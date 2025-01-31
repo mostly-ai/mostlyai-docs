@@ -12,11 +12,11 @@ import { CustomCallout } from '@components/custom-callout'
 
 As Model creators, you carry the torch of democratizing data within and outside of your organization!
 
-Here is how you can quickly train a new generator on your original tabular data. Your peers, colleagues, and third parties can then use the generator to create privacy-safe synthetic data.
+Here is how you can quickly train a new generator on original tabular data. Your peers, colleagues, and third parties can then use the generator to create privacy-safe synthetic data.
 
 <Steps>
 ## Step 1: Train a generator
-<Tabs items={['UI', 'Local Python environment', 'Remote platform']}>
+<Tabs items={['UI', 'Python SDK']}>
 <Tabs.Tab>
 1. In MOSTLY AI, select the **Generators** page.
 2. Click **+ New generator**.
@@ -27,7 +27,7 @@ Here is how you can quickly train a new generator on your original tabular data.
         height={150}
     />
 3. Select **Upload file**, browse for a dataset, and click **Proceed**.
-    <CustomCallout type="tech">
+    <CustomCallout>
     **Note**<br />
     If you don't have one, download the [UCI Adult income dataset](/datasets/us-census-income.csv.gz).
     </CustomCallout>
@@ -53,26 +53,41 @@ Here is how you can quickly train a new generator on your original tabular data.
     />
 </Tabs.Tab>
 <Tabs.Tab>
-1. Install the MOSTLY AI Synthetic Data SDK.<br />
-    ```python copy filename="bash"
-    pip install -U mostlyai
-    ```
+1. [Install the MOSTLY AI Python SDK](/python-sdk#installation).
 2. Create your first generator using the [US Census Income](/datasets#us-census-income-dataset) dataset, start its training, and wait for it to finish.
     <CustomCallout>
     Generator training uses compute from the local environment.
     </CustomCallout>
+    <Tabs items={['Local mode', 'Client mode']}>
+    <Tabs.Tab>
     ```python copy filename="python" {7}
     # 1. Load original data into a pd.DataFrame
     import pandas as pd
     df = pd.read_csv("https://mostly.ai/docs/datasets/us-census-income.csv.gz")
 
-    # 2. Instantiate the MOSTLY AI SDK for local use
+    # 2. Instantiate in Local use
     from mostlyai.sdk import MostlyAI
     mostly = MostlyAI(local=True)
     
     # 3. Create a generator and launch its training
     g = mostly.train(data=df, start=True, wait=True)
     ```
+    </Tabs.Tab>
+    <Tabs.Tab>
+    ```python copy filename="python" {7}
+    # 1. Load original data into a pd.DataFrame
+    import pandas as pd
+    df = pd.read_csv("https://mostly.ai/docs/datasets/us-census-income.csv.gz")
+
+    # 2. Instantiate in Client mode by connecting to a remote Platform instance
+    from mostlyai.sdk import MostlyAI
+    mostly_remote = MostlyAI(base_url="https://app.mostly.ai", api_key="INSERT_API_KEY")
+    
+    # 3. Create a generator and launch its training
+    g = mostly.train(data=df, start=True, wait=True)
+    ```
+    </Tabs.Tab>
+    </Tabs>
 </Tabs.Tab>
 <Tabs.Tab>
 1. Install the MOSTLY AI Synthetic Data SDK.<br />
@@ -108,7 +123,7 @@ Once training has finished, you, your peers, colleagues, or any third party can 
 After the generator training completes, you can generate synthetic data. You can also export it and share it with Data consumers so they can too generate synthetic data.
 
 ## Step 2: Export and share the generator
-<Tabs items={['UI', 'Local Python environment', 'Remote platform']}>
+<Tabs items={['UI', 'Python SDK']}>
 <Tabs.Tab>
 1. In MOSTLY AI, select the **Generators** page.
 2. Open the generator.
@@ -127,18 +142,16 @@ The generator is exported as a `ZIP` archive.
 
 </Tabs.Tab>
 <Tabs.Tab>
+
+<CustomCallout type="API">
+Available in both [Local and Client modes](/python-sdk#local-and-client-modes).
+</CustomCallout>
+
 On a generator object, use the `export_to_file()` method to export a generator to a `ZIP` archive.
     ```python copy filename="python"
     g.export_to_file()
     ```
     The generator is exported and saved as a `ZIP` archive.
-</Tabs.Tab>
-<Tabs.Tab>
-Identical to local environments, use the `export_to_file()` method to export a generator to a `ZIP` archive.
-    ```python copy filename="python"
-    g.export_to_file()
-    ```
-    The remote generator is downloaded as a `ZIP` archive.
 </Tabs.Tab>
 </Tabs>
 **What's next**

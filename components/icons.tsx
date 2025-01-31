@@ -266,3 +266,14 @@ export const DatabaseLockIcon = () => {
         </svg>
     )
 }
+
+export const APIIcon = () => {
+    return (
+        <Image  
+            className="card-icon" src="/docs/icons/mostly-ai/api.svg" alt="API Icon"
+            width={26}
+            height={26}
+            style={{display: "inline", marginTop: "-2px"}}
+        />       
+    )
+}

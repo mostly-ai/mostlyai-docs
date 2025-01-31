@@ -1,14 +1,23 @@
 import cn from 'clsx'
 import type { FC, ReactElement, ReactNode } from 'react'
+import { APIIcon } from '@components/icons'
 
 const TypeToEmoji = {
-  tech: '📑'
+  tech: '📑',
+  API: <APIIcon />,
+  test: '🧪',
 }
 
 type CalloutType = keyof typeof TypeToEmoji
 
 const classes: Record<CalloutType, string> = {
   tech: cn(
+    'x:border-black-100 x:bg-black-50 x:text-black-800 x:dark:border-black-400/30 x:dark:bg-black-400/20 x:dark:text-black-300'
+  ),
+  API: cn(
+    'x:border-black-100 x:bg-black-50 x:text-black-800 x:dark:border-black-400/30 x:dark:bg-black-400/20 x:dark:text-black-300'
+  ),
+  test: cn(
     'x:border-black-100 x:bg-black-50 x:text-black-800 x:dark:border-black-400/30 x:dark:bg-black-400/20 x:dark:text-black-300'
   )
 }
