@@ -44,6 +44,7 @@ Then, you can [generate synthetic data](#step-2-generate-synthetic-data) with th
     />
 </Tabs.Tab>
 <Tabs.Tab>
+
 1. [Install the MOSTLY AI Python SDK](/python-sdk#installation).
 2. Import the generator with the Python SDK either locally or into a remote MOSTLY AI Platform.
     <Tabs items={['Local mode', 'Client mode']}>
@@ -72,32 +73,6 @@ Then, you can [generate synthetic data](#step-2-generate-synthetic-data) with th
     Imported generator 82ceb8f3-b622-4de1-a710-c44d68804376
     ```
 3. Click the UUID link to can open the generator in your browser.
-</Tabs.Tab>
-<Tabs.Tab>
-
-1. Install the Python SDK.
-    ```shell copy filename="shell"
-    pip install mostlyai
-    ```
-2. [Get an API key](/python-sdk#get-an-api-key).
-3. Import and instantiate a remote client to a MOSTLY AI Platform into which you can import the generator.
-    ```python copy filename="python" {3-6}
-    from mostlyai.sdk import MostlyAI
-
-    mostly_remote = MostlyAI(
-        base_url="https://app.mostly.ai",
-        api_key="INSERT_API_KEY"
-    )
-
-    g = mostly_remote.generators.import_from_file("path/to/generator.zip")
-    ```
-    If successful, the output will be similar to the following:
-    ```shell
-    Imported generator fa010e5f-f493-4fa2-98c7-e60fd59871d9
-    ```
-
-If you follow the UUID link, the the generator opens in the MOSTLY AI Platform instance.
-
 </Tabs.Tab>
 </Tabs>
 
@@ -138,6 +113,7 @@ When the generation of synthetic data completes, you can [download](/quick-start
 You can also [share](/quick-start/data-consumers#step-3-share-your-synthetic-dataset) the synthetic dataset so others can access its page, review the **Data report**, **Data samples**, **Generation steps**, and **Configuration**, or download in their selected format.
 </Tabs.Tab>
 <Tabs.Tab>
+
 <CustomCallout type="API">
 Available in both [Local and Client modes](/python-sdk#local-and-client-modes).
 </CustomCallout>
