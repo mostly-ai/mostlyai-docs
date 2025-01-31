@@ -6,6 +6,7 @@ description: 'MOSTLY AI can use a Microsoft SQL Server database as a source for 
 import { Callout } from 'nextra/components'
 import { Tabs } from 'nextra/components'
 import Image from 'next/image'
+import { CustomCallout } from '@components/custom-callout'
 
 # Use a SQL Server database for synthetic data
 
@@ -15,14 +16,12 @@ For each SQL Server data source or destination, you need a separate connector.
 
 **Prerequisites**
 
-Obtain the SQL Server connection details.
+* Obtain the SQL Server connection details (host, port, credentials, database name).
+* To use the Python SDK in [Local mode](/python-sdk#local-and-client-modes), install the ODBC driver.
+    * For Linux, see [_Installing ODBC driver on Linux_](https://learn.microsoft.com/en-us/sql/connect/odbc/linux-mac/installing-the-microsoft-odbc-driver-for-sql-server).
+    * For macOS, see [_Installing ODBC driver on macOS_](https://learn.microsoft.com/en-us/sql/connect/odbc/linux-mac/install-microsoft-odbc-driver-sql-server-macos).
 
-* host
-* port
-* credentials
-* database name
-
-<Tabs items={['UI', 'Python SDK - Local mode', 'Python SDK - Client mode']}>
+<Tabs items={['UI', 'Python SDK']}>
 <Tabs.Tab>
 If you use the web application, create a new SQL Server connector from the **Connectors** page.
 
@@ -62,13 +61,11 @@ If you use the web application, create a new SQL Server connector from the **Con
     You can click **Save anyway** to save the connector disregarding any errors.
 </Tabs.Tab>
 <Tabs.Tab>
-If you use the Python SDK in Local mode, you first need to install the Microsoft SQL Server drivers for your operating system.
+<CustomCallout type="API">
+Available in both [Local and Client modes](/python-sdk#local-and-client-modes).
+</CustomCallout>
 
-1. Install the ODBC driver for your operating system.
-    * [Linux](https://learn.microsoft.com/en-us/sql/connect/odbc/linux-mac/installing-the-microsoft-odbc-driver-for-sql-server)
-    * [macOS](https://learn.microsoft.com/en-us/sql/connect/odbc/linux-mac/install-microsoft-odbc-driver-sql-server-macos)
-    * [Windows](https://learn.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server?view=sql-server-ver16)
-2. Create a SQL Server connector with `mostly.connect()`. Define a connector configuration dictionary as shown below.
+Use `mostly.connect()` to create a SQL Server connector. Define a connector configuration dictionary as shown below.
 ```python copy filename="python"
 from mostlyai.sdk import MostlyAI
 
@@ -90,35 +87,7 @@ c = mostly.connect({
 })
 ```
 
-The local server tests the connection to the MS SQL database, and if successful, the connector is created. Bear in mind, this tests the connection from the local environment to the server.
-
-If you see an error, check the connection details and try again.
-</Tabs.Tab>
-<Tabs.Tab>
-If you use the Python SDK in Client mode to connect to a remote Platform, connect to the remote platform via `MostlyAI()` with `base_url` and `api_key`, and then create a SQL Server connector.
-
-```python copy filename="python"
-from mostlyai.sdk import MostlyAI
-
-mostly_remote = MostlyAI(base_url="https://api.mostly.ai", api_key="INSERT_API_KEY")
-
-c = mostly_remote.connect({
-    "name": "MS SQL Server Connector",
-    "type": "MSSQL",
-    "access_type": "SOURCE",
-    "config": {
-        "host": "mssql.hostname.com",
-        "port": "1433",
-        "username": "admin",
-    },
-    "secrets": {
-        "password": "******"
-    },
-    "test_connection": True
-})
-```
-
-The platform tests the connection to the MS SQL database, and if successful, the connector is created. Bear in mind, this tests the connection from the remote Platform to the server.
+The SDK tests the connection to the MS SQL database, and if successful, the connector is created.
 
 If you see an error, check the connection details and try again.
 </Tabs.Tab>

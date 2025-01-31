@@ -19,7 +19,7 @@ You can then export the trained generator from the secure environment and import
 
 ## Export a generator
 
-<Tabs items={['UI', 'Local environment', 'Remote platform']}>
+<Tabs items={['UI', 'Python SDK']}>
 <Tabs.Tab>
 
 If you use the UI of the MOSTLY AI Platform, you can export a generator in one of two ways.
@@ -49,9 +49,12 @@ To export a generator, you must be its `Owner` or have the `Editor` role if the 
         />
 </Tabs.Tab>
 <Tabs.Tab>
-If you trained a generator in a local environment with the Python SDK, you can export it to a ZIP archive with the `export_to_file()` method.
 
-Optionally, you can specify a filename for the exported generator.
+<CustomCallout type="API">
+Available in both [Local and Client modes](/python-sdk#local-and-client-modes).
+</CustomCallout>
+
+With the Python SDK, you can export a generator to a ZIP archive with the `export_to_file()` method. Optionally, you can specify a filename.
 
 ```python filename="python" copy
 g = mostly.generators.get('INSERT_GENERATOR_ID')
@@ -63,19 +66,7 @@ g.export_to_file()
 g.export_to_file('INSERT_GENERATOR_FILENAME.zip')
 ```
 </Tabs.Tab>
-<Tabs.Tab>
-If you use the Python SDK with a remote Platform instance, you can export a generator from the Platform. Use the same `export_to_file()` method as you would in a local environment.
 
-```python filename="python" copy
-g = mostly_remote.generators.get('INSERT_GENERATOR_ID')
-
-# Exports with a default filename 'generator-UUID-time-high-octet.zip' 
-g.export_to_file() 
-
-# Export with a specified filename
-g.export_to_file('INSERT_GENERATOR_FILENAME.zip')
-```
-</Tabs.Tab>
 </Tabs>
 
 **Result**
@@ -86,7 +77,7 @@ The generator is exported as a `ZIP` archive. You can now import it into another
 
 Learn how to import generators into another instance of the MOSTLY AI Platform with the UI and the Python SDK. You can do so in a local environment as well as in a remotely running MOSTLY AI Platform.
 
-<Tabs items={['UI', 'Local environment', 'Remote platform']}>
+<Tabs items={['UI', 'Python SDK']}>
 <Tabs.Tab>
 You can use the UI of another instance of the MOSTLY AI Platform to import exported generators.
 
@@ -113,15 +104,15 @@ You can use the UI of another instance of the MOSTLY AI Platform to import expor
 The imported generator opens immediately. You can now use it to [generate synthetic data](/synthetic-datasets/generate) in the new environment.
 </Tabs.Tab>
 <Tabs.Tab>
-If you use the Python SDK in a local environment, you can import a generator with the `mostly.generators.import_from_file` method.
+
+<CustomCallout type="API">
+Available in both [Local and Client modes](/python-sdk#local-and-client-modes).
+</CustomCallout>
+
+You can import a generator with the `import_from_file()` method.
+
 ```python filename="python" copy
 g = mostly.generators.import_from_file('path/to/generator.zip')
-```
-</Tabs.Tab>
-<Tabs.Tab>
-If you use the Python SDK with a remote Platform instance, you can again use the `mostly_remote.generators.import_from_file` method to import a generator.
-```python filename="python" copy
-g = mostly_remote.generators.import_from_file('path/to/generator.zip')
 ```
 </Tabs.Tab>
 </Tabs>

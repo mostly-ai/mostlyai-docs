@@ -6,6 +6,7 @@ description: 'MOSTLY AI can fill any null or empty values in your datasets with 
 import { Callout } from 'nextra/components'
 import { Tabs } from 'nextra/components'
 import Image from 'next/image'
+import { CustomCallout } from '@components/custom-callout'
 
 # Data imputation
 
@@ -19,7 +20,7 @@ To use **Imputed columns**, the model responsible for the table containing missi
 
 When you configure a new synthetic dataset, you can specify any columns you want to impute.
 
-<Tabs items={['UI', 'Local environment', 'Remote platform']}>
+<Tabs items={['UI', 'Python SDK']}>
 <Tabs.Tab>
 In the web application, you can select which columns to impute from the **Imputed columns** menu on the **Synthetic dataset configuration** page.
 
@@ -47,7 +48,13 @@ In this example, you can see a demonstration of a generator trained on the CDNOW
 When you examine the `age_category` column in the `customers` of the generated data, no null values appear.
 </Tabs.Tab>
 <Tabs.Tab>
-If you use the Python SDK locally, add the `imputation.columns` list to the `tables.configuration` dictionary, listing as strings all columns to impute.
+
+<CustomCallout type="API">
+Available in both [Local and Client modes](/python-sdk#local-and-client-modes).
+</CustomCallout>
+
+With the Python SDK, add the `imputation.columns` list to the `tables.configuration` dictionary, listing as strings all columns to impute.
+
 ```python copy filename="python" {7-9}
 sd = mostly.generate("GENERATOR_ID", {
    "name": "census",
@@ -64,25 +71,6 @@ sd = mostly.generate("GENERATOR_ID", {
 })
 sd.data()
 ```
-</Tabs.Tab>
-<Tabs.Tab>
-If you connect to a remote Platform instance with the Python SDK, again add the `imputation.columns` list to the `tables.configuration` dictionary, listing as strings all columns to impute.
 
-```python copy filename="python" {1, 7-9}
-sd = mostly_remote.generate("GENERATOR_ID", {
-   "name": "census",
-   "tables": [
-      {
-         "name": "census",
-         "configuration": {
-            "imputation": {
-               "columns": ["education"]
-            }
-         }
-      }
-   ]
-})
-sd.data()
-```
 </Tabs.Tab>
 </Tabs>
