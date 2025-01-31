@@ -4,8 +4,6 @@
 
 Here, you can find the source code and content of the [MOSTLY AI Platform documentation](https://mostly.ai/docs).
 
-![mostly-ai-docs](https://github.com/user-attachments/assets/a20ce5b4-8ada-4ee6-b9e9-b81f39356ee0)
-
 
 ## 🛠️ Contributing
 
