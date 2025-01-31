@@ -10,7 +10,7 @@ import Image from 'next/image'
 
 After you have a [generator](/generators) trained on a single- or multi-table original dataset, you can use it to create a new synthetic dataset.
 
-<Tabs items={['UI', 'Local Python environment', 'Remote platform']}>
+<Tabs items={['UI', 'Python SDK']}>
 <Tabs.Tab>
 **Steps**
 
@@ -38,7 +38,7 @@ After you have a [generator](/generators) trained on a single- or multi-table or
         />
 </Tabs.Tab>
 <Tabs.Tab>
-When using the [Python SDK in a local environment](/python-sdk#use-in-a-local-environment), use `mostly.generate` to create a synthetic dataset.
+With the Python SDK, use `mostly.generate` to create a synthetic dataset.
 
 To generate only a certain number of synthetic samples, use the `size` parameter.
 
@@ -47,26 +47,9 @@ sd = mostly.generate("GENERATOR_ID", size=1_000)
 sd.data()
 ```
 
-To generate the same size as the original data, drop the `size` parameter. The default sample size of the original dataset will be applied.
+To generate the same size as the original data, drop the `size` parameter. The size of the original dataset will be generated.
 ```python copy filename="python"
 sd = mostly.generate("GENERATOR_ID")
-sd.data()
-```
-</Tabs.Tab>
-<Tabs.Tab>
-With the [Python SDK connected to a remote platform](/python-sdk#use-with-a-remote-mostly-ai-platform), again use `mostly.generate` to create a synthetic dataset.
-
-To generate only a certain number of synthetic samples, use the `size` parameter.
-
-```python copy filename="python"
-sd = mostly_remote.generate("GENERATOR_ID", size=1_000)
-sd.data()
-```
-
-To generate the same size as the original data, drop the `size` parameter. The default sample size of the original dataset will be applied.
-
-```python copy filename="python"
-sd = mostly_remote.generate("GENERATOR_ID")
 sd.data()
 ```
 </Tabs.Tab>
