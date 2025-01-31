@@ -29,6 +29,7 @@ export default {
         "type": "separator",
         "title": "GLOBAL FEATURES"
     },
+    "organizations": "Organizations",
     "search": "Search",
     "usage": "Usage and credits",
     "notifications": "Notifications",
