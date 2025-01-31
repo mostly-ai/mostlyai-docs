@@ -1,0 +1,45 @@
+---
+title: 'Troubleshoot MOSTLY AI deployments to minikube'
+description: 'Learn how you can troubleshoot various issues when you deploy MOSTLY AI to a minikube cluster.'
+---
+
+import Image from 'next/image'
+import { CustomCallout } from '@components/custom-callout'
+
+# Troubleshoot minikube deployment issues
+
+Learn how you can troubleshoot various issues when you deploy MOSTLY AI to a minikube cluster. Each of the listed issues includes a description of the problem and solution that shows how to workaround the issue.
+
+## Cannot upload files
+
+**Problem**
+
+When you attempt to upload files in MOSTLY AI, you might see the error notification `Error while connecting API`.
+
+**Solution**
+
+1. Check if you have enabled the `ingress` add-on in your minikube cluster. For details, see _[Task 10: Install required minikube addons
+](/install/deploy/minikube#task-10-install-required-minikube-addons)_.
+2. Make sure that you have enabled the `ingress` annotations for the `mostly-app` and `mostly-keycloak` services in the `values.yaml` file as listed below.
+    ```yaml filename="values.yaml" copy {3-9}
+    mostly-app:
+        ingress:
+            annotations:
+              nginx.ingress.kubernetes.io/proxy-body-size: 10240m
+              nginx.ingress.kubernetes.io/proxy-buffer-size: 128k
+              nginx.org/proxy-connect-timeout: 3000s
+              nginx.org/proxy-read-timeout: 3000s
+              nginx.org/client-max-body-size: 3000m
+            # annotations: {}
+    ```
+
+    ```yaml filename="values.yaml" copy {3-7}
+    mostly-keycloak:
+    ...
+        ingress:
+            annotations:
+                nginx.ingress.kubernetes.io/proxy-body-size: 10240m
+                nginx.ingress.kubernetes.io/proxy-buffer-size: 128k
+            # annotations: {}
+    ```
+3. Apply the changes to the `values.yaml` file and redeploy the MOSTLY AI Helm chart.

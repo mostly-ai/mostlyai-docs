@@ -1,0 +1,49 @@
+---
+title: 'Search'
+description: 'The Search bar offers direct access to all of your generators, synthetic datasets, and connectors in MOSTLY AI.'
+---
+
+import { Tabs } from 'nextra/components'
+import Image from 'next/image'
+
+# Search
+
+You can use the search capabilities in the MOSTLY AI web application and Python SDK for easy access to all of your [generators](/generators), [synthetic datasets](/synthetic-datasets), and [connectors](/connectors).
+
+<Image
+    src="/docs/docimages/search/search-python-client.webp"
+    alt="MOSTLY AI - Search Python SDK"
+    width={800}
+    height={500}
+/>
+
+Based on keywords, you search within the names and descriptions of all entity types.
+
+<Tabs items={['UI', 'Python SDK']}>
+<Tabs.Tab>
+In the web application, enter a search term to find entities whose name or description contains the keyword.
+
+<Image
+    src="/docs/docimages/search/search-task.webp"
+    alt="MOSTLY AI - Search bar - Example"
+    width={800}
+    height={500}
+/>
+</Tabs.Tab>
+<Tabs.Tab>
+If you use the Python SDK, use the `list()` method for `generators`, `synthetic_datasets`, and `connectors` along with the `search_term` parameter.
+
+```python filename="python" copy
+g_search = mostly.generators.list(search_term = 'census')
+sd_search = mostly.synthetic_datasets.list(search_term = 'census')
+c_search = mostly.connectors.list(search_term = 'PostgreSQL')
+```
+
+The result is a generator object you can iterate over.
+
+```python filename="python" copy
+for i in g_search:
+    print(i)
+```
+</Tabs.Tab>
+</Tabs>

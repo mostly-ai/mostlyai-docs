@@ -1,0 +1,198 @@
+---
+title: "Quick start for Data consumers"
+description: "As a Data consumer, you can use a trained generator in MOSTLY AI to generate new synthetic data. Use the new data for analysis, downstream machine learning (ML) tasks, or share it with others."
+---
+
+import Image from 'next/image'
+import { Steps } from 'nextra/components'
+import { Tabs } from 'nextra/components'
+import { CustomCallout } from '@components/custom-callout'
+
+# Quick start for Data consumers
+
+As Data consumers, through synthetic data you can get easy and privacy-safe access to data that otherwise remains locked.
+
+To do so, you can use a MOSTLY AI trained generator for fresh and new synthetic data. The Model creators in your organization can share a generator with you.
+
+<Steps>
+## Step 1: Import a generator
+
+A Model creator from your organization can share a generator with you. You can then import the generator to a MOSTLY AI Platform via the UI, or use the Python SDK to import in a local environment or even in a remote Platform. You can then generate synthetic data with the imported generator.
+
+<Tabs items={['UI', 'Local Python environment', 'Remote platform']}>
+<Tabs.Tab>
+1. In MOSTLY AI, open the **Generators** page.
+2. Click **Import from file**.
+    <Image
+        src="/docs/docimages/quickstart/data-consumers/import-generator-01-click-import.webp"
+        alt="MOSTLY AI - Import a generator - 01 - Click Import generator"
+        width={800}
+        height={150}
+    />
+3. Upload the generator `ZIP` file and click **Proceed**.
+    <Image
+        src="/docs/docimages/quickstart/data-consumers/import-generator-02-upload-generator-zip.webp"
+        alt="MOSTLY AI - Import a generator - 02 - Upload generator ZIP file"
+        width={800}
+        height={150}
+    />
+</Tabs.Tab>
+<Tabs.Tab>
+1. Install the Python SDK.
+    ```shell copy filename="shell"
+    pip install mostlyai
+    ```
+2. Import and instantiate a local Python SDK environment into which you can import the generator.
+    ```python copy filename="python" {3}
+    from mostlyai.sdk import MostlyAI
+
+    mostly = MostlyAI(local=True)
+
+    g = mostly.generators.import_from_file("path/to/generator.zip")
+    ```
+    If successful, the output will be similar to the following:
+    ```shell
+    Imported generator 82ceb8f3-b622-4de1-a710-c44d68804376
+    ```
+3. If you follow the UUID link, the locally running server will open the generator data in your browser.
+</Tabs.Tab>
+<Tabs.Tab>
+
+1. Install the Python SDK.
+    ```shell copy filename="shell"
+    pip install mostlyai
+    ```
+2. [Get an API key](/python-sdk#get-an-api-key).
+3. Import and instantiate a remote client to a MOSTLY AI Platform into which you can import the generator.
+    ```python copy filename="python" {3-6}
+    from mostlyai.sdk import MostlyAI
+
+    mostly_remote = MostlyAI(
+        base_url="https://app.mostly.ai",
+        api_key="INSERT_API_KEY"
+    )
+
+    g = mostly_remote.generators.import_from_file("path/to/generator.zip")
+    ```
+    If successful, the output will be similar to the following:
+    ```shell
+    Imported generator fa010e5f-f493-4fa2-98c7-e60fd59871d9
+    ```
+
+If you follow the UUID link, the the generator opens in the MOSTLY AI Platform instance.
+
+</Tabs.Tab>
+</Tabs>
+
+**What's next**
+
+Use the generator to generate a new synthetic dataset.
+
+## Step 2: Generate synthetic data
+
+<Tabs items={['UI', 'Local Python environment', 'Remote platform']}>
+<Tabs.Tab>
+1. In MOSTLY AI, click **+ New synthetic dataset** from the **Synthetic datasets** page.
+    <Image 
+        src="/docs/docimages/quickstart/data-consumers/generate-sd-01-click-new-synthetic-dataset.webp" 
+        alt="MOSTLY AI - Generate synthetic data - 01 - Click New synthetic dataset" 
+        width={800} 
+        height={150}
+    />
+2. Select a generator.
+    <Image 
+        src="/docs/docimages/quickstart/data-consumers/generate-sd-02-select-generator.webp" 
+        alt="MOSTLY AI - Generate synthetic data - 02 - Click Generate synthetic data" 
+        width={800} 
+        height={150}
+    />
+3. Click **Start generation**.
+    <Image 
+        src="/docs/docimages/quickstart/data-consumers/generate-sd-03-synthetic-dataset-click-start-generation.webp" 
+        alt="MOSTLY AI - Train a generator - 03 - Click Upload files" 
+        width={800} 
+        height={150}
+    />
+
+**What's next**
+
+When the generation of synthetic data completes, you can [download](/quick-start/data-consumers#step-2-download-synthetic-data) the data in CSV, Parquet, or XSLX format.
+
+You can also [share](/quick-start/data-consumers#step-3-share-your-synthetic-dataset) the synthetic dataset so others can access its page, review the **Data report**, **Data samples**, **Generation steps**, and **Configuration**, or download in their selected format.
+</Tabs.Tab>
+<Tabs.Tab>
+In your local Python environment, use the imported generator object `g` to generate a new synthetic dataset.
+<CustomCallout>
+The synthetic data generation uses compute from the local environment.
+</CustomCallout>
+
+1. Generate your first synthetic dataset, using the imported generator.
+    ```python copy filename="python"
+    sd = mostly.generate(g, size=100)
+    ```
+2. Consume the generated data.
+    ```python copy filename="python"
+    df = sd.data()
+    df
+    ```
+</Tabs.Tab>
+<Tabs.Tab>
+When you use the Python SDK with a remote Platform, again use the imported generator object `g` to generate a new synthetic dataset.
+
+<CustomCallout>
+The synthetic data generation uses compute from the remote MOSTLY AI Platform.
+</CustomCallout>
+1. Generate your first synthetic dataset, using the imported generator.
+    ```python copy filename="python" /mostly_remote/
+    sd = mostly_remote.generate(g, size=100)
+    ```
+2. Consume the generated data.
+    ```python copy filename="python"
+    df = sd.data()
+    df
+    ```
+</Tabs.Tab>
+</Tabs>
+
+## Step 3: Download synthetic data
+
+<Tabs items={['UI', 'Local Python environment', 'Remote platform']}>
+<Tabs.Tab>
+1. With the synthetic dataset open, click **Download synthetic dataset**.
+2. Select to download as CSV, Parquet, or Excel.
+    <Image 
+        src="/docs/docimages/quickstart/data-consumers/download-sd-01-click-download-synthetic-data-select-format.webp" 
+        alt="MOSTLY AI - Download a synthetic dataset - Click Download synthetic data and select CSV Parquet or Excel" 
+        width={800} 
+        height={150}
+    />
+</Tabs.Tab>
+<Tabs.Tab>
+In the local environment, use the Python SDK to easily download your synthetic data in the file format that you need.
+```python copy filename="python"
+# download as CSV format
+sd.download(format="CSV")
+
+# download as Parquet format
+sd.download(format="PARQUET")
+
+# download as Excel format
+sd.download(format="XLSX")
+```
+</Tabs.Tab>
+<Tabs.Tab>
+With the Python SDK, downloading synthetic data from a remote MOSTLY AI Platform is identical to when you use the SDK in a local environment.
+```python copy filename="python"
+# download as CSV format
+sd.download(format="CSV")
+
+# download as Parquet format
+sd.download(format="PARQUET")
+
+# download as Excel format
+sd.download(format="XLSX")
+```
+</Tabs.Tab>
+</Tabs>
+
+</Steps>

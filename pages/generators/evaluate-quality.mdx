@@ -1,0 +1,407 @@
+---
+title: 'Evaluate generator quality'
+description: 'For each trained generator in MOSTLY AI, you can find multiple quality metrics: accuracy, privacy-preservation, correlations, distributions, coherence, and similarity.'
+---
+
+import Image from 'next/image'
+import { Callout } from 'nextra/components'
+import { CustomCallout } from '@components/custom-callout'
+import FigureWithCaption from '@components/figure-with-caption'
+
+# Evaluate generator quality
+
+In MOSTLY AI, each trained generator is evaluated with an auto-generated report with the quality metrics listed below.
+
+* _accuracy_
+* _privacy-preservation_
+* _correlations_
+* _distributions_
+* _coherence_ (only for linked tables)
+* _similarity_
+
+## Generator details page
+
+All generator quality metrics are available on the generator details page, which you can access by opening a generator from the **Generators** page.
+
+### Accuracy
+
+Each generator's overall **Accuracy** metric measures how effectively the generator has learned the characteristics and general patterns of the original data. The higher the overall accuracy percentage, the better.
+
+The generator **Accuracy** is an average of the accuracies of all AI models in the generator. For generators with a single AI model, the generator and model accuracies are the same.
+
+<Image
+    src="/docs/docimages/generators/evaluate-quality/01-generator-page-01-accuracy.webp"
+    alt="MOSTLY AI - Generator details - Accuracy"
+    width={900}
+    height={300}
+/>
+
+The accuracy of an AI model is an aggregated statistic that is the _mean_ of the _univariate accuracy_, the _bivariate accuracy_, and (only for linked tables) the _coherence_ of the model. The accuracy of each model is available in the **Data insights** section.
+
+You can find the univariate, bivariate, and coherence metrics for each model in its [**Model** report](#model-report).
+
+<Image
+    src="/docs/docimages/generators/evaluate-quality/01-generator-page-02-open-model-report.webp"
+    alt="MOSTLY AI - Generator configuration - Open model report"
+    width={900}
+    height={300}
+/>
+
+A generator includes a separate AI model for each table, and for each language column configured to use the [**Language/Text** encoding type](/generators/configure/set-encoding-types#languagetext). For example, a dataset with two tables and one language column will have a total of 3 AI models.
+
+Each AI model has a separate [**Model** report](#model-report) that includes detailed quality metrics.
+
+### Privacy
+
+MOSTLY AI generates synthetic data in a privacy-safe way. The privacy of data subjects is protected as a result of the privacy-protection mechanisms that are in place for every generated synthetic dataset. Every time you train a new generator, MOSTLY AI trains AI models that learn only the general patterns of the original dataset and never memorize data points. The AI models are then able to generate data with random draws which is a process that ensures that no 1:1 relationship exists between the original and synthetic datasets. For more information, see [Privacy-protection mechanisms](/concepts/privacy-protection).
+
+In addition, for each AI model MOSTLY AI calculates the distances that synthetic samples have from the training records and also their distances from holdout records (as reference). For details, see the [_Distances_](#distances) section.
+
+### Distances
+
+The **Distances** are a _**privacy metric**_ that shows the average distances calculated between synthetic samples and their nearest neighbors from the _training data_, on one side, and between the synthetic samples and their nearest neighbors from the _holdout data_, on the other side (for reference).
+
+To calculate the distances, 10% from the original data is randomly drawn into a holdout dataset. The **Distance to Closest Record** metric is then calculated like so and averaged for each table.
+
+* DCR(S,T) - the distances between synthetic samples and their nearest neighbors from the training dataset
+* DCR(S,H) - the distances between synthetic samples and their nearest neighbors from the holdout dataset (appears in light gray)
+
+To gauge the privacy-preservation qualities of a generator, the generated synthetic samples should be as close to their nearest training neighbors as they are close to their nearest holdout neighbors (the data not seen during training).
+
+<Image
+    src="/docs/docimages/generators/evaluate-quality/qa-report-distances.webp"
+    alt="Top QA report card" 
+    width={800} 
+    height={150}
+/>
+
+The full distribution of the distances is visualized as part of the [Model](#model-report) report. See [Distances in the Model report](#distances-1).
+
+<CustomCallout type="tech">
+**Technical reference**<br />
+The **Distances** metric is calculated based on L2 distances between samples. Each sample is converted into JSON format and is then mapped to a 384-dimensional vector space with the [`all-MiniLM-L6-v2`](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2) model so that the calculation takes into account semantic similarities. With this, the distances are applicable to both tabular mixed-type data as well as any unstructured text columns that you use to [fine-tune LLMs](/quick-start/fine-tuning-llms).
+</CustomCallout>
+
+## Model report
+
+For each model in a generator, you can open its **Model** report and view its metrics in detail. To open, click **Model** in the **Reports** column under **Data insights**.
+
+<Image 
+    src="/docs/docimages/generators/evaluate-quality/02-open-model-report.webp" 
+    alt="Top QA report card" 
+    width={800} 
+    height={150}
+/>
+
+<Callout>
+MOSTLY AI generates a **Model** report for each model in a generator and a **Data** report for each model when you generate a synthetic dataset.
+
+The **Data** report is especially important when you use data augmentation features, such as **Rebalancing**. For example, when you use **Rebalancing**, the changes in the distribution of the synthetic data will be visible only in the **Data**  report. For more information, see [Evaluate synthetic data quality](/synthetic-datasets/evaluate-quality).
+</Callout>
+
+Each **Model** report contains a breakdown and visualization for the following generator quality metrics:
+
+* Correlations
+* Univariates
+* Bivariates
+* Coherence (linked tables only)
+* Accuracy
+* Distances
+
+<Callout type="info">
+To reduce computational time, the model report is calculated on a maximum of 100,000 samples that are randomly selected from the original and synthetic data. If smaller, the entire dataset is used.
+</Callout>
+
+### Overview of model quality metrics
+
+At the top of the model report, you can find information about the model: when it was generated, the number of samples in the original table, the number of synthetic samples, and the generator ID.
+
+You will also find three cards with quality metrics for **Accuracy**, **Similarity**, and **Distances**.
+
+<Image 
+    src="/docs/docimages/generators/evaluate-quality/03-model-report-top.webp" 
+    alt="Model report - top section - Dataset statistics, Accuracy, Distances" 
+    width={800} 
+    height={150}
+/>
+
+<div className="empty_header_table"></div>
+
+**Accuracy metrics in the overview**
+| Accuracy metric | Description |
+| ----------------- | ----------- |
+| **Accuracy** | The overall accuracy of the model. It shows how well synthetic data generated with the model captures the characteristics of the training data.<br /><br />For reference, the accuracy of the synthetic data when compared to the holdout data appears in light gray. |
+| **Univariate** | The overall accuracy of the model's univariate distributions. An aggregated statistic that shows the mean of the univariate accuracies of all columns. |
+| **Bivariate**  | The overall accuracy of the model's bivariate distributions. An aggregated statistic that shows the mean of the bivariate accuracies of all columns. |
+| **Coherence**  | (Only for linked tables) The temporal coherence of time series data between the synthetic and training data as well as the preservation of the average sequence length (or the average number of linked table records that are related to a subject table record). |
+
+**Similarity metrics in the overview**
+
+| Similarity<br />metric | Description |
+| ----------------- | ----------- |
+| **Cosine<br />Similarity** | The **Cosine similarity** explains how similar the synthetic data is to the training data. To calculate it, we first represent the synthetic and training datasets as vectors in an embedding space, and then find their centroids. Once the centroids are identified, the similarity is determined by measuring the cosine distance between the two centroid vectors.<br /><br />The closer the value is to 1, the higher the similarity between the synthetic dataset and the training samples, indicating higher quality. The similarity between the training and holdout datasets is also calculated and displayed in light gray for comparison.<br /><br />We expect these similarities to be close since we want the synthetic dataset to be as close as the holdout dataset to the training data. |
+| **Discriminator<br />AUC** | The **Discriminator AUC** shows the area under the curve of a classifier trained to distinguish between the training and synthetic embeddings.<br /><br />High-quality synthetic data should be indistinguishable from the original data. Therefore, we expect this value to be closer to 50%, indicating that the discriminator has only a 50% probability of correctly identifying whether the data is synthetic or real, which suggests the synthetic data closely resembles the original. Values between 50% and 60% indicate high-quality synthetic data.<br /><br />For comparison, the same metric is also calculated between the training and holdout datasets and displayed in light gray. |
+
+**Distances metrics in the overview**
+
+| Distances<br />metric | Description |
+| ----------------- | ----------- |
+| **Identical<br />Matches** | An **identical match** is the special case of the distance measure being zero. In such a case, two records would share the same values across all columns. But also here, the occurrence of identical matches only represents a privacy issue if and only if it is more prevalent than within the training data itself. If the training dataset has identical matches, we can expect to see a similar number (but not significantly more) of identical matches in the synthetic data. |
+| **Average Distances** | The average distances calculated between the synthetic records and their nearest neighbors from the training dataset used for this model.<br />For reference, the average distances between the synthetic records and their nearest neighbors from the holdout dataset appear in light gray. |
+
+### Correlations
+
+The **Correlations** section shows three correlation matrices. They provide a way to assess whether the synthetic dataset retained the correlation structure of the original data set. This gives you an additional way to assess the quality of the synthetic data, but does not have an impact on the calculated overall accuracy score.
+
+Both the X and Y-axis refer to the columns in the table that is evaluated, and each cell in the matrix correlates to a variable pair: the more two variables are correlated, the darker the cell becomes. This is obvious in the dark 45 degree diagonal which shows the correlations of single variables with themselves. Naturally, their correlation coefficient is 1. The third matrix shows the difference between the original and the synthetic data.
+
+For subject tables, the charts display all columns.
+
+<Image 
+    src="/docs/docimages/generators/evaluate-quality/qa-report-correlations-subject-table.webp" 
+    alt="Correlations - Subject table" 
+    width={800} 
+    height={150}
+/>
+
+For linked tables, the charts display the correlations between all columns as well as the correlations between each column and the **Sequence Length**.
+
+<Image 
+    src="/docs/docimages/generators/evaluate-quality/qa-report-correlations-linked-table.webp" 
+    alt="Correlations - Linked table" 
+    width={800} 
+    height={150}
+/>
+
+<CustomCallout type="tech">
+**Technical reference**<br />
+The correlations are calculated by binning all variables into a maximum of 10 groups. For categorical columns, the 10 most common categories are used and for numerical columns, the deciles are chosen as cut-offs. Then, a correlation coefficient Φκ is calculated for each combination of variable pairs. The Φκ coefficient provides a stable solution when combining numerical and categorical variables and also captures non-linear dependencies. The resulting correlation matrix is then color-coded as a heatmap to indicate the strength of variable interdependencies, once for the actual and once for the synthetic data with scaling between 0 and 1.
+Details about the Φκ coefficient can be found in the following paper: [A new correlation coefficient between categorical, ordinal and interval variables with Pearson characteristics](https://arxiv.org/abs/1811.11440)
+</CustomCallout>
+
+### Univariates
+
+Univariate distributions describe the probability of a variable having a particular value. You can find four types of plots in this section of the QA report: categorical, continuous, and datetime. A Sequence Length plot is also available if your generator includes a linked table.
+
+For each variable, there’s a distribution and binned plot. These show the distributions of the original and the synthetic dataset in black and green, respectively. The percentage next to the title shows how accurately the original column is represented by the synthetic column.
+
+You can search by column name to find a univariate chart.
+
+<Image 
+    src="/docs/docimages/generators/evaluate-quality/qa-report-univariate.webp" 
+    alt="QA report - Univariate distributions" 
+    width={600} 
+    height={150}
+/>
+
+You may find categories that are not present in the original dataset (for example, **`_RARE_`**). These categories appear as a means of rare category protection, ensuring privacy protection of subjects with rare or unique features.
+
+<CustomCallout type="tech">
+**Technical reference**<br />
+
+All variables are binned into a maximum of 10 groups. For categorical columns, the 10 most common categories are used and for numerical and datetime columns, the deciles are chosen as cut-offs. One additional group is used to show empty values: (empty) for categorical and (n/a) for numerical and datetime columns. This presented accuracy is the Manhattan distance (L1) calculated on the binned datasets.
+</CustomCallout>
+
+### Bivariates
+
+Bivariate distributions provide a metric of the conditional relationship between the content of two columns in your original dataset and that relationship is preserved in the synthetic dataset.
+
+For each variable pair, there is an **original** and a **synthetic** plot. These show the relationships of the variables in the original and the synthetic dataset in black and green, respectively. Again, the percentage next to the title shows how accurately the original column is represented by the synthetic column.
+
+The bivariate distribution below shows, for instance, that the age group of forty years and older is most likely to be married, and anyone below thirty is most likely to have never been married. You can see that this is the same in the synthetic dataset.
+
+If it’s a QA report for a linked table, then you can find the plots with the context table’s columns by looking for `context:[column-name]`. The word context here refers to either the subject table or another linked table with which this linked table has been synthesized.
+
+You can search by column name to find a bivariate chart.
+
+<Image 
+    src="/docs/docimages/generators/evaluate-quality/qa-report-bivariate.webp" 
+    alt="QA report - Bivariate distributions" 
+    width={350} 
+    height={150}
+/>
+
+You may find categories that are not present in the original dataset (for example, **`_RARE_`**). These categories appear as a means of rare category protection, ensuring privacy protection of subjects with rare or unique features.
+
+<CustomCallout type="tech">
+**Technical reference**<br />
+All variables are binned into a maximum of 10 groups. For categorical columns, the 10 most common categories are used and for numerical and datetime columns, the deciles are chosen as cut-offs. One additional group is used to show empty values: (empty) for categorical and (n/a) for numerical and datetime columns.
+
+In the downloadable HTML, only a selection of bivariate plots are shown, half of which are the most accurate and the other half the least accurate.
+</CustomCallout>
+
+### Coherence (linked tables only)
+
+Coherence charts compare original and synthetic time-series data and their inherent correlations. A coherence chart is a bivariate plot of a column of data. The data from the column is copied into two separate columns, where the first column contains the sequence of earlier events and the second columns contains the sequence of later events. You can use coherence charts to check the probability of one type of event being followed by another.
+
+Coherence charts are available only for linked tables. You can review the coherence of linked tables on the **Coherence** section of the **Model** report and **Data** report.
+
+To interpret coherence charts, you can review the following example where a color with a higher saturation indicates higher probability that an event from a Y-axis event is followed by an X-axis event.
+
+<Image 
+    src="/docs/docimages/generators/evaluate-quality/coherence-chart.webp" 
+    alt="QA report - Coherence" 
+    width={400} 
+    height={150}
+/>
+
+### Accuracy
+
+The **Accuracy** section is a summary of all Univariate and Bivariate distributions. It displays a table with all variables from the original dataset, the second column and third column of which list the respective univariate and bivariate accuracies.
+
+<Image
+    src="/docs/docimages/generators/evaluate-quality/qa-report-accuracy-section.webp" 
+    alt="QA report - Accuracy section" 
+    width={800} 
+    height={150}
+/>
+
+At the bottom is an **Accuracy Matrix** that shows the bivariate accuracies between pairs of variables. You can also find these values in the respective **Bivariate distribution** charts. The diagonal values (bottom left to top right) of the chart that only belong to one variable are the univariate accuracies of that variable.
+
+<Image 
+    src="/docs/docimages/generators/evaluate-quality/qa-report-accuracy.webp" 
+    alt="QA report - Accuracy matrix"
+    width={400} 
+    height={150}
+/>
+
+**How accuracy is calculated**
+
+The accuracy of synthetic data can be assessed by measuring statistical distances between the synthetic and the original data. The metric of choice for the statistical distance is the total variation distance (TVD), which is calculated for the discretized empirical distributions. Subtracting the TVD from 100% then yields the reported accuracy measure. These are being calculated for all univariate and all bivariate distributions. The latter is done for all pair-wise combinations within the original data, as well as between the context and the target. For sequential data, an additional coherence metric is calculated that assesses the bivariate accuracy between the value of a column, and the succeeding value of a column. All of these individual-level statistics are then averaged across to provide a single informative quantitative measure. The full list of calculated accuracies is provided as a separate downloadable file.
+
+### Similarity
+
+The similarity plots represent how the training, synthetic, and holdout datasets compare to each other in terms of their distributions. The similarity metrics are calculated in a multi-dimensional embedding space and then projected into a 2D space for easier visualization.
+
+<Image
+    src="/docs/docimages/generators/evaluate-quality/similarity-plots.webp"
+    alt="Model report - Similarity plots" 
+    width={800} 
+    height={150}
+/>
+
+The principal components displayed on the X and Y axes are combinations of the original dimensions. Think of them as new dimensions that capture the most significant variability in the data. 
+
+The black dots represent the centroids of each dataset, while the colorful areas represent the distribution of the data points. The more saturated areas indicate regions with a higher concentration of data points.
+
+A high-quality synthetic dataset should resemble closely the original data in terms of distribution. In this context, we expect the shapes and saturations of the green layers, which represent the synthetic data, to be similar to those of the training data, which appears in blue.
+
+Additionally, the centroids' similar positions indicate that the overall distribution of the synthetic data resembles closely the training data.
+
+The holdout data provides a benchmark for comparison. The synthetic dataset should align closely with both the training and holdout data, confirming its quality and generalizability.
+
+### Distances
+
+The full distribution of the distances to closest records appears at the end of the **Model** report.
+
+The distances of the **_synthetic samples to the training samples_** are displayed in **_green_**, and the distances of the **_synthetic samples to the holdout samples_** are displayed in **_gray_**. 
+
+In the chart, you can ascertain that the synthetic samples are as close to the original training samples as they are to the holdout samples (which serves as a reference).
+<Image 
+    src="/docs/docimages/generators/evaluate-quality/model-report-distances.webp" 
+    alt="Model report - Distances" 
+    width={650} 
+    height={150}
+/>
+
+## Get quality metrics with the Python SDK
+
+The Python SDK provides direct access to the metrics of each generator. Get a generator with `mostly.generators.get('GENERATOR_ID')` and then access the metrics with `g.tables[0].tabular_model_metrics` (for tabular models) and `g.tables[0].language_model_metrics` (for language models).
+
+* `g.tables[0].tabular_model_metrics` - returns the metrics of the first table model in the generator. Increment `0` for each subsequent model in the generator.
+* `g.tables[0].language_model_metrics` - returns the metrics of the language model of the first table in the generator (available when a text column has the **Language/Text** encoding type).
+
+```python filename="python" copy
+g = mostly.generators.get('GENERATOR_ID')
+
+g.tables[0].tabular_model_metrics
+```
+
+The following is an example of the model metrics obtained with the Python SDK.
+
+```json
+{
+    'accuracy': {
+        'overall': 0.946,
+        'univariate': 0.958,
+        'bivariate': 0.934,
+        'coherence': None,
+        'overall_max': 0.984
+    },
+    'distances': {
+        'dcr_training': 0.075,
+        'dcr_holdout': 0.077,
+        'dcr_original': None,
+        'dcr_synthetic': None
+    },
+    'similarity': {
+        'cosine_similarity_training_synthetic': 0.99995,
+        'cosine_similarity_training_holdout': 0.99998,
+        'discriminator_auc_training_synthetic': 0.531,
+        'discriminator_auc_training_holdout': 0.506
+    }
+}
+```
+
+To get the language model metrics (if that table model has a column with the **Language/Text** encoding type), use the following code.
+
+```python filename="python" copy
+g.tables[0].language_model_metrics
+```
+
+```json
+{
+    'accuracy': {
+        'overall': 0.93,
+        'univariate': 0.956,
+        'bivariate': 0.904,
+        'coherence': None,
+        'overall_max': 0.936
+    },
+    'distances': {
+        'dcr_training': 0.491,
+        'dcr_holdout': 0.493,
+        'dcr_original': None,
+        'dcr_synthetic': None
+    },
+    'similarity': {
+        'cosine_similarity_training_synthetic': 0.99927,
+        'cosine_similarity_training_holdout': 0.99921,
+        'discriminator_auc_training_synthetic': 0.535,
+        'discriminator_auc_training_holdout': 0.516
+    }
+}
+```
+
+Each synthetic dataset also provides the metrics of its generator. So, you can get the generator metrics also by using the `synthetic_dataset` object.
+
+```python filename="python" copy
+sd = mostly.synthetic_datasets.get('SYNTHETIC_DATASET_ID')
+sd.tables[0].tabular_model_metrics
+```
+
+The returned metrics are the same as those reported for the generator.
+
+```json
+{
+    'accuracy': {
+        'overall': 0.946,
+        'univariate': 0.958,
+        'bivariate': 0.934,
+        'coherence': None,
+        'overall_max': 0.984
+    },
+    'distances': {
+        'dcr_training': 0.075,
+        'dcr_holdout': 0.077,
+        'dcr_original': None,
+        'dcr_synthetic': None
+    },
+    'similarity': {
+        'cosine_similarity_training_synthetic': 0.99995,
+        'cosine_similarity_training_holdout': 0.99998,
+        'discriminator_auc_training_synthetic': 0.531,
+        'discriminator_auc_training_holdout': 0.506
+    }
+}
+```

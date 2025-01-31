@@ -1,0 +1,143 @@
+---
+title: 'Two-table relationship'
+description: 'In MOSTLY AI, a two-table scenario includes a subject table and a linked table that have a context relationship.'
+---
+
+import { Tabs } from 'nextra/components'
+import Image from 'next/image'
+
+# Two-table relationship
+
+The two-table scenario includes a **_subject table_** and a **_linked table_**. _Subject tables_ contain PII details about people, companies, or any other entities. _Linked tables_ contain time-series or events data, one or many of which belong to a subject.
+
+For example, the figure below shows the `customers` and `purchases` tables from the [CDNOW dataset](/datasets#cdnow-dataset). The highlighted rows show the relationship between subject records from the `customers` table and their related events records from the `purchases` table.
+
+<Image
+    src="/docs/docimages/generators/set-table-relationships/two-table.webp"
+    alt="MOSTLY AI - Two-table relationship - subject and linked table"
+    width={900}
+    height={300}
+/>
+
+To train a generator on a two-table dataset, you need to define the foreign key from the `purchases` table that points to the primary key to the `users` table.
+
+<Tabs items={['UI', 'Python SDK']}>
+<Tabs.Tab>
+If you use the web interface, add both tables to the generator and set their relationship.
+
+**Steps**
+
+1. In MOSTLY AI, select **Generators** from the top menu.
+2. On the **Generators** page, click **+ New generator**.
+    <Image
+        src="/docs/docimages/generators/train/01-click-new-generator.webp"
+        alt="MOSTLY AI - Generators page - Click New generator"
+        width={800}
+        height={300}
+    />
+3. Upload the `customers` table.
+    1. Click **Upload file**.
+        <Image
+            src="/docs/docimages/generators/train/02-select-upload-file.webp"
+            alt="MOSTLY AI - Generators page - Select Upload file"
+            width={800}
+            height={300}
+        />
+    2. Upload the `customers` table, leave its name as `customers`, and click **Proceed**.<br />
+        **Step result**: The table is now added to the generator.
+        <Image
+            src="/docs/docimages/generators/set-table-relationships/table-rel-01-customers-added.webp"
+            alt="MOSTLY AI - Table CDNOW/customers added"
+            width={800}
+            height={300}
+        />
+5. Upload the `purchases` table.
+    1. In the generator, click **Add data**.
+        <Image
+            src="/docs/docimages/generators/set-table-relationships/table-rel-02-click-add-data.webp"
+            alt="MOSTLY AI - Click Add data"
+            width={800}
+            height={300}
+        />
+    2. Click **Upload files**, upload the table, leave its name as `purchases`, and click **Proceed**.<br />
+        **Step result**: The table is now added to the generator.
+6. Set the relationship between the `customers` and `purchases` tables.
+    1. Hover over the linked table (in this case `purchases`) and click **Edit foreign keys**.
+        <Image
+            src="/docs/docimages/generators/set-table-relationships/table-rel-03-click-edit-foreign-keys.webp"
+            alt="MOSTLY AI - Click Edit foreign keys"
+            width={800}
+            height={300}
+        />
+    2. In the drawer, click **Add foreign key**.
+    3. For **Foreign key**, select the foreign key column for the `purchases` table. In this case, the `users_id` column.
+    4. For **Referenced table**, select the table to which the foreign key points to. In this case, the `customers` table.
+    5. For **Referenced primary key**, select the primary key column of the referenced table. In this case, the `id` column.
+    6. Select the **Is context** checkbox.
+    7. Click the confirmation button.
+        <Image
+            src="/docs/docimages/generators/set-table-relationships/table-rel-04-configure-foreign-key.webp"
+            alt="MOSTLY AI - Click Edit foreign keys"
+            width={800}
+            height={300}
+        />
+7. Click **Close** in the upper right to close the drawer.
+
+**Result**
+
+The two-table relationship foreign key is now set. The linked table `purchases` is now nested and indented under its subject table `customers`.
+
+<Image
+    src="/docs/docimages/generators/set-table-relationships/table-rel-05-two-table-foreign-key-set.webp"
+    alt="MOSTLY AI - Click Edit foreign keys"
+    width={800}
+    height={300}
+/>
+
+With the context relationship defined, the generator can capture the correlations and retain the referential integrity between the two tables during AI model training.
+
+Optionally, you can click **Relationship diagram** to get an overview of all table relationships.
+
+<Image
+    src="/docs/docimages/generators/set-table-relationships/table-rel-06-relationship-diagram-two-table.webp"
+    alt="MOSTLY AI - Click Edit foreign keys"
+    width={800}
+    height={300}
+/>
+
+**What's next**
+
+You can now train the generator on the CDNOW dataset with the default options. To do so, click **Configure models** and then **Start training**.
+</Tabs.Tab>
+<Tabs.Tab>
+With the Python SDK, define each table as a dictionary in the `tables` list and include the `primary_key` and the `foreign_keys` keys for the subject and linked table. It is important to set `is_context: True{:python}` for the foreign key. For more information, see [Context foreign key](../set-table-relationships#context-foreign-key).
+```python filename="python" copy {15,20}
+# load data
+import pandas as pd
+cdnow_url = "https://github.com/mostly-ai/public-demo-data/raw/dev/cdnow/"
+users_df = pd.read_csv(cdnow_url + "users.csv.gz")
+purchases_df = pd.read_csv(cdnow_url + "purchases.csv.gz")
+
+# create and train a generator
+from mostlyai.sdk import MostlyAI
+mostly = MostlyAI(api_key="INSERT_API_KEY")
+config = {
+    "name": "CDNOW",
+    "tables": [
+        {
+            "name": "users", 
+            "data": users_df,
+            "primary_key": "id"
+        },
+        {
+            "name": "purchases",
+            "data": purchases_df,
+            "foreign_keys": [{"column": "users_id", "referenced_table": "users", "is_context": True}]
+        }
+    ]
+}
+g = mostly.train(config=config, start=True, wait=True)
+g
+```
+</Tabs.Tab>
+</Tabs>

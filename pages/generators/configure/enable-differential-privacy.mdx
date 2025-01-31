@@ -1,0 +1,133 @@
+---
+title: "Differential privacy"
+description: "With MOSTLY AI, you can train a generator with differential privacy enabled to ensure that it can generate differentially private synthetic data."
+---
+
+import { Callout } from 'nextra/components';
+import { Tabs } from 'nextra/components'
+import Image from 'next/image';
+
+# Differential privacy
+With MOSTLY AI, you can train a generator with differential privacy enabled to ensure that it can generate differentially private synthetic data.
+
+## When to use differential privacy?
+
+MOSTLY AI models implement a number of [privacy mechanisms](/concepts/privacy-protection) to guarantee that a trained generator will never leak private data.
+
+If you wish to add a mathematical guarantee that a trained [generator](/generators) is differentially private, you can enable differential privacy in its configuration before starting its training.
+
+## Train with differential privacy
+
+In MOSTLY AI, you enable differential privacy on the **Model configuration** page of a generator. This means that you can train a [generator](/generators) to be differentially private from the start. Any [synthetic datasets](/synthetic-datasets) you generate with this generator will be differentially private as a result.
+
+<Tabs items={['UI', 'Python SDK']}>
+<Tabs.Tab>
+**Steps**
+
+1. Open a non-trained generator (that has the status **New** or **Continue**)
+2. Click **Configure models** in the upper right.
+3. On the **Model configuration** page, expand a model to configure.
+4. Expand **Differential privacy** and select **On** to enable differential privacy for the model.
+    <Image
+        src="/docs/docimages/generators/enable-differential-privacy/01-enable-differential-privacy.webp"
+        alt="Enable differential privacy"
+        width={800}
+        height={400}
+    />
+4. Configure the differential privacy options.<br />
+    | Differential privacy setting | Action |
+    | --- | --- |
+    | **DP max epsilon** | Set a maximum epsilon value for the model.<br /><br />If exceeded, this value acts as a stopping criteria for training. Only those model checkpoints that have an epsilon value below this threshold will be saved. If left blank, the training proceeds without a stopping criteria.<br /><br />For details, see [_Privacy budget (epsilon)_](#privacy-budget-epsilon).|
+    | **DP noise multiplier** | Set the noise multiplier for the model. The noise multiplier determines the amount of noise added to the model's gradients during training. A higher value results in more noise and stronger privacy, but may lead to less accurate results.<br /><br />The default is `1.5`.<br /><br />For details, see [_Noise multiplier_](#noise-multiplier).|
+    | **DP max gradient norm** | Set the maximum norm of the per-sample gradients. Gradients with norm higher than this will be clipped to this value.<br /><br />The default is `1`.<br /><br />For details, see [_Gradient clipping_](#gradient-clipping).|
+    | **Delta** | The delta value for differential privacy in the range of `1 x 10 ^ -3` to `1 x 10 ^ -12`. It is the probability of the privacy guarantee not holding. The smaller the delta, the more confident you can be that the privacy guarantee holds.<br />The default is `1 x 10 ^ -5`.|
+    
+    <Callout>
+    **Note**<br />
+    The best amounts of epsilon, noise multiplier, and max gradient norm depend on your original data, specific use case, and the desired trade-off between privacy and accuracy.<br /><br />As a best practice, start with the default values and adjust them based on the results.
+    </Callout>
+
+    <Image
+        src="/docs/docimages/generators/enable-differential-privacy/02-configure-differential-privacy-epsilon-max-gradient-norm-noise-multiplier.webp"
+        alt="Configure differential privacy settings"
+        width={800}
+        height={400}
+    />
+5. Click **Start training** in the upper right to train the generator with differential privacy.
+</Tabs.Tab>
+<Tabs.Tab>
+To enable differential privacy for a generator, use the `differential_privacy` key under `tabular_model_configuration`, and nest the `max_epsilon`, `noise_multiplier`, `max_grad_norm`, and `delta` keys. Default values are applied if a key is undefined.
+
+```python filename="python" copy {10-15}
+df_original = pd.read_csv('https://github.com/mostly-ai/public-demo-data/raw/dev/census/census.csv.gz')
+
+dp_config = {
+    "name": "US Census DP",
+    "tables": [
+        {
+            "name": "US Census",
+            "data": df_original,
+            "tabular_model_configuration": {
+                "differential_privacy": {
+                    "max_epsilon": 2.5,      # default is None
+                    "noise_multiplier": 1.5, # default is 1.5
+                    "max_grad_norm": 1,      # default is 1
+                    "delta": 1e-05           # default is 1e-05
+                }
+            }
+        }
+    ],
+    
+}
+g = mostly.train(config=dp_config, start=True, wait=True)
+```
+</Tabs.Tab>
+</Tabs>
+
+**What's next**
+
+You can track the training progress and the epsilon value by opening the **Training log** from the **Training status** section.
+
+The **Training log** includes the **Diff privacy (ε/δ)** column and shows the values of epsilon and delta. The delta is typically a very low value (such as `1e-5`) and represents the probability threshold for potential privacy loss across the training epochs. A smaller delta implies a stricter privacy guarantee.
+
+<Image 
+    src="/docs/docimages/generators/enable-differential-privacy/03-open-training-log.webp"
+    alt="Open training log"
+    width={800}
+    height={400}
+/>
+
+## Appendix: Concepts
+
+Differential privacy is a mathematical definition of privacy that ensures that the output of a computation does not reveal information about the input data. It is a way to maximize the accuracy of queries from statistical databases while minimizing the chances of identifying  individual records.
+
+<Callout>
+**Example**<br />
+Imagine a database that contains the salaries of all employees in a company. If you query the database to get the average salary of all employees, the result will be different if you include or exclude the salary of a single employee.<br /><br />Differential privacy ensures that the result of the query is the same or very similar, regardless of whether the salary of a single employee is included or not.
+</Callout>
+
+Key concepts of differential privacy are [**_noise addition_**](#noise-addition) and [**_privacy budget_**](#privacy-budget) (also known as **_epsilon_**).
+
+### Noise addition
+
+Differential privacy works by adding controlled random noise to the data or results derived from it (such as averages or counts). This noise is used to mask the contribution of individual records to the output of a query, making it impossible to identify individual records.
+
+The amount of noise to add depends on the _privacy budget_, or epsilon (ε).
+
+### Privacy budget (epsilon)
+
+The privacy budget, or epsilon (ε), is a measure of how much privacy loss is acceptable. It quantifies the trade-off between privacy and data accuracy. A smaller epsilon means stronger privacy, as the effect of any single data point is more heavily obscured, but may lead to less accurate results.
+
+Each query or analysis consumes a portion of the privacy budget. With repeated queries, the budget can be potentially exhausted, which limits how much information can be extracted from a dataset before privacy risks increase.
+
+## Appendix: Techniques
+
+MOSTLY AI uses the [Opacus](https://opacus.ai/) library to implement differential privacy in its models. Opacus is a library for training PyTorch models with differential privacy.
+
+### Gradient clipping
+
+During training, the gradients of each individual sample in a batch are computed. To limit the influence of any single sample on the model, the gradients are clipped to a predefined maximum norm. This ensures that the model does not overfit to any single sample and that the training process is more stable.
+
+### Noise multiplier
+
+After gradient clipping, Opacus adds noise to the sum of gradients before they are applied to update the model parameters. This noise, typically Gaussian, is calibrated based on the privacy budget (epsilon) specified by the user, which defines how much information about any single sample can be inferred from the model.

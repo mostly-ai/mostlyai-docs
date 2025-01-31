@@ -1,0 +1,145 @@
+---
+title: 'Datasets'
+description: 'The datasets below are popular for machine learning use cases. You can use them in MOSTLY AI to generate synthetic data versions and compare them to the original versions.'
+---
+
+# Ready-to-use datasets
+
+In case you don’t have your own dataset ready, you can still get started right away with one of the provided datasets below:
+
+## US Census Income dataset
+
+This dataset is taken from the [Adult Dataset](https://archive.ics.uci.edu/dataset/2/adult) from UC Irvine’s Machine Learning Repository.
+
+It is an extraction from the 1994 US Census database and contains 48,842 records and 13 columns of data, with a mix of data types.
+
+Click [here](/datasets/us-census-income.csv.gz) to download the `.CSV` file.
+
+```csv filename="us-census-income.csv.gz"
+       age        workclass fnlwgt education     marital-status        occupation   relationship               race    sex hours-per-week native-country capital income
+    1:  39        State-gov  77516 Bachelors      Never-married      Adm-clerical  Not-in-family              White   Male             40  United-States    2174  <=50K
+    2:  50 Self-emp-not-inc  83311 Bachelors Married-civ-spouse   Exec-managerial        Husband              White   Male             13  United-States       0  <=50K
+    3:  38          Private 215646   HS-grad           Divorced Handlers-cleaners  Not-in-family              White   Male             40  United-States       0  <=50K
+    4:  53          Private 234721      11th Married-civ-spouse Handlers-cleaners        Husband              Black   Male             40  United-States       0  <=50K
+    5:  28          Private 338409 Bachelors Married-civ-spouse    Prof-specialty           Wife              Black Female             40           Cuba       0  <=50K
+   ...
+48838:  39          Private 215419 Bachelors           Divorced    Prof-specialty  Not-in-family              White Female             36  United-States       0  <=50K
+48839:  64                ? 321403   HS-grad            Widowed                 ? Other-relative              Black   Male             40  United-States       0  <=50K
+48840:  38          Private 374983 Bachelors Married-civ-spouse    Prof-specialty        Husband              White   Male             50  United-States       0  <=50K
+48841:  44          Private  83891 Bachelors           Divorced      Adm-clerical      Own-child Asian-Pac-Islander   Male             40  United-States    5455  <=50K
+48842:  35     Self-emp-inc 182148 Bachelors Married-civ-spouse   Exec-managerial        Husband              White   Male             60  United-States       0   >50K
+```
+
+## Baseball dataset
+
+This dataset is taken from the [Sean Lahman Baseball Database](http://lahman.r-forge.r-project.org/).
+
+It consists of two data tables: 17,000 MLB baseball players and up to 15 seasons of their batting statistics.
+
+Click [here](/datasets/baseball.zip) to download the .ZIP file.
+
+```csv filename="players.csv"
+                 id country  birthDate  deathDate nameFirst nameLast weight height bats throws
+    1: 00020a493f3b    P.R. 1993-02-10       <NA>     Jorge    Lopez    195     75    R      R
+    2: 000492168bd5     USA 1945-10-12 1970-12-14    Herman     Hill    190     74    L      R
+    3: 0007b3925736     USA 1890-12-24 1956-09-12       Tod    Sloan    175     72    L      R
+    4: 000b415221f6     USA 1979-04-23       <NA>     Henry    Owens    230     75    R      R
+    5: 000f9b5832e6     USA 1886-03-06 1948-05-26      Bill  Sweeney    175     71    R      R
+   ...
+16996: ffe6f538955f     USA 1867-10-07 1915-09-23 Brickyard  Kennedy    160     71    R      R
+16997: ffefc03893ec     USA 1992-02-01       <NA>      Sean   Manaea    245     77    R      L
+16998: fff23e39b183     USA 1869-10-11 1906-02-14      Yale   Murphy    125     63    L      R
+16999: fff3d8297c46     USA 1917-05-19 1993-06-07    Skippy  Roberge    185     71    R      R
+17000: fffa80049d40    P.R. 1990-02-18       <NA>       Joe    Colon    180     72    R      R
+```
+
+```csv filename="seasons.csv"
+          players_id year team league  G AB R H HR RBI SB CS BB SO
+     1: 00020a493f3b 2015  MIL     NL  2  2 0 0  0   0  0  0  0  2
+     2: 00020a493f3b 2017  MIL     NL  1  0 0 0  0   0  0  0  0  0
+     3: 00020a493f3b 2018  MIL     NL 10  2 1 1  0   2  0  0  0  1
+     4: 00020a493f3b 2018  KCA     AL  7  0 0 0  0   0  0  0  0  0
+     5: 000492168bd5 1969  MIN     AL 16  2 4 0  0   0  1  2  0  1
+    ---
+105857: fffa11996763 2005  CHA     AL 24  3 0 1  0   0  0  0  0  1
+105858: fffa11996763 2006  ARI     NL  9 11 0 3  0   0  0  0  1  0
+105859: fffa11996763 2006  NYN     NL 20 35 4 5  0   2  1  0  0 10
+105860: fffa11996763 2007  NYN     NL 28 48 1 8  0   3  2  0  0 18
+105861: fffa80049d40 2016  CLE     AL 11  0 0 0  0   0  0  0  0  0
+```
+
+## CDNOW dataset
+
+This dataset contains a CRM table and the entire purchase history up to the end of June 1998 of 23,570 customers who made their first-ever purchase at CDNOW in the first quarter of 1997.
+
+[Download CDNOW CRM table](/datasets/CDNOW_CRM_table.csv.gz)
+
+
+```csv filename="CDNOW_CRM_table.csv.gz"
+first_name  last_name	state        gender  birthdate
+Bobby       Thompson    Oregon       M       1972-07-19
+John        Wood        New Jersey   M       1962-02-08
+Michael     Griffith    Minnesota    M       1981-03-22
+Eric        Walker      Michigan     M       1942-10-07
+Austin      Levine      New Jersey   M       1952-05-23
+Hunter      White       New Mexico   M       1963-05-20
+```
+[Download CDNOW CRM table + purchase history](/datasets/CDNOW_dataset.zip)
+
+
+```csv filename="customers.csv"
+id   zone       state       gender  age_category   age
+1    Pacific    Oregon      M       young          26
+2    Eastern    New Jersey  M       medium         36
+3    Central    Minnesota   M       young          17
+4    Eastern    Michigan    M       medium         56
+5    Eastern    New Jersey  M       medium         46
+6    Mountain   New Mexico  M       medium         35
+...
+```
+
+
+```csv filename="purchases.csv"
+users_id   date        cds  amt
+1          1997-01-01  1    11.77
+2          1997-01-12  1    12
+2          1997-01-12  5    77
+3          1997-01-02  2    20.76
+3          1997-03-30  2    20.76
+...
+```
+
+## Netflix Prize dataset
+
+This sequence dataset is an excerpt from the original Netflix Prize dataset. It contains 500,000 ratings from 10,000 users.
+
+Click [here](/datasets/netflix_10k.zip) to download the .ZIP file.
+
+
+```csv filename="users.csv"
+        id
+     1: 495
+     2: 840
+     3: 1374
+     4: 1522
+     5: 1619
+    ---
+  9997: 2648568
+  9998: 2648678
+  9999: 2648907
+ 10000: 2649207
+```
+
+
+```csv filename="ratings.csv"
+        users_id  date        movie                                  rating
+     1: 495       2003-10-08  A Mighty Wind                          4
+     2: 495       2003-10-24  On the Beach                           4
+     3: 495       2003-11-17  Seven Samurai                          5
+     4: 495       2003-11-26  Midnight Cowboy                        4
+    ---
+501286: 2649207   2005-02-08	The Importance of Being Earnest        4
+501287: 2649207   2005-06-08	Friday Night Lights                    2
+501288: 2649207   2005-06-16	The Hitchhiker's Guide to the Galaxy   1
+501289: 2649207   2005-08-14	Ray                                    3
+```

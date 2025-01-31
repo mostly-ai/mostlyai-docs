@@ -1,0 +1,46 @@
+---
+title: 'Hardware profiling'
+description: 'Depending on the datasets you need to synthesize, your hardware requirements for MOSTLY AI can differ. Review the MOSTLY AI hardware profiling benchmarks to get insights on what hardware can cover your synthetic data needs best.'
+---
+
+import Image from 'next/image'
+
+# Hardware profiling
+
+Depending on the datasets you need to synthesize, your hardware requirements for MOSTLY AI can differ. Review the results from the MOSTLY AI hardware profiling tests to understand how different data and machine sizes impact memory usage and the duration of AI training and synthetic data generation.
+
+## Memory usage
+
+<Image 
+    src="/docs/docimages/install/hardware-profiling/memory.webp" 
+    alt="MOSTLY AI - Hardware profiling - Memory usage" 
+    width={800} 
+    height={150}
+/>
+
+## Duration
+
+<Image 
+    src="/docs/docimages/install/hardware-profiling/duration.webp" 
+    alt="MOSTLY AI - Hardware profiling - Duration of AI training and generation" 
+    width={800} 
+    height={150}
+/>
+
+## Terminology reference
+
+| Step | Description |
+|-|-|
+| PULL               | Pull data from data source                                 |
+| ANALYZE            | Analyze original data                                      |
+| ENCODE             | Encode data based on selected column types for AI training |
+| TRAIN              | Train AI models                                            |
+| GENERATE           | Generate synthetic data                                    |
+| MODEL_QA           | Generate quality reports for each AI model                 |
+| DATA_QA            | Generate quality reports for each table of synthetic data  |
+| FLAT               | AI model for subject tables                                |
+| SEQUENTIAL         | AI model for linked tables (time-series and events data)   |
+| SUBJECTS           | Records in a subject table                                 |
+| Sequence length    | Number of linked table records that belong to one subject  |
+| Target columns     | Number of linked table records that belong to one subject  |
+| Column cardinality | Number of unique categories in categorical columns         |

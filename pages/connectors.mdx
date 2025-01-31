@@ -1,0 +1,30 @@
+---
+title: 'Connectors'
+description: 'MOSTLY AI integrates with popular databases and cloud storage providers so that you can utilize them as data sources for training generators or data destinations for synthetic data.'
+---
+
+# Connectors
+
+MOSTLY AI integrates with popular databases and cloud storage providers so that you can utilize them as data sources for training generators or data destinations for synthetic data.
+
+A connector in MOSTLY AI is a container of the connection details needed to connect to a database or a cloud storage bucket.
+
+For each database or cloud bucket that you want to read original data from or deliver synthetic data to, you need to create a **connector**.
+
+## Create a connector
+
+For step-by-step instructions on how to create a connector for each supported database or cloud object storage, see [Create a connector](connectors/create).
+
+## Data sources and destinations
+
+When you create a connector for the first time, you usually do so for a new data source. 
+
+With MOSTLY AI, you can also deliver synthetic data to a supported database or cloud storage, and for that, you need to create another connector, a destination connector.
+
+The data source and destination can be of different types. For example, you can read data from Snowflake and deliver the generated synthetic data into an AWS S3 bucket. Or vice versa.
+
+The links below contain information on how you can use data sources and configure data destinations for your synthetic datasets.
+
+* [Use a connector as a data source](connectors/use/data-source)
+* [Use a connector as a data destination](connectors/use/data-destination)
+* [Use a local database as a sorce or destination](connectors/use/local-db)

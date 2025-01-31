@@ -1,0 +1,37 @@
+---
+title: 'Live probing'
+description: 'You can use the MOSTLY AI Python SDK to probe a trained generator for a number of synthetic samples in real-time without the need to generate a synthetic dataset.'
+---
+
+# Live probing of generators
+
+You can use the MOSTLY AI Python SDK to probe a trained generator for a number of synthetic samples in real-time without the need to generate a synthetic dataset.
+
+```bash copy filename="python"
+g = mostly.generators.get('INSERT_GENERATOR_ID') # Get the generator by its ID
+sp = mostly.probe(g, size=3)                       # Probe the generator for 3 synthetic samples
+```
+Based on the specified `size`, you get 3 synthetic data samples generated.
+
+```
+   age workclass education      marital-status       occupation relationship   race     sex  hours-per-week      native-country income
+0   29   Private   HS-grad  Married-civ-spouse     Craft-repair      Husband  White    Male              55       United-States  <=50K
+1   36   Private   HS-grad  Married-civ-spouse  Exec-managerial      Husband  White    Male              40       United-States   >50K
+2   23   Private       9th       Never-married     Adm-clerical    Unmarried  White  Female              40  Dominican-Republic  <=50K
+```
+
+You can also request the creation of specific samples by providing a seed. For example, to generate 3 synthetic samples where the `sex` of the subjects is always `Female`, you can use the following:
+
+```bash copy filename="python"
+seed = pd.DataFrame({'sex': ['Female', 'Female', 'Female']})
+sp = mostly.probe(g, seed=seed)
+```
+
+The following are 3 samples created with a generator trained on the US Census Income dataset.
+
+```
+   age  workclass  education marital-status       occupation   relationship   race     sex  hours-per-week native-country income
+0   43    Private  Bachelors       Divorced            Sales      Unmarried  White  Female              45  United-States   >50K
+1   45  Local-gov  Bachelors       Divorced  Exec-managerial      Unmarried  White  Female              40  United-States  <=50K
+2   41    Private  Bachelors  Never-married   Prof-specialty  Not-in-family  White  Female              40  United-States  <=50K
+```

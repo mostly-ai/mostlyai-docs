@@ -1,0 +1,36 @@
+---
+title: OCI compliance and security of MOSTLY AI container images
+description: ""
+---
+
+# OCI compliance and security of MOSTLY AI container images
+
+Learn about the OCI compliance and security scans of MOSTLY AI container images.
+
+## Are MOSTLY AI container images OCI Compliant?
+
+While MOSTLY AI images do not go through a formal OCI compliance check, we consider the images compliant on the [Image Specification](https://github.com/opencontainers/image-spec) and [Distribution Specification](https://github.com/opencontainers/distribution-spec).
+
+MOSTLY AI uses Red Hat Universal Base Images (UBI) as a base image, builds images with Docker, and stores them in DockerHub.
+
+## Can I run MOSTLY AI on any Kubernetes distribution?
+
+MOSTLY AI does not impose a Kubernetes distribution to customers. You are free to run MOSTLY AI on any Kubernetes distribution you like.
+
+The list of the officially supported distributions are:
+
+* Amazon Elastic Kubernetes Service (EKS)
+* Google Kubernetes Engine (GKE)
+* Azure Kubernetes Service (AKS)
+* Red Hat OpenShift
+* Vanilla Kubernetes
+
+## How do I make sure to run MOSTLY AI in an OCI Compliant environment?
+
+MOSTLY AI assumes that the officially supported Kubernetes distributions are compliant with the [Runtime Specification](https://github.com/opencontainers/runtime-spec) of OCI.
+
+If you are using a different Kubernetes distribution, check with the vendor if the runtime environment is OCI compliant.
+
+## Do you scan your images for vulnerabilities?
+
+MOSTLY AI uses [Trivy Open Source](https://trivy.dev/) vulnerability scanner in CI/CD pipelines and the scans of DockerHub, when pushing to the MOSTLY AI repository.

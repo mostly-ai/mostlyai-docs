@@ -1,0 +1,94 @@
+---
+title: 'Use S3 storage for synthetic data'
+description: 'If you keep datasets in S3 storage (Amazon AWS S3 or any S3-compatible storage service), you can synthesize them via an S3 connector in MOSTLY AI. If you want to store the generated synthetic data in a separate S3 bucket, you need to create a second destination S3 connector that points to that bucket.'
+---
+
+import { Tabs } from 'nextra/components'
+import Image from 'next/image'
+import { Callout } from 'nextra/components'
+
+# Use S3 storage for synthetic data
+
+If you keep datasets in S3 storage (Amazon S3 or any S3-compatible storage service), you can synthesize them via an S3 connector in MOSTLY AI.
+
+If you want to store the generated synthetic data in a S3 separate bucket, you need to create a second destination S3 connector that points to that bucket.
+
+**Prerequisites**
+
+When you use AWS S3, take into account the prerequisites listed below.
+
+* Use only "long-term" credentials that include an _access key_ and a _secret key_. "Short-term" credentials also require a _session token_, which is not supported.
+* To use AWS S3 paths containing partitioned Parquet datasets, your AWS credentials must have the `s3:ListBucket` permission.
+
+<Tabs items={['UI', 'Python SDK']}>
+<Tabs.Tab>
+
+**Steps**
+
+1. From the **Connectors** tab, click **Create connector**.
+    <Image 
+        src="/docs/docimages/connectors/create-connector-01-click.webp"
+        alt="Click Create connector button"
+        width={800}
+        height={500}
+    />
+2. From the **Create a new connector** window, select **S3 Storage**.
+    <Image
+        src="/docs/docimages/connectors/s3/create-connector-02-select-s3-storage.webp"
+        alt="Select S3 Storage connector"
+        width={800}
+        height={500}
+    />
+3. From the **New connector** window, configure the connector.
+    1. For **Name**, enter a name that you can distinguish from other connectors.
+    2. For **Access type**, select whether you want to use the connector as a **source** or **destination**.
+    3. For **Access key**, enter your AWS access key.
+    4. For **Secret key**, enter your AWS secret key.
+        <Image
+            src="/docs/docimages/connectors/s3/create-connector-03-configure-aws-bucket.webp"
+            alt="Configure AWS S3 bucket connector"
+            width={300}
+            height={500}
+        />
+    5. For **Endpoint URL (optional)**, enter the endpoint URL of your S3-compatible storage service.
+        <Callout>
+        If you use Amazon S3, you can leave this field empty.<br /><br />
+        If you use a different S3-compatible storage service, enter the endpoint URL of the service. For example: `https://play.min.io:9000`.
+        </Callout>
+        <Image
+            src="/docs/docimages/connectors/s3/create-connector-04-use-ssl.webp"
+            alt="Configure AWS S3 bucket connector - Use SSL for encrypted connection"
+            width={300}
+            height={500}
+        />
+    6. (Optional) To use an encrypted connection, select **Use SSL** and upload your certificate in the **CA certificate** field.
+4. Click **Save** to save your new AWS storage connector.<br /><br />
+    MOSTLY AI tests the connection. If you see an error, check the connection details, update them, and click **Save** again.<br /><br />
+    You can click **Save anyway** to save the connector disregarding any errors.
+</Tabs.Tab>
+<Tabs.Tab>
+If you use the Python SDK, create an AWS S3 connector with `mostly.connect()` and provide a connector configuration dictionary as shown below.
+```python copy filename="python" {3}
+c = mostly.connect({
+    "name": "S3 Connector",
+    "type": "S3_STORAGE",
+    "access_type": "SOURCE",
+    "config": {
+        "access_key": "AKIA******",
+        "endpoint_url": "https://play.min.io:9000", # Required only for S3-compatible storage services
+    },
+    "secrets": {
+        "secret_key": "******"
+    },
+    "test_connection": True
+})
+```
+</Tabs.Tab>
+</Tabs>
+
+**What's next**
+
+Depending on whether you created a **source** or a **destination** connector, you can use the connector as:
+
+* [data source](../use/data-source) for a new generator
+* [data destination](../use/data-destination) for a new synthetic dataset

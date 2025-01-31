@@ -1,0 +1,53 @@
+---
+title: Create a connector
+description: 'MOSTLY AI integrates with popular databases. You can create connectors to all supported databases and use them as data sources or destinations for synthetic data.'
+---
+import { Card, Cards } from 'nextra/components'
+import { 
+    mySQLIcon, 
+    PostgresIcon, 
+    SqlServerIcon, 
+    OracleIcon, 
+    MariaDBIcon, 
+    ApacheHiveIcon, 
+    SnowflakeIcon, 
+    BigQueryIcon,
+    DatabricksIcon,
+    AzureIcon, 
+    GoogleCloudIcon, 
+    AWSIcon
+} from '/components/connector-icons'
+
+# Create a connector
+
+MOSTLY AI integrates with popular databases and cloud object storage providers. You can create connectors to all supported databases and storage providers and use them as data sources or destinations for synthetic data.
+
+## Database connectors
+
+You can find a list below of self-hosted and managed databases that MOSTLY AI integrates with. You can create connectors to all supported databases and use them as [data sources](use/data-source) or a [destination](use/data-destination) for synthetic data.
+
+If you want to synthesize data from a database, you first need to define a connector that points to an existing database as the source of original data. If you also want to deliver the generated synthetic data to a database, you need to define another connector that points to an empty database.
+
+<Cards num={7}>
+  <Cards.Card icon={mySQLIcon()} arrow title="MySQL" href="create/mysql" />
+  <Cards.Card icon={PostgresIcon()} arrow title="PostgreSQL" href="create/postgresql" />
+  <Cards.Card icon={SqlServerIcon()} arrow title="SQL Server" href="create/sql-server" />
+  <Cards.Card icon={OracleIcon()} arrow title="Oracle" href="create/oracle" />
+  <Cards.Card icon={MariaDBIcon()} arrow title="MariaDB" href="create/mariadb" />
+  <Cards.Card icon={ApacheHiveIcon()} arrow title="Apache Hive" href="create/apache-hive" />
+  <Cards.Card icon={BigQueryIcon()} arrow title="BigQuery" href="create/bigquery" />
+  <Cards.Card icon={SnowflakeIcon()} arrow title="Snowflake" href="create/snowflake" />
+  <Cards.Card icon={DatabricksIcon()} arrow title="Databricks" href="create/databricks" />
+</Cards>
+
+## Cloud storage connectors
+
+You can find a list below of popular cloud object storage providers that MOSTLY AI integrates with. You can create connectors to use AWS, Google Cloud buckets, and Azure blob storage containers as data sources or destinations for synthetic data.
+
+To use a cloud storage provider as a data source or destination for synthetic data in MOSTLY AI, you first need to create a connector.
+
+<Cards num={3}>
+  <Cards.Card icon={AzureIcon()} arrow title="Azure" href="create/azure" />
+  <Cards.Card icon={GoogleCloudIcon()} arrow title="Google Cloud" href="create/google-cloud" />
+  <Cards.Card icon={AWSIcon()} arrow title="AWS" href="create/aws" />
+</Cards>

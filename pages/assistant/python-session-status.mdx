@@ -1,0 +1,44 @@
+---
+title: "Python session status"
+description: "Each new Assistant thread runs a Python environment where MOSTLY AI runs the Python code to navigate you and show you data insights. The Python session expires after a period of inactivity. Learn how to check and manage your Python session status."
+---
+
+import Image from 'next/image'
+import { Callout } from 'nextra/components'
+
+# Python session status
+
+Each new Assistant thread runs a Python environment. It is in the Python environment where all Python code suggested by the Assistant runs to deliver data insights and visualizations.
+
+After you create a new thread, the Python session is initialized in the background before it becomes ready for use. Until then, the Python session status is **Initializing**.
+
+<Image
+    src="/docs/docimages/assistant/python-session-initializing.webp"
+    alt="Python session initializing"
+    width={800}
+    height={400}
+/>
+
+After the Python session becomes available, its status changes to **Running**.
+
+<Image
+    src="/docs/docimages/assistant/python-session-running.webp"
+    alt="Python session running"
+    width={800}
+    height={400}
+/>
+
+After 15 minutes of inactivity, the Python session status changes to **Expired**.
+
+<Image
+    src="/docs/docimages/assistant/python-session-expired.webp"
+    alt="Python session expired"
+    width={800}
+    height={400}
+/>
+
+## Handle expired Python sessions
+
+After the Python session expires in a thread, you can no longer run Python code in that thread. If you try to run Python code in an expired Python session, you will see an error message.
+
+To run Python again, you need to [create a new Assistant thread](/assistant#use-the-assistant).

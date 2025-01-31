@@ -1,0 +1,45 @@
+# protect from DOS attacks
+limit_req_zone $binary_remote_addr zone=proxy:10m rate=50r/s;
+limit_req zone=proxy burst=200 nodelay;
+
+access_log  /dev/stdout  main;
+error_log   /dev/stderr  warn;
+
+server {
+  include       include/${MOSTLY_NGINX_IPCONF}.conf;
+  server_name _;
+
+  # SERVING STATIC FILES
+  root /opt/app-root/src/html;
+  index  index.html;
+  try_files $uri $uri/index.html /index.html;
+
+  location /docs/ {
+      try_files $uri $uri.html $uri/ =404;
+      alias /opt/app-root/src/html/;
+      default_type text/html;
+  }
+
+  # hardcoded location for us-census-income.csv.gz and CDNOW_CRM_table.csv.gz
+  # to be downloaded instead of parsed by browser
+  location = /docs/datasets/us-census-income.csv.gz {
+    alias /opt/app-root/src/html/datasets/us-census-income.csv.gz;
+    default_type text/csv;
+    add_header Content-Disposition 'attachment; filename="us-census-income.csv.gz"';
+    add_header Content-Type 'text/csv';
+    add_header Cache-Control 'no-store, no-cache, must-revalidate, max-age=0';
+  }
+  location = /docs/datasets/CDNOW_CRM_table.csv.gz {
+    alias /opt/app-root/src/html/datasets/CDNOW_CRM_table.csv.gz;
+    default_type text/csv;
+    add_header Content-Disposition 'attachment; filename="CDNOW_CRM_table.csv.gz"';
+    add_header Content-Type 'text/csv';
+    add_header Cache-Control 'no-store, no-cache, must-revalidate, max-age=0';
+  }
+  
+  error_page  404              /404.html;
+  error_page  500 502 503 504  /50x.html;
+  location ~ ^/(error.css|(50|40)[0-9x].html) {
+    root /opt/app-root/src/error;
+  }
+}

@@ -1,0 +1,68 @@
+---
+title: 'Requirements'
+description: "Before you deploy MOSTLY AI in your organization's cloud, make sure that your environment meets the requirements."
+---
+
+import { Callout } from 'nextra/components'
+
+# Requirements
+
+MOSTLY AI is a multi-service application that can run on single-node or multi-node Kubernetes clusters. For a successful deployment and operation, the Kubernetes cluster on which you deploy MOSTLY AI must meet the compute and storage requirements.
+
+If you need to run multiple synthetic datasets in parallel, you can deploy MOSTLY AI in a [multi-node environment](#multi-node-deployments) with multiple worker nodes.
+
+## Single-node deployments
+
+You can deploy MOSTLY AI in a single-server environment that runs as a single-node Kubernetes cluster. The single node will run all components of the [MOSTLY AI application architecture](architecture), including the application and worker nodes.
+
+The **minimum requirements** for a successful single-node deployment of MOSTLY AI are as follows:
+
+| Resources   | Size     |
+| ----------- | -------: |
+| **CPU**     | 24 cores |
+| **RAM**     | 48 GB    |
+| **Storage** | 256 GB   |
+
+Depending on the datasets you intend to synthesize, you might need a node with more compute resources.
+
+<Callout type="info">
+    **Note**<br />
+    To learn how to size your infrastructure based on the size of the datasets you want to synthesize, see the [best practices for virtual machine sizes](/best-practices#virtual-machine-size) and refer to the `resourcesPreset` definitions in the helm charts.
+</Callout>
+
+## Multi-node deployments
+
+For a multi-node deployment, you need a Kubernetes cluster with at least two nodes. One of the nodes functions as the application node and the remaining function as worker nodes.
+
+MOSTLY AI requires nodes with available resources that meet the computation and memory requirements. To ensure a smooth operation in shared cluster environments, it is best to dedicate the nodes solely to MOSTLY AI tasks. This prevents resource conflicts and ensures that all tasks required to complete AI training and to generate synthetic datasets will run unobstructed. To achieve this, you can isolate the dedicated nodes by applying taints and tolerations to node and pod configurations. For more information, see [Taints and tolerations](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) in the _Kubernetes documentation_.
+
+### Application node minimum requirements
+
+The application node runs the web-based user interface and distributes the synthetic data generation jobs across the available worker nodes.
+
+The **minimum requirements** for the application node are as follows:
+
+| Resources   | Size    |
+| ----------- | ------: |
+| **CPU**     | 8 cores |
+| **RAM**     | 16 GB   |
+| **Storage** | 20 GB   |
+
+### Worker nodes minimum requirements
+
+You need at least 1 worker node to run jobs for generator training or synthetic dataset generation. If you need to run multiple jobs in parallel (such as multiple generators training and multiple synthetic datasets being generated), you may need 2 or more worker nodes added to your cluster.
+
+The worker nodes are responsible for running and processing each job to train a generator or to generate a synthetic dataset. The **minimum requirements** for each worker node are as follows:
+
+| Resources                       | Size     |
+| ------------------------------- | -------: |
+| **CPU**                         | 16 cores |
+| **RAM**                         | 32 GB    |
+| **Storage**                     | 256 GB   |
+
+Depending on the datasets you intend to synthesize, you might need worker nodes with more compute resources.
+
+<Callout type="info">
+    **Note**<br />
+    To learn how to size your infrastructure based on the datasets you want to synthesize, check the [best practices to identify your virtual machine size](/best-practices#virtual-machine-size) and refer to the `resourcesPreset` definitions in the [Helm chart](/install/deploy/helm-chart).
+</Callout>

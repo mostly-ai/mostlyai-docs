@@ -1,0 +1,135 @@
+---
+title: 'Use a connector as a data destination'
+description: 'When you configure a data synthesis job, you can specify a destination where you want the job to deliver the generated synthetic data.'
+---
+
+import { Callout } from 'nextra/components'
+import { Tabs } from 'nextra/components'
+import { CustomCallout } from '@components/custom-callout'
+import Image from 'next/image'
+
+# Use a connector as a data destination
+
+For each new synthetic dataset, you can set a destination (database or cloud storage) where MOSTLY AI will deliver your new synthetic data automatically.
+
+**Prerequisites**
+
+Create a connector for a database or cloud storage bucket and select **Destination** under **Access type**. You can use all supported databases and cloud object storage.
+
+<Image
+    src="/docs/docimages/connectors/connector-destination.webp"
+    alt="Connector - Select Destination under Connector type"
+    width={350}
+    height={30} 
+/>
+
+<Tabs items={['UI', 'Python SDK']}>
+<Tabs.Tab>
+If you use the web application, set a destination from the **Dataset destination** option when you configure a new synthetic dataset.
+
+**Steps**
+
+1. Start a new synthetic dataset in one of two ways.
+    * From the **Synthetic datasets** page, click **+ New synthetic data** and select a trained generator.
+    * From the **Generators** page with a trained generator open, click **Generate synthetic data**.
+3. Click **Dataset destination**.
+    <Image
+        src="/docs/docimages/connectors/destination/click-dataset-destination.webp"
+        alt="Synthetic dataset configuration - click Dataset destination"
+        width={800}
+        height={30} 
+    />
+3. In the modal window, select a destination connector from the **Destination** drop-down.
+    <Image
+        src="/docs/docimages/connectors/destination/select-destination-connector.webp"
+        alt="Synthetic dataset configuration - Select a destinaiton connector"
+        width={800}
+        height={30}
+    />
+4. For **Location**, follow the steps depending on whether you deliver to a database or cloud storage destination.
+    * For databases, select a database and in which schema you want to deliver the synthetic dataset.
+        <Image
+            src="/docs/docimages/connectors/destination/destination-database-select-location.webp"
+            alt="Synthetic dataset - Select a destination - Database configuration"
+            width={800}
+            height={30}
+        />
+    * For cloud storage, click in the **Location** field and expand the bucket tree structure to select a destination folder.
+        <Image
+            src="/docs/docimages/connectors/destination/destination-cloud-storage-tree-view-select-location.webp"
+            alt="Synthetic dataset - Select a destination - Cloud storage configuration"
+            width={800}
+            height={30}
+        />
+5. (Optional) Select **Overwrite existing table** to replace database tables or cloud storage files that have the same name as the tables in your synthetic data.
+    <CustomCallout>
+    **Note**: The best use case for overwriting existing tables is when you are delivering multiple times to the same database or cloud bucket.
+    </CustomCallout>
+6. Click **Proceed**.
+
+**Result**
+
+Your synthetic dataset now has a destination, and when generated, MOSTLY AI delivers it to the destination.
+</Tabs.Tab>
+<Tabs.Tab>
+If you use the Python SDK, add `delivery` to your synthetic dataset `config` dictionary.
+
+To **deliver to databases with a schema**, use the code snippet below and replace as follows:
+* `GENERATOR_ID` with the generator ID
+* `DESTINATION_CONNECTOR_ID` with the ID of a destination connector
+* `SCHEMA` with the database schema
+* `TABLE` with the table name
+
+```python copy filename="python" {7}
+g = mostly.generators.get("GENERATOR_ID")
+config = {
+   "generator_id": "GENERATOR_ID",
+   "name": "Databricks US Census",
+   "delivery": {
+      "destination_connector_id": "DESTINATION_CONNECTOR_ID",
+      "location": "SCHEMA.TABLE"
+   }
+}
+sd = mostly.generate(g, config=config)
+```
+
+To **deliver to databases with no schema**, use the code snippet below and replace as follows:
+
+* `GENERATOR_ID` with the generator ID
+* `DESTINATION_CONNECTOR_ID` with the ID of a destination connector
+* `TABLE` with the table name
+
+```python copy filename="python" {7}
+g = mostly.generate.get("GENERATOR_ID")
+config = {
+   "generator_id": "GENERATOR_ID",
+   "name": "Databricks US Census",
+   "delivery": {
+      "destination_connector_id": "DESTINATION_CONNECTOR_ID",
+      "location": "TABLE"
+   }
+}
+sd = mostly.generate(g, config=config)
+```
+
+To **deliver to cloud buckets**, use the code snippet below and replace as follows:
+
+* `GENERATOR_ID` with the generator ID
+* `DESTINATION_CONNECTOR_ID` with the ID of a destination connector
+* `path` with cloud bucket path to the destination file
+* `file.csv` with the filename and extension (one of `.csv`, `.parquet`, or `.xslx`)
+
+```python copy filename="python" {7}
+g = mostly.generate.get("GENERATOR_ID")
+config = {
+   "generator_id": "GENERATOR_ID",
+   "name": "Synthetic dataset",
+   "delivery": {
+      "destination_connector_id": "DESTINATION_CONNECTOR_ID",
+      "location": "/path/file.csv"
+   }
+}
+sd = mostly.generate(g, config=config)
+```
+</Tabs.Tab>
+</Tabs>

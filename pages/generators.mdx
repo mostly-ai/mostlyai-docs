@@ -1,0 +1,29 @@
+---
+title: 'Generators'
+description: 'With MOSTLY AI, your journey to synthetic data starts with the training of a generator. You can train generators on tabular data that also includes columns with text data.'
+---
+import Image from 'next/image'
+
+# Generators
+
+With MOSTLY AI, your journey to synthetic data starts with the training of a _**generator**_. You can train generators on tabular data. Columns with text data are also fully supported.
+
+## What is a generator?
+
+A _**generator**_ bundles the training of Generative AI models and the definition of metadata about your tabular data (table schemas, table relationships, and data types) to enable you to generate brand new synthetic datasets.
+
+A trained generator can produce high-quality tabular synthetic data that retains the correlations from your original data and maintains the referential integrity between tables in multi-table scenarios.
+
+## Features
+
+| Features | Description |
+| --- | --- |
+| **Generative AI for tabular synthetic data** | Train Generative AI models on your original tabular data to be able to generate high-quality and privacy-safe synthetic data |
+| **Support for LLMs to train on text data**   | Use an extensive list of language models to train on your text data. |
+| **Multi-table datasets**                     | You can train generators on multi-table datasets and configure them to retain intra- and inter-table correlations and referential integrity |
+| **Multi-source data**                        | Train a generator on tabular data from multiple data sources<br />• files (`CSV`, `Parquet`)<br />• databases<br />• cloud buckets<br />• Pandas `DataFrame` objects (with Python SDK) |
+| **Support for multiple data types**          | Configure data types for each table column to ensure your generators captures correctly the data types of your original data<br />• Categorical<br />• Numeric<br />• Character<br />• Datetime<br />• Geo-location<br />• Language/Text |
+| **Time-series and events data**              | Train models on sequential data and retain the events patterns and coherence from your original data |
+| **AI training settings**                     | Configure AI training speed and accuracy settings |
+| **Sharing**                                  | Share generators with peers and colleagues to empower them to generate and analyze privacy-safe synthetic data |
+| **Export and import**                        | Export and import generators between air-gapped and wider-audience deployments of MOSTLY AI  |

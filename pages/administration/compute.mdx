@@ -1,0 +1,173 @@
+---
+title: 'Compute'
+description: 'With flexible compute, you can add any compute resources needed to complete your GenAI workloads in MOSTLY AI.'
+---
+
+import Image from 'next/image'
+import { Callout } from 'nextra/components'
+
+# Compute
+
+With flexible compute, you can define compute resources from Kubernetes or Databricks clusters that you can then assign to run your generator training and synthetic data generation workloads. You can use compute resources to add GPU-capable compute that can significantly speed up the time to train new generators and generate synthetic datasets.
+
+## Add a new Kubernetes compute
+
+You can define any of your existing Kubernetes compute resources as a new compute in MOSTLY AI.
+
+**Prerequisites**
+
+* Before you define a new compute, check the available compute resources in your Kubernetes cluster.
+* You need to be a super admin to add a new compute.
+
+**Steps**
+
+1. From the profile menu, select **Compute**.
+    <Image
+      src="/docs/docimages/administration/compute/01-profile-menu-select-compute.webp" 
+      alt="MOSTLY AI - Profile menu - Select Compute"
+      width={800}
+      height={15000}
+    />
+2. Click **+ New compute**.
+    <Image
+      src="/docs/docimages/administration/compute/02-click-new-compute.webp" 
+      alt="MOSTLY AI - Click New Compute"
+      width={800}
+      height={15000}
+    />
+3. Select **Kubernetes**.
+    <Image
+      src="/docs/docimages/administration/compute/02.01-select-kubernetes.webp" 
+      alt="MOSTLY AI - Select Kubernetes"
+      width={800}
+      height={15000}
+    />
+3. Define the compute configuration.
+    | Kubernetes compute parameter | Description |
+    | ---------------- | ------------------------------------------------------------------------------------------------------------------ |
+    | **Name**         | A unique name for the compute. |
+    | **CPUs**         | The number of CPU cores. |
+    | **Memory**       | The amount of memory. |
+    | **GPUs**         | The number of GPUs. |
+    | **GPU memory**   | The amount of GPU memory. |
+    | **Toleration**   | A toleration that matches the taint defined for your cluster.<br /><br />⚠️ Leave empty if in the `values.yaml` you need to set the `mostly_coordinator.deployment.core_job.tolerationOperator` to `Exists`.|
+    | **Order Index**  | The order in which the compute appears in the **Compute** drop-down.<br />The default compute has `order_index=1`. |
+    <Image
+      src="/docs/docimages/administration/compute/03-new-kubernetes-compute.webp" 
+      alt="MOSTLY AI - New Kubernetes compute"
+      width={800}
+      height={15000}
+    />
+4. Click **Save**.
+
+**Result**
+
+The next time users configure a new generator training or synthetic dataset, they can select the new compute from the **Compute** drop-down list.
+
+<Image
+    src="/docs/docimages/administration/compute/05-result-select-compute.webp" 
+    alt="MOSTLY AI - Result - Select Compute"
+    width={800}
+    height={15000}
+/>
+
+In addition, the new compute remains available in the **Computes** list.
+
+<Image
+    src="/docs/docimages/administration/compute/04-new-compute-available.webp" 
+    alt="MOSTLY AI - New Compute available"
+    width={800}
+    height={15000}
+/>
+
+## Add a new Databricks compute
+
+You can add Databricks computes for use in MOSTLY AI.
+
+**Steps**
+
+1. From the profile menu, select **Compute**.
+    <Image
+      src="/docs/docimages/administration/compute/01-profile-menu-select-compute.webp" 
+      alt="MOSTLY AI - Profile menu - Select Compute"
+      width={800}
+      height={1}
+    />
+2. Click **+ New compute**.
+    <Image
+      src="/docs/docimages/administration/compute/databricks-compute-01-click-new-compute.webp" 
+      alt="MOSTLY AI - Compute - Click New compute"
+      width={800}
+      height={1}
+    />
+3. Select **Databricks**.
+    <Image
+      src="/docs/docimages/administration/compute/databricks-compute-02-select-databricks.webp" 
+      alt="MOSTLY AI - Compute - Select Databricks"
+      width={800}
+      height={1}
+    />
+3. Define the Databricks compute configuration.
+    | Databricks compute parameter | Description |
+    |-|-|
+    | **Name**         | Set a name for the new Databricks compute. |
+    | **Instance URL** | Set your Databricks instance URL.          |
+    | **Cluster ID**   | Set your Databricks cluster ID.            |
+    | **Access token** | Set your Databricks access token.          |
+    | **Order index**  | Set the order in which the Databricks compute appears in the **Compute** drop-down. |
+    <Image
+      src="/docs/docimages/administration/compute/databricks-compute-03-configure-databricks-compute.webp" 
+      alt="MOSTLY AI - Compute - Configure Databricks compute"
+      width={800}
+      height={1}
+    />
+4. Click **Save**.
+
+**Result**
+
+The Databricks compute now appears in the list of available computes.
+
+<Image
+    src="/docs/docimages/administration/compute/databricks-compute-04-result-compute-list.webp" 
+    alt="MOSTLY AI - Compute - Databricks compute available"
+    width={800}
+    height={1}
+/>
+
+**What's next**
+
+You can now assign the Databricks compute to a generator training or synthetic dataset.
+
+<Image
+    src="/docs/docimages/administration/compute/databricks-compute-05-select-databricks-compute.webp" 
+    alt="MOSTLY AI - Compute - Databricks compute available"
+    width={800}
+    height={1}
+/>
+
+## Edit a compute
+
+You can make changes to exising computes.
+
+**Steps**
+
+1. Open the **Compute** kebab menu and select **Edit**.
+2. Change the compute configuration.
+3. Click **Save**.
+
+**Result**
+
+The compute configuration is now updated.
+
+## Delete a compute
+
+You can delete an existing compute from its kebab menu.
+
+<Callout>
+Do not delete the **Default** compute as all common steps for generators and synthetic datasets rely on its availability.
+</Callout>
+
+**Steps**
+
+1. Open the **Compute** kebab menu and select **Delete**.
+2. Click **Yes, delete compute** in the confirmation pop-up.

@@ -1,0 +1,65 @@
+---
+title: 'Configure an external PostgreSQL database'
+description: 'The MOSTLY AI Helm charts include a PostgreSQL container that the application uses to store data about generators, synthetic datasets, and connectors. If necessary, you can configure an external PostgreSQL database that your company hosts internally.'
+---
+
+import { Callout } from 'nextra/components'
+
+# Configure an external PostgreSQL database
+
+The [MOSTLY AI Helm charts](../deploy/helm-chart) include a PostgreSQL container that the application uses to store data about generators, synthetic datasets, and connectors.
+
+If necessary, you can configure an external PostgreSQL database that your company hosts internally.
+
+**Prerequisites**
+
+* Make sure that the Kubernetes cluster has access to your external PostgreSQL database.
+* Encode the PostgreSQL credentials in base64 format.
+
+**Steps**
+
+1. Edit `values.yaml` to configure the external PostgreSQL.
+2. Under `### Postgresql settings`, set `local_deployment` to `false`.
+    ```yaml filename="values.yaml" {3}
+    ### Postgresql settings
+    PSQL:
+        local_deployment: false
+    ```
+3. Paste the base64-encoded user and password in the `psqlMostlyPass` and `psqlMostlyUser` lines.
+    <Callout>
+    The excerpt from `values.yaml` contains asterisks where you need to paste your encoded PostgreSQL user and password.
+    </Callout>
+    ```yaml filename="values.yaml" {3,4}
+    ## External Postgresql database details encrypted with base64 (psql_local_deployment have to be setup to 'false')
+    psql_secrets:
+        psqlMostlyPass: **********
+        psqlMostlyUser: ******
+    ##
+    ```
+4. Under `## External Postgresql database details`, configure your PostgreSQL database connection details.
+    ```yaml filename="values.yaml" {3-7}
+    ## External Postgresql database details
+    psql_cm:
+        host: mostly-db.example.com
+        mostly_app_db_name: mostly_app
+        mostly_coordinator_db_name: mostly_coordinator
+        mostly_keycloak_db_name: mostly_keycloak
+        port: '5432'
+    ## 
+    ```
+5. Under `## Local Postgresql deployment`, set the database name and port in the `name` and `containerPort` lines.
+    ```yaml filename="values.yaml" {10-11}
+    ## Local Postgresql deployment
+    # name: mostly-psql
+    # image:
+    #   name: postgresql #<-- required to be updated with provided by Mostly AI repository
+    #   tag: 14.5.0-debian-11-r6 #<-- required to be updated with provided by Mostly AI image tag
+    #   imagePullPolicy: IfNotPresent
+    #   imagePullSecrets: mostly-docker-cfg
+
+    ports:
+        name: mostly-db
+        containerPort: 5432
+    ```
+6. Save the changes to the `values.yaml` file.
+7. Go back to deploying with `helm upgrade ...`.

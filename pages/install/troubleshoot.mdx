@@ -1,0 +1,24 @@
+---
+title: 'Troubleshoot MOSTLY AI deployments'
+description: 'Due to different Kubernetes cluster configurations, you might need to take into account our troubleshooting information in case you run into any issue deploying MOSTLY AI.'
+---
+
+import { Callout } from 'nextra/components'
+import { Card, Cards } from 'nextra/components'
+import { MinikubeIcon, AmazonEKSIcon, OpenShiftIcon, GKEIcon, AKSIcon, KubernetesIcon } from '@components/icons'
+
+# Troubleshoot MOSTLY AI deployments
+
+Due to different Kubernetes cluster configurations, you might need troubleshooting information in case you run into any issue deploying MOSTLY AI.
+
+<Callout type='info'>
+Contact MOSTLY AI if you need help troubleshooting your deployment.
+</Callout>
+
+<Cards num={2}>
+  <Cards.Card icon={KubernetesIcon()} title="Troubleshoot common deployment issues" href="troubleshoot/openshift" />
+  <Cards.Card icon={OpenShiftIcon()} title="Troubleshoot OpenShift cluster deployments" href="troubleshoot/openshift" />
+  <Cards.Card icon={AmazonEKSIcon()} title="Troubleshoot AWS EKS cluster deployments" href="troubleshoot/aws-eks" />
+  <Cards.Card icon={AKSIcon()} title="Troubleshoot Azure AKS cluster deployments" href="troubleshoot/azure-aks" />
+  <Cards.Card icon={MinikubeIcon()} title="Troubleshoot minikube cluster deployments" href="troubleshoot/minikube" />
+</Cards>

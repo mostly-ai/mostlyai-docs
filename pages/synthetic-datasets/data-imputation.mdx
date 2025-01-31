@@ -1,0 +1,88 @@
+---
+title: 'Data imputation'
+description: 'MOSTLY AI can fill any null or empty values in your datasets with highly-correlated values based on the learnings of your generators.'
+---
+
+import { Callout } from 'nextra/components'
+import { Tabs } from 'nextra/components'
+import Image from 'next/image'
+
+# Data imputation
+
+You can generate synthetic data that fills in any null values you might have in your original data with statistically reliable values. To do so, use the **Imputed columns** setting when you configure a new synthetic dataset.
+
+## Prerequisites
+
+To use **Imputed columns**, the model responsible for the table containing missing or null values must have [flexible generation enabled](/generators/configure/enable-flexible-generation).
+
+## Add imputed columns to a synthetic dataset
+
+When you configure a new synthetic dataset, you can specify any columns you want to impute.
+
+<Tabs items={['UI', 'Local environment', 'Remote platform']}>
+<Tabs.Tab>
+In the web application, you can select which columns to impute from the **Imputed columns** menu on the **Synthetic dataset configuration** page.
+
+<Callout>
+In this example, you can see a demonstration of a generator trained on the CDNOW dataset that has **Flexible generation** enabled. The `age_category` column from the `customers` table contains 2.5% of null values or 557 null values out of 23,570 rows.
+</Callout>
+
+**Steps**
+
+1. Open the generator you want to use.
+2. Click **Generate synthetic data** in the upper right.
+3. Expand the generation settings for a table.
+4. Click inside the **Imputed columns** box and select a column to impute.
+    <Image 
+        src="/docs/docimages/synthetic-datasets/impute-columns/imputed-columns-00-select.webp" 
+        alt="MOSTLY AI - Synthetic datasets - Impute columns" 
+        width={800} 
+        height={150}
+    />
+5. (Optional) Add more columns to impute if you want.
+6. Click **Start generation**.
+
+**Result**
+
+When you examine the `age_category` column in the `customers` of the generated data, no null values appear.
+</Tabs.Tab>
+<Tabs.Tab>
+If you use the Python SDK locally, add the `imputation.columns` list to the `tables.configuration` dictionary, listing as strings all columns to impute.
+```python copy filename="python" {7-9}
+sd = mostly.generate("GENERATOR_ID", {
+   "name": "census",
+   "tables": [
+      {
+         "name": "census",
+         "configuration": {
+            "imputation": {
+               "columns": ["education"]
+            }
+         }
+      }
+   ]
+})
+sd.data()
+```
+</Tabs.Tab>
+<Tabs.Tab>
+If you connect to a remote Platform instance with the Python SDK, again add the `imputation.columns` list to the `tables.configuration` dictionary, listing as strings all columns to impute.
+
+```python copy filename="python" {1, 7-9}
+sd = mostly_remote.generate("GENERATOR_ID", {
+   "name": "census",
+   "tables": [
+      {
+         "name": "census",
+         "configuration": {
+            "imputation": {
+               "columns": ["education"]
+            }
+         }
+      }
+   ]
+})
+sd.data()
+```
+</Tabs.Tab>
+</Tabs>
