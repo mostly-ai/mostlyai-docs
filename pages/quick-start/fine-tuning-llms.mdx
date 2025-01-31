@@ -1,0 +1,131 @@
+---
+title: "Quick start for fine-tuning LLMs"
+description: "Learn how easy it is to fine-tune an LLM with MOSTLY AI to train and generate unstructured synthetic text data."
+---
+
+import Image from 'next/image'
+import { Steps } from 'nextra/components'
+import { Tabs } from 'nextra/components'
+import { CustomCallout } from '@components/custom-callout'
+
+## Quick start for fine-tuning LLMs
+
+MOSTLY AI integrates with well-known LLMs and gives the flexibility to use any LLM to generate privacy-safe synthetic text. When included in a tabular dataset, synthetic text data is intelligently aligned with the rest of the data, ensuring high correlation while safeguarding the privacy of real-world individuals.
+
+<Image
+    src="/docs/docimages/quickstart/unstructured-text/splash-unstructured-text.webp"
+    alt="MOSTLY AI for fine-tuning LLMs"
+    width={800}
+    height={300}
+/>
+
+<Steps>
+### Step 1: Train a generator to fine-tune an LLM
+
+**Prerequisites**
+
+* **Dataset with unstructured text in a supported format**. The dataset you will use for fine-tuning must be `CSV`, `Parquet`, `TSV`, where one or more of the columns contains unstructured text.
+* **Size of the training dataset**. Depending on the size of the dataset and the compute resources you use for training, it is possible that the generator training can fail with out-of-memory errors. For details, see [_Troubleshooting_](#troubleshooting).
+
+**Steps**
+
+1. Create a new generator and upload a table file or add a table from a data source that contains unstructured text.
+2. On Data configuration page, for the column containing unstructured text, select **Language/Text** from **Encoding type**.
+    <Image
+        src="/docs/docimages/quickstart/unstructured-text/01-generator-configuration-01-select-language-text.webp"
+        alt="MOSTLY AI Unstructured text - Select Language/Text as Encoding type"
+        width={800}
+        height={300}
+    />
+3. Click **Configure models** in the upper right.
+4. On the **Model configuration** page, expand the `:language` model and configure it.
+    1. For **Model**, select one of the available language models for training.
+        <CustomCallout>
+        The list of available models includes [HuggingFace text generation models](/generators/configure/set-encoding-types#huggingface-text-models) we have tested as well as the not-pre-trained MOSTLY AI LSTM model.
+
+        If you need to use another LLM, contact [MOSTLY AI Support](mailto:support@mostly.ai).
+        </CustomCallout>
+        <Image
+            src="/docs/docimages/quickstart/unstructured-text/01-generator-configuration-02-select-language-model.webp"
+            alt="MOSTLY AI Unstructured text - Select language model to use"
+            width={800}
+            height={300}
+        />
+    2. For **Compute**, select an available compute. We recommend the use of a GPU-enabled compute for language models.
+        <CustomCallout>
+        From **Compute**, you select a compute from a list of compute resources configured for the MOSTLY AI application. The compute is based on the resources available in the compute cluster where MOSTLY AI is running.
+
+        * **CPU-based** computes offer a specific number of CPU cores and memory. Typically, they perform better when assigned to tabular data computations.
+        * **GPU-based** computes include a specific number of GPU cores and GPU memory. For language model fine-tuning and language generation, it is typically faster to use GPU computes.
+        </CustomCallout>
+        <Image
+            src="/docs/docimages/quickstart/unstructured-text/01-generator-configuration-03-select-compute.webp"
+            alt="MOSTLY AI Unstructured text - Select compute"
+            width={800}
+            height={300}
+        />
+5. Click **Start training** in the upper right.
+    <Image
+        src="/docs/docimages/quickstart/unstructured-text/01-generator-configuration-04-click-start-training.webp"
+        alt="MOSTLY AI Unstructured text - Start training"
+        width={800}
+        height={300}
+    />
+
+### Step 2: Generate text
+
+1. Open the trained generator and click **Generate data** in the upper right.
+    <Image
+        src="/docs/docimages/quickstart/unstructured-text/02-generate-unstructured-text-01-click-generate-data.webp"
+        alt="MOSTLY AI Unstructured text - Click Generate data"
+        width={800}
+        height={300}
+    />
+2. Configure the generation.
+    1. For **Tabular compute**, select the compute you want to use for tabular data. For tabular data, it is usually best to use a CPU-based compute.
+    2. For **Language compute**, select the compute you want to use for tabular data. For language (unstructured text), GPU-based computes tend to be faster.
+    3. (Optional) If needed, adjust the rest of the generation options.
+3. Click **Start generation** in the upper right.
+    <Image
+        src="/docs/docimages/quickstart/unstructured-text/02-generate-unstructured-text-02-click-start-generation.webp"
+        alt="MOSTLY AI Unstructured text - Click Start generation"
+        width={800}
+        height={300}
+    />
+
+</Steps>
+
+## Troubleshooting
+
+Depending on your original text dataset, it is possible that the model samples of your trained generator include `_INVALID_` text values, or that for particularly long texts, the generator training can fail. Learn how you can troubleshoot such issues.
+
+### `_INVALID_` values
+
+If you encounter `_INVALID_` values in your model samples or generated synthetic text data, this is likely due to the use of the less efficient CPU compute for fine-tuning, insufficient data, or insufficient training time.
+
+**Use GPUs for language model fine-tuning**
+
+GPUs are in a league of their own when it comes to LLM fine-tuning. To avoid `_INVALID_` values, you can use the best practices listed below.
+
+* Use GPU computes as explained in [_Step 1: Train a generator to fine-tune an LLM_](#step-1-train-a-generator-to-fine-tune-an-llm), step 4.2.
+* Use CPU computes only for tabular model training.
+
+**Increase Max training time**
+
+If you already use GPUs and still see `_INVALID_` values, the next step is to train a new generator with an increased **Max training time**.
+
+* Start by training a new generator with **Max training time** increased to 20 min. The default is 10 min.
+* If you still see `_INVALID_` values, increase **Max training time** to 30 min.
+
+For details, see [_Increase max training time_](/generators/configure/improve-model-accuracy#use-the-accuracy-preset-to-increase-training-time).
+
+**Use a training dataset with shorter texts**
+
+Using a dataset with shorter texts or trimming its original lengths can also help to avoid `_INVALID_` values.
+
+### Generator training failures
+
+Depending on the LLM you use, the size of your text data and its dataset, and the compute resources available for fine-tuning, generator training might fail with out-of-memory errors. To troubleshoot, try the suggestions below in the order listed.
+
+1. Set **Batch size** to `2` or `4`. For details on how to set batch size, see [_Increase batch size_](/generators/configure/speed-up-training#increase-batch-size).
+2. Use a training dataset with shorter texts.

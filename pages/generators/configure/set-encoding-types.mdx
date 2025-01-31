@@ -1,0 +1,330 @@
+---
+title: 'Set encoding types'
+description: 'MOSTLY AI supports well-known data types and implements logic on how to encode the data in each column for AI model training. Setting the correct encoding type ensures that the generated synthetic data accurately represents your original data.'
+---
+
+import { Callout } from 'nextra/components'
+import { Tabs } from 'nextra/components'
+import Image from 'next/image'
+import ModelsList from '@components/mostly-ai-llm-list'
+
+# Set encoding types
+
+When you add your original table data to a generator, MOSTLY AI assigns an encoding type to each column. The assignment depends on the _**data inside the columns**_ (for file uploads and cloud storage files) or on the _**data types defined in the database schema**_ (for database data sources).
+
+## About encoding types
+
+The _**encoding type**_ defines how your original data is encoded before AI model training. This is a requirement for the training phase, when the data needs to be in a format that can be processed for the purposes of machine learning.
+
+As a best practice, check the auto-detected encoding types and, if needed, select an encoding type that is a better match for your data.
+
+## Set the encoding type of a column
+
+When you add a table to a generator in the web application, MOSTLY AI analyzes the data in each column and auto-assigns the best possible encoding type. You can always select a different encoding type.
+
+With the Python SDK, you do not need to specify an encoding type when you submit a new generator configuration for training. MOSTLY AI will again analyze each column and assign the best possible encoding type. You can still use the `model_encoding_type` key to enforce an encoding type.
+
+<Tabs items={['UI', 'Python SDK']}>
+<Tabs.Tab>
+**Steps**
+
+1. On the generator **Data configuration** page, click a table to expand it and view its encoding types.
+    <Image
+        src="/docs/docimages/generators/set-encoding-types/generator-01-highlight-and-click-table.webp"
+        alt="MOSTLY AI - Generator - Set column types - Select an added table"
+        width={900}
+        height={300}
+    />
+2. Click in the **Encoding type** area for a column.
+    <Image
+        src="/docs/docimages/generators/set-encoding-types/generator-02-select-encoding-type.webp"
+        alt="MOSTLY AI - Generator - Set column types - Select type"
+        width={900}
+        height={300}
+    />
+3. Set a column type that best describes the data in the column.
+
+For more information about each type, see the sections below.
+</Tabs.Tab>
+<Tabs.Tab>
+To set encoding types with the Python SDK, use the `table.columns` dictionary as shown in the example below. For each column in your source data, define the column with a `name` and set the encoding type with the `model_encoding_type` key.
+
+```python copy {7-16}
+config = {
+   "name": "us-census-income",
+   "tables": [
+      {
+         "name": "us-census-income",
+         "data": "https://mostly.ai/docs/datasets/us-census-income.csv.gz",
+         "columns": [
+            {
+               "name": "age",
+               "model_encoding_type": "TABULAR_NUMERIC_DISCRETE"
+            },
+            {
+               "name": "income",
+               "model_encoding_type": "TABULAR_CATEGORICAL"
+            }
+         ]
+      }
+   ]
+}
+
+g = mostly.train(config = config, start=True, wait=True)
+```
+
+For a column, the `model_encoding_type` key accepts one of the values listed below.
+
+| Encoding type               | Description                                                                       |
+| --------------------------- | --------------------------------------------------------------------------------- |
+| `AUTO`                      | MOSTLY AI sets an encoding type based on the data in the column or its data type. |
+| `TABULAR_CATEGORICAL`       | Corresponds to [Tabular/Categorical](#tabularcategorical).                        |
+| `TABULAR_NUMERIC_AUTO`      | Corresponds to [Tabular/Numeric: Auto](#tabularnumeric-auto).                     |
+| `TABULAR_NUMERIC_DISCRETE`  | Corresponds to [Tabular/Numeric: Discrete](#tabularnumeric-discrete).             |
+| `TABULAR_NUMERIC_BINNED`    | Corresponds to [Tabular/Numeric: Binned](#tabularnumeric-binned).                 |
+| `TABULAR_NUMERIC_DIGIT`     | Corresponds to [Tabular/Numeric: Digit](#tabularnumeric-digit).                   |
+| `TABULAR_CHARACTER`         | Corresponds to [Tabular/Character](#tabularcharacter).                            |
+| `TABULAR_DATETIME`          | Corresponds to [Tabular/Datetime](#tabulardatetime).                              |
+| `TABULAR_DATETIME_RELATIVE` | Corresponds to [Tabular/Datetime: Relative](#tabulardatetime-relative).           |
+| `TABULAR_LAT_LONG`          | Corresponds to [Tabular/Latitude, Longitude](#tabularlatitude-longitude).         |
+| `LANGUAGE_TEXT`             | Corresponds to [Language/Text](#languagetext).                                    |
+</Tabs.Tab>
+</Tabs>
+
+## Encoding types
+
+### Tabular/Categorical
+
+A categorical variable has a fixed set of possible values that are already present in the input data. An example of such a variable is T-shirt size, which could consist of the following categories: 'XS, S, M, L, XL'. The synthetic data will only contain categories that were present in the original data. Categorical variables thus prevent random values (for instance, 'XM, A, B') from appearing in your synthetic dataset.
+
+If the automatic encoding type detection does not recognize a **Numeric** or **Datetime** column as such, it is encoded as **Categorical**.
+
+You can control how the rare category protection mechanism works with **Value protection** settings and the **Rare category replacement method** which appear on the **Model configuration** page of a generator. These settings help with protecting rare categories. Rare categories may cause re-identification of outliers among your data subjects if they’re present in the resulting synthetic data.
+
+There are two rare category protection methods available with which you can mask these categories:
+
+**Constant**<br />
+Replaces rare categories with the value `_RARE_`.
+
+<Callout type="info">
+The use of **Constant** introduces the `_RARE`_ category in your synthetic data and that can impact your downstream tasks. To avoid that, you can use the **Sample** method.
+</Callout>
+
+**Sample**<br />
+Replaces rare categories with categories that will appear in the synthetic version of this column. The categories are sampled from the original data based on their frequency. The more frequent a category is, the more likely it will be selected.
+
+### Tabular/Numeric: Auto
+
+With **Numeric: Auto**, MOSTLY AI uses heuristics to decide the most appropriate **Numeric** encoding type based on the data in a column. For most cases, select **Numeric:Auto** or leave it selected by default.
+
+### Tabular/Numeric: Discrete
+
+**Discrete** treats the numeric data in the column as categorical values. You can use this option for columns that have categorical numeric codes, such as:
+  * ZIP codes, postal codes, country phone codes
+  * binary `True` or `False` that are represented as the numeric values `0` and `1`
+  * any categorical data which are represented with numeric values
+
+**Rare category protection** also applies to **Numeric: Discrete** columns. When you generate a synthetic dataset, MOSTLY AI replaces rare numeric categories with a non-rare numeric category in the column (applying the **Sample** method as explained above for Categorical columns). `_RARE_` values are not generated for **Numeric: Discrete** columns.
+
+### Tabular/Numeric: Binned
+
+You can use **Binned** for columns containing large integers or long decimals. MOSTLY AI bins the numerical values into 100 bins and considers each a category during training. During generation, MOSTLY AI samples values from the corresponding bin to generate the synthetic values in the column.
+
+### Tabular/Numeric: Digit
+
+**Numeric: Digit** recognizes the data in the column as numeric values.
+
+<Callout type="info">
+MOSTLY AI can synthesize floating-point values with a precision of up to 8 digits after the decimal point.
+</Callout>
+
+### Tabular/Character
+
+Use the **Character** encoding type to synthesize short strings with a consistent pattern, such as phone numbers, license plate numbers, company ID’s, transaction ID, and social security ID’s.
+
+### Tabular/Datetime
+
+Datetime refers to values that contain a date part and a time part. This encoding type enables MOSTLY AI to synthesize them and generate valid and statistically representative dates and times.
+
+The following formats are supported:
+
+| | Format | Example |
+| --- | --- | --- |
+| **Date** | `yyyy-MM-dd` | `2020-02-08` |
+| **Datetime with hours** | `yyyy-MM-dd HH`<br />`yyyy-MM-ddTHH`<br />`yyyy-MM-ddTHHZ` | `2020-02-08 09`<br />`2020-02-08T09`<br />`2020-02-08T09Z` |
+| **Datetime with minutes** | `yyyy-MM-dd HH:mm`<br />`yyyy-MM-ddTHH:mm`<br />`yyyy-MM-ddTHH:mmZ` | `2020-02-08 09:30`<br />`2020-02-08T09:30`<br />`2020-02-08T09:30Z` |
+| **Datetime with seconds** | `yyyy-MM-dd HH:mm:ss`<br />`yyyy-MM-ddTHH:mm:ss`<br />`yyyy-MM-ddTHH:mm:ssZ` | `2020-02-08 09:30:26`<br />`2020-02-08T09:30:26`<br />`2020-02-08T09:30:26Z` |
+| **Datetime with milliseconds** | `yyyy-MM-dd HH:mm:ss.SSS`<br />`yyyy-MM-ddTHH:mm:ss.SSS`<br />`yyyy-MM-ddTHH:mm:ss.SSSZ` | `2020-02-08 09:30:26.123`<br />`2020-02-08T09:30:26.123`<br />`2020-02-08T09:30:26.123Z` |
+
+### Tabular/Datetime: Relative
+
+**Datetime: Relative** models the time interval between two subsequent events in the synthetic dataset. This encoding type causes the time between events to become very accurate, but the dates become less accurate.
+
+<Callout type="info">
+The **Datetime: Relative** encoding type is only available for linked tables.
+</Callout>
+
+### Tabular/Latitude, Longitude
+
+Use the **Latitude, Longitude** encoding type to synthesize geolocation coordinates.
+
+MOSTLY AI requires a geolocation coordinate to be encoded in a single field with the latitude and longitude as comma-separated values. The latitude must be on the comma’s left side and the longitude on the right.
+
+The values must be in decimal degrees format and range from `-90` to `90` for latitude and `-180` to `180` for longitude. Their precision cannot be larger than five digits after the decimal dot. This translates to an accuracy of approx. 1 meter. Any additional digits will be ignored.
+
+| Start location | End location | Some other location |
+| --- | --- | --- |
+| `70.31311, 150.1` | `-90.0, 180.0` | `37.311, 173.8998` |
+| `-39.0, 120.33114` | `78.31112, -100.031` | `-10.10, -80.901` |
+
+<Callout type="info">
+For CSV files, wrap each coordinate in double quotes.
+To learn more, see [CSV files requirements](/generators/prepare-data/csv-requirements).
+</Callout>
+
+### Language/Text
+
+For synthetic text, MOSTLY AI provides a non-pre-trained LSTM model as well as the option to use a text generation model from [HuggingFace](https://huggingface.co/) that is configured for use in MOSTLY AI.
+
+#### HuggingFace text models
+
+When you deploy MOSTLY AI in your organization's private cloud, you can integrate with as many HuggingFace text generation models as needed. For configuration details, see the [_Models configuration_](/administration/models) page.
+
+On the MOSTLY AI Platform at https://app.mostly.ai, you can find the following models available.
+
+<Callout>
+If a model you want to use is not available, contact [MOSTLY AI Support](mailto:support@mostly.ai).
+</Callout>
+
+<ModelsList/>
+
+#### MOSTLY AI LSTM
+
+Use the **LSTM** model type to synthesize unstructured natural language texts up to 1,000 characters long. This model is not pre-trained.
+
+You can use this encoding type to generate realistic, representative, and anonymous financial transaction texts, short user feedback, medical assessments, PII fields, etc. As the resulting synthetic texts are representative of the terms, tokens, and their co-occurrence in the original data, they can be confidently used in analytics and machine learning use cases, such as sentiment analysis and named-entity recognition. Even though they might look noisy and not very human-readable, they will work perfectly for these use cases.
+
+Our text synthesis model is language-agnostic and doesn’t contain the biases of some pre-trained models—any content is solely learned from the original training data. This means that it can process any language, vernacular, and slang present in the original data.
+
+The amount of data required to produce usable results depends on the diversity of the original texts' vocabulary, categories, names, etc. As a rule of thumb, the more structure there is, the fewer samples are needed.
+
+The synthetic texts are generated in a context-aware manner—the messages from a teenager are different from those of an 85-year old grandmother, for instance. By considering the other attributes of a synthetic subject’s profile, MOSTLY AI is capable of synthesizing appropriate natural language texts for each of them.
+
+Below, you can find two examples. The first example demonstrates MOSTLY AI’s ability to synthesize entirely new names from a multilingual dataset. And the second example shows the result of synthesizing Tripadvisor reviews. Here you can see that the resulting texts accurately retain the context of the establishment they discuss (Restaurant or Hotel) and the synthesized rating.
+
+**Multilingual names dataset**
+
+<br />
+<table>
+<thead>
+<tr>
+<th width="50%">Original</th>
+<th width="50%">Synthetic</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style={{verticalAlign: 'top'}}>
+```
+   Nationality     Name
+1: Czech           Svoboda
+2: Greek           Chrysanthopoulos
+3: Spanish         Ventura
+4: Russian         Gagarin
+5: Japanese        Yokoyama
+6: English         Parsons
+7: Spanish         Ruiz
+8: Russian         Chekhov
+9: English         Blake
+10: English         Wigley
+```
+</td>
+<td style={{verticalAlign: 'top'}}>
+```
+    Nationality     Name
+ 1: English         Olsewood
+ 2: German          Kort
+ 3: Japanese        Misaghi
+ 4: English         Roger
+ 5: Russian         Lusov
+ 6: Russian         Zhuszenko
+ 7: Japanese        Noraghi
+ 8: English         Dalman
+ 9: Russian         Michov
+10: Polish          Poskan
+11: Arabic          Shaif
+```
+</td>
+</tr>
+</tbody>
+</table>
+
+**Tripadvisor reviews**
+
+<br />
+<table>
+<thead>
+<tr>
+<th>Original</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style={{verticalAlign: 'top'}}>
+```
+   Establishment    Rating  Review
+1: Restaurant       6       Not bad, great interior but let down by
+                            unimaginative food. Perfectly good for a
+                            quick lunch or drink though, good ales
+2: Hotel            2       Awful!!!! stunk of smoke guttering outside
+                            window ledge filled with cigarette ends and
+                            bottles. NOISY air con unit in room, husband
+                            had no sleep.
+3: Restaurant       8       Helpful staff, pleasant enough with quick
+                            service. Sat at bar by revolving food server.
+                            Everything seemed nice and fresh. Good value.
+4: Hotel            8       We stayed in a standard room at the hotel.
+                            The room was adequate, though a bit short on
+                            cupboard drawer space.
+5: Hotel            4       Expected much more from here and they just
+                            didn't deliver, for the price of the room it
+                            was no different than any of the other cheaper
+                            aparthotels.
+```
+</td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<thead>
+<tr>
+<th>Synthetic</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style={{verticalAlign: 'top'}}>
+```
+   Establishment    Rating  Review
+1: Restaurant       8       My only complaint are the portion sizes. Lovely
+                            restaurant with good food, though.
+2: Restaurant       8       I'm a year-round regular. Service is really
+                            friendly. The starters are OK and the seafood
+                            buffet is amazing and tasty. Overall a nice menu
+                            throughout and our children love it.
+3: Hotel            8       This is a fantastic hotel. Great food but few
+                            options, a brilliant room and spent an excellent
+                            time. Very clean environment and a high level of
+                            service.
+4: Hotel            2       I booked an offer for a spa day. The food was
+                            below-average, the room was dated, smelled of
+                            fried fish, and the staff has an attitude.
+5: Hotel            2       We've been here before. But for £70, the rooms
+                            are still poor and glamourless. We spent a few
+                            days with 5 people and 4 were not impressed.
+```
+</td>
+</tr>
+</tbody>
+</table>

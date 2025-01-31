@@ -1,0 +1,53 @@
+---
+title: 'Configure compute resources'
+description: 'The MOSTLY AI Platform runs AI tasks using Kubernetes jobs. These jobs may require a lot of resources, especially memory and CPU. It is very important that these jobs are assigned on a node that has enough resources.'
+---
+
+# Compute resources
+
+The MOSTLY AI Platform runs [Kubernetes jobs](https://kubernetes.io/docs/concepts/workloads/controllers/job/) to complete AI tasks. Depending on the size of the original data, a job may require a lot of memory and CPU to complete successfully. Because of this, it is very important that jobs are assigned to a node that has enough resources. Ideally, the node should be dedicated only to a single job and all of its resources should be available to the job.
+
+_**Memory**_ is crucial because insufficient memory causes job failure. The memory required for a job depends on the size and complexity of the original dataset.
+
+_**CPU**_ is less critical. Fewer CPUs slow down the job but do not cause failures.
+
+## Kubernetes nodes configuration
+
+By default, the [MOSTLY AI Helm chart](/install/deploy/helm-chart) uses taints to ensure that AI jobs run on dedicated worker nodes. MOSTLY AI recommends that you use the following taints on worker nodes:
+
+* **Key**: `scheduling.mostly.ai/node`
+* **Value**: `engine-jobs`
+* **Effect**: `NoSchedule`
+
+If you already have a taint in place for worker nodes and node pools, before deploying you can modify the `values.yaml` file to define your existing taint.
+
+```yaml filename="values.yaml" {11,18}
+  ...
+  mostlyApp:
+    deployment:
+      resources: {}
+      tolerations: []
+      affinity: {}
+      mostly:
+        defaultComputePool:
+          name: Default
+          type: KUBERNETES
+          toleration: engine-jobs # replace with your toleration value
+  ...
+  mostlyCoordinator:
+    deployment:
+      ...
+      coreJob:
+        affinity: {}
+        tolerationKey: scheduling.mostly.ai/node # replace with your toleration key
+        tolerationEffect: NoSchedule
+        tolerationOperator: Equal
+  ...
+```
+
+## Worker node configuration
+
+Assign jobs to nodes where they will succeed and complete quickly. Use the following `values.yaml` parameters to configure the AI workloads on the worker nodes. Kubernetes will assign AI jobs to a node, which has at least this amount of resources available.
+
+  * `mostlyApp.deployment.mostly.defaultComputePool.resources.cpu`: To configure 14 cores, set `cpu: 14`.
+  * `mostlyApp.deployment.mostly.defaultComputePool.resources.memory`: To configure 24 GB memory, set `memory: 24`.

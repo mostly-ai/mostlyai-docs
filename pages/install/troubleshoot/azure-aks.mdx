@@ -1,0 +1,111 @@
+---
+title: 'Troubleshoot MOSTLY AI deployments to Azure AKS'
+description: 'Learn how you can troubleshoot various issues when you deploy MOSTLY AI to an Azure AKS cluster.'
+---
+
+# Troubleshoot Azure AKS deployment issues
+
+Learn how you can troubleshoot various issues when you deploy MOSTLY AI to an Azure AKS cluster. Each of the listed issues includes a description of the problem and solution that shows how to overcome or workaround the issue.
+
+## Nginx 404 Not found
+
+**Problem**
+
+**Cause**
+
+Nginx class name is not defined in the Helm charts.
+
+**Solution**
+
+Define the Nginx class name in the `values.yaml` file, for `global.ingress.ingressClassName`.
+
+```yaml {6}
+global:
+    ...
+    ingress:
+        annotations:
+          route.openshift.io/termination: edge
+        ingressClassName: nginx
+```
+
+This also requires that you uncomment the nginx annotations in the `values.yaml` file.
+
+```yaml {4-12,17-22}
+mostlyApp:
+  ...
+  ingress:
+    # 1. Uncomment the annotations below.
+    annotations:
+      nginx.ingress.kubernetes.io/proxy-body-size: 10240m
+      nginx.ingress.kubernetes.io/proxy-buffer-size: 128k
+      nginx.org/proxy-connect-timeout: 3000s
+      nginx.org/proxy-read-timeout: 3000s
+      nginx.org/client-max-body-size: 3000m
+    # 2. Comment out the empty annotations line.
+    # annotations: {}
+    ...
+mostlyKeycloak:
+  ...
+  ingress:
+    # 1. Uncomment the annotations below.
+    annotations:
+      nginx.ingress.kubernetes.io/proxy-body-size: 10240m
+      nginx.ingress.kubernetes.io/proxy-buffer-size: 128k
+    # 2. Comment out the empty annotations line.
+    # annotations: {}
+```
+
+## Error: `nginx can not be set`
+
+**Problem**
+If after you run the `helm install` command, you see output that contains the error below, this is an indication that nginx is defined twice.
+
+```
+upgrade.go:442: [debug] warning: Upgrade "mostly-ai" failed: failed to create resource: Ingress.extensions "mostly-app" is invalid: annotations.kubernetes.io/ingress.class: Invalid value: "nginx": can not be set when the class field is also set
+Error: UPGRADE FAILED: failed to create resource: Ingress.extensions "mostly-app" is invalid: annotations.kubernetes.io/ingress.class: Invalid value: "nginx": can not be set when the class field is also set
+helm.go:84: [debug] Ingress.extensions "mostly-app" is invalid: annotations.kubernetes.io/ingress.class: Invalid value: "nginx": can not be set when the class field is also set
+failed to create resource
+```
+
+**Solution**
+
+1. Define NGINX only one time in `values.yaml`. Comment out the `ingressClassName` line.
+    ```yaml filename="values.yaml" {2}
+    ingress:
+    # ingressClassName: nginx
+    kubernetes.io/ingress.class: nginx
+2. Delete the `mostly-ai` namespace. This deletes all running MOSTLY AI pods and bound storage volumes.
+    ```bash copy
+    kubectl delete namespace mostly-ai
+    ```
+3. Redeploy MOSTLY AI.
+    ```bash copy
+    helm upgrade --install mostly-ai ./ --values values.yaml --namespace mostly-ai
+    ```
+
+## Error: `Subscription not registered to use 'Microsoft.Storage'`
+
+**Problem**
+
+If you did not register your Azure subscription to the `Microsoft.Storage` provider, the provisioning of storage volumes might show the following error:
+
+```
+The subscription is not registered to use namespace 'Microsoft.Storage'
+```
+
+**Solution**
+
+1. Register your subscription to use the `Microsoft.Storage` service.
+    ```bash copy
+    az provider register --namespace Microsoft.Storage
+    ```
+2. Check the registration status.
+    ```bash copy
+    az provider show -n Microsoft.Storage --output table
+    ```
+    The output should be similar to the following:
+    ```
+    Namespace          RegistrationPolicy    RegistrationState
+    -----------------  --------------------  -------------------
+    Microsoft.Storage  RegistrationRequired  Registered
+    ```

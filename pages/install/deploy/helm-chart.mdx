@@ -1,0 +1,35 @@
+---
+title: 'MOSTLY AI Helm chart'
+description: 'To deploy MOSTLY AI in a Kubernetes cluster that your organization owns and configures, MOSTLY AI provides a Helm chart.'
+---
+
+# MOSTLY AI Helm chart
+
+To deploy MOSTLY AI in a Kubernetes cluster that your organization owns and configures, MOSTLY AI provides a Helm chart. [Helm](https://helm.sh/) is a package manager for Kubernetes and a [Helm chart](https://helm.sh/docs/topics/charts/) is the package format.
+
+## Contents
+The MOSTLY AI Customer Success team provides clients with the Helm chart that includes the `MOSTLY_AI_helm_charts` folder. You can review the root contents of the folder below.
+
+```
+Chart.yaml          # A YAML file that contains information about the chart
+README.md           # Helm chart README file
+templates/          # A directory of templates that, when combined with values,
+                    # will generate valid Kubernetes manifest files.
+values.yaml         # The configuration values for this Helm chart
+```
+
+## Edit and configure the Helm chart
+
+To configure your deployment, you need to edit the `values.yaml` file, and in rare cases, the files in the `templates/` directory.
+
+The `values.yaml` file contains many of the required configurations for different types of Kubernetes clusters. Each deployment guide includes steps which contain excerpts from the `values.yaml` file to indicate sections of the required configurations for a specific deployment. The excerpts are small sections from the file. Contents preceding and following the excerpts are indicated with an ellipsis (...).
+
+For mode information, see the [deployment guides](../deploy) for each supported cloud platform provider.
+
+## Delivery of images in the MOSTLY AI Helm chart
+
+You can deploy the container images defined in the Helm chart from the MOSTLY AI image repository or from an internal image repository.
+
+You need to make sure that your Kubernetes cluster has Internet connectivity to download the images from the MOSTLY AI repository.
+
+Similarly, you need direct connectivity from your cluster to your internal image repository, if you plan to use that option.

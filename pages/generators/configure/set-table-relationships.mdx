@@ -1,0 +1,47 @@
+---
+title: 'Set table relationships'
+description: 'With MOSTLY AI, you can train a generator on multi-table datasets with existing relationships between tables by setting foreign keys.'
+---
+
+import { Card, Cards } from 'nextra/components'
+import { RelDiagramIcon, KeyIcon, TwoTableIcon, MultiTableIcon } from '@components/icons'
+
+# Set table relationships
+
+For multi-table datasets, you can set the relationships between tables in your generator. The generator can then learn to retain the correlations and referential integrity of your original dataset.
+
+The basic scenario is the [two-table relationship](set-table-relationships/two-table), while the more complex but also easy to set up are [multi-table relationships](set-table-relationships/multi-table).
+
+<Cards num={2}>
+  <Cards.Card icon={TwoTableIcon()} title="Two-table scenario" href="set-table-relationships/two-table" />
+  <Cards.Card icon={MultiTableIcon()} title="Multi-table scenario" href="set-table-relationships/multi-table" />
+  <Cards.Card icon={KeyIcon()} title="Manage primary keys" href="set-table-relationships/manage-pks" />
+  <Cards.Card icon={RelDiagramIcon()} title="View relationship diagram" href="set-table-relationships/relationship-diagram" />
+</Cards>
+
+## Concepts
+
+MOSTLY AI differentiates between two types of table relationships: context and non-context relationships. The relationships are based on the primary and foreign key concepts and define how MOSTLY AI trains generators to retain the correlations and referential integrity in multi-table datasets.
+
+### Primary key
+
+The goal of a **primary key** is to uniquely identify a record. In database schema design, a primary key constraint sets a requirement in a column that the column must contain a unique value for each record.
+
+### Foreign key
+
+A **foreign key** establishes a relationship between two tables. In database design, the foreign key constraint requires that each record from a table is related to a record from another (usually by pointing to the other table's primary key).
+
+### Context foreign key
+
+In MOSTLY AI, you can set a context foreign key to define that a table is trained on and then generated in the context of another table. With a context foreign key, you can fully retain the correlations and maintain the referential integrity between two tables and across a hierarchy of grandparent - parent - child tables.
+
+A table can have only one context foreign key. If the same table has multiple foreign keys in your original data, you can use regular foreign keys for the remaining relationships.
+
+### Non-context foreign key
+
+In MOSTLY AI, a non-context foreign key helps to maintain the referential integrity between two tables. The correlations between such tables are retained on a "best effort" basis.
+
+Regular foreign keys are useful in the following scenarios.
+
+* **Multiple foreign keys in a single table**. If a table has multiple foreign keys, you can prioritize one as the context (to retain correlations and referential integrity), and have the remaining as regular foreign keys (to retain the referential integrity). 
+* **Relationship between two subject tables**. If you have two subject tables, you can retain their referential integrity with a non-context foreign key.

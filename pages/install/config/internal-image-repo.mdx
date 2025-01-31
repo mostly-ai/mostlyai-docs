@@ -1,0 +1,60 @@
+---
+title: 'Configure an internal image repository'
+description: 'Due to internal IT and security policies, you might need to host the MOSTLY AI container images in an internal repository.'
+---
+
+import { Callout } from 'nextra/components'
+
+# Configure an internal image repository
+
+Due to internal IT and security policies, you might need to host the MOSTLY AI container images in an internal repository.
+
+For such cases, you need to edit the `values.yaml` file in the [Helm chart](/install/deploy/helm-chart) and specify the URL and path to the MOSTLY AI images.
+
+You can find the configuration steps below. Complete before deploying.
+
+**Prerequisites**
+
+* Obtain the MOSTLY AI images from your Customer Success Engineer.
+* Work with your IT team to host the images in an internal repository.
+* Make sure that your Kubernetes cluster can access the internal image repository.
+* Obtain the repository URL from your IT team.
+* Obtain the image pull secret for your internal repository from your IT team.
+
+**Steps**
+
+1. In the `MOSTLY_AI_Helm_charts` directory, edit the `values.yaml` file.
+2. In the `mostlyRegistry` line, set the internal MOSTLY AI images repository URL.
+    ```yaml filename="values.yaml" {5}
+    _customerInstallation:
+    ...
+      deploymentSettings:
+      ...
+        mostlyRegistry: &mostlyRegistry your.internal.image.registry.com/mostlyai
+    ...
+    ```
+3. Set the name of the secret to your repository in `global.image.mostlyPullSecret`.
+    ```yaml filename="values.yaml" {6}
+    ...
+    global:
+    ...
+        image:
+          mostlyRegistry: *mostlyRegistry
+          mostlyPullSecret: name-of-the-secret-to-your-repository
+    ...
+    ```
+4. Set `mostlyConfigurations.secrets.dockerConfig.create` to `false`.
+    ```yaml filename="values.yaml" {5}
+    ...
+    mostlyConfigurations:
+      secrets:
+        dockerConfig:
+          create: false
+    ```
+5. Save the `values.yaml` file.
+
+**What's next**
+
+Check the [deployment checklist](../deploy/checklist) for any additional configurations that might be required.
+
+You can then continue with the [deployment](../deploy) of MOSTLY AI.

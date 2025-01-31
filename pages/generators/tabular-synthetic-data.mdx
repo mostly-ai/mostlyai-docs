@@ -1,0 +1,220 @@
+---
+title: 'Tabular synthetic data'
+description: 'MOSTLY AI generates tabular synthetic data that provides privacy protection for data subjects while maintaining referential integrity and retaining the correlations between columns and tables (depending on the table relationship schema).'
+---
+
+import { 
+    GreenTickSign,
+    YellowWarningSign
+} from '@components/icons'
+import Image from 'next/image'
+import { Callout } from 'nextra/components'
+
+# Tabular synthetic data
+
+MOSTLY AI generates tabular synthetic data that provides privacy protection for data subjects and high accuracy while maintaining referential integrity and retaining the correlations between columns and tables (depending on the table relationship schema).
+
+## Scenarios
+
+MOSTLY AI supports [single-table](#single-table-synthetic-data), [two-table](#two-table-synthetic-data), and [multi-table synthetic data](#multi-table-synthetic-data) generation. In all scenarios, MOSTLY AI provides privacy protection and high accuracy. 
+
+In [multi-table](#multi-table-synthetic-data) scenarios, MOSTLY AI again maintains the referential integrity of the original data and aims to retain the correlations between table columns and among tables.
+
+For a review of the supported table generation scenarios, see the following sections.
+
+### Single table synthetic data
+
+MOSTLY AI generates single-table synthetic data that retains all correlations between the columns in the original data.
+
+### Two-table synthetic data
+
+In a two-table scenario, you have a [subject](#subject-tables) and a [linked table](#linked-tables).
+
+To generate synthetic data in such a scenario, you define a Context foreign key relationship from the linked to the subject table. MOSTLY AI can then generate two-table synthetic data that maintains the referential integrity of the original two tables and retains the correlations within each table and between the two tables.
+
+### Multi-table synthetic data
+
+In a multi-table scenario, you can generate data that spans **three or more tables** with relationships between them.
+
+In such a scenario, you can have multiple [relationship schemas](#relationship-schemas) between the tables (or multiple different ways in which the relationships between the tables can be configured). In all cases, MOSTLY AI maintains the **referential integrity**. Depending on the exact relationship schema, the **correlations between specific tables** can be fully retained, partially retained, or not retained.
+
+For [single table](#single-subject-table), [two-table schema with a subject and linked tables](#subject-and-linked-tables-two-table-setup), and [star schemas with three or more tables](#three-tables---star-schema), MOSTLY AI can generate synthetic data that **fully retains the correlations from your original data**.
+
+For [nested schemas](#three-tables---nested-schema), [graph schemas with non-hierarchical relationships](#graph-schemas---non-hierarchical-relations), or [graph schemas with self-referencing relationships](#graph-schemas---self-relation), MOSTLY AI synthetic data **can retain some of the correlations from your original data on a "best-effort" basis**, while others cannot be retained.
+
+Before you learn about the details of retaining the correlations in different database schemas, learn about the main concepts of synthetic data when you use MOSTLY AI.
+
+## Table types
+
+MOSTLY AI categorizes tables into two different types to aid the configuration of table relationships.
+
+When you add tables to a new synthetic dataset in MOSTLY AI, all tables are added as subject tables. You can then configure the table relationships and MOSTLY AI distinguishes between subject and linked tables.
+
+### Subject tables
+
+It is important to think of subject tables as the tables that contain one record per subject and it is the privacy of those data subjects (people, companies, any other entities) that you aim to protect with the generation of synthetic data.
+
+Examples of subject tables can be *`users`*, *`customers`*, *`business_partners`*, *`providers`*, and so on.
+
+### Linked tables
+
+You can think of linked tables as events and time-series data or tables in which each record represents a specific event or a point in time. You define a table as a linked table when you set a [Context foreign key](#context-foreign-key) from it to a subject table.
+
+Examples of such tables can be *`order`*, *`purchase`*, *`events`* and so on.
+
+## Column types
+
+MOSTLY AI automatically recognizes common data types in table columns and can also use LLMs to train on and generate unstructured text found in table columns.
+
+### Data types
+
+MOSTLY AI uses the column data types to assign an encoding type that defines how the data will be encoded during generator training. For details, see [Set encoding types](/generators/configure/set-encoding-types).
+
+### Text columns
+
+For Text columns, you can use an LLM of your choice to fine-tune with your unstructured text data. This is part of the configuration of a generator.
+
+* While you configure the generator, you select [which LLM to fine-tune](/generators/configure/set-encoding-types#languagetext)).
+* When you generate synthetic data, your synthetic text will be generated with the fine-tuned LLM. The generated data retains the correlations with the rest of the columns in your original dataset.
+
+## Relationship types
+
+MOSTLY AI supports two types of foreign keys.
+
+### Context foreign key
+
+You add a Context foreign key to a table to define the table as linked to the subject table to which the Context foreign key points. With a Context foreign key, MOSTLY AI can fully retain the correlations between the subject and linked tables. This means that any correlations that exist within each table and between the columns of both tables are fully retained in the synthetic data.
+
+Also, context foreign keys guarantee the referential integrity between the linked and subject tables.
+
+<Callout type="warning">
+You can have only one context foreign key per linked table. If you need multiple foreign keys per linked table, use a context foreign key for the subject table the correlations of which you want to fully retain in the synthetic data, and non-context foreign keys for all others.
+</Callout>
+
+### Non-context foreign key
+
+Use non-context foreign keys to configure between two tables when in the same table you have already set a context foreign key.
+
+Non-context foreign keys only preserve the referential integrity between two tables.
+
+## Relationship schemas
+
+The sections below review the table setups that you might have in your original data and how MOSTLY AI creates synthetic data in the each setup, as well as how the privacy, correlations, and referential integrity are retained for each scenario.
+
+Each setup is illustrated with a diagram. The legend below shows the elements that are part of each diagram.
+<br />
+<Image 
+    src="/docs/docimages/concepts/tabular-sd/table-setups-legend.svg" 
+    alt="Legend" 
+    width={400} 
+    height={150}
+/>
+
+### Single subject table
+
+In this scenario, you have a single subject table. The table might have the attributes listed in the table below.
+
+<Image 
+    src="/docs/docimages/concepts/tabular-sd/single-subject-table.svg" 
+    alt="Two-table setup" 
+    width={150} 
+    height={150}
+/>
+
+In this scenario, MOSTLY AI fully retains the correlations between columns in the subject table.
+
+### Two tables
+
+<Image 
+    src="/docs/docimages/concepts/tabular-sd/two-table-setup.svg" 
+    alt="Two-table setup" 
+    width={400} 
+    height={150}
+/>
+
+<div className="empty_header_table"></div>
+| | |
+| -- | -- |
+| <GreenTickSign/> | Referential integrity is preserved |
+| <GreenTickSign/> | Correlations between all columns are retained |
+| <GreenTickSign/> | Correlations between events of the same customer are retained |
+| <GreenTickSign/> | Privacy of customers is protected |
+
+### Three tables - Star schema
+
+<Image 
+    src="/docs/docimages/concepts/tabular-sd/three-table-star-schema.svg" 
+    alt="Three tables - Star schema" 
+    width={450} 
+    height={150}
+/>
+
+<div className="empty_header_table"></div>
+| | |
+| -- | -- |
+| <GreenTickSign/> | Referential integrity is preserved |
+| <GreenTickSign/> | Correlations between customers and clicks are retained |
+| <GreenTickSign/> | Correlations between customers and visits are retained |
+| <GreenTickSign/> | Correlations between clicks and visits are retained |
+| <GreenTickSign/> | Correlations between all clicks of the same customer are retained |
+| <GreenTickSign/> | Correlations between all visits of the same customer are retained |
+| <GreenTickSign/> | Correlations between events of the same customer are retained |
+| <GreenTickSign/> | Privacy of customers is protected |
+
+### Three tables - Nested schema
+
+<Image 
+    src="/docs/docimages/concepts/tabular-sd/three-table-nested-schema.svg" 
+    alt="Three tables - Nested schema" 
+    width={450} 
+    height={150}
+/>
+
+<div className="empty_header_table"></div>
+| | |
+| -- | -- |
+| <GreenTickSign/> | Referential integrity is preserved |
+| <GreenTickSign/> | Correlations between customers and accounts and between accounts and transactions are retained |
+| <GreenTickSign/> | Correlations between customers and transactions are retained |
+| <GreenTickSign/> | Correlations between all accounts of the same customer are retained |
+| <GreenTickSign/> | Correlations between all transactions of the same customer are retained |
+| <YellowWarningSign/> | Correlations between transactions across accounts are NOT retained |
+| <GreenTickSign/> | Privacy of all entities is protected |
+
+### Graph schemas - Non-hierarchical relations
+
+<Image 
+    src="/docs/docimages/concepts/tabular-sd/graph-structure-external-link.svg" 
+    alt="Graph structure - non-hierarchical relations" 
+    width={450} 
+    height={150}
+/>
+
+<div className="empty_header_table"></div>
+| | |
+| -- | -- |
+| <GreenTickSign/> | Referential integrity is preserved |
+| <GreenTickSign/> | Correlations between customers and logins are retained |
+| <GreenTickSign/> | Correlations between all logins of the same customer are retained |
+| <YellowWarningSign/> | Correlations between logins and accounts are NOT retained |
+| <YellowWarningSign/> | Correlations between logins to the same account are NOT retained. In particular, the cardinality of the relationship is NOT retained. |
+| <GreenTickSign/> | Privacy of all entities is protected |
+
+### Graph schemas - Self-relation
+
+<Image 
+    src="/docs/docimages/concepts/tabular-sd/graph-structure-self-link.svg" 
+    alt="Graph structure - self-relation" 
+    width={200} 
+    height={150}
+/>
+
+<div className="empty_header_table"></div>
+
+| | |
+| -- | -- |
+| <GreenTickSign/> | Referential integrity is preserved |
+| <GreenTickSign/> | Correlations between customers columns are retained |
+| <YellowWarningSign/> | Correlations between customers and their mothers and fathers are NOT retained |
+| <YellowWarningSign/> | Correlations between customers that belong to the same mother, or to the same father are NOT retained. |
+| <GreenTickSign/> | Privacy of customers is protected |

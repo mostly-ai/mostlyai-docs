@@ -1,0 +1,184 @@
+---
+title: "Improve model accuracy"
+description: "You can adjust the model settings in MOSTLY AI to improve the accuracy of your tabular AI models."
+---
+
+import { Tabs } from 'nextra/components'
+import { Callout } from 'nextra/components'
+import Image from 'next/image'
+
+# Improve model accuracy
+
+The default Generative AI model configuration in MOSTLY AI aims to achieve high accuracy at an optimized speed of training. You can adjust the configuration of your models to improve their individual and the overall accuracy of the generator.
+
+## Defaults related to accuracy
+
+The accuracy-related options with their default setting for each model are listed below:
+
+* Max sample size: 100%
+* Max training time: 10 min
+* Max training epochs: 100
+* Model: MOSTLY_AI/Medium
+* Batch size: Auto
+* Max sequence window (linked tables and Text models only): 100 rows
+
+## Use the **Accuracy** preset to increase training time
+
+Select the **Accuracy** configuration preset to use the recommended model configuration for accuracy. This increases the **Max training time** to **120 min** for all models to ensure enough training duration for the highest possible accuracy. 
+<Image
+   src="/docs/docimages/generators/improve-model-accuracy/model-configuration-00-select-accuracy-preset.webp"
+   alt="MOSTLY AI - Generator configuration - Select Accuracy configuration preset"
+   width={900}
+   height={300}
+/>
+
+You can also increase the **Max training time** if you notice that your model training is cut short at the 60-minute mark or the 120-minute mark if you use the **Accuracy** preset.
+
+<Tabs items={['UI', 'Python SDK']}>
+<Tabs.Tab>
+If you use the web application, you can configure the maximum training time from the **Model configuration** page of a generator.
+
+**Steps**
+
+1. With an untrained generator open, go to the **Model configuration** page by clicking **Configure models**.
+2. Click a model to expand its settings.
+3. Set the **Max training time** in minutes.
+    
+    <Image
+        src="/docs/docimages/generators/improve-model-accuracy/model-configuration-02-set-max-training-time.webp"
+        alt="MOSTLY AI - Generator configuration - Set maximum training time"
+        width={900}
+        height={300}
+    />
+</Tabs.Tab>
+<Tabs.Tab>
+For the Python SDK, use the `max_training_time` in the `tabular_model_configuration` dictionary to set the training time for a model. Specify an integer for a duration in minutes.
+
+```python filename="python" copy {11}
+import pandas as pd
+df = pd.read_csv('https://mostly.ai/docs/datasets/us-census-income.csv.gz')
+
+config={
+    "name": "US census",
+    "tables": [
+        {
+            "name": "census",
+            "data": df,
+            "tabular_model_configuration": {
+                "max_training_time": 120,
+            },
+        },
+    ]
+})
+```
+</Tabs.Tab>
+</Tabs>
+
+## Increase training sample size
+
+By default, MOSTLY AI uses all records in a table to train the Generative AI model for that table. If your model configuration already uses a percentage or number of rows that are less than what you have in your original table, you can increase that for higher model accuracy.
+
+<Tabs items={['UI', 'Python SDK']}>
+<Tabs.Tab>
+
+If you use the web application, you can configure the training sample size for each table from the **Model configuration** page of a generator.
+
+**Steps**
+
+1. With an untrained generator open, go to the **Model configuration** page by clicking **Configure models**.
+2. Click a model to expand its settings.
+3. Set the **Max sample size** as number of rows.
+    1. For subject tables, you set the number of rows to be used for training from the original subject table.
+        <Image
+            src="/docs/docimages/generators/improve-model-accuracy/model-configuration-01-set-max-sample-size-subjects.webp"
+            alt="MOSTLY AI - Generator configuration - Set maximum training sample size for subject tables"
+            width={900}
+            height={300}
+        />
+    2. For linked tables, you set the number of sequences (the sequences equal the number of subjects) to be used for training.
+        <Callout>
+        The training size of linked tables is defined by the number of sequences. A _**sequence**_ is the defined as 1 subject (sample) from the subject table and all of its related samples from the linked table.
+
+        Think of the training size for linked tables as defined by the number of subjects or sequences used to pull the related sequences for a subject.
+        </Callout>
+        <Image
+            src="/docs/docimages/generators/improve-model-accuracy/model-configuration-01.01-set-max-sample-size-linked.webp"
+            alt="MOSTLY AI - Generator configuration - Set maximum training sample size for linked tables"
+            width={900}
+            height={300}
+        />
+</Tabs.Tab>
+<Tabs.Tab>
+For the Python SDK, use the `max_sample_size` key in the `tabular_model_configuration` dictionary.
+
+```python filename="python" copy {11}
+import pandas as pd
+df = pd.read_csv('https://mostly.ai/docs/datasets/us-census-income.csv.gz')
+
+config = {
+   "name": "US census",
+   "tables": [
+      {
+         "data": df,
+         "name": "census",
+         "tabular_model_configuration": {
+            "max_sample_size": null,  # use all rows
+         },
+      }
+   ]
+}
+```
+</Tabs.Tab>
+</Tabs>
+
+## Increase model size
+
+Model size defines the amount of internal parameters that the AI model uses to learn from your data. A larger model uses more parameters to analyze and train on your data. You can use three different model sizes.
+
+* **MOSTLY_AI/Small** uses fewer parameters, takes less memory and time, at the cost of accuracy.
+* **MOSTLY_AI/Medium** uses optimal parameters and is best for most use cases.
+* **MOSTLY_AI/Large** can further improve accuracy for large datasets, but requires significantly more memory and compute time.
+
+<Tabs items={['UI', 'Python SDK']}>
+<Tabs.Tab>
+If you use the web application, you can configure the model size from the **Model configuration** page of a generator.
+
+**Steps**
+
+1. With an untrained generator open, go to the **Model configuration** page by clicking **Configure models**.
+2. Click a model to expand its settings.
+3. For **Model**, select **MOSTLY_AI/Large**.
+    
+    <Image
+        src="/docs/docimages/generators/improve-model-accuracy/model-configuration-03-increase-model-size.webp"
+        alt="MOSTLY AI - Generator configuration - Increase model size"
+        width={900}
+        height={300}
+    />
+</Tabs.Tab>
+<Tabs.Tab>
+For the Python SDK, use the `model` key in the `tabular_model_configuration` dictionary.
+
+* Use `MOSTLY_AI/Small` for a small model size
+* Use `MOSTLY_AI/Medium` for a medium model size
+* Use `MOSTLY_AI/Large` for a large model size
+
+```python filename="python" copy {11}
+import pandas as pd
+df = pd.read_csv('https://mostly.ai/docs/datasets/us-census-income.csv.gz')
+
+config = {
+   "name": "US census",
+   "tables": [
+      {
+         "name": "census",
+         "data": df,
+         "tabular_model_configuration": {
+            "model": "MOSTLY_AI/Large",
+         },
+      }
+   ]
+}
+```
+</Tabs.Tab>
+</Tabs>

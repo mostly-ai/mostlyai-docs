@@ -1,0 +1,30 @@
+---
+title: 'Deploy MOSTLY AI'
+description: 'A system administrator of a Kubernetes cluster can best navigate the deployment of MOSTLY AI. The deployment requires the management and mapping of permissions for the storage, nodes, ingress, and secrets to internal repositories, as well as the definition of limits and requests for the pods.'
+---
+
+import { Callout } from 'nextra/components'
+import { Card, Cards } from 'nextra/components'
+import { MinikubeIcon, AmazonEKSIcon, OpenShiftIcon, GKEIcon, AKSIcon } from '@components/icons'
+
+# Deploy MOSTLY AI
+
+A system administrator of a Kubernetes cluster can best navigate the deployment of MOSTLY AI. The deployment requires the management and mapping of permissions for the storage, nodes, ingress, and secrets to internal repositories, as well as the definition of requests for the pods. The values.yaml file includes suggestions on minimum requirements and guidance on where to map each of those parameters.
+
+## Deployment targets
+
+You can deploy MOSTLY AI in an on-premises Kubernetes cluster or in managed Kubernetes services.
+
+<Callout type='info'>
+Contact MOSTLY AI if you need help deploying to a specific managed Kubernetes service.
+</Callout>
+
+Below, you can find a list of installation procedures with prerequisites and step-by-step guidance to deploy MOSTLY AI to a supported deployment target.
+
+<Cards num={2}>
+  <Cards.Card icon={OpenShiftIcon()} title="Deploy to an OpenShift cluster" href="deploy/openshift" />
+  <Cards.Card icon={AmazonEKSIcon()} title="Deploy to an AWS EKS cluster" href="deploy/aws-eks" />
+  <Cards.Card icon={GKEIcon()} title="Deploy to a GKE cluster" href="deploy/gke" />
+  <Cards.Card icon={AKSIcon()} title="Deploy to an Azure AKS cluster" href="deploy/azure-aks" />
+  <Cards.Card icon={MinikubeIcon()} title="Deploy to a minikube cluster" href="deploy/minikube" />
+</Cards>

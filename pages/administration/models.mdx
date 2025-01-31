@@ -1,0 +1,86 @@
+---
+title: 'Models configuration'
+description: 'Unstructured text generation in MOSTLY AI is available via the configuration of any text generation model available on Hugging Face as well as via the built-in LSTM model (that is not pre-trained) provided by MOSTLY AI.'
+---
+
+import { Callout } from 'nextra/components'
+import { Tabs } from 'nextra/components'
+import Image from 'next/image'
+
+# Models configuration
+
+Unstructured text generation in MOSTLY AI is available via the configuration of any text generation model available on [Hugging Face](https://huggingface.co/) as well as via the built-in LSTM model (that is not pre-trained) provided by MOSTLY AI.
+
+You can use any text generation model available on HuggingFace. To do so, you can first acquire a HuggingFace token.
+
+## Create a HuggingFace token
+
+You need to sign up or use an existing account to obtain a HuggingFace token. You need a token with Read permissions. We demonstrate how you can specify a **Read** token, but you can also use a **Fine-grained** token as long as it has the required read permissions.
+
+**Steps**
+
+1. After having logged into HuggingFace, go to the profile menu and select **Settings**.
+2. From the left sidebar, select **Access Tokens**.
+3. Click **+ Create new token**.
+4. Under **Token type**, select **Read** to use only read permissions for the token.
+5. For **Token name**, provide a name, such as `mostly-ai`.
+6. Click **Create token**.
+    <Image
+        src="/docs/docimages/administration/models/hugging-face-token-01-create-token.webp"
+        alt="HuggingFace - Create a Read token"
+        width={800}
+        height={300}
+    />
+7. Copy your new token.
+    <Image
+        src="/docs/docimages/administration/models/hugging-face-token-02-copy-token.webp"
+        alt="HuggingFace - Copy token"
+        width={800}
+        height={300}
+    />
+
+## Add HuggingFace language models
+
+You can select any language model available on [HuggingFace](https://huggingface.co/) and define it as a model for synthetic text in MOSTLY AI.
+
+**Prerequisites**
+
+You must be logged in as a superadmin to be able to add or remove HuggingFace models.
+
+**Steps**
+
+1. In MOSTLY AI, select **Models** from the profile menu.
+    <Image
+        src="/docs/docimages/administration/models/configure-models-01-profile-select-models.webp"
+        alt="MOSTLY AI Models configurations - Select profile menu and then Models"
+        width={800}
+        height={300}
+    />
+2. For HuggingFace token, paste your [HuggingFace token](#create-a-huggingface-token).
+3. Under **Available models**, list the models you want to make available.<br />
+    Use the convention below. Place each model on a new line, without separators.<br />
+    ```
+    provider/Model-Name
+    provider/Model-Name
+    ```
+    <Image
+        src="/docs/docimages/administration/models/01-configure-huggingface-models.webp"
+        alt="MOSTLY AI Deployment - Log in page"
+        width={800}
+        height={300}
+    />
+3. Click **Save**.
+
+**Result**
+
+The models are now available for selection whenever someone at your organization needs to train a new generator.
+
+## How are HuggingFace models cached
+
+After a user with `superadmin` privileges adds a model, that model appears in the **Model** drop-down (**Model configuration** page) for the next generator that a user configures. Any user can then select the new model and use it to fine-tune the model with new text data.
+
+After the generator training starts, MOSTLY AI connects to HuggingFace to download the model. At this point, the model is cached and is available for further use without the need to download the model again.
+
+<Callout>
+Internet connection is required to download HuggingFace models. Contact MOSTLY AI to learn how to add models if internet connectivity is not available for your deployment due to security policies.
+</Callout>

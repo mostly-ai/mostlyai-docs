@@ -1,0 +1,760 @@
+---
+title: 'Deploy MOSTLY AI to an AWS EKS cluster'
+description: 'You can deploy MOSTLY AI to an Amazon AWS Elastic Kubernetes Services (EKS) cluster. This page covers the list of prerequisites you need and the steps for a successful installation.'
+---
+
+import Image from 'next/image'
+import { Callout } from 'nextra/components'
+
+## Overview
+
+To run MOSTLY AI in AWS, you need to create an Elastic Kubernetes Service (EKS) cluster. MOSTLY AI provides a set of automated scripts and configuration files that can help you create and configure an EKS cluster  as well as create and mount the required EFS storage, and create and configure an AWS Application Load Balancer (ALB) for the application.
+
+This page contains step-by-step tasks that guide you through the process of deploying MOSTLY AI in an AWS EKS cluster. The tasks are grouped into four categories.
+
+* [Pre-deployment](#pre-deployment)
+* [Deployment](#deployment)
+* [Post-deployment](#post-deployment)
+* [Troubleshooting](#troubleshooting)
+
+Use the tasks on this page as a reference for what you might need to complete to reach the point in which MOSTLY AI runs in an EKS cluster and you can successfully generate synthetic datasets.
+
+Some of the tasks describe configurations that you might have already completed in AWS. In such cases, use the tasks on this page as a reference for all required configurations.
+
+## Prerequisites
+
+* Make sure that you have the tools and commands listed below.
+    * Install [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
+    * Install [Helm](https://helm.sh/docs/intro/install/).
+    * Install [`kubectl`](https://kubernetes.io/docs/tasks/tools/).
+    * Install [`jq`](https://jqlang.github.io/jq/) (a command-line JSON parser)
+    * Verify that you have the `grep` and `awk` commands.
+* Decide in which AWS region you want to deploy MOSTLY AI. The page documents the steps in detail to deploy to **`eu-central-1`**. If you need to deploy to another region, read the information about the [Region-specific EKS images](#region-specific-eks-image) and how to configure for that.
+
+
+## Pre-deployment
+
+### Task 1: Subscribe for MOSTLY AI from AWS Marketplace
+
+Before you make any configurations in your AWS account, subscribe to the MOSTLY AI Synthetic Data Platform from the AWS Marketplace.
+
+<Callout>
+The MOSTLY AI offering on the AWS Marketplace will soon be updated. Stay tuned!
+</Callout>
+
+**Steps**
+
+1. Go the [MOSTLY AI](https://aws.amazon.com/marketplace/pp/prodview-z4bb3qozmlg3c?sr=0-1&ref_=beagle&applicationId=AWSMPContessa) page on the AWS Marketplace.
+2. Click **Continue to Subscribe**.
+    <Image 
+        src="/docs/docimages/install/aws-eks/01-aws-marketplace-01-continue-to-subscribe.webp"
+        alt="AWS Marketplace - Click Continue to Subscribe"
+        width={800}
+        height={700}
+    />
+3. Review the terms and, if you agree, click **Accept Terms**.
+4. Click **Continue to Configuration**.
+    <Image 
+        src="/docs/docimages/install/aws-eks/01-aws-marketplace-02-continue-to-config.webp"
+        alt="AWS Marketplace - Click Continue to Configuration"
+        width={800}
+        height={700}
+    />
+5. On the **Configure this software** page, select fulfillment and software version.
+    1. For **Fulfillment option**, select **MOSTLY AI EKS installation bootstrap image**.
+    2. For **Software version**, select the latest available version.
+    3. Click **Continue to Launch**.
+        <Image 
+            src="/docs/docimages/install/aws-eks/01-aws-marketplace-03-continue-to-launch.webp"
+            alt="AWS Marketplace - Click Continue to Launch"
+            width={800}
+            height={700}
+        />
+6. On the **Launch this software** page, you can review the configuration details and usage instructions.
+    <Callout type="warning">
+    The command under **Container images** is already integrated into the MOSTLY AI deployment scripts that you download in [Task 10](#task-10-download-and-configure-deployment-files) and you do not need to run the command to deploy MOSTLY AI.
+    </Callout>
+    <Image 
+        src="/docs/docimages/install/aws-eks/01-aws-marketplace-04-launch.webp"
+        alt="AWS Marketplace - Launch this software"
+        width={800}
+        height={700}
+    />
+
+**Result**
+
+You can now complete the next tasks in AWS to prepare the necessary configurations (if you do not already have them) before you run the AWS deployment script.
+
+### Task 2: Create a key pair in EC2
+
+When you create a key pair in EC2, you can use the generated security credentials to use `ssh` and log in to the EC2 instances that the MOSTLY AI deployment script creates.
+
+**Prerequisites**
+
+* Log in to the [AWS Management Console](https://aws.amazon.com/console/). You can do the steps here with your root AWS account.
+* Select the zone in which you want to create your Kubernetes cluster.
+
+**Steps**
+
+1. From AWS Services, search and open **EC2**.
+    <Image 
+        src="/docs/docimages/install/aws-eks/02-key-pair-01-open-ec2.webp"
+        alt="AWS Services - Open EC2"
+        width={700}
+        height={700}
+    />
+2. In **EC2**, select **Key Pairs** under **Network & Security** from the sidebar.
+    <Image 
+        src="/docs/docimages/install/aws-eks/02-key-pair-02-ec2-select-key-pair.webp"
+        alt="Get a key pair - Open EC2 > Key pair"
+        width={700}
+        height={700}
+    />
+3. Click **Create key pair**.
+    <Image 
+        src="/docs/docimages/install/aws-eks/02-key-pair-03-click-create.webp"
+        alt="Get a key pair - Click Create"
+        width={700}
+        height={700}
+    />
+4. Enter a name for the new key pair and click **Create key pair**.
+    <Callout>
+    Leave the default options: 
+    
+    * **Key pair type**: RSA
+    * **Private key file format**: `.pem`
+    </Callout>
+    <Image 
+        src="/docs/docimages/install/aws-eks/02-key-pair-04-name-and-create.webp"
+        alt="Get a key pair - Name and create"
+        width={450}
+        height={300}
+    />
+
+**Result**
+
+The new key pair appears in the list. The generated `.pem` file that contains the certificate and access keys download automatically.
+
+<Image 
+    src="/docs/docimages/install/aws-eks/02-key-pair-05-result.webp"
+    alt="Get a key pair - Created key pair"
+    width={450}
+    height={300}
+/>
+
+**What's next**
+
+You can now create a non-ROOT user which is a requirement to run the deployment script in [Task 11](#task-11-run-deployment-script).
+
+Also, later in [Task 10](#task-10-download-and-configure-deployment-files), you define the key pair name in the `eks-cluster.yaml` deployment configuration file which is a requirement before you run the deployment. You can also use the downloaded certificate to log in to the Kubernetes pods that MOSTLY AI deploys.
+
+### Task 3: Create a user group
+
+As a best practice, create a user group to which you will assign the required policies and add the user that will run the deployment script.
+
+**Steps**
+
+1. From AWS Services, search and open **Identity and Access Management (IAM)**.
+    <Image 
+        src="/docs/docimages/install/aws-eks/03-user-group-01-open-iam.webp"
+        alt="AWS Services - Open IAM"
+        width={700}
+        height={700}
+    />
+2. In **IAM**, select **User groups** from the sidebar.
+    <Image 
+        src="/docs/docimages/install/aws-eks/03-user-group-02-click-user-groups.webp"
+        alt="AWS IAM - click User groups"
+        width={225}
+        height={300}
+    />
+3. Click **Create group**.
+    <Image 
+        src="/docs/docimages/install/aws-eks/03-user-group-03-click-create-group.webp"
+        alt="AWS IAM - click Create group"
+        width={800}
+        height={300}
+    />
+4. Name the group **`eksctl-group`** and click **Create group**.
+    <Image 
+        src="/docs/docimages/install/aws-eks/03-user-group-04-name-the-group.webp"
+        alt="AWS IAM - Name the group"
+        width={350}
+        height={300}
+    />
+
+**Result**
+
+The user group **`eksctl-group`** is now listed under **User groups**.
+<Image 
+    src="/docs/docimages/install/aws-eks/03-user-group-05-result.webp"
+    alt="AWS IAM - User group created"
+    width={800}
+    height={300}
+/>
+
+
+### Task 4: Assign an administrator policy to the user group
+
+Allow the user group to act as an administrator which will grant the user that runs the deployment script the privileges required to create an EKS cluster and all related resources.
+
+**Steps**
+
+1. From **User groups**, click the **`eksctl-group`** to open its settings.
+2. Select the **Permissions** tab.
+3. Click **Add permissions** and select **Attach policies** from the drop-down menu.
+    <Image 
+        src="/docs/docimages/install/aws-eks/04-user-group-policies-01-permissions-attach-policies.webp"
+        alt="AWS IAM User group - Attach policies"
+        width={800}
+        height={300}
+    />
+3. Select the **`AdministratorAccess`** policy.
+    <Image 
+        src="/docs/docimages/install/aws-eks/04-user-group-policies-02-select-admin-access.webp"
+        alt="AWS IAM User group - Select Administrator Access policy"
+        width={800}
+        height={300}
+    />
+5. Click **Add permissions**.
+    <Image 
+        src="/docs/docimages/install/aws-eks/04-user-group-policies-03-click-add-permissions.webp"
+        alt="AWS IAM User group - Click Add permissions"
+        width={800}
+        height={300}
+    />
+
+**Result**
+
+The required **`AdministratorAccess`** policy is now added to the user group **`eksctl-group`**.
+
+<Image 
+    src="/docs/docimages/install/aws-eks/04-user-group-policies-04-result.webp"
+    alt="AWS IAM User group - Group with added permissions"
+    width={800}
+    height={300}
+/>
+
+### Task 5: Create a user
+
+Create a non-ROOT user that should be part of the new user group and will have permissions to run the MOSTLY AI deployment script.
+
+**Steps**
+
+
+1. Open **Identity and Access Management (IAM)**.
+2. Select **Users** from the sidebar.
+    <Image 
+        src="/docs/docimages/install/aws-eks/05-user-01-select-users.webp"
+        alt="AWS IAM - Select Users from sidebar"
+        width={225}
+        height={300}
+    />
+3. Click **Create user**.
+    <Image 
+        src="/docs/docimages/install/aws-eks/05-user-02-click-create-user.webp"
+        alt="AWS IAM - Click Create user"
+        width={750}
+        height={300}
+    />
+4. Name the user **`eksctl`** and click **Next**.
+    <Image 
+        src="/docs/docimages/install/aws-eks/05-user-03-name-and-click-next.webp"
+        alt="AWS IAM - Name user and click Next"
+        width={800}
+        height={300}
+    />
+5. On the **Set permissions** step, select the **`eksctl-group`** and click **Next**.
+    <Image 
+        src="/docs/docimages/install/aws-eks/05-user-04-select-user-group-click-next.webp"
+        alt="AWS IAM - select user group and click Next"
+        width={800}
+        height={300}
+    />
+5. On the **Review and create** step, click **Create user**.
+    <Image 
+        src="/docs/docimages/install/aws-eks/05-user-05-click-create-user.webp"
+        alt="AWS IAM - click Create user"
+        width={800}
+        height={300}
+    />
+
+**Result**
+
+The user is now created and appears in the **Users** table.
+
+<Image 
+    src="/docs/docimages/install/aws-eks/05-user-06-result.webp"
+    alt="AWS IAM - new user added"
+    width={800}
+    height={300}
+/>
+
+### Task 6: Create an access key for the user
+
+Create an access key for the created user. You use the access key to configure and use the AWS CLI and run automated commands or scripts.
+
+**Step**
+
+1. In **IAM** > **Users**, select the **`eksctl`** user.
+2. Click **Create access key**.
+    <Image 
+        src="/docs/docimages/install/aws-eks/06-user-access-key-01-click-create-access-key.webp"
+        alt="AWS IAM - click Create access key"
+        width={800}
+        height={300}
+    />
+3. Select **Comand Line Interface**.
+4. Select the **I understand the above recommendation...** checkbox.
+5. Click **Next**.
+    <Image 
+        src="/docs/docimages/install/aws-eks/06-user-access-key-02-best-practices.webp"
+        alt="AWS IAM - Best practices"
+        width={800}
+        height={300}
+    />
+6. Click **Create access key**.
+    <Image 
+        src="/docs/docimages/install/aws-eks/06-user-access-key-03-click-create-access-key.webp"
+        alt="AWS IAM - Click Create access key"
+        width={800}
+        height={300}
+    />
+7. (Optional) View the **Access key** and **Secret access key** values.
+8. Click **Download .csv file** to download the access key locally.
+    <Image 
+        src="/docs/docimages/install/aws-eks/06-user-access-key-04-download-access-key.webp"
+        alt="AWS IAM - Download access key"
+        width={800}
+        height={300}
+    />
+
+**Result**
+
+The file **`eksctl_accessKeys.csv`** is saved locally and contains the **Access key** and **Secret access key** values.
+
+### Task 7: Configure AWS CLI
+
+With the user created specifically for the creation and deployment of MOSTLY AI, you can use it configure AWS CLI so that the user performs all scripted tasks.
+
+**Prerequisites**
+
+* AWS CLI. See [Install or update the latest version of the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) in the _AWS Documentation_.
+* Prepare your **Access key** and **Secret access key** from the previous task.
+
+**Steps**
+
+1. Open a command-line application.
+2. Create an AWS CLI named profile for the `eksctl` user with the `aws configure` command.
+    ```bash copy
+    aws configure --profile eksctl
+    ```
+3. Complete the prompts for the `aws configure` command.
+    1. For `AWS Access Key ID [None]`, paste your access key.
+    2. For `AWS Secret Access Key [None]`, paste your secret access key.
+    3. For `Default region name [None]`, type the default AWS region you want to use. For example, `eu-central-1`.
+    4. For `Default output format [None]`, type `json`.
+
+**Result**
+
+You AWS CLI profile for the **`eksctl`** user is now created.
+
+You can verify the configuration from your home folder. If you did not have a previously configured profile, the following commands should produce results similar to the ones below.
+
+1. View the contents of `.aws/config` in your home folder to see the configured profiles.
+    ```bash copy
+    cat ~/.aws/config
+    ```
+    Without any previously configured profiles, the result should be similar to the following:
+    ```
+    [profile eksctl]
+    region = eu-central-1
+    output = json
+    ```
+2. View the contents of `.aws/credentials` in your home folder to see the saved access key and secret access key for the profile.
+    ```bash copy
+    cat ~/.aws/credentials
+    ```
+    Without any previously configured profiles, the result should be similar to the following (actual secret values are obfuscated with asterisks):
+    ```
+    [eksctl]
+    aws_access_key_id = AK******************
+    aws_secret_access_key = ******************
+    ```
+3. Finally, you can use the `aws sts-caller-identity` command to check if the previous configurations were correct:
+    ```bash copy
+    aws sts get-caller-identity --profile eksctl
+    ```
+    The result should be similar to the following (actual secret values are obfuscated with asterisks):
+    ```
+    {
+        "UserId": "AI*******************",
+        "Account": "74**********",
+        "Arn": "arn:aws:iam::74**********:user/eksctl"
+    }
+    ```
+
+### Task 8: Create a hosted zone in Route 53
+
+You need to have a fully-qualified domain name (FQDN) for your MOSTLY AI application. If you need to register a new FQDN, you can do so from any domain name registrar (such as GoDaddy, Namecheap, or any other) or use AWS Route 53. You can also use a subdomain.
+
+If you register an FQDN with Route 53, you already have your hosted zone available in AWS under **Route 53** > **Hosted zones**.
+
+If you register an FQDN from another domain registrar, you need to create a hosted zone in Route 53 with your registered domain. In this case, follow the steps below.
+
+**Steps**
+
+1. From AWS Services, search and open **Route 53**.
+    <Image 
+        src="/docs/docimages/install/aws-eks/08-hosted-zone-01-open-route.webp"
+        alt="AWS Services - Open EC2"
+        width={700}
+        height={700}
+    />
+2. Select **Hosted zones** from the sidebar.
+3. Click **Create hosted zone**.
+    <Image 
+        src="/docs/docimages/install/aws-eks/08-hosted-zone-02-route-53-click-create-hosted-zone.webp"
+        alt="AWS S3 - upload deployment files"
+        width={700}
+        height={300}
+    />
+4. For **Domain name**, type your FQDN.
+5. Click **Create hosted zone**.
+    <Image 
+        src="/docs/docimages/install/aws-eks/08-hosted-zone-03-name-click-create.webp"
+        alt="AWS S3 - upload deployment files"
+        width={550}
+        height={300}
+    />
+    **Step result**: Your FQDN appears in the **Records** tabe.
+6. From the **Records** table, copy the name servers for the hosted zone you created.
+    <Image 
+        src="/docs/docimages/install/aws-eks/08-hosted-zone-04-copy-name-servers.webp"
+        alt="AWS S3 - upload deployment files"
+        width={800}
+        height={300}
+    />
+7. Go to your domain registrar and add the copied name servers as custom nameservers for your domain.
+    <Callout type="info">
+    The propagation of the updated name servers across the DNS network might take several hours.
+    
+    For more information, contact your domain registrar.
+    </Callout>
+
+**Result**
+
+You now have a configured hosted zone in Route 53 for your FQDN.
+
+Depending on your domain name provider, it might take some time (sometimes up to a few days) before the new nameservers are updated and propagated across the global DNS network.
+
+### Task 9: Create a SSL certificate for your FQDN
+
+To enable encrypted access with your FQDN, you need an SSL certificate. You can create a SSL certificate through AWS Certificate Manager.
+
+An SSL certificate for your FQDN is required to deploy MOSTLY AI in an EKS cluster.
+
+**Steps**
+
+1. From AWS Services, search and open **Certificate Manager**.
+    <Image 
+        src="/docs/docimages/install/aws-eks/09-ssl-cert-01-open-cert-manager.webp"
+        alt="AWS Services - Open EC2"
+        width={700}
+        height={700}
+    />
+2. Click **List certificates** from the sidebar.
+3. Click **Request**.
+    <Image
+        src="/docs/docimages/install/aws-eks/09-ssl-cert-02-cert-mgr-click-request.webp"
+        alt="AWS Certificate Manager - Click Request"
+        width={800}
+        height={300}
+    />
+4. Select **Request a public certificate** and click **Next**.
+    <Image
+        src="/docs/docimages/install/aws-eks/09-ssl-cert-03-public-cert-click-next.webp"
+        alt="AWS Certificate Manager - Request a public certificate"
+        width={800}
+        height={300}
+    />
+5. Configure and submit a certificate request.
+    1. For **Fully qualified domain name**, type your FQDN.
+    2. Select **DNS validation** under **Validation method**.
+    3. Click **Requst**.
+        <Image
+            src="/docs/docimages/install/aws-eks/09-ssl-cert-04-name-dns-valid-request.webp"
+            alt="AWS Certificate Manager - type FQDN select DNS validation and request"
+            width={800}
+            height={300}
+        />
+    **Step result**: A notification indicates that the certificate requires further validation.
+        <Image
+            src="/docs/docimages/install/aws-eks/09-ssl-cert-05-request-success-notification.webp"
+            alt="AWS Certificate Manager - type FQDN select DNS validation and request"
+            width={800}
+            height={300}
+        />
+6. Validate you are the owner of your domain.
+    <Callout>
+    AWS provides two validation methods: **DNS validation** and **Email validation**.
+    
+    For more information, see [Validating domain ownership](https://docs.aws.amazon.com/acm/latest/userguide/domain-ownership-validation.html) in the _AWS Certificate Manager (ACM) documentation_.
+
+    The steps below demonstrate the **DNS validation** method when your domain name provider is not AWS Route 53.
+    
+    If your domain name provider is AWS Route 53, see [DNS validation](https://docs.aws.amazon.com/acm/latest/userguide/dns-validation.html) in the _AWS Certificate Manager (ACM) documentation_.
+    </Callout>
+    1. Select **List certificates**.
+    2. Select the **Certificate ID** in a **Pending validation** status.
+        <Image
+            src="/docs/docimages/install/aws-eks/09-ssl-cert-06-open-pending-valildation-request.webp"
+            alt="AWS Certificate Manager - open the certificate request with pending validation"
+            width={800}
+            height={300}
+        />
+    3. Copy the CNAME name and value and add them as a new CNAME record in your DNS provider.
+        <Image
+            src="/docs/docimages/install/aws-eks/09-ssl-cert-07-copy-cname-name-value.webp"
+            alt="AWS Certificate Manager - copy CNAME name and value"
+            width={800}
+            height={300}
+        />
+    3. Create a new CNAME record for your domain name in your domain name provider web interface.
+        <Callout type="warning">
+        See your domain name provider documentation on how to add a new CNAME record for the DNS validation. 
+        </Callout>
+
+
+**Result**
+
+As explained the [DNS validation](https://docs.aws.amazon.com/acm/latest/userguide/dns-validation.html) page in the _AWS ACM Documentation_, the **DNS validation can take up to 30 minutes** after you add the CNAME record in your domain name provider web interface.
+
+After the DNS validation completes, the **Status** of your certificate changes to **Issued** in the certificates list.
+
+<Image
+    src="/docs/docimages/install/aws-eks/09-ssl-cert-08-cert-issued.webp"
+    alt="AWS Certificate Manager - copy CNAME name and value"
+    width={800}
+    height={300}
+/>
+
+## Deployment
+
+### Task 10: Download and configure deployment files
+
+The MOSTLY AI deployment files include the required configurations to deploy MOSTLY AI in a newly created EKS cluster.
+
+The contents of the deployment files are listed below.
+
+```bash
+templates/
+    ecr-helper.yaml
+    job.yaml
+Chart.yaml
+bootstrap.sh
+eks-cluster.yaml
+mostly-policy.json
+values.yaml
+```
+
+**Steps**
+
+1. Download the contents of the [MOSTLY AI AWS Marketplace Deployment files](/depl/mostly-ai-aws-eks-deployment.zip).
+    
+2. Edit `eks-cluster.yaml`, and define your AWS key pair name.
+    ```yaml filename="eks-cluster.yaml" {5}
+    ...
+    KeyPairName:
+        Type: String
+        Description: Name of an existing EC2 key pair (for SSH-a$
+        Default: mostly-ai-dep
+    ...
+    ```
+    <Image
+        src="/docs/docimages/install/aws-eks/10-download-files-01-key-pair-name.webp"
+        alt="Edit deployment YAML - key pair name"
+        width={800}
+        height={300}
+    />
+3. Edit `values.yaml` to add your domain name and certificate ARN.
+    1. For `domain`, define the domain name from which you want to reach the MOSTLY AI application.
+         ```yaml filename="values.yaml" {1}
+        domain: 'mostlyai-eks.com'
+        certificateArn: ''
+        albScheme: internet-facing
+        ```
+    2. For `certificateArn`, paste the certificate **ARN** from **AWS Certificate Manager**.
+         ```yaml filename="values.yaml" {2}
+        domain: 'mostlyai-eks.com'
+        certificateArn: 'arn:aws:acm:eu-central-1:74**********::certificate/951a92df-****-****-****-************'
+        albScheme: internet-facing
+        ```
+        <Image
+            src="/docs/docimages/install/aws-eks/10-download-files-02-copy-certificate-arn.webp"
+            alt="values.yaml - Paste certificate ARN"
+            width={800}
+            height={300}
+        />
+    3. Save the file.
+
+**What's next**
+
+You can now start the MOSTLY AI deployment script.
+
+### Task 11: Run deployment script
+
+The MOSTLY AI deployment script uses AWS CloudFormation to automate the creation of an EKS cluster and all required resources in your AWS account and then runs the deployment of the MOSTLY AI with a Helm chart that is part of the deployment files.
+
+**Steps**
+
+1. Change directory to the downloaded deployment files.
+2. Run the `bootstrap.sh` script and provide your AWS region as the first argument and the AWS user name from [Task 5](#task-5-create-a-user) as the second argument.
+    ```bash copy
+    ./bootstrap.sh eu-central-1 eksctl
+    ```
+    
+    The deployment script starts and reports progress as it creates the required resources in AWS CloudFormation in order to create your EKS cluster. The output from the script should be similar to the following:
+    
+    ```json
+    {
+        "StackId": "arn:aws:cloudformation:eu-central-1:74**********:stack/mostlyai-eks/720db0d0-****-****-****-************"
+    }
+    Stack status: CREATE_IN_PROGRESS. Waiting for stack creation to complete...
+    ```
+
+    The script creates the resources that are required for your EKS cluster. See the list of the created resources below.
+
+        * 6 x EC2 instances
+        * VPC
+        * Application Load Balancer (ALB)
+        * EFS mountpoint
+        * EBS provisioning
+        * subnets
+        * NAT gateways
+        * routes
+        * route tables
+        * security groups
+    
+    <Callout type="info">
+    It can take 20-30 min for CloudFormation to create all resources.
+    </Callout>
+    
+3. (Optional) To track the progress, open CloudFormation in AWS, select your stack and select the **Events** tab. 
+    <Image
+        src="/docs/docimages/install/aws-eks/11-depl-script-01-track-cloudformation-progress.webp"
+        alt="AWS Certificate Manager - copy CNAME name and value"
+        width={800}
+        height={300}
+    />
+
+**Result**
+
+When the script finishes, it outputs a long list of valuable information for your EKS cluster. Save the information in a safe location.
+
+```
+NAME: aws-load-balancer-controller
+LAST DEPLOYED: Fri Aug 25 21:01:28 2023
+NAMESPACE: kube-system
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+NOTES:
+AWS Load Balancer controller installed!
+node/ip-10-110-33-152.eu-central-1.compute.internal labeled
+node/ip-10-110-35-142.eu-central-1.compute.internal labeled
+node/ip-10-110-44-159.eu-central-1.compute.internal labeled
+node/ip-10-110-58-31.eu-central-1.compute.internal labeled
+node/ip-10-110-59-235.eu-central-1.compute.internal labeled
+node/ip-10-110-62-52.eu-central-1.compute.internal labeled
+secret/mostly-docker-cfg created
+Release "mostly-ai" does not exist. Installing it now.
+NAME: mostly-ai
+LAST DEPLOYED: Fri Aug 25 21:02:08 2023
+NAMESPACE: mostly-ai
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+#########
+Please use below AWS ALB address to point your domain to it with AWS Route 53 or any other provider.
+Please don't cancel or close this terminal tab as it will offer some important information at the end!
+NAME        CLASS   HOSTS              ADDRESS                                                             PORTS   AGE
+mostly-ui   alb     mostlyai-eks.com   k8s-mostlyai-d90957e22b-**********.eu-central-1.elb.amazonaws.com   80      21m
+#########
+```
+
+<Callout type="warning">
+If the deployment script fails, go to [Troubleshoot deployment issues](#troubleshoot-deployment-issues) to learn how to work around deployment issues.
+</Callout>
+
+**What's next**
+
+Use the information about your ALB to set your FQDN in [Task 12](#task-12-set-your-fqdn-to-point-at-your-alb).
+
+## Post-deployment
+
+### Task 12: Set your FQDN to point at your ALB
+
+If the deployment script finishes successfully in [Task 11](#task-11-run-deployment-script), you now need to configure your FQDN to point to the ALB that is created by the CloudFormation script at the address that is output by the script.
+
+**Steps**
+
+1. From the end of the previous task, copy the ALB address that looks similar to the following:
+    ```
+    k8s-mostlyai-d90957e22b-**********.eu-central-1.elb.amazonaws.com
+    ```
+2. Go to **Route 53** > **Hosted zones** and select the hosted zone for your FQDN.
+3. Click **Create record**.
+    <Image
+        src="/docs/docimages/install/aws-eks/12-alb-domain-01-click-create-record.webp"
+        alt="AWS Route 53 - click Create record"
+        width={800}
+        height={300}
+    />
+4. Configure the record.
+    1. For **Record type**, select **A - Route traffic to an IPv4 address and some AWS resources**.
+    2. For **Alias**, enable the checkbox.
+    3. Under **Route traffic to**, select the following options:
+        * **Alias to an Application and Classic Load Balancer**
+        * Select your region. In this case, **Europe (Frankfurt)**.
+        * From the search box, select the name of your ALB.
+            <Image
+                src="/docs/docimages/install/aws-eks/12-alb-domain-02-configure-a-record.webp"
+                alt="AWS Route 53 - configure A record"
+                width={800}
+                height={300}
+            />
+5. Click **Create records**.
+
+**Result**
+
+Your FQDN now points to the ALB for the MOSTLY AI app.
+
+**What's next**
+
+You can now direct your browser to your FQDN and open your deployed MOSTLY AI app for the first time.
+
+### Task 13: Log in to your MOSTLY AI deployment
+
+Log in for the first time to your MOSTLY AI deployment to set a new password for the `superadmin` user.
+
+**Prerequisites**
+
+Contact MOSTLY AI to obtain the supeadmin credentials as you need them to log in for the first time.
+
+**Steps**
+
+1. Open your FQDN in your browser.<br />
+    **Step result**: You **Sign in** page for your MOSTLY AI deployment opens.
+    <Image
+        src="/docs/docimages/install/minikube/02-minikube-dashboard-01-post-deployment-red.webp"
+        alt="MOSTLY AI Deployment - Log in page"
+        width={800}
+        height={300}
+    />
+2. Enter the superadmin credentials and click **Sign in**.
+3. Provide a new password and click **Change password**.
+
+**Result**
+
+Your `superadmin` password is now changed and you can use it to log in again to your MOSTLY AI deployment.

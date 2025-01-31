@@ -1,0 +1,91 @@
+---
+title: "Configure AI models for time-series and events data"
+description: "MOSTLY AI supports specific AI models for training on time-series. You can configure how these models train on your time-series data."
+---
+
+import { Tabs } from 'nextra/components'
+import Image from 'next/image'
+
+# Configure AI models for time-series and events data
+
+MOSTLY AI supports specific AI models for training on time-series. You can configure how these models train on your time-series data.
+
+## Use Datetime and Datetime: relative column types
+
+For any datetime columns in your data (that are in a supported format), MOSTLY AI assigns the [**Datetime** column type](/generators/configure/set-encoding-types#datetime). You can also use the [**Datetime: relative** column type](/generators/configure/set-encoding-types#datetime-relative).
+
+If you prioritize having valid and statistically representative dates and times, use **Datetime**. If you want to generate accurate intervals between each event where accurate dates are not a priority, use **Datetime: relative**.
+
+## Maintain correlations and referential integrity with related tables
+
+Tables containing time-series and events data usually reference **subject tables** that include PII information about people, organizations, and other entities. In MOSTLY AI, time-series and events tables are recognized as **linked tables**. To ensure that your generator learns the correlations between events and subjects and maintains the referential integrity between such tables, you should create a **context relationship** between subject and linked tables when you configure your generator.
+
+<Image 
+   src="/docs/docimages/generators/configure-time-series/time-series-01-set-context-relationships.webp" 
+   alt="MOSTLY AI - Generators - Time-series - Set context relationships" 
+   width={800} 
+   height={150}
+/>
+
+For more information, see [Context and non-context relationships](/generators/configure/set-table-relationships/multi-table#context-and-non-context-relationships) and [Context foreign key](/generators/configure/set-table-relationships#context-foreign-key).
+
+## Set max sequence window
+
+**Max sequence window** applies only to linked tables (with time-series and events data) and Text models. A linked table has a [context foreign key](/generators/configure/set-table-relationships#context-foreign-key) to another table.
+
+For linked tables, the term **_sequence_** means the events that belong to a single subject. The term **_sequence length_** indicates the number of events in the sequence. For example, if subject A has 30 related events, then the sequence length is 30.
+
+MOSTLY AI has a specific AI model for time-series and events data that captures the sequences and event patterns in linked tables. While performing AI model training on a complete sequence can lead to high accuracy, this can also lead to out-of-memory failures if certain sequences are too long. For better training efficiency, you can adjust the **Max sequence window** training parameter. This sets the maximum subsequence of events the model trains on for the duration of a training epoch. During each epoch, the window shifts to consider a different subsequence with the goal to train on the entire sequence by the end of model training.
+
+By default, **Max sequence window** is set to 100.
+
+<Image
+    src="/docs/docimages/generators/configure-time-series/max-sequence-window.svg"
+    alt="MOSTLY AI - Generator configuration - Max sequence window"
+    width={900}
+    height={300}
+/>
+
+<Tabs items={['UI', 'Python SDK']}>
+<Tabs.Tab>
+If you use the web application, you can configure the maximum sequence window from the **Model configuration** page of a generator.
+
+**Steps**
+
+1. With an untrained generator open, go to the **Model configuration** page by clicking **Configure models**.
+2. Click a linked table to expand its model settings.
+3. Adjust the **Max sequence window**.
+    <Image
+        src="/docs/docimages/generators/configure-time-series/time-series-02-adjust-max-sequence-window.webp"
+        alt="MOSTLY AI - Generator configuration - Adjust Max sequence window"
+        width={900}
+        height={300}
+    />
+</Tabs.Tab>
+<Tabs.Tab>
+For the Python SDK, set the `max_sequence_window` key in the `tabular_model_configuration` dictionary.
+
+```python filename="python" copy {13}
+config = {
+   "name": "baseball",
+   "tables": [
+      {
+         "name": "players",
+         "data": "https://github.com/mostly-ai/public-demo-data/raw/dev/baseball/players.csv.gz",
+         "primary_key": "id",
+      },
+      {
+         "name": "batting",
+         "data": "https://github.com/mostly-ai/public-demo-data/raw/dev/baseball/batting.csv.gz",
+         "tabular_model_configuration": {
+            "max_sequence_window": 20,
+         },
+         "foreign_keys": [
+            { "column": "players_id", "referenced_table": "players", "is_context": True }
+         ],
+      }
+   ]
+}
+```
+</Tabs.Tab>
+</Tabs>

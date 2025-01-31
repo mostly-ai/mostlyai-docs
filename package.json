@@ -1,0 +1,23 @@
+{
+    "dependencies": {
+        "@docsearch/react": "^3.6.0",
+        "next": "^15.0.3",
+        "next-sitemap": "^4.2.2",
+        "nextra": "^3.3.1",
+        "nextra-theme-docs": "^3.3.1",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "react-gtm-module": "^2.0.11",
+        "tar": ">=6.2.1",
+        "path-to-regexp": ">=6.3.0",
+        "@types/node": "22.10.7"
+    },
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "postbuild": "next-sitemap",
+        "start": "next start",
+        "lint": "next lint",
+        "export": "NEXT_PUBLIC_ALGOLIA_SEARCH=false UNOPTIMIZED_IMAGES=true next build && NEXT_PUBLIC_ALGOLIA_SEARCH=false UNOPTIMIZED_IMAGES=true next export"
+    }
+}

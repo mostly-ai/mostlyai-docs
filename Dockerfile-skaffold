@@ -1,0 +1,24 @@
+FROM harbor.env.mostlylab.com/ci/gh-sub-runner:node20 as build
+
+WORKDIR /tmp
+COPY python python
+COPY utils utils
+COPY components components
+COPY styles styles
+COPY pages pages
+COPY *.json *.js *.jsx ./
+RUN npm ci
+RUN npm run export
+
+FROM harbor.env.mostlylab.com/ubi/ubi9-nginx:120 as final
+
+ARG GIT_COMMIT_SHA=unknown
+LABEL GIT_COMMIT_SHA=$GIT_COMMIT_SHA
+ENV GIT_COMMIT_SHA=$GIT_COMMIT_SHA
+
+ADD /docker/server.conf.template /etc/nginx/templates/server.conf.template
+
+COPY --from=build /tmp/out ./html
+COPY /docker/error  ./error
+
+CMD mostly_start_nginx.sh

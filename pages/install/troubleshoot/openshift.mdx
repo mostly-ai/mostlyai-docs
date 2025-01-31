@@ -1,0 +1,163 @@
+---
+title: 'Troubleshoot MOSTLY AI deployments to OpenShift'
+description: 'Learn how you can troubleshoot various issues when you deploy MOSTLY AI to an OpenShift cluster.'
+---
+
+import Image from 'next/image'
+
+# Troubleshoot OpenShift deployment issues
+
+Learn how you can troubleshoot various issues when you deploy MOSTLY AI to an OpenShift cluster. Each of the listed issues includes a description of the problem and solution that shows how to overcome or workaround the issue.
+
+## Cannot list or patch resource
+
+**Problem**
+
+During the [deployment of MOSTLY AI to an OpenShift cluster](../deploy/openshift), you might see one of the errors listed below.
+
+```
+Error from server (Forbidden): nodes is forbidden: User "hello@mostly.ai"
+cannot list resource "nodes" in API group "" at the cluster scope
+```
+
+```
+Error from server (Forbidden): namespaces "mostly-ai" is forbidden: 
+User "hello@mostly.ai" cannot patch resource "namespaces" in
+API group "" in the namespace "mostly-ai"
+```
+
+The errors appear, when you attempt to run the commands listed below from the [OpenShift deployment guide](../deploy/openshift).
+
+```bash copy
+oc get nodes
+```
+
+```bash copy
+oc annotate --overwrite namespace mostly-ai openshift.io/sa.scc.uid-range="1000700000/10000"
+```
+
+**Solution**
+
+Request elevated permissions for your user from your OpenShift administrator.
+
+## Violate PodSecurity
+
+The installation error `would violate PodSecurity allowPrivilegeEscalation` might indicate misconfigurations in the `values.yaml` file.
+
+**Problem**
+
+When you run the `helm` command to install MOSTLY AI on an OpenShift cluster, you might see the installation error similar to the one below.
+
+```bash
+W0714 14:04:39.656905   47432 warnings.go:70] would violate PodSecurity "restricted:v1.24": allowPrivilegeEscalation != false (container "mostly-*" must set securityContext.allowPrivilegeEscalation=false), unrestricted capabilities (container "mostly-*" must set securityContext.capabilities.drop=["ALL"]), runAsNonRoot != true (pod or container "mostly-*" must set securityContext.runAsNonRoot=true), seccompProfile (pod or container "mostly-*" must set securityContext.seccompProfile.type to "RuntimeDefault" or "Localhost")
+W0714 14:04:39.711306   47432 warnings.go:70] would violate PodSecurity "restricted:v1.24": allowPrivilegeEscalation != false (container "mostly-psql" must set securityContext.allowPrivilegeEscalation=false), unrestricted capabilities (container "mostly-psql" must set securityContext.capabilities.drop=["ALL"])
+```
+
+**Solution**
+
+* Verify that you have the correct storage class defined for the `CORDINATOR: pvc: storageClassName` key. To check your OpenShift storageClassNames, open your OpenShift console, and navigate to **Storage** > **StorageClasses**. The name defined for `CORDINATOR: pvc: storageClassName` must match one of the entires.
+* Verify that you the `platform` key is set to `ocp` and not `k8s`.
+    ```yaml filename="values.yaml"
+    platform: k8s # incorrect
+    platform: ocp # correct
+    ```
+* Alternatively, keep in mind that this warning reflects the security constraints in your cluster. To better adapt to the, set the `platform` key to `other`. Like so, the suggested security contexts of the helm charts will be ignored and the deployment will follow the ones from your cluster.
+    ```yaml filename="values.yaml"
+    platform: other # alternative
+    ```
+
+## Failed to create resource
+
+The error `UPGRADE FAILED: failed to create resource: Secret in version "v1" cannot be handled as a Secret` might indicate an incorrect or missing secret key in the `docker_secret` key in the `values.yaml` file.
+
+**Problem**
+
+When you run the `helm` command to deploy MOSTLY AI in an OpenShift cluster, you might see the deployment error similar to the one below.
+
+```bash
+UPGRADE FAILED: failed to create resource: Secret in version "v1" cannot be handled as a Secret: illegal base64 data at input byte 6
+```
+
+Make sure that you have set the Docker pull image secret in `docker_secret`.
+
+**Solution**
+
+* Double-check that you have the correct secret key in `docker_secret`.
+* Make sure that the secret key value is not wrapped in quotation marks.
+
+If the suggestions above do not help to resolve the issue, contact your Customer Experience Engineer.
+
+## Cannot patch "mostly-data" with PersistentVolumeClaim
+
+The error `UPGRADE FAILED: cannot patch "mostly-data" with kind PersistentVolumeClaim` might indicate intermittent installation issues.
+
+**Problem**
+
+When you run the `helm` command to deploy MOSTLY AI in an OpenShift cluster, you might see an installation error similar to the one below.
+
+```bash
+Error: UPGRADE FAILED: cannot patch "mostly-data" with kind PersistentVolumeClaim: PersistentVolumeClaim "mostly-data" is invalid: spec: Forbidden: spec is immutable after creation except resources.requests for bound claims
+  core.PersistentVolumeClaimSpec{
+  	... // 2 identical fields
+  	Resources:        {Requests: {s"storage": {i: {...}, s: "50Gi", Format: "BinarySI"}}},
+  	VolumeName:       "",
+- 	StorageClassName: &"efs-sc",
++ 	StorageClassName: &"efs",
+  	VolumeMode:       &"Filesystem",
+  	DataSource:       nil,
+  	DataSourceRef:    nil,
+  }
+```
+
+**Solution**
+
+You can work around the issue above by removing the `mostly-ai` project from your OpenShift cluster, recreating it, and running the installation again.
+
+1. Delete the the `mostly-ai` project from your OpenShift cluster.
+    ```bash copy
+    oc delete namespace mostly-ai
+    ```
+2. Create the `mostly-ai` project again.
+    ```bash copy
+    oc new-project mostly-ai
+    ```
+    1. Enter the following annotations for the pods of MOSTLY AI to be able to be scheduled in this namespace:
+    ```bash copy
+    oc annotate --overwrite namespace mostly-ai openshift.io/sa.scc.supplemental-groups="1000700000/10000"
+    ```
+    ```bash copy
+    oc annotate --overwrite namespace mostly-ai openshift.io/sa.scc.uid-range="1000700000/10000"
+    ```
+3. Run the deployment again with the `helm` command.
+    ```bash copy
+    helm upgrade --install mostly-ai ./mostly-combined --values ocp-values.yaml --namespace mostly-ai --create-namespace
+    ```
+
+## Keycloak connection error
+
+**Problem**
+
+After you deploy to an OpenShift cluster, you can see in the console error messages related to Keycloak connection errors. Such as the ones listed below.
+
+```
+Keycloak connection error #1 - retrying (error: jakarta.ws.rs.ForbiddenException: HTTP 403 Forbidden)
+Keycloak connection error #2 - retrying (error: jakarta.ws.rs.ForbiddenException: HTTP 403 Forbidden)
+Keycloak connection error #3 - retrying (error: jakarta.ws.rs.ForbiddenException: HTTP 403 Forbidden)
+```
+
+**Solution**
+
+1. Log in to Keycloak at `https://{FULLY_QUALIFIED_DOMAIN_NAME}/auth/`.
+2. Log in with the admin credentials as documented in [Manage groups](/administration/users-groups#manage-groups), step 2.
+3. Select master realm.
+4. Select **Realm settings**.
+5. For **Require SSL**, select **None**.
+    <Image
+        src="/docs/docimages/install/troubleshoot/openshift/ocp-troubleshoot-keycloak-turn-ssl-off.webp"
+        alt="MOSTLY AI Deployment troubleshooting - Resolve Keycloak connection error"
+        width={800}
+        height={300}
+    />
+6. Click **Save** for the changes to take effect.
+
+The pod will initialize, create the `mostly-generate` realm and the application will be then reachable.
