@@ -16,6 +16,7 @@ Here is how you can quickly train a new generator on original tabular data. Your
 
 <Steps>
 ## Step 1: Train a generator
+
 <Tabs items={['UI', 'Python SDK']}>
 <Tabs.Tab>
 1. In MOSTLY AI, select the **Generators** page.
@@ -88,33 +89,6 @@ Here is how you can quickly train a new generator on original tabular data. Your
     ```
     </Tabs.Tab>
     </Tabs>
-</Tabs.Tab>
-<Tabs.Tab>
-1. Install the MOSTLY AI Synthetic Data SDK.<br />
-    ```python copy filename="bash"
-    pip install -U mostlyai
-    ```
-2. Get an [API key](/api-key).
-3. Create your first generator using the [US Census Income](/datasets#us-census-income-dataset) dataset, start its training, and wait for it finish.
-    <CustomCallout>
-    Generator training uses compute from the remote MOSTLY AI Platform.
-    </CustomCallout>
-    ```python copy filename="python" {7-10}
-    # 1. Load original data into a pd.DataFrame
-    import pandas as pd
-    df = pd.read_csv("https://mostly.ai/docs/datasets/us-census-income.csv.gz")
-
-    # 2. Connect the MOSTLY AI SDK to a remote Platform
-    from mostlyai.sdk import MostlyAI
-    mostly_remote = MostlyAI(
-        base_url="https://app.mostly.ai",
-        api_key="INSERT_API_KEY"
-    )
-    
-    # 3. Create a generator and launch its training
-    g = mostly_remote.train(data=df, start=True, wait=True)
-    ```
-Once training has finished, you, your peers, colleagues, or any third party can generate synthetic data.
 </Tabs.Tab>
 </Tabs>
 
