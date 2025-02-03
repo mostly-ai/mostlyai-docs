@@ -1,0 +1,58 @@
+---
+title: 'Public and private assets'
+description: 'In MOSTLY AI, all assets (generators, synthetic datasets, connectors, assistant threads) are private by default. You can make generators and synthetic datasets public to share them with the world or keep them private for internal use.'
+---
+
+import { Tabs } from 'nextra/components'
+import { CustomCallout } from '@components/custom-callout'
+import Image from 'next/image'
+import { PrivateAssetIcon, PublicAssetIcon } from '@components/icons'
+
+# Public and private assets
+
+In MOSTLY AI, all assets (generators, synthetic datasets, connectors, assistant threads) are private by default. You can make generators and synthetic datasets public to share them with the world or keep them private for internal use.
+
+<CustomCallout>
+[Connectors](/connectors) and [assistant threads](/assistant) are always private and cannot be made public. However, you can [export an assistant thread as a Jupyter Notebook](/assistant/manage-threads#export-as-a-jupyter-notebook).
+</CustomCallout>
+
+| Asset | Default visibility | Visibility options | Organizations visibility |
+| --- | --- | --- | --- |
+| Generators | <PrivateAssetIcon/>Private | <PublicAssetIcon/>Public<br /><PrivateAssetIcon/>Private | <PublicAssetIcon/>Public<br /><PrivateAssetIcon/>Private (within organization) |
+| Synthetic datasets | <PrivateAssetIcon/>Private | <PublicAssetIcon/>Public<br /><PrivateAssetIcon/>Private | <PublicAssetIcon/>Public<br /><PrivateAssetIcon/>Private (within organization) |
+| Connectors | <PrivateAssetIcon/>Private | <PrivateAssetIcon/>Private | <PrivateAssetIcon/>Private (within organization) |
+| Assistant threads | <PrivateAssetIcon/>Private | <PrivateAssetIcon/>Private | Cannot be transferred to an organization |
+
+<Tabs items={['UI', 'Python SDK']}>
+<Tabs.Tab>
+
+**Steps**
+
+1. With a generator or synthetic dataset open, click the kebab menu and select **Manage visibility**.
+    <Image 
+        src="/docs/docimages/organizations/visibility-01-kebab-select-manage-visibility.webp"
+        alt="Manage visibility - 01 - Kebab menu"
+        width={700}
+        height={300}
+    />
+2. Select whether the asset should be made **Public** or **Private**.
+    <Image
+        src="/docs/docimages/organizations/visibility-02-select-public-or-private.webp"
+        alt="Manage visibility - 02 - Select visibility"
+        width={700}
+        height={300}
+    />
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+```python copy filename="python"
+mostly.organizations.create(
+    display_name="MOSTLY AI",
+    real_name="mostly-ai",
+    logo="path/to/logo.png" # optional
+)
+```
+
+</Tabs.Tab>
+</Tabs>
