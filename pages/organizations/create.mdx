@@ -1,0 +1,71 @@
+---
+title: 'Create an organization'
+description: ''
+---
+
+# Create an organization
+
+MOSTLY AI provides an easy flow to create a new organization.
+
+<CustomCallout>
+Each organization has a public profile.
+</CustomCallout>
+
+<Tabs items={["UI", "Python SDK"]}>
+<Tabs.Tab>
+
+**Steps**
+
+1. From the sidebar, click **+ New organization**.
+    <Image 
+        src="/docs/docimages/organizations/create-01-sidebar-new-organization.webp"
+        alt="Create a new organization"
+        width={250}
+        height={300}
+    />
+2. Set the organization display name.
+    <CustomCallout>
+    The **display name** appears on the organization profile page.
+
+    The **organization name** is auto-generated from the display name. The rules below apply:
+    
+    * _lower-case letters only_
+    * _hyphens replace white spaces_
+    * _special characters are ommitted_
+    * _leading, trailing, double-dashes are not allowed_
+    </CustomCallout>
+3. (Optional) If needed, tweak the organization name. Bear in mind the requirements listed above.
+3. (Optional) Upload the organization logo.
+    MOSTLY AI assigns one of 6 random logos to the organization if you do not upload one. You can always update that later.
+    <Image 
+        src="/docs/docimages/organizations/create-02-set-names-logo.webp"
+        alt="Create a new organization - 02 - Set display name, organization name, and logo"
+        width={400}
+        height={300}
+    />
+4. Click **+ Create organization**.
+
+**Result**
+
+The organization is created and you are redirected to the organization profile page.
+
+<Image 
+    src="/docs/docimages/organizations/create-03-result.webp"
+    alt="Create a new organization - 03 - Organization created"
+    width={700}
+    height={300}
+/>
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+```python copy filename="python"
+mostly.organizations.create(
+    display_name="MOSTLY AI",
+    real_name="mostly-ai",
+    logo="path/to/logo.png" # optional
+)
+```
+
+</Tabs.Tab>
+</Tabs>
