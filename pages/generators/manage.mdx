@@ -6,6 +6,7 @@ description: 'Train generators with MOSTLY AI and you can share them with peers 
 import { Callout } from 'nextra/components'
 import { Tabs } from 'nextra/components'
 import Image from 'next/image'
+import { Canceled, Generating, InProgress, OnHold, Ready, Failed, New, Queued, Continue } from '@components/status-pills'
 
 # Manage generators
 
@@ -17,13 +18,13 @@ In the table below, you can find a list of all possible statuses a generator can
 
 | Status               | Description                                                                                         | Next actions                                                                                                         |
 |:---------------------|:----------------------------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------|
-| **New**              | A generator object exists with a default or modified configuration. Training not started.           | • Start training<br />• Clone configuration<br />• Delete                                                            |
-| **Queued**           | Generator training is queued until cluster resources become available.                              | • Share<br />• Clone configuration<br />• Cancel training<br />• Delete                                              |
-| **In&nbsp;progress** | Generator training is in progress.                                                                  | • Share<br/ >•&nbsp;Clone&nbsp;configuration<br />•&nbsp;Cancel&nbsp;training<br />• Delete                          |
-| **Continue**         | A trained generator was cloned to improve its quality with further training. Training not started.  | • Start&nbsp;training<br />• Share<br />• Clone configuration<br />• Delete                                          |
-| **Ready**            | The generator has completed training successfully and can now generate synthetic datasets.          | • Generate data<br />• Share<br />• Export to file<br />• Clone configuration<br />• Continue training<br />• Delete |
-| **Failed**           | The generator training started and then failed.                                                     | • Share<br />• Clone configuration<br />• Delete                                                                     |
-| **Canceled**         | The generator training was canceled while still in progress.                                        | • Share<br />• Clone configuration<br />• Delete                                                                     |
+| <New />              | A generator object exists with a default or modified configuration. Training not started.           | • Start training<br />• Clone configuration<br />• Delete                                                            |
+| <Queued />           | Generator training is queued until cluster resources become available.                              | • Share<br />• Clone configuration<br />• Cancel training<br />• Delete                                              |
+| <InProgress />       | Generator training is in progress.                                                                  | • Share<br/ >•&nbsp;Clone&nbsp;configuration<br />•&nbsp;Cancel&nbsp;training<br />• Delete                          |
+| <Continue />         | A trained generator was cloned to improve its quality with further training. Training not started.  | • Start&nbsp;training<br />• Share<br />• Clone configuration<br />• Delete                                          |
+| <Ready />            | The generator has completed training successfully and can now generate synthetic datasets.          | • Generate data<br />• Share<br />• Export to file<br />• Clone configuration<br />• Continue training<br />• Delete |
+| <Failed />           | The generator training started and then failed.                                                     | • Share<br />• Clone configuration<br />• Delete                                                                     |
+| <Canceled />         | The generator training was canceled while still in progress.                                        | • Share<br />• Clone configuration<br />• Delete                                                                     |
 
 ## Clone a generator
 
