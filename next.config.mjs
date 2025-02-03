@@ -10,5 +10,5 @@ export default withNextra({
     images: {
         unoptimized: process.env.UNOPTIMIZED_IMAGES === "true",
     },
-    output: 'export'
+    output: process.env.NEXT_OUTPUT
 });

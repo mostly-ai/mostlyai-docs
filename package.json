@@ -18,6 +18,6 @@
         "postbuild": "next-sitemap",
         "start": "next start",
         "lint": "next lint",
-        "export": "NEXT_PUBLIC_ALGOLIA_SEARCH=false UNOPTIMIZED_IMAGES=true next build"
+        "export": "NEXT_PUBLIC_ALGOLIA_SEARCH=false UNOPTIMIZED_IMAGES=true NEXT_OUTPUT=export next build"
     }
 }
