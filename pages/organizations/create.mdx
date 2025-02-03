@@ -9,10 +9,12 @@ import { CustomCallout } from '@components/custom-callout';
 
 ## Create an organization
 
-Create an organization to create your organization's profile and use it as a publication vehicle for your synthetic data assets.
+Create an organization for your company, team, or project to establish a portfolio of synthetic data assets.
+
+Each organization has a profile page. On the profile page, users logged into the platform (that are not organization members) can also find all of the organization's assets that have been made public.
 
 <CustomCallout>
-Each organization has a public profile.
+Each organization's profile is public.
 </CustomCallout>
 
 <Tabs items={["UI", "Python SDK"]}>
@@ -67,19 +69,11 @@ mostly.organizations.create(
 
 Organizations have two names: the **display name** and the **organization name**.
 
-* The **display name** appears on the organization profile page and in the organizations list on the sidebar.<br /><br />
-    **Naming rules**:
-    * _any characters are allowed_
-    * _64 characters max length_
-* The **organization name** is automatically set while you are typing the **display name** using the naming rules below.<br /><br />
-    **Naming rules**:
-    * _all letters are converted to lower-case_
-    * _spaces are replaced with hyphens_
-    * _special characters are omitted_
-    * _leading, trailing, double-dashes are not allowed_
-    <CustomCallout>
-    You can edit the **organization name** following the naming rules.
-    </CustomCallout>
+<div className="empty_header_table"></div>
+| Name type | Example | Naming rules |
+| --- | --- | --- |
+| **Display name**<br /><br />Appears on the organization profile and in the organization list in the sidebar. | MOSTLY&nbsp;AI | • any characters<br />• 64 characters max length |
+| **Organization name**<br /><br />• The organization name is a lower-case, hyphen-separated version of the **display name** that is set while you type the display name.<br /><br />• You can also edit it based on the naming rules. | `mostly-ai` | • all letters are converted to lower-case<br />• spaces are replaced with hyphens<br />• special characters are omitted<br />• leading, trailing, and double-dashes are not allowed |
 
 <Image 
     src="/docs/docimages/organizations/organizations-names-explained.webp"
