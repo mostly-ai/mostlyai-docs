@@ -4,8 +4,9 @@ description: 'In MOSTLY AI, all assets (generators, synthetic datasets, connecto
 ---
 
 import { Tabs } from 'nextra/components'
-import { CustomCallout } from '@components/custom-callout'
+import { Callout } from 'nextra/components'
 import Image from 'next/image'
+import { CustomCallout } from '@components/custom-callout'
 import { PrivateAssetIcon, PublicAssetIcon } from '@components/icons'
 
 # Public and private assets
@@ -22,6 +23,10 @@ In MOSTLY AI, all assets (generators, synthetic datasets, connectors, assistant 
 | Synthetic datasets | <PrivateAssetIcon/>Private | <PublicAssetIcon/>Public<br /><PrivateAssetIcon/>Private | <PublicAssetIcon/>Public<br /><PrivateAssetIcon/>Private (within organization) |
 | Connectors | <PrivateAssetIcon/>Private | <PrivateAssetIcon/>Private | <PrivateAssetIcon/>Private (within organization) |
 | Assistant threads | <PrivateAssetIcon/>Private | <PrivateAssetIcon/>Private<br /><br />Can be [exported and shared as a Jupyter Notebook](/manage-threads#export-as-a-jupyter-notebook) | Cannot be transferred to an organization |
+
+<Callout>
+If you move a generator or synthetic dataset that you have made public to an organization, the asset remains public from within the organization.
+</Callout>
 
 <Tabs items={['UI', 'Python SDK']}>
 <Tabs.Tab>
