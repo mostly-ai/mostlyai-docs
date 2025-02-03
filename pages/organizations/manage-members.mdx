@@ -3,6 +3,7 @@ title: Manage members
 description: ''
 ---
 
+import { Callout } from 'nextra/components'
 import Image from 'next/image'
 
 # Manage organization members
@@ -26,8 +27,13 @@ import Image from 'next/image'
         height={300}
     />
 3. Share the invite link with the person you want to invite.
+    <Callout>
+    The invite link is valid for 72 hours. Multiple people can use the same link to join the organization.
+    </Callout>
 
-When the members accepts, they are then listed as part of the members.
+**What's next**
+
+When members accept the invitation, they are then listed as part of the organization members.
 
 <Image 
     src="/docs/docimages/organizations/accept-01-organization-members.webp"
@@ -68,7 +74,7 @@ You are now part of the organization members.
     />
 2. Under **Members**, click **Remove** for the team member.
     <Image 
-        src="/docs/docimages/organizations/remove-02-under-members-click-remove.webp"
+        src="/docs/docimages/organizations/remove-member-02-click-remove.webp"
         alt="Remove a member from an organization - 02 - Click Remove"
         width={700}
         height={300}
