@@ -6,6 +6,7 @@ description: 'Track the status of each synthetic datasets with MOSTLY AI. You ca
 import { Callout } from 'nextra/components'
 import { Tabs } from 'nextra/components'
 import Image from 'next/image'
+import { Canceled, Failed, New, Ready, InProgress } from '@components/status-pills'
 
 # Manage synthetic datasets
 
@@ -17,11 +18,11 @@ In the table below, you can find a list of all possible statuses a synthetic dat
 
 | Status               | Description                                                                                                 | Next actions                                |
 |:---------------------|:------------------------------------------------------------------------------------------------------------|:--------------------------------------------|
-| **New**              | A synthetic dataset object exists with a default or modified configuration. Generation has not yet started. | • Start generation<br />• Delete            |
-| **In&nbsp;progress** | Synthetic data generation is in progress.                                                                   | •&nbsp;Cancel&nbsp;generation<br />• Delete |
-| **Ready**            | The synthetic dataset has been generated successfully.                                                      | • Generate<br />• Delete       |
-| **Failed**           | The synthetic dataset generation started and then failed.                                                   | • Delete                                    |
-| **Canceled**         | The synthetic dataset generation was canceled while still in progress.                                      | • Delete                                    |
+| <New />              | A synthetic dataset object exists with a default or modified configuration. Generation has not yet started. | • Start generation<br />• Delete             |
+| <InProgress />       | Synthetic data generation is in progress.                                                                   | •&nbsp;Cancel&nbsp;generation<br />• Delete |
+| <Ready />            | The synthetic dataset has been generated successfully.                                                      | • Generate<br />• Delete       |
+| <Failed />           | The synthetic dataset generation started and then failed.                                                   | • Delete                                    |
+| <Canceled />         | The synthetic dataset generation was canceled while still in progress.                                      | • Delete                                    |
 
 ## Clone a synthetic dataset
 
