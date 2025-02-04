@@ -1,21 +1,17 @@
 ---
 title: 'Create an organization'
-description: ''
+description: 'Create an organization for your company, team, or project to develop and collaborate on a portfolio of synthetic data assets. You can also use organizations to manage access to assets and share them publicly or within your team and organization.'
 ---
 
 import { Tabs } from 'nextra/components';
 import Image from 'next/image';
 import { CustomCallout } from '@components/custom-callout';
 
-## Create an organization
+# Create an organization
 
-Create an organization for your company, team, or project to establish a portfolio of synthetic data assets.
+Create an organization for your company, team, or project to develop and collaborate on a portfolio of synthetic data assets. You can also use organizations to manage access to assets and share them publicly or within your team and organization.
 
-Each organization has a profile page. On the profile page, users logged into the platform (that are not organization members) can also find all of the organization's assets that have been made public.
-
-<CustomCallout>
-Each organization's profile is public.
-</CustomCallout>
+On the profile page of an organization, users logged into the platform (that are not organization members) can find all of the organization's [public assets](/public-private-assets).
 
 <Tabs items={["UI", "Python SDK"]}>
 <Tabs.Tab>
@@ -29,9 +25,14 @@ Each organization's profile is public.
         width={250}
         height={300}
     />
-2. Set the organization display name. If needed, tweak the organization name. For details, see [_About organization names_](#about-organization-names).
+2. Set the **Organization display name**.
+    <CustomCallout>
+    As you type the **Organization display name**, the **Organization name** is also updated, with lower-case characters and spaces replaced with hyphens. If needed, you can tweak the organization name.
+    
+    Naming rules apply as to what characters you can use in the **display name** and in the **organization name**. For details, see [_About organization names_](#about-organization-names).
+    </CustomCallout>
 3. (Optional) Upload the organization logo.
-    MOSTLY AI assigns one of 6 random logos to the organization if you do not upload one. You can always update that later.
+    If you do not upload a logo, MOSTLY AI will assign one of six random logos to the organization. You can always update it later.
     <Image 
         src="/docs/docimages/organizations/create-02-set-names-logo.webp"
         alt="Create a new organization - 02 - Set display name, organization name, and logo"
@@ -51,6 +52,10 @@ The organization is created and you are redirected to the organization profile p
     height={300}
 />
 
+**What's next**
+
+You can now edit the organization settings to create a stellar profile page. Learn more in [_Edit organization settings_](/organizations/edit-settings).
+
 </Tabs.Tab>
 <Tabs.Tab>
 
@@ -67,13 +72,13 @@ mostly.organizations.create(
 
 ## About organization names
 
-Organizations have two names: the **display name** and the **organization name**.
+The **Organization display name** and the **Organization name** serve a different purpose and have different naming rules. See the table below.
 
-<div className="empty_header_table"></div>
+<div className="left_align_right_aligned_md_table_column"></div>
 | Name type | Example | Naming rules |
 | --- | --- | --- |
-| **Display name**<br /><br />Appears on the organization profile and in the organization list in the sidebar. | MOSTLY&nbsp;AI | • any characters<br />• 64 characters max length |
-| **Organization name**<br /><br />• The organization name is a lower-case, hyphen-separated version of the **display name** that is set while you type the display name.<br /><br />• You can also edit it based on the naming rules. | `mostly-ai` | • all letters are converted to lower-case<br />• spaces are replaced with hyphens<br />• special characters are omitted<br />• leading, trailing, and double-dashes are not allowed |
+| **Organization display name**<br /><br />Appears on the organization profile and in the organization list in the sidebar. | MOSTLY&nbsp;AI | • any characters<br />• 64 characters max length |
+| **Organization name**<br /><br />Prefixes the name of each asset in the organization.<br /><br />• It is a lower-case, hyphen-separated version of the **display name** that is updated while you type the display name.<br /><br />• You can also edit it based on the naming rules. | <span style={{ display: "inline-block", fontFamily: "monospace", backgroundColor: "#E9E9E9", whiteSpace: "nowrap", padding: "2px 4px", borderRadius: "6px" }}>mostly-ai</span> | • only lower-case characters allowed<br />• spaces and special characters are not allowed<br />• leading, trailing, and double-dashes are not allowed |
 
 <Image 
     src="/docs/docimages/organizations/organizations-names-explained.webp"
