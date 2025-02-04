@@ -12,7 +12,7 @@ import { CustomCallout } from '@components/custom-callout'
 
 As Model creators, you carry the torch of democratizing data within and outside of your organization!
 
-Here is how you can quickly train a new generator on original tabular data. Your peers, colleagues, and third parties can then use the generator to create privacy-safe synthetic data.
+Here is how you can quickly train a new generator on original tabular data. You can then transfer the generator to an organization and make it public. Peers, colleagues, and third parties can then use it to create privacy-safe synthetic data.
 
 <Steps>
 ## Step 1: Train a generator
@@ -96,42 +96,75 @@ Here is how you can quickly train a new generator on original tabular data. Your
 
 **What's next**
 
-After the generator training completes, you can generate synthetic data. You can also export it and share it with Data consumers so they can too generate synthetic data.
+After the generator training completes, you can generate synthetic data. You can also transfer it to an organization. Data consumers from your organization can then too generate synthetic data.
 
-## Step 2: Export and share the generator
-<Tabs items={['UI', 'Python SDK']}>
-<Tabs.Tab>
-1. In MOSTLY AI, select the **Generators** page.
-2. Open the generator.
-3. Click the kebab menu and select **Export generator**.
+## Step 2: Share the generator with your organization
+
+1. In MOSTLY AI, open the generator from the **Generators** page.
+2. Click the kebab menu and select **Transfer ownership**.
     <Image
-        src="/docs/docimages/quickstart/model-creators/export-share-01-kebab-select-export-generator.webp"
-        alt="MOSTLY AI - Export and share the generator - 01 - Select Export generator"
+        src="/docs/docimages/quickstart/model-creators/transfer-to-org-01-kebab-select-transfer-ownership.webp"
+        alt="MOSTLY AI - Make the generator publc - 01 - Select Transfer ownership"
         width={800}
         height={150}
     />
-4. Save the generator locally.
+3. Select your organization and click **Save**.
+    <Image
+        src="/docs/docimages/quickstart/model-creators/transfer-to-org-02-select-org.webp"
+        alt="MOSTLY AI - Make the generator publc - 02 - Select organization"
+        width={800}
+        height={150}
+    />
 
 **Result**
 
-The generator is exported as a `ZIP` archive.
+The generator is now available to all members of your organization and they can use it to generate synthetic data.
 
-</Tabs.Tab>
-<Tabs.Tab>
-
-<CustomCallout type="API">
-Available in both [Local and Client modes](/python-sdk#local-and-client-modes).
-</CustomCallout>
-
-On a generator object, use the `export_to_file()` method to export a generator to a `ZIP` archive.
-    ```python copy filename="python"
-    g.export_to_file()
-    ```
-    The generator is exported and saved as a `ZIP` archive.
-</Tabs.Tab>
-</Tabs>
 **What's next**
 
-You can now share the `ZIP` archive with Data consumers (peers, colleagues, or third parties) so they can import the generator in a MOSTLY AI Platform instance to generate synthetic data.
-</Steps>
+You can make the generator public so that it is available to all logged-in users in the Platform.
+
+## Step 3: Make the generator public
+
+Generators capture only the statistical characteristics of the original data and they never memorize data points. This makes it perfectly safe to make a generator public.
+
+1. Open the generator from the **Generators** page.
+2. Click the kebab menu and select **Manage visibility**.
+    <Image
+        src="/docs/docimages/quickstart/model-creators/make-public-01-select-manage-visibility.webp"
+        alt="MOSTLY AI - Make the generator publc - 02 - Select organization"
+        width={800}
+        height={150}
+    />
+3. Select **Public** and click **Save**.
+    <Image
+        src="/docs/docimages/quickstart/model-creators/make-public-02-select-public.webp"
+        alt="MOSTLY AI - Make the generator publc - 02 - Select organization"
+        width={800}
+        height={150}
+    />
+
+**Result**
+
+Public generators of organizations are listed on the organization's profile page.
+
+<Image
+    src="/docs/docimages/quickstart/model-creators/make-public-03-public-generator-org-profile.webp"
+    alt="MOSTLY AI - Make the generator publc - 03 - Public generator on organization profile"
+    width={800}
+    height={150}
+/>
+
+They are also available on the **Generators** page for all logged-in users.
+
+<Image
+    src="/docs/docimages/quickstart/model-creators/make-public-04-public-generator-user-generators-list.webp"
+    alt="MOSTLY AI - Make the generator publc - 04 - Public generator on user's Generators list"
+    width={800}
+    height={150}
+/>
+
+**What's next**
+
 To generate synthetic data, see [Quickstart for Data consumers](data-consumers).
+</Steps>
