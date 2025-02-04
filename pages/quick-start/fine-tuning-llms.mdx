@@ -30,7 +30,7 @@ MOSTLY AI integrates with well-known LLMs and gives the flexibility to use any L
 **Steps**
 
 1. Create a new generator and upload a table file or add a table from a data source that contains unstructured text.
-2. On Data configuration page, for the column containing unstructured text, select **Language/Text** from **Encoding type**.
+2. On the **Data configuration** page, for the columns containing unstructured text, make sure that **Language/Text** is selected as **Encoding type**.
     <Image
         src="/docs/docimages/quickstart/unstructured-text/01-generator-configuration-01-select-language-text.webp"
         alt="MOSTLY AI Unstructured text - Select Language/Text as Encoding type"
@@ -38,10 +38,10 @@ MOSTLY AI integrates with well-known LLMs and gives the flexibility to use any L
         height={300}
     />
 3. Click **Configure models** in the upper right.
-4. On the **Model configuration** page, expand the `:language` model and configure it.
+4. On the **Model configuration** page, expand the `language` model and configure it.
     1. For **Model**, select one of the available language models for training.
         <CustomCallout>
-        The list of available models includes [HuggingFace text generation models](/generators/configure/set-encoding-types#huggingface-text-models) we have tested as well as the not-pre-trained MOSTLY AI LSTM model.
+        The list of available models includes [HuggingFace text generation models](/generators/configure/set-encoding-types#huggingface-text-models) and the not-pre-trained MOSTLY AI LSTM model.
 
         If you need to use another LLM, contact [MOSTLY AI Support](mailto:support@mostly.ai).
         </CustomCallout>
