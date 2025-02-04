@@ -6,6 +6,7 @@ description: "As a Data consumer, you can use a trained generator in MOSTLY AI t
 import Image from 'next/image'
 import { Steps } from 'nextra/components'
 import { Tabs } from 'nextra/components'
+import { Callout } from 'nextra/components'
 import { CustomCallout } from '@components/custom-callout'
 
 # Quick start for Data consumers
@@ -15,92 +16,26 @@ As Data consumers, through synthetic data you can get easy and privacy-safe acce
 To do so, you can use a MOSTLY AI trained generator for fresh and new synthetic data. The Model creators in your organization can share a generator with you.
 
 <Steps>
-## Step 1: Import a generator
-
-A Model creator from your organization can share a generator with you. You can then use the generator as listed below.
-
-* use the UI to **import into a MOSTLY AI Platform**
-* use the Python SDK to **import in a local environment**
-* use the Python SDK to **import into a remote MOSTLY AI Platform**. You can then generate synthetic data with the imported generator.
-
-Then, you can [generate synthetic data](#step-2-generate-synthetic-data) with the generator ✨
+## Step 1: Generate synthetic data
 
 <Tabs items={['UI', 'Python SDK']}>
 <Tabs.Tab>
-1. In MOSTLY AI, open the **Generators** page.
-2. Click **Import from file**.
-    <Image
-        src="/docs/docimages/quickstart/data-consumers/import-generator-01-click-import.webp"
-        alt="MOSTLY AI - Import a generator - 01 - Click Import generator"
-        width={800}
-        height={150}
-    />
-3. Upload the generator `ZIP` file and click **Proceed**.
-    <Image
-        src="/docs/docimages/quickstart/data-consumers/import-generator-02-upload-generator-zip.webp"
-        alt="MOSTLY AI - Import a generator - 02 - Upload generator ZIP file"
-        width={800}
-        height={150}
-    />
-</Tabs.Tab>
-<Tabs.Tab>
+1. Open the link of the shared generator.
+    <Callout>
+    Model creators within your organizaion can share a link to a **public** generator or a link to a **private** generator within an [organization](/organizations).
 
-1. [Install the MOSTLY AI Python SDK](/python-sdk#installation).
-2. Import the generator with the Python SDK either locally or into a remote MOSTLY AI Platform.
-    <Tabs items={['Local mode', 'Client mode']}>
-    <Tabs.Tab>
-    ```python copy filename="python" {3}
-    from mostlyai.sdk import MostlyAI
-    
-    mostly = MostlyAI(local=True)
-
-    g = mostly.generators.import_from_file("path/to/generator.zip")
-    ```
-    </Tabs.Tab>
-    <Tabs.Tab>
-    ```python copy filename="python" {3} /mostly_remote/
-    from mostlyai.sdk import MostlyAI
-
-    mostly_remote = MostlyAI(base_url="https://app.mostly.ai", api_key="INSERT_API_KEY")
-
-    g = mostly_remote.generators.import_from_file("path/to/generator.zip")
-    ```
-    </Tabs.Tab>
-    </Tabs>
-
-    If successful, the output will be similar to the following:
-    ```shell
-    Imported generator 82ceb8f3-b622-4de1-a710-c44d68804376
-    ```
-3. Click the UUID link to can open the generator in your browser.
-</Tabs.Tab>
-</Tabs>
-
-**What's next**
-
-Use the generator to generate a new synthetic dataset.
-
-## Step 2: Generate synthetic data
-
-<Tabs items={['UI', 'Python SDK']}>
-<Tabs.Tab>
-1. In MOSTLY AI, click **+ New synthetic dataset** from the **Synthetic datasets** page.
+    For details, see [Public and private assets](/public-private-assets).
+    </Callout>
+2. With the generator open, click **Generate data**.
     <Image 
-        src="/docs/docimages/quickstart/data-consumers/generate-sd-01-click-new-synthetic-dataset.webp" 
-        alt="MOSTLY AI - Generate synthetic data - 01 - Click New synthetic dataset" 
-        width={800} 
-        height={150}
-    />
-2. Select a generator.
-    <Image 
-        src="/docs/docimages/quickstart/data-consumers/generate-sd-02-select-generator.webp" 
-        alt="MOSTLY AI - Generate synthetic data - 02 - Click Generate synthetic data" 
+        src="/docs/docimages/quickstart/data-consumers/generate-sd-01-click-generate-data.webp" 
+        alt="MOSTLY AI - Generate synthetic data - 01 - Click Generate data" 
         width={800} 
         height={150}
     />
 3. Click **Start generation**.
     <Image 
-        src="/docs/docimages/quickstart/data-consumers/generate-sd-03-synthetic-dataset-click-start-generation.webp" 
+        src="/docs/docimages/quickstart/data-consumers/generate-sd-02-click-start-generation.webp" 
         alt="MOSTLY AI - Train a generator - 03 - Click Upload files" 
         width={800} 
         height={150}
@@ -110,7 +45,7 @@ Use the generator to generate a new synthetic dataset.
 
 When the generation of synthetic data completes, you can [download](/quick-start/data-consumers#step-2-download-synthetic-data) the data in CSV, Parquet, or XSLX format.
 
-You can also [share](/quick-start/data-consumers#step-3-share-your-synthetic-dataset) the synthetic dataset so others can access its page, review the **Data report**, **Data samples**, **Generation steps**, and **Configuration**, or download in their selected format.
+You can also [make the synthetic dataset public](/quick-start/data-consumers#step-3-make-the-synthetic-dataset-public) so others can access its page, review the **Data report**, **Data samples**, **Generation steps**, and **Configuration**, or download the data in a preferred format they.
 </Tabs.Tab>
 <Tabs.Tab>
 
@@ -136,7 +71,7 @@ Use the imported generator object `g` to generate a new synthetic dataset.
 </Tabs.Tab>
 </Tabs>
 
-## Step 3: Download synthetic data
+## Step 2: Download synthetic data
 
 <Tabs items={['UI', 'Python SDK']}>
 <Tabs.Tab>
@@ -170,4 +105,28 @@ sd.download(format="XLSX")
 </Tabs.Tab>
 </Tabs>
 
+## Step 3: Make the synthetic dataset public
+
+1. With the synthetic dataset open, click the kebab menu and select **Manage visibility**.
+    <Image 
+        src="/docs/docimages/quickstart/data-consumers/make-public-01-select-manage-visibility.webp" 
+        alt="MOSTLY AI - Make the synthetic dataset public - 01 - Click Make public" 
+        width={800} 
+        height={150}
+    />
+2. Select **Public**.
+    <Image 
+        src="/docs/docimages/quickstart/data-consumers/make-public-02-select-public.webp" 
+        alt="MOSTLY AI - Make the synthetic dataset public - 02 - Select Public" 
+        width={800} 
+        height={150}
+    />
+3. Click **Save**.
+4. Copy and share the URL of the synthetic dataset.
+
+**What's next**
+
+Use the synthetic dataset to freely analyze the data without the privacy-related concerns.
+
+Share the dataset URL so others can do the same.
 </Steps>
