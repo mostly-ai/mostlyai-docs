@@ -4,26 +4,31 @@ description: "You can grow your organization's portfolio in MOSTLY AI by adding 
 ---
 
 import Image from 'next/image'
+import { CustomCallout } from '@components/custom-callout'
 
 # Manage organization assets
 
-You can grow your organization's portfolio by adding generators, synthetic datasets, and connectors.
-
-While you can publish generators and synthetic datasets for the the outside world to use, connectors always remain private, and only available, within the organization.
+You can grow your organization's portfolio by adding synthetic data assets.
 
 ## Add assets
 
-As mentioned, you can transfer the following types of assets to an organization:
+You can add the following types of assets to an organization:
 
 - [generators](/generators)
 - [synthetic datasets](/synthetic-datasets)
 - [connectors](/connectors)
 
-All assets first have their creator as the owner. Only after they are created can their owner transfer them to an organization.
+To add assets, you transfer the ownership of the asset from your personal account to the organization. An asset's initial owner is always the creator's account. Assets cannot start with an organization as the owner, but their ownership can always be transferred to another account or organization.
+
+While you can make generators and synthetic datasets assets [public](/public-private-assets) for the the outside world to use, connectors always remain [private](/public-private-assets) and are only available within the organization.
+
+<CustomCallout>
+[Assistant threads](/assistant/manage-threads) are also always private and cannot be transferred to organizations. You can, however, share them with others by [exporting them as Jupyter Notebooks](/assistant/manage-threads#export-as-a-jupyter-notebook).
+</CustomCallout>
 
 **Prerequisites**
 
-You can only transfer generators and synthetic datasets with the status **Ready**. For details, see [_Status of generators_](/generators/manage#status-of-generators) and [_Status of synthetic datasets_](/synthetic-datasets/manage#status-of-synthetic-datasets).
+You can transfer generators and synthetic datasets only when their status is **Ready**. For details, see [_Status of generators_](/generators/manage#status-of-generators) and [_Status of synthetic datasets_](/synthetic-datasets/manage#status-of-synthetic-datasets).
 
 **Steps**
 
@@ -96,4 +101,4 @@ You can only transfer generators and synthetic datasets with the status **Ready*
 
 **Result**
 
-The asset now belongs to the user or organization transferred to. As a result, the asset is no longer available to the organization members.
+The asset now belongs to the user or organization transferred to. As a result, the asset is no longer under the organization.
