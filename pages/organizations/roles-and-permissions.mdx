@@ -7,24 +7,23 @@ description: 'In MOSTLY AI, organizations provide RBAC (Role-Based Access Contro
 
 Organizations provide RBAC (Role-Based Access Control) to manage access to resources and actions within an organization. The following roles are available in organizations in MOSTLY AI:
 
-* Owner
 * Admin
-* Collaborator
+* Contributor
 * Viewer
 
 The table below shows the permissions that come with each role.
 
-| Permission                              | Owner | Admin | Collaborator | Viewer |
-| --------------------------------------- | ----- | ----- | ------------ | ------ |
-| Edit organization details               | ✅    | ❌    | ❌           | ❌     |
-| Invite members to the organization      | ✅    | ❌    | ❌           | ❌     |
-| Update roles of members                 | ✅    | ❌    | ❌           | ❌     |
-| Remove members from the organization    | ✅    | ❌    | ❌           | ❌     |
-| Leave organization                      | ✅    | ✅    | ✅           | N/A    |
-| View organization profile               | ✅    | ✅    | ✅           | ✅     |
-| View public members of the organization | ✅    | ✅    | ✅           | ✅     |
-| View and use public resources           | ✅    | ✅    | ✅           | ✅     |
-| View and use private resources          | ✅    | ✅    | ✅           | ❌     |
-| Add new resources                       | ✅    | ✅    | ❌           | ❌     |
-| Edit created by resources               | ✅    | ✅    | N/A          | ❌     |
-| Edit all resources of the organization  | ✅    | ❌    | ❌           | ❌     |
+| Permission                              | Admin | Contributor | Viewer | Non-member |
+| --------------------------------------- | ----- | ----------- | ------ | ---------- |
+| Edit organization details               | ✅    | ❌          | ❌     | ❌         |
+| Invite members to the organization      | ✅    | ❌          | ❌     | ❌         |
+| Update roles of members                 | ✅    | ❌          | ❌     | ❌         |
+| Remove members from the organization    | ✅    | ❌          | ❌     | ❌         |
+| Leave organization                      | ✅    | ✅          | ✅     | N/A        |
+| View organization profile               | ✅    | ✅          | ✅     | ✅         |
+| View public members of the organization | ✅    | ✅          | ✅     | ✅         |
+| View and use public resources           | ✅    | ✅          | ✅     | ✅         |
+| View and use private resources          | ✅    | ✅          | ✅     | ❌         |
+| Add new resources                       | ✅    | ✅          | ❌     | ❌         |
+| Edit created by resources               | ✅    | ✅          | N/A    | ❌         |
+| Edit all resources of the organization  | ✅    | ❌          | ❌     | ❌         |
