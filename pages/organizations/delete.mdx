@@ -14,6 +14,10 @@ When you delete an organization, all assets and data associated with the organiz
 To avoid a loss of assets, [transfer them to a user or another organization](/organizations/manage-assets#transfer-an-asset-to-a-user-or-organization) before deleting the organization.
 </Callout>
 
+**Prerequisites**
+
+Only a team member with the Admin role can delete an organization. For more information, see [_Roles and permissions_](/organizations/roles-and-permissions).
+
 **Steps**
 
 1. On the organization page, click **Settings**.
@@ -35,10 +39,12 @@ To avoid a loss of assets, [transfer them to a user or another organization](/or
 
 **Result**
 
-All assets and data associated with the organization are deleted.
+All assets and files associated with the organization are deleted.
 
-This includes:
+Deleted assets include:
 
 * generators
 * synthetic datasets
 * connectors
+
+The association of existing team members with the organization is removed. No other changes are applied to the team members' accounts.
