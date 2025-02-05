@@ -11,11 +11,11 @@ import { PrivateAssetIcon, PublicAssetIcon } from '@components/icons'
 
 # Public and private assets
 
-In MOSTLY AI, all assets (generators, synthetic datasets, connectors, assistant threads) are private immediately after you create them. You can make [generators](/generators) and [synthetic datasets](/synthetic-datasets) public to share with the world. Alternatively, you can keep them private for your internal use or that of your organization's.
+In MOSTLY AI, all assets (generators, synthetic datasets, connectors, assistant threads) are private immediately after you create them. You can make [generators](/generators), [synthetic datasets](/synthetic-datasets), and [connectors](/connectors) public to share with the world. Alternatively, you can keep them private for your internal use or that of your organization's.
 
-<CustomCallout>
-[Connectors](/connectors) and [assistant threads](/assistant) are always private and cannot be made public. You can, however, [export an assistant thread as a Jupyter Notebook](/assistant/manage-threads#export-as-a-jupyter-notebook).
-</CustomCallout>
+
+[Assistant threads](/assistant) are always private and cannot be made public. You can, however, [export an assistant thread as a Jupyter Notebook](/assistant/manage-threads#export-as-a-jupyter-notebook).
+
 
 | Asset | Default visibility | Visibility options | Organizations visibility |
 | --- | --- | --- | --- |
@@ -27,16 +27,13 @@ In MOSTLY AI, all assets (generators, synthetic datasets, connectors, assistant 
 <Callout>
 The following applies to **public assets**:
 
-* If you made a generator or synthetic dataset public before transferring it to an organization, the asset will remain public. It will be visible from the organization profile.
+* If you made a generator, synthetic dataset, or connector public before transferring it to an organization, the asset will remain public. It will be visible from the organization profile.
 * Public assets are visible to everyone, including people who are not part of your organization.
 </Callout>
 
-<Tabs items={['UI', 'Python SDK']}>
-<Tabs.Tab>
-
 **Steps**
 
-1. With a generator or synthetic dataset open, click the kebab menu, and select **Manage visibility**.
+1. With a generator or synthetic dataset open, click the kebab menu and select **Manage visibility**.
     <Image 
         src="/docs/docimages/organizations/visibility-01-kebab-select-manage-visibility.webp"
         alt="Manage visibility - 01 - Kebab menu"
@@ -50,17 +47,3 @@ The following applies to **public assets**:
         width={700}
         height={300}
     />
-
-</Tabs.Tab>
-<Tabs.Tab>
-
-```python copy filename="python"
-mostly.organizations.create(
-    display_name="MOSTLY AI",
-    real_name="mostly-ai",
-    logo="path/to/logo.png" # optional
-)
-```
-
-</Tabs.Tab>
-</Tabs>
