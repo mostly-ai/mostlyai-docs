@@ -46,8 +46,9 @@ c_search = mostly.connectors.list(search_term=search_term)
 all_results = list(g_search) + list(sd_search) + list(c_search)
 
 # Print all matching items
-for item in all_results:
-    print(item)
+for i in all_results:
+    print(i)
+    print(f"{i.metadata.owner_name:}/{i.name}") 
 ```
 </Tabs.Tab>
 </Tabs>
