@@ -4,6 +4,5 @@ export default {
     "manage-assets": "Manage assets",
     "manage-members": "Manage members",
     "delete": "Delete an organization",
-    "roles-and-permissions": "Roles and permissions",
-    "report-misrepresentation": "Report misrepresentation"
+    "roles-and-permissions": "Roles and permissions"
 }
