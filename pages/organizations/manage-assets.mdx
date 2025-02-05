@@ -20,15 +20,20 @@ You can add the following types of assets to an organization:
 
 To add assets, you [transfer the ownership of the asset from your personal account to the organization](#transfer-an-asset-to-a-user-or-organization). An asset's initial owner is always the creator's account. Assets cannot start with an organization as the owner, but their ownership can always be transferred to another user or organization.
 
-## Transfer an asset to a user or organization
+## Transfer an asset to an organization
 
-The ownership of an asset can always be transferred to another user or organization.
+In MOSTLY AI, you can transfer any generator, synthetic datasets, or connector you create to an organization.
 
-Even if the creator of an asset deletes their account, the asset will not be deleted, and its owner will remain the user or organization transferred to.
+After the transfer, even if the creator of an asset deletes their account, the asset will not be deleted and its owner will remain the organization transferred to.
+
+You cannot transfer assets to:
+
+* another user
+* organizations you are not a member of
 
 **Prerequisites**
 
-* You are the creator or owner of the asset you want to transfer.
+* You are the creator of the asset you want to transfer.
 * You have the Admin or Contributor role in the organization you want to transfer the asset to.
 * You can transfer generators and synthetic datasets only when their status is **Ready**. For details, see [_Status of generators_](/generators/manage#status-of-generators) and [_Status of synthetic datasets_](/synthetic-datasets/manage#status-of-synthetic-datasets).
 
@@ -53,7 +58,7 @@ Even if the creator of an asset deletes their account, the asset will not be del
 
 **Result**
 
-The asset now belongs to the user or organization transferred to.
+The asset now belongs to the organization transferred to.
 
 ## Remove an asset
 
@@ -63,6 +68,6 @@ To remove an asset from an organization, you can do one of the following:
 | | |
 | --- | --- |
 | Delete the asset | • [Delete a generator](/generators/manage#delete-a-generator)<br />• [Delete a synthetic dataset](/synthetic-datasets/manage#delete-a-synthetic-dataset)<br />* [Delete a connector](/connectors/manage#delete-a-connector) |
-| Transfer the asset to a user or organization | [Transfer asset ownership](#transfer-an-asset-to-a-user-or-organization) |
+| Transfer the asset back to your account | Follow [Transfer an asset to an organization](#transfer-an-asset-to-an-organization). Instead of organization select your account. |
 
 As a result, the asset will be no longer available to the organization members.
