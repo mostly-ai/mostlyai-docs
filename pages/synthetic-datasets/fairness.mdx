@@ -21,13 +21,14 @@ If you are using the UI of the MOSTLY AI Platform, you can generate fair synthet
 
 1. Start a new synthetic dataset.
 2. On the **Synthetic dataset configuration** page, click a table to expand its generation options.
+3. Expand **Fairness**.
 3. Configure fair generation.
     1. For **Fairness target column**, select a categorical column. The data in the column will be generated with statistical parity for the categories in the sensitive columns you select.<br />
         For example, **income**.
     2. For **Fairness sensitive columns**, select at least one column the categories of which will influence the generation of the target column.<br />
         For example, **race**, **gender**, **age**.
         <Image
-            src="/docs/docimages/synthetic-datasets/fairness/fairness-target-column-sensitive-columns.png"
+            src="/docs/docimages/synthetic-datasets/fairness/fairness-target-column-sensitive-columns.webp"
             alt="MOSTLY AI - Fair synthetic data - Target column and sensitive columns"
             width={800}
             height={500}
