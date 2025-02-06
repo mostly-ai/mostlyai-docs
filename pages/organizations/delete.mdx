@@ -1,0 +1,50 @@
+---
+title: 'Delete an organization'
+description: 'Learn how you can delete an organization and its synthetic data assets in MOSTLY AI.'
+---
+
+import { Callout } from 'nextra/components'
+import Image from 'next/image'
+
+# Delete an organization
+
+When you delete an organization, all assets and data associated with the organization are deleted.
+
+<Callout type="warning">
+To avoid a loss of assets, [transfer them to a user or another organization](/organizations/manage-assets#transfer-an-asset-to-a-user-or-organization) before deleting the organization.
+</Callout>
+
+**Prerequisites**
+
+Only a team member with the Admin role can delete an organization. For more information, see [_Roles and permissions_](/organizations/roles-and-permissions).
+
+**Steps**
+
+1. On the organization page, click **Settings**.
+    <Image 
+        src="/docs/docimages/organizations/delete-01-click-settings.webp"
+        alt="Delete an organization - 01 - Click settings"
+        width={700}
+        height={300}
+    />
+2. Scroll to the bottom.
+3. Click **Delete organization**.
+    <Image 
+        src="/docs/docimages/organizations/delete-02-click-delete.webp"
+        alt="Delete an organization - 02 - Click Delete"
+        width={700}
+        height={300}
+    />
+4. In the confirmation dialog, click **Yes, delete organization**.
+
+**Result**
+
+All assets and files associated with the organization are deleted.
+
+Deleted assets include:
+
+* generators
+* synthetic datasets
+* connectors
+
+The association of existing team members with the organization is removed. No other changes are applied to the team members' accounts.

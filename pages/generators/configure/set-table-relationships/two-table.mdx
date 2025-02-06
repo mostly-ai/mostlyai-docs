@@ -52,24 +52,26 @@ If you use the web interface, add both tables to the generator and set their rel
             height={300}
         />
 5. Upload the `purchases` table.
-    1. In the generator, click **Add data**.
+    1. In the generator, click **Add table**.
         <Image
-            src="/docs/docimages/generators/set-table-relationships/table-rel-02-click-add-data.webp"
-            alt="MOSTLY AI - Click Add data"
+            src="/docs/docimages/generators/set-table-relationships/table-rel-02-click-add-table.webp"
+            alt="MOSTLY AI - Click Add table"
             width={800}
             height={300}
         />
     2. Click **Upload files**, upload the table, leave its name as `purchases`, and click **Proceed**.<br />
         **Step result**: The table is now added to the generator.
 6. Set the relationship between the `customers` and `purchases` tables.
-    1. Hover over the linked table (in this case `purchases`) and click **Edit foreign keys**.
+    1. Expand the `purchases` table.
+    2. Expand **Table relationships**.
+    3. Click **Modify**.
         <Image
-            src="/docs/docimages/generators/set-table-relationships/table-rel-03-click-edit-foreign-keys.webp"
-            alt="MOSTLY AI - Click Edit foreign keys"
+            src="/docs/docimages/generators/set-table-relationships/table-rel-03-expand-table-relationships-click-modify.webp"
+            alt="MOSTLY AI - Expand Table relationships and click Modify"
             width={800}
             height={300}
         />
-    2. In the drawer, click **Add foreign key**.
+    4. In the pop-up, click **Add foreign key**.
     3. For **Foreign key**, select the foreign key column for the `purchases` table. In this case, the `users_id` column.
     4. For **Referenced table**, select the table to which the foreign key points to. In this case, the `customers` table.
     5. For **Referenced primary key**, select the primary key column of the referenced table. In this case, the `id` column.

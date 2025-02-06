@@ -29,6 +29,8 @@ export default {
         "type": "separator",
         "title": "GLOBAL FEATURES"
     },
+    "organizations": "Organizations",
+    "public-private-assets": "Public and private assets",
     "search": "Search",
     "usage": "Usage and credits",
     "notifications": "Notifications",

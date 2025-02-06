@@ -1,0 +1,129 @@
+---
+title: Manage members
+description: ''
+---
+
+import { Callout } from 'nextra/components'
+import Image from 'next/image'
+
+# Manage organization members
+
+Grow your organization by sending out invites for new members to join. You can assign roles to members based on their responsibilities and remove any members that no longer participate.
+
+## Invite members to an organization
+
+To add a new member, send them an invite link. The invite link is valid for 72 hours and can be used by multiple people to join the organization.
+
+New team members are automatically assigned the Viewer role. For more information, see [_Roles and permissions_](/organizations/roles-and-permissions).
+
+**Prerequisites**
+
+Only a team member with the Admin role can generate an invite link and copy it for sending.
+
+**Steps**
+
+1. On the organization page, click **Settings**.
+    <Image 
+        src="/docs/docimages/organizations/delete-01-click-settings.webp"
+        alt="Delete an organization - 01 - Click settings"
+        width={700}
+        height={300}
+    />
+2. Under **Members**, click **Copy** to copy the invite link.
+    <Image 
+        src="/docs/docimages/organizations/invite-02-under-members-click-copy.webp"
+        alt="Invite members to an organization - 02 - Copy invite link"
+        width={700}
+        height={300}
+    />
+3. Share the invite link with the people you want to invite.
+    <Callout>
+    The invite link is valid for 72 hours. Multiple people can use the same link to join the organization.
+    </Callout>
+
+**Result**
+
+When members accept the invitation, they are then listed as part of the organization members with the **Viewer** role.
+
+<Image 
+    src="/docs/docimages/organizations/accept-01-organization-members.webp"
+    alt="Accept an organization invitation - 01 - Organization members"
+    width={700}
+    height={300}
+/>
+
+You can change the role of a member at any time. For more information, see [_Change the role of a member_](#change-the-role-of-a-member).
+
+## Accept an invitation
+
+When people open the invitation link, they are greeted with a prompt to accept your organization's invitation. When accepted, they automatically become part of the organization.
+
+**Steps**
+
+1. Open the invitation link.
+2. In the dialog, click **Accept**.
+    <Image
+        src="/docs/docimages/organizations/accept-01-click-accept.webp"
+        alt="Accept an organization invitation - 01 - Accept"
+        width={700}
+        height={300}
+    />
+
+## Change the role of a member
+
+As your organization grows, you can assign roles to members based on their responsibilities. For a list of roles and their permissions, see [_Roles and permissions_](/organizations/roles-and-permissions).
+
+<Callout>
+An organization must have at least one Admin. If you are the only Admin, you cannot change your role.
+</Callout>
+
+**Prerequisites**
+
+Only a team member with the Admin role can change the roles of other members.
+
+**Steps**
+
+1. On the organization page, click **Settings**.
+    <Image 
+        src="/docs/docimages/organizations/delete-01-click-settings.webp"
+        alt="Delete an organization - 01 - Click settings"
+        width={700}
+        height={300}
+    />
+2. Under **Members**, click the **Role** drop-down for the team member.
+    <Image 
+        src="/docs/docimages/organizations/change-member-role-02-select-role.webp"
+        alt="Change the role of a member - 02 - Click Role"
+        width={700}
+        height={300}
+    />
+
+## Remove a member
+
+In the event that a team member no longer needs access to the organization, you can conclude their membership.
+
+**Prerequisites**
+
+Only a team member with the Admin role can remove a member from the organization.
+
+**Steps**
+
+1. On the organization page, click **Settings**.
+    <Image 
+        src="/docs/docimages/organizations/delete-01-click-settings.webp"
+        alt="Delete an organization - 01 - Click settings"
+        width={700}
+        height={300}
+    />
+2. Under **Members**, click **Remove** for the team member.
+    <Image 
+        src="/docs/docimages/organizations/remove-member-02-click-remove.webp"
+        alt="Remove a member from an organization - 02 - Click Remove"
+        width={700}
+        height={300}
+    />
+3. In the confirmation dialog, click **Yes, remove member**.
+
+**Result**
+
+The now former team member no longer has access to the organization and its private assets.
