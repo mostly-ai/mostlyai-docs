@@ -199,14 +199,11 @@ The result is an object with all metrics.
 
 ### Usage of connectors
 
-For each connector, you can track the **number of shares** and the **number of generators that used the connector**.
+For each **source connector**, you can track _the number of generators using the connector as a data source_. For each **destination connector**, _the number of synthetic datasets delivered to the connector destination_ are available.
 
 <Tabs items={['UI', 'Python SDK']}>
 <Tabs.Tab>
 In the web application, the **Connectors** page contains an **Activity** column that shows the connector usage metrics.
-
-* For each **source connector**, track _the number of generators using the connector as a data source_.
-* For each **destination connector**, track _the number of synthetic datasets delivered to the connector destination_.
 
 <Image
     src="/docs/docimages/usage/connectors-usage.webp"
