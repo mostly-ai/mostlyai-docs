@@ -24,6 +24,9 @@ MOSTLY AI integrates with well-known LLMs and gives the flexibility to use any L
 
 **Prerequisites**
 
+* **Hardware**. The minimum recommended requirements to fine-tune an LLM with MOSTLY AI are:
+    * GPU: Nvidia A10g or better (for example, A100, H100, RTX 4090)
+    * GPU VRAM: at least 24GB 
 * **Dataset with unstructured text in a supported format**. The dataset you will use for fine-tuning must be `CSV`, `Parquet`, `TSV`, where one or more of the columns contains unstructured text.
 * **Size of the training dataset**. Depending on the size of the dataset and the compute resources you use for training, it is possible that the generator training can fail with out-of-memory errors. For details, see [_Troubleshooting_](#troubleshooting).
 
@@ -41,7 +44,7 @@ MOSTLY AI integrates with well-known LLMs and gives the flexibility to use any L
 4. On the **Model configuration** page, expand the `language` model and configure it.
     1. For **Model**, select one of the available language models for training.
         <CustomCallout>
-        The list of available models includes [HuggingFace text generation models](/generators/configure/set-encoding-types#huggingface-text-models) and the not-pre-trained MOSTLY AI LSTM model.
+        The list of available models includes [HuggingFace text generation models](/generators/configure/set-encoding-types#huggingface-text-models) and the [not-pre-trained MOSTLY AI LSTM model](/generators/configure/set-encoding-types#mostly-ai-lstm).
 
         If you need to use another LLM, contact [MOSTLY AI Support](mailto:support@mostly.ai).
         </CustomCallout>
@@ -51,12 +54,12 @@ MOSTLY AI integrates with well-known LLMs and gives the flexibility to use any L
             width={800}
             height={300}
         />
-    2. For **Compute**, select an available compute. We recommend the use of a GPU-enabled compute for language models.
+    2. For **Compute**, select an available compute. We recommend the use of GPUs for language models.
         <CustomCallout>
-        From **Compute**, you select a compute from a list of compute resources configured for the MOSTLY AI application. The compute is based on the resources available in the compute cluster where MOSTLY AI is running.
+        From **Compute**, you select from a list of compute resources configured for MOSTLY AI. The compute is based on the resources available in the compute cluster where MOSTLY AI is running.
 
-        * **CPU-based** computes offer a specific number of CPU cores and memory. Typically, they perform better when assigned to tabular data computations.
-        * **GPU-based** computes include a specific number of GPU cores and GPU memory. For language model fine-tuning and language generation, it is typically faster to use GPU computes.
+        * **CPU-based** computes offer a specific number of CPU cores and memory. They perform better for tabular data computations.
+        * **GPU-based** computes include a specific number of GPU cores and GPU memory. For language model fine-tuning and language generation, it is typically faster to use GPUs.
         </CustomCallout>
         <Image
             src="/docs/docimages/quickstart/unstructured-text/01-generator-configuration-03-select-compute.webp"
@@ -82,8 +85,8 @@ MOSTLY AI integrates with well-known LLMs and gives the flexibility to use any L
         height={300}
     />
 2. Configure the generation.
-    1. For **Tabular compute**, select the compute you want to use for tabular data. For tabular data, it is usually best to use a CPU-based compute.
-    2. For **Language compute**, select the compute you want to use for tabular data. For language (unstructured text), GPU-based computes tend to be faster.
+    1. For **Tabular compute**, select the compute to use for tabular data. It is usually best to use a CPU-based compute.
+    2. For **Language compute**, select the compute to use for language data. GPUs tend to be faster for language generation.
     3. (Optional) If needed, adjust the rest of the generation options.
 3. Click **Start generation** in the upper right.
     <Image
