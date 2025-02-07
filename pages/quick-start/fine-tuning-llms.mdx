@@ -24,6 +24,9 @@ MOSTLY AI integrates with well-known LLMs and gives the flexibility to use any L
 
 **Prerequisites**
 
+* **Hardware**. The minimum requirements to fine-tune an LLM with MOSTLY AI are:
+    * GPU: Nvidia A10g or better (for example, A100, H100, RTX 4090)
+    * GPU VRAM: at least 24GB 
 * **Dataset with unstructured text in a supported format**. The dataset you will use for fine-tuning must be `CSV`, `Parquet`, `TSV`, where one or more of the columns contains unstructured text.
 * **Size of the training dataset**. Depending on the size of the dataset and the compute resources you use for training, it is possible that the generator training can fail with out-of-memory errors. For details, see [_Troubleshooting_](#troubleshooting).
 
