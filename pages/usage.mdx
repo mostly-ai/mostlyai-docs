@@ -116,7 +116,6 @@ You can track the usage of generators, synthetic datasets, and connectors in the
 For each generator, you can track the metrics below.
 
 * **likes**
-* **number of shares with others**
 * **times used to generate a synthetic dataset**
 
 <Tabs items={['UI', 'Python SDK']}>
@@ -153,7 +152,6 @@ The result is an object with all metrics.
     'total_datapoints': 1287456,
     'total_compute_time': 176,
     'no_of_synthetic_datasets': 2,
-    'no_of_shares': 12,
     'no_of_likes': 2
 }
 ```
@@ -166,7 +164,6 @@ For each synthetic dataset, you can track how the number of **data points genera
 For each synthetic dataset, you can track the metrics below.
 
 * **likes**
-* **number of shares with others**
 * **data points generated**
 * **credits used**
 
@@ -194,7 +191,6 @@ The result is an object with all metrics.
     'total_datapoints': 189129,
     'total_credits': 0.1891,
     'total_compute_time': 171,
-    'no_of_shares': 2,
     'no_of_likes': 1
 }
 ```
@@ -203,14 +199,11 @@ The result is an object with all metrics.
 
 ### Usage of connectors
 
-For each connector, you can track the **number of shares** and the **number of generators that used the connector**.
+For each **source connector**, you can track _the number of generators using the connector as a data source_. For each **destination connector**, _the number of synthetic datasets delivered to the connector destination_ are available.
 
 <Tabs items={['UI', 'Python SDK']}>
 <Tabs.Tab>
 In the web application, the **Connectors** page contains an **Activity** column that shows the connector usage metrics.
-
-* For each **source connector**, you can see the _number of shares_ and _the number of generators using the connector as a data source_.
-* For each **destination connector**, the _number of shares_ and _the number of synthetic datasets delivered to the connector destination_ are available.
 
 <Image
     src="/docs/docimages/usage/connectors-usage.webp"
@@ -229,7 +222,6 @@ c.usage
 The result is the `ConnectorUsage` object which includes all metrics.
 ```python filename="python"
 ConnectorUsage(
-    no_of_shares=7,
     no_of_generators=4
 )
 ```
