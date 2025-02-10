@@ -6,6 +6,7 @@ description: 'In a multi-table scenario with MOSTLY AI, where you add 3 or more 
 import { Callout } from 'nextra/components'
 import { Tabs } from 'nextra/components'
 import Image from 'next/image'
+import { CustomCallout } from '@components/custom-callout'
 
 ## Multi-table relationships
 
@@ -57,31 +58,18 @@ From the web interface, you can define each relationship with the configuration 
         width={900}
         height={300}
     />
-2. Define foreign keys for all linked tables that refer the `account` table.
+2. Define all required foreign keys.
+    <CustomCallout>
+    For information about how to create a foreign key, see [Two-table scenario](two-table).
+    </CustomCallout>
     1. Set a context foreign key from the `loan` table (`account_id` column) to the `account` table.
-        <Image
-            src="/docs/docimages/generators/set-table-relationships/multi-table-rel-02-set-context-for-loan-table.webp"
-            alt="MOSTLY AI - Multi-table relationships - Set foreign key for loan table"
-            width={900}
-            height={300}
-        />
     2. Set a context foreign key from the `order` table (`account_id` column) to the `account` table.
-        <Image
-            src="/docs/docimages/generators/set-table-relationships/multi-table-rel-03-set-context-for-order-table.webp"
-            alt="MOSTLY AI - Multi-table relationships - Set foreign key for order table"
-            width={900}
-            height={300}
-        />
     3. Set a context foreign key from the `transaction` table (`account_id` column) to the `account` table.
-        <Image
-            src="/docs/docimages/generators/set-table-relationships/multi-table-rel-04-set-context-for-transaction-table.webp"
-            alt="MOSTLY AI - Multi-table relationships - Set foreign key for transaction table"
-            width={900}
-            height={300}
-        />
     4. Set two foreign keys from the `disp` table: one to the `account` table, and another to the `client` table.<br />
         <Callout>
         Only one of the foreign keys can be **context**. Set as context the relationship for which you want to fully retain the correlations between the two tables.
+
+        To learn more, see [_Context foreign key_](/generators/configure/set-table-relationships#context-foreign-key) and [_Non-context foreign key_](/generators/configure/set-table-relationships#non-context-foreign-key).
         </Callout>
         <Image
             src="/docs/docimages/generators/set-table-relationships/multi-table-rel-05-set-fk-for-disp-table.webp"
@@ -90,12 +78,6 @@ From the web interface, you can define each relationship with the configuration 
             height={300}
         />
     5. Set a context foreign key from the `card` table (`disp_id` column) to the `disp` table.
-        <Image
-            src="/docs/docimages/generators/set-table-relationships/multi-table-rel-06-set-context-for-card-table.webp"
-            alt="MOSTLY AI - Multi-table relationships - Set foreign keys for card table"
-            width={900}
-            height={300}
-        />
 
 **Result**
 
@@ -108,11 +90,15 @@ With all required foreign keys set, the **Data configuration** page provides a h
     height={300}
 />
 
-You can now take a look at the relationship diagram.
+You can also review the [relationship diagram](/generators/configure/set-table-relationships/relationship-diagram).
+
+**What's next**
+
+To train the generator on the Berka dataset, click **Configure models** and then **Start training**.
 </Tabs.Tab>
 <Tabs.Tab>
-    1. Download the [Berka dataset](/datasets/berka.zip) and unzip.
-    2. Run the following Python code to create and train a multi-table generator.
+1. Download the [Berka dataset](/datasets/berka.zip) and unzip.
+2. Run the following Python code to create and train a multi-table generator.
 
 ```python filename="python" copy
 from mostlyai.sdk import MostlyAI
