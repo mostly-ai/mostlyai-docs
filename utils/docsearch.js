@@ -10,10 +10,7 @@ function AlgoliaSearch() {
       appId="UPODPFM590"
       indexName="mostly"
       apiKey = {ALGOLIA_API_KEY}
-      maxResultsPerGroup = {20}
-      searchParameters={{
-        hitsPerPage: 20,
-      }}
+      maxResultsPerGroup = {3}
       insights
     />
   );
