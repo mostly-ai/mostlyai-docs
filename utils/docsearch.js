@@ -10,6 +10,7 @@ function AlgoliaSearch() {
       appId="UPODPFM590"
       indexName="mostly"
       apiKey = {ALGOLIA_API_KEY}
+      searchParameters={{ hitsPerPage: 10 }}
     />
   );
 }
