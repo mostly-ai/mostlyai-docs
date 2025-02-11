@@ -16,9 +16,9 @@ function AlgoliaSearch() {
       }}
       hitComponent={({ hit }) => (
         <a href={hit.url} style={{ display: "block", padding: "10px" }}>
-          <strong>{hit.hierarchy.lvl0}</strong>
+          <strong>{hit.hierarchy.lvl1}</strong>
           <br />
-          {hit.hierarchy.lvl1 || hit.content}
+            {hit.hierarchy.lvl2 || hit.content}
         </a>
       )}
       insights
