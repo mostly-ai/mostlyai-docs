@@ -10,17 +10,10 @@ function AlgoliaSearch() {
       appId="UPODPFM590"
       indexName="mostly"
       apiKey = {ALGOLIA_API_KEY}
-      maxResultsPerGroup = {5}
+      maxResultsPerGroup = {20}
       searchParameters={{
         hitsPerPage: 20,
       }}
-      hitComponent={({ hit }) => (
-        <a href={hit.url} style={{ display: "block", padding: "10px" }}>
-          <strong>{hit.hierarchy.lvl1}</strong>
-          <br />
-            {hit.hierarchy.lvl2 || hit.content}
-        </a>
-      )}
       insights
     />
   );
