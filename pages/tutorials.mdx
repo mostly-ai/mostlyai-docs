@@ -5,6 +5,7 @@ description: 'MOSTLY AI provides a number of synthetic data tutorials that you c
 
 import Image from 'next/image'
 import Link from 'next/link'
+import TutorialsTable from '@components/tutorials-table'
 import { 
     ColabBadge
 } from '@components/icons'
@@ -13,15 +14,4 @@ import {
 
 Welcome! We're excited to share our <Link href="https://github.com/mostly-ai/mostly-tutorials/" target="_blank">repository</Link> of tutorials with you, which will help you explore and validate the benefits of synthetic data. Simply clone the repository to your own environment and run it locally via Jupyter Lab, or make it even easier and run each tutorial directly on Google's cloud resources via Colab. Let's get started!
 
-| Tutorial | Colab link |
-| --- | --- |
-| Validate synthetic data via Train-Synthetic-Test-Real | <Link href="https://colab.research.google.com/github/mostly-ai/mostly-tutorials/blob/dev/train-synthetic-test-real/TSTR.ipynb" target="_blank"><ColabBadge/></Link> |
-| Explore the size vs. accuracy trade-off for synthetic data | <Link href="https://colab.research.google.com/github/mostly-ai/mostly-tutorials/blob/dev/size-vs-accuracy/size-vs-accuracy.ipynb" target="_blank"><ColabBadge/></Link> |
-| Rebalance synthetic datasets for data augmentation | <Link href="https://colab.research.google.com/github/mostly-ai/mostly-tutorials/blob/dev/rebalancing/rebalancing.ipynb" target="_blank"><ColabBadge/></Link> |
-| Conditionally generate synthetic (geo) data | <Link href="https://colab.research.google.com/github/mostly-ai/mostly-tutorials/blob/dev/conditional-generation/conditional-generation.ipynb" target="_blank"><ColabBadge/></Link> |
-| Explain AI with synthetic data | <Link href="https://colab.research.google.com/github/mostly-ai/mostly-tutorials/blob/dev/explainable-ai/explainable-ai.ipynb" target="_blank"><ColabBadge/></Link> |
-| Generate synthetic text | <Link href="https://colab.research.google.com/github/mostly-ai/mostly-tutorials/blob/dev/synthetic-text/synthetic-text.ipynb" target="_blank"><ColabBadge/></Link> |
-| Perform multi-table synthesis | <Link href="https://colab.research.google.com/github/mostly-ai/mostly-tutorials/blob/dev/multi-table/multi-table.ipynb" target="_blank"><ColabBadge/></Link> |
-| Develop a fake or real discriminator with Synthetic Data | <Link href="https://colab.research.google.com/github/mostly-ai/mostly-tutorials/blob/dev/fake-or-real/fake-or-real.ipynb" target="_blank"><ColabBadge/></Link> |
-| Close gaps in your data with Smart Imputation | <Link href="https://colab.research.google.com/github/mostly-ai/mostly-tutorials/blob/dev/smart-imputation/smart-imputation.ipynb" target="_blank"><ColabBadge/></Link> |
-| Calculate accuracy and privacy metrics for Quality Assurance | <Link href="https://colab.research.google.com/github/mostly-ai/mostly-tutorials/blob/dev/quality-assurance/quality-assurance.ipynb" target="_blank"><ColabBadge/></Link> |
+<TutorialsTable />
