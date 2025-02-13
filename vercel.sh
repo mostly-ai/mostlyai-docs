@@ -2,7 +2,7 @@
 
 # Check if we're in preview (skip Algolia trigger for preview and dev)
 if [ "$VERCEL_ENV" = "preview" ]; then
-  npm run build:preview
+  npm run build
   echo "Preview build detected. Triggering Algolia Crawler..."
   
   # Encode credentials for Basic Auth
