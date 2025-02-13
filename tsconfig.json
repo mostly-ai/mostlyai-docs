@@ -17,7 +17,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "target": "es5",
+    "target": "esnext",
     "baseUrl": ".",
     "paths": {
       "@components/*": ["components/*"]
