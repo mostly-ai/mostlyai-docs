@@ -9,7 +9,7 @@ if [ "$VERCEL_ENV" = "production" ]; then
   
   # Trigger the Algolia crawler
   curl -X POST -H "Authorization: Basic $AUTH_HEADER" \
-       "https://crawler.algolia.com/api/1/crawlers/$ALGOLIA_CRAWLER_ID/run"
+       "https://crawler.algolia.com/api/1/crawlers/$ALGOLIA_CRAWLER_ID/reindex"
 else
   echo "Skipping Algolia Crawler trigger (not a production build)."
 fi
