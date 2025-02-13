@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Check if we're in production (skip Algolia trigger for preview and dev)
 if [ "$VERCEL_ENV" = "preview" ]; then
