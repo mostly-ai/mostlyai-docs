@@ -3,6 +3,8 @@
 # Check if we're in production (skip Algolia trigger for preview and dev)
 if [ "$VERCEL_ENV" = "preview" ]; then
   echo "Production build detected. Triggering Algolia Crawler..."
+  echo "ALGOLIA_CRAWLER_USER_ID: $ALGOLIA_CRAWLER_USER_ID"
+  echo "ALGOLIA_CRAWLER_ID: $ALGOLIA_CRAWLER_ID"
   
   # Encode credentials for Basic Auth
   AUTH_HEADER=$(echo -n "$ALGOLIA_CRAWLER_USER_ID:$ALGOLIA_CRAWLER_API_KEY" | base64)
