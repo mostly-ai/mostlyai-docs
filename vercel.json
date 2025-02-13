@@ -1,4 +1,5 @@
 {
+    "buildCommand": "sh vercel.sh",
     "redirects": [
         {
           "source": "/docs/mostly-ai-help-support-tutorials-documentation",
