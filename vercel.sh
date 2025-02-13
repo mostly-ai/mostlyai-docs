@@ -7,7 +7,7 @@ if [ "$VERCEL_ENV" = "preview" ]; then
   echo "ALGOLIA_CRAWLER_ID: $ALGOLIA_CRAWLER_ID"
   
   # Encode credentials for Basic Auth
-  AUTH_HEADER=$(echo -n "$ALGOLIA_CRAWLER_USER_ID:$ALGOLIA_CRAWLER_API_KEY" | base64)
+  export AUTH_HEADER=$(echo -n "$ALGOLIA_CRAWLER_USER_ID:$ALGOLIA_CRAWLER_API_KEY" | base64)
   
   # Trigger the Algolia crawler
   curl -X POST -H "Authorization: Basic $AUTH_HEADER" \
