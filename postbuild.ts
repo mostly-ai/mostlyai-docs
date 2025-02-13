@@ -1,111 +1,50 @@
-import axios from 'axios';
-import dotenv from 'dotenv';
+import type { NextApiRequest, NextApiResponse } from 'next'
 
-dotenv.config();
+export default async function handler(
+  req: NextApiRequest, 
+  res: NextApiResponse
+) {
+  // Validate required environment variables
+  const crawlerId = process.env.ALGOLIA_CRAWLER_ID
+  const crawlerUserId = process.env.ALGOLIA_CRAWLER_USER_ID
+  const crawlerApiKey = process.env.ALGOLIA_CRAWLER_API_KEY
 
-interface AlgoliaCrawlerConfig {
-  appId: string;
-  apiKey: string;
-  crawlerId: string;
-}
-
-class AlgoliaCrawlerPostBuild {
-  private config: AlgoliaCrawlerConfig;
-
-  constructor() {
-    // Validate required environment variables
-    this.validateEnvironmentVariables();
-
-    this.config = {
-      appId: process.env.ALGOLIA_APP_ID!,
-      apiKey: process.env.ALGOLIA_ADMIN_API_KEY!,
-      crawlerId: process.env.ALGOLIA_CRAWLER_ID!
-    };
+  if (!crawlerId || !crawlerUserId || !crawlerApiKey) {
+    return res.status(500).json({ 
+      error: 'Missing Algolia configuration' 
+    })
   }
 
-  private validateEnvironmentVariables() {
-    const requiredEnvVars = [
-      'ALGOLIA_APP_ID', 
-      'ALGOLIA_ADMIN_API_KEY', 
-      'ALGOLIA_CRAWLER_ID',
-    ];
+  // Create Base64 encoded credentials
+  const credentials = Buffer.from(`${crawlerUserId}:${crawlerApiKey}`).toString('base64')
 
-    const missingVars = requiredEnvVars.filter(varName => !process.env[varName]);
-
-    if (missingVars.length > 0) {
-      console.error('Missing required environment variables:', missingVars);
-      process.exit(1);
-    }
-  }
-
-  private getAlgoliaCrawlerEndpoint(): string {
-    return `https://crawler.algolia.com/api/1/crawlers/${this.config.crawlerId}/reindex`;
-  }
-
-  private getAuthHeaders() {
-    return {
-      'Content-Type': 'application/json',
-      'X-Algolia-Application-Id': this.config.appId,
-      'X-Algolia-API-Key': this.config.apiKey
-    };
-  }
-
-  public async triggerCrawler() {
-    try {
-      console.log('🚀 Initiating Algolia Crawler Reindex...');
-
-      const response = await axios.post(
-        this.getAlgoliaCrawlerEndpoint(), 
-        {
-          url: process.env.SITE_URL,
-          strategy: 'all'
-        },
-        {
-          headers: this.getAuthHeaders(),
-          timeout: 30000 // 30 seconds timeout
-        }
-      );
-
-      console.log('✅ Algolia Crawler Reindex Triggered Successfully');
-      console.log('Response:', {
-        status: response.status,
-        data: response.data
-      });
-
-    } catch (error) {
-      this.handleCrawlerError(error);
-    }
-  }
-
-  private handleCrawlerError(error: any) {
-    console.error('❌ Algolia Crawler Reindex Failed');
-
-    if (axios.isAxiosError(error)) {
-      // Axios-specific error handling
-      console.error('Error Details:', {
-        status: error.response?.status,
-        data: error.response?.data,
-        message: error.message
-      });
-    } else {
-      // Generic error handling
-      console.error('Unexpected Error:', error);
-    }
-
-    // Optional: You might want to exit with a non-zero code to indicate build failure
-    process.exit(1);
-  }
-}
-
-// Run the crawler trigger
-async function runAlgoliaCrawlerPostBuild() {
   try {
-    const crawlerPostBuild = new AlgoliaCrawlerPostBuild();
-    await crawlerPostBuild.triggerCrawler();
+    const response = await fetch(
+      `https://crawler.algolia.com/api/1/crawlers/${crawlerId}/reindex`, 
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Basic ${credentials}`
+        }
+      }
+    )
+
+    if (!response.ok) {
+      const errorBody = await response.text()
+      throw new Error(`Reindex failed: ${errorBody}`)
+    }
+
+    const result = await response.json()
+
+    res.status(200).json({ 
+      message: 'Reindex triggered successfully',
+      details: result 
+    })
   } catch (error) {
-    console.error('Post-build Algolia Crawler script failed:', error);
-    process.exit(1);
+    console.error('Reindex error:', error)
+    res.status(500).json({ 
+      error: error instanceof Error ? error.message : 'Reindex failed' 
+    })
   }
 }
-
-runAlgoliaCrawlerPostBuild();
