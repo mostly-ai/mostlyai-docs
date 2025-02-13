@@ -1,0 +1,15 @@
+#!/bin/sh
+
+# Check if we're in production (skip Algolia trigger for preview and dev)
+if [ "$VERCEL_ENV" = "production" ]; then
+  echo "Production build detected. Triggering Algolia Crawler..."
+  
+  # Encode credentials for Basic Auth
+  AUTH_HEADER=$(echo -n "$ALGOLIA_CRAWLER_USER_ID:$ALGOLIA_CRAWLER_API_KEY" | base64)
+  
+  # Trigger the Algolia crawler
+  curl -X POST -H "Authorization: Basic $AUTH_HEADER" \
+       "https://crawler.algolia.com/api/1/crawlers/$ALGOLIA_CRAWLER_ID/run"
+else
+  echo "Skipping Algolia Crawler trigger (not a production build)."
+fi
