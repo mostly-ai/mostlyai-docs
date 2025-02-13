@@ -17,7 +17,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "target": "esnext",
+    "target": "es6",
     "baseUrl": ".",
     "paths": {
       "@components/*": ["components/*"]
@@ -26,7 +26,8 @@
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx",
+    "postbuild.ts"
   ],
   "exclude": [
     "node_modules"
