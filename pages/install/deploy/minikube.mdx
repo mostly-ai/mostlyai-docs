@@ -448,16 +448,16 @@ scp -i KEYPAIR_FILENAME.pem MOSTLY_AI_Helm_chart.zip ubuntu@IP_ADDRESS:~
             registryFor3rdPartyComponents: &registryFor3rdPartyComponents docker.io
         ...
         ```
-    4. (Optional) If you need to host MOSTLY AI container images in an internal repository, replace `harbor.env.mostlylab.com/mostlyai` in `mostlyRegistry`.
+    4. (Optional) If you need to host MOSTLY AI container images in an internal repository, replace `quay.io/mostlyai` in `mostlyRegistry`.
         ```yaml filename="values.yaml" copy {5}
         _customerInstallation:
         ...
           deploymentSettings:
           ...
-            mostlyRegistry: &mostlyRegistry harbor.env.mostlylab.com/mostlyai
+            mostlyRegistry: &mostlyRegistry quay.io/mostlyai
         ...
         ```
-    5. (Optional) If you intend to use the MOSTLY AI image repository at `harbor.env.mostlylab.com/mostlyai`, set its secret in `mostlyRegistryDockerConfigJson`.
+    5. (Optional) If you intend to use the MOSTLY AI image repository at `quay.io/mostlyai`, set its secret in `mostlyRegistryDockerConfigJson`.
         <Callout>
         To obtain the secret, contact your MOSTLY AI Customer Experience Engineer.
         </Callout>
