@@ -1,0 +1,150 @@
+---
+title: Install NGINX Ingress Controller
+description: 'Install the NGINX ingress controller to assign a LoadBalancer IP address to your cluster. You can then assign a FQDN to the IP address and make the MOSTLY AI web application accessible to your users in your organization.'
+---
+
+import { Callout } from 'nextra/components'
+
+# Configure NGINX Ingress Controller
+
+## Install NGINX
+
+Install the NGINX ingress controller to assign a LoadBalancer IP address to your cluster. You can then assign a FQDN to the IP address and make the MOSTLY AI web application accessible to your users in your organization.
+
+<Callout>
+NGINX installation may be required only for [GKE](../../deploy/gke) and [Azure](../../deploy/azure) deployments.
+</Callout>
+
+**Steps**
+
+1. Add the helm chart repository for the Ingress NGINX Controller.
+    ```bash copy
+    helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+    ```
+    You should see the following result:
+    ```
+    "ingress-nginx" has been added to your repositories
+    ```
+2. Install the Ingress NGINX Controller.
+    ```bash copy
+    helm install nginx-ingress ingress-nginx/ingress-nginx
+    ```
+
+**Result**
+
+The Ingress NGINX Controller is now installed for your GKE cluster. You might see a result similar to the output below.
+
+Note the line that indicates that you are now waiting for the LoadBalancer IP to be available and a suggested command to check the status of when the IP is available.
+
+```txt {9,10}
+NAME: nginx-ingress
+LAST DEPLOYED: Thu Sep 28 01:35:44 2023
+NAMESPACE: default
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+NOTES:
+The ingress-nginx controller has been installed.
+It may take a few minutes for the LoadBalancer IP to be available.
+You can watch the status by running 'kubectl --namespace default get services -o wide -w nginx-ingress-ingress-nginx-controller'
+
+An example Ingress that makes use of the controller:
+  apiVersion: networking.k8s.io/v1
+  kind: Ingress
+  metadata:
+    name: example
+    namespace: foo
+  spec:
+    ingressClassName: nginx
+    rules:
+      - host: www.example.com
+        http:
+          paths:
+            - pathType: Prefix
+              backend:
+                service:
+                  name: exampleService
+                  port:
+                    number: 80
+              path: /
+    # This section is only required if TLS is to be enabled for the Ingress
+    tls:
+      - hosts:
+        - www.example.com
+        secretName: example-tls
+
+If TLS is enabled for the Ingress, a Secret containing the certificate and key must also be provided:
+
+  apiVersion: v1
+  kind: Secret
+  metadata:
+    name: example-tls
+    namespace: foo
+  data:
+    tls.crt: <base64 encoded cert>
+    tls.key: <base64 encoded key>
+  type: kubernetes.io/tls
+```
+
+**What's next**
+
+To check if cluster ingress IP address has been assigned, run the following command:
+```bash copy
+kubectl --namespace default get services -o wide -w nginx-ingress-ingress-nginx-controller
+```
+
+If your IP is assigned, you will see it under the `EXTERNAL-IP` column. The `EXTERNAL-IP` value below is masked on purpose.
+
+```
+NAME                                     TYPE           CLUSTER-IP     EXTERNAL-IP     PORT(S)                      AGE     SELECTOR
+nginx-ingress-ingress-nginx-controller   LoadBalancer   10.48.12.255   34.140.40.***   80:31623/TCP,443:32105/TCP   4m41s   app.kubernetes.io/component=controller,app.kubernetes.io/instance=nginx-ingress,app.kubernetes.io/name=ingress-nginx
+```
+
+You can now use your ingress IP and assign it to the domain name that you intend to use for your MOSTLY AI cluster.
+
+
+## Configure NGINX in the MOSTLY AI Helm chart
+
+Enable the `ingress` annotations for NGINX.
+
+**Steps**
+
+1. Assign the `ingressClassName` to be `nginx` under `global.ingress.ingressClassName`.
+    ```yaml filename="values.yaml" copy {6}
+    global:
+    ...
+      ingress:
+        annotations:
+          route.openshift.io/termination: edge
+        ingressClassName: nginx
+    ...
+    ```
+2. Enable the ingress annotations under `mostly-app`.
+    ```yaml filename="values.yaml" copy {3-9}
+    mostly-app:
+        ingress:
+            annotations:
+              nginx.ingress.kubernetes.io/proxy-body-size: 10240m
+              nginx.ingress.kubernetes.io/proxy-buffer-size: 128k
+              nginx.org/proxy-connect-timeout: 3000s
+              nginx.org/proxy-read-timeout: 3000s
+              nginx.org/client-max-body-size: 3000m
+            # annotations: {}
+    ```
+3. Enable the ingress annotations under `mostly-keycloak`.
+    ```yaml filename="values.yaml" copy {7-10}
+    mostly-keycloak:
+        deployment:
+            resources: {}
+            tolerations: []
+            affinity: {}
+        ingress:
+            annotations:
+                nginx.ingress.kubernetes.io/proxy-body-size: 10240m
+                nginx.ingress.kubernetes.io/proxy-buffer-size: 128k
+            # annotations: {}
+    ```
+
+**What's next**
+
+Continue with the MOSTLY AI Helm chart configuration in the related [deployment guide](../../deploy). You can then deploy MOSTLY AI.
