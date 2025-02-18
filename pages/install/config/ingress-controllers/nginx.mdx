@@ -95,7 +95,7 @@ If TLS is enabled for the Ingress, a Secret containing the certificate and key m
 **What's next**
 
 To check if cluster ingress IP address has been assigned, run the following command:
-```bash copy
+```shell copy filename="shell"
 kubectl --namespace default get services -o wide -w nginx-ingress-ingress-nginx-controller
 ```
 
