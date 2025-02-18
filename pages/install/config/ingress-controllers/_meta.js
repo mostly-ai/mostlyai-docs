@@ -1,5 +1,5 @@
 export default {
     "haproxy": "HAProxy",
     "nginx": "NGINX",
-    "istio": "Istio",
+    "istio": "Istio Virtual Service",
 }

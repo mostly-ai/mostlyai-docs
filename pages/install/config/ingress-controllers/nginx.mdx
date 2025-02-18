@@ -105,19 +105,18 @@ You can now use your ingress IP and assign it to the domain name that you intend
 
 ## Configure NGINX in the MOSTLY AI Helm chart
 
-Enable the `ingress` annotations for NGINX.
+Define NGINX as the ingress controller and then enable the required `ingress` annotations.
 
 **Steps**
 
-1. Assign the `ingressClassName` to be `nginx` under `global.ingress.ingressClassName`.
+1. Assign the `ingressClassName` to be `nginx` under `_customerInstallation.deploymentSettings`.
     ```yaml filename="values.yaml" copy {6}
-    global:
-    ...
-      ingress:
-        annotations:
-          route.openshift.io/termination: edge
-        ingressClassName: nginx
-    ...
+    _customerInstallation:
+      ...
+      deploymentSettings:
+        ...
+        ingressClassName: &ingressClassName nginx
+        ...
     ```
 2. Enable the ingress annotations under `mostly-app`.
     ```yaml filename="values.yaml" copy {3-9}

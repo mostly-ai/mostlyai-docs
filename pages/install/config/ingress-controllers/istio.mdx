@@ -1,6 +1,47 @@
 ---
-title: Install Istio
-description: 'Install the Istio.'
+title: Enable support for Istio Virtual Services
+description: 'MOSTLY AI provides support for Istio Virtual Services in case you are already using it in your Kubernetes cluster.'
 ---
 
-# Install Istio
+# Enable support for Istio Virtual Services
+
+MOSTLY AI provides support for Istio Virtual Services in case you are already using it in your Kubernetes cluster. To enable the support for Istio Virtual Services, you need to edit the files listed below.
+
+* `mostly-combined/values.yaml`
+* `values.yaml`
+
+**Steps**
+
+1. Edit the `mostly-combined/values.yaml` file and enable the `istioVirtualService` implementation.
+    ```yaml copy filename="mostly-combined/values.yaml"
+    ...
+        implementation: istioVirtualService
+    ...
+    ```
+2. Edit the `values.yaml` from the root folder.
+    1. The `global.ingress.hostname` parameter must be defined.
+        ```yaml copy filename="values.yaml" {4}
+        ...
+        global:
+            ingress:
+                hostname: your.company.fqdn.com
+        ...
+        ```
+    2. If `global.tls.enabled` is set to `True`, you must then define `global.tls.secretName`.
+        ```yaml copy filename="values.yaml" {4}
+        ...
+        global:
+            tls:
+                enabled: True
+                secretName: your-tls-secret-name
+        ...
+        ```
+5. Save both files.
+
+**Result**
+
+Your MOSTLY AI Helm chart is now enabled to work with Istio Virtual Services.
+
+**What's next**
+
+Continue with the deployment of MOSTLY AI. For reference, see [_Deploy MOSTLY AI_](/install/deploy).
