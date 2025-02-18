@@ -30,7 +30,8 @@ Before you deploy MOSTLY AI to an Azure AKS cluster, you need to complete severa
 * [Task 1: Create an AKS cluster](#task-1-create-an-aks-cluster)
 * [Task 2: Log in to the Azure CLI](#task-2-log-in-to-the-azure-cli)
 * [Task 3: Connect to the Azure AKS cluster](#task-3-connect-to-the-azure-aks-cluster)
-* [Task 4: Install NGINX](#task-4-install-nginx)
+* [Task 4: Install an ingress controler](#task-4-install-an-ingress-controller)
+
 
 ### Task 1. Create an AKS cluster
 
@@ -250,98 +251,11 @@ You can find the exact Azure CLI commands to connect to your AKS cluster from th
 
 Your CLI is now set up to use the new Azure AKS cluster as the default K8S context. You can now run `kubectl` and `helm` command against this context.
 
-### Task 4: Install NGINX
+### Task 4: Install an ingress controller
 
-If you do not have an ingress controller running for your cluster, you can install NGINX to allow external traffic via HTTP or HTTPS to your cluster.
+MOSTLY AI supports HAProxy by default as the ingress controller. NGINX and Istio virtual services are also supported.
 
-For more information, see [Basic configuration for an unmanaged ingress controller](https://learn.microsoft.com/en-us/azure/aks/ingress-basic?tabs=azure-cli#basic-configuration) in the _Azure Kubernetes Services_ documentation.
-
-**Steps**
-
-1. Add the helm chart repository for the Ingress NGINX Controller.
-    ```bash copy
-    NAMESPACE=ingress-basic
-    helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
-    helm repo update
-    ```
-    You should see the following result:
-    ```
-    "ingress-nginx" has been added to your repositories
-    ```
-2. Install the Ingress NGINX Controller.
-    ```bash copy
-    helm install ingress-nginx ingress-nginx/ingress-nginx \
-    --create-namespace \
-    --namespace $NAMESPACE \
-    --set controller.service.annotations."service\.beta\.kubernetes\.io/azure-load-balancer-health-probe-request-path"=/healthz
-    ```
-    You should see a result similar to the following:
-        ```
-        NAME: nginx-ingress
-        LAST DEPLOYED: Thu Nov  9 10:04:24 2023
-        NAMESPACE: default
-        STATUS: deployed
-        REVISION: 1
-        TEST SUITE: None
-        NOTES:
-        The ingress-nginx controller has been installed.
-        It may take a few minutes for the LoadBalancer IP to be available.
-        You can watch the status by running 'kubectl --namespace default get services -o wide -w nginx-ingress-ingress-nginx-controller'
-
-        An example Ingress that makes use of the controller:
-        apiVersion: networking.k8s.io/v1
-        kind: Ingress
-        metadata:
-            name: example
-            namespace: foo
-        spec:
-            ingressClassName: nginx
-            rules:
-            - host: www.example.com
-                http:
-                paths:
-                    - pathType: Prefix
-                    backend:
-                        service:
-                        name: exampleService
-                        port:
-                            number: 80
-                    path: /
-            # This section is only required if TLS is to be enabled for the Ingress
-            tls:
-            - hosts:
-                - www.example.com
-                secretName: example-tls
-
-        If TLS is enabled for the Ingress, a Secret containing the certificate and key must also be provided:
-
-        apiVersion: v1
-        kind: Secret
-        metadata:
-            name: example-tls
-            namespace: foo
-        data:
-            tls.crt: <base64 encoded cert>
-            tls.key: <base64 encoded key>
-        type: kubernetes.io/tls
-        ```
-3. Get the load balancer IP address to assign to your cluster.
-    ```bash copy
-    kubectl --namespace ingress-basic get services -o wide -w ingress-nginx-controller
-    ```
-    The output should be similar to the following:
-    <Callout>
-    Real values are obfuscated with asterisks (`*`).
-    </Callout>
-    ```
-    NAME                                     TYPE           CLUSTER-IP     EXTERNAL-IP    PORT(S)                      AGE    SELECTOR
-    nginx-ingress-ingress-nginx-controller   LoadBalancer   10.0.***.***   20.72.***.***   80:30454/TCP,443:32319/TCP   8m8s   app.kubernetes.io/component=controller,app.kubernetes.io/instance=nginx-ingress,app.kubernetes.io/name=ingress-nginx
-    ```
-4. Copy the value under `External-IP` address and assign it to your FQDN through your DNS provider.
-
-**Result**
-
-Your cluster can now accept incoming connections. Also, if configured, the cluster external IP address is accessible through your FQDN for the MOSTLY AI app.
+For details on how to configure each, see [_Ingress controllers_](../config/ingress-controllers).
 
 ## Deployment
 
