@@ -30,7 +30,7 @@ Before you deploy MOSTLY AI to an Azure AKS cluster, you need to complete severa
 * [Task 1: Create an AKS cluster](#task-1-create-an-aks-cluster)
 * [Task 2: Log in to the Azure CLI](#task-2-log-in-to-the-azure-cli)
 * [Task 3: Connect to the Azure AKS cluster](#task-3-connect-to-the-azure-aks-cluster)
-* [Task 4: Install an ingress controler](#task-4-install-an-ingress-controller)
+* [Task 4: Install an ingress controler](#task-4-configure-an-ingress-controller)
 
 
 ### Task 1. Create an AKS cluster
@@ -251,7 +251,7 @@ You can find the exact Azure CLI commands to connect to your AKS cluster from th
 
 Your CLI is now set up to use the new Azure AKS cluster as the default K8S context. You can now run `kubectl` and `helm` command against this context.
 
-### Task 4: Install an ingress controller
+### Task 4: Configure an ingress controller
 
 MOSTLY AI supports HAProxy by default as the ingress controller. NGINX and Istio virtual services are also supported.
 

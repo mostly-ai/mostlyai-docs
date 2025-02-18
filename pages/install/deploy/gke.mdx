@@ -29,7 +29,7 @@ Before you deploy MOSTLY AI to a GKE cluster, go over the pre-deployment tasks a
 * [Task 1: Create a GCP project](#task-1-create-a-gcp-project)
 * [Task 2: Create a GKE cluster](#task-2-create-a-gke-cluster)
 * [Task 3: Connect to the GKE cluster from your CLI](#task-3-connect-to-the-gke-cluster)
-* [Task 4: Install an ingress controler](#task-4-install-an-ingress-controller)
+* [Task 4: Install an ingress controler](#task-4-configure-an-ingress-controller)
 
 ### Task 1. Create a GCP project
 
@@ -198,7 +198,7 @@ The GKE cluster connection is now configured on your local system.
 
 You can now use `kubectl` to communicate with your GKE cluster and `helm` to install and manage packages.
 
-### Task 4: Install an ingress controller
+### Task 4: Configure an ingress controller
 
 MOSTLY AI supports HAProxy by default as the ingress controller. NGINX and Istio virtual services are also supported.
 
