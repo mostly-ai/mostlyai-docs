@@ -267,7 +267,7 @@ export const DatabaseLockIcon = () => {
     )
 }
 
-export const PrivateAssetIcon = () => {
+export const PrivateResourceIcon = () => {
     return (
         <span style={{ display: 'inline-flex', verticalAlign: 'middle' }}>
             <svg width="1em" height="1em" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" data-icon="mostly:lock" aria-hidden="true"
@@ -281,7 +281,7 @@ export const PrivateAssetIcon = () => {
     )
 }
 
-export const PublicAssetIcon = () => {
+export const PublicResourceIcon = () => {
     return (
         <span style={{ display: 'inline-flex', verticalAlign: 'middle' }}>
             <svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg" data-icon="mostly:world" aria-hidden="true"
