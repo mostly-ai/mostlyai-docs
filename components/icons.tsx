@@ -36,6 +36,12 @@ export const OpenShiftIcon = () => {
     )
 }
 
+export const IngressIcon = () => {
+    return (
+        <Image className="card-icon" src="/docs/icons/mostly-ai/ingress.svg" alt="Ingress icon" width={30} height={30} />
+    )
+}
+
 export const DatabaseIcon = () => {
     return (
         <Image className="card-icon" src="/docs/icons/mostly-ai/database.png" alt="Database icon" width={30} height={30} />

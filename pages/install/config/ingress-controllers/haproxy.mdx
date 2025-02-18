@@ -1,0 +1,26 @@
+---
+title: Enable support for HAProxy
+description: 'You can deploy MOSTLY AI and use HAProxy as the ingress controller in your Kubernetes cluster.'
+---
+
+# Enable support for HAProxy
+
+Define HAProxy as the ingress controller in the `values.yaml` file (located in the root of the MOSTLY AI Helm chart).
+
+**Steps**
+
+1. Edit the `values.yaml` file.
+2. Assign the `ingressClassName` to be `haproxy` under `_customerInstallation.deploymentSettings`.
+    ```yaml filename="values.yaml" copy {6}
+    _customerInstallation:
+      ...
+      deploymentSettings:
+        ...
+        ingressClassName: &ingressClassName haproxy
+        ...
+    ```
+3. Save the file. 
+
+**What's next**
+
+Continue with the MOSTLY AI Helm chart configuration in the related [deployment guide](../../deploy). You can then deploy MOSTLY AI.
