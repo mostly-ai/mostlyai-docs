@@ -1,20 +1,20 @@
 ---
 title: 'Ingress controllers'
-description: 'Learn how to install and configure load balancers and gateways for your Kubernetes cluster.'
+description: 'Learn how to install and configure an ingress controller for the Kubernetes cluster running MOSTLY AI if such a service is required.'
 ---
 
 import { Cards } from 'nextra/components'
 
 # Ingress controllers
 
-The MOSTLY AI Helm chart implements [HAProxy](https://www.haproxy.org/) by default.<br /><br />
+By default, the MOSTLY AI Helm chart supports [HAProxy](https://www.haproxy.org/) as an ingress controller. Learn how you can enable it for your MOSTLY AI deployment.<br /><br />
 
-<Cards.Card arrow title="Configure HAProxy" href="" />
+<Cards.Card arrow title="Configure HAProxy" href="ingress-controllers/haproxy" />
 
-Alternatively, you can install and use [NGINX](https://nginx.org/en/) or another standard Kubernetes ingress controller.<br /><br />
+Alternatively, you can install and use [NGINX](https://nginx.org/en/).<br /><br />
 
-<Cards.Card arrow title="Configure NGINX" href="" />
+<Cards.Card arrow title="Install and configure NGINX" href="nginx" />
 
-We also provide support for [Istio Virtual Services](https://istio.io/latest/docs/reference/config/networking/virtual-service/).<br /><br />
+MOSTLY AI also provides support for [Istio Virtual Services](https://istio.io/latest/docs/reference/config/networking/virtual-service/).<br /><br />
 
-<Cards.Card arrow title="Configure Istio Virtual Services" href="" />
+<Cards.Card arrow title="Configure Istio Virtual Services" href="istio" />

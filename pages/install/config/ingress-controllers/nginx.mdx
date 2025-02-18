@@ -5,7 +5,12 @@ description: 'Install the NGINX ingress controller to assign a LoadBalancer IP a
 
 import { Callout } from 'nextra/components'
 
-# Configure NGINX Ingress Controller
+# Install and configure NGINX Ingress Controller
+
+You can use NGINX as the ingress controller for your MOSTLY AI deployment. NGINX makes it possible to assign a LoadBalancer IP address to your cluster. You can then assign a Fully Qualified Domain Name (FQDN) to the IP address and make the MOSTLY AI web application accessible to your users in your organization.
+
+* [**Install NGINX**](#install-nginx). Learn how to install NGINX in your Kubernetes cluster.
+* [**Configure NGINX**](#configure-nginx). Learn the configuration steps required to use NGINX as the ingress controller for your MOSTLY AI deployment.
 
 ## Install NGINX
 
@@ -18,15 +23,16 @@ NGINX installation may be required only for [GKE](../../deploy/gke) and [Azure](
 **Steps**
 
 1. Add the helm chart repository for the Ingress NGINX Controller.
-    ```bash copy
+    ```shell copy filename="shell"
     helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
     ```
+    
     You should see the following result:
     ```
     "ingress-nginx" has been added to your repositories
     ```
 2. Install the Ingress NGINX Controller.
-    ```bash copy
+    ```shell copy filename="shell"
     helm install nginx-ingress ingress-nginx/ingress-nginx
     ```
 
@@ -103,13 +109,13 @@ nginx-ingress-ingress-nginx-controller   LoadBalancer   10.48.12.255   34.140.40
 You can now use your ingress IP and assign it to the domain name that you intend to use for your MOSTLY AI cluster.
 
 
-## Configure NGINX in the MOSTLY AI Helm chart
+## Configure NGINX
 
 Define NGINX as the ingress controller and then enable the required `ingress` annotations.
 
 **Steps**
 
-1. Assign the `ingressClassName` to be `nginx` under `_customerInstallation.deploymentSettings`.
+1. In the `values.yaml` file, assign the `ingressClassName` to be `nginx` under `_customerInstallation.deploymentSettings`.
     ```yaml filename="values.yaml" copy {6}
     _customerInstallation:
       ...
