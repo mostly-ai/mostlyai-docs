@@ -894,6 +894,16 @@
           "source": "/generators/share",
           "destination": "/generators/export-import",
           "permanent": true
+        },
+        {
+          "source": "/public-private-assets",
+          "destination": "/public-private-resources",
+          "permanent": true
+        },
+        {
+          "source": "/organizations/manage-assets",
+          "destination": "/organizations/manage-resources",
+          "permanent": true
         }
     ]
 }
