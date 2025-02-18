@@ -120,9 +120,9 @@ Define NGINX as the ingress controller and then enable the required `ingress` an
         ingressClassName: &ingressClassName nginx
         ...
     ```
-2. Enable the ingress annotations under `mostly-app`.
+2. Enable the ingress annotations under `global.ingress.annotations`.
     ```yaml filename="values.yaml" copy {3-9}
-    mostly-app:
+    global:
         ingress:
             annotations:
               nginx.ingress.kubernetes.io/proxy-body-size: 10240m
@@ -130,19 +130,6 @@ Define NGINX as the ingress controller and then enable the required `ingress` an
               nginx.org/proxy-connect-timeout: 3000s
               nginx.org/proxy-read-timeout: 3000s
               nginx.org/client-max-body-size: 3000m
-            # annotations: {}
-    ```
-3. Enable the ingress annotations under `mostly-keycloak`.
-    ```yaml filename="values.yaml" copy {7-10}
-    mostly-keycloak:
-        deployment:
-            resources: {}
-            tolerations: []
-            affinity: {}
-        ingress:
-            annotations:
-                nginx.ingress.kubernetes.io/proxy-body-size: 10240m
-                nginx.ingress.kubernetes.io/proxy-buffer-size: 128k
             # annotations: {}
     ```
 

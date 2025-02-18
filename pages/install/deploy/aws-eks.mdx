@@ -33,7 +33,7 @@ Some of the tasks describe configurations that you might have already completed 
 
 ## Pre-deployment
 
-### Task 2: Create a key pair in EC2
+### Task 1: Create a key pair in EC2
 
 When you create a key pair in EC2, you can use the generated security credentials to use `ssh` and log in to the EC2 instances that the MOSTLY AI deployment script creates.
 
@@ -96,7 +96,7 @@ You can now create a non-ROOT user which is a requirement to run the deployment 
 
 Also, later in [Task 10](#task-10-download-and-configure-deployment-files), you define the key pair name in the `eks-cluster.yaml` deployment configuration file which is a requirement before you run the deployment. You can also use the downloaded certificate to log in to the Kubernetes pods that MOSTLY AI deploys.
 
-### Task 3: Create a user group
+### Task 2: Create a user group
 
 As a best practice, create a user group to which you will assign the required policies and add the user that will run the deployment script.
 
@@ -142,7 +142,7 @@ The user group **`eksctl-group`** is now listed under **User groups**.
 />
 
 
-### Task 4: Assign an administrator policy to the user group
+### Task 3: Assign an administrator policy to the user group
 
 Allow the user group to act as an administrator which will grant the user that runs the deployment script the privileges required to create an EKS cluster and all related resources.
 
@@ -183,7 +183,7 @@ The required **`AdministratorAccess`** policy is now added to the user group **`
     height={300}
 />
 
-### Task 5: Create a user
+### Task 4: Create a user
 
 Create a non-ROOT user that should be part of the new user group and will have permissions to run the MOSTLY AI deployment script.
 
@@ -238,7 +238,7 @@ The user is now created and appears in the **Users** table.
     height={300}
 />
 
-### Task 6: Create an access key for the user
+### Task 5: Create an access key for the user
 
 Create an access key for the created user. You use the access key to configure and use the AWS CLI and run automated commands or scripts.
 
@@ -281,7 +281,7 @@ Create an access key for the created user. You use the access key to configure a
 
 The file **`eksctl_accessKeys.csv`** is saved locally and contains the **Access key** and **Secret access key** values.
 
-### Task 7: Configure AWS CLI
+### Task 6: Configure AWS CLI
 
 With the user created specifically for the creation and deployment of MOSTLY AI, you can use it configure AWS CLI so that the user performs all scripted tasks.
 
@@ -342,7 +342,7 @@ You can verify the configuration from your home folder. If you did not have a pr
     }
     ```
 
-### Task 8: Create a hosted zone in Route 53
+### Task 7: Create a hosted zone in Route 53
 
 You need to have a fully-qualified domain name (FQDN) for your MOSTLY AI application. If you need to register a new FQDN, you can do so from any domain name registrar (such as GoDaddy, Namecheap, or any other) or use AWS Route 53. You can also use a subdomain.
 
@@ -396,7 +396,7 @@ You now have a configured hosted zone in Route 53 for your FQDN.
 
 Depending on your domain name provider, it might take some time (sometimes up to a few days) before the new nameservers are updated and propagated across the global DNS network.
 
-### Task 9: Create a SSL certificate for your FQDN
+### Task 8: Create a SSL certificate for your FQDN
 
 To enable encrypted access with your FQDN, you need an SSL certificate. You can create a SSL certificate through AWS Certificate Manager.
 
@@ -487,11 +487,7 @@ After the DNS validation completes, the **Status** of your certificate changes t
     height={300}
 />
 
-## Pre-deployment 2
-
-
-
-### Task XX: Create an AWS EKS cluster
+### Task 9: Create an AWS EKS cluster
 
 **Steps**
 
@@ -520,6 +516,7 @@ After the DNS validation completes, the **Status** of your certificate changes t
           - arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy
     ```
 2. Run the CloudFormation definition with your AWS CLI.
+
     ```shell copy filename="shell"
     eksctl create cluster -f mostly-ai-cluster.yaml
     ```
@@ -533,7 +530,7 @@ The cluster creation is started in CloudFormation.
 You can track the cluster creation in CloudFormation. When the cluster is created, you can proceed to grant access to your AWS user to view resources in the cluster.
 
 
-### Task XX: Grant permissions to view cluster resources
+### Task 10: Grant permissions to view cluster resources
 
 With your cluster ready, you can view it in the **AWS Management Console** under **Elastic Kubernetes Service** > **Clusters**. However, when you open the Resources tabs or browse To do so, you need to grant permissions to the user that created the cluster.
 
@@ -577,9 +574,43 @@ The access policies now appear for the user.
 
 The user can now view the available nodes on the **Compute** tab and view the pods on **Resources** tab, under **Workloads** > **Pods**.
 
+### Task 11: Grant permissions to provision storage volumes
+
+The shared storage service `minio` that is provisioned during the deployment requires permissions to create storage volumes. To grant the required permissions, you need to attach the `AmazonEC2FullAccess` policy to the `eksctl-mostly-ai-cluster-nodegroup-NodeInstanceRole-******` role.
+
+**Steps**
+
+1. In AWS, open **Identity and Access Management (IAM)**.
+2. From the sidebar, select **Roles**.
+3. Search for `nodeinstance` and open the `eksctl-mostly-ai-cluster-nodegroup-NodeInstanceRole-******` role.
+    <Image 
+        src="/docs/docimages/install/aws-eks/_new/xx-storage-permissions-01-select-nodeinstance-role.webp"
+        alt="AWS IAM - Search for nodeinstance role"
+        width={800}
+        height={300}
+    />
+4. Click **Add permissions** and select **Attach policies**.
+    <Image 
+        src="/docs/docimages/install/aws-eks/_new/xx-storage-permissions-02-nodeinstance-role-attach-policy.webp"
+        alt="AWS IAM - Search for nodeinstance role"
+        width={800}
+        height={300}
+    />
+5. Search for `ec2fullaccess`, select **AmazonEC2FullAccess** and click **Add permissions**.
+    <Image 
+        src="/docs/docimages/install/aws-eks/_new/xx-storage-permissions-03-select-ec2fullaccess-and-attach.webp"
+        alt="AWS IAM - Search for nodeinstance role"
+        width={800}
+        height={300}
+    />
+
+**Result**
+
+The `eksctl-mostly-ai-cluster-nodegroup-NodeInstanceRole-******` role now has the `AmazonEC2FullAccess` policy attached. With the policy, the role can provision storage volumes as required by the `minio` shared storage service.
+
 ## Deployment
 
-### Task 11: Edit the `values.yaml` file
+### Task 12: Edit the `values.yaml` file
 
 **Steps**
 
@@ -680,8 +711,9 @@ The user can now view the available nodes on the **Compute** tab and view the po
 
 **Result**
 
+The `values.yaml` file is now configured for your deployment.
 
-### Task 12: Deploy MOSTLY AI
+### Task 13: Deploy MOSTLY AI
 
 1. Deploy the MOSTLY AI Helm chart.
     ```shell copy filename="shell"
@@ -700,25 +732,21 @@ The user can now view the available nodes on the **Compute** tab and view the po
 
 ## Post-deployment
 
-### Task 12: Set your FQDN to point at your ALB
+### Task 14: Set your FQDN to point at your ALB
 
 If the deployment script finishes successfully in [Task 11](#task-11-run-deployment-script), you now need to configure your FQDN to point to the ALB that is created by the CloudFormation script at the address that is output by the script.
 
 **Steps**
 
-1. From the end of the previous task, copy the ALB address that looks similar to the following:
-    ```
-    k8s-mostlyai-d90957e22b-**********.eu-central-1.elb.amazonaws.com
-    ```
-2. Go to **Route 53** > **Hosted zones** and select the hosted zone for your FQDN.
-3. Click **Create record**.
+1. Go to **Route 53** > **Hosted zones** and select the hosted zone for your FQDN.
+2. Click **Create record**.
     <Image
         src="/docs/docimages/install/aws-eks/12-alb-domain-01-click-create-record.webp"
         alt="AWS Route 53 - click Create record"
         width={800}
         height={300}
     />
-4. Configure the record.
+3. Configure the record.
     1. For **Record type**, select **A - Route traffic to an IPv4 address and some AWS resources**.
     2. For **Alias**, enable the checkbox.
     3. Under **Route traffic to**, select the following options:
@@ -731,7 +759,7 @@ If the deployment script finishes successfully in [Task 11](#task-11-run-deploym
                 width={800}
                 height={300}
             />
-5. Click **Create records**.
+4. Click **Create records**.
 
 **Result**
 
@@ -741,7 +769,7 @@ Your FQDN now points to the ALB for the MOSTLY AI app.
 
 You can now direct your browser to your FQDN and open your deployed MOSTLY AI app for the first time.
 
-### Task 13: Log in to your MOSTLY AI deployment
+### Task 14: Log in to your MOSTLY AI deployment
 
 Log in for the first time to your MOSTLY AI deployment to set a new password for the `superadmin` user.
 
