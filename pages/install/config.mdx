@@ -4,15 +4,16 @@ description: 'If you Kubernetes environment has specific requirements, you may n
 ---
 
 import { Card, Cards } from 'nextra/components'
-import { DatabaseIcon, Chip2Icon, PuzzleIcon, FileBadgeIcon } from '@components/icons'
+import { DatabaseIcon, Chip2Icon, PuzzleIcon, FileBadgeIcon, IngressIcon } from '@components/icons'
 
 ## Configure MOSTLY AI deployments
 
 If your Kubernetes environment has specific requirements, you may need to customize the deployment of MOSTLY AI. Learn how you can customize your MOSTLY AI Helm chart for the scenarios listed below.
 
-<Cards>
+<Cards num={2}>
     <Cards.Card icon={<Chip2Icon />} arrow title="Compute resources" href="/install/config/compute-resources" />
     <Cards.Card icon={<DatabaseIcon />} arrow title="External PostgreSQL" href="/install/config/external-postgresql-db" />
     <Cards.Card icon={<PuzzleIcon />} arrow title="Internal image repository" href="/install/config/internal-image-repo" />
     <Cards.Card icon={<FileBadgeIcon />} arrow title="Domain SSL certificate" href="/install/config/domain-ssl-cert" />
+    <Cards.Card icon={<IngressIcon />} arrow title="Ingress controllers" href="/install/config/ingress-controllers" />
 </Cards>

@@ -36,6 +36,12 @@ export const OpenShiftIcon = () => {
     )
 }
 
+export const IngressIcon = () => {
+    return (
+        <Image className="card-icon" src="/docs/icons/mostly-ai/ingress.svg" alt="Ingress icon" width={30} height={30} />
+    )
+}
+
 export const DatabaseIcon = () => {
     return (
         <Image className="card-icon" src="/docs/icons/mostly-ai/database.png" alt="Database icon" width={30} height={30} />
@@ -267,7 +273,7 @@ export const DatabaseLockIcon = () => {
     )
 }
 
-export const PrivateAssetIcon = () => {
+export const PrivateResourceIcon = () => {
     return (
         <span style={{ display: 'inline-flex', verticalAlign: 'middle' }}>
             <svg width="1em" height="1em" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" data-icon="mostly:lock" aria-hidden="true"
@@ -281,7 +287,7 @@ export const PrivateAssetIcon = () => {
     )
 }
 
-export const PublicAssetIcon = () => {
+export const PublicResourceIcon = () => {
     return (
         <span style={{ display: 'inline-flex', verticalAlign: 'middle' }}>
             <svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg" data-icon="mostly:world" aria-hidden="true"
@@ -301,6 +307,17 @@ export const APIIcon = () => {
     return (
         <Image  
             className="card-icon" src="/docs/icons/mostly-ai/api.svg" alt="API Icon"
+            width={26}
+            height={26}
+            style={{display: "inline", marginTop: "-2px"}}
+        />       
+    )
+}
+
+export const GitHubIcon = () => {
+    return (
+        <Image  
+            className="card-icon" src="/docs/icons/third-party/github.svg" alt="GitHub Icon"
             width={26}
             height={26}
             style={{display: "inline", marginTop: "-2px"}}
