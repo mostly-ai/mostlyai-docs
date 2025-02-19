@@ -11,6 +11,30 @@ import { CustomCallout } from '@components/custom-callout'
 
 Learn how you can troubleshoot MOSTLY AI deployment issues that might occur in any Kubernetes environment.
 
+## `404 not found` error after deploying
+
+If immediately after deploying MOSTLY AI and attempting to access the application, you see a `404 not found` error, it might be that you are trying to access the application on the HTTPS protocol without having set up a TLS certificate.
+
+**Problem**
+
+Immediately after deploying the MOSTLY AI application, you attempt to access the application through a FQDN or static IP address, the browser shows a `404 not found` error.
+
+**Cause**
+
+You might be trying to access the application on the HTTPS protocol without having set up a TLS certificate. The URL looks as listed below:
+
+```{1} /https/
+https://your-fqdn.com
+```
+
+**Solution**
+
+* Access the application through HTTP protocol, as shown in the URL below.
+  ```{1} /http/
+  http://your-fqdn.com
+  ```
+* If the issue persists, clear your browser cache and try again, or try opening the application in an Incognito or Private window in your browser.
+
 ## Generator is stuck in `Queued` status
 
 After you deploy MOSTLY AI, your first sanity test can be to train a new generator. However, the generator training might make no progress and remain in the `Queued` status indefinitely.
