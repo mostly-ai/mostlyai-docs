@@ -613,9 +613,15 @@ The shared storage service `minio` that is provisioned during the deployment req
 
 The `eksctl-mostly-ai-cluster-nodegroup-NodeInstanceRole-******` role now has the `AmazonEC2FullAccess` policy attached. With the policy, the role can provision storage volumes as required by the `minio` shared storage service.
 
+### Task 12: Configure an ingress controller
+
+MOSTLY AI supports HAProxy by default as the ingress controller. NGINX and Istio virtual services are also supported.
+
+For details on how to configure each, see [_Ingress controllers_](../config/ingress-controllers).
+
 ## Deployment
 
-### Task 12: Edit the `values.yaml` file
+### Task 13: Edit the `values.yaml` file
 
 **Steps**
 
@@ -634,15 +640,20 @@ The `eksctl-mostly-ai-cluster-nodegroup-NodeInstanceRole-******` role now has th
         mostly-ai: &fqdn yourfqdn.com
     ```
 2. (Optional) Apply one of the configurations below depending on whether you intend to use TLS-encrypted access to the MOSTLY AI application.<br /><br />
-    **➡️ You use an TLS certificate**. Replace `your-tls-secret` with the TLS secret name as defined in your cluster configuration.
+    **➡️ You use a TLS certificate**. Replace `your-tls-secret` with the TLS secret name as defined in your cluster configuration.
     <Callout>
     Your IT department or Kubernetes administrator creates the FQDN and its TLS certificate and adds it to the configuration of your cluster. When added, it comes with a TLS secret name that you can define in the `values.yaml` file. For details, see [_Configure your domain TLS certificate_](/install/config/domain-ssl-cert).
     </Callout>
-    ```yaml filename="values.yaml" copy {4}
+    ```yaml filename="values.yaml" copy {4,9}
     _customerInstallation:
     ...
       deploymentSettings:
         tlsSecretName: &tlsSecretName your-tls-secret
+    ...
+    global:
+      ...
+      tls:
+        enabled: true
     ...
     ```
     **➡️ You do not use an TLS certificate**. Replace the  `your-tls-secret` with an empty string and, for `global.tls`, set `enabled` to `false`. 
@@ -702,11 +713,11 @@ The `eksctl-mostly-ai-cluster-nodegroup-NodeInstanceRole-******` role now has th
 
 The `values.yaml` file is now configured for your deployment.
 
-### Task 13: Deploy MOSTLY AI
+### Task 14: Deploy MOSTLY AI
 
 1. Deploy the MOSTLY AI Helm chart.
     ```shell copy filename="shell"
-    helm upgrade --install mostly-ai ./mostly-combined --values values.yaml --namespace mostly-ai
+    helm upgrade --install mostly-ai ./mostly-combined --values values.yaml --namespace mostly-ai --create-namespace
     ```
     The result from the command should be similar to the following. If you see errors, see the [_Troubleshoot AWS EKS deployment issues_](/install/troubleshoot/aws-eks) section.
     ```
@@ -721,7 +732,7 @@ The `values.yaml` file is now configured for your deployment.
 
 ## Post-deployment
 
-### Task 14: Set your FQDN to point at your ALB
+### Task 15: Set your FQDN to point at your ALB
 
 If the deployment script finishes successfully in [Task 11](#task-11-run-deployment-script), you now need to configure your FQDN to point to the ALB that is created by the CloudFormation script at the address that is output by the script.
 
@@ -758,7 +769,7 @@ Your FQDN now points to the ALB for the MOSTLY AI app.
 
 You can now direct your browser to your FQDN and open your deployed MOSTLY AI app for the first time.
 
-### Task 15: Log in to your MOSTLY AI deployment
+### Task 16: Log in to your MOSTLY AI deployment
 
 Log in for the first time to your MOSTLY AI deployment to set a new password for the `superadmin` user.
 
