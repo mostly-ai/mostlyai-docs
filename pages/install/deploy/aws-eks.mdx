@@ -28,7 +28,10 @@ Some of the tasks describe configurations that you might have already completed 
     * Install [`kubectl`](https://kubernetes.io/docs/tasks/tools/).
     * Install [`eksctl`](https://eksctl.io/installation/).
 * Decide in which AWS region you want to deploy MOSTLY AI. The page documents the steps in detail to deploy to **`eu-central-1`**. If you need to deploy to another region, read the information about the [Region-specific EKS images](#region-specific-eks-image) and how to configure for that.
-
+* Obtain deployment details from your Customer Experience Engineer.
+    * **MOSTLY AI Helm chart**. Required for [Task 13](#task-13-edit-the-valuesyaml-file).
+    * **First-time log in credentials** for the MOSTLY AI application. Required for [Task 16](#task-16-log-in-to-your-mostly-ai-deployment).
+    * (Optional) **MOSTLY AI image repository pull secret**. Required only if you intend to use the MOSTLY AI image repository to pull the container images. Optional for [Task 13](#task-13-edit-the-valuesyaml-file) and [Task 14](#task-14-deploy-mostly-ai).
 
 ## Pre-deployment
 
