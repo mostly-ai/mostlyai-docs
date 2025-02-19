@@ -15,7 +15,6 @@ This page contains step-by-step tasks that guide you through the process of depl
 * [Pre-deployment](#pre-deployment)
 * [Deployment](#deployment)
 * [Post-deployment](#post-deployment)
-* [Troubleshooting](#troubleshooting)
 
 Use the tasks on this page as a reference for what you might need to complete to reach the point in which MOSTLY AI runs in an EKS cluster and you can successfully generate synthetic datasets.
 
@@ -489,6 +488,12 @@ After the DNS validation completes, the **Status** of your certificate changes t
 
 ### Task 9: Create an AWS EKS cluster
 
+To simplify the creation of an EKS cluster, you can use the `eksctl` command-line tool. The tool creates the cluster and the required resources in CloudFormation.
+
+**Prerequisites**
+
+Install [`eksctl`](https://eksctl.io/installation/).
+
 **Steps**
 
 1. Create a CloudFormation YAML file named `mostly-ai-cluster.yaml` with the contents below.
@@ -502,7 +507,7 @@ After the DNS validation completes, the **Status** of your certificate changes t
 
     nodeGroups:
       - name: mostly-ai-nodegroup
-        instanceType: m5.4xlarge
+        instanceType: m5.8xlarge
         desiredCapacity: 1
 
     cloudWatch:
@@ -719,7 +724,7 @@ The `values.yaml` file is now configured for your deployment.
     ```shell copy filename="shell"
     helm upgrade --install mostly-ai ./mostly-combined --values values.yaml --namespace mostly-ai
     ```
-    The result from the command should be similar to the following. If you see errors, see the [Troubleshooting](#troubleshooting) section.
+    The result from the command should be similar to the following. If you see errors, see the [_Troubleshoot AWS EKS deployment issues_](/install/troubleshoot/aws-eks) section.
     ```
     Release "mostly-ai" does not exist. Installing it now.
     NAME: mostly-ai
