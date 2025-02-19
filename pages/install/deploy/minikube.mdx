@@ -469,23 +469,7 @@ scp -i KEYPAIR_FILENAME.pem MOSTLY_AI_Helm_chart.zip ubuntu@IP_ADDRESS:~
             mostlyRegistryDockerConfigJson: &mostlyRegistryDockerConfigJson <HARBOR_SECRET>
         ...
         ```
-    6. Define the **Default** compute under `mostly-app`.<br /><br />
-        Use CPU and memory resources that are slightly below the ones defined for your minikube cluster. For example, if your minikube has 14 CPU cores and 24GB memory, define 10 CPU cores and 20GB memory in your Helm chart.
-        ```yaml filename="values.yaml" copy {9-10}
-        mostly-app:
-        ...
-            mostly:
-              defaultComputePool:
-                name: Default
-                type: KUBERNETES
-                toleration: engine-jobs
-                resources:
-                  cpu: 10
-                  memory: 20
-                  gpu: 0
-        ...
-        ```
-    7. Enable the `ingress` annotations.
+    6. Enable the `ingress` annotations.
         a. Enable the ingress annotations under `mostly-app`.
             ```yaml filename="values.yaml" copy {3-9}
             mostly-app:
