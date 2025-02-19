@@ -338,58 +338,6 @@ As mentioned in the [Prerequisites](#prerequisites), you need to obtain the [MOS
         mostlyRegistryDockerConfigJson: &mostlyRegistryDockerConfigJson <HARBOR_SECRET>
     ...
     ```
-6. Define the **Default** compute under `mostly-app`.<br /><br />
-    Use CPU and memory resources that are slightly below the ones defined for your worker nodes. For example, if your worker node has 14 CPU cores and 24GB memory, define 10 CPU cores and 20GB memory in your Helm chart.
-    ```yaml filename="values.yaml" copy {9-10}
-    mostly-app:
-    ...
-        mostly:
-          defaultComputePool:
-            name: Default
-            type: KUBERNETES
-            toleration: engine-jobs
-            resources:
-              cpu: 10
-              memory: 20
-              gpu: 0
-    ...
-    ```
-7. Enable the `ingress` annotations for NGINX.
-    1. Assign the `ingressClassName` to be `nginx` under `global.ingress.ingressClassName`.
-        ```yaml filename="values.yaml" copy {6}
-        global:
-        ...
-          ingress:
-            annotations:
-              route.openshift.io/termination: edge
-            ingressClassName: nginx
-        ...
-        ```
-    2. Enable the ingress annotations under `mostly-app`.
-        ```yaml filename="values.yaml" copy {3-9}
-        mostly-app:
-            ingress:
-                annotations:
-                  nginx.ingress.kubernetes.io/proxy-body-size: 10240m
-                  nginx.ingress.kubernetes.io/proxy-buffer-size: 128k
-                  nginx.org/proxy-connect-timeout: 3000s
-                  nginx.org/proxy-read-timeout: 3000s
-                  nginx.org/client-max-body-size: 3000m
-                # annotations: {}
-        ```
-    3. Enable the ingress annotations under `mostly-keycloak`.
-        ```yaml filename="values.yaml" copy {7-10}
-        mostly-keycloak:
-            deployment:
-                resources: {}
-                tolerations: []
-                affinity: {}
-            ingress:
-                annotations:
-                    nginx.ingress.kubernetes.io/proxy-body-size: 10240m
-                    nginx.ingress.kubernetes.io/proxy-buffer-size: 128k
-                # annotations: {}
-        ```
 
 **Result**
 
