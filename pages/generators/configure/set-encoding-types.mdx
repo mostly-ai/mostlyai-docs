@@ -88,6 +88,9 @@ For a column, the `model_encoding_type` key accepts one of the values listed bel
 | `TABULAR_DATETIME_RELATIVE` | Corresponds to [Tabular/Datetime: Relative](#tabulardatetime-relative).           |
 | `TABULAR_LAT_LONG`          | Corresponds to [Tabular/Latitude, Longitude](#tabularlatitude-longitude).         |
 | `LANGUAGE_TEXT`             | Corresponds to [Language/Text](#languagetext).                                    |
+| `LANGUAGE_NUMERIC`          | Corresponds to [Language/Numeric](#languagenumeric).                              |
+| `LANGUAGE_DATETIME`         | Corresponds to [Language/Datetime](#languagedatetime).                            |
+| `LANGUAGE_CATEGORICAL`      | Corresponds to [Language/Categorical](#languagecategorical).                      |
 </Tabs.Tab>
 </Tabs>
 
@@ -181,6 +184,24 @@ The values must be in decimal degrees format and range from `-90` to `90` for la
 For CSV files, wrap each coordinate in double quotes.
 To learn more, see [CSV files requirements](/generators/prepare-data/csv-requirements).
 </Callout>
+
+### Language/Categorical
+
+Use the **Language/Categorical** encoding type to fine-tune an LLM with the categorical data in the selected column.
+
+When you [generate a synthetic dataset](/synthetic-datasets/generate), you leverage the LLM knowledge for additional categories that can representatively belong to the column.
+
+### Language/Numeric
+
+Use the **Language/Numeric** encoding type to fine-tune an LLM with the numeric data in the selected column from your dataset.
+
+When you [generate a synthetic dataset](/synthetic-datasets/generate), you leverage the LLM knowledge for additional numeric values that can representatively belong to the column.
+
+### Language/Datetime
+
+Use the **Language/Datetime** encoding type to fine-tune an LLM with the date-time data in the selected column.
+
+When you [generate a synthetic dataset](/synthetic-datasets/generate), you leverage the LLM knowledge for additional date-time values that can representatively belong to the column.
 
 ### Language/Text
 
