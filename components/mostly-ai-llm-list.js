@@ -54,16 +54,7 @@ const ModelsList = () => {
       <ul className="_mt-6 _list-disc first:_mt-0 ltr:_ml-6 rtl:_mr-6">
         {models.map((model) => {
           if (model === 'MOSTLY_AI/LSTMFromScratch-3m') {
-            return (
-              <li key={model} className="_my-2">
-                <a
-                  className="_text-primary-600 _underline _decoration-from-font [text-underline-position:from-font]"
-                  href="#mostly-ai-lstm"
-                >
-                  {model}
-                </a>
-              </li>
-            );
+            return null;
           } else {
             return (
               <li key={model} className="_my-2">
@@ -92,7 +83,7 @@ const ModelsList = () => {
         or check the 
         <a
           className="_text-primary-600 _underline _decoration-from-font [text-underline-position:from-font]"
-          href="https://mostly.ai/docs/generators/configure/set-encoding-types#languagetext"
+          href="https://mostly.ai/docs/generators/configure/set-encoding-types#huggingface-llms"
         > public documentation
         </a>.
       </Callout>

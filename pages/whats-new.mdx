@@ -9,6 +9,29 @@ import { Tabs } from 'nextra/components'
 
 # What's new in MOSTLY AI
 
+## v4.2.0
+_Feb 21st, 2024_
+
+### Language `CATEGORICAL`, `NUMERIC`, and `DATETIME` encoding types
+{/* MSD-965 */}
+
+You can now fine-tune LLMs with tabular data from columns containing categorical, numeric, and datetime values. You can do so with the new encoding types **Language/Categorical**, **Language/Numeric**, and **Language/Datetime**.
+
+The new encoding types are particularly useful for original datasets with smaller sample sizes. You can then leverage the LLMs knowledge to still generate representative synthetic data.
+
+For details, see [_Set encoding types_](/generators/configure/set-encoding-types).
+
+### Improvements
+
+* {/* MSD-1350 */} Added a shortcut to the **Training logs** in the **Data insights** section
+* {/* MSD-1379 */} Improvements in the Assistant system prompt. Among other issues resolved, the Assistant now handles DataFrames correctly
+
+### Resolved issues
+
+* {/* MSD-1377 */} Resolved the page refreshes after an Assistant thread title is updated
+* {/* MSD-1356 */} Removed `maxLength` constraint on the Assistant messages
+* {/* MSD-1356 */} Limit the length for Column and Table Names to 256 chars
+
 ## v4.1.1
 _Feb 12th, 2024_
 

@@ -6,6 +6,7 @@ description: 'MOSTLY AI supports well-known data types and implements logic on h
 import { Callout } from 'nextra/components'
 import { Tabs } from 'nextra/components'
 import Image from 'next/image'
+import { CustomCallout } from '@components/custom-callout'
 import ModelsList from '@components/mostly-ai-llm-list'
 
 # Set encoding types
@@ -87,13 +88,38 @@ For a column, the `model_encoding_type` key accepts one of the values listed bel
 | `TABULAR_DATETIME`          | Corresponds to [Tabular/Datetime](#tabulardatetime).                              |
 | `TABULAR_DATETIME_RELATIVE` | Corresponds to [Tabular/Datetime: Relative](#tabulardatetime-relative).           |
 | `TABULAR_LAT_LONG`          | Corresponds to [Tabular/Latitude, Longitude](#tabularlatitude-longitude).         |
+| `LANGUAGE_CATEGORICAL`      | Corresponds to [Language/Categorical](#languagecategorical).                      |
+| `LANGUAGE_NUMERIC`          | Corresponds to [Language/Numeric](#languagenumeric).                              |
+| `LANGUAGE_DATETIME`         | Corresponds to [Language/Datetime](#languagedatetime).                            |
 | `LANGUAGE_TEXT`             | Corresponds to [Language/Text](#languagetext).                                    |
+
 </Tabs.Tab>
 </Tabs>
 
 ## Encoding types
 
-### Tabular/Categorical
+When you select an encoding type, you also [select the model to train or fine-tune](#models). MOSTLY AI supports tabular and language models.
+
+[**Tabular models**](#tabular-models). Tabular models train on original tabular data to then generate privacy-preserving **tabular synthetic data**. Their encoding types are prefixed with **Tabular/** (in the Platform UI) or `TABULAR_` (for the Python SDK). MOSTLY AI supports three tabular model sizes.
+
+The list of tabular models includes:
+   * [MOSTLY AI/Small](#mostly-aismall)
+   * [MOSTLY AI/Medium](#mostly-aimedium)
+   * [MOSTLY AI/Large](#mostly-ailarge)
+      <Callout>
+      Selecting a model size is part of the _speed vs accuracy_ trade-off when training a generator. For details, see [_Increase model size_](/generators/configure/improve-model-accuracy#increase-model-size) and [_Select a smaller model_](/generators/configure/speed-up-training#select-a-smaller-model).
+      </Callout>
+[**Language models**](#language-models). With language models, you can generate privacy-preserving **synthetic text data**. Encoding types for language models are prefixed with **Language/** (when using the Platform UI) or `LANGUAGE_` (when using the Python SDK). To learn more about the supported use cases, check out each Language encoding type.
+
+The list of language models includes:
+   * [MOSTLY_AI/LSTMFromScratch-3m](#mostly_ailstmfromscratch-3m)
+   * [HuggingFace LLMs](#huggingface-llms)
+
+### Tabular
+
+Tabular encoding types include support for multiple data types, such as categorical, numeric, datetime, and geolocation data.
+
+#### Categorical
 
 A categorical variable has a fixed set of possible values that are already present in the input data. An example of such a variable is T-shirt size, which could consist of the following categories: 'XS, S, M, L, XL'. The synthetic data will only contain categories that were present in the original data. Categorical variables thus prevent random values (for instance, 'XM, A, B') from appearing in your synthetic dataset.
 
@@ -113,11 +139,11 @@ The use of **Constant** introduces the `_RARE`_ category in your synthetic data 
 **Sample**<br />
 Replaces rare categories with categories that will appear in the synthetic version of this column. The categories are sampled from the original data based on their frequency. The more frequent a category is, the more likely it will be selected.
 
-### Tabular/Numeric: Auto
+#### Numeric: Auto
 
 With **Numeric: Auto**, MOSTLY AI uses heuristics to decide the most appropriate **Numeric** encoding type based on the data in a column. For most cases, select **Numeric:Auto** or leave it selected by default.
 
-### Tabular/Numeric: Discrete
+#### Numeric: Discrete
 
 **Discrete** treats the numeric data in the column as categorical values. You can use this option for columns that have categorical numeric codes, such as:
   * ZIP codes, postal codes, country phone codes
@@ -126,11 +152,11 @@ With **Numeric: Auto**, MOSTLY AI uses heuristics to decide the most appropriate
 
 **Rare category protection** also applies to **Numeric: Discrete** columns. When you generate a synthetic dataset, MOSTLY AI replaces rare numeric categories with a non-rare numeric category in the column (applying the **Sample** method as explained above for Categorical columns). `_RARE_` values are not generated for **Numeric: Discrete** columns.
 
-### Tabular/Numeric: Binned
+#### Numeric: Binned
 
 You can use **Binned** for columns containing large integers or long decimals. MOSTLY AI bins the numerical values into 100 bins and considers each a category during training. During generation, MOSTLY AI samples values from the corresponding bin to generate the synthetic values in the column.
 
-### Tabular/Numeric: Digit
+#### Numeric: Digit
 
 **Numeric: Digit** recognizes the data in the column as numeric values.
 
@@ -138,11 +164,11 @@ You can use **Binned** for columns containing large integers or long decimals. M
 MOSTLY AI can synthesize floating-point values with a precision of up to 8 digits after the decimal point.
 </Callout>
 
-### Tabular/Character
+#### Character
 
 Use the **Character** encoding type to synthesize short strings with a consistent pattern, such as phone numbers, license plate numbers, company ID’s, transaction ID, and social security ID’s.
 
-### Tabular/Datetime
+#### Datetime
 
 Datetime refers to values that contain a date part and a time part. This encoding type enables MOSTLY AI to synthesize them and generate valid and statistically representative dates and times.
 
@@ -156,7 +182,7 @@ The following formats are supported:
 | **Datetime with seconds** | `yyyy-MM-dd HH:mm:ss`<br />`yyyy-MM-ddTHH:mm:ss`<br />`yyyy-MM-ddTHH:mm:ssZ` | `2020-02-08 09:30:26`<br />`2020-02-08T09:30:26`<br />`2020-02-08T09:30:26Z` |
 | **Datetime with milliseconds** | `yyyy-MM-dd HH:mm:ss.SSS`<br />`yyyy-MM-ddTHH:mm:ss.SSS`<br />`yyyy-MM-ddTHH:mm:ss.SSSZ` | `2020-02-08 09:30:26.123`<br />`2020-02-08T09:30:26.123`<br />`2020-02-08T09:30:26.123Z` |
 
-### Tabular/Datetime: Relative
+#### Datetime: Relative
 
 **Datetime: Relative** models the time interval between two subsequent events in the synthetic dataset. This encoding type causes the time between events to become very accurate, but the dates become less accurate.
 
@@ -164,7 +190,7 @@ The following formats are supported:
 The **Datetime: Relative** encoding type is only available for linked tables.
 </Callout>
 
-### Tabular/Latitude, Longitude
+#### Latitude, Longitude
 
 Use the **Latitude, Longitude** encoding type to synthesize geolocation coordinates.
 
@@ -182,25 +208,76 @@ For CSV files, wrap each coordinate in double quotes.
 To learn more, see [CSV files requirements](/generators/prepare-data/csv-requirements).
 </Callout>
 
-### Language/Text
+### Language
 
-For synthetic text, MOSTLY AI provides a non-pre-trained LSTM model as well as the option to use a text generation model from [HuggingFace](https://huggingface.co/) that is configured for use in MOSTLY AI.
+Use **Language** encoding types for the following use cases:
 
-#### HuggingFace text models
+* fine-tune LLMs with tabular categorical, numeric, and datetime data
+* fine-tune LLMs with original unstructured text data to then generate synthetic text data
+* train on short text data to later generate privacy-preserving names, emails, and others
 
-When you deploy MOSTLY AI in your organization's private cloud, you can integrate with as many HuggingFace text generation models as needed. For configuration details, see the [_Models configuration_](/administration/models) page.
+#### Categorical
 
-On the MOSTLY AI Platform at https://app.mostly.ai, you can find the following models available.
+Use the **Language/Categorical** encoding type to fine-tune an LLM with the categorical data in the selected column.
 
-<Callout>
-If a model you want to use is not available, contact [MOSTLY AI Support](mailto:support@mostly.ai).
-</Callout>
+When you [generate a synthetic dataset](/synthetic-datasets/generate), you leverage the LLM pre-training and knowledge in the use cases listed below.
 
-<ModelsList/>
+* Generate representative categories even when fine-tuning with smaller datasets
+* Apply [conditional generation by seeding](/synthetic-datasets/seeded-generation) numeric values that weren't present in the original data
 
-#### MOSTLY AI LSTM
+#### Numeric
 
-Use the **LSTM** model type to synthesize unstructured natural language texts up to 1,000 characters long. This model is not pre-trained.
+Use the **Language/Numeric** encoding type to fine-tune an LLM with the numeric data in the selected column.
+
+<CustomCallout>
+Use cases for LLM-generated numeric data are the same as the ones listed in [**Language/Categorical**](#languagecategorical).
+</CustomCallout>
+
+#### Datetime
+
+Use the **Language/Categorical** encoding type to fine-tune an LLM with the numeric data in the selected column.
+
+<CustomCallout>
+Use cases for LLM-generated datetime data are the same as the ones listed in [**Language/Categorical**](#languagecategorical).
+</CustomCallout>
+
+#### Text
+
+With the **Language/Text** encoding type, you have two general choices:
+
+* train the not pre-trained [MOSTLY AI/LSTM](#mostly_ailstmfromscratch-3m) model with unstructured text to be able to generate unstructured natural language texts up to 1,000 characters
+* fine-tune a [HuggingFace LLM](https://huggingface.co/) with original unstructured language texts of any length to generate unstructured synthetic text data
+
+## Models
+
+MOSTLY AI supports the following models for generating tabular synthetic data and unstructured synthetic text.
+
+### Tabular
+
+For tabular data, you can train tabular models of three different sizes, depending on the trade-off between speed and accuracy.
+
+#### MOSTLY AI/Small
+
+The **MOSTLY AI/Small** tabular model uses fewer parameters, takes less memory and time, at the cost of accuracy
+
+#### MOSTLY AI/Medium
+
+The **MOSTLY AI/Medium** tabular model uses an optimal amount of parameters and is best for most use cases.
+
+#### MOSTLY AI/Large
+
+The **MOSTLY AI/Large** tabular model maximizes accuracy with more parameters but requires extra memory and time to complete training.
+
+### Language
+
+For unstructured text data, you can:
+
+* train the not pre-trained [MOSTLY AI/LSTM](#mostly_ailstmfromscratch-3m)
+* fine-tune a [HuggingFace LLM](https://huggingface.co/)
+
+#### MOSTLY AI/LSTMFromScratch-3m
+
+The **LSTM** is not a pre-trained model and you can use it to synthesize unstructured natural language texts up to 1,000 characters.
 
 You can use this encoding type to generate realistic, representative, and anonymous financial transaction texts, short user feedback, medical assessments, PII fields, etc. As the resulting synthetic texts are representative of the terms, tokens, and their co-occurrence in the original data, they can be confidently used in analytics and machine learning use cases, such as sentiment analysis and named-entity recognition. Even though they might look noisy and not very human-readable, they will work perfectly for these use cases.
 
@@ -328,3 +405,19 @@ Below, you can find two examples. The first example demonstrates MOSTLY AI’s a
 </tr>
 </tbody>
 </table>
+
+#### HuggingFace LLMs
+
+MOSTLY AI supports fine-tuning HuggingFace LLMs with original unstructured text data to be able to generate privacy-preserving synthetic text data.
+
+When you deploy MOSTLY AI in your organization's private cloud, you can integrate with as many HuggingFace LLMs as needed. For configuration details, see the [_Models configuration_](/administration/models) page.
+
+On the MOSTLY AI Platform at https://app.mostly.ai, you can find the following text models available.
+
+<Callout>
+The list below includes all models you can use with the **Language/Text** encoding type. You will find the not pre-trained MOSTLY AI/LSTM model and the HuggingFace LLMs currently available on [https://app.mostly.ai](https://app.mostly.ai).
+
+If a model you want to use is not available, contact [MOSTLY AI Support](mailto:support@mostly.ai).
+</Callout>
+
+<ModelsList/>
