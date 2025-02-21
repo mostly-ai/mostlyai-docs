@@ -250,21 +250,32 @@ With the **Language/Text** encoding type, you have two general choices:
 
 ## Models
 
-MOSTLY AI supports the following models for generating synthetic tabular data and synthetic text.
+MOSTLY AI supports the following models for generating tabular synthetic data and unstructured synthetic text.
 
-### MOSTLY AI/Small
+### Tabular
+
+For tabular data, you can train tabular models of three different sizes, depending on the trade-off between speed and accuracy.
+
+#### MOSTLY AI/Small
 
 The **MOSTLY AI/Small** tabular model uses fewer parameters, takes less memory and time, at the cost of accuracy
 
-### MOSTLY AI/Medium
+#### MOSTLY AI/Medium
 
 The **MOSTLY AI/Medium** tabular model uses an optimal amount of parameters and is best for most use cases.
 
-### MOSTLY AI/Large
+#### MOSTLY AI/Large
 
 The **MOSTLY AI/Large** tabular model maximizes accuracy with more parameters but requires extra memory and time to complete training.
 
-### MOSTLY AI/LSTMFromScratch-3m
+### Language
+
+For unstructured text data, you can:
+
+* train the not pre-trained [MOSTLY AI/LSTM](#mostly_ailstmfromscratch-3m)
+* fine-tune a [HuggingFace LLM](https://huggingface.co/)
+
+#### MOSTLY AI/LSTMFromScratch-3m
 
 The **LSTM** is not a pre-trained model and you can use it to synthesize unstructured natural language texts up to 1,000 characters.
 
@@ -395,9 +406,9 @@ Below, you can find two examples. The first example demonstrates MOSTLY AI’s a
 </tbody>
 </table>
 
-### HuggingFace LLMs
+#### HuggingFace LLMs
 
-MOSTLY AI supports fine-tuning HuggingFace LLMs with original text data.
+MOSTLY AI supports fine-tuning HuggingFace LLMs with original unstructured text data to be able to generate privacy-preserving synthetic text data.
 
 When you deploy MOSTLY AI in your organization's private cloud, you can integrate with as many HuggingFace LLMs as needed. For configuration details, see the [_Models configuration_](/administration/models) page.
 
