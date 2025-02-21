@@ -83,7 +83,7 @@ const ModelsList = () => {
         or check the 
         <a
           className="_text-primary-600 _underline _decoration-from-font [text-underline-position:from-font]"
-          href="https://mostly.ai/docs/generators/configure/set-encoding-types#languagetext"
+          href="https://mostly.ai/docs/generators/configure/set-encoding-types#huggingface-llms"
         > public documentation
         </a>.
       </Callout>
