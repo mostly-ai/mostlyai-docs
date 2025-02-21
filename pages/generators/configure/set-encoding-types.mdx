@@ -101,13 +101,19 @@ For a column, the `model_encoding_type` key accepts one of the values listed bel
 When you select an encoding type, you also [select the model to train or fine-tune](#models). MOSTLY AI supports tabular and language models.
 
 [**Tabular models**](#tabular-models). Tabular models train on original tabular data to then generate privacy-preserving **tabular synthetic data**. Their encoding types are prefixed with **Tabular/** (in the Platform UI) or `TABULAR_` (for the Python SDK). MOSTLY AI supports three tabular model sizes.
+
+The list of tabular models includes:
    * [MOSTLY AI/Small](#mostly-aismall)
    * [MOSTLY AI/Medium](#mostly-aimedium)
    * [MOSTLY AI/Large](#mostly-ailarge)
       <Callout>
       Selecting a model size is part of the _speed vs accuracy_ trade-off when training a generator. For details, see [_Increase model size_](/generators/configure/improve-model-accuracy#increase-model-size) and [_Select a smaller model_](/generators/configure/speed-up-training#select-a-smaller-model).
       </Callout>
-[**Language models**](#language-models). Language models include the [MOSTLY_AI/LSTMFromScratch-3m](#mostly_ailstmfromscratch-3m) model and [HuggingFace LLMs](#huggingface-llms). With language models, you can generate privacy-preserving **synthetic text data**. Encoding types for language models are prefixed with **Language/** (when using the Platform UI) or `LANGUAGE_` (when using the Python SDK).
+[**Language models**](#language-models). With language models, you can generate privacy-preserving **synthetic text data**. Encoding types for language models are prefixed with **Language/** (when using the Platform UI) or `LANGUAGE_` (when using the Python SDK). To learn more about the supported use cases, check out each Language encoding type.
+
+The list of language models includes:
+   * [MOSTLY_AI/LSTMFromScratch-3m](#mostly_ailstmfromscratch-3m)
+   * [HuggingFace LLMs](#huggingface-llms)
 
 ### Tabular
 
@@ -258,11 +264,11 @@ The **MOSTLY AI/Small** tabular model uses fewer parameters, takes less memory a
 
 The **MOSTLY AI/Medium** tabular model uses an optimal amount of parameters and is best for most use cases.
 
-### MOSTLY_AI/Large
+### MOSTLY AI/Large
 
 The **MOSTLY AI/Large** tabular model maximizes accuracy with more parameters but requires extra memory and time to complete training.
 
-### MOSTLY_AI/LSTMFromScratch-3m
+### MOSTLY AI/LSTMFromScratch-3m
 
 The **LSTM** is not a pre-trained model and you can use it to synthesize unstructured natural language texts up to 1,000 characters.
 
