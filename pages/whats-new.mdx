@@ -17,10 +17,7 @@ _Feb 21st, 2024_
 
 You can now fine-tune LLMs with tabular data from columns containing categorical, numeric, and datetime values. You can do so with the new encoding types **Language/Categorical**, **Language/Numeric**, and **Language/Datetime**.
 
-Use cases:
-
-* Fine-tune LLMs with smaller training sample sizes to then leverage the knowledge of pre-trained LLMs for generating representative synthetic data.
-* Apply [_conditional generation by seeding_](/synthetic-datasets/seeded-generation) categories, numeric values, or datetime values that weren't present in the original data to again leverage the LLM knowledge for representative generation.
+The new encoding types are particularly useful for smaller original datasets (with smaller sample sizes). You can then leverage the LLMs knowledge to still generate representative synthetic data.
 
 For details, see [_Set encoding types_](/generators/configure/set-encoding-types).
 
@@ -31,9 +28,9 @@ For details, see [_Set encoding types_](/generators/configure/set-encoding-types
 
 ### Resolved issues
 
-{/* MSD-1377 */} Resolved the page refreshes after an Assistant thread title is updated
-{/* MSD-1356 */} Removed `maxLength` constraint on the Assistant messages
-{/* MSD-1356 */} Limit the length for Column and Table Names to 256 chars
+* {/* MSD-1377 */} Resolved the page refreshes after an Assistant thread title is updated
+* {/* MSD-1356 */} Removed `maxLength` constraint on the Assistant messages
+* {/* MSD-1356 */} Limit the length for Column and Table Names to 256 chars
 
 ## v4.1.1
 _Feb 12th, 2024_
