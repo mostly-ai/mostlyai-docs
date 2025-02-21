@@ -189,19 +189,22 @@ To learn more, see [CSV files requirements](/generators/prepare-data/csv-require
 
 Use the **Language/Categorical** encoding type to fine-tune an LLM with the categorical data in the selected column.
 
-When you [generate a synthetic dataset](/synthetic-datasets/generate), you leverage the LLM knowledge for additional categories that can representatively belong to the column.
+When you [generate a synthetic dataset](/synthetic-datasets/generate), you leverage the LLM pre-training and knowledge in the use cases listed below.
+
+* Generate representative categories even when fine-tuning with smaller datasets
+* Apply [conditional generation by seeding](/synthetic-datasets/seeded-generation) numeric values that weren't present in the original data
 
 ### Language/Numeric
 
-Use the **Language/Numeric** encoding type to fine-tune an LLM with the numeric data in the selected column from your dataset.
+Use the **Language/Numeric** encoding type to fine-tune an LLM with the numeric data in the selected column.
 
-When you [generate a synthetic dataset](/synthetic-datasets/generate), you leverage the LLM knowledge for additional numeric values that can representatively belong to the column.
+For use cases, see [**Language/Categorical**](#languagecategorical).
 
 ### Language/Datetime
 
-Use the **Language/Datetime** encoding type to fine-tune an LLM with the date-time data in the selected column.
+Use the **Language/Categorical** encoding type to fine-tune an LLM with the numeric data in the selected column.
 
-When you [generate a synthetic dataset](/synthetic-datasets/generate), you leverage the LLM knowledge for additional date-time values that can representatively belong to the column.
+For use cases, see [**Language/Categorical**](#languagecategorical).
 
 ### Language/Text
 
