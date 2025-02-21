@@ -6,6 +6,7 @@ description: 'MOSTLY AI supports well-known data types and implements logic on h
 import { Callout } from 'nextra/components'
 import { Tabs } from 'nextra/components'
 import Image from 'next/image'
+import { CustomCallout } from '@components/custom-callout'
 import ModelsList from '@components/mostly-ai-llm-list'
 
 # Set encoding types
@@ -198,13 +199,17 @@ When you [generate a synthetic dataset](/synthetic-datasets/generate), you lever
 
 Use the **Language/Numeric** encoding type to fine-tune an LLM with the numeric data in the selected column.
 
-For use cases, see [**Language/Categorical**](#languagecategorical).
+<CustomCallout>
+Use cases for LLM-generated numeric data are the same as the ones listed in [**Language/Categorical**](#languagecategorical).
+</CustomCallout>
 
 ### Language/Datetime
 
 Use the **Language/Categorical** encoding type to fine-tune an LLM with the numeric data in the selected column.
 
-For use cases, see [**Language/Categorical**](#languagecategorical).
+<CustomCallout>
+Use cases for LLM-generated datetime data are the same as the ones listed in [**Language/Categorical**](#languagecategorical).
+</CustomCallout>
 
 ### Language/Text
 
