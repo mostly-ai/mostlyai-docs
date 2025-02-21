@@ -12,10 +12,15 @@ import { Tabs } from 'nextra/components'
 ## v4.2.0
 _Feb 21st, 2024_
 
-### `NUMERIC`, `DATETIME`, and `CATEGORICAL` encoding types for fine-tuned LLMs
+### Language `CATEGORICAL`, `NUMERIC`, and `DATETIME` encoding types
 {/* MSD-965 */}
 
-Leverage the knowledge of LLMs by fine-tuning data columns with the new `LANGUAGE/NUMERIC`, `LANGUAGE/DATETIME`, and `LANGUAGE/CATEGORICAL` encoding types even for small training data sample sizes.
+You can now fine-tune LLMs with tabular data from columns containing categorical, numeric, and datetime values. You can do so with the new encoding types **Language/Categorical**, **Language/Numeric**, and **Language/Datetime**.
+
+Use cases:
+
+* Fine-tune LLMs with smaller training sample sizes to then leverage the knowledge of pre-trained LLMs for generating representative synthetic data.
+* Apply [_conditional generation by seeding_](/synthetic-datasets/seeded-generation) categories, numeric values, or datetime values that weren't present in the original data to again leverage the LLM knowledge for representative generation.
 
 For details, see [_Set encoding types_](/generators/configure/set-encoding-types).
 
