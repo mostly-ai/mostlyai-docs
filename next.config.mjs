@@ -916,6 +916,11 @@ export default withNextra({
         source: "/organizations/manage-assets",
         destination: "/organizations/manage-resources",
         permanent: true
+      },
+      {
+        source: "/install/config/domain-ssl-cert",
+        destination: "/install/config/domain-tls-cert",
+        permanent: true
       }
   ]
 });
