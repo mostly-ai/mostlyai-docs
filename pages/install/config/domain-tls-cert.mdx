@@ -1,17 +1,17 @@
 ---
-title: 'Configure your domain SSL certificate'
-description: 'To deploy MOSTLY AI, you need to configure SSL certificates for your fully-qualified domain name (FQDN) to enable secure access to the MOSTLY AI web app.'
+title: 'Configure a domain TLS certificate'
+description: 'To deploy MOSTLY AI, you need to configure TLS certificates for your fully-qualified domain name (FQDN) to enable secure access to the MOSTLY AI web app.'
 ---
 
 import { Callout } from 'nextra/components'
 
-# Configure your domain SSL certificate
+# Configure your domain TLS certificate
 
-To deploy MOSTLY AI, you need to configure SSL certificates for your fully-qualified domain name (FQDN) to enable secure access to the MOSTLY AI web app.
+To deploy MOSTLY AI, you need to configure TLS certificates for your fully-qualified domain name (FQDN) to enable secure access to the MOSTLY AI web app.
 
 **Prerequisites**
 
-* Obtain your FQDN SSL certificate from your IT department.
+* Obtain your FQDN TLS certificate from your IT department.
 * Obtain the name of the secret that your IT department creates in the Kubernetes management console. If you have access to the Kubernetes cluster and the certificate, you can create the secret with the following command:
     ```bash copy
     kubectl create secret generic mostly-tls-secret --from-file=certificate.pem -n <namespace>
@@ -19,7 +19,7 @@ To deploy MOSTLY AI, you need to configure SSL certificates for your fully-quali
 
 **Steps**
 
-1. Copy the SSL certificate in the `MOSTLY_AI_Helm_chart` directory.
+1. Copy the TLS certificate in the `MOSTLY_AI_Helm_chart` directory.
 2. Change directory to `templates/`.
 3. Edit the files:
     * `mostly-app-ingress.yaml`
