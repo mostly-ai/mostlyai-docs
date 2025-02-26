@@ -589,7 +589,7 @@ export default withNextra({
       },
       {
         source: "/install/custom-config/domain-ssl-cert",
-        destination: "/install/config/domain-ssl-cert",
+        destination: "/install/config/domain-tls-cert",
         permanent: true
       },
       {
