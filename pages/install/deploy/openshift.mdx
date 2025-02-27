@@ -50,7 +50,7 @@ You can install MOSTLY AI in an OpenShift cluster. This page covers the list of 
     2. (Optional) Apply one of the configurations below depending on whether you intend to use SSL-encrypted access to the MOSTLY AI application.<br /><br />
         **➡️ You use an SSL certificate**. Replace `your-tls-secret` with the TLS secret name as defined in your cluster configuration.
         <Callout>
-        Your IT department or Kubernetes administrator creates the FQDN and its SSL certificate and adds it to the configuration of your cluster. When added, it comes with a TLS secret name that you can define in the `ocp-values.yaml` file. For details, see [_Configure your domain SSL certificate_](/install/config/domain-ssl-cert).
+        Your IT department or Kubernetes administrator creates the FQDN and its SSL certificate and adds it to the configuration of your cluster. When added, it comes with a TLS secret name that you can define in the `ocp-values.yaml` file. For details, see [_Configure your domain SSL certificate_](/install/config/domain-tls-cert).
         </Callout>
         ```yaml filename="ocp-values.yaml" copy {4}
         _customerInstallation:

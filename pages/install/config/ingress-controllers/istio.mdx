@@ -28,12 +28,12 @@ MOSTLY AI provides support for Istio Virtual Services in case you are already us
         ...
         ```
     2. If `global.tls.enabled` is set to `True`, you must then define `global.tls.secretName`.
-        ```yaml copy filename="values.yaml" {4}
+        ```yaml copy filename="values.yaml" {4,5} /INSERT-TLS-SECRET-NAME/
         ...
         global:
             tls:
                 enabled: True
-                secretName: your-tls-secret-name
+                secretName: INSERT-TLS-SECRET-NAME
         ...
         ```
 5. Save both files.
