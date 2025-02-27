@@ -7,11 +7,15 @@ description: 'You can deploy MOSTLY AI and use HAProxy as the ingress controller
 
 Define HAProxy as the ingress controller in the `values.yaml` file (located in the root of the MOSTLY AI Helm chart).
 
+**Prerequisites**
+
+Ask your Customer Success Engineer to provide a Helm chart with enabled HAProxy.
+
 **Steps**
 
 1. Edit the `values.yaml` file.
 2. Assign the `ingressClassName` to be `haproxy` under `_customerInstallation.deploymentSettings`.
-    ```yaml filename="values.yaml" copy {6}
+    ```yaml filename="values.yaml" copy {5}
     _customerInstallation:
       ...
       deploymentSettings:

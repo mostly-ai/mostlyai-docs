@@ -12,45 +12,24 @@ To deploy MOSTLY AI, you need to configure TLS certificates for your fully-quali
 **Prerequisites**
 
 * Obtain your FQDN TLS certificate from your IT department.
-* If applicable, download the certificate from AWS Certificate Manager (requires AWS CLI and obtaining the `certificate-arn`).
-    ```shell copy filename="shell"
-    aws acm get-certificate --certificate-arn <certificate-arn>
-    ```
-    <br />
-* Obtain the name of the secret that your IT department creates in the Kubernetes management console. If you have access to the Kubernetes cluster and the certificate, you can create the secret with the following command:
-    ```shell copy filename="shell"
-    kubectl create secret generic mostly-tls-secret --from-file=cert.pem -n <namespace>
+* If you have access to the Kubernetes cluster and the certificate, you can create the secret in your Kubernetes cluster as follows:
+    ```shell copy filename="shell" /INSERT_MOSTLY_TLS_SECRET_NAME/
+    kubectl create secret tls INSERT_MOSTLY_TLS_SECRET_NAME --cert=cert.crt --key=cert.key -n <namespace>
     ```
 
 **Steps**
 
-1. Copy the TLS certificate in the `MOSTLY_AI_Helm_chart` directory.
-2. Change directory to `templates/`.
-3. Edit the files:
-    * `mostly-app-ingress.yaml`
-    * `mostly-keycloak-ingress.yaml`
-    * `mostly-ui-ingress.yaml`
-4. In each file, add the lines between the ellipsis inside the `spec` block (as shown in the excerpt):
-    ```yaml
-        spec:
-        ...
-            tls:
-                - hosts:
-                    - {{ .Values.ingress.fqdn }}
-                secretName: MOSTLY_TLS_SECRET
-        ...
+1. Edit the `values.yaml` file.
+2. Set the TLS secret name to the name of the secret you created under `_customerInstallation.deploymentSettings.tlsSecretName`.
+    ```yaml filename="values.yaml" {4} /INSERT_MOSTLY_TLS_SECRET_NAME/
+        _customerInstallation:
+          ...
+          deploymentSettings:
+            tlsSecretName: &tlsSecretName INSERT_MOSTLY_TLS_SECRET_NAME
+          ...
     ```
-    <Callout type="info">
-    Replace `MOSTLY_TLS_SECRET` with the name of the secret configured by your IT department in the Kubernetes management console.
-    </Callout>
-4. In the root of the Helm chart, edit `values.yaml` and update the `ingress.fqdn` value with your FQDN.
-    ```yaml filename="values.yaml" {2}
-    ingress:
-        fqdn: mostly.domain.comm
-        ...
-    ```
-5. Save all three files.
+3. Save the file.
 
 **What's next**
 
-Check the [deployment checklist](../deploy/checklist) for any additional configurations that might be required. You can then continue with the [deployment](../deploy) of MOSTLY AI.
+You can continue with the [deployment](../deploy) of MOSTLY AI.
