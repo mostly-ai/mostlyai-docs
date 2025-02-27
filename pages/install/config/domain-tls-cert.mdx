@@ -12,9 +12,9 @@ To deploy MOSTLY AI, you need to configure TLS certificates for your fully-quali
 **Prerequisites**
 
 * Obtain your FQDN TLS certificate from your IT department.
-* If you have access to the Kubernetes cluster and the certificate, you can create the secret in your Kubernetes cluster as follows:
+* If you have access to the Kubernetes cluster and the certificate, create the secret in the `mostly-ai` namespace as follows:
     ```shell copy filename="shell" /INSERT_MOSTLY_TLS_SECRET_NAME/
-    kubectl create secret tls INSERT_MOSTLY_TLS_SECRET_NAME --cert=cert.crt --key=cert.key -n <namespace>
+    kubectl create secret tls INSERT_MOSTLY_TLS_SECRET_NAME --cert=cert.crt --key=cert.key -n mostly-ai
     ```
 
 **Steps**
