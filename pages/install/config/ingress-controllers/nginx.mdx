@@ -112,7 +112,7 @@ Define NGINX as the ingress controller and then enable the required `ingress` an
 **Steps**
 
 1. In the `values.yaml` file, assign the `ingressClassName` to be `nginx` under `_customerInstallation.deploymentSettings`.
-    ```yaml filename="values.yaml" copy {6}
+    ```yaml filename="values.yaml" copy {5} /nginx/
     _customerInstallation:
       ...
       deploymentSettings:
