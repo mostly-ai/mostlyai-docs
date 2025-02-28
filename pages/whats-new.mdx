@@ -9,6 +9,30 @@ import { Tabs } from 'nextra/components'
 
 # What's new in MOSTLY AI
 
+## v4.2.3
+_Feb 28th, 2024_
+
+### User profiles and usernames
+
+Ever wanted to build your own public portfolio of synthetic data resources? Today, MOSTLY AI introduces user profiles and the ability to set a unique user identifier for your resources.
+
+* Set a user name to uniquely identify each of your synthetic data resources.
+* Make your own generators, synthetic datasets, and connectors public. The resources are then automatically made available to all users of the platform and listed publicly on your profile.
+* Share your profile with others and showcase your portfolio of synthetic data resources.
+
+For details, see [_User profiles_](/user-profiles).
+
+### Improvements
+
+* {/* MSD-1337 */} Public resources are now made distinct with the new **public** badge
+* {/* MSD-1335 */} In the Transfer ownership modal window, you can now view and select only organizations in which you have the Contributor role
+
+### Resolved issues
+
+* {/* MSD-1321 */} After an organization is deleted (and, as a result, all of its resources are also deleted), all resource lists are updated automatically (without the need to refresh the page)
+* {/* MSD-XXXX */} The Assistant no longer makes multiple attempts to download a file when receiving a DataFrame
+* {/* MSD-1401 */} Resolved an issue with the setup of multi-table generators where the parent subject table only has an `id` column
+
 ## v4.2.1
 _Feb 25th, 2024_
 

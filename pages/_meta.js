@@ -30,6 +30,7 @@ export default {
         "title": "GLOBAL FEATURES"
     },
     "organizations": "Organizations",
+    "user-profiles": "User profiles",
     "public-private-resources": "Public and private resources",
     "search": "Search",
     "usage": "Usage and credits",
