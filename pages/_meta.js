@@ -34,6 +34,11 @@ export default {
     "search": "Search",
     "usage": "Usage and credits",
     "notifications": "Notifications",
+    "-- Platform integrations": {
+        "type": "separator",
+        "title": "PLATFORM INTEGRATIONS"
+    },
+    "databricks": "Databricks",
     "-- Installation and administration": {
         "type": "separator",
         "title": "INSTALLATION AND ADMINISTRATION"
