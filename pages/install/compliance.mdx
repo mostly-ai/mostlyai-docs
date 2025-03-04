@@ -37,4 +37,4 @@ MOSTLY AI uses [Trivy Open Source](https://trivy.dev/) vulnerability scanner in 
 
 ## How are connector secrets (passwords, tokens, secret keys, etc.) stored in MOSTLY AI?
 
-The secrets for each saved connector in MOSTLY AI are stored in the PostgreSQL database that is part of the [MOSTLY AI application services](/install/architecture). The secrets are encrypted at rest and in transit.
+The secrets for each saved connector in MOSTLY AI are stored in the PostgreSQL database that is part of the [MOSTLY AI application services](/install/architecture). The secrets are encrypted not only at rest, but also in transit.
