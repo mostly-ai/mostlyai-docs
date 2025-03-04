@@ -34,3 +34,7 @@ If you are using a different Kubernetes distribution, check with the vendor if t
 ## Do you scan your images for vulnerabilities?
 
 MOSTLY AI uses [Trivy Open Source](https://trivy.dev/) vulnerability scanner in CI/CD pipelines and the scans of DockerHub, when pushing to the MOSTLY AI repository.
+
+## How are connector secrets (passwords, tokens, secret keys, etc.) stored in MOSTLY AI?
+
+The secrets for each saved connector in MOSTLY AI are stored in the PostgreSQL database that is part of the MOSTLY AI application services. The secrets are encrypted at rest and in transit.
