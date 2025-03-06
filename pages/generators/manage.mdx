@@ -30,10 +30,12 @@ In the table below, you can find a list of all possible statuses a generator can
 
 If you need to reuse the data and model configuration from an existing generator, you can clone it. All previously added data as well as the model and training configuration are copied to the new generator.
 
+<Callout>
 Before you start, keep in mind:
 
 * Cloning is available only for generators that use a database or a cloud storage connector as a data source.
-* You cannot clone generators with uploaded files because the uploaded data is deleted after the generator training completes.
+* **You cannot clone generators with uploaded files** because the uploaded data is deleted after the generator training completes.
+</Callout>
 
 <Tabs items={['UI', 'Python SDK']}>
 <Tabs.Tab>
