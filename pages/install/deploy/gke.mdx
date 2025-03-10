@@ -306,7 +306,7 @@ The `values.yaml` file is part of the [MOSTLY AI Helm chart](/install/deploy/hel
 **Steps**
 
 1. Open the `values.yaml` file in a text editor.
-2. At the start, set the application domain name to an FQDN. Do the same as listed below for `minio`.
+2. At the start, set the application domain name to an FQDN.
     <Callout>
     `minio` is the shared storage service.
     </Callout>
@@ -314,7 +314,6 @@ The `values.yaml` file is part of the [MOSTLY AI Helm chart](/install/deploy/hel
     _customerInstallation:
       domainNames:
         mostly-ai: &fqdn yourfqdn.com
-        minio: &fqdnMinio minio-yourfqdn.com
     ```
 2. (Optional) Apply one of the configurations below depending on whether you intend to use TLS-encrypted access to the MOSTLY AI application.<br /><br />
     **➡️ You use an TLS certificate**. Replace `your-tls-secret` with the TLS secret name as defined in your cluster configuration.
