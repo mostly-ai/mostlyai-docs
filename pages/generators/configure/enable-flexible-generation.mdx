@@ -8,12 +8,14 @@ import Image from 'next/image'
 
 # Flexible generation
 
-Before you start the training of a generator, you can configure whether it will have **Flexible generation** turned on or off.
+Before you start the training of a generator, you can configure whether your models will have **Flexible generation** turned on or off.
+
+Learn more about the benefits of **Flexible generation** from the table below.
 
 | Flexible generation status | Description |
 | --- | --- |
-| Enabled **Flexible generation** | Uses the **Any order** model of feeding original columns for training that is randomly permuted for every batch.<br /><br />With **Flexible generation** enabled, you can use the generator to:<br /><br />  • [rebalance data](/synthetic-datasets/rebalance-columns)<br />  • [impute data](/synthetic-datasets/data-imputation)<br />  • [use fairness](/synthetic-datasets/fairness)<br />  • [generate synthetic data conditionally based on a seed dataset](/synthetic-datasets/seeded-generation)<br /><br />➡️ Flexible generation can lead to a reduced accuracy. Most impacted are models trained on particularly wide tables. |
-| Disabled **Flexible generation** | Uses the **Fixed order** model of feeding original columns in the same order in which they appear in the original data.<br /><br />➡️ With the **Fixed order** model, you can achieve maximum accuracy of the trained generator. |
+| Enabled **Flexible generation** | During training, the original columns are fed in a randomly permuted order for every batch.<br /><br />With **Flexible generation** enabled, you can use the generator to:<br /><br />  • [rebalance data](/synthetic-datasets/rebalance-columns)<br />  • [impute data](/synthetic-datasets/data-imputation)<br />  • [generate fair synthetic data](/synthetic-datasets/fairness)<br />  • [generate synthetic data conditionally based on a seed dataset](/synthetic-datasets/seeded-generation)<br /><br />➡️ When enabled, **Flexible generation** can impact the model's accuracy. Most impacted are models trained on particularly wide tables. |
+| Disabled **Flexible generation** | During training, original columns are fed in the same order in which they appear in the original data.<br /><br />➡️ When **Flexible generation** is disabled, you can achieve maximum accuracy of the trained generator. |
 
 ## Set flexible generation
 
