@@ -9,6 +9,35 @@ import { Tabs } from 'nextra/components'
 
 # What's new in MOSTLY AI
 
+## v4.3.0
+_Mar 10th, 2025_
+
+### Single compute selection per synthetic dataset
+{/* MSD-1294 */}
+Faster synthetic dataset generation is now fully available by selecting a single compute for a synthetic dataset.
+
+Compute selection is now moved on the synthetic dataset level and ensure that both generation and Data report generation are performed on the same compute.
+
+For details, see [_Select a compute for a synthetic dataset_]().
+
+### Disable Model and Data reports
+
+You can now disable the generation of Model reports for generators and Data reports for synthetic datasets. This feature is particularly useful when you need to speed up the time to finalize a generator or a synthetic dataset.
+
+For details, see [_Disable Model reports_](/generators/evaluate-quality#disable-model-reports) and [_Disable Data reports_](/synthetic-datasets/evaluate-quality#disable-data-reports).
+
+### Improvements
+* {/* MSD-1331 */} Allow non-members to see the list of members in an organization
+* {/* MSD-1385 */} Implemented Tool Calling for the Assistant
+* {/* MSD-1446 */} Prevent OOM errors by streaming large files instead of loading them into memory
+
+### Resolved issues
+
+* {/* MSD-1417 */} Fixed the name display when a resource is unnamed
+* {/* MSD-1408 */} Add public badge for resources on user profile page
+* {/* MSD-1323 */} Fixed markdown links in the organization description section
+* {/* MSD-1402 */} Fixed tasks restarts and keeping them in progress for generators using HuggingFace models 
+
 ## v4.2.3
 _Feb 28th, 2025_
 
