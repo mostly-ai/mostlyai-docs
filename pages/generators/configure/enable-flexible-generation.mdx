@@ -6,27 +6,20 @@ description: "Generators in MOSTLY AI have flexible generation on by default. Yo
 import { Tabs } from 'nextra/components'
 import Image from 'next/image'
 
-# Flexible generation
+# Enable Flexible generation
 
-Generators in MOSTLY AI have flexible generation enabled by default. You can enable or disable flexible generation for each table in a generator. You can do so before you train a generator. Once a generator is trained, you cannot change its flexible generation configuration.
+Before you start the training of a generator, you can configure whether your models will have **Flexible generation** turned on or off.
 
-Even if enabled, the use of rebalancing, imputation, and fairness is optional when you generate new synthetic datasets.
+Learn more about the benefits of **Flexible generation** from the table below.
 
-If you want to restrict your models and disable the options to rebalance columns, impute data, or use fairness, you can disable flexible generation before starting training.
+| Flexible generation status | Description |
+| --- | --- |
+| Enabled **Flexible generation** | During training, the original columns are fed in a randomly permuted order for every batch.<br /><br />With **Flexible generation** enabled, you can use the generator to:<br /><br />  • [rebalance data](/synthetic-datasets/rebalance-columns)<br />  • [impute data](/synthetic-datasets/data-imputation)<br />  • [generate fair synthetic data](/synthetic-datasets/fairness)<br />  • [generate synthetic data conditionally based on a seed dataset](/synthetic-datasets/seeded-generation)<br /><br />➡️ When enabled, **Flexible generation** can impact the model's accuracy. Most impacted are models trained on particularly wide tables. |
+| Disabled **Flexible generation** | During training, original columns are fed in the same order in which they appear in the original data.<br /><br />➡️ When **Flexible generation** is disabled, you can achieve maximum accuracy of the trained generator. |
 
-## Why flexible generation?
+## Set flexible generation
 
-Flexible generation enables a generator to rebalance data, impute data, and use fairness.
-
-* With [rebalancing](/synthetic-datasets/rebalance-columns), you can rebalance your datasets in a highly correlated manner. For a simplified example, if you decide to increase the percentage of women in your dataset, correlated features such as female first names, respective average income, respective job titles, will also be impacted.
-* With [imputation](/synthetic-datasets/data-imputation), you can replace any null values you might have in your original data with statistically reliable values.
-* With [fairness](/synthetic-datasets/fairness), you can generate statistical parity synthetic data and define which categorical columns (for example, `income`) should be generated fairly based on which other sensitive columns (for example, `sex`, `race`, `age`, and so on).
-
-You can use flexible generation for scenarios such as fraud detection, statistical parity synthetic data, what-if scenarios, testing of an increase in less likely outcomes or decrease in rather likely outcomes.
-
-## Enable flexible generation
-
-Flexible generation is on by default for each table in a generator.
+Flexible generation is on by default for each table in a generator. You can keep it on or turn it of depending on whether you intend to use the generator to rebalance data, or any of the flexible generation scenarios listed above.
 
 <Tabs items={['UI', 'Python SDK']}>
 <Tabs.Tab>
