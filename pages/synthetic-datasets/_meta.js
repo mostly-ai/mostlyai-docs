@@ -4,9 +4,9 @@ export default {
     "set-size-temp": "Set sample size and temperature",
     "rebalance-columns": "Rebalance columns",
     "data-imputation": "Data imputation",
-    "evaluate-quality": "Evaluate synthetic data quality",
-    "deliver": "Deliver synthetic data",
-    "seeded-generation": "Seeded generation",
     "fairness": "Fair synthetic data",
+    "seeded-generation": "Seeded generation",
+    "deliver": "Deliver synthetic data",
+    "evaluate-quality": "Evaluate synthetic data quality",
     "manage": "Manage synthetic datasets"
 }
