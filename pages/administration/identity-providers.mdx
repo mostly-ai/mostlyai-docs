@@ -1,6 +1,6 @@
 ---
 title: 'Identity providers'
-description: 'MOSTLY AI supports Ping One as an identity providers.'
+description: 'MOSTLY AI supports PingOne as an identity providers.'
 ---
 
 import Image from 'next/image'
@@ -8,14 +8,7 @@ import { Callout } from 'nextra/components'
 
 # Identity providers
 
-MOSTLY AI supports Ping One as an identity provider.
-
-<Image
-    src="/docs/docimages/administration/identity-providers/app-landing-page-with-pingone.webp"
-    alt="HuggingFace - Create a Read token"
-    width={800}
-    height={300}
-/>
+MOSTLY AI supports PingOne as an identity provider.
 
 ## 1. Create a new PingOne application
 
@@ -85,6 +78,11 @@ Take record of the **Client ID**, **Client Secret**, and **OIDC Discovery Endpoi
         This will automatically populate the **Authorization URL**, **Token URL**, and similar fields.
         </Callout>
     6. For **Client Authentication**, select **Client secret sent as basic auth**.
+        <Callout>
+        This is the default setting for PingOne. You can change it as needed. Just make sure that the Keycloak IdP and PingOne use the same client authentication.
+
+        You can change the PingOne client authentication method under **Application** > **Configuration** > **OIDC Settings** > **Token Auth Method**.
+        </Callout>
     6. Click **Add**.
         <Image
             src="/docs/docimages/administration/identity-providers/01-create-new-id-provider-02-configure-pingone.webp"
@@ -101,33 +99,42 @@ Take record of the **Client ID**, **Client Secret**, and **OIDC Discovery Endpoi
         height={300}
     />
 
-## 3. Configure the Keycloak Identity Provider
-
-1. Go back to Keycloak and open the **Ping One** identity provider.
-2. Paste the **Authorization URL** from the PingOne configuration into the **Authorization URL** field. This will automatically populate the **Token URL**, **User Info URL** and such fields.
-3. Select **Client secret sent as basic auth** under **Client Authentication**.
-4. Paste the **Client ID** and **Client Secret** from the PingOne configuration into the **Client ID** and **Client Secret** fields.
-5. Enable **Trust Email**
-
-## 4 Configure the PingOne Application
+## 3. Configure the PingOne application
 
 1. Navigate back to **Application** on the PingOne Admin Console.
-2. Under the **Configuration** tab scroll down to **OIDC Settings** and select **Client Secret Basic** as the **Token Auth method**. The method selected here must match the method selected in the Keycloak configuration.
-3. For **Signoff URLs** you may set the URL to redirect to after the user logs out of the application. For example: `https://<KEYCLOAK_HOST>/auth/realms/<KEYCLOAK_REALM>/broker/<IDP_ALIAS>/endpoint/logout_response`
+2. Select the **Configuration** tab.
+3. Click the edit icon and configure the **Token Auth Method** and **Signoff URL**.
+    1. Under **OIDC Settings**, make sure that the **Token Auth Method** for PingOne uses the same client authentication method as Keycloak.
+    2. For **Signoff URLs**, you can set the URL to redirect to after the user logs out of the application.<br /><br />
+    For example:
+        <Callout>
+        Replace:
+        * `KEYCLOAK_HOST` with your MOSTLY AI FQDN.
+        * `IDP_ALIAS` with the Keycloak IdP alias.
+        </Callout>
+        ```bash filename="Signoff URL" copy
+        https://<KEYCLOAK_HOST>/auth/realms/mostly-generate/broker/<IDP_ALIAS>/endpoint/logout_response
+        ```
+        <Image
+            src="/docs/docimages/administration/identity-providers/03-configure-ping-one-01-token-auth-method-and-signoff-url.webp"
+            alt="Configure PingOne application - Token Auth Method and Signoff URL"
+            width={800}
+            height={300}
+        />
 
-## 5. Configure PingOne Application's Attribute Mappings
+## 4. Configure PingOne application attribute mappings
 
 1. Navigate back to **Application** on the PingOne Admin Console.
 2. Select **Attribute Mappings** in the top bar.
-3. Click on the Edit symbol next to **Custom Attributes**.
+3. Click the edit icon next to **Custom Attributes**.
 4. Add the following mappings as a minimum:
-    - **sub** -> **User ID**
-    - **email** -> **Email Address**
-    - **given_name** -> **Given Name**
-    - **family_name** -> **Family Name**
+    - `sub` -> **User ID**
+    - `email` -> **Email Address**
+    - `given_name` -> **Given Name**
+    - `family_name` -> **Family Name**
 5. Click **Save**.
 
-## 6. Configure PingOne Application's Scopes
+## 5. Configure PingOne application scopes
 
 1. Navigate back to **Application** on the PingOne Admin Console.
 2. Select **Resources** in the top bar.
@@ -137,28 +144,30 @@ Take record of the **Client ID**, **Client Secret**, and **OIDC Discovery Endpoi
     - **profile**
     - **email**
 
-## 7. Configure Keycloak Identity Provider's Attribute Mappings
+## 6. Configure Keycloak Identity Provider's Attribute Mappings
 
-1. Navigate back to the **Ping One** Identity Provider configuration in Keycloak Admin Console.
+1. Navigate back to the **PingOne** Identity Provider configuration in Keycloak.
 2. Select **Mappers** in the top bar.
 3. Click on the **Add mapper** button and add the following mappings as a minimum:
-    1. Name: Username
-       Sync Mode override: Force
-       Mapper type: Username Template Importer
-       Template: `${ALIAS}.${CLAIM.email}`
-       Target: Local
-    2. Name: Email
-       Sync Mode override: Force
-       Mapper type: Attribute Importer
-       Claim: email
-       User Attribute Name: email
-    3. Name: First Name
-       Sync Mode override: Force
-       Mapper type: Attribute Importer
-       Claim: given_name
-       User Attribute Name: firstName
-    4. Name: Last Name
-       Sync Mode override: Force
-       Mapper type: Attribute Importer
-       Claim: family_name
-       User Attribute Name: lastName
+
+    | **Name**       | **Sync Mode override** | **Mapper**                  | **Claim**     | **User Attribute Name** | **Template**           | **Target** |
+    | -------------- | ---------------------- | --------------------------- | ------------- | ----------------------- | ---------------------- | ---------- |
+    | **Username**   | **Force**              | **Username Template Importer** |               |                         | `${ALIAS}.${CLAIM.email}` | **Local**  |
+    | **Email**      | **Force**              | **Attribute Importer**      | `email`       | `email`                 |                        |            |
+    | **First Name** | **Force**              | **Attribute Importer**      | `given_name`  | `firstName`             |                        |            |
+    | **Last Name**  | **Force**              | **Attribute Importer**      | `family_name` | `lastName`              |                        |            |
+
+**Result**
+
+The PingOne identity provider is now configured and ready to use with MOSTLY AI.
+
+**What's next**
+
+Your users can now use their PingOne identity to sign up and log in to your MOSTLY AI deployment by clicking the **Log in with PingOne** button on the landing page.
+
+<Image
+    src="/docs/docimages/administration/identity-providers/app-landing-page-with-pingone.webp"
+    alt="HuggingFace - Create a Read token"
+    width={800}
+    height={300}
+/>
