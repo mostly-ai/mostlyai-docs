@@ -17,42 +17,7 @@ MOSTLY AI supports Ping One as an identity provider.
     height={300}
 />
 
-## 1. Create a new Identity Provider in Keycloak
-
-1. Log in to the Keycloak Admin Console.
-2. From the drop-down in the upper left, select **mostly-generate**.
-    <Image
-        src="/docs/docimages/administration/switch-realm-01-select-mostly-generate.webp"
-        alt="Configure PingOne as IdP - Select mostly-generate realm"
-        width={350}
-        height={300}
-    />
-3. Select **Identity Providers** from the sidebar.
-4. Click **Add provider** and select **OpenID Connect v1.0**.
-    <Image
-        src="/docs/docimages/administration/identity-providers/01-create-new-id-provider-01-click-add-and-openid-connect-1.0.webp"
-        alt="Configure PingOne as IdP - Add provide and select OpenID Connect v1.0"
-        width={500}
-        height={300}
-    />
-5. Enter **pingone** in the **Alias** field.
-6. Enter **PingOne** in the **Display Name** field.
-    <Callout>
-    Note the rendered Redirect URI. This will be used in the PingOne configuration.
-    </Callout>
-7. Click **Add**.
-    <Image
-        src="/docs/docimages/administration/identity-providers/01-create-new-id-provider-02-configure-pingone.webp"
-        alt="Configure PingOne as IdP - Configure PingOne"
-        width={500}
-        height={300}
-    />
-
-**What's new**
-
-We will finish the configuration after setting up PingOne.
-
-## 2. Create a new Application in PingOne
+## 1. Create a new PingOne application
 
 1. Log in to your PingOne Admin Console.
 2. Click **Administrators** from the sidebar.
@@ -89,9 +54,47 @@ Take record of the **Client ID**, **Client Secret**, and **Authorization URL**. 
     height={300}
 />
 
+## 2. Create a new Keycloak identity provider
+
+1. Log in to the Keycloak Admin Console.
+2. From the drop-down in the upper left, select **mostly-generate**.
+    <Image
+        src="/docs/docimages/administration/switch-realm-01-select-mostly-generate.webp"
+        alt="Configure PingOne as IdP - Select mostly-generate realm"
+        width={350}
+        height={300}
+    />
+3. Select **Identity Providers** from the sidebar.
+4. Click **Add provider** and select **OpenID Connect v1.0**.
+    <Image
+        src="/docs/docimages/administration/identity-providers/01-create-new-id-provider-01-click-add-and-openid-connect-1.0.webp"
+        alt="Configure PingOne as IdP - Add provide and select OpenID Connect v1.0"
+        width={500}
+        height={300}
+    />
+5. For **Alias**, enter `pingone`.
+6. For **Display Name**, enter `PingOne`.
+    <Callout>
+    Note the rendered Redirect URI. This will be used in the PingOne configuration.
+    </Callout>
+7. For **Client ID**, enter the **Client ID** from the PingOne configuration.
+8. For **Client Secret**, enter the **Client Secret** from the PingOne configuration.
+9. For **Discovery endpoint**, enter the **OIDC Discovery Endpoint** from the PingOne configuration.
+10. Click **Add**.
+    <Image
+        src="/docs/docimages/administration/identity-providers/01-create-new-id-provider-02-configure-pingone.webp"
+        alt="Configure PingOne as IdP - Configure PingOne"
+        width={500}
+        height={300}
+    />
+
+**What's new**
+
+We will finish the configuration after setting up PingOne.
+
 ## 3. Configure the Keycloak Identity Provider
 
-1. Navigate back to the **Ping One** Identity Provider configuration in Keycloak Admin Console.
+1. Go back to Keycloak and open the **Ping One** identity provider.
 2. Paste the **Authorization URL** from the PingOne configuration into the **Authorization URL** field. This will automatically populate the **Token URL**, **User Info URL** and such fields.
 3. Select **Client secret sent as basic auth** under **Client Authentication**.
 4. Paste the **Client ID** and **Client Secret** from the PingOne configuration into the **Client ID** and **Client Secret** fields.
