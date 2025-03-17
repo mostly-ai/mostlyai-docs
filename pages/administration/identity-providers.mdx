@@ -54,12 +54,40 @@ We will finish the configuration after setting up PingOne.
 
 ## 2. Create a new Application in PingOne
 
-1. Log in to the PingOne Admin Console.
-2. Click on the **Applications** tab in the left-hand menu.
-3. Click on the Plus icon next to the **Application** button.
+1. Log in to your PingOne Admin Console.
+2. Click **Administrators** from the sidebar.
+3. Click **Applications** and then again **Applications** from the sidebar.
+4. Click on **Plus** icon next to the **Application** title.
+    <Image
+        src="/docs/docimages/administration/identity-providers/02-create-pingone-app-01-click-plus-button.webp"
+        alt="Create a PingOne application - Click Plus button"
+        width={500}
+        height={300}
+    />
 4. Enter **Application Name** and **Description**. Optionally, upload and icon.
-5. Select **OIDC Web App** as the application type.
-6. Note the **Client ID** and **Client Secret** and **Authorization URL** These will be used in the Keycloak configuration.
+5. Select the **OIDC Web App** card as the application type.
+6. Click **Save**.
+    <Image
+        src="/docs/docimages/administration/identity-providers/02-create-pingone-app-02-configure-app-and-save.webp"
+        alt="Create a PingOne application - Click Plus button"
+        width={800}
+        height={300}
+    />
+
+**Result**
+
+The application is created and PingOne shows its details.
+
+**What's next**
+
+Take record of the **Client ID**, **Client Secret**, and **Authorization URL**. All three are needed for the Keycloak configuration.
+
+<Image
+    src="/docs/docimages/administration/identity-providers/02-create-pingone-app-03-result-copy-details.webp"
+    alt="Create a PingOne application - Click Plus button"
+    width={800}
+    height={300}
+/>
 
 ## 3. Configure the Keycloak Identity Provider
 
