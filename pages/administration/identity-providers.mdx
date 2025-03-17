@@ -1,0 +1,175 @@
+---
+title: 'Identity providers'
+description: 'MOSTLY AI supports PingOne as an identity providers.'
+---
+
+import Image from 'next/image'
+import { Callout } from 'nextra/components'
+
+# Identity providers
+
+MOSTLY AI supports [PingOne](https://www.pingidentity.com/en.html) as an identity provider.
+
+## 1. Create a new PingOne application
+
+1. Log in to your PingOne Admin Console.
+2. Click **Administrators** from the sidebar.
+3. Click **Applications** and then again **Applications** from the sidebar.
+4. Click on **Plus** icon next to the **Application** title.
+    <Image
+        src="/docs/docimages/administration/identity-providers/02-create-pingone-app-01-click-plus-button.webp"
+        alt="Create a PingOne application - Click Plus button"
+        width={500}
+        height={300}
+    />
+4. Enter **Application Name** and **Description**. Optionally, upload and icon.
+5. Select the **OIDC Web App** card as the application type.
+6. Click **Save**.
+    <Image
+        src="/docs/docimages/administration/identity-providers/02-create-pingone-app-02-configure-app-and-save.webp"
+        alt="Create a PingOne application - Click Plus button"
+        width={800}
+        height={300}
+    />
+
+**Result**
+
+The application is created and PingOne shows its details.
+
+**What's next**
+
+Take record of the **Client ID**, **Client Secret**, and **OIDC Discovery Endpoint**. All three are needed for the Keycloak configuration.
+
+<Image
+    src="/docs/docimages/administration/identity-providers/02-create-pingone-app-03-result-copy-details.webp"
+    alt="Create a PingOne application - Click Plus button"
+    width={800}
+    height={300}
+/>
+
+## 2. Create a new Keycloak identity provider
+
+1. Log in to the Keycloak Admin Console.
+2. From the drop-down in the upper left, select **mostly-generate**.
+    <Image
+        src="/docs/docimages/administration/switch-realm-01-select-mostly-generate.webp"
+        alt="Configure PingOne as IdP - Select mostly-generate realm"
+        width={350}
+        height={300}
+    />
+3. Select **Identity Providers** from the sidebar.
+4. Click **Add provider** and select **OpenID Connect v1.0**.
+    <Image
+        src="/docs/docimages/administration/identity-providers/01-create-new-id-provider-01-click-add-and-openid-connect-1.0.webp"
+        alt="Configure PingOne as IdP - Add provide and select OpenID Connect v1.0"
+        width={500}
+        height={300}
+    />
+5. Configure PingOne identity provider.
+    1. For **Alias**, enter `pingone`.
+    2. For **Display name**, enter `PingOne`.
+        <Callout>
+        Note the rendered **Redirect URI**. This will be used in the PingOne configuration.
+        </Callout>
+    3. For **Client ID**, enter the **Client ID** from the PingOne configuration.
+    4. For **Client Secret**, enter the **Client Secret** from the PingOne configuration.
+    5. For **Discovery endpoint**, enter the **OIDC Discovery Endpoint** from the PingOne configuration.
+        <Callout>
+        This will automatically populate the **Authorization URL**, **Token URL**, and similar fields.
+        </Callout>
+    6. For **Client Authentication**, select **Client secret sent as basic auth**.
+        <Callout>
+        This is the default setting for PingOne. You can change it as needed. Just make sure that the Keycloak IdP and PingOne use the same client authentication.
+
+        You can change the PingOne client authentication method under **Application** > **Configuration** > **OIDC Settings** > **Token Auth Method**.
+        </Callout>
+    6. Click **Add**.
+        <Image
+            src="/docs/docimages/administration/identity-providers/01-create-new-id-provider-02-configure-pingone.webp"
+            alt="Configure PingOne as IdP - Configure PingOne"
+            width={800}
+            height={300}
+        />
+        **Step result**: The PingOne configuration is saved and it opens for review.
+6. Scroll down. Under **Advanced settings**, enable **Trust email**.
+    <Image
+        src="/docs/docimages/administration/identity-providers/01-create-new-id-provider-03-enable-trust-email.webp"
+        alt="Configure PingOne as IdP - Enable Trust Email"
+        width={500}
+        height={300}
+    />
+
+## 3. Configure the PingOne application
+
+1. Navigate back to **Application** on the PingOne Admin Console.
+2. Select the **Configuration** tab.
+3. Click the edit icon and configure the **Token Auth Method** and **Signoff URL**.
+    1. Under **OIDC Settings**, make sure that the **Token Auth Method** for PingOne uses the same client authentication method as Keycloak.
+    2. For **Signoff URLs**, you can set the URL to redirect to after the user logs out of the application.<br /><br />
+    For example:
+        <Callout>
+        Replace:
+        * `KEYCLOAK_HOST` with your MOSTLY AI FQDN.
+        * `IDP_ALIAS` with the Keycloak IdP alias.
+        </Callout>
+        ```bash filename="Signoff URL" copy
+        https://<KEYCLOAK_HOST>/auth/realms/mostly-generate/broker/<IDP_ALIAS>/endpoint/logout_response
+        ```
+        <Image
+            src="/docs/docimages/administration/identity-providers/03-configure-ping-one-01-token-auth-method-and-signoff-url.webp"
+            alt="Configure PingOne application - Token Auth Method and Signoff URL"
+            width={800}
+            height={300}
+        />
+
+## 4. Configure PingOne application attribute mappings
+
+1. Navigate back to **Application** on the PingOne Admin Console.
+2. Select **Attribute Mappings** in the top bar.
+3. Click the edit icon next to **Custom Attributes**.
+4. Add the following mappings as a minimum:
+    - `sub` -> **User ID**
+    - `email` -> **Email Address**
+    - `given_name` -> **Given Name**
+    - `family_name` -> **Family Name**
+5. Click **Save**.
+
+## 5. Configure PingOne application scopes
+
+1. Navigate back to **Application** on the PingOne Admin Console.
+2. Select **Resources** in the top bar.
+3. Click on the Edit symbol next to **Allowed Scopes**.
+4. Add the following scopes as a minimum:
+    - **openid**
+    - **profile**
+    - **email**
+
+## 6. Configure Keycloak Identity Provider's Attribute Mappings
+
+1. Navigate back to the **PingOne** Identity Provider configuration in Keycloak.
+2. Select **Mappers** in the top bar.
+3. Click on the **Add mapper** button and add the following mappings as a minimum:
+
+    | **Name**       | **Sync Mode override** | **Mapper**                  | **Claim**     | **User Attribute Name** | **Template**           | **Target** |
+    | -------------- | ---------------------- | --------------------------- | ------------- | ----------------------- | ---------------------- | ---------- |
+    | **Username**   | **Force**              | **Username Template Importer** |               |                         | `${ALIAS}.${CLAIM.email}` | **Local**  |
+    | **Email**      | **Force**              | **Attribute Importer**      | `email`       | `email`                 |                        |            |
+    | **First Name** | **Force**              | **Attribute Importer**      | `given_name`  | `firstName`             |                        |            |
+    | **Last Name**  | **Force**              | **Attribute Importer**      | `family_name` | `lastName`              |                        |            |
+
+**Result**
+
+The PingOne identity provider is now configured and ready to use with MOSTLY AI.
+
+**What's next**
+
+Your users can now use their PingOne identity to sign up and log in to your MOSTLY AI deployment by clicking the **Log in with PingOne** button on the landing page 🎉
+
+<Image
+    src="/docs/docimages/administration/identity-providers/app-landing-page-with-pingone.webp"
+    alt="HuggingFace - Create a Read token"
+    width={800}
+    height={300}
+/>
+
+You can also create [organizations](/organizations) to control access to synthetic data resources via [roles and permissions](/organizations/roles-and-permissions). Users can also create their own organizations to keep resources private or share them by changing their visibility to [public](/public-private-resources).
