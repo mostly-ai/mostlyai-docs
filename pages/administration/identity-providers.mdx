@@ -1,0 +1,90 @@
+---
+title: 'Identity providers'
+description: 'MOSTLY AI supports Ping One as an identity providers.'
+---
+
+# Identity providers
+
+MOSTLY AI supports Ping One as an identity providers.
+
+## 1. Create a new Identity Provider in Keycloak
+
+1. Log in to the Keycloak Admin Console.
+2. Click on the **Identity Providers** tab in the left-hand menu.
+3. Click on the **Add provider** button.
+4. Select **OpenID Connect v1.0** from the **Provider Type** dropdown.
+5. Enter **pingone** in the **Alias** field.
+6. Enter **Ping One** in the **Display Name** field.
+7. Note the rendered Redirect URI. This will be used in the PingOne configuration.
+8. Click on the **Save** button. We will finish the configuration after setting up PingOne.
+
+## 2. Create a new Application in PingOne
+
+1. Log in to the PingOne Admin Console.
+2. Click on the **Applications** tab in the left-hand menu.
+3. Click on the Plus icon next to the **Application** button.
+4. Enter **Application Name** and **Description**. Optionally, upload and icon.
+5. Select **OIDC Web App** as the application type.
+6. Note the **Client ID** and **Client Secret** and **Authorization URL** These will be used in the Keycloak configuration.
+
+## 3. Configure the Keycloak Identity Provider
+
+1. Navigate back to the **Ping One** Identity Provider configuration in Keycloak Admin Console.
+2. Paste the **Authorization URL** from the PingOne configuration into the **Authorization URL** field. This will automatically populate the **Token URL**, **User Info URL** and such fields.
+3. Select **Client secret sent as basic auth** under **Client Authentication**.
+4. Paste the **Client ID** and **Client Secret** from the PingOne configuration into the **Client ID** and **Client Secret** fields.
+5. Enable **Trust Email**
+
+## 4 Configure the PingOne Application
+
+1. Navigate back to **Application** on the PingOne Admin Console.
+2. Under the **Configuration** tab scroll down to **OIDC Settings** and select **Client Secret Basic** as the **Token Auth method**. The method selected here must match the method selected in the Keycloak configuration.
+3. For **Signoff URLs** you may set the URL to redirect to after the user logs out of the application. For example: `https://<KEYCLOAK_HOST>/auth/realms/<KEYCLOAK_REALM>/broker/<IDP_ALIAS>/endpoint/logout_response`
+
+## 5. Configure PingOne Application's Attribute Mappings
+
+1. Navigate back to **Application** on the PingOne Admin Console.
+2. Select **Attribute Mappings** in the top bar.
+3. Click on the Edit symbol next to **Custom Attributes**.
+4. Add the following mappings as a minimum:
+    - **sub** -> **User ID**
+    - **email** -> **Email Address**
+    - **given_name** -> **Given Name**
+    - **family_name** -> **Family Name**
+5. Click **Save**.
+
+## 6. Configure PingOne Application's Scopes
+
+1. Navigate back to **Application** on the PingOne Admin Console.
+2. Select **Resources** in the top bar.
+3. Click on the Edit symbol next to **Allowed Scopes**.
+4. Add the following scopes as a minimum:
+    - **openid**
+    - **profile**
+    - **email**
+
+## 7. Configure Keycloak Identity Provider's Attribute Mappings
+
+1. Navigate back to the **Ping One** Identity Provider configuration in Keycloak Admin Console.
+2. Select **Mappers** in the top bar.
+3. Click on the **Add mapper** button and add the following mappings as a minimum:
+    1. Name: Username
+       Sync Mode override: Force
+       Mapper type: Username Template Importer
+       Template: `${ALIAS}.${CLAIM.email}`
+       Target: Local
+    2. Name: Email
+       Sync Mode override: Force
+       Mapper type: Attribute Importer
+       Claim: email
+       User Attribute Name: email
+    3. Name: First Name
+       Sync Mode override: Force
+       Mapper type: Attribute Importer
+       Claim: given_name
+       User Attribute Name: firstName
+    4. Name: Last Name
+       Sync Mode override: Force
+       Mapper type: Attribute Importer
+       Claim: family_name
+       User Attribute Name: lastName
