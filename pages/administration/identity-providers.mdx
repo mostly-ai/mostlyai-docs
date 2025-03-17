@@ -72,25 +72,34 @@ Take record of the **Client ID**, **Client Secret**, and **OIDC Discovery Endpoi
         width={500}
         height={300}
     />
-5. For **Alias**, enter `pingone`.
-6. For **Display Name**, enter `PingOne`.
-    <Callout>
-    Note the rendered Redirect URI. This will be used in the PingOne configuration.
-    </Callout>
-7. For **Client ID**, enter the **Client ID** from the PingOne configuration.
-8. For **Client Secret**, enter the **Client Secret** from the PingOne configuration.
-9. For **Discovery endpoint**, enter the **OIDC Discovery Endpoint** from the PingOne configuration.
-10. Click **Add**.
+5. Configure PingOne identity provider.
+    1. For **Alias**, enter `pingone`.
+    2. For **Display name**, enter `PingOne`.
+        <Callout>
+        Note the rendered **Redirect URI**. This will be used in the PingOne configuration.
+        </Callout>
+    3. For **Client ID**, enter the **Client ID** from the PingOne configuration.
+    4. For **Client Secret**, enter the **Client Secret** from the PingOne configuration.
+    5. For **Discovery endpoint**, enter the **OIDC Discovery Endpoint** from the PingOne configuration.
+        <Callout>
+        This will automatically populate the **Authorization URL**, **Token URL**, and similar fields.
+        </Callout>
+    6. For **Client Authentication**, select **Client secret sent as basic auth**.
+    6. Click **Add**.
+        <Image
+            src="/docs/docimages/administration/identity-providers/01-create-new-id-provider-02-configure-pingone.webp"
+            alt="Configure PingOne as IdP - Configure PingOne"
+            width={800}
+            height={300}
+        />
+        **Step result**: The PingOne configuration is saved and it opens for review.
+6. Scroll down. Under **Advanced settings**, enable **Trust email**.
     <Image
-        src="/docs/docimages/administration/identity-providers/01-create-new-id-provider-02-configure-pingone.webp"
-        alt="Configure PingOne as IdP - Configure PingOne"
+        src="/docs/docimages/administration/identity-providers/01-create-new-id-provider-03-enable-trust-email.webp"
+        alt="Configure PingOne as IdP - Enable Trust Email"
         width={500}
         height={300}
     />
-
-**What's new**
-
-We will finish the configuration after setting up PingOne.
 
 ## 3. Configure the Keycloak Identity Provider
 
