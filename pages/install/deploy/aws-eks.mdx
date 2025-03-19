@@ -634,9 +634,6 @@ For details on how to configure each, see [_Ingress controllers_](../config/ingr
     ```
 2. Edit the `values.yaml` file.
 2. At the start, set the application domain name to an FQDN. Do the same as listed below for `minio`.
-    <Callout>
-    `minio` is the shared storage service.
-    </Callout>
     ```yaml filename="values.yaml" copy {3-4}
     _customerInstallation:
       domainNames:
@@ -659,7 +656,7 @@ For details on how to configure each, see [_Ingress controllers_](../config/ingr
         enabled: true
     ...
     ```
-    **➡️ You do not use an TLS certificate**. Replace the  `your-tls-secret` with an empty string and, for `global.tls`, set `enabled` to `false`. 
+    **➡️ You do not use a TLS certificate**. Replace the  `your-tls-secret` with an empty string and, for `global.tls`, set `enabled` to `false`. 
     ```yaml filename="values.yaml" copy {4,9}
     _customerInstallation:
     ...
