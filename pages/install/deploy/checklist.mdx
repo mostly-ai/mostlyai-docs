@@ -20,8 +20,8 @@ The checklist below provides a list of prerequisites to ensure a successful inst
 **Networking requirements**
 
 - [ ] Your Kubernetes cluster can access the **container image repository**.
-    * By default, MOSTLY AI serves the container images from the MOSTLY AI image repository at `nexus.test.mostlylab.com`. To deploy the images, your Kubernetes cluster needs to have Internet access.
-    * If your internal IT policies require that you pull the images from an internal repository, ensure that your Kubernetes cluster has access to it. For more information, [Configure an internal image repository](../config/internal-image-repo).
+    * By default, MOSTLY AI serves the container images from the MOSTLY AI image repository. To download the images, your Kubernetes cluster needs to have Internet access.
+    * If your internal IT policies require that you pull the images from an internal repository, ensure that your Kubernetes cluster has access to it. For more information, see [Configure an internal image repository](../config/internal-image-repo).
 - [ ] Your Kubernetes cluster has network access to the defined storage classes and to the data sources (databases and cloud object storage providers) from which you want to pull original data.
 - [ ] Collaborate with your IT department and Customer Experience Engineer to configure an domain SSL certificate for your Kubernetes cluster and for the MOSTLY AI Helm chart.
 
