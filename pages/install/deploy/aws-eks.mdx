@@ -10,19 +10,20 @@ import { Callout } from 'nextra/components'
 
 To run MOSTLY AI in AWS, you need to create an Elastic Kubernetes Service (EKS) cluster. MOSTLY AI provides a set of automated scripts and configuration files that can help you create and configure an EKS cluster  as well as create and mount the required EFS storage, and create and configure an AWS Application Load Balancer (ALB) for the application.
 
-This page contains step-by-step tasks that guide you through the process of deploying MOSTLY AI in an AWS EKS cluster. The tasks are grouped into four categories.
+This page contains step-by-step tasks that guide you through the process of deploying MOSTLY AI in an AWS EKS cluster. The tasks are grouped into the categories below.
 
 * [Pre-deployment](#pre-deployment)
 * [Deployment](#deployment)
 * [Post-deployment](#post-deployment)
 
-Use the tasks on this page as a reference for what you might need to complete to reach the point in which MOSTLY AI runs in an EKS cluster and you can successfully generate synthetic datasets.
+Use the tasks on this page as a reference for what you might need to complete to reach the point in which MOSTLY AI runs in an EKS cluster.
 
-Some of the tasks describe configurations that you might have already completed in AWS. In such cases, use the tasks on this page as a reference for all required configurations.
+Before you start, make sure you complete the prerequisites in the next section.
 
 ## Prerequisites
 
-* Make sure that you have the tools and commands listed below.
+* An AWS account.
+* Install the tools listed below.
     * Install [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
     * Install [Helm](https://helm.sh/docs/intro/install/).
     * Install [`kubectl`](https://kubernetes.io/docs/tasks/tools/).
@@ -626,6 +627,10 @@ For details on how to configure each, see [_Ingress controllers_](../config/ingr
 
 ### Task 13: Edit the `values.yaml` file
 
+**Prerequisites**
+
+Obtain the MOSTLY AI Helm chart from your Customer Experience Engineer. The Helm chart includes the `values.yaml` file.
+
 **Steps**
 
 1. In a terminal or command prompt, make the Helm chart directory the current directory .
@@ -639,7 +644,7 @@ For details on how to configure each, see [_Ingress controllers_](../config/ingr
       domainNames:
         mostly-ai: &fqdn yourfqdn.com
     ```
-2. (Optional) Apply one of the configurations below depending on whether you intend to use TLS-encrypted access to the MOSTLY AI application.<br /><br />
+2. Apply one of the configurations below depending on whether you intend to use TLS-encrypted access to the MOSTLY AI application.<br /><br />
     **➡️ You use a TLS certificate**. Replace `your-tls-secret` with the TLS secret name as defined in your cluster configuration.
     <Callout>
     Your IT department or Kubernetes administrator creates the FQDN and its TLS certificate and adds it to the configuration of your cluster. When added, it comes with a TLS secret name that you can define in the `values.yaml` file. For details, see [_Configure your domain TLS certificate_](/install/config/domain-tls-cert).
@@ -775,7 +780,7 @@ Log in for the first time to your MOSTLY AI deployment to set a new password for
 
 **Prerequisites**
 
-Contact MOSTLY AI to obtain the supeadmin credentials as you need them to log in for the first time.
+Obtain the superadmin credentials from your Customer Experience Engineer.
 
 **Steps**
 
