@@ -5,9 +5,60 @@ searchable: false
 ---
 
 import Image from 'next/image'
-import { Tabs } from 'nextra/components'
+import { CustomCallout } from '@components/custom-callout'
 
 # What's new in MOSTLY AI
+
+## v4.4.0
+_Mar 21st, 2025_
+
+### Compute-based credits
+{/* MSD-1307 */}
+MOSTLY AI is transitioning to a compute-based credit system for tracking usage. The new system is more accurate and fair, as it accounts for the actual compute resources used for training generators, generating synthetic datasets, and the usage in Assistant threads.
+
+The system now tracks virtual CPU and GPU time across each resource. The **Usage report** is also updated to include the new **Virtual CPU time** and **Virtual GPU time** usage metrics.
+
+### Direct read / write access for connectors
+{/* MSD-1464 */}
+Introducing new access types for connectors.
+
+* **Read protected**. You can use this connector type only for generator training. The [SDK](https://github.com/mostly-ai/mostlyai) and Assistant cannot use the connector to parse data into a DataFrame and run analyses.
+* **Read data**. You can use this connector for generator training and for reading data. The [SDK](https://github.com/mostly-ai/mostlyai) and Assistant can use the connector to read and parse data into a DataFrame and run analyses.
+* **Write data**. You can use this connector to read from and write data back into the database or cloud storage bucket.
+
+### New visibility option: UNLISTED
+{/* MSD-1310 */}
+
+You can now set your resources' visibility to **Unlisted**. Unlisted resources are not visible in public resource list, but you can share them with others using a direct link.
+
+<CustomCallout>
+_Public resource lists_ include:
+- Generators list
+- Synthetic datasets list
+- Connectors list
+- User profiles
+- Organization profiles
+- Search results
+</CustomCallout>
+
+### Improvements
+
+* {/* MSD-1511 */} The Assistant can use connectors as data sources
+* {/* MSD-xxxx */} Refined the Assistant system instructions
+* {/* MSD-1523 */} Added drag & drop of files for Assistant
+* {/* MSD-1504 */} Adapted scrolling behavior of Assistant
+* {/* MSD-1465 */} Speed up page load times by replacing plotly with uplot
+
+### Resolved issues
+
+* {/* MSD-1532 */} Fixed icons appearance in Safari browser
+* {/* MSD-1424 */} Fixed the opening connector pop-up when clicking a connector from a user's profile page
+* Upgraded to [`mostlyai`](https://github.com/mostly-ai/mostlyai) 4.4.2, [`mostlyai-qa`](https://github.com/mostly-ai/mostlyai-qa) 1.5.9, [`mostlyai-engine`](https://github.com/mostly-ai/mostlyai-engine) 1.1.8
+* **`mostlyai-engine`**: upgrade to PyTorch 2.6.0, vLLM 0.8.1
+* **`mostlyai-engine`**: improved BatchSize heuristic for LANGUAGE on GPU for faster training
+* **`mostlyai-qa`**: Added new Coherence visualizations to QA reports
+* **`mostlyai-qa`**: Report Distances also for training vs holdout
+
 
 ## v4.3.2
 _Mar 14th, 2025_
