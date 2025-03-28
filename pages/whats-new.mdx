@@ -8,6 +8,29 @@ import Image from 'next/image'
 
 # What's new in MOSTLY AI
 
+## v4.4.2
+_Mar 28th, 2025_
+
+### Direct write data access for connectors
+{/* MSD-1464 */}
+Implemented `c.write_data()` and `c.delete_data()` functions for direct access to connectors.
+
+### Improvements
+
+* {/* MSD-1535 */} Enhanced user experience by redirecting to login page when URL is not valid
+* {/* MSD-1534 */} Assistant now only displays READY resources in popup menus
+
+### Resolved issues
+
+* {/* MSD-1537 */} Fixed user information for audit logs
+* {/* MSD-1550 */} Fixed vCPUTime updates for threads when kernel is not running
+* {/* MSD-1536 */} Stopped triggering probe jobs for synthetic datasets
+
+### Upstream dependencies
+
+* Upgraded to [`mostlyai`](https://github.com/mostly-ai/mostlyai) 4.4.3, [`mostlyai-qa`](https://github.com/mostly-ai/mostlyai-qa) 1.5.10, [`mostlyai-engine`](https://github.com/mostly-ai/mostlyai-engine) 1.1.10
+* **`mostlyai-engine`**: Fixed OOM error for HF Language Models by calculating max tokens
+
 ## v4.4.1
 _Mar 21st, 2025_
 
@@ -59,7 +82,7 @@ _Mar 14th, 2025_
 
 * {/* MSD-1405 */} Fixed separate Python calls merging into a single code block in the Assistant.
 * {/* MSD-XXXX */} Fixed extra arguments not being handled correctly in the Assistant configuration.
-* {/* MSD-1449 */} Fixed selected column in Fairness and Rebalancing not clearing when clicking “X” in SD configuration.
+* {/* MSD-1449 */} Fixed selected column in Fairness and Rebalancing not clearing when clicking "X" in SD configuration.
 * {/* MSD-1418 */} Added usernames in front of Assistant thread names.
 * {/* MSD-XXXX */} Fixed issue with RANDOM sampling of rows in case of sequential data.
 
@@ -886,7 +909,7 @@ All users can now add custom instructions to personalize the Assistant responses
 * **Personal Insights:** What would you like the Assistant to know about you to provide better responses?
 * **Response Style:** How would you like the Assistant to respond?
 
-Define these to tailor the assistant’s functionality to your needs.
+Define these to tailor the assistant's functionality to your needs.
 
 ### Improvements
 
@@ -2182,14 +2205,14 @@ Working with the relationship manager is not complicated either. Watch this 6-mi
 
 * Improved interactive charts help you easily pinpoint and identify potential accuracy issues in the synthetic data.
 * There's no need to wait for it either! QA report generation now takes seconds per table rather than minutes, so you can immediately assess the quality of your synthetic data.
-* Explainer sections in the report help the reader understand what they’re looking at.
+* Explainer sections in the report help the reader understand what they're looking at.
 * The QA report now comes in a handy, self-contained HTML document that retains all interactive charts when sharing it across your business and partnerships.
 
 ### Resolved issues
 
-* MPD-2198 - When the ‘number of generated subjects’ is left blank, the **number of training subjects** is used if defined, instead of the number of subjects in the subject table.
+* MPD-2198 - When the 'number of generated subjects' is left blank, the **number of training subjects** is used if defined, instead of the number of subjects in the subject table.
 * MPD-2185 - Incorrect number of columns reported in the QA report.
-* MPD-2180 - ‘Cancel training’ and ‘Cancel generation’ buttons are not working when synthesizing data.
+* MPD-2180 - 'Cancel training' and 'Cancel generation' buttons are not working when synthesizing data.
 * MCD-2057 - UI issues when creating an Oracle database data connector.
 * MCD-1177 - Incorrect handling of  SID and SERVICE_NAME connections to Oracle databases.
 * MCD-1169 - The QA report of certain datasets have an Incorrect placement of labels in the correlation matrix.
@@ -2396,7 +2419,7 @@ It connects to your data sources, recognizes its columns and their relationships
 
 There are no more limits to what you can synthesize. Connect to your databases, buckets, and files without any hurdles.
 
-Be ready for the synthetic data revolution. It’s already here.
+Be ready for the synthetic data revolution. It's already here.
 
 
 ### New UI
