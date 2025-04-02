@@ -60,9 +60,7 @@ export default {
     feedback: {
       content: null
     },
-    editLink: {
-      content: null
-    },
+    editLink: false,
     sidebar: {
       defaultMenuCollapseLevel: 1
     },
