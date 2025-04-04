@@ -8,6 +8,35 @@ import Image from 'next/image'
 
 # What's new in MOSTLY AI
 
+## v4.4.3
+_Apr 4th, 2025_
+
+### Direct query access for connectors
+{/* MSD-1474 */}
+Added `c.query()` for direct access to database and bucket-based connectors. It streamlines data exploration by supporting custom queries on the fly.
+
+### Gradient accumulation steps
+{/* MSD-1201 */}
+Expose gradient accumulation steps as new training parameter. This allows accumulating gradients over multiple batches before updating model weights, enabling effective training with larger batch sizes even on memory-constrained hardware.
+
+### Improvements
+
+* {/* MSD-1540 */} Assistant streaming support implemented for Python execution responses to the client
+* {/* MSD-1559 */} Improved structure of the navigation bar
+* {/* MSD-1558 */} Refined homepage layout for better clarity and usability
+
+### Resolved issues
+
+* {/* MSD-1557 */} Fixed incorrect display of total rows showing 0 in synthetic datasets after generation
+* {/* MSD-1445 */} Fixed delay in displaying the Fairness configuration form
+
+### Upstream dependencies
+
+* Upgraded to [`mostlyai`](https://github.com/mostly-ai/mostlyai) 4.4.8, [`mostlyai-qa`](https://github.com/mostly-ai/mostlyai-qa) 1.5.13, [`mostlyai-engine`](https://github.com/mostly-ai/mostlyai-engine) 1.1.11
+* **`mostlyai-qa`**: Initialize SentenceTransformer only a single time when running Model Report
+* **`mostlyai-qa`**: Upgraded to latest Plotly version
+* **`mostlyai-engine`**: Improved batch size heuristic for LANGUAGE models
+
 ## v4.4.2
 _Mar 28th, 2025_
 
