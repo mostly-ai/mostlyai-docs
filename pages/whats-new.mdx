@@ -15,6 +15,10 @@ _Apr 4th, 2025_
 {/* MSD-1474 */}
 Added `c.query()` for direct access to database and bucket-based connectors. It streamlines data exploration by supporting custom queries on the fly.
 
+### Refined homepage layout
+{/* MSD-1558 */}
+Improved the homepage layout for better clarity and usability, making it easier to navigate and access key features.
+
 ### Gradient accumulation steps
 {/* MSD-1201 */}
 Expose gradient accumulation steps as new training parameter. This allows accumulating gradients over multiple batches before updating model weights, enabling effective training with larger batch sizes even on memory-constrained hardware.
@@ -23,7 +27,6 @@ Expose gradient accumulation steps as new training parameter. This allows accumu
 
 * {/* MSD-1540 */} Assistant streaming support implemented for Python execution responses to the client
 * {/* MSD-1559 */} Improved structure of the navigation bar
-* {/* MSD-1558 */} Refined homepage layout for better clarity and usability
 
 ### Resolved issues
 
@@ -33,6 +36,7 @@ Expose gradient accumulation steps as new training parameter. This allows accumu
 ### Upstream dependencies
 
 * Upgraded to [`mostlyai`](https://github.com/mostly-ai/mostlyai) 4.4.8, [`mostlyai-qa`](https://github.com/mostly-ai/mostlyai-qa) 1.5.13, [`mostlyai-engine`](https://github.com/mostly-ai/mostlyai-engine) 1.1.11
+* **`mostlyai`**: Added list views for Databricks and BigQuery connectors
 * **`mostlyai-qa`**: Initialize SentenceTransformer only a single time when running Model Report
 * **`mostlyai-qa`**: Upgraded to latest Plotly version
 * **`mostlyai-engine`**: Improved batch size heuristic for LANGUAGE models
