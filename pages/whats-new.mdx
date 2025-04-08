@@ -8,6 +8,27 @@ import Image from 'next/image'
 
 # What's new in MOSTLY AI
 
+## v4.5.0
+_Apr 9th, 2025_
+
+### Windows SDK generator import support
+{/* MSD-1588 */}
+We now support importing of generators trained via SDK on Windows.
+
+### Improvements
+
+* {/* MSD-1493 */} Switch to XGrammar for lower memory footprint of LANGUAGE models
+
+### Resolved issues
+
+* {/* MSD-1507 */} Fixed access control for unlisted connectors by checking user permissions and redirecting to the VIEW modal when needed
+* {/* MSD-1508 */} Enabled Organization and User Profile Settings buttons for Super Admin users
+* {/* MSD-1555 */} Prevented cloning of generators that reference missing connectors
+
+### Upstream dependencies
+
+* Upgraded to [`mostlyai`](https://github.com/mostly-ai/mostlyai) 4.5.1, [`mostlyai-qa`](https://github.com/mostly-ai/mostlyai-qa) 1.5.17, [`mostlyai-engine`](https://github.com/mostly-ai/mostlyai-engine) 1.2.4
+
 ## v4.4.3
 _Apr 4th, 2025_
 
