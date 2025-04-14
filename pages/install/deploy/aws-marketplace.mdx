@@ -1,0 +1,163 @@
+---
+title: 'AWS Marketplace Deployment'
+description: 'Deploy Mostly AI through AWS Marketplace'
+---
+
+import Image from 'next/image'
+
+# AWS Marketplace Deployment
+
+MOSTLY AI is available via the AWS Marketplace.
+
+## Prerequisites
+
+- An AWS account
+
+## Deployment Steps
+
+1. **Access AWS Marketplace**
+   - Navigate to the [AWS Marketplace offering for MOSTLY AI](https://aws.amazon.com/marketplace/pp/prodview-xyz)
+   - Click on "View purchase options"
+
+<Image
+    src="/docs/docimages/install/deploy/aws-marketplace/01-marketplace-offering.webp"
+    alt="AWS Marketplace offering"
+    width={800}
+    height={400}
+/>
+
+2. **Subscribe to the Software**
+   - Select a subscription period (1, 12, 24, or 36 months)
+   - Optionally enable auto-renewal
+   - Click "Continue to Configuration"
+
+<Image
+    src="/docs/docimages/install/deploy/aws-marketplace/02-subscription-options.webp"
+    alt="Subscription options"
+    width={800}
+    height={400}
+/>
+
+3. **Configure Deployment**
+   - In the "Fulfillment option" drop-down menu, select "Helm chart"
+
+<Image
+    src="/docs/docimages/install/deploy/aws-marketplace/03-fulfillment-option.webp"
+    alt="Fulfillment option"
+    width={800}
+    height={400}
+/>
+
+   - Leave the defaults for the latest version
+   - Click "Continue to Launch"
+
+<Image
+    src="/docs/docimages/install/deploy/aws-marketplace/04-configuration-defaults.webp"
+    alt="Configuration defaults"
+    width={800}
+    height={400}
+/>
+
+4. **Launch Configuration**
+   - Under "Launch method", select "Launch on a new EKS cluster with QuickLaunch"
+     * This will use CloudFormation to automatically deploy the required infrastructure
+     * Alternatively, you can select "Launch on existing cluster" if you have a pre-existing cluster
+
+<Image
+    src="/docs/docimages/install/deploy/aws-marketplace/05-launch-method.webp"
+    alt="Launch method selection"
+    width={800}
+    height={400}
+/>
+
+   - When editing the stack details:
+     * Enter a Stack name (e.g., `my-mostly-ai-stack`)
+     * Enter an EKS cluster name (e.g., `my-mostly-ai-cluster`)
+     * Leave "MostlyAI Installation FQDN" empty to use the DNS name provided by AWS ELB
+     * Leave "Docker Registry Authorization" empty to use the default AWS registry
+
+<Image
+    src="/docs/docimages/install/deploy/aws-marketplace/06-stack-details.webp"
+    alt="Stack details"
+    width={800}
+    height={400}
+/>
+
+   - Under "Optional parameters":
+     * Set instance type to minimum `m5.4xlarge` (16 vCPUs, 64 GB RAM)
+     * Adjust "Number of nodes" and "Maximum number of nodes" based on your synthetic data generation requirements
+     * Increase the Volume size of the node's root EBS volumes to at least 60 GB
+
+<Image
+    src="/docs/docimages/install/deploy/aws-marketplace/07-optional-parameters.webp"
+    alt="Optional parameters"
+    width={800}
+    height={400}
+/>
+
+   - Under "Capabilities":
+     * Check the acknowledgement boxes
+     * Click "Create stack" to start the deployment
+
+<Image
+    src="/docs/docimages/install/deploy/aws-marketplace/08-capabilities.webp"
+    alt="Capabilities"
+    width={800}
+    height={400}
+/>
+
+## Post-Deployment Configuration
+
+1. Wait approximately 45 minutes for the stack creation to complete in CloudFormation
+
+<Image
+    src="/docs/docimages/install/deploy/aws-marketplace/09-stack-creation-complete.webp"
+    alt="Stack creation complete"
+    width={800}
+    height={400}
+/>
+
+2. Go to EC2 > Load Balancing > Load balancers
+3. Copy the DNS name of the Load balancer created by the CloudFormation Stack
+
+<Image
+    src="/docs/docimages/install/deploy/aws-marketplace/10-load-balancer-dns.webp"
+    alt="Load balancer DNS"
+    width={800}
+    height={400}
+/>
+
+4. Access the platform by pasting the DNS name in your browser
+
+<Image
+    src="/docs/docimages/install/deploy/aws-marketplace/11-platform-access.webp"
+    alt="Platform access"
+    width={800}
+    height={400}
+/>
+
+## Initial Login
+
+Use the following default credentials to log in:
+- Email: `superadmin@mostly.ai`
+- Password: `Mostly01!`
+
+<Image
+    src="/docs/docimages/install/deploy/aws-marketplace/12-login-screen.webp"
+    alt="Login screen"
+    width={800}
+    height={400}
+/>
+
+## Accessing Documentation
+
+You can access the documentation in two ways:
+1. Click the "Documentation" link in the bottom-left corner of the platform
+2. Visit [https://mostly.ai/docs](https://mostly.ai/docs) (requires internet access)
+
+## Support
+
+For additional support:
+- Contact AWS Support
+- Reach out to Mostly AI Support
+- Check the [documentation](https://mostly.ai/docs) 
