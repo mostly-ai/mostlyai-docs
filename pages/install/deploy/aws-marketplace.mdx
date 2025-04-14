@@ -16,7 +16,7 @@ MOSTLY AI is available via the AWS Marketplace.
 ## Deployment Steps
 
 1. Navigate to the [AWS Marketplace offering for MOSTLY AI](https://aws.amazon.com/marketplace/pp/prodview-xyz)
-2. Click on "View purchase options"
+2. Click on **View purchase options**
 
 <Image
     src="/docs/docimages/install/aws-marketplace/01-aws-marketplace-01-view-purchase-options.webp"
@@ -27,7 +27,7 @@ MOSTLY AI is available via the AWS Marketplace.
 
 3. Select a subscription period (1, 12, 24, or 36 months)
 4. Optionally enable auto-renewal
-5. Click "Continue to Configuration"
+5. Click **Continue to Configuration**
 
 <Image
     src="/docs/docimages/install/aws-marketplace/01-aws-marketplace-02-continue-to-configuration.webp"
@@ -36,7 +36,7 @@ MOSTLY AI is available via the AWS Marketplace.
     height={400}
 />
 
-6. In the "Fulfillment option" drop-down menu, select "Helm chart"
+6. In the **Fulfillment option** drop-down menu, select **Helm chart**
 
 <Image
     src="/docs/docimages/install/aws-marketplace/01-aws-marketplace-03-choose-fullfilment-option.webp"
@@ -46,7 +46,7 @@ MOSTLY AI is available via the AWS Marketplace.
 />
 
 7. Leave the defaults for the latest version
-8. Click "Continue to Launch"
+8. Click **Continue to Launch**
 
 <Image
     src="/docs/docimages/install/aws-marketplace/01-aws-marketplace-04-continue-to-launch.webp"
@@ -55,9 +55,9 @@ MOSTLY AI is available via the AWS Marketplace.
     height={400}
 />
 
-9. Under "Launch method", select "Launch on a new EKS cluster with QuickLaunch"
+9. Under **Launch method**, select **Launch on a new EKS cluster with QuickLaunch**
    - This will use CloudFormation to automatically deploy the required infrastructure
-   - Alternatively, you can select "Launch on existing cluster" if you have a pre-existing cluster
+   - Alternatively, you can select **Launch on existing cluster** if you have a pre-existing cluster
 
 <Image
     src="/docs/docimages/install/aws-marketplace/01-aws-marketplace-05-launch-method.webp"
@@ -69,8 +69,8 @@ MOSTLY AI is available via the AWS Marketplace.
 10. When editing the stack details:
     - Enter a Stack name (e.g., `my-mostly-ai-stack`)
     - Enter an EKS cluster name (e.g., `my-mostly-ai-cluster`)
-    - Leave "MostlyAI Installation FQDN" empty to use the DNS name provided by AWS ELB
-    - Leave "Docker Registry Authorization" empty to use the default AWS registry
+    - Leave **MostlyAI Installation FQDN** empty to use the DNS name provided by AWS ELB
+    - Leave **Docker Registry Authorization** empty to use the default AWS registry
 
 <Image
     src="/docs/docimages/install/aws-marketplace/01-aws-marketplace-06-stack-and-eks-cluster-name.webp"
@@ -79,9 +79,9 @@ MOSTLY AI is available via the AWS Marketplace.
     height={400}
 />
 
-11. Under "Optional parameters":
+11. Under **Optional parameters**:
     - Set instance type to minimum `m5.4xlarge` (16 vCPUs, 64 GB RAM)
-    - Adjust "Number of nodes" and "Maximum number of nodes" based on your synthetic data generation requirements
+    - Adjust **Number of nodes** and **Maximum number of nodes** based on your synthetic data generation requirements
     - Increase the Volume size of the node's root EBS volumes to at least 60 GB
 
 <Image
@@ -91,9 +91,9 @@ MOSTLY AI is available via the AWS Marketplace.
     height={400}
 />
 
-12. Under "Capabilities":
+12. Under **Capabilities**:
     - Check the acknowledgement boxes
-    - Click "Create stack" to start the deployment
+    - Click **Create stack** to start the deployment
 
 <Image
     src="/docs/docimages/install/aws-marketplace/01-aws-marketplace-08-capabilities.webp"
@@ -113,7 +113,7 @@ MOSTLY AI is available via the AWS Marketplace.
     height={400}
 />
 
-2. Go to EC2 > Load Balancing > Load balancers
+2. Go to **EC2** > **Load Balancing** > **Load balancers**
 3. Copy the DNS name of the Load balancer created by the CloudFormation Stack
 
 <Image
