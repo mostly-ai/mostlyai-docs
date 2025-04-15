@@ -27,8 +27,13 @@ MOSTLY AI is available via the AWS Marketplace.
 />
 
 3. Select a subscription period (1, 12, 24, or 36 months)
-4. Optionally enable auto-renewal
-5. Click **Continue to Configuration**
+
+<Callout type="default" emoji="💡">
+**Tip**<br />
+Optionally enable auto-renewal to ensure uninterrupted service.
+</Callout>
+
+4. Click **Continue to Configuration**
 
 <Image
     src="/docs/docimages/install/aws-marketplace/01-aws-marketplace-02-continue-to-configuration.webp"
@@ -37,7 +42,7 @@ MOSTLY AI is available via the AWS Marketplace.
     height={400}
 />
 
-6. In the **Fulfillment option** drop-down menu, select **Helm chart**
+5. In the **Fulfillment option** drop-down menu, select **Helm chart**
 
 <Image
     src="/docs/docimages/install/aws-marketplace/01-aws-marketplace-03-choose-fullfilment-option.webp"
@@ -46,8 +51,8 @@ MOSTLY AI is available via the AWS Marketplace.
     height={400}
 />
 
-7. Leave the defaults for the latest version
-8. Click **Continue to Launch**
+6. Leave the defaults for the latest version
+7. Click **Continue to Launch**
 
 <Image
     src="/docs/docimages/install/aws-marketplace/01-aws-marketplace-04-continue-to-launch.webp"
@@ -56,7 +61,7 @@ MOSTLY AI is available via the AWS Marketplace.
     height={400}
 />
 
-9. Under **Launch method**, select **Launch on a new EKS cluster with QuickLaunch**
+8. Under **Launch method**, select **Launch on a new EKS cluster with QuickLaunch**
    - This will use CloudFormation to automatically deploy the required infrastructure
    - Alternatively, you can select **Launch on existing cluster** if you have a pre-existing cluster
 
@@ -67,11 +72,9 @@ MOSTLY AI is available via the AWS Marketplace.
     height={400}
 />
 
-10. When editing the stack details:
-    - Enter a Stack name (e.g., `my-mostly-ai-stack`)
-    - Enter an EKS cluster name (e.g., `my-mostly-ai-cluster`)
-    - Leave **MostlyAI Installation FQDN** empty to use the DNS name provided by AWS ELB
-    - Leave **Docker Registry Authorization** empty to use the default AWS registry
+9. When editing the stack details:
+    - Enter a **Stack name** (e.g., `my-mostly-ai-stack`)
+    - Enter an **EKS cluster name** (e.g., `my-mostly-ai-cluster`)
 
 <Image
     src="/docs/docimages/install/aws-marketplace/01-aws-marketplace-06-stack-and-eks-cluster-name.webp"
@@ -80,11 +83,15 @@ MOSTLY AI is available via the AWS Marketplace.
     height={400}
 />
 
+<Callout type="default" emoji="💡">
+**Tip**<br />
+For optimal configuration:
+- Leave **MostlyAI Installation FQDN** empty to use the DNS name provided by AWS ELB
+- Leave **Docker Registry Authorization** empty to use the default AWS registry
+</Callout>
+
 <Callout type="warning">
-Under **Optional parameters**:
-- Set instance type to minimum `m5.4xlarge` (16 vCPUs, 64 GB RAM)
-- Adjust **Number of nodes** and **Maximum number of nodes** based on your synthetic data generation requirements
-- Increase the Volume size of the node's root EBS volumes to at least 60 GB
+Under **Optional parameters**, change the instance type to a minimum `m5.4xlarge` (16 vCPUs, 64 GB RAM) to account for the minimum required capacity for the worker nodes.
 
 <Image
     src="/docs/docimages/install/aws-marketplace/01-aws-marketplace-07-instance-type.webp"
@@ -94,9 +101,9 @@ Under **Optional parameters**:
 />
 </Callout>
 
-11. Under **Capabilities**:
-    - Check the acknowledgement boxes
-    - Click **Create stack** to start the deployment
+10. Adjust **Number of nodes** and **Maximum number of nodes** based on your synthetic data generation requirements. Consider that one job needs at least [14 CPUs and 24 GB of RAM](https://github.com/mostly-ai/helm-charts/blob/c0471eac5387fc80e340c3f2ba1b7de4a9b8071f/mostly-app/values.yaml#L165C1-L170C1)
+11. Increase the **Volume size** of the node's root EBS volumes to at least 60 GB
+12. Under **Capabilities**, check the acknowledgement boxes
 
 <Image
     src="/docs/docimages/install/aws-marketplace/01-aws-marketplace-08-capabilities.webp"
@@ -104,6 +111,8 @@ Under **Optional parameters**:
     width={800}
     height={400}
 />
+
+13. Click **Create stack** to start the deployment
 
 ## Post-Deployment Configuration
 
@@ -134,3 +143,11 @@ Under **Optional parameters**:
     width={800}
     height={400}
 />
+
+5. Log in with the default superadmin credentials:
+   - E-mail address: `superadmin@mostly.ai`
+   - Password: `Mostly01!`
+
+**Result**
+
+Now you have a fully functional deployment of MOSTLY AI in your own AWS environment! 🎉
