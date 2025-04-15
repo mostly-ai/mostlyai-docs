@@ -4,6 +4,7 @@ description: 'Follow this step-by-step guide to deploy MOSTLY AI through AWS Mar
 ---
 
 import Image from 'next/image'
+import { Callout } from 'nextra/components'
 
 # AWS Marketplace Deployment
 
@@ -15,7 +16,7 @@ MOSTLY AI is available via the AWS Marketplace.
 
 ## Deployment Steps
 
-1. Navigate to the [AWS Marketplace offering for MOSTLY AI](https://aws.amazon.com/marketplace/pp/prodview-xyz)
+1. Navigate to the [AWS Marketplace offering for MOSTLY AI](https://aws.amazon.com/marketplace/pp/prodview-clqfgzfzznfoc?sr=0-5&ref_=beagle&applicationId=AWSMPContessa)
 2. Click on **View purchase options**
 
 <Image
@@ -79,10 +80,11 @@ MOSTLY AI is available via the AWS Marketplace.
     height={400}
 />
 
-11. Under **Optional parameters**:
-    - Set instance type to minimum `m5.4xlarge` (16 vCPUs, 64 GB RAM)
-    - Adjust **Number of nodes** and **Maximum number of nodes** based on your synthetic data generation requirements
-    - Increase the Volume size of the node's root EBS volumes to at least 60 GB
+<Callout type="warning">
+Under **Optional parameters**:
+- Set instance type to minimum `m5.4xlarge` (16 vCPUs, 64 GB RAM)
+- Adjust **Number of nodes** and **Maximum number of nodes** based on your synthetic data generation requirements
+- Increase the Volume size of the node's root EBS volumes to at least 60 GB
 
 <Image
     src="/docs/docimages/install/aws-marketplace/01-aws-marketplace-07-instance-type.webp"
@@ -90,8 +92,9 @@ MOSTLY AI is available via the AWS Marketplace.
     width={800}
     height={400}
 />
+</Callout>
 
-12. Under **Capabilities**:
+11. Under **Capabilities**:
     - Check the acknowledgement boxes
     - Click **Create stack** to start the deployment
 
