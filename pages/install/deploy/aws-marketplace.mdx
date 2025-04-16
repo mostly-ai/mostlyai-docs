@@ -73,7 +73,7 @@ Optionally enable auto-renewal to ensure uninterrupted service.
 />
 
 9. When editing the stack details:
-    - Enter a **Stack name** (e.g., `my-mostly-ai-stack`)
+    - Enter a **Stack name** (e.g., `my-mostly-ai-stack`). This is the name of the CloudFormation stack to be created, which will hold all the resources for this installation. When you want to uninstall, you will delete this stack for CloudFormation to remove all provisioned resources.
     - Enter an **EKS cluster name** (e.g., `my-mostly-ai-cluster`)
 
 <Image
@@ -137,17 +137,49 @@ Under **Optional parameters**, change the instance type to a minimum `m5.4xlarge
 
 4. Access the platform by pasting the DNS name in your browser
 
+**Result**
+
+Now you have a fully functional deployment of MOSTLY AI in your own AWS environment! 🎉
+
+## Change Keycloak Admin Password
+
+1. Access the Keycloak admin console by navigating to `https://<your-load-balancer-dns>/auth/admin`
+2. Log in with the default Keycloak admin credentials:
+   - Username: `admin`
+   - Password: `admin`
+   
+3. Navigate to **Manage** > **Users**
+
 <Image
-    src="/docs/docimages/install/aws-marketplace/01-aws-marketplace-11-login-screen.webp"
-    alt="Platform access"
+    src="/docs/docimages/install/aws-marketplace/01-aws-marketplace-12-keycloak-users.webp"
+    alt="Keycloak users list"
     width={800}
     height={400}
 />
 
-5. Log in with the default superadmin credentials:
-   - E-mail address: `superadmin@mostly.ai`
-   - Password: `Mostly01!`
+4. Select the **admin** user and go to the **Credentials** tab
 
-**Result**
+<Image
+    src="/docs/docimages/install/aws-marketplace/01-aws-marketplace-13-keycloak-credentials.webp"
+    alt="Keycloak credentials tab"
+    width={800}
+    height={400}
+/>
 
-Now you have a fully functional deployment of MOSTLY AI in your own AWS environment! 🎉
+5. Click the **Reset password** button
+
+<Image
+    src="/docs/docimages/install/aws-marketplace/01-aws-marketplace-14-keycloak-reset-password.webp"
+    alt="Keycloak reset password"
+    width={800}
+    height={400}
+/>
+
+6. Set a new secure password for the Keycloak admin account
+
+<Image
+    src="/docs/docimages/install/aws-marketplace/01-aws-marketplace-15-keycloak-new-password.webp"
+    alt="Keycloak new password"
+    width={800}
+    height={400}
+/>
