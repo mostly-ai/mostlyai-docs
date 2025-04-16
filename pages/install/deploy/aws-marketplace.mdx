@@ -1,0 +1,236 @@
+---
+title: 'Deploy via AWS Marketplace'
+description: 'Follow this step-by-step guide to deploy MOSTLY AI through AWS Marketplace. You will learn how to subscribe to the software and configure the setup.'
+---
+
+import Image from 'next/image'
+import { Callout } from 'nextra/components'
+
+# AWS Marketplace Deployment
+
+MOSTLY AI is available via the AWS Marketplace.
+
+## Prerequisites
+
+- An [AWS account](https://portal.aws.amazon.com/billing/signup)
+
+## Deployment
+
+1. Navigate to the [AWS Marketplace offering for MOSTLY AI](https://aws.amazon.com/marketplace/pp/prodview-clqfgzfzznfoc?sr=0-5&ref_=beagle&applicationId=AWSMPContessa)
+2. Click on **View purchase options**
+
+<Image
+    src="/docs/docimages/install/aws-marketplace/01-aws-marketplace-01-view-purchase-options.webp"
+    alt="AWS Marketplace offering"
+    width={800}
+    height={400}
+/>
+
+3. Select a subscription period (1, 12, 24, or 36 months)
+
+<Callout type="default" emoji="💡">
+**Tip**<br />
+Optionally enable auto-renewal to ensure uninterrupted service.
+</Callout>
+
+4. Click **Continue to Configuration**
+
+<Image
+    src="/docs/docimages/install/aws-marketplace/01-aws-marketplace-02-continue-to-configuration.webp"
+    alt="Subscription options"
+    width={800}
+    height={400}
+/>
+
+5. In the **Fulfillment option** drop-down menu, select **Helm chart**
+
+<Image
+    src="/docs/docimages/install/aws-marketplace/01-aws-marketplace-03-choose-fullfilment-option.webp"
+    alt="Fulfillment option"
+    width={800}
+    height={400}
+/>
+
+6. Leave the defaults for the latest version
+7. Click **Continue to Launch**
+
+<Image
+    src="/docs/docimages/install/aws-marketplace/01-aws-marketplace-04-continue-to-launch.webp"
+    alt="Configuration defaults"
+    width={800}
+    height={400}
+/>
+
+8. Under **Launch method**, select **Launch on a new EKS cluster with QuickLaunch**
+   - This will use CloudFormation to automatically deploy the required infrastructure
+   - Alternatively, you can select **Launch on existing cluster** if you have a pre-existing cluster
+
+<Image
+    src="/docs/docimages/install/aws-marketplace/01-aws-marketplace-05-launch-method.webp"
+    alt="Launch method selection"
+    width={800}
+    height={400}
+/>
+
+9. When editing the stack details:
+    - Enter a **Stack name** (e.g., `my-mostly-ai-stack`). This is the name of the CloudFormation stack to be created, which will hold all the resources for this installation. When you want to uninstall, you will delete this stack for CloudFormation to remove all provisioned resources.
+    - Enter an **EKS cluster name** (e.g., `my-mostly-ai-cluster`)
+
+<Image
+    src="/docs/docimages/install/aws-marketplace/01-aws-marketplace-06-stack-and-eks-cluster-name.webp"
+    alt="Stack details"
+    width={800}
+    height={400}
+/>
+
+<Callout type="default" emoji="💡">
+**Tip**<br />
+For optimal configuration:
+- Leave **MostlyAI Installation FQDN** empty to use the DNS name provided by AWS ELB
+- Leave **Docker Registry Authorization** empty to use the default AWS registry
+</Callout>
+
+<Callout type="warning">
+Under **Optional parameters**, change the instance type to a minimum `m5.4xlarge` (16 vCPUs, 64 GB RAM) to account for the minimum required capacity for the worker nodes.
+
+<Image
+    src="/docs/docimages/install/aws-marketplace/01-aws-marketplace-07-instance-type.webp"
+    alt="Optional parameters"
+    width={800}
+    height={400}
+/>
+</Callout>
+
+10. Adjust **Number of nodes** and **Maximum number of nodes** based on your synthetic data generation requirements. Consider that one job needs at least [14 CPUs and 24 GB of RAM](https://github.com/mostly-ai/helm-charts/blob/c0471eac5387fc80e340c3f2ba1b7de4a9b8071f/mostly-app/values.yaml#L165C1-L170C1)
+11. Increase the **Volume size** of the node's root EBS volumes to at least 60 GB
+12. Under **Capabilities**, check the acknowledgement boxes
+
+<Image
+    src="/docs/docimages/install/aws-marketplace/01-aws-marketplace-08-capabilities.webp"
+    alt="Capabilities"
+    width={800}
+    height={400}
+/>
+
+13. Click **Create stack** to start the deployment
+
+## Post-deployment
+
+1. Wait approximately 45 minutes for the stack creation to complete in CloudFormation
+
+<Image
+    src="/docs/docimages/install/aws-marketplace/01-aws-marketplace-09-stack-creation-complete.webp"
+    alt="Stack creation complete"
+    width={800}
+    height={400}
+/>
+
+2. Go to **EC2** > **Load Balancing** > **Load balancers**
+3. Copy the DNS name of the Load balancer created by the CloudFormation Stack
+
+<Image
+    src="/docs/docimages/install/aws-marketplace/01-aws-marketplace-10-load-balancers.webp"
+    alt="Load balancer DNS"
+    width={800}
+    height={400}
+/>
+
+4. Access the platform by pasting the DNS name in your browser
+
+<Image
+    src="/docs/docimages/install/aws-marketplace/01-aws-marketplace-11-login-screen.webp"
+    alt="Platform access"
+    width={800}
+    height={400}
+/>
+
+5. Log in with the default superadmin credentials:
+   - E-mail address: `superadmin@mostly.ai`
+   - Password: `Mostly01!`
+
+**Result**
+
+Now you have a fully functional deployment of MOSTLY AI in your own AWS environment! 🎉
+
+## Change Keycloak admin password
+
+1. Access the Keycloak admin console by navigating to `https://<your-load-balancer-dns>/auth/admin`
+2. Log in with the default Keycloak admin credentials:
+   - Username: `admin`
+   - Password: `admin`
+   
+3. Navigate to **Manage** > **Users**
+
+<Image
+    src="/docs/docimages/install/aws-marketplace/01-aws-marketplace-12-keycloak-users.webp"
+    alt="Keycloak users list"
+    width={800}
+    height={400}
+/>
+
+4. Select the **admin** user
+
+<Image
+    src="/docs/docimages/install/aws-marketplace/01-aws-marketplace-13-keycloak-credentials.webp"
+    alt="Keycloak credentials tab"
+    width={800}
+    height={400}
+/>
+
+5. Click the **Reset password** button under **Credentials** tab
+
+<Image
+    src="/docs/docimages/install/aws-marketplace/01-aws-marketplace-14-keycloak-reset-password.webp"
+    alt="Keycloak reset password"
+    width={800}
+    height={400}
+/>
+
+6. Set a new secure password for the Keycloak admin account
+
+<Image
+    src="/docs/docimages/install/aws-marketplace/01-aws-marketplace-15-keycloak-new-password.webp"
+    alt="Keycloak new password"
+    width={800}
+    height={400}
+/>
+
+## Change superadmin password
+
+1. Select **mostly-generate** from the dropdown menu at the top left
+
+<Image
+    src="/docs/docimages/install/aws-marketplace/01-aws-marketplace-16-mostly-generate.webp"
+    alt="Select mostly-generate realm"
+    width={800}
+    height={400}
+/>
+
+2. Navigate to **Manage** > **Users**
+
+3. Select the **superadmin** user
+
+<Image
+    src="/docs/docimages/install/aws-marketplace/01-aws-marketplace-17-superadmin.webp"
+    alt="Superadmin users list"
+    width={800}
+    height={400}
+/>
+
+4. Click the **Reset password** button under **Credentials** tab
+
+<Image
+    src="/docs/docimages/install/aws-marketplace/01-aws-marketplace-19-superadmin-reset-password.webp"
+    alt="Superadmin reset password"
+    width={800}
+    height={400}
+/>
+
+5. Set a new secure password for the superadmin account
+
+<Image
+    src="/docs/docimages/install/aws-marketplace/01-aws-marketplace-18-superadmin-new-password.webp"
+    alt="Superadmin credentials tab"
+    width={800}
+    height={400}
+/>
