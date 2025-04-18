@@ -8,6 +8,35 @@ import Image from 'next/image'
 
 # What's new in MOSTLY AI
 
+## v4.5.2
+_Apr 18th, 2025_
+
+### Assistant: Automatic restart of inactive Python sessions
+{/* MSD-1581 */}
+The Assistant now automatically restarts Python sessions that have become inactive. If your session times out, it will be reinitialized the next time you send a message. This allows you to continue the conversation in the same thread without manually starting a new session.
+
+### Filtering and sorting options for lists
+{/* MSD-1309 */}
+We've added new filtering and sorting capabilities to lists across the platform. You can now filter resources by date, owner, and visibility, and sort them by date, popularity, or usage. These improvements make it easier to organize and locate the resources most relevant to you.
+
+### Improvements
+
+* {/* MSD-xxxx */} Replaced UBI with Wolfi as base images for faster startups
+* {/* MSD-1614 */} Enabled rolling updates by adding readiness endpoints for services
+
+### Resolved issues
+
+* {/* MSD-1631 */} Assistant: Prevent sending new messages while a response is still in progress
+* {/* MSD-1447 */} Cancelled status is now displayed immediately when cancelling SD or generator processes
+* {/* MSD-1325 */} Changes in the SD configuration are now saved when the field loses focus (on blur)
+* {/* MSD-1619 */} Usernames from deleted users can now be reused
+
+### Upstream dependencies
+
+* Upgraded to [`mostlyai`](https://github.com/mostly-ai/mostlyai) 4.5.5, [`mostlyai-qa`](https://github.com/mostly-ai/mostlyai-qa) 1.6.2, [`mostlyai-engine`](https://github.com/mostly-ai/mostlyai-engine) 1.3.2
+  * Faster QA report generation due to model2vec embeddings
+  * Use training and holdout data for calculating accuracy
+
 ## v4.5.1
 _Apr 10th, 2025_
 
