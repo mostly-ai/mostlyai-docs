@@ -8,6 +8,39 @@ import Image from 'next/image'
 
 # What's new in MOSTLY AI
 
+## v4.6.0
+_May 7th, 2025_
+
+### Differential Privacy Value Protection
+{/* MSD-1590 */}
+Introduced Differential Privacy Value Protection for metadata analysis, extending DP beyond model training to include protected min/max ranges for numeric, categorical, and datetime columns. A new configuration parameter, valueProtectionEpsilon, allows fine-grained control over privacy budgets, improving metadata security while maintaining data utility.
+
+### Accuracy Trivariates
+{/* MSD-1684 */}
+Enhanced accuracy analysis with 3-way (trivariate) interactions, extending quality metrics to include univariate, bivariate, and trivariate accuracy calculations. The overall accuracy is now determined as the average across all three levels, resulting in stricter and more reliable assessments of model performance.
+
+### Improvements
+
+* {/* MSD-1630 */} Assistant: Centered the input box in empty threads for a cleaner and more intuitive user experience.
+* {/* MSD-1628 */} Assistant: Redesigned the thread header to be thinner, freeing up more space for the actual conversation area and improving usability.
+* {/* MSD-1664 */} Assistant: Enabled direct URL links with assistant prompts in both text and Python modes for quicker navigation
+* {/* MSD-1648 */} Assistant: Enable file uploads even if the session is not initialized.
+* {/* MSD-XXX */} Add a python dictionary to generator details configuration section
+* {/* MSD-1171 */} Upgrade to Keycloak v26
+
+### Resolved issues
+
+* {/* MSD-1642 */} Preserve connector filtering and sorting after closing the new Connector modal.
+* {/* MSD-1643 */} Update totalVirtualCpuTime in Assistant threads based on websocket events.
+* {/* MSD-1637 */} Prevent large horizontal scrolls in wide tables within Assistant threads.
+* {/* MSD-1666 */} Fixed issue where clicking on a connector in the connector list redirected to the Homepage.
+* {/* MSD-1615 */} Smooth out the notifications menu.
+* {/* MSD-1640 */} Fixed backend error (500) caused by expired sessions when attempting to restart them.
+
+### Upstream dependencies
+
+* Upgraded to [`mostlyai`](https://github.com/mostly-ai/mostlyai) 4.5.7, [`mostlyai-qa`](https://github.com/mostly-ai/mostlyai-qa) 1.9.1
+
 ## v4.5.6
 _Apr 30th, 2025_
 
