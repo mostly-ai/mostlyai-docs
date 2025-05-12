@@ -11,11 +11,11 @@ import Image from 'next/image'
 ## v4.6.0
 _May 13th, 2025_
 
-### Differential Privacy Value Protection
+### Differential privacy value protection epsilon
 {/* MSD-1590 */}
 Introduced Differential Privacy Value Protection for metadata analysis, extending DP beyond model training to include protected min/max ranges for numeric, categorical, and datetime columns. A new configuration parameter, valueProtectionEpsilon, allows fine-grained control over privacy budgets, improving metadata security while maintaining data utility.
 
-### Accuracy Trivariates
+### Accuracy trivariates
 {/* MSD-1684 */}
 Enhanced accuracy analysis with 3-way (trivariate) interactions, extending quality metrics to include univariate, bivariate, and trivariate accuracy calculations. The overall accuracy is now determined as the average across all three levels, resulting in stricter and more reliable assessments of model performance.
 
