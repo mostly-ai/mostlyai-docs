@@ -8,6 +8,30 @@ import Image from 'next/image'
 
 # What's new in MOSTLY AI
 
+## v4.6.2
+_May 21st, 2025_
+
+### Enhanced connector details
+{/* MSD-1670 */}
+Introduced dedicated Connector Detail pages, providing comprehensive information about each connector including its configuration, usage statistics, and sharing options. This enhancement improves connector management and visibility.
+
+### Improvements
+
+* {/* MSD-1669 */} Assistant: Added collapsible Python blocks for better organization and readability of code in threads
+* {/* MSD-1675, MSD-1683 */} Updated connector cards and API to display number of likes and descriptions
+* {/* MSD-1708 */} Streamlined the "Connect your Data Source" flow when creating a new connector
+* {/* MSD-1556 */} Added support for manual entry of full bucket paths in the Generator Add data flow
+
+### Resolved issues
+
+* {/* MSD-1687 */} Fixed an issue where the number of parallel running threads wasn't immediately updated after deleting a thread
+* {/* MSD-1691 */} Optimized response time of API endpoint for creating new threads
+* {/* MSD-XXX */} Improved error messages in logs to be more descriptive and LLM-compatible
+
+### Upstream dependencies
+
+* Upgraded to [`mostlyai`](https://github.com/mostly-ai/mostlyai) 4.6.3, [`mostlyai-qa`](https://github.com/mostly-ai/mostlyai-qa) 1.9.5
+
 ## v4.6.1
 _May 16th, 2025_
 
