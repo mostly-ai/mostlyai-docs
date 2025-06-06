@@ -11,7 +11,10 @@ import {
             UserPersonaIcon,
             DatabaseLockIcon,
             TerminalIcon,
-            StorageIcon
+            StorageIcon,
+            AssistantBrokerIcon,
+            JupyterHubIcon,
+            ProbeAPIIcon
         } from '@components/icons'
 
 # Architecture
@@ -24,13 +27,17 @@ MOSTLY AI runs as a set of containerized applications and services that you can 
 
 |     | <div style={{width: '152px'}}>Pod and image name</div> | Description | Pod Lifecycle |
 | --- | --- | --- | --- |
-| <WebFrontendIcon/> Web frontend          | **mostly-ui**<br /><br />`mostly-app-ui`               | Contains the frontend of MOSTLY AI. Reachable over port `8080`. | Service |
-| <TerminalIcon/> Backend                  | **mostly-app**<br /><br />`mostly-app-enterprise`      | Contains the backend and public APIs of MOSTLY AI. | Service |
-| <DatabaseLockIcon /> Coordinator Service | **mostly-coordinator**<br /><br />`mostly-coordinator` | Component that takes all requests from the web application and coordinates execution of tasks on the main AI engine. | Service |
-| <StorageIcon /> Data discovery           | **mostly-core-api**<br /><br />`mostly-core-api`       | Component that reads metadata and analyzes data sources and destinations. | Service |
-| <UserPersonaIcon /> Keycloak             | **mostly-keycloak**<br /><br />`mostly-keycloak`       | Keycloak is an open-source identity management, authentication, and authorization tool. This container has a pre-configured Keycloak instance for MOSTLY AI. | Service |
-| <DatabaseLockIcon /> PostgreSQL          | **mostly-psql**<br /><br />`postgres`                  | Database instance of the system. Contains databases for app, coordinator, and Keycloak. | Service |
-| <DatabaseLockIcon /> MinIO               | **mostly-minio**<br /><br />`minio`                    | Shared storage service. | Service |
+| <WebFrontendIcon/> Web frontend          | **mostly-ui**<br /><br />`mostly-app-ui`                           | Contains the frontend of MOSTLY AI. Reachable over port `8080`. | Service |
+| <TerminalIcon/> Backend                  | **mostly-app**<br /><br />`mostly-app-enterprise`                  | Contains the backend and public APIs of MOSTLY AI. | Service |
+| <DatabaseLockIcon /> Coordinator Service | **mostly-coordinator**<br /><br />`mostly-coordinator`             | Component that takes all requests from the web application and coordinates execution of tasks on the main AI engine. | Service |
+| <StorageIcon /> Data discovery           | **mostly-core-api**<br /><br />`mostly-core-api`                   | Component that reads metadata and analyzes data sources and destinations. | Service |
+| <UserPersonaIcon /> Keycloak             | **mostly-keycloak**<br /><br />`mostly-keycloak`                   | Keycloak is an open-source identity management, authentication, and authorization tool. This container has a pre-configured Keycloak instance for MOSTLY AI. | Service |
+| <DatabaseLockIcon /> PostgreSQL          | **mostly-psql**<br /><br />`postgres`                              | Database instance of the system. Contains databases for app, coordinator, and Keycloak. | Service |
+| <DatabaseLockIcon /> MinIO               | **mostly-minio**<br /><br />`minio`                                | Shared storage service. | Service |
+| <AssistantBrokerIcon /> Assistant Broker | **mostly-assistant-broker**<br /><br />`mostly-assistant-broker`   | Components that manages Assistant communication with the LLM service and the thread sessions. | Service |
+| <JupyterHubIcon /> Jupyter Hub           | **jupter-hub**<br /><br />`jupter-hub`                             | Manages Python sessions for the assistant service, providing isolated Jupyter environments for code execution. | Service |
+| <ProbeAPIIcon /> Probe API               | **mostly-probe**<br /><br />`mostly-probe`                         | Component responsable for online synthetic data generation from trained generators. | Service |
+
 
 ## AI Worker nodes
 
@@ -55,6 +62,10 @@ MOSTLY AI can connect to your internal databases (with the help of [connectors](
 ### Cloud storage buckets
 
 In addition to databases, you can also read original data and deliver synthetic data from and to cloud storage buckets (AWS S3, Azure blob storage, Google Cloud storage buckets).
+
+### LLM services
+
+The Assistant Broker can connect to any Large Language Model (LLM) service that supports tool calling via LiteLLM. This includes publicly available LLM services such as Claude or OpenAI, or privately hosted LLM services deployed within your customer infrastructure. This integration enables the assistant service to provide intelligent responses and coordinate code execution through the internal Jupyter Hub nodes.
 
 ### Storage requirements
 
