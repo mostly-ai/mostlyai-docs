@@ -295,11 +295,15 @@ The holdout data provides a benchmark for comparison. The synthetic dataset shou
 
 ### Distances
 
-The full distribution of the distances to closest records appears at the end of the **Model** report.
+The **Distances** section contains two distribution charts that appear at the end of the **Model** report: the **DCR distribution** and the **NNDR distribution**.
 
-The distances of the **_synthetic samples to the training samples_** are displayed in **_green_**, and the distances of the **_synthetic samples to the holdout samples_** are displayed in **_gray_**. 
+The charts display three lines to compare different dataset combinations:
 
-In the chart, you can ascertain that the synthetic samples are as close to the original training samples as they are to the holdout samples (which serves as a reference).
+* **Green line** - distances between synthetic samples and training data
+* **Black line** - distances between synthetic samples and holdout data  
+* **Gray line** - distances between training data and holdout data (reference)
+
+Synthetic data shall be as close to the original training samples, as it is close to original holdout samples, which serve us as a reference. This can be asserted empirically by measuring distances between synthetic samples to their closest original samples, whereas training and holdout sets are sampled to be of equal size. A green line that is significantly left of the dark gray line implies that synthetic samples are closer to the training samples than to the holdout samples, indicating that the data has overfitted to the training data. A green line that overlays with the dark gray line validates that the trained model indeed represents the general rules, that can be found in training just as well as in holdout samples. The DCR share indicates the proportion of synthetic samples that are closer to a training sample than to a holdout sample, and ideally, this value should not significantly exceed 50%, as a higher value could indicate overfitting.
 <Image 
     src="/docs/docimages/generators/evaluate-quality/model-report-distances.webp" 
     alt="Model report - Distances" 
@@ -348,23 +352,34 @@ The following is an example of the model metrics obtained with the Python SDK.
 ```json
 {
     'accuracy': {
-        'overall': 0.946,
-        'univariate': 0.958,
-        'bivariate': 0.934,
-        'coherence': None,
-        'overall_max': 0.984
+        'overall': 0.934,
+        'univariate': 0.965,
+        'bivariate': 0.944,
+        'trivariate': 0.862,
+        'coherence': 0.964,
+        'overall_max': 0.969,
+        'univariate_max': 0.99,
+        'bivariate_max': 0.972,
+        'trivariate_max': 0.927,
+        'coherence_max': 0.985
     },
     'distances': {
-        'dcr_training': 0.075,
-        'dcr_holdout': 0.077,
-        'dcr_original': None,
-        'dcr_synthetic': None
+        'ims_training': 0.0,
+        'ims_holdout': 0.0,
+        'ims_trn_hol': 0.0,
+        'dcr_training': 0.029,
+        'dcr_holdout': 0.031,
+        'dcr_trn_hol': 0.031,
+        'dcr_share': 0.526,
+        'nndr_training': 0.003,
+        'nndr_holdout': 0.003,
+        'nndr_trn_hol': 0.002
     },
     'similarity': {
-        'cosine_similarity_training_synthetic': 0.99995,
-        'cosine_similarity_training_holdout': 0.99998,
-        'discriminator_auc_training_synthetic': 0.531,
-        'discriminator_auc_training_holdout': 0.506
+        'cosine_similarity_training_synthetic': 0.99254,
+        'cosine_similarity_training_holdout': 0.99943,
+        'discriminator_auc_training_synthetic': 0.782,
+        'discriminator_auc_training_holdout': 0.539
     }
 }
 ```
@@ -377,25 +392,36 @@ g.tables[0].language_model_metrics
 
 ```json
 {
-    'accuracy': {
-        'overall': 0.93,
-        'univariate': 0.956,
-        'bivariate': 0.904,
-        'coherence': None,
-        'overall_max': 0.936
-    },
-    'distances': {
-        'dcr_training': 0.491,
-        'dcr_holdout': 0.493,
-        'dcr_original': None,
-        'dcr_synthetic': None
-    },
-    'similarity': {
-        'cosine_similarity_training_synthetic': 0.99927,
-        'cosine_similarity_training_holdout': 0.99921,
-        'discriminator_auc_training_synthetic': 0.535,
-        'discriminator_auc_training_holdout': 0.516
-    }
+        'accuracy': {
+            'overall': 0.641,
+            'univariate': 0.771,
+            'bivariate': 0.636,
+            'trivariate': 0.514,
+            'coherence': None,
+            'overall_max': 0.91,
+            'univariate_max': 0.966,
+            'bivariate_max': 0.917,
+            'trivariate_max': 0.848,
+            'coherence_max': None
+        },
+        'distances': {
+            'ims_training': 0.0,
+            'ims_holdout': 0.0,
+            'ims_trn_hol': 0.0,
+            'dcr_training': 0.09,
+            'dcr_holdout': 0.093,
+            'dcr_trn_hol': 0.092,
+            'dcr_share': 0.534,
+            'nndr_training': 0.176,
+            'nndr_holdout': 0.174,
+            'nndr_trn_hol': 0.131
+        },
+        'similarity': {
+            'cosine_similarity_training_synthetic': 0.91449,
+            'cosine_similarity_training_holdout': 0.9989,
+            'discriminator_auc_training_synthetic': 0.73,
+            'discriminator_auc_training_holdout': 0.495
+        }
 }
 ```
 
@@ -411,23 +437,34 @@ The returned metrics are the same as those reported for the generator.
 ```json
 {
     'accuracy': {
-        'overall': 0.946,
-        'univariate': 0.958,
-        'bivariate': 0.934,
-        'coherence': None,
-        'overall_max': 0.984
+        'overall': 0.934,
+        'univariate': 0.965,
+        'bivariate': 0.944,
+        'trivariate': 0.862,
+        'coherence': 0.964,
+        'overall_max': 0.969,
+        'univariate_max': 0.99,
+        'bivariate_max': 0.972,
+        'trivariate_max': 0.927,
+        'coherence_max': 0.985
     },
     'distances': {
-        'dcr_training': 0.075,
-        'dcr_holdout': 0.077,
-        'dcr_original': None,
-        'dcr_synthetic': None
+        'ims_training': 0.0,
+        'ims_holdout': 0.0,
+        'ims_trn_hol': 0.0,
+        'dcr_training': 0.029,
+        'dcr_holdout': 0.031,
+        'dcr_trn_hol': 0.031,
+        'dcr_share': 0.526,
+        'nndr_training': 0.003,
+        'nndr_holdout': 0.003,
+        'nndr_trn_hol': 0.002
     },
     'similarity': {
-        'cosine_similarity_training_synthetic': 0.99995,
-        'cosine_similarity_training_holdout': 0.99998,
-        'discriminator_auc_training_synthetic': 0.531,
-        'discriminator_auc_training_holdout': 0.506
+        'cosine_similarity_training_synthetic': 0.99254,
+        'cosine_similarity_training_holdout': 0.99943,
+        'discriminator_auc_training_synthetic': 0.782,
+        'discriminator_auc_training_holdout': 0.539
     }
 }
 ```

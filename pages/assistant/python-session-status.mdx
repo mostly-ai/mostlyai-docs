@@ -1,6 +1,6 @@
 ---
 title: "Python session status"
-description: "Each new Assistant thread runs a Python environment where MOSTLY AI runs the Python code to navigate you and show you data insights. The Python session expires after a period of inactivity. Learn how to check and manage your Python session status."
+description: "Each new Assistant thread runs a Python environment where MOSTLY AI runs the Python code to navigate you and show you data insights. The Python session becomes inactive after a period of inactivity but can restart automatically. Learn how to check and manage your Python session status."
 ---
 
 import Image from 'next/image'
@@ -28,17 +28,21 @@ After the Python session becomes available, its status changes to **Running**.
     height={400}
 />
 
-After 15 minutes of inactivity, the Python session status changes to **Expired**.
+After 10 minutes of inactivity, the Python session status changes to **Inactive**.
 
 <Image
     src="/docs/docimages/assistant/python-session-expired.webp"
-    alt="Python session expired"
+    alt="Python session inactive"
     width={800}
     height={400}
 />
 
-## Handle expired Python sessions
+## Handle inactive Python sessions
 
-After the Python session expires in a thread, you can no longer run Python code in that thread. If you try to run Python code in an expired Python session, you will see an error message.
+When a Python session becomes inactive due to inactivity, it can automatically restart when you run Python code again. The Assistant is aware when the session has restarted and will intelligently manage variables that are no longer available from the previous session.
 
-To run Python again, you need to [create a new Assistant thread](/assistant#use-the-assistant).
+<Callout type="info">
+Your uploaded files remain available even after the Python session restarts, so you can continue working with your data seamlessly.
+</Callout>
+
+The Assistant will automatically handle the session restart process and inform you if any previously defined variables need to be recreated due to the session restart.

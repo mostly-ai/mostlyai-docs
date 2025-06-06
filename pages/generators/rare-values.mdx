@@ -103,7 +103,7 @@ If the original column contains short strings with a consistent pattern (phone n
 
 #### Set a primary key
 
-If the original column is a primary key column, you can set a **Primary key** to generate primary key values. MOSTLY AI generates integer or UUID primary keys in the column depending on its primary key format.
+If the original column is a primary key column, you can set a **Primary key** to generate primary key values. MOSTLY AI generates UUID primary keys in the column to mantain the value uniqueness.
 
 <Image
     src="/docs/docimages/generators/rare-values/set-primary-key.webp"
@@ -115,9 +115,3 @@ If the original column is a primary key column, you can set a **Primary key** to
 #### Pre-process your data to exclude primary keys
 
 If you do not intend to set a primary key on a table or point any foreign keys to it, you can pre-process the table to exclude the primary key column. Alternatively, deselect the **Include** checkbox on the **Data configuration** page of a generator.
-
-### Columns for emails
-
-If a column contains emails, MOSTLY AI again auto-assigns the **Categorical** encoding type and enables **Rare category protection** with the **Constant** method.
-
-If each row in the column contains a unique email, all emails will appear as `_RARE_` values in the synthetic data.
