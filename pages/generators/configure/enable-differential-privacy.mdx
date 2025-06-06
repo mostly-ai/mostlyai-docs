@@ -41,6 +41,7 @@ In MOSTLY AI, you enable differential privacy on the **Model configuration** pag
     | **DP noise multiplier** | Set the noise multiplier for the model. The noise multiplier determines the amount of noise added to the model's gradients during training. A higher value results in more noise and stronger privacy, but may lead to less accurate results.<br /><br />The default is `1.5`.<br /><br />For details, see [_Noise multiplier_](#noise-multiplier).|
     | **DP max gradient norm** | Set the maximum norm of the per-sample gradients. Gradients with norm higher than this will be clipped to this value.<br /><br />The default is `1`.<br /><br />For details, see [_Gradient clipping_](#gradient-clipping).|
     | **Delta** | The delta value for differential privacy in the range of `1 x 10 ^ -3` to `1 x 10 ^ -12`. It is the probability of the privacy guarantee not holding. The smaller the delta, the more confident you can be that the privacy guarantee holds.<br />The default is `1 x 10 ^ -5`.|
+    | **Value protection epsilon** | Privacy budget allocated for protecting value ranges during analysis. A higher value provides more accurate ranges but reduces the budget available for model training.|
     
     <Callout>
     **Note**<br />

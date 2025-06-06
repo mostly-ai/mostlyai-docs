@@ -133,6 +133,7 @@ You will also find three cards with quality metrics for **Accuracy**, **Similari
 | **Accuracy** | The overall accuracy of the model. It shows how well synthetic data generated with the model captures the characteristics of the training data.<br /><br />For reference, the accuracy of the synthetic data when compared to the holdout data appears in light gray. |
 | **Univariate** | The overall accuracy of the model's univariate distributions. An aggregated statistic that shows the mean of the univariate accuracies of all columns. |
 | **Bivariate**  | The overall accuracy of the model's bivariate distributions. An aggregated statistic that shows the mean of the bivariate accuracies of all columns. |
+| **Trivariate**  | The overall accuracy of the model's trivariate distributions. An aggregated statistic that shows the mean of the trivariate accuracies across all three-way column interactions. |
 | **Coherence**  | (Only for linked tables) The temporal coherence of time series data between the synthetic and training data as well as the preservation of the average sequence length (or the average number of linked table records that are related to a subject table record). |
 
 **Similarity metrics in the overview**
@@ -146,8 +147,10 @@ You will also find three cards with quality metrics for **Accuracy**, **Similari
 
 | Distances<br />metric | Description |
 | ----------------- | ----------- |
-| **Identical<br />Matches** | An **identical match** is the special case of the distance measure being zero. In such a case, two records would share the same values across all columns. But also here, the occurrence of identical matches only represents a privacy issue if and only if it is more prevalent than within the training data itself. If the training dataset has identical matches, we can expect to see a similar number (but not significantly more) of identical matches in the synthetic data. |
-| **Average Distances** | The average distances calculated between the synthetic records and their nearest neighbors from the training dataset used for this model.<br />For reference, the average distances between the synthetic records and their nearest neighbors from the holdout dataset appear in light gray. |
+| **Identical<br />Matches** | The share of synthetic samples that have at least one exact match within the training dataset. For reference, the share of synthetic samples with an identical match within the holdout dataset is also reported. Identical matches only represent a privacy issue if they are more prevalent than within the training data itself. |
+| **Average Distances** | The mean distance between synthetic samples and their nearest training samples. For reference, the mean distance between synthetic samples and their nearest holdout samples is provided in light gray. |
+| **DCR Share** | The share of synthetic samples that are closer to a training sample than to a holdout sample. With equally-sized holdout and training datasets, the DCR share is ideally close to 50%. |
+| **NNDR Ratio** | The Nearest-Neighbor Distance Ratio (NNDR) is the distance towards the nearest neighbor divided by the distance to the second nearest neighbor. The NNDR is computed for all synthetic samples with respect to both the training dataset and the holdout dataset. The NNDR ratio is then the ratio of the 10th smallest NNDR for synthetic vs. training, divided by the 10th smallest NNDR for synthetic vs. holdout. |
 
 ### Correlations
 
@@ -183,7 +186,7 @@ Details about the Φκ coefficient can be found in the following paper: [A new c
 
 Univariate distributions describe the probability of a variable having a particular value. You can find four types of plots in this section of the QA report: categorical, continuous, and datetime. A Sequence Length plot is also available if your generator includes a linked table.
 
-For each variable, there’s a distribution and binned plot. These show the distributions of the original and the synthetic dataset in black and green, respectively. The percentage next to the title shows how accurately the original column is represented by the synthetic column.
+For each variable, there's a distribution and binned plot. These show the distributions of the original and the synthetic dataset in black and green, respectively. The percentage next to the title shows how accurately the original column is represented by the synthetic column.
 
 You can search by column name to find a univariate chart.
 
@@ -210,7 +213,7 @@ For each variable pair, there is an **original** and a **synthetic** plot. These
 
 The bivariate distribution below shows, for instance, that the age group of forty years and older is most likely to be married, and anyone below thirty is most likely to have never been married. You can see that this is the same in the synthetic dataset.
 
-If it’s a QA report for a linked table, then you can find the plots with the context table’s columns by looking for `context:[column-name]`. The word context here refers to either the subject table or another linked table with which this linked table has been synthesized.
+If it's a QA report for a linked table, then you can find the plots with the context table's columns by looking for `context:[column-name]`. The word context here refers to either the subject table or another linked table with which this linked table has been synthesized.
 
 You can search by column name to find a bivariate chart.
 
