@@ -16,13 +16,13 @@ MOSTLY AI is available via the AWS Marketplace.
 
 ## Deployment
 
-Follow the deployment instructions in the [GitHub repository](https://github.com/mostly-ai/aws-marketplace).
+Deployment Overview, Requirements and Prerequisites are available in the [GitHub repository](https://github.com/mostly-ai/aws-marketplace).
 
-The guide includes all required steps to complete the setup.
+You will also find installation [examples](https://github.com/mostly-ai/aws-marketplace/tree/main/examples), which may be used as a step-by-step installation guide via Terragrunt.
 
 ## Post-deployment
 
-1. Access the platform by pasting the DNS name in your browser
+1. Once the installation has been completed, you can access the Platform via the DNS name (FQDN) used during the setup.
 
 <Image
     src="/docs/docimages/install/aws-marketplace/01-aws-marketplace-11-login-screen.webp"
@@ -31,7 +31,9 @@ The guide includes all required steps to complete the setup.
     height={400}
 />
 
-2. Log in using the superadmin credentials defined in the `helm-stack/mostly-combined/terragrunt.hcl` file. 
+2. Log in using the superadmin credentials:
+   - If following an [examples](https://github.com/mostly-ai/aws-marketplace/tree/main/examples)-based installation, the superadmin credentials will be the ones defined in `helm-stack/mostly-combined/terragrunt.hcl`. 
+   - Otherwise, use the default ones.
 
 **Result**
 
