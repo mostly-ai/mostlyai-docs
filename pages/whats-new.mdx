@@ -8,6 +8,27 @@ import Image from 'next/image'
 
 # What's new in MOSTLY AI
 
+## v4.7.3
+_June 23rd, 2025_
+
+### Improvements
+
+* {/* MSD-1797 */} Added a collapsible Python code container with streaming animation to the Assistant, so the chat interface stays clean and focused on the output.
+* {/* MSD-1740 */} Improved Assistant compatibility and behavior on iOS, ensuring a smoother mobile experience.
+* {/* MSD-1805 */} Added a plus button and Python mode to the Assistant input area on the homepage, enabling file uploads and resource access without navigating into a thread.
+* {/* MSD-1791 */} Introduced a retry mechanism for file uploads in the Generator table, to prevent failed uploads from blocking progress.
+
+### Resolved issues
+
+* {/* MSD-1764 */} Fixed an issue where model samples were not shown even if available.
+* {/* MSD-1813 */} Fixed missing generator training status when in the QUEUED state.
+* {/* MSD-1822 */} Fixed an issue where the synthetic dataset details page failed to load if the underlying Generator was private and not accessible.
+
+### Upstream dependencies
+
+* Upgraded to [`mostlyai`](https://github.com/mostly-ai/mostlyai) 4.7.8, [`mostlyai-engine`](https://github.com/mostly-ai/mostlyai-engine) 1.4.5
+  * Fix issues with gated HuggingFace models
+
 ## v4.7.2
 _June 6th, 2025_
 
