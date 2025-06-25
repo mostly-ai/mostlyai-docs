@@ -9,7 +9,7 @@ function App({ Component, pageProps }: AppProps) {
 
   useEffect(() => {
     initTagManager();
-  }, [router.events]);
+  }, []);
 
   return (
       <Component {...pageProps} />
