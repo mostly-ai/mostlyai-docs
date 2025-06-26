@@ -8,6 +8,35 @@ import Image from 'next/image'
 
 # What's new in MOSTLY AI
 
+## v4.8.0
+_June 26th, 2025_
+
+### Dynamic Interactive HTML Generation artifacts on the Assistant
+{/* MSD-1839 */}
+The Assistant now supports dynamic interactive HTML generation artifacts, enabling you to create rich, interactive visualizations and reports directly within your Assistant threads. This feature allows for more engaging and informative data presentations that can be shared and interacted with in real-time.
+
+### Mostly MCP Server (beta)
+{/* MSD-XXXX */}
+Introducing the Mostly MCP Server in beta, providing 19 powerful tools for enhanced synthetic data workflows. The MCP Server is supported by 4 major MCP clients:
+
+* **Claude Desktop** - Access MOSTLY AI capabilities directly from your desktop environment
+* **Claude Web UI** - Seamless integration with Claude's web interface
+* **VS Code** - Enhanced development experience with synthetic data tools
+* **Cursor** - Advanced AI-powered coding with MOSTLY AI integration
+
+### Improvements
+
+* {/* MSD-1810 */} Implemented periodic AWS license validation in the AWS marketplace offering, ensuring compliance and proper license management for AWS users.
+
+### Resolved issues
+
+* {/* MSD-1836 */} Fixed EmptyDataError when uploading a file in an inactive session, improving the reliability of file uploads in Assistant threads.
+
+### Upstream dependencies
+
+* Upgraded to [`mostlyai`](https://github.com/mostly-ai/mostlyai) 4.7.9, [`mostlyai-engine`](https://github.com/mostly-ai/mostlyai-engine) 1.4.6, [`mostlyai-qa`](https://github.com/mostly-ai/mostlyai-qa) 1.9.7
+* Upgraded to vLLM 0.9.1, PyTorch 2.7.0, Triton 3.3.0 for improved performance and stability
+
 ## v4.7.3
 _June 23rd, 2025_
 
@@ -2786,3 +2815,5 @@ Mock data makes it possible to simulate errors and circumstances that would othe
 *A new and intuitive QA report*
 
 The new QA Report is available directly in the UI. You can explore the results of your generation job and see if there are privacy or accuracy warnings!
+
+</rewritten_file>
