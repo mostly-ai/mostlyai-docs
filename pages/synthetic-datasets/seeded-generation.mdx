@@ -1,15 +1,15 @@
 ---
-title: 'Seeded generation'
-description: 'With seeded generation, you can create a new synthetic dataset that is conditioned on a seed dataset you provide. This is also known as conditional generation.'
+title: 'Conditional simulation'
+description: 'With conditional simulation, you can create a new synthetic dataset that is conditioned on a seed dataset you provide. This is also known as conditional simulation.'
 ---
 
 import Image from 'next/image'
 import { Callout } from 'nextra/components'
 import { Tabs } from 'nextra/components'
 
-# Seeded generation
+# Conditional simulation
 
-With **_seeded generation_**, you can create a new synthetic dataset that is conditioned on a seed dataset you provide. This is also known as **_conditional generation_**.
+With **_conditional simulation_**, you can create a new synthetic dataset that is conditioned on a seed dataset you provide. This is also known as **_conditional simulation_**.
 
 The seed dataset acts as context for the generation of the new synthetic dataset. With a seed dataset, you can define as context the **columns**, **values**, and **their distributions** that you want to use to conditionally generate the rest of the columns in the synthetic dataset.
 
@@ -24,7 +24,7 @@ A synthetic dataset generated with seed is **_partially synthetic_**.
 
 ## Generate a synthetic dataset with seed
 
-For seeded generation, start a new synthetic dataset and provide a seed dataset.
+For conditional simulation, start a new synthetic dataset and provide a seed dataset.
 
 **Prerequisites**
 
@@ -40,11 +40,11 @@ If you use the web application, you can upload a seed dataset from the **Sample 
 
 1. Start a new synthetic dataset.
 2. On the **Synthetic dataset configuration** page, expand the subject table.
-3. Expand **Conditional generation**.
+3. Expand **Conditional simulation**.
 4. Click **Choose file**.
     <Image 
         src="/docs/docimages/synthetic-datasets/seeded-generation/02-click-upload-seed-file.webp" 
-        alt="Seeded generation - Sample size - Click Upload file" 
+        alt="Conditional simulation - Sample size - Click Upload file" 
         width={800} 
         height={150}
     />
@@ -61,17 +61,17 @@ sd = mostly.generate(generator=g, seed=seed)
 
 ## Examples
 
-The three examples below showcase what you can achieve with seeded generation.
+The three examples below showcase what you can achieve with conditional simulation.
 
 <Callout>
 The examples below are also available as a [Jupyter Notebook](https://colab.research.google.com/github/mostly-ai/mostly-tutorials/blob/dev/conditional-generation/conditional-generation.ipynb). You can also find it in our [Tutorials](/tutorials) section.
 </Callout>
 
-1. [Perform multi-column dataset rebalancing](#rebalance-datasets-with-seeded-generation). You create a seed dataset with two columns that have a new distribution. You then use the seed for conditional generation and see how the rest of the columns are impacted by the rebalancing.
+1. [Perform multi-column dataset rebalancing](#rebalance-datasets-with-conditional-simulation). You create a seed dataset with two columns that have a new distribution. You then use the seed for conditional simulation and see how the rest of the columns are impacted by the rebalancing.
 2. [Generate partially synhetic geo data](#generate-partially-synthetic-geographical-data). Use the original geographical coordinates from the original training dataset to generate the remaining columns as synthetic data.
 3. [Generate synthetic names](#generate-synthetic-names). Train a generator on the [baseball/players] table and generate the first names and last names of baseball players by using a seed dataset that contains the country of origin of the players.
 
-### Rebalance datasets with seeded generation
+### Rebalance datasets with conditional simulation
 
 In this example, you learn how to rebalance the US Census dataset with seed generation, where the seed dataset contains an equal distribution of females and males and an uncorrelated income attribute. The goal is to remove the gender gap and see how the rest of the attributes in the original dataset change in the generated synthetic dataset.
 
@@ -107,7 +107,7 @@ To install in a Jupyter Notebook environment, use the following:
     * Train a new generator.
         ```python filename="python" copy
         df = pd.read_csv('http://mostly.ai/docs/datasets/us-census-income.csv.gz')
-        g = mostly.train(data=df, name="Tutorial Seeded Generation - US Census")
+        g = mostly.train(data=df, name="Tutorial Conditional Simulation - US Census")
         ```
     * Get an existing generator trained on the US Adult dataset.
         ```python filename="python" copy
@@ -147,7 +147,7 @@ To meet the criteria of removing the gender income gap, the generated synthetic 
 
 <Image
     src="/docs/docimages/synthetic-datasets/seeded-generation/01-example-01-chart.webp"
-    alt="Seeded generation - Example 01 - Chart - Rebalance dataset"
+    alt="Conditional simulation - Example 01 - Chart - Rebalance dataset"
     width={450}
     height={500}
 />
@@ -206,7 +206,7 @@ To install in a Jupyter Notebook environment, use the following:
     ```python filename="python" copy
     # Train a generator on the pre-processed AirBnB data
     config = {
-        'name': 'Conditional Generation Tutorial AirBnB',
+        'name': 'Conditional Simulation Tutorial AirBnB',
         'tables': [{
             'name': 'AirBnB',
             'data': df,
@@ -284,7 +284,7 @@ To install in a Jupyter Notebook environment, use the following:
     1. Create a new generator and add the `players.csv` table from the [baseball dataset](/datasets#baseball-dataset).
         <Image
             src="/docs/docimages/synthetic-datasets/seeded-generation/03-example-generator-baseball-text-encoding-type.webp"
-            alt="Seeded generation - Example 03 - Generator with baseball/players table - names set to Language/Text"
+            alt="Conditional simulation - Example 03 - Generator with baseball/players table - names set to Language/Text"
             width={800}
             height={150}
         />
@@ -294,7 +294,7 @@ To install in a Jupyter Notebook environment, use the following:
     4. For **Model**, make sure the **MOSTLY_AI/LSTMFromScratch** model is selected.
         <Image
             src="/docs/docimages/synthetic-datasets/seeded-generation/03-example-generator-configure-model-mostly-ai-lstm.webp"
-            alt="Seeded generation - Example 03 - Configure model - MOSTLY_AI/LSTMFromScratch"
+            alt="Conditional simulation - Example 03 - Configure model - MOSTLY_AI/LSTMFromScratch"
             width={800}
             height={150}
         />
@@ -303,7 +303,7 @@ To install in a Jupyter Notebook environment, use the following:
     1. With the generator open, click its kebab menu and select **Copy ID**.
         <Image
             src="/docs/docimages/synthetic-datasets/seeded-generation/03-example-generator-copy-id.webp"
-            alt="Seeded generation - Example 03 - Generator - Copy ID"
+            alt="Conditional simulation - Example 03 - Generator - Copy ID"
             width={800}
             height={150}
         />
@@ -341,7 +341,7 @@ The generator probe returns the following generator names from country Mexico.
 
 ## What's next
 
-With seeded generation, you can probe generators with a specific context, whether that is hypothetical ([example 1](#rebalance-datasets-with-seeded-generation)) or real ([example 2](#generate-partially-synthetic-geographical-data)), and gain corresponding insights for specific scenarios. You can also generate synthetic text based on the provided context ([example 3](#generate-synthetic-names)).
+With conditional simulation, you can probe generators with a specific context, whether that is hypothetical ([example 1](#rebalance-datasets-with-conditional-simulation)) or real ([example 2](#generate-partially-synthetic-geographical-data)), and gain corresponding insights for specific scenarios. You can also generate synthetic text based on the provided context ([example 3](#generate-synthetic-names)).
 
 In addition, you can:
 
