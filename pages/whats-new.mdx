@@ -8,6 +8,70 @@ import Image from 'next/image'
 
 # What's new in MOSTLY AI
 
+## v4.8.2
+_June 27th, 2025_
+
+### Resolved issues
+
+* {/* MSD-1870 */} Fixed issue when using LLM models in generator training
+
+## v4.8.1
+_June 26th, 2025_
+
+### Resolved issues
+
+* {/* MSD-XXXX */} Fix upload file error on Assistant threads
+
+## v4.8.0
+_June 26th, 2025_
+
+### Interactive HTML artifacts in the Assistant
+{/* MSD-1839 */}
+You can now generate and view fully interactive HTML content directly inside Assistant threads. This lets you create rich visualizations, reports, or custom UI elements that are rendered and usable in real time — perfect for sharing insights or building dynamic tools within your conversations.
+
+### Mostly AI MCP Server
+{/* MSD-XXXX */}
+The [MOSTLY AI MCP Server](https://github.com/mostly-ai/mostly-mcp-server) is now available in beta, offering 19 powerful tools to supercharge your synthetic data workflows. It seamlessly integrates with four leading MCP clients:
+
+* **Claude Desktop** - Bring MOSTLY AI's capabilities directly to your desktop environment.
+* **Claude Web UI** - Seamless integration with Claude's web interface
+* **VS Code** - Enhanced development experience with synthetic data tools
+* **Cursor** - Advanced AI-assisted coding with MOSTLY AI integration
+
+### Improvements
+
+* {/* MSD-1810 */} Implemented periodic license validation for the AWS Marketplace offering to ensure proper subscription management and compliance for AWS users.
+
+### Resolved issues
+
+* {/* MSD-1836 */} Fixed EmptyDataError when uploading a file in an inactive session, improving the reliability of file uploads in Assistant threads.
+
+### Upstream dependencies
+
+* Upgraded to [`mostlyai`](https://github.com/mostly-ai/mostlyai) 4.7.9, [`mostlyai-engine`](https://github.com/mostly-ai/mostlyai-engine) 1.4.6, [`mostlyai-qa`](https://github.com/mostly-ai/mostlyai-qa) 1.9.7
+* Upgraded to vLLM 0.9.1, PyTorch 2.7.0, Triton 3.3.0 for improved performance and stability
+
+## v4.7.3
+_June 23rd, 2025_
+
+### Improvements
+
+* {/* MSD-1797 */} Added a collapsible Python code container with streaming animation to the Assistant, so the chat interface stays clean and focused on the output.
+* {/* MSD-1740 */} Improved Assistant compatibility and behavior on iOS, ensuring a smoother mobile experience.
+* {/* MSD-1805 */} Added a plus button and Python mode to the Assistant input area on the homepage, enabling file uploads and resource access without navigating into a thread.
+* {/* MSD-1791 */} Introduced a retry mechanism for file uploads in the Generator table, to prevent failed uploads from blocking progress.
+
+### Resolved issues
+
+* {/* MSD-1764 */} Fixed an issue where model samples were not shown even if available.
+* {/* MSD-1813 */} Fixed missing generator training status when in the QUEUED state.
+* {/* MSD-1822 */} Fixed an issue where the synthetic dataset details page failed to load if the underlying Generator was private and not accessible.
+
+### Upstream dependencies
+
+* Upgraded to [`mostlyai`](https://github.com/mostly-ai/mostlyai) 4.7.8, [`mostlyai-engine`](https://github.com/mostly-ai/mostlyai-engine) 1.4.5
+  * Fix issues with gated HuggingFace models
+
 ## v4.7.2
 _June 6th, 2025_
 

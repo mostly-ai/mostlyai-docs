@@ -125,7 +125,7 @@ A categorical variable has a fixed set of possible values that are already prese
 
 If the automatic encoding type detection does not recognize a **Numeric** or **Datetime** column as such, it is encoded as **Categorical**.
 
-You can control how the rare category protection mechanism works with **Value protection** settings and the **Rare category replacement method** which appear on the **Model configuration** page of a generator. These settings help with protecting rare categories. Rare categories may cause re-identification of outliers among your data subjects if they’re present in the resulting synthetic data.
+You can control how the rare category protection mechanism works with **Value protection** settings and the **Rare category replacement method** which appear on the **Model configuration** page of a generator. These settings help with protecting rare categories. Rare categories may cause re-identification of outliers among your data subjects if they're present in the resulting synthetic data.
 
 There are two rare category protection methods available with which you can mask these categories:
 
@@ -166,7 +166,7 @@ MOSTLY AI can synthesize floating-point values with a precision of up to 8 digit
 
 #### Character
 
-Use the **Character** encoding type to synthesize short strings with a consistent pattern, such as phone numbers, license plate numbers, company ID’s, transaction ID, and social security ID’s.
+Use the **Character** encoding type to synthesize short strings with a consistent pattern, such as phone numbers, license plate numbers, company ID's, transaction ID, and social security ID's.
 
 #### Datetime
 
@@ -194,7 +194,7 @@ The **Datetime: Relative** encoding type is only available for linked tables.
 
 Use the **Latitude, Longitude** encoding type to synthesize geolocation coordinates.
 
-MOSTLY AI requires a geolocation coordinate to be encoded in a single field with the latitude and longitude as comma-separated values. The latitude must be on the comma’s left side and the longitude on the right.
+MOSTLY AI requires a geolocation coordinate to be encoded in a single field with the latitude and longitude as comma-separated values. The latitude must be on the comma's left side and the longitude on the right.
 
 The values must be in decimal degrees format and range from `-90` to `90` for latitude and `-180` to `180` for longitude. Their precision cannot be larger than five digits after the decimal dot. This translates to an accuracy of approx. 1 meter. Any additional digits will be ignored.
 
@@ -223,7 +223,7 @@ Use the **Language/Categorical** encoding type to fine-tune an LLM with the cate
 When you [generate a synthetic dataset](/synthetic-datasets/generate), you leverage the LLM pre-training and knowledge in the use cases listed below.
 
 * Generate representative categories even when fine-tuning with smaller datasets
-* Apply [conditional generation by seeding](/synthetic-datasets/seeded-generation) numeric values that weren't present in the original data
+* Apply [conditional simulation by seeding](/synthetic-datasets/seeded-generation) numeric values that weren't present in the original data
 
 #### Numeric
 
@@ -277,17 +277,19 @@ For unstructured text data, you can:
 
 #### MOSTLY AI/LSTMFromScratch-3m
 
-The **LSTM** is not a pre-trained model and you can use it to synthesize unstructured natural language texts up to 1,000 characters.
+The **LSTM** is a custom-trained model that synthesizes unstructured natural language texts.
 
-You can use this encoding type to generate realistic, representative, and anonymous financial transaction texts, short user feedback, medical assessments, PII fields, etc. As the resulting synthetic texts are representative of the terms, tokens, and their co-occurrence in the original data, they can be confidently used in analytics and machine learning use cases, such as sentiment analysis and named-entity recognition. Even though they might look noisy and not very human-readable, they will work perfectly for these use cases.
+You can use this encoding type to generate realistic, representative, and anonymous financial transaction texts, short user feedback, medical assessments, PII fields, etc. As the resulting synthetic texts are representative of the terms, tokens, and their co-occurrence in the original data, they can be confidently used in analytics and machine learning use cases, such as sentiment analysis and named-entity recognition.
 
-Our text synthesis model is language-agnostic and doesn’t contain the biases of some pre-trained models—any content is solely learned from the original training data. This means that it can process any language, vernacular, and slang present in the original data.
+Remember, the LSTM will perform better when trained on short, structured, repetitive sequences like names and short sentences while an LLM will perform better for longer, less structured samples like descriptions, email bodies, or notes. 
+
+Our text synthesis model is language-agnostic and doesn't contain the biases of some pre-trained models—any content is solely learned from the original training data. This means that it can process any language, vernacular, and slang present in the original data.
 
 The amount of data required to produce usable results depends on the diversity of the original texts' vocabulary, categories, names, etc. As a rule of thumb, the more structure there is, the fewer samples are needed.
 
-The synthetic texts are generated in a context-aware manner—the messages from a teenager are different from those of an 85-year old grandmother, for instance. By considering the other attributes of a synthetic subject’s profile, MOSTLY AI is capable of synthesizing appropriate natural language texts for each of them.
+The synthetic texts are generated in a context-aware manner—the messages from a teenager are different from those of an 85-year old grandmother, for instance. By considering the other attributes of a synthetic subject's profile, MOSTLY AI is capable of synthesizing appropriate natural language texts for each of them.
 
-Below, you can find two examples. The first example demonstrates MOSTLY AI’s ability to synthesize entirely new names from a multilingual dataset. And the second example shows the result of synthesizing Tripadvisor reviews. Here you can see that the resulting texts accurately retain the context of the establishment they discuss (Restaurant or Hotel) and the synthesized rating.
+Below, you can find two examples. The first example demonstrates MOSTLY AI's ability to synthesize entirely new names from a multilingual dataset. And the second example shows the result of synthesizing Tripadvisor reviews. Here you can see that the resulting texts accurately retain the context of the establishment they discuss (Restaurant or Hotel) and the synthesized rating.
 
 **Multilingual names dataset**
 
