@@ -90,6 +90,10 @@ const tutorials: Tutorial[] = [
   { 
     title: "Calculate accuracy and privacy metrics for **Quality Assurance**", 
     colabUrl: "https://colab.research.google.com/github/mostly-ai/mostlyai/blob/main/docs/tutorials/quality-assurance/quality-assurance.ipynb" 
+  },
+  { 
+    title: "Enrich Sensitive Data with **LLMs using Synthetic Replicas**", 
+    colabUrl: "https://colab.research.google.com/github/mostly-ai/mostlyai/blob/main/docs/tutorials/synthetic-enrich/synthetic-enrich.ipynb" 
   }
 ];
 
