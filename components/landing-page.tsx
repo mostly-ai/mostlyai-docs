@@ -40,7 +40,7 @@ const LandingPage: React.FC = () => {
         links: [
           { text: 'About the Assistant', href: '/assistant' },
           { text: 'Prompt examples', href: '/assistant/prompt-examples' },
-          { text: 'Manage threads', href: '/assistant/manage-threads' },
+          { text: 'Manage chats', href: '/assistant/manage-chats' },
           { text: 'Configuration', href: '/assistant/configuration' }
         ],
       },
