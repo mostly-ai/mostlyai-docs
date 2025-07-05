@@ -33,14 +33,14 @@ const LandingPage: React.FC = () => {
       {
         icon: <AssistantIcon />,
         title: {
-          text: 'Assistant',
-          link: '/assistant'
+          text: 'Chats',
+          link: '/chats'
         },
         description: '',
         links: [
           { text: 'About the Assistant', href: '/assistant' },
           { text: 'Prompt examples', href: '/assistant/prompt-examples' },
-          { text: 'Manage chats', href: '/assistant/manage-threads' },
+          { text: 'Manage chats', href: '/chats/manage-chats' },
           { text: 'Configuration', href: '/assistant/configuration' }
         ],
       },
