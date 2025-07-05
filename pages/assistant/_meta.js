@@ -1,6 +1,6 @@
 export default {
     "prompt-examples": "Prompt examples",
-    "manage-threads": "Manage threads",
+    "manage-threads": "Manage chats",
     "python-session-status": "Python session status",
     "configuration": "Configuration"
 }
