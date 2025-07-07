@@ -1,6 +1,6 @@
 ---
 title: 'Public and private resources'
-description: 'In MOSTLY AI, all resources (generators, synthetic datasets, connectors, assistant chats) are private by default. You can make generators and synthetic datasets public to share them with the world or keep them private for internal use.'
+description: 'In MOSTLY AI, all resources (generators, synthetic datasets, connectors, chats) are private by default. You can make generators and synthetic datasets public to share them with the world or keep them private for internal use.'
 ---
 
 import { Tabs } from 'nextra/components'
@@ -11,11 +11,11 @@ import { PrivateResourceIcon, PublicResourceIcon, UnlistedResourceIcon } from '@
 
 # Public and private resources
 
-<PrivateResourceIcon/>In MOSTLY AI, all resources (generators, synthetic datasets, connectors, assistant chats) are **private** immediately after you create them.
+<PrivateResourceIcon/>In MOSTLY AI, all resources (generators, synthetic datasets, connectors, chats) are **private** immediately after you create them.
 
 <PublicResourceIcon/>You can make [generators](/generators), [synthetic datasets](/synthetic-datasets), and [connectors](/connectors) **public** to share with the world. Alternatively, you can keep them private for your internal use or that of your organization's.
 
-<UnlistedResourceIcon/>You can also make generators, synthetic datasets, connectors, and assistant chats **unlisted**. Unlisted resources are not visible in public resource lists, but anyone with the link can access them.
+<UnlistedResourceIcon/>You can also make generators, synthetic datasets, connectors, and chats **unlisted**. Unlisted resources are not visible in public resource lists, but anyone with the link can access them.
 
 <CustomCallout>
 _Public resource lists_ include:
@@ -27,7 +27,7 @@ _Public resource lists_ include:
 - Search results
 </CustomCallout>
 
-[Assistant chats](/assistant) are always private and cannot be made public. You can, however, [export an assistant chat as a Jupyter Notebook](/assistant/manage-chats#export-as-a-jupyter-notebook).
+[Chats](/assistant) are always private and cannot be made public.
 
 
 | Resource              | Default visibility         | Visibility options                                                                 | Organizations visibility                                      |
@@ -35,7 +35,7 @@ _Public resource lists_ include:
 | Generators         | <PrivateResourceIcon/>Private | <PublicResourceIcon/>Public<br /><UnlistedResourceIcon/>Unlisted<br /><PrivateResourceIcon/>Private                            | <PublicResourceIcon/>Public<br /><UnlistedResourceIcon/>Unlisted<br /><PrivateResourceIcon/>Private (within organization) |
 | Synthetic datasets | <PrivateResourceIcon/>Private | <PublicResourceIcon/>Public<br /><UnlistedResourceIcon/>Unlisted<br /><PrivateResourceIcon/>Private                            | <PublicResourceIcon/>Public<br /><UnlistedResourceIcon/>Unlisted<br /><PrivateResourceIcon/>Private (within organization) |
 | Connectors         | <PrivateResourceIcon/>Private | <PublicResourceIcon/>Public<br /><UnlistedResourceIcon/>Unlisted<br /><PrivateResourceIcon/>Private                            | <PublicResourceIcon/>Public<br /><UnlistedResourceIcon/>Unlisted<br /><PrivateResourceIcon/>Private (within organization) |
-| Assistant chats  | <PrivateResourceIcon/>Private | <PrivateResourceIcon/>Private<br /><UnlistedResourceIcon/>Unlisted<br /><br />Can also be [exported and shared as a Jupyter Notebook](/assistant/manage-chats#export-as-a-jupyter-notebook) | Cannot be transferred to an organization                       |
+| Chats  | <PrivateResourceIcon/>Private | <PrivateResourceIcon/>Private<br /><UnlistedResourceIcon/>Unlisted | Cannot be transferred to an organization                       |
 
 <Callout>
 The following applies to **public resources**:
