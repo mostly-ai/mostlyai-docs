@@ -42,14 +42,14 @@ _June 26th, 2025_
 
 ### Resolved issues
 
-* {/* MSD-XXXX */} Fix upload file error on Assistant threads
+* {/* MSD-XXXX */} Fix upload file error on Assistant chats
 
 ## v4.8.0
 _June 26th, 2025_
 
 ### Interactive HTML artifacts in the Assistant
 {/* MSD-1839 */}
-You can now generate and view fully interactive HTML content directly inside Assistant threads. This lets you create rich visualizations, reports, or custom UI elements that are rendered and usable in real time — perfect for sharing insights or building dynamic tools within your conversations.
+You can now generate and view fully interactive HTML content directly inside Assistant chats. This lets you create rich visualizations, reports, or custom UI elements that are rendered and usable in real time — perfect for sharing insights or building dynamic tools within your conversations.
 
 ### Mostly AI MCP Server
 {/* MSD-XXXX */}
@@ -66,7 +66,7 @@ The MOSTLY AI MCP Server is now available in beta at `https://mcp.mostly.ai/sse`
 
 ### Resolved issues
 
-* {/* MSD-1836 */} Fixed EmptyDataError when uploading a file in an inactive session, improving the reliability of file uploads in Assistant threads.
+* {/* MSD-1836 */} Fixed EmptyDataError when uploading a file in an inactive session, improving the reliability of file uploads in Assistant chats.
 
 ### Upstream dependencies
 
@@ -80,7 +80,7 @@ _June 23rd, 2025_
 
 * {/* MSD-1797 */} Added a collapsible Python code container with streaming animation to the Assistant, so the chat interface stays clean and focused on the output.
 * {/* MSD-1740 */} Improved Assistant compatibility and behavior on iOS, ensuring a smoother mobile experience.
-* {/* MSD-1805 */} Added a plus button and Python mode to the Assistant input area on the homepage, enabling file uploads and resource access without navigating into a thread.
+* {/* MSD-1805 */} Added a plus button and Python mode to the Assistant input area on the homepage, enabling file uploads and resource access without navigating into a chat.
 * {/* MSD-1791 */} Introduced a retry mechanism for file uploads in the Generator table, to prevent failed uploads from blocking progress.
 
 ### Resolved issues
@@ -139,7 +139,7 @@ You can now ensure that Generators and Synthetic datasets produce consistent res
 
 ### Assistant artifacts
 {/* MSD-1658 */}
-The Assistant now supports **artifacts**, allowing it to display resources (like Generators or Synthetic datasets) and files (like CSV, PNG) directly in your threads. A more interactive and organized way to work with results.
+The Assistant now supports **artifacts**, allowing it to display resources (like Generators or Synthetic datasets) and files (like CSV, PNG) directly in your chats. A more interactive and organized way to work with results.
 
 ### Multi-table mock data
 {/* MSD-1712 */}
@@ -149,7 +149,7 @@ We've introduced a new way to generate mock data with multi-table support direct
 
 * {/* MSD-1677 */} You can now change the access type of a Connector after it's been created.
 * {/* MSD-1678 */} When creating a new Connector through the Synthetic dataset destination flow, we now automatically sets its access type to **Write**, ensuring it's immediately usable for writing data.
-* {/* MSD-1680 */} Added filters to the Assistant's Thread list page, making it easier to navigate threads.
+* {/* MSD-1680 */} Added filters to the Assistant's Chat list page, making it easier to navigate chats.
 * {/* MSD-xxx */} Switched to uv for faster and more reliable Python package management in the Assistant backend.
 
 ### Resolved issues
@@ -172,15 +172,15 @@ Introduced dedicated Connector Detail pages, providing comprehensive information
 
 ### Improvements
 
-* {/* MSD-1669 */} Assistant: Added collapsible Python blocks for better organization and readability of code in threads
+* {/* MSD-1669 */} Assistant: Added collapsible Python blocks for better organization and readability of code in chats
 * {/* MSD-1675, MSD-1683 */} Updated connector cards and API to display number of likes and descriptions
 * {/* MSD-1708 */} Streamlined the "Connect your Data Source" flow when creating a new connector
 * {/* MSD-1556 */} Added support for manual entry of full bucket paths in the Generator Add data flow
 
 ### Resolved issues
 
-* {/* MSD-1687 */} Fixed an issue where the number of parallel running threads wasn't immediately updated after deleting a thread
-* {/* MSD-1691 */} Optimized response time of API endpoint for creating new threads
+* {/* MSD-1687 */} Fixed an issue where the number of parallel running chats wasn't immediately updated after deleting a chat
+* {/* MSD-1691 */} Optimized response time of API endpoint for creating new chats
 * {/* MSD-XXX */} Improved error messages in logs to be more descriptive and LLM-compatible
 
 ### Upstream dependencies
@@ -216,8 +216,8 @@ Enhanced accuracy analysis with 3-way (trivariate) interactions, extending quali
 
 ### Improvements
 
-* {/* MSD-1630 */} Assistant: Centered the input box in empty threads for a cleaner and more intuitive user experience.
-* {/* MSD-1628 */} Assistant: Redesigned the thread header to be thinner, freeing up more space for the actual conversation area and improving usability.
+* {/* MSD-1630 */} Assistant: Centered the input box in empty chats for a cleaner and more intuitive user experience.
+* {/* MSD-1628 */} Assistant: Redesigned the chat header to be thinner, freeing up more space for the actual conversation area and improving usability.
 * {/* MSD-1664 */} Assistant: Enabled direct URL links with assistant prompts in both text and Python modes for quicker navigation
 * {/* MSD-1648 */} Assistant: Enable file uploads even if the session is not initialized.
 * {/* MSD-XXX */} Add a python dictionary to generator details configuration section
@@ -226,8 +226,8 @@ Enhanced accuracy analysis with 3-way (trivariate) interactions, extending quali
 ### Resolved issues
 
 * {/* MSD-1642 */} Preserve connector filtering and sorting after closing the new Connector modal.
-* {/* MSD-1643 */} Update totalVirtualCpuTime in Assistant threads based on websocket events.
-* {/* MSD-1637 */} Prevent large horizontal scrolls in wide tables within Assistant threads.
+* {/* MSD-1643 */} Update totalVirtualCpuTime in Assistant chats based on websocket events.
+* {/* MSD-1637 */} Prevent large horizontal scrolls in wide tables within Assistant chats.
 * {/* MSD-1666 */} Fixed issue where clicking on a connector in the connector list redirected to the Homepage.
 * {/* MSD-1615 */} Smooth out the notifications menu.
 * {/* MSD-1640 */} Fixed backend error (500) caused by expired sessions when attempting to restart them.
@@ -270,7 +270,7 @@ Introduced the new Nearest-Neighbor Distance Ratio (NNDR) metric, providing a mo
 
 ### Resolved issues
 
-* {/* MSD-XXX */} Fixed Virtual CPU time computation for re-started threads, ensuring accurate resource tracking and credits consumption.
+* {/* MSD-XXX */} Fixed Virtual CPU time computation for re-started chats, ensuring accurate resource tracking and credits consumption.
 
 ### Upstream dependencies
 
@@ -281,7 +281,7 @@ _Apr 18th, 2025_
 
 ### Assistant: Automatic restart of inactive Python sessions
 {/* MSD-1581 */}
-The Assistant now automatically restarts Python sessions that have become inactive. If your session times out, it will be reinitialized the next time you send a message. This allows you to continue the conversation in the same thread without manually starting a new session.
+The Assistant now automatically restarts Python sessions that have become inactive. If your session times out, it will be reinitialized the next time you send a message. This allows you to continue the conversation in the same chat without manually starting a new session.
 
 ### Filtering and sorting options for lists
 {/* MSD-1309 */}
@@ -386,7 +386,7 @@ Implemented `c.write_data()` and `c.delete_data()` functions for direct access t
 ### Resolved issues
 
 * {/* MSD-1537 */} Fixed user information for audit logs
-* {/* MSD-1550 */} Fixed vCPUTime updates for threads when kernel is not running
+* {/* MSD-1550 */} Fixed vCPUTime updates for chats when kernel is not running
 * {/* MSD-1536 */} Stopped triggering probe jobs for synthetic datasets
 
 ### Upstream dependencies
@@ -399,7 +399,7 @@ _Mar 21st, 2025_
 
 ### Compute-based credits
 {/* MSD-1307 */}
-MOSTLY AI is transitioning to a compute-based credit system for tracking usage. The new system is more accurate and fair, as it accounts for the actual compute resources used for training generators, generating synthetic datasets, and the usage in Assistant threads.
+MOSTLY AI is transitioning to a compute-based credit system for tracking usage. The new system is more accurate and fair, as it accounts for the actual compute resources used for training generators, generating synthetic datasets, and the usage in Assistant chats.
 
 The system now tracks virtual CPU and GPU time across each resource. The **Usage report** is also updated to include the new **Virtual CPU time** and **Virtual GPU time** usage metrics.
 
@@ -446,7 +446,7 @@ _Mar 14th, 2025_
 * {/* MSD-1405 */} Fixed separate Python calls merging into a single code block in the Assistant.
 * {/* MSD-XXXX */} Fixed extra arguments not being handled correctly in the Assistant configuration.
 * {/* MSD-1449 */} Fixed selected column in Fairness and Rebalancing not clearing when clicking "X" in SD configuration.
-* {/* MSD-1418 */} Added usernames in front of Assistant thread names.
+* {/* MSD-1418 */} Added usernames in front of Assistant chat names.
 * {/* MSD-XXXX */} Fixed issue with RANDOM sampling of rows in case of sequential data.
 
 ## v4.3.1
@@ -538,7 +538,7 @@ For details, see [_Set encoding types_](/generators/configure/set-encoding-types
 
 ### Resolved issues
 
-* {/* MSD-1377 */} Resolved the page refreshes after an Assistant thread title is updated
+* {/* MSD-1377 */} Resolved the page refreshes after an Assistant chat title is updated
 * {/* MSD-1356 */} Removed `maxLength` constraint on the Assistant messages
 * {/* MSD-1356 */} Limit the length for Column and Table Names to 256 chars
 
@@ -562,7 +562,7 @@ _Feb 12th, 2025_
 * {/* MSD-1331 */} Non-members can also see the members in an organization
 * {/* MSD-1322 */} Resolved a misalignment in the **Generate data** button
 * {/* MSD-1328 */} Resolved an issue with the unexpected expiration of organization invitations
-* {/* MSD-1297 */} Resolved an issue with the display of tables and images in Assistant threads
+* {/* MSD-1297 */} Resolved an issue with the display of tables and images in Assistant chats
 * {/* MSD-1270 */} Values set for the configuration of differential privacy are now preserved when you collapse and expand the Differential privacy section (in **Model configuration** of a generator)
 * {/* MSD-1300 */} Resolved an issue in the Assistant related to disappearing Python code snippets provided using the **Python code** mode
 * {/* MSD-1340 */} When you are not member of any organizations and use the **Owner: My organizations** filter, the filtered list of results is now empty as expected
@@ -758,7 +758,7 @@ _Nov 28th, 2024_
 
 * {/* MSD-xxxx */} Reduced the number of parallel workers from 4 to 2 for Data API
 * {/* MSD-1118 */} UI and API are now consistent for Temperature and Top P value ranges
-* {/* MSD-1035 */} Implemented a retry mechanism for file uploads in Assistant threads
+* {/* MSD-1035 */} Implemented a retry mechanism for file uploads in Assistant chats
 * {/* MSD-1139 */} Improved the messages in the new Notification center
 * {/* MSD-1089 */} Refactored the `share` endpoint to be consistent with `likes`
 
@@ -766,7 +766,7 @@ _Nov 28th, 2024_
 
 * {/* MSD-1157 */} Resolved the `gated repo` error when fine-tuning LLMs from HuggingFace
 * {/* MSD-1132 */} `Generator.noOfSyntheticDatasets` is no longer incremented when live-probing generators
-* {/* MSD-1167 */} Window title now displayed correctly when adding a generator or synthetic dataset to an Assistant thread
+* {/* MSD-1167 */} Window title now displayed correctly when adding a generator or synthetic dataset to an Assistant chat
 
 ## v312
 _Nov 21st, 2024_
@@ -775,7 +775,7 @@ _Nov 21st, 2024_
 
 * {/* MSD-xxxx */} Improvements to the Assistant system prompt
 * {/* MSD-1126 */} The chart in the **Training log** now remains in place while the training log table is scrolled down
-* {/* MSD-1096 */} Moved the **Python mode** button in assistant threads to improve usability
+* {/* MSD-1096 */} Moved the **Python mode** button in assistant chats to improve usability
 
 ### Resolved issues
 
@@ -817,11 +817,11 @@ _Nov 13th, 2024_
 ### Improvements
 
 * {/* MSD-948 */} Improved (more fast and robust) language model inference by using vLLM engine for GPU compute
-* {/* MSD-1065 */} Use names of any length for all entities (generators, synthetic datasets, connectors, assistant threads, and computes). In the UI, the names are truncated and appear in full when you hover over them.
+* {/* MSD-1065 */} Use names of any length for all entities (generators, synthetic datasets, connectors, assistant chats, and computes). In the UI, the names are truncated and appear in full when you hover over them.
 
 ### Resolved issues
 
-* {/* MSD-1108 */} Resolved an error while trying to fetch an image file from an Assistant thread
+* {/* MSD-1108 */} Resolved an error while trying to fetch an image file from an Assistant chat
 * {/* MSD-1103 */} Synthetic dataset cloning is disabled for users with **Viewer** role
 
 ## v309
@@ -887,11 +887,11 @@ A new mechanism now auto-detects columns with unstructured text in your tabular 
 ## v307
 _Oct 21st, 2024_
 
-### Export assistant threads as Jupyter Notebooks
+### Export assistant chats as Jupyter Notebooks
 
-You can now run your assistant threads in a Jupyter Notebook environment. All assistant threads are now exportable `.ipynb` files.
+You can now run your assistant chats in a Jupyter Notebook environment. All assistant chats are now exportable `.ipynb` files.
 
-For details, see [_Export as Jupyter Notebooks_](/assistant/manage-threads#export-as-a-jupyter-notebook).
+For details, see [_Export as Jupyter Notebooks_](/assistant/manage-chats#export-as-a-jupyter-notebook).
 
 ### Tree viewer for object storage
 {/* MSD-940 */}
@@ -1075,7 +1075,7 @@ For on-premises deployments, you can integrate with any model and make it availa
 
 ### Resolved issues
 
-- {/* MSD-867 */} The `createShare` API endpoint is now available only to users who have Editor permission for a generator, synthetic dataset, or assistant thread.
+- {/* MSD-867 */} The `createShare` API endpoint is now available only to users who have Editor permission for a generator, synthetic dataset, or assistant chat.
 
 ## v232
 _Aug 30th, 2024_
@@ -1141,9 +1141,9 @@ _Aug 22nd, 2024_
 
 ### Assistant tokens usage
 {/* MSD-??? */}
-Each Assistant thread now includes information about the number of tokens used in the thread. Tokens are counted both for the number of tokens sent and received. Tokens used in Assistant threads count towards your daily credits usage.
+Each Assistant chat now includes information about the number of tokens used in the chat. Tokens are counted both for the number of tokens sent and received. Tokens used in Assistant chats count towards your daily credits usage.
 
-Tokens are counted in threads starting from version 227. Threads created before this version will always have their tokens used count shown as 0.
+Tokens are counted in chats starting from version 227. Chats created before this version will always have their tokens used count shown as 0.
 
 For details, see [_Usage and credits_](/usage).
 
@@ -1167,7 +1167,7 @@ You can now download the logs of failed jobs. The logs are available for downloa
 
 ### Improvements
 
-* {/* MSD-760 */} Introduced heartbeat messages for Assistant threads to avoid unexpected timeouts and incomplete Python code execution
+* {/* MSD-760 */} Introduced heartbeat messages for Assistant chats to avoid unexpected timeouts and incomplete Python code execution
 * {/* MSD-796 */} Improved the error message when the downloading of logs for generators or synthetic datasets fails
 * {/* MSD-715 */} Improved the error message when a user tries to open a resource (generator, synthetic dataset, or connector) that is not shared with them
 
@@ -1200,10 +1200,10 @@ Thereafter, you can assign each AI model to use a different compute. This applie
 
 For details, see [_Compute_](/administration/compute) in the _Administration_ section.
 
-### Easiest way to start Assistant threads
+### Easiest way to start Assistant chats
 {/* MSD-764 */}
 
-The **New thread** button is now available directly from the sidebar. You can now start new Assistant threads from anywhere in the app.
+The **New chat** button is now available directly from the sidebar. You can now start new Assistant chats from anywhere in the app.
 
 ## v225
 _Aug 16th, 2024_
@@ -1248,13 +1248,13 @@ For details, see [Monthly usage reports](/usage#monthly-usage-reports-enterprise
 
 _Aug 2nd, 2024_
 
-### Interactive data tables in Assistant threads
+### Interactive data tables in Assistant chats
 
-Assistant threads now support the display of tabular data in interactive tables. The interactions are available directly whenever the Assistant displays a data table. You can sort, search, paginate, and download the data in CSV format.
+Assistant chats now support the display of tabular data in interactive tables. The interactions are available directly whenever the Assistant displays a data table. You can sort, search, paginate, and download the data in CSV format.
 
-### Run your Python code in Assistant threads
+### Run your Python code in Assistant chats
 
-You can now run your own Python code in Assistant threads. For all those cases where you need to run your custom code and not the one generated by the Assistant, you can now paste your Python snippet directly and the Assistant will run it for you.
+You can now run your own Python code in Assistant chats. For all those cases where you need to run your custom code and not the one generated by the Assistant, you can now paste your Python snippet directly and the Assistant will run it for you.
 
 ### Improvements
 
@@ -1300,7 +1300,7 @@ _Jul 18th, 2024_
 
 ### Share MOSTLY AI assets publicly in your organization
 
-Admins can now share Generators, Synthetic datasets, Connectors and Assistant threads with all users in their organization. 
+Admins can now share Generators, Synthetic datasets, Connectors and Assistant chats with all users in their organization. 
 
 Use the **Share** button and turn on the **Any authenticated user can view** toggle.
 
@@ -1310,32 +1310,32 @@ Use the **Share** button and turn on the **Any authenticated user can view** tog
 
 ### Resolved issues
 
-* {/* MSD-701 */} Fix for an issue that prevented uploading a file in Assistant threads for some users.
+* {/* MSD-701 */} Fix for an issue that prevented uploading a file in Assistant chats for some users.
 
 
 ## v218
 
 _Jul 17th, 2024_
 
-### File uploads in Assistant threads
+### File uploads in Assistant chats
 
 The Assistant has made data insights easier than ever. And it can reason very well about your MOSTLY AI assets - generators and synthetic datasets. But you might also need to work with external data. The Assistant now supports this too.
 
-You can now upload files in Assistant threads. You can do so with single or multiple files. Instant examples are typical data file types, such as CSV, Parquet, or Excel. But you can use any file type that an LLM can process.
+You can now upload files in Assistant chats. You can do so with single or multiple files. Instant examples are typical data file types, such as CSV, Parquet, or Excel. But you can use any file type that an LLM can process.
 
-For details, see [Upload files in Assistant threads](/assistant#upload-files).
+For details, see [Upload files in Assistant chats](/assistant#upload-files).
 
-### Add MOSTLY AI assets to Assistant threads
+### Add MOSTLY AI assets to Assistant chats
 
-While you can use the **Explore** button from any generator or synthetic dataset to open the Assistant, you can now also add these assets directly to an Assistant thread. This way, you can easily refer to them in a conversation.
+While you can use the **Explore** button from any generator or synthetic dataset to open the Assistant, you can now also add these assets directly to an Assistant chat. This way, you can easily refer to them in a conversation.
 
 Use the new Resources menu and select either **Use a generator** or **Use a synthetic dataset** option. You are then able to select the asset from a UI list.
 
 For details, see [Use a generator or a synthetic dataset](assistant#use-a-generator-or-a-synthetic-dataset).
 
-### Python session status in Assistant threads
+### Python session status in Assistant chats
 
-Each Assistant thread also runs a Python session in the background to run any Python code generated by the Assistant. That session expires after 15 minutes of inactivity. You can now track your Python session status in each thread. The session now is started as soon the thread is created.
+Each Assistant chat also runs a Python session in the background to run any Python code generated by the Assistant. That session expires after 15 minutes of inactivity. You can now track your Python session status in each chat. The session now is started as soon the chat is created.
 
 For details, see [Python session status](/assistant/python-session-status).
 
@@ -1481,9 +1481,9 @@ You can now use SSL along with Kerberos authentication to connect to your Apache
 
 For details, see [_Use Apache Hive for synthetic data_](/connectors/create/apache-hive).
 
-### Auto-generated titles for Assistant threads
+### Auto-generated titles for Assistant chats
 {/* MSD-604 */}
-After the second message in a thread, the Assistant now automatically generates a title for the thread based on the conversation content. You can now identify and find Assistant threads more easily based on the their conversation context and name.
+After the second message in a chat, the Assistant now automatically generates a title for the chat based on the conversation content. You can now identify and find Assistant chats more easily based on the their conversation context and name.
 
 ### Improvements
 

@@ -34,7 +34,7 @@ MOSTLY AI runs as a set of containerized applications and services that you can 
 | <UserPersonaIcon /> Keycloak             | **mostly-keycloak**<br /><br />`mostly-keycloak`                   | Keycloak is an open-source identity management, authentication, and authorization tool. This container has a pre-configured Keycloak instance for MOSTLY AI. | Service |
 | <DatabaseLockIcon /> PostgreSQL          | **mostly-psql**<br /><br />`postgres`                              | Database instance of the system. Contains databases for app, coordinator, and Keycloak. | Service |
 | <DatabaseLockIcon /> MinIO               | **mostly-minio**<br /><br />`minio`                                | Shared storage service. | Service |
-| <AssistantBrokerIcon /> Assistant Broker | **mostly-assistant-broker**<br /><br />`mostly-assistant-broker`   | Component that manages Assistant communication with the LLM service and the thread sessions. | Service |
+| <AssistantBrokerIcon /> Assistant Broker | **mostly-assistant-broker**<br /><br />`mostly-assistant-broker`   | Component that manages Assistant communication with the LLM service and the chat sessions. | Service |
 | <JupyterHubIcon /> Jupyter Hub           | **jupyter-hub**<br /><br />`jupyter-hub`                           | Manages Python sessions for the assistant service, providing isolated Jupyter environments for code execution. | Service |
 | <ProbeAPIIcon /> Probe API               | **mostly-probe**<br /><br />`mostly-probe`                         | Component responsible for online synthetic data generation from trained generators. | Service |
 
