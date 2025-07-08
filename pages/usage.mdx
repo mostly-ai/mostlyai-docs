@@ -20,21 +20,21 @@ For more credits on https://app.mostly.ai or for the configuration of credits on
 
 ## Usage
 
-Usage is tracked based on consumed **Total CPU time** and **Total GPU time**.
+Usage is tracked based on consumed **Total CPU time**, **Total GPU time**, and **Token Consumption**.
 
-For each generator and synthetic dataset, you will find the total virtual CPU/GPU time consumed in the **Training status** section.
+For each generator and synthetic dataset, you will find the total token consumption as well as virtual CPU/GPU time consumed in the **Python session status** section.
 
-**Generator details: Compute consumption**
-GPU and CPU time are measured in seconds. The total time is the sum of the GPU and CPU time used. GPU time is only available when a GPU was selected to train a generator.
+**Generator details: Compute and token consumption**
+GPU and CPU time are measured in seconds while Token Consumption is measured in tokens. The total time is the sum of the GPU and CPU time used. GPU time is only available when a GPU was selected to train a generator. Token consumption is calculated at a rate of 1M tokens per 5.0 Credits.
 <Image
-    src="/docs/docimages/usage/g-virtual-cpu-gpu-times.webp"
+    src="/docs/docimages/usage/g-virtual-cpu-gpu-times-with-tokens.webp"
     alt="MOSTLY AI - Usage and credits - Virtual CPU and GPU times"
     width={800}
     height={500}
 />
 
 **Synthetic dataset details: Compute consumption**
-GPU time is only available when a GPU was selected to generate the synthetic dataset.
+GPU time is only available when a GPU was selected to generate the synthetic dataset. Tokens are consumed during conversation with the Assistant.
 <Image
     src="/docs/docimages/usage/sd-virtual-cpu-gpu-times.webp"
     alt="MOSTLY AI - Usage and credits - Virtual CPU and GPU times"
@@ -44,7 +44,7 @@ GPU time is only available when a GPU was selected to generate the synthetic dat
 
 ## Credits
 
-Credits are consumed based on the total virtual CPU and GPU time used to train generators and generate synthetic datasets.
+Credits are consumed based on the total virtual CPU and GPU time used to train generators and generate synthetic datasets. Credits are also be consumed during conversation with the Assistant at a rate of 5 credits per 1M tokens.
 
 `Credits` = `𝐴` × `Total Virtual CPU Time` + `𝐵` × `Total Virtual GPU Time`, where `𝐴` and `𝐵`are the unit prices for CPU and GPU time respectively.
 
