@@ -1,6 +1,6 @@
 ---
 title: 'Usage and credits'
-description: 'Daily, MOSTLY AI provides 5 credits for the free generation of synthetic data points. 1 credits equals 1 million synthetic data points.'
+description: 'Daily, MOSTLY AI provides 5 credits for the free generation of synthetic data points. 1 credits equals 1 million synthetic data points. 5 credits equals 1 million chat tokens.'
 ---
 
 import { Tabs } from 'nextra/components'
@@ -9,32 +9,41 @@ import { CustomCallout } from '@components/custom-callout'
 
 # Usage and credits
 
-The MOSTLY AI Platform at https://app.mostly.ai provides a daily limit of 5 credits to train generators, generate synthetic datasets, and use the Assistant. Enterprise deployments have a usage-based configuration which can be adjusted according to the organization's needs.
+The [MOSTLY AI Platform](https://app.mostly.ai) provides a daily limit of 5 credits to train generators, generate synthetic datasets, and use the [Assistant](./assistant.mdx). Enterprise deployments have a usage-based configuration which can be adjusted according to the organization's needs.
 
 <CustomCallout>
 **Note**
 When you use up your credits, you can no longer train new generators, create new synthetic datasets, or start chats.
 
-For more credits on https://app.mostly.ai or for the configuration of credits on Enterprise deployments, contact MOSTLY AI.
+For more credits or for the configuration of credits on Enterprise deployments, [contact MOSTLY AI](https://mostly.ai/contact).
 </CustomCallout>
 
 ## Usage
 
-Usage is tracked based on **Total CPU time**, **Total GPU time**, and **Token Consumption**.
+Platform usage is tracked based on **Total CPU time**, **Total GPU time**, and **Token Consumption**.
 
-For each generator and synthetic dataset, you will find the total token consumption as well as virtual CPU/GPU time consumed in the **Python session status** section.
+For generators and synthetic datasets, you will find the virtual CPU/GPU time consumed in the **Training status** section. For chats, you will find the total token consumption as well as virtual CPU/GPU time consumed in the **Python Session status** section.
 
-**Generator details: Compute and token consumption**
-GPU and CPU time are measured in seconds while Token Consumption is measured in tokens. The total time is the sum of the GPU and CPU time used. GPU time is only available when a GPU was selected to train a generator. Token consumption is calculated at a rate of 1M tokens per 5.0 Credits.
+**Chat details: Compute and token consumption**
+GPU and CPU time are measured in seconds while chat usage is measured in tokens. The total time is the sum of the GPU and CPU time used. GPU time is only available when a GPU was selected to train a generator. Token consumption is calculated at a rate of 1M tokens per 5.0 Credits.
 <Image
     src="/docs/docimages/usage/g-virtual-cpu-gpu-times-with-tokens.webp"
+    alt="MOSTLY AI - Usage and credits - Token Consumption plus Virtual CPU and GPU times"
+    width={800}
+    height={500}
+/>
+
+**Generator details: Compute and token consumption**
+GPU and CPU time are measured in seconds. The total time is the sum of the GPU and CPU time used. GPU time is only available when a GPU was selected to train a generator.
+<Image
+    src="/docs/docimages/usage/g-virtual-cpu-gpu-times.webp"
     alt="MOSTLY AI - Usage and credits - Virtual CPU and GPU times"
     width={800}
     height={500}
 />
 
 **Synthetic dataset details: Compute consumption**
-GPU time is only available when a GPU was selected to generate the synthetic dataset. Tokens are consumed during conversation with the Assistant.
+GPU time is only available when a GPU was selected to generate the synthetic dataset.
 <Image
     src="/docs/docimages/usage/sd-virtual-cpu-gpu-times.webp"
     alt="MOSTLY AI - Usage and credits - Virtual CPU and GPU times"
@@ -50,7 +59,7 @@ Credits are consumed based on the total virtual CPU and GPU time used to train g
 
 ### Check your daily credits
 
-As you train generators and generate synthetic dataset, you can track the usage and the remaining credits you have on your account.
+As you train generators, generate synthetic datasets, and chat with the Assistant, you can track the usage and the remaining credits you have on your account.
 
 <Tabs items={['UI', 'Python SDK']}>
 <Tabs.Tab>
