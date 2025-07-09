@@ -6,7 +6,6 @@ const withNextra = nextra({
 });
 
 export default withNextra({
-  basePath: "/",
   trailingSlash: process.env.NEXT_TRAILING_SLASH === "true" ? true : false,
   images: {
     unoptimized: process.env.UNOPTIMIZED_IMAGES === "true",

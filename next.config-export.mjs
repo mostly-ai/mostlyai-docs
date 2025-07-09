@@ -6,7 +6,6 @@ const withNextra = nextra({
 });
 
 module.exports = withNextra({
-  basePath: "/",
   output: "export",
   images: {
     unoptimized: true,
