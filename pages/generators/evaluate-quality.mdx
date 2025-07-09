@@ -30,7 +30,7 @@ Each generator's overall **Accuracy** metric measures how effectively the genera
 The generator **Accuracy** is an average of the accuracies of all AI models in the generator. For generators with a single AI model, the generator and model accuracies are the same.
 
 <Image
-    src="/docs/docimages/generators/evaluate-quality/01-generator-page-01-accuracy.webp"
+    src="/docimages/generators/evaluate-quality/01-generator-page-01-accuracy.webp"
     alt="MOSTLY AI - Generator details - Accuracy"
     width={900}
     height={300}
@@ -41,7 +41,7 @@ The accuracy of an AI model is an aggregated statistic that is the _mean_ of the
 You can find the univariate, bivariate, and coherence metrics for each model in its [**Model** report](#model-report).
 
 <Image
-    src="/docs/docimages/generators/evaluate-quality/01-generator-page-02-open-model-report.webp"
+    src="/docimages/generators/evaluate-quality/01-generator-page-02-open-model-report.webp"
     alt="MOSTLY AI - Generator configuration - Open model report"
     width={900}
     height={300}
@@ -69,9 +69,9 @@ To calculate the distances, 10% from the original data is randomly drawn into a 
 To gauge the privacy-preservation qualities of a generator, the generated synthetic samples should be as close to their nearest training neighbors as they are close to their nearest holdout neighbors (the data not seen during training).
 
 <Image
-    src="/docs/docimages/generators/evaluate-quality/qa-report-distances.webp"
-    alt="Top QA report card" 
-    width={800} 
+    src="/docimages/generators/evaluate-quality/qa-report-distances.webp"
+    alt="Top QA report card"
+    width={800}
     height={150}
 />
 
@@ -86,10 +86,10 @@ The **Distances** metric is calculated based on L2 distances between samples. Ea
 
 For each model in a generator, you can open its **Model** report and view its metrics in detail. To open, click **Model** in the **Reports** column under **Data insights**.
 
-<Image 
-    src="/docs/docimages/generators/evaluate-quality/02-open-model-report.webp" 
-    alt="Top QA report card" 
-    width={800} 
+<Image
+    src="/docimages/generators/evaluate-quality/02-open-model-report.webp"
+    alt="Top QA report card"
+    width={800}
     height={150}
 />
 
@@ -118,10 +118,10 @@ At the top of the model report, you can find information about the model: when i
 
 You will also find three cards with quality metrics for **Accuracy**, **Similarity**, and **Distances**.
 
-<Image 
-    src="/docs/docimages/generators/evaluate-quality/03-model-report-top.webp" 
-    alt="Model report - top section - Dataset statistics, Accuracy, Distances" 
-    width={800} 
+<Image
+    src="/docimages/generators/evaluate-quality/03-model-report-top.webp"
+    alt="Model report - top section - Dataset statistics, Accuracy, Distances"
+    width={800}
     height={150}
 />
 
@@ -160,19 +160,19 @@ Both the X and Y-axis refer to the columns in the table that is evaluated, and e
 
 For subject tables, the charts display all columns.
 
-<Image 
-    src="/docs/docimages/generators/evaluate-quality/qa-report-correlations-subject-table.webp" 
-    alt="Correlations - Subject table" 
-    width={800} 
+<Image
+    src="/docimages/generators/evaluate-quality/qa-report-correlations-subject-table.webp"
+    alt="Correlations - Subject table"
+    width={800}
     height={150}
 />
 
 For linked tables, the charts display the correlations between all columns as well as the correlations between each column and the **Sequence Length**.
 
-<Image 
-    src="/docs/docimages/generators/evaluate-quality/qa-report-correlations-linked-table.webp" 
-    alt="Correlations - Linked table" 
-    width={800} 
+<Image
+    src="/docimages/generators/evaluate-quality/qa-report-correlations-linked-table.webp"
+    alt="Correlations - Linked table"
+    width={800}
     height={150}
 />
 
@@ -190,10 +190,10 @@ For each variable, there's a distribution and binned plot. These show the distri
 
 You can search by column name to find a univariate chart.
 
-<Image 
-    src="/docs/docimages/generators/evaluate-quality/qa-report-univariate.webp" 
-    alt="QA report - Univariate distributions" 
-    width={600} 
+<Image
+    src="/docimages/generators/evaluate-quality/qa-report-univariate.webp"
+    alt="QA report - Univariate distributions"
+    width={600}
     height={150}
 />
 
@@ -217,10 +217,10 @@ If it's a QA report for a linked table, then you can find the plots with the con
 
 You can search by column name to find a bivariate chart.
 
-<Image 
-    src="/docs/docimages/generators/evaluate-quality/qa-report-bivariate.webp" 
-    alt="QA report - Bivariate distributions" 
-    width={350} 
+<Image
+    src="/docimages/generators/evaluate-quality/qa-report-bivariate.webp"
+    alt="QA report - Bivariate distributions"
+    width={350}
     height={150}
 />
 
@@ -241,10 +241,10 @@ Coherence charts are available only for linked tables. You can review the cohere
 
 To interpret coherence charts, you can review the following example where a color with a higher saturation indicates higher probability that an event from a Y-axis event is followed by an X-axis event.
 
-<Image 
-    src="/docs/docimages/generators/evaluate-quality/coherence-chart.webp" 
-    alt="QA report - Coherence" 
-    width={400} 
+<Image
+    src="/docimages/generators/evaluate-quality/coherence-chart.webp"
+    alt="QA report - Coherence"
+    width={400}
     height={150}
 />
 
@@ -253,18 +253,18 @@ To interpret coherence charts, you can review the following example where a colo
 The **Accuracy** section is a summary of all Univariate and Bivariate distributions. It displays a table with all variables from the original dataset, the second column and third column of which list the respective univariate and bivariate accuracies.
 
 <Image
-    src="/docs/docimages/generators/evaluate-quality/qa-report-accuracy-section.webp" 
-    alt="QA report - Accuracy section" 
-    width={800} 
+    src="/docimages/generators/evaluate-quality/qa-report-accuracy-section.webp"
+    alt="QA report - Accuracy section"
+    width={800}
     height={150}
 />
 
 At the bottom is an **Accuracy Matrix** that shows the bivariate accuracies between pairs of variables. You can also find these values in the respective **Bivariate distribution** charts. The diagonal values (bottom left to top right) of the chart that only belong to one variable are the univariate accuracies of that variable.
 
-<Image 
-    src="/docs/docimages/generators/evaluate-quality/qa-report-accuracy.webp" 
+<Image
+    src="/docimages/generators/evaluate-quality/qa-report-accuracy.webp"
     alt="QA report - Accuracy matrix"
-    width={400} 
+    width={400}
     height={150}
 />
 
@@ -277,13 +277,13 @@ The accuracy of synthetic data can be assessed by measuring statistical distance
 The similarity plots represent how the training, synthetic, and holdout datasets compare to each other in terms of their distributions. The similarity metrics are calculated in a multi-dimensional embedding space and then projected into a 2D space for easier visualization.
 
 <Image
-    src="/docs/docimages/generators/evaluate-quality/similarity-plots.webp"
-    alt="Model report - Similarity plots" 
-    width={800} 
+    src="/docimages/generators/evaluate-quality/similarity-plots.webp"
+    alt="Model report - Similarity plots"
+    width={800}
     height={150}
 />
 
-The principal components displayed on the X and Y axes are combinations of the original dimensions. Think of them as new dimensions that capture the most significant variability in the data. 
+The principal components displayed on the X and Y axes are combinations of the original dimensions. Think of them as new dimensions that capture the most significant variability in the data.
 
 The black dots represent the centroids of each dataset, while the colorful areas represent the distribution of the data points. The more saturated areas indicate regions with a higher concentration of data points.
 
@@ -300,14 +300,14 @@ The **Distances** section contains two distribution charts that appear at the en
 The charts display three lines to compare different dataset combinations:
 
 * **Green line** - distances between synthetic samples and training data
-* **Black line** - distances between synthetic samples and holdout data  
+* **Black line** - distances between synthetic samples and holdout data
 * **Gray line** - distances between training data and holdout data (reference)
 
 Synthetic data shall be as close to the original training samples, as it is close to original holdout samples, which serve us as a reference. This can be asserted empirically by measuring distances between synthetic samples to their closest original samples, whereas training and holdout sets are sampled to be of equal size. A green line that is significantly left of the dark gray line implies that synthetic samples are closer to the training samples than to the holdout samples, indicating that the data has overfitted to the training data. A green line that overlays with the dark gray line validates that the trained model indeed represents the general rules, that can be found in training just as well as in holdout samples. The DCR share indicates the proportion of synthetic samples that are closer to a training sample than to a holdout sample, and ideally, this value should not significantly exceed 50%, as a higher value could indicate overfitting.
-<Image 
-    src="/docs/docimages/generators/evaluate-quality/model-report-distances.webp" 
-    alt="Model report - Distances" 
-    width={650} 
+<Image
+    src="/docimages/generators/evaluate-quality/model-report-distances.webp"
+    alt="Model report - Distances"
+    width={650}
     height={150}
 />
 
@@ -322,7 +322,7 @@ By default, a Model report is enabled and generated for each model in a generato
 To disable the Model report for a model, select **Off** from the model's **Model report** section.
 
 <Image
-    src="/docs/docimages/generators/evaluate-quality/disable-model-report.webp"
+    src="/docimages/generators/evaluate-quality/disable-model-report.webp"
     alt="MOSTLY AI - Generator configuration - Disable model report"
     width={900}
     height={300}

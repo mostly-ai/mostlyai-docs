@@ -15,7 +15,7 @@ You can backup and restore MOSTLY AI just like any other Kubernetes application 
 ## Backup workflow
 
 <Image
-  src="/docs/docimages/administration/backup-restore/velero-diagram.webp" 
+  src="/docimages/administration/backup-restore/velero-diagram.webp"
   alt="Velero diagram"
   width={800}
   height={15000}
@@ -120,7 +120,7 @@ Output:
 Client:
 	Version: v1.12.2
 	Git commit: -
-<error getting server version: no matches for kind "ServerStatusRequest" 
+<error getting server version: no matches for kind "ServerStatusRequest"
 in version "velero.io/v1">
 ```
 
@@ -140,7 +140,7 @@ velero install \
   --use-node-agent
 ```
 
-**NOTE:** You need to take care on create AWS S3 bucket, for backup destination storage, as well as crate AWS credentials and point it with `--secret-file` parameter. 
+**NOTE:** You need to take care on create AWS S3 bucket, for backup destination storage, as well as crate AWS credentials and point it with `--secret-file` parameter.
 
 Format of `velero_credentials` file is:
 
@@ -279,7 +279,7 @@ Making sure that the `mostly-ai` namespace does not exist, you can now restore M
     ```bash copy
     velero restore create mostly-ai-restore-poc --from-backup mostly-ai-backup-poc
     ```
-2. Check status of the restore: 
+2. Check status of the restore:
     ```bash copy
     velero restore describe mostly-ai-restore-poc
     ```
@@ -304,7 +304,7 @@ Making sure that the `mostly-ai` namespace does not exist, you can now restore M
     ItemOperationTimeout:       4h0m0s
 
     Preserve Service NodePorts:  auto
-    ``` 
+    ```
 3. Check the `mostly-ai` namespace:
     ```bash copy
     kubectl get all --namespace mostly-ai
@@ -326,7 +326,7 @@ Making sure that the `mostly-ai` namespace does not exist, you can now restore M
     service/mostly-data          ClusterIP   172.20.206.27    <none>        8000/TCP             81s
     service/mostly-db            ClusterIP   172.20.130.113   <none>        5432/TCP             81s
     service/mostly-keycloak      NodePort    172.20.113.58    <none>        8080:31784/TCP       81s
-  
+
     service/mostly-ui            NodePort    172.20.5.52      <none>        8888:31465/TCP       81s
     service/replicated           ClusterIP   172.20.165.239   <none>        3000/TCP             81s
 

@@ -32,7 +32,7 @@ Select the **Speed** configuration preset for faster AI model training while not
 * Max sequence window (linked tables and Text models only): 20 rows
 
 <Image
-   src="/docs/docimages/generators/speed-up-training/model-configuration-01-select-speed-preset.webp"
+   src="/docimages/generators/speed-up-training/model-configuration-01-select-speed-preset.webp"
    alt="MOSTLY AI - Generator configuration - Select Speed configuration preset"
    width={900}
    height={300}
@@ -45,7 +45,7 @@ Select the **Turbo** configuration preset to complete AI model training as quick
 * Max sequence window (linked tables and Text models only): 4 rows
 
 <Image
-   src="/docs/docimages/generators/speed-up-training/model-configuration-02-select-turbo-preset.webp"
+   src="/docimages/generators/speed-up-training/model-configuration-02-select-turbo-preset.webp"
    alt="MOSTLY AI - Generator configuration - Select Turbo configuration preset"
    width={900}
    height={300}
@@ -53,7 +53,7 @@ Select the **Turbo** configuration preset to complete AI model training as quick
 
 ## Decrease training sample size
 
-By default, MOSTLY AI uses all records in a table to train the Generative AI model for that table. Decrease the training sample size if you want to speed up model training. 
+By default, MOSTLY AI uses all records in a table to train the Generative AI model for that table. Decrease the training sample size if you want to speed up model training.
 
 <Tabs items={['UI', 'Python SDK']}>
 <Tabs.Tab>
@@ -65,7 +65,7 @@ If you use the web application, you can configure the training sample size for e
 2. Click a table to expand its model settings.
 3. Set the **Max sample size** as number of rows.
     <Image
-        src="/docs/docimages/generators/speed-up-training/model-configuration-03-decrease-max-sample-size.webp"
+        src="/docimages/generators/speed-up-training/model-configuration-03-decrease-max-sample-size.webp"
         alt="MOSTLY AI - Generator configuration - Decrease maximum training sample size"
         width={900}
         height={300}
@@ -79,7 +79,7 @@ config = {
     "name": "US census",
     "tables": [
         {
-            "data": "https://mostly.ai/docs/datasets/us-census-income.csv.gz",
+            "data": "https://docs.mostly.ai/datasets/us-census-income.csv.gz",
             "name": "census",
             "tabular_model_configuration": {
                 "max_sample_size": 1000,  # use only max 1000 samples
@@ -105,7 +105,7 @@ If you use the web application, you can configure the maximum training time from
 2. Click a table to expand its model settings.
 3. Set the **Max training time** in minutes.
     <Image
-        src="/docs/docimages/generators/speed-up-training/model-configuration-04-decrease-training-time.webp"
+        src="/docimages/generators/speed-up-training/model-configuration-04-decrease-training-time.webp"
         alt="MOSTLY AI - Generator configuration - Set maximum training time"
         width={900}
         height={300}
@@ -119,7 +119,7 @@ config = {
     "name": "US census",
     "tables": [
         {
-            "data": "https://mostly.ai/docs/datasets/us-census-income.csv.gz",
+            "data": "https://docs.mostly.ai/datasets/us-census-income.csv.gz",
             "name": "census",
             "tabular_model_configuration": {
                 "max_training_time": 1,  # train only for 1 minute
@@ -153,7 +153,7 @@ If you use the web application, you can configure the model from the **Model con
 2. Click a table to expand its model settings.
 3. For **Model**, select **MOSTLY_AI/Small**.
     <Image
-        src="/docs/docimages/generators/speed-up-training/model-configuration-05-reduce-model-size.webp"
+        src="/docimages/generators/speed-up-training/model-configuration-05-reduce-model-size.webp"
         alt="MOSTLY AI - Generator configuration - Reduce model size"
         width={900}
         height={300}
@@ -171,7 +171,7 @@ config = {
     "name": "US census",
     "tables": [
         {
-            "data": "https://mostly.ai/docs/datasets/us-census-income.csv.gz",
+            "data": "https://docs.mostly.ai/datasets/us-census-income.csv.gz",
             "name": "census",
             "tabular_model_configuration": {
                 "model": "MOSTLY_AI/Small",
@@ -200,9 +200,9 @@ If you use the web application, you can configure the model size from the **Mode
 3. Adjust the **Batch size**.
    1. In most cases, use **Auto** and MOSTLY AI determines the optimal batch size for your table data.
    2. Otherwise, set the batch size to a powers of 2 integer from the listed options.
-    
+
     <Image
-        src="/docs/docimages/generators/speed-up-training/model-configuration-06-increase-batch-size.webp"
+        src="/docimages/generators/speed-up-training/model-configuration-06-increase-batch-size.webp"
         alt="MOSTLY AI - Generator configuration - Increase batch size"
         width={900}
         height={300}
@@ -219,7 +219,7 @@ config = {
     "name": "US census",
     "tables": [
         {
-            "data": "https://mostly.ai/docs/datasets/us-census-income.csv.gz",
+            "data": "https://docs.mostly.ai/datasets/us-census-income.csv.gz",
             "name": "census",
             "tabular_model_configuration": {
                 "batch_size": 8192,

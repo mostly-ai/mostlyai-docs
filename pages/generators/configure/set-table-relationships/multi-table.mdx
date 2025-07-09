@@ -13,7 +13,7 @@ import { CustomCallout } from '@components/custom-callout'
 In a multi-table scenario, where you add 3 or more tables to a generator, you can have multiple tables with multiple relationships to other tables. For example, consider the Berka dataset.
 
 <Image
-    src="/docs/docimages/generators/set-table-relationships/berka-table-relationships.webp"
+    src="/docimages/generators/set-table-relationships/berka-table-relationships.webp"
     alt="MOSTLY AI - Multi-table relationships - Berka table schema"
     width={800}
     height={300}
@@ -30,7 +30,7 @@ You define a relationship as **_context_** when you want the data in a table (ch
 Due to the context relationships, the correlations among `account` - `disposition` - `card` hierarchy are fully retained. The non-context relationship between `client` and `disposition` only maintains the referential integrity. You can switch this to a context relationship, but then the generator loses the opportunity to retain the hierarchical correlations among `account` - `disposition` - `card`.
 
 <Image
-    src="/docs/docimages/generators/set-table-relationships/berka-hierarchy-relationships.webp"
+    src="/docimages/generators/set-table-relationships/berka-hierarchy-relationships.webp"
     alt="MOSTLY AI - Multi-table relationships - Berka relationship hierarchy"
     width={800}
     height={300}
@@ -53,7 +53,7 @@ From the web interface, you can define each relationship with the configuration 
 
 1. Download the [Berka dataset](/datasets/berka.zip) and add all tables to a new generator.
     <Image
-        src="/docs/docimages/generators/set-table-relationships/multi-table-rel-01-add-berka-tables.webp"
+        src="/docimages/generators/set-table-relationships/multi-table-rel-01-add-berka-tables.webp"
         alt="MOSTLY AI - Multi-table relationships - add Berka tables"
         width={900}
         height={300}
@@ -72,7 +72,7 @@ From the web interface, you can define each relationship with the configuration 
         To learn more, see [_Context foreign key_](/generators/configure/set-table-relationships#context-foreign-key) and [_Non-context foreign key_](/generators/configure/set-table-relationships#non-context-foreign-key).
         </Callout>
         <Image
-            src="/docs/docimages/generators/set-table-relationships/multi-table-rel-05-set-fk-for-disp-table.webp"
+            src="/docimages/generators/set-table-relationships/multi-table-rel-05-set-fk-for-disp-table.webp"
             alt="MOSTLY AI - Multi-table relationships - Set foreign keys for disp table"
             width={900}
             height={300}
@@ -84,7 +84,7 @@ From the web interface, you can define each relationship with the configuration 
 With all required foreign keys set, the **Data configuration** page provides a hierarchical overview of the table relationships and lists all primary keys and foreign keys
 
 <Image
-    src="/docs/docimages/generators/set-table-relationships/multi-table-rel-08-result-table-hierarchy.webp"
+    src="/docimages/generators/set-table-relationships/multi-table-rel-08-result-table-hierarchy.webp"
     alt="MOSTLY AI - Multi-table relationships - Set foreign keys for card table"
     width={900}
     height={300}
@@ -163,7 +163,7 @@ If you have a hierarchy of three tables where a child table references both the 
 The solution is to exclude the grandparent foreign key column of the child table from training and propagate the column as a post-processing step after you generate a synthetic dataset.
 
 <Image
-    src="/docs/docimages/generators/set-table-relationships/berka-grandparent-child-exception.webp"
+    src="/docimages/generators/set-table-relationships/berka-grandparent-child-exception.webp"
     alt="MOSTLY AI - Multi-table relationships - Set foreign keys for card table"
     width={900}
     height={300}

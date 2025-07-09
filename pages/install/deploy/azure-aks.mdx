@@ -39,29 +39,29 @@ Use the **Create Kubernetes cluster** wizard in Azure to create your AKS cluster
 **Steps**
 
 1. Log in to Microsoft Azure and select **Create a resource**.
-    <Image 
-        src="/docs/docimages/install/azure-aks/01-azure-01-select-create-a-resource.webp"
+    <Image
+        src="/docimages/install/azure-aks/01-azure-01-select-create-a-resource.webp"
         alt="Azure - Create AKS cluster - Select Create a resource"
         width={800}
         height={700}
     />
 2. In the services search bar, type `aks` and press Enter.
-    <Image 
-        src="/docs/docimages/install/azure-aks/01-azure-02-search-aks.webp"
+    <Image
+        src="/docimages/install/azure-aks/01-azure-02-search-aks.webp"
         alt="Azure - Create AKS cluster - Search for 'aks'"
         width={800}
         height={700}
     />
 3. From the results, select **Azure Kubernetes Service (AKS)**.
-    <Image 
-        src="/docs/docimages/install/azure-aks/01-azure-03-select-azure-kubernetes-services.webp"
+    <Image
+        src="/docimages/install/azure-aks/01-azure-03-select-azure-kubernetes-services.webp"
         alt="Azure - Create AKS cluster - Select Azure Kubernetes Services"
         width={800}
         height={700}
     />
 4. Click **Create**.
-    <Image 
-        src="/docs/docimages/install/azure-aks/01-azure-04-click-create.webp"
+    <Image
+        src="/docimages/install/azure-aks/01-azure-04-click-create.webp"
         alt="Azure - Create AKS cluster - Click Create on AKS page"
         width={450}
         height={700}
@@ -79,8 +79,8 @@ Use the **Create Kubernetes cluster** wizard in Azure to create your AKS cluster
     4. For **Kubernetes cluster name**, define the cluster name.
     <br />For example, `MOSTLYAI-AKS`.
     5. (Optional) For **Region**, select the region to use for the cluster.
-        <Image 
-            src="/docs/docimages/install/azure-aks/01-azure-05-basics-page.webp"
+        <Image
+            src="/docimages/install/azure-aks/01-azure-05-basics-page.webp"
             alt="Azure - Create AKS cluster - Configure Basic page of Create cluster wizard"
             width={450}
             height={700}
@@ -88,36 +88,36 @@ Use the **Create Kubernetes cluster** wizard in Azure to create your AKS cluster
     6. Retain the remaining default options and click **Next**.
 6. Configure the **Node pools** page of the wizard.
     1. For the **agentpool** node pool, click the **Node size** entry.
-        <Image 
-            src="/docs/docimages/install/azure-aks/01-azure-06-click-node-size.webp"
+        <Image
+            src="/docimages/install/azure-aks/01-azure-06-click-node-size.webp"
             alt="Azure - Create AKS cluster - Click node size"
             width={450}
             height={700}
         />
     2. On the **Update node pool** page, for **Node size** click **Choose a size**.
-        <Image 
-            src="/docs/docimages/install/azure-aks/01-azure-07-choose-node-size.webp"
+        <Image
+            src="/docimages/install/azure-aks/01-azure-07-choose-node-size.webp"
             alt="Azure - Create AKS cluster - Choose a node size"
             width={450}
             height={700}
         />
     3. On the **Select a VM size** page, select **D8s_v3** and click **Select**.
-        <Image 
-            src="/docs/docimages/install/azure-aks/01-azure-08-select-vm-size.webp"
+        <Image
+            src="/docimages/install/azure-aks/01-azure-08-select-vm-size.webp"
             alt="Azure - Create AKS cluster - Select VM size"
             width={800}
             height={700}
         />
     4. Back on the **Update node pool** page, for **Scale method**, select **Manual** and leave **Node count** to **1**.
-        <Image 
-            src="/docs/docimages/install/azure-aks/01-azure-09-scale-node-count.webp"
+        <Image
+            src="/docimages/install/azure-aks/01-azure-09-scale-node-count.webp"
             alt="Azure - Create AKS cluster - Select Scale method and Node count"
             width={450}
             height={700}
         />
     5. For the **userpool** node pool, click the **Node size** entry.
         <Image
-            src="/docs/docimages/install/azure-aks/01-azure-09.02-click-userpool-node-size.webp"
+            src="/docimages/install/azure-aks/01-azure-09.02-click-userpool-node-size.webp"
             alt="Azure - Create AKS cluster - Select userpool node size"
             width={450}
             height={700}
@@ -127,9 +127,9 @@ Use the **Create Kubernetes cluster** wizard in Azure to create your AKS cluster
     8. Back on the **Update node pool** page, for **Scale method**, select **Manual** and leave **Node count** to **2**.
     9. Click **Next**.
 7. Configure the **Networking** page of the wizard.
-    1. For **Network policy**, select **None**.    
-        <Image 
-            src="/docs/docimages/install/azure-aks/01-azure-10-network-policy.webp"
+    1. For **Network policy**, select **None**.
+        <Image
+            src="/docimages/install/azure-aks/01-azure-10-network-policy.webp"
             alt="Azure - Select Network policy - None"
             width={800}
             height={700}
@@ -137,8 +137,8 @@ Use the **Create Kubernetes cluster** wizard in Azure to create your AKS cluster
 8. (Optional) Review the **Integrations**, **Advanced**, and **Tags** pages.
 9. Click **Review + Create**.
 10. If the final configuration validation completes, click **Create**.
-    <Image 
-        src="/docs/docimages/install/azure-aks/01-azure-11-config-validation-complete.webp"
+    <Image
+        src="/docimages/install/azure-aks/01-azure-11-config-validation-complete.webp"
         alt="Azure - Select Network policy - None"
         width={450}
         height={700}
@@ -148,16 +148,16 @@ Use the **Create Kubernetes cluster** wizard in Azure to create your AKS cluster
 
 The cluster deployment starts. Wait several minutes until Azure creates your AKS cluster.
 
-<Image 
-    src="/docs/docimages/install/azure-aks/01-azure-12-cluster-creation-in-progress.webp"
+<Image
+    src="/docimages/install/azure-aks/01-azure-12-cluster-creation-in-progress.webp"
     alt="Azure - Select Network policy - None"
     width={800}
     height={700}
 />
 
 When the cluster is created, Azure reports that the deployment is complete.
-<Image 
-    src="/docs/docimages/install/azure-aks/01-azure-13-cluster-deployment-complete.webp"
+<Image
+    src="/docimages/install/azure-aks/01-azure-13-cluster-deployment-complete.webp"
     alt="Azure - Select Network policy - None"
     width={800}
     height={700}
@@ -209,15 +209,15 @@ You can find the exact Azure CLI commands to connect to your AKS cluster from th
 **Steps**
 
 1. From the AKS cluster page, click **Connect to cluster**.
-    <Image 
-        src="/docs/docimages/install/azure-aks/03-connect-to-cluster-01-cluster-page-connect.webp"
+    <Image
+        src="/docimages/install/azure-aks/03-connect-to-cluster-01-cluster-page-connect.webp"
         alt="Azure AKS cluster page - Click Connect to cluster"
         width={800}
         height={700}
     />
 2. Copy and run the commands to connect to your cluster.
-    <Image 
-        src="/docs/docimages/install/azure-aks/03-connect-to-cluster-02-copy-commands.webp"
+    <Image
+        src="/docimages/install/azure-aks/03-connect-to-cluster-02-copy-commands.webp"
         alt="Azure AKS cluster page - Run commands to connect to the cluster"
         width={800}
         height={700}
@@ -294,7 +294,7 @@ As mentioned in the [Prerequisites](#prerequisites), you need to obtain the [MOS
         tlsSecretName: &tlsSecretName your-tls-secret
     ...
     ```
-    **➡️ You do not use an TLS certificate**. Replace the  `your-tls-secret` with an empty string and, for `global.tls`, set `enabled` to `false`. 
+    **➡️ You do not use an TLS certificate**. Replace the  `your-tls-secret` with an empty string and, for `global.tls`, set `enabled` to `false`.
     ```yaml filename="values.yaml" copy {4,9}
     _customerInstallation:
     ...
@@ -351,14 +351,14 @@ The MOSTLY AI worker pods can only run on nodes with the `engine-jobs` taint. Yo
 1. For your Azure AKS cluster, select **Settings** > **Node pools**.
 2. Select the `userpool` node pool.
     <Image
-        src="/docs/docimages/install/azure-aks/xx-taint-node-pools-01-select-userpool.webp"
+        src="/docimages/install/azure-aks/xx-taint-node-pools-01-select-userpool.webp"
         alt="Deploy MOSTLY AI to Azure AKS - Node pools"
         width={550}
         height={700}
     />
 3. For **Taints**, click **edit**.
     <Image
-        src="/docs/docimages/install/azure-aks/xx-taint-node-pools-02-click-edit-for-taints.webp"
+        src="/docimages/install/azure-aks/xx-taint-node-pools-02-click-edit-for-taints.webp"
         alt="Deploy MOSTLY AI to Azure AKS - Edit taints"
         width={800}
         height={700}
@@ -369,7 +369,7 @@ The MOSTLY AI worker pods can only run on nodes with the `engine-jobs` taint. Yo
     3. For **Effect**, select `NoSchedule`.
     4. Click **Save**.
         <Image
-            src="/docs/docimages/install/azure-aks/xx-taint-node-pools-03-define-taint.webp"
+            src="/docimages/install/azure-aks/xx-taint-node-pools-03-define-taint.webp"
             alt="Deploy MOSTLY AI to Azure AKS - Define taint"
             width={800}
             height={700}
@@ -405,8 +405,8 @@ With all required configurations made in the `values.yaml` and worker nodes tain
     ```
 3. In Azure, go to your AKS cluster and select **Workloads**.<br />
     Initially, all of the MOSTLY AI pods are in progress of starting and connecting to storage and to each services. Wait for a few minutes until AKS provisions pods and all pods connect successfully to all required services.
-    <Image 
-        src="/docs/docimages/install/azure-aks/06-deploy-01-workloads-started.webp"
+    <Image
+        src="/docimages/install/azure-aks/06-deploy-01-workloads-started.webp"
         alt="Deploy MOSTLY AI to Azure AKS - Pods started"
         width={800}
         height={700}
@@ -429,7 +429,7 @@ Contact MOSTLY AI to obtain the `superadmin` credentials. You need them to log i
 1. Open your FQDN in your browser.<br />
     **Step result**: You **Sign in** page for your MOSTLY AI deployment opens.
     <Image
-        src="/docs/docimages/install/minikube/02-minikube-dashboard-01-post-deployment-red.webp"
+        src="/docimages/install/minikube/02-minikube-dashboard-01-post-deployment-red.webp"
         alt="MOSTLY AI Deployment - Log in page"
         width={800}
         height={300}
@@ -458,9 +458,9 @@ Use the Azure CLI to delete your AKS cluster.
 **Steps**
 
 1. Obtain your cluster name and resource group name in Azure.
-    
-    <Image 
-        src="/docs/docimages/install/azure-aks/uninstall-02-delete-cluster.webp"
+
+    <Image
+        src="/docimages/install/azure-aks/uninstall-02-delete-cluster.webp"
         alt="Uninstall MOSTLY AI - obtain Azure AKS cluster name and resource group"
         width={450}
         height={700}

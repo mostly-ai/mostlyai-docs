@@ -31,17 +31,17 @@ If you use the web application, create a new Apache Hive connector from the **Co
 
 1. From the **Connectors** page, click **New connector**.
     <Image
-        src="/docs/docimages/connectors/create-connector-01-click.webp"
+        src="/docimages/connectors/create-connector-01-click.webp"
         alt="Click Create connector button"
         width={800}
         height={500}
     />
 2. From the **Create a new connector** window, select **Apache Hive**.
     <Image
-        src="/docs/docimages/connectors/apache-hive/create-connector-02-select-apache-hive.webp"
+        src="/docimages/connectors/apache-hive/create-connector-02-select-apache-hive.webp"
         alt="Select Apache Hive connector"
         width={800}
-        height={500}    
+        height={500}
     />
 3. From the **New connector** page, configure the connector.
     1. For **Name**, enter a name that you can distinguish from other connectors.
@@ -56,7 +56,7 @@ If you use the web application, create a new Apache Hive connector from the **Co
         </Callout>
     5. For **Username** and **Password**, enter your Apache Hive credentials.
         <Image
-            src="/docs/docimages/connectors/apache-hive/create-connector-03-configure-apache-hive.webp"
+            src="/docimages/connectors/apache-hive/create-connector-03-configure-apache-hive.webp"
             alt="Configure Apache Hive connector"
             width={300}
             height={500}
@@ -100,7 +100,7 @@ To create an Apache Hive connector with Kerberos authentication, contact your Ke
     dns_lookup_kdc = false
     forwardable = true
     rdns = false
-    
+
     [realms]
 	INTERNAL = {
 		kdc = ip-172-***-***-222
@@ -110,7 +110,7 @@ To create an Apache Hive connector with Kerberos authentication, contact your Ke
 		kdc = hive-kerberized.domain.com
 		admin_server = hive-kerberized.domain.com
 	}
-    
+
     [domain_realm]
     .hive-kerberized.domain.com = INTERNAL
     hive-kerberized.domain.com = INTERNAL
@@ -138,16 +138,16 @@ If you use the web application, enable the **Authenticate with Kerberos** checkb
     2. For **Kerberos krb5 config**, paste the contents of a `krb5.conf` file.
     3. For **Kerberos keytab**, click the **Upload** button and select a Kerberos keytab file from your local file system.
         <Image
-            src="/docs/docimages/connectors/apache-hive/kerberos/apache-hive-connector-config-with-kerberos.webp"
+            src="/docimages/connectors/apache-hive/kerberos/apache-hive-connector-config-with-kerberos.webp"
             alt="Apache Hive connector configuration - Kerberos authentication"
             width={800}
             height={500}
         />
 3. Enable **SSL** and provide the CA certificate.
-    <Image 
-        src="/docs/docimages/connectors/apache-hive/kerberos/apache-hive-connector-config-with-kerberos-enable-ssl.webp" 
+    <Image
+        src="/docimages/connectors/apache-hive/kerberos/apache-hive-connector-config-with-kerberos-enable-ssl.webp"
         alt="Apache Hive connector configuration - Kerberos authentication with SSL"
-        width={400} 
+        width={400}
         height={150}
     />
 4. Click **Save**.

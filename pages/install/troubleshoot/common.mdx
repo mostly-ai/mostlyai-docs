@@ -58,7 +58,7 @@ Reallocate the **Default** compute resources to be lower than the total resource
 1. In the `values.yaml` file, edit the `defaultComputePool` section for the `mostly-app` service.
     ```yaml filename="values.yaml" copy {10-11}
     mostly-app:
-      deployment: 
+      deployment:
         ...
         mostly:
           defaultComputePool:
@@ -115,7 +115,7 @@ Remove any **Toleration** values defined for your computes.
  1. As a Super admin, go to the **Profile** menu in the upper right and select **Computes**.
  2. For the **Default** compute, select it from the list and remove the **Toleration** value, and click **Save**.
     <Image
-        src="/docs/docimages/install/troubleshoot/common/computes-remove-toleration.webp" 
+        src="/docimages/install/troubleshoot/common/computes-remove-toleration.webp"
         alt="MOSTLY AI - Troubleshoot Queued jobs - Remove Toleration from computes"
         width={550}
         height={400}

@@ -55,7 +55,7 @@ You can install MOSTLY AI in an OpenShift cluster. This page covers the list of 
             tlsSecretName: &tlsSecretName your-tls-secret
         ...
         ```
-        **➡️ You do not use an SSL certificate**. Replace the  `your-tls-secret` with an empty string and, for `global.tls`, set `enabled` to `false`. 
+        **➡️ You do not use an SSL certificate**. Replace the  `your-tls-secret` with an empty string and, for `global.tls`, set `enabled` to `false`.
         ```yaml filename="ocp-values.yaml" copy {4,9}
         _customerInstallation:
         ...
@@ -96,7 +96,7 @@ You can install MOSTLY AI in an OpenShift cluster. This page covers the list of 
         ...
         ```
    2. If you are using an internal repository, you need to complete the following 2 steps.
-        1. Set `mostly-configuration.secrets.dockerConfig.create` to `false` to prevent the creation of a Docker pull secret. 
+        1. Set `mostly-configuration.secrets.dockerConfig.create` to `false` to prevent the creation of a Docker pull secret.
             ```yaml filename="ocp-values.yaml" copy {5}
             ...
             mostly-configurations:
@@ -130,7 +130,7 @@ You can install MOSTLY AI in an OpenShift cluster. This page covers the list of 
     ```
     In the OpenShift web console, select **Compute**, then **Nodes**. Click under **Taints** to review the list of taints for the node.
     <Image
-        src="/docs/docimages/install/openshift/ocp-node-taints.webp"
+        src="/docimages/install/openshift/ocp-node-taints.webp"
         alt="Taints on OpenShift nodes"
         width={800}
         height={400}
@@ -147,7 +147,7 @@ If all pods run as expected, you can log in for the first time to your MOSTLY AI
 1. In a web browser, open the FQDN for the deployment.
 **Step result**: Your **Sign in** page for your MOSTLY AI deployment opens.
     <Image
-        src="/docs/docimages/install/minikube/02-minikube-dashboard-01-post-deployment-red.webp"
+        src="/docimages/install/minikube/02-minikube-dashboard-01-post-deployment-red.webp"
         alt="MOSTLY AI Deployment - Log in page"
         width={800}
         height={300}

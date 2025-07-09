@@ -26,14 +26,14 @@ You need to sign up or use an existing account to obtain a HuggingFace token. Yo
 5. For **Token name**, provide a name, such as `mostly-ai`.
 6. Click **Create token**.
     <Image
-        src="/docs/docimages/administration/models/hugging-face-token-01-create-token.webp"
+        src="/docimages/administration/models/hugging-face-token-01-create-token.webp"
         alt="HuggingFace - Create a Read token"
         width={800}
         height={300}
     />
 7. Copy your new token.
     <Image
-        src="/docs/docimages/administration/models/hugging-face-token-02-copy-token.webp"
+        src="/docimages/administration/models/hugging-face-token-02-copy-token.webp"
         alt="HuggingFace - Copy token"
         width={800}
         height={300}
@@ -51,7 +51,7 @@ You must be logged in as a superadmin to be able to add or remove HuggingFace mo
 
 1. In MOSTLY AI, select **Models** from the profile menu.
     <Image
-        src="/docs/docimages/administration/models/configure-models-01-profile-select-models.webp"
+        src="/docimages/administration/models/configure-models-01-profile-select-models.webp"
         alt="MOSTLY AI Models configurations - Select profile menu and then Models"
         width={800}
         height={300}
@@ -64,7 +64,7 @@ You must be logged in as a superadmin to be able to add or remove HuggingFace mo
     provider/Model-Name
     ```
     <Image
-        src="/docs/docimages/administration/models/01-configure-huggingface-models.webp"
+        src="/docimages/administration/models/01-configure-huggingface-models.webp"
         alt="MOSTLY AI Deployment - Log in page"
         width={800}
         height={300}
@@ -83,4 +83,4 @@ After the generator training starts, MOSTLY AI connects to HuggingFace to downlo
 
 ## Manual model download and installation
 
-To install HuggingFace models on airgapped platforms, follow the official [HuggingFace documentation](https://huggingface.co/docs/huggingface_hub/guides/download) for downloading models locally. For gated models, ensure you generate an access token and configure it using `HF_TOKEN`, `HF_TOKEN_PATH`, or by passing it explicitly, as described in their docs. Once downloaded, copy the model files from your local HuggingFace cache (typically in `~/.cache/huggingface/hub`, unless overridden by [environment variables](https://huggingface.co/docs/huggingface_hub/package_reference/environment_variables)) to the [Shared Storage](https://mostly.ai/docs/administration/storage-policy/), in the `models/hub/` subdirectory (e.g. `${BUCKET}/models/hub/`). For a code example, refer to our [MOSTLY AI SDK documentation](https://mostly-ai.github.io/mostlyai/#air-gapped-environments).
+To install HuggingFace models on airgapped platforms, follow the official [HuggingFace documentation](https://huggingface.co/docs/huggingface_hub/guides/download) for downloading models locally. For gated models, ensure you generate an access token and configure it using `HF_TOKEN`, `HF_TOKEN_PATH`, or by passing it explicitly, as described in their docs. Once downloaded, copy the model files from your local HuggingFace cache (typically in `~/.cache/huggingface/hub`, unless overridden by [environment variables](https://huggingface.co/docs/huggingface_hub/package_reference/environment_variables)) to the [Shared Storage](https://docs.mostly.ai/administration/storage-policy/), in the `models/hub/` subdirectory (e.g. `${BUCKET}/models/hub/`). For a code example, refer to our [MOSTLY AI SDK documentation](https://mostly-ai.github.io/mostlyai/#air-gapped-environments).

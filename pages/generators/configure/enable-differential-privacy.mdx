@@ -29,7 +29,7 @@ In MOSTLY AI, you enable differential privacy on the **Model configuration** pag
 3. On the **Model configuration** page, expand a model to configure.
 4. Expand **Differential privacy** and select **On** to enable differential privacy for the model.
     <Image
-        src="/docs/docimages/generators/enable-differential-privacy/01-enable-differential-privacy.webp"
+        src="/docimages/generators/enable-differential-privacy/01-enable-differential-privacy.webp"
         alt="Enable differential privacy"
         width={800}
         height={400}
@@ -42,14 +42,14 @@ In MOSTLY AI, you enable differential privacy on the **Model configuration** pag
     | **DP max gradient norm** | Set the maximum norm of the per-sample gradients. Gradients with norm higher than this will be clipped to this value.<br /><br />The default is `1`.<br /><br />For details, see [_Gradient clipping_](#gradient-clipping).|
     | **Delta** | The delta value for differential privacy in the range of `1 x 10 ^ -3` to `1 x 10 ^ -12`. It is the probability of the privacy guarantee not holding. The smaller the delta, the more confident you can be that the privacy guarantee holds.<br />The default is `1 x 10 ^ -5`.|
     | **Value protection epsilon** | Privacy budget allocated for protecting value ranges during analysis. A higher value provides more accurate ranges but reduces the budget available for model training.|
-    
+
     <Callout>
     **Note**<br />
     The best amounts of epsilon, noise multiplier, and max gradient norm depend on your original data, specific use case, and the desired trade-off between privacy and accuracy.<br /><br />As a best practice, start with the default values and adjust them based on the results.
     </Callout>
 
     <Image
-        src="/docs/docimages/generators/enable-differential-privacy/02-configure-differential-privacy-epsilon-max-gradient-norm-noise-multiplier.webp"
+        src="/docimages/generators/enable-differential-privacy/02-configure-differential-privacy-epsilon-max-gradient-norm-noise-multiplier.webp"
         alt="Configure differential privacy settings"
         width={800}
         height={400}
@@ -78,7 +78,7 @@ dp_config = {
             }
         }
     ],
-    
+
 }
 g = mostly.train(config=dp_config, start=True, wait=True)
 ```
@@ -91,8 +91,8 @@ You can track the training progress and the epsilon value by opening the **Train
 
 The **Training log** includes the **Diff privacy (ε/δ)** column and shows the values of epsilon and delta. The delta is typically a very low value (such as `1e-5`) and represents the probability threshold for potential privacy loss across the training epochs. A smaller delta implies a stricter privacy guarantee.
 
-<Image 
-    src="/docs/docimages/generators/enable-differential-privacy/03-open-training-log.webp"
+<Image
+    src="/docimages/generators/enable-differential-privacy/03-open-training-log.webp"
     alt="Open training log"
     width={800}
     height={400}

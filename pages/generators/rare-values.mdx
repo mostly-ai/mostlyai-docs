@@ -38,7 +38,7 @@ For example, in a **`Job title`** column, the rare category **`President of the 
 With this method, you can prevent `_RARE_` values, but it comes with the trade-off of skewing the original distribution in the categorical column by boosting any non-rare categories that MOSTLY AI samples from.
 
 <Image
-    src="/docs/docimages/generators/rare-values/rare-category-protection-modes.webp"
+    src="/docimages/generators/rare-values/rare-category-protection-modes.webp"
     alt="Rare category protection modes - Constant and Sample"
     width={800}
     height={300}
@@ -46,7 +46,7 @@ With this method, you can prevent `_RARE_` values, but it comes with the trade-o
 
 ## Do not disable Value protection
 
-MOSTLY AI recommends that you do not disable **Value protection** for categorical columns. 
+MOSTLY AI recommends that you do not disable **Value protection** for categorical columns.
 
 If you do so, you risk exposing your synthetic data to re-identification attacks. This means that the Generative AI models in MOSTLY AI are trained with rare categories and will generate rare categories in the synthetic data.
 
@@ -95,7 +95,7 @@ Because each ID is unique in the column, the synthetic data for the column conta
 If the original column contains short strings with a consistent pattern (phone numbers, license plate numbers, company IDs, and so on), you can use the [Character encoding type](/generators/set-encoding-types#character) to train the Generative AI model for this table with the code patterns.
 
 <Image
-    src="/docs/docimages/generators/rare-values/columns-with-codes-character-column-type.webp"
+    src="/docimages/generators/rare-values/columns-with-codes-character-column-type.webp"
     alt="Columns with codes - use Character column type"
     width={800}
     height={300}
@@ -106,7 +106,7 @@ If the original column contains short strings with a consistent pattern (phone n
 If the original column is a primary key column, you can set a **Primary key** to generate primary key values. MOSTLY AI generates UUID primary keys in the column to mantain the value uniqueness.
 
 <Image
-    src="/docs/docimages/generators/rare-values/set-primary-key.webp"
+    src="/docimages/generators/rare-values/set-primary-key.webp"
     alt="Set primary key"
     width={800}
     height={300}

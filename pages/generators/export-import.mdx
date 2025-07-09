@@ -32,19 +32,19 @@ To export a generator, you must be its creator or have the Admin role in the org
 
 * Export a generator directly from the **Generators** page.
     1. From the **Generators** page, click the kebab menu of a generator, and select **Export to file**.
-        <Image 
-            src="/docs/docimages/generators/export-import/export-02-generators-page-kebab-menu-select-export-to-file.webp" 
-            alt="MOSTLY AI - Export a generator - 01 - From Generators page, kebab menu, Export to file" 
-            width={800} 
+        <Image
+            src="/docimages/generators/export-import/export-02-generators-page-kebab-menu-select-export-to-file.webp"
+            alt="MOSTLY AI - Export a generator - 01 - From Generators page, kebab menu, Export to file"
+            width={800}
             height={150}
         />
 * Export a generator after you open it.
     1. From the **Generators** page, click a generator to open it.
     2. Click the kebab menu in the upper right, and select **Export to file**.
-        <Image 
-            src="/docs/docimages/generators/export-import/export-01-kebab-menu-select-export-to-file.webp" 
-            alt="MOSTLY AI - Export a generator - 01 - Open kebab menu and select Export to file" 
-            width={800} 
+        <Image
+            src="/docimages/generators/export-import/export-01-kebab-menu-select-export-to-file.webp"
+            alt="MOSTLY AI - Export a generator - 01 - Open kebab menu and select Export to file"
+            width={800}
             height={150}
         />
 </Tabs.Tab>
@@ -59,8 +59,8 @@ With the Python SDK, you can export a generator to a ZIP archive with the `expor
 ```python filename="python" copy
 g = mostly.generators.get('INSERT_GENERATOR_ID')
 
-# Exports with a default filename 'generator-UUID-time-high-octet.zip' 
-g.export_to_file() 
+# Exports with a default filename 'generator-UUID-time-high-octet.zip'
+g.export_to_file()
 
 # Export with a specified filename
 g.export_to_file('INSERT_GENERATOR_FILENAME.zip')
@@ -84,17 +84,17 @@ You can use the UI of another instance of the MOSTLY AI Platform to import expor
 **Steps**
 
 1. On the **Generators** page, click **Import from file**.
-    <Image 
-        src="/docs/docimages/generators/export-import/import-01-click-import-from-file.webp" 
-        alt="MOSTLY AI - Import a generator - 01 - Click Import from file" 
-        width={800} 
+    <Image
+        src="/docimages/generators/export-import/import-01-click-import-from-file.webp"
+        alt="MOSTLY AI - Import a generator - 01 - Click Import from file"
+        width={800}
         height={150}
     />
 2. On the **Import Generator** prompt, click in the upload area to browse or drag-and-drop the exported generator ZIP file.
-    <Image 
-        src="/docs/docimages/generators/export-import/import-02-click-upload-area.webp" 
-        alt="MOSTLY AI - Import a generator - 02 - Click upload area" 
-        width={800} 
+    <Image
+        src="/docimages/generators/export-import/import-02-click-upload-area.webp"
+        alt="MOSTLY AI - Import a generator - 02 - Click upload area"
+        width={800}
         height={150}
     />
 3. Click **Proceed**.

@@ -48,35 +48,35 @@ When you create a key pair in EC2, you can use the generated security credential
 **Steps**
 
 1. From AWS Services, search and open **EC2**.
-    <Image 
-        src="/docs/docimages/install/aws-eks/02-key-pair-01-open-ec2.webp"
+    <Image
+        src="/docimages/install/aws-eks/02-key-pair-01-open-ec2.webp"
         alt="AWS Services - Open EC2"
         width={700}
         height={700}
     />
 2. In **EC2**, select **Key Pairs** under **Network & Security** from the sidebar.
-    <Image 
-        src="/docs/docimages/install/aws-eks/02-key-pair-02-ec2-select-key-pair.webp"
+    <Image
+        src="/docimages/install/aws-eks/02-key-pair-02-ec2-select-key-pair.webp"
         alt="Get a key pair - Open EC2 > Key pair"
         width={700}
         height={700}
     />
 3. Click **Create key pair**.
-    <Image 
-        src="/docs/docimages/install/aws-eks/02-key-pair-03-click-create.webp"
+    <Image
+        src="/docimages/install/aws-eks/02-key-pair-03-click-create.webp"
         alt="Get a key pair - Click Create"
         width={700}
         height={700}
     />
 4. Enter a name for the new key pair and click **Create key pair**.
     <Callout>
-    Leave the default options: 
-    
+    Leave the default options:
+
     * **Key pair type**: RSA
     * **Private key file format**: `.pem`
     </Callout>
-    <Image 
-        src="/docs/docimages/install/aws-eks/02-key-pair-04-name-and-create.webp"
+    <Image
+        src="/docimages/install/aws-eks/02-key-pair-04-name-and-create.webp"
         alt="Get a key pair - Name and create"
         width={450}
         height={300}
@@ -86,8 +86,8 @@ When you create a key pair in EC2, you can use the generated security credential
 
 The new key pair appears in the list. The generated `.pem` file that contains the certificate and access keys download automatically.
 
-<Image 
-    src="/docs/docimages/install/aws-eks/02-key-pair-05-result.webp"
+<Image
+    src="/docimages/install/aws-eks/02-key-pair-05-result.webp"
     alt="Get a key pair - Created key pair"
     width={450}
     height={300}
@@ -106,29 +106,29 @@ As a best practice, create a user group to which you will assign the required po
 **Steps**
 
 1. From AWS Services, search and open **Identity and Access Management (IAM)**.
-    <Image 
-        src="/docs/docimages/install/aws-eks/03-user-group-01-open-iam.webp"
+    <Image
+        src="/docimages/install/aws-eks/03-user-group-01-open-iam.webp"
         alt="AWS Services - Open IAM"
         width={700}
         height={700}
     />
 2. In **IAM**, select **User groups** from the sidebar.
-    <Image 
-        src="/docs/docimages/install/aws-eks/03-user-group-02-click-user-groups.webp"
+    <Image
+        src="/docimages/install/aws-eks/03-user-group-02-click-user-groups.webp"
         alt="AWS IAM - click User groups"
         width={225}
         height={300}
     />
 3. Click **Create group**.
-    <Image 
-        src="/docs/docimages/install/aws-eks/03-user-group-03-click-create-group.webp"
+    <Image
+        src="/docimages/install/aws-eks/03-user-group-03-click-create-group.webp"
         alt="AWS IAM - click Create group"
         width={800}
         height={300}
     />
 4. Name the group **`eksctl-group`** and click **Create group**.
-    <Image 
-        src="/docs/docimages/install/aws-eks/03-user-group-04-name-the-group.webp"
+    <Image
+        src="/docimages/install/aws-eks/03-user-group-04-name-the-group.webp"
         alt="AWS IAM - Name the group"
         width={350}
         height={300}
@@ -137,8 +137,8 @@ As a best practice, create a user group to which you will assign the required po
 **Result**
 
 The user group **`eksctl-group`** is now listed under **User groups**.
-<Image 
-    src="/docs/docimages/install/aws-eks/03-user-group-05-result.webp"
+<Image
+    src="/docimages/install/aws-eks/03-user-group-05-result.webp"
     alt="AWS IAM - User group created"
     width={800}
     height={300}
@@ -154,22 +154,22 @@ Allow the user group to act as an administrator which will grant the user that r
 1. From **User groups**, click the **`eksctl-group`** to open its settings.
 2. Select the **Permissions** tab.
 3. Click **Add permissions** and select **Attach policies** from the drop-down menu.
-    <Image 
-        src="/docs/docimages/install/aws-eks/04-user-group-policies-01-permissions-attach-policies.webp"
+    <Image
+        src="/docimages/install/aws-eks/04-user-group-policies-01-permissions-attach-policies.webp"
         alt="AWS IAM User group - Attach policies"
         width={800}
         height={300}
     />
 3. Select the **`AdministratorAccess`** policy.
-    <Image 
-        src="/docs/docimages/install/aws-eks/04-user-group-policies-02-select-admin-access.webp"
+    <Image
+        src="/docimages/install/aws-eks/04-user-group-policies-02-select-admin-access.webp"
         alt="AWS IAM User group - Select Administrator Access policy"
         width={800}
         height={300}
     />
 5. Click **Add permissions**.
-    <Image 
-        src="/docs/docimages/install/aws-eks/04-user-group-policies-03-click-add-permissions.webp"
+    <Image
+        src="/docimages/install/aws-eks/04-user-group-policies-03-click-add-permissions.webp"
         alt="AWS IAM User group - Click Add permissions"
         width={800}
         height={300}
@@ -179,8 +179,8 @@ Allow the user group to act as an administrator which will grant the user that r
 
 The required **`AdministratorAccess`** policy is now added to the user group **`eksctl-group`**.
 
-<Image 
-    src="/docs/docimages/install/aws-eks/04-user-group-policies-04-result.webp"
+<Image
+    src="/docimages/install/aws-eks/04-user-group-policies-04-result.webp"
     alt="AWS IAM User group - Group with added permissions"
     width={800}
     height={300}
@@ -195,36 +195,36 @@ Create a non-ROOT user that should be part of the new user group and will have p
 
 1. Open **Identity and Access Management (IAM)**.
 2. Select **Users** from the sidebar.
-    <Image 
-        src="/docs/docimages/install/aws-eks/05-user-01-select-users.webp"
+    <Image
+        src="/docimages/install/aws-eks/05-user-01-select-users.webp"
         alt="AWS IAM - Select Users from sidebar"
         width={225}
         height={300}
     />
 3. Click **Create user**.
-    <Image 
-        src="/docs/docimages/install/aws-eks/05-user-02-click-create-user.webp"
+    <Image
+        src="/docimages/install/aws-eks/05-user-02-click-create-user.webp"
         alt="AWS IAM - Click Create user"
         width={750}
         height={300}
     />
 4. Name the user **`eksctl`** and click **Next**.
-    <Image 
-        src="/docs/docimages/install/aws-eks/05-user-03-name-and-click-next.webp"
+    <Image
+        src="/docimages/install/aws-eks/05-user-03-name-and-click-next.webp"
         alt="AWS IAM - Name user and click Next"
         width={800}
         height={300}
     />
 5. On the **Set permissions** step, select the **`eksctl-group`** and click **Next**.
-    <Image 
-        src="/docs/docimages/install/aws-eks/05-user-04-select-user-group-click-next.webp"
+    <Image
+        src="/docimages/install/aws-eks/05-user-04-select-user-group-click-next.webp"
         alt="AWS IAM - select user group and click Next"
         width={800}
         height={300}
     />
 5. On the **Review and create** step, click **Create user**.
-    <Image 
-        src="/docs/docimages/install/aws-eks/05-user-05-click-create-user.webp"
+    <Image
+        src="/docimages/install/aws-eks/05-user-05-click-create-user.webp"
         alt="AWS IAM - click Create user"
         width={800}
         height={300}
@@ -234,8 +234,8 @@ Create a non-ROOT user that should be part of the new user group and will have p
 
 The user is now created and appears in the **Users** table.
 
-<Image 
-    src="/docs/docimages/install/aws-eks/05-user-06-result.webp"
+<Image
+    src="/docimages/install/aws-eks/05-user-06-result.webp"
     alt="AWS IAM - new user added"
     width={800}
     height={300}
@@ -249,8 +249,8 @@ Create an access key for the created user. You use the access key to configure a
 
 1. In **IAM** > **Users**, select the **`eksctl`** user.
 2. Click **Create access key**.
-    <Image 
-        src="/docs/docimages/install/aws-eks/06-user-access-key-01-click-create-access-key.webp"
+    <Image
+        src="/docimages/install/aws-eks/06-user-access-key-01-click-create-access-key.webp"
         alt="AWS IAM - click Create access key"
         width={800}
         height={300}
@@ -258,23 +258,23 @@ Create an access key for the created user. You use the access key to configure a
 3. Select **Comand Line Interface**.
 4. Select the **I understand the above recommendation...** checkbox.
 5. Click **Next**.
-    <Image 
-        src="/docs/docimages/install/aws-eks/06-user-access-key-02-best-practices.webp"
+    <Image
+        src="/docimages/install/aws-eks/06-user-access-key-02-best-practices.webp"
         alt="AWS IAM - Best practices"
         width={800}
         height={300}
     />
 6. Click **Create access key**.
-    <Image 
-        src="/docs/docimages/install/aws-eks/06-user-access-key-03-click-create-access-key.webp"
+    <Image
+        src="/docimages/install/aws-eks/06-user-access-key-03-click-create-access-key.webp"
         alt="AWS IAM - Click Create access key"
         width={800}
         height={300}
     />
 7. (Optional) View the **Access key** and **Secret access key** values.
 8. Click **Download .csv file** to download the access key locally.
-    <Image 
-        src="/docs/docimages/install/aws-eks/06-user-access-key-04-download-access-key.webp"
+    <Image
+        src="/docimages/install/aws-eks/06-user-access-key-04-download-access-key.webp"
         alt="AWS IAM - Download access key"
         width={800}
         height={300}
@@ -356,32 +356,32 @@ If you register an FQDN from another domain registrar, you need to create a host
 **Steps**
 
 1. From AWS Services, search and open **Route 53**.
-    <Image 
-        src="/docs/docimages/install/aws-eks/08-hosted-zone-01-open-route.webp"
+    <Image
+        src="/docimages/install/aws-eks/08-hosted-zone-01-open-route.webp"
         alt="AWS Services - Open EC2"
         width={700}
         height={700}
     />
 2. Select **Hosted zones** from the sidebar.
 3. Click **Create hosted zone**.
-    <Image 
-        src="/docs/docimages/install/aws-eks/08-hosted-zone-02-route-53-click-create-hosted-zone.webp"
+    <Image
+        src="/docimages/install/aws-eks/08-hosted-zone-02-route-53-click-create-hosted-zone.webp"
         alt="AWS S3 - upload deployment files"
         width={700}
         height={300}
     />
 4. For **Domain name**, type your FQDN.
 5. Click **Create hosted zone**.
-    <Image 
-        src="/docs/docimages/install/aws-eks/08-hosted-zone-03-name-click-create.webp"
+    <Image
+        src="/docimages/install/aws-eks/08-hosted-zone-03-name-click-create.webp"
         alt="AWS S3 - upload deployment files"
         width={550}
         height={300}
     />
     **Step result**: Your FQDN appears in the **Records** tabe.
 6. From the **Records** table, copy the name servers for the hosted zone you created.
-    <Image 
-        src="/docs/docimages/install/aws-eks/08-hosted-zone-04-copy-name-servers.webp"
+    <Image
+        src="/docimages/install/aws-eks/08-hosted-zone-04-copy-name-servers.webp"
         alt="AWS S3 - upload deployment files"
         width={800}
         height={300}
@@ -389,7 +389,7 @@ If you register an FQDN from another domain registrar, you need to create a host
 7. Go to your domain registrar and add the copied name servers as custom nameservers for your domain.
     <Callout type="info">
     The propagation of the updated name servers across the DNS network might take several hours.
-    
+
     For more information, contact your domain registrar.
     </Callout>
 
@@ -408,8 +408,8 @@ An SSL certificate for your FQDN is required to deploy MOSTLY AI in an EKS clust
 **Steps**
 
 1. From AWS Services, search and open **Certificate Manager**.
-    <Image 
-        src="/docs/docimages/install/aws-eks/09-ssl-cert-01-open-cert-manager.webp"
+    <Image
+        src="/docimages/install/aws-eks/09-ssl-cert-01-open-cert-manager.webp"
         alt="AWS Services - Open EC2"
         width={700}
         height={700}
@@ -417,14 +417,14 @@ An SSL certificate for your FQDN is required to deploy MOSTLY AI in an EKS clust
 2. Click **List certificates** from the sidebar.
 3. Click **Request**.
     <Image
-        src="/docs/docimages/install/aws-eks/09-ssl-cert-02-cert-mgr-click-request.webp"
+        src="/docimages/install/aws-eks/09-ssl-cert-02-cert-mgr-click-request.webp"
         alt="AWS Certificate Manager - Click Request"
         width={800}
         height={300}
     />
 4. Select **Request a public certificate** and click **Next**.
     <Image
-        src="/docs/docimages/install/aws-eks/09-ssl-cert-03-public-cert-click-next.webp"
+        src="/docimages/install/aws-eks/09-ssl-cert-03-public-cert-click-next.webp"
         alt="AWS Certificate Manager - Request a public certificate"
         width={800}
         height={300}
@@ -434,14 +434,14 @@ An SSL certificate for your FQDN is required to deploy MOSTLY AI in an EKS clust
     2. Select **DNS validation** under **Validation method**.
     3. Click **Requst**.
         <Image
-            src="/docs/docimages/install/aws-eks/09-ssl-cert-04-name-dns-valid-request.webp"
+            src="/docimages/install/aws-eks/09-ssl-cert-04-name-dns-valid-request.webp"
             alt="AWS Certificate Manager - type FQDN select DNS validation and request"
             width={800}
             height={300}
         />
     **Step result**: A notification indicates that the certificate requires further validation.
         <Image
-            src="/docs/docimages/install/aws-eks/09-ssl-cert-05-request-success-notification.webp"
+            src="/docimages/install/aws-eks/09-ssl-cert-05-request-success-notification.webp"
             alt="AWS Certificate Manager - type FQDN select DNS validation and request"
             width={800}
             height={300}
@@ -449,31 +449,31 @@ An SSL certificate for your FQDN is required to deploy MOSTLY AI in an EKS clust
 6. Validate you are the owner of your domain.
     <Callout>
     AWS provides two validation methods: **DNS validation** and **Email validation**.
-    
+
     For more information, see [Validating domain ownership](https://docs.aws.amazon.com/acm/latest/userguide/domain-ownership-validation.html) in the _AWS Certificate Manager (ACM) documentation_.
 
     The steps below demonstrate the **DNS validation** method when your domain name provider is not AWS Route 53.
-    
+
     If your domain name provider is AWS Route 53, see [DNS validation](https://docs.aws.amazon.com/acm/latest/userguide/dns-validation.html) in the _AWS Certificate Manager (ACM) documentation_.
     </Callout>
     1. Select **List certificates**.
     2. Select the **Certificate ID** in a **Pending validation** status.
         <Image
-            src="/docs/docimages/install/aws-eks/09-ssl-cert-06-open-pending-valildation-request.webp"
+            src="/docimages/install/aws-eks/09-ssl-cert-06-open-pending-valildation-request.webp"
             alt="AWS Certificate Manager - open the certificate request with pending validation"
             width={800}
             height={300}
         />
     3. Copy the CNAME name and value and add them as a new CNAME record in your DNS provider.
         <Image
-            src="/docs/docimages/install/aws-eks/09-ssl-cert-07-copy-cname-name-value.webp"
+            src="/docimages/install/aws-eks/09-ssl-cert-07-copy-cname-name-value.webp"
             alt="AWS Certificate Manager - copy CNAME name and value"
             width={800}
             height={300}
         />
     3. Create a new CNAME record for your domain name in your domain name provider web interface.
         <Callout type="warning">
-        See your domain name provider documentation on how to add a new CNAME record for the DNS validation. 
+        See your domain name provider documentation on how to add a new CNAME record for the DNS validation.
         </Callout>
 
 
@@ -484,7 +484,7 @@ As explained the [DNS validation](https://docs.aws.amazon.com/acm/latest/usergui
 After the DNS validation completes, the **Status** of your certificate changes to **Issued** in the certificates list.
 
 <Image
-    src="/docs/docimages/install/aws-eks/09-ssl-cert-08-cert-issued.webp"
+    src="/docimages/install/aws-eks/09-ssl-cert-08-cert-issued.webp"
     alt="AWS Certificate Manager - copy CNAME name and value"
     width={800}
     height={300}
@@ -553,15 +553,15 @@ Add the the **AmazonEKSAdminPolicy** and **AmazonEKSClusterAdminPolicy** policie
 4. From the cluster tabs, select **Access**.
 5. View the entries under **IAM access entries**.
 6. Select the user to which you need to grant permissions.
-    <Image 
-        src="/docs/docimages/install/aws-eks/_new/xx-eks-cluster-01-iam-access-entries.webp"
+    <Image
+        src="/docimages/install/aws-eks/_new/xx-eks-cluster-01-iam-access-entries.webp"
         alt="AWS EKS Cluster - View IAM Access Entries"
         width={800}
         height={300}
     />
 7. Click **Add access policy.**
     <Image
-        src="/docs/docimages/install/aws-eks/_new/xx-eks-cluster-02-add-access-policy.webp"
+        src="/docimages/install/aws-eks/_new/xx-eks-cluster-02-add-access-policy.webp"
         alt="AWS EKS Cluster - Click Add access policy"
         width={800}
         height={300}
@@ -571,7 +571,7 @@ Add the the **AmazonEKSAdminPolicy** and **AmazonEKSClusterAdminPolicy** policie
     2. For **Access scope**, select **Cluster**.
     3. Click **Add access policy** in the bottom right.
         <Image
-            src="/docs/docimages/install/aws-eks/_new/xx-eks-cluster-03-add-access-policy-steps.webp"
+            src="/docimages/install/aws-eks/_new/xx-eks-cluster-03-add-access-policy-steps.webp"
             alt="AWS EKS Cluster - Step to add an Access policy"
             width={800}
             height={300}
@@ -592,22 +592,22 @@ The shared storage service `minio` that is provisioned during the deployment req
 1. In AWS, open **Identity and Access Management (IAM)**.
 2. From the sidebar, select **Roles**.
 3. Search for `nodeinstance` and open the `eksctl-mostly-ai-cluster-nodegroup-NodeInstanceRole-******` role.
-    <Image 
-        src="/docs/docimages/install/aws-eks/_new/xx-storage-permissions-01-select-nodeinstance-role.webp"
+    <Image
+        src="/docimages/install/aws-eks/_new/xx-storage-permissions-01-select-nodeinstance-role.webp"
         alt="AWS IAM - Search for nodeinstance role"
         width={800}
         height={300}
     />
 4. Click **Add permissions** and select **Attach policies**.
-    <Image 
-        src="/docs/docimages/install/aws-eks/_new/xx-storage-permissions-02-nodeinstance-role-attach-policy.webp"
+    <Image
+        src="/docimages/install/aws-eks/_new/xx-storage-permissions-02-nodeinstance-role-attach-policy.webp"
         alt="AWS IAM - Search for nodeinstance role"
         width={800}
         height={300}
     />
 5. Search for `ec2fullaccess`, select **AmazonEC2FullAccess** and click **Add permissions**.
-    <Image 
-        src="/docs/docimages/install/aws-eks/_new/xx-storage-permissions-03-select-ec2fullaccess-and-attach.webp"
+    <Image
+        src="/docimages/install/aws-eks/_new/xx-storage-permissions-03-select-ec2fullaccess-and-attach.webp"
         alt="AWS IAM - Search for nodeinstance role"
         width={800}
         height={300}
@@ -661,7 +661,7 @@ Obtain the MOSTLY AI Helm chart from your Customer Experience Engineer. The Helm
         enabled: true
     ...
     ```
-    **➡️ You do not use a TLS certificate**. Replace the  `your-tls-secret` with an empty string and, for `global.tls`, set `enabled` to `false`. 
+    **➡️ You do not use a TLS certificate**. Replace the  `your-tls-secret` with an empty string and, for `global.tls`, set `enabled` to `false`.
     ```yaml filename="values.yaml" copy {4,9}
     _customerInstallation:
     ...
@@ -746,7 +746,7 @@ If the deployment script finishes successfully in [Task 11](#task-11-run-deploym
 1. Go to **Route 53** > **Hosted zones** and select the hosted zone for your FQDN.
 2. Click **Create record**.
     <Image
-        src="/docs/docimages/install/aws-eks/12-alb-domain-01-click-create-record.webp"
+        src="/docimages/install/aws-eks/12-alb-domain-01-click-create-record.webp"
         alt="AWS Route 53 - click Create record"
         width={800}
         height={300}
@@ -759,7 +759,7 @@ If the deployment script finishes successfully in [Task 11](#task-11-run-deploym
         * Select your region. In this case, **Europe (Frankfurt)**.
         * From the search box, select the name of your ALB.
             <Image
-                src="/docs/docimages/install/aws-eks/12-alb-domain-02-configure-a-record.webp"
+                src="/docimages/install/aws-eks/12-alb-domain-02-configure-a-record.webp"
                 alt="AWS Route 53 - configure A record"
                 width={800}
                 height={300}
@@ -787,7 +787,7 @@ Obtain the superadmin credentials from your Customer Experience Engineer.
 1. Open your FQDN in your browser.<br />
     **Step result**: You **Sign in** page for your MOSTLY AI deployment opens.
     <Image
-        src="/docs/docimages/install/minikube/02-minikube-dashboard-01-post-deployment-red.webp"
+        src="/docimages/install/minikube/02-minikube-dashboard-01-post-deployment-red.webp"
         alt="MOSTLY AI Deployment - Log in page"
         width={800}
         height={300}

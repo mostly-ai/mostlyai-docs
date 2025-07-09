@@ -13,7 +13,7 @@ _July 3rd, 2025_
 
 ### Enhancements
 
-* {/* MSD-1837 */} Platform - Enhance [resource sharing experience](https://mostly.ai/docs/organizations/manage-resources/#transfer-a-resource-to-an-organization)
+* {/* MSD-1837 */} Platform - Enhance [resource sharing experience](https://docs.mostly.ai/organizations/manage-resources/#transfer-a-resource-to-an-organization)
 * {/* MSD-1875 */} Platform - Make login page mobile responsive
 * {/* MSD-1431 */} Assistant - Indicate if a previous streaming chat is ongoing after reload
 * {/* MSD-1873 */} Assistant - Consider token usage for credit consumption
@@ -483,7 +483,7 @@ For details, see [_Disable Model reports_](/generators/evaluate-quality#disable-
 * {/* MSD-1417 */} Fixed the name display when a resource is unnamed
 * {/* MSD-1408 */} Add public badge for resources on user profile page
 * {/* MSD-1323 */} Fixed markdown links in the organization description section
-* {/* MSD-1402 */} Fixed tasks restarts and keeping them in progress for generators using HuggingFace models 
+* {/* MSD-1402 */} Fixed tasks restarts and keeping them in progress for generators using HuggingFace models
 
 ## v4.2.3
 _Feb 28th, 2025_
@@ -628,10 +628,10 @@ The [MOSTLY AI Synthetic Data SDK](https://github.com/mostly-ai/mostlyai/) is an
     # 3. Train a generator
     df_original = pd.read_csv('https://github.com/mostly-ai/public-demo-data/raw/dev/census/census.csv.gz')
     g = mostly.train(name='census', data=df_original)
-    
+
     # 4. Generate synthetic data with the trained generator
     sd = mostly.generate(g)
-    
+
     # 5. Consume the synthetic data as a pandas DataFrame.
     sd.data()
     ```
@@ -1045,7 +1045,7 @@ For details, see [_Clone a generator_](/generators/manage#clone-a-generator). In
 * {/* MSD-846 */} Redirect to login after session timeout
 * {/* MSD-xxx */} Cap length of Nested Sequence Context to 20 to limit peak memory
 * {/* MSD-880 */} Improved numeric stability of training
-* {/* MSD-880 */} Upgraded Pandas to 2.2 
+* {/* MSD-880 */} Upgraded Pandas to 2.2
 
 ### Resolved issues
 
@@ -1122,7 +1122,7 @@ _Aug 23nd, 2024_
 This release introduces new error reporting for failed jobs. A new heartbeat mechanism keeps track of running jobs and reports errors immediately when a step fails. The logs are available for download from the new error tooltip at the step at which a job fails.
 
 <Image
-    src="/docs/docimages/release-notes/v228-job-failure-heartbeat-error.webp"
+    src="/docimages/release-notes/v228-job-failure-heartbeat-error.webp"
     alt="MOSTLY AI - Job failure error"
     width={800}
     height={500}
@@ -1159,7 +1159,7 @@ For details, see [_Edit a compute_](/administration/compute#edit-a-compute) in t
 You can now download the logs of failed jobs. The logs are available for download from the **Training status** and **Generation status** sections of generators and synthetic datasets, respectively.
 
 <Image
-    src="/docs/docimages/release-notes/v228-download-logs-failed-job.webp"
+    src="/docimages/release-notes/v228-download-logs-failed-job.webp"
     alt="MOSTLY AI - Download logs for failed jobs"
     width={800}
     height={500}
@@ -1226,7 +1226,7 @@ _Aug 8th, 2024_
 {/* MSD-763 */}
 In the MOSTLY AI UI, you can now search your available databases schemas and tables from when you are adding database tables to a generator.
 <Image
-    src="/docs/docimages/release-notes/v223-search-drop-downs-schemas-tables.webp"
+    src="/docimages/release-notes/v223-search-drop-downs-schemas-tables.webp"
     alt="MOSTLY AI - Search database schemas and tables"
     width={800}
     height={500}
@@ -1300,7 +1300,7 @@ _Jul 18th, 2024_
 
 ### Share MOSTLY AI assets publicly in your organization
 
-Admins can now share Generators, Synthetic datasets, Connectors and Assistant chats with all users in their organization. 
+Admins can now share Generators, Synthetic datasets, Connectors and Assistant chats with all users in their organization.
 
 Use the **Share** button and turn on the **Any authenticated user can view** toggle.
 
@@ -1380,7 +1380,7 @@ For details, see [Generate fair synthetic data](/synthetic-datasets/fairness).
 MOSTLY AI supports a new look and feel with a redesigned navigation.
 
 <Image
-    src="/docs/docimages/common/redesigned-navigation.gif"
+    src="/docimages/common/redesigned-navigation.gif"
     alt="MOSTLY AI - Redesigned navigation"
     width={800}
     height={500}
@@ -1466,7 +1466,7 @@ _Jun 12th, 2024_
 * Login screen updated with new MOSTLY AI slogan
 
 ### Resolved issues
- 
+
 * Fixed `is_ticket_alive` logic for Kerberos authentication
 * Fixed missing UI messages for seed upload
 * Removed the prefix `/` to fix file download when using S3 as internal storage
@@ -1578,7 +1578,7 @@ You can use this information to correctly set the table names and table column t
 
 ### Improvements
 
-* {/* MSD-421 */} Improved the refresh mechanism of the **Credits** pop-up 
+* {/* MSD-421 */} Improved the refresh mechanism of the **Credits** pop-up
 * {/* MSD-520 */} The generator option **Max sample size** for linked tables is now indicated as `seqs` in the UI to indicate that you specify the number of sequences to train on
 * {/* MSD-502 */} Improvements in the look and feel of Search results
 * Implemented quicker archiving of Parquet files into ZIP format for the data download option
@@ -1683,7 +1683,7 @@ _Apr 18th, 2024_
 ### Markdown in entities descriptions
 {/* MSD-389 */}
 
-You can now use Markdown to create detailed and stylized descriptions for your 
+You can now use Markdown to create detailed and stylized descriptions for your
 **generators** and **synthetic datasets**. Use the [CommonMark](https://commonmark.org/help/) syntax.
 
 * **New paragraph** - press Enter
@@ -1702,7 +1702,7 @@ Similarly, you can change that of a synthetic dataset after it is generated.
 {/* MSD-397,  */}
 You can now create new connectors when you create a new **generator** or **synthetic dataset**.
 
-To do so, use the **New connector** button from the **Connect to source** window when you create a **new generator** and from the **Destination** dropdown when you configure a destination for a **new synthetic dataset**. 
+To do so, use the **New connector** button from the **Connect to source** window when you create a **new generator** and from the **Destination** dropdown when you configure a destination for a **new synthetic dataset**.
 
 ### Support for Kerberos authentication for Apache Hive connectors
 
@@ -2190,7 +2190,7 @@ As you track the progress of a running job from the **Jobs** tab or in the **Vie
 
 ### Resolved issues
 
-* **MPD-3220** - In the previous version, when you clicked **Stop generation** while looking at a job progress in the **View tasks** drawer, the job would continue generating data and ignore the action. We have now resolved this issue and clicking **Stop generation** now takes immediate effect. 
+* **MPD-3220** - In the previous version, when you clicked **Stop generation** while looking at a job progress in the **View tasks** drawer, the job would continue generating data and ignore the action. We have now resolved this issue and clicking **Stop generation** now takes immediate effect.
 * **MCD-1952** - When a column is set as both a primary key and a foreign key in the original data, MOSTLY AI prioritizes the foreign key relationship and the issue is handled gracefully.
 * **MCD-1951** - Resolved an issue when MOSTLY AI writes primary keys in UUID format that are longer than the maximum number of characters allowed by the column data type in the destination database
 
@@ -2358,7 +2358,7 @@ MOSTLY AI 3.0 will use Kubernetes and Openshift as the deployment method.
 Smart imputation allows the user to create a synthetic dataset where specific columns don't contain null values.
 
 ### Rebalancing
-Rebalancing allows you to specify the distribution of specific values in a column. 
+Rebalancing allows you to specify the distribution of specific values in a column.
 Using Rebalancing, you can create a large number of relevant business scenarios out of the few that are present in your data. Use it to simulate what-if scenarios based on your historical data, or make minority classes visible for downstream machine learning algorithms.
 
 ### Generation mood
@@ -2386,11 +2386,11 @@ The look and feel of the application are updated, along with the below improveme
 
 ### Rare / Extreme Value Protection updates
 
-#### Enabling / Disabling the Rare Category Protection 
+#### Enabling / Disabling the Rare Category Protection
 You can enable or disable Rare category protection for categorical type columns.
 
-#### Extreme Value Protection 
-You can enable or disable Extreme value protection for numerical, datetime, and ITT-type columns. If enabled, the values of the smallest and largest outliers in these columns will be replaced by the non-outlier values. 
+#### Extreme Value Protection
+You can enable or disable Extreme value protection for numerical, datetime, and ITT-type columns. If enabled, the values of the smallest and largest outliers in these columns will be replaced by the non-outlier values.
 
 ### Improvements
 
@@ -2435,7 +2435,7 @@ You can now download synthetic data for all types of jobs. If you don't have acc
 * MPD-2347 - Reference tables' primary keys are not copied but generated.
 * MCD-1325 - QA report generation fails when analyzing database datetime columns that contain values in an unknown format.
 * MCD-1327 - Sequence lengths are incorrectly calculated in an edge case scenario.
-* MPD-2194 - When creating or modifying a data connector, the **Test connection** button doesn't check whether the specified schema can be accessed. 
+* MPD-2194 - When creating or modifying a data connector, the **Test connection** button doesn't check whether the specified schema can be accessed.
 * MPD-2178 - Whitespaces in the header row of CSV files cause issues during synthesization.
 * MCD-1275 - QA report generation fails when synthesizing Parquet files.
 * MCD-1273 - Incorrect processing of scientific notation in CSV files.
@@ -2516,11 +2516,11 @@ _Sep 12th, 2022_
 ### Improvements
 
 * Ad hoc jobs can now synthesize Parquet files.
-* CSV files can now have semicolons (;) as well as commas (,) as column separators. 
+* CSV files can now have semicolons (;) as well as commas (,) as column separators.
 
 ### Resolved issues
 
-* MPD-2194 - When creating or modifying a data connector, the **Test connection** button doesn't check whether the specified schema can be accessed. 
+* MPD-2194 - When creating or modifying a data connector, the **Test connection** button doesn't check whether the specified schema can be accessed.
 * MPD-2178 - Whitespaces in the header row of CSV files cause issues during synthesization.
 * MCD-1275 - QA report generation fails when synthesizing Parquet files.
 * MCD-1273 - Incorrect processing of scientific notation in CSV files.
@@ -2535,7 +2535,7 @@ _Sep 12th, 2022_
 
 ### Security updates
 
-Security updates have been made to the following components: 
+Security updates have been made to the following components:
 
 * Java and Python libraries
 * RabbitMQ
@@ -2558,7 +2558,7 @@ We worked on numerous improvements that help you assess synthetic data quality a
 
 ### Relationship Manager
 
-Whether your database is small or large, with or without schema, we've got you covered. You can now complete the relationships between your database's tables so that all of its data assets can be properly secured and accurately synthesized, QA report included. 
+Whether your database is small or large, with or without schema, we've got you covered. You can now complete the relationships between your database's tables so that all of its data assets can be properly secured and accurately synthesized, QA report included.
 
 And if you're dealing with partially defined relationships and don't know which ones are missing, you can count on us as well. Our handy 'Tables without relations' filter gets you going in no time!
 
@@ -2589,8 +2589,8 @@ Whether you're a student, small business, or enterprise, our Synthetic Data Plat
 * **Effortless onboarding with our new video tutorials**<br />
 Our new video tutorials help users start synthesizing your company's valuable data assets right away and help them understand what's going on in each step.
 * **Audit logs for compliance and security**<br />
-MOSTLY AI's audit log keeps track of who accessed the system, 
-what they looked at, and what actions they took. 
+MOSTLY AI's audit log keeps track of who accessed the system,
+what they looked at, and what actions they took.
 * **Improved synthesization of your database's sequences**<br />
 The order of your linked tables' lists, sequences, and time-series data embodies valuable information. MOSTLY AI now allows you to sort your linked tables by column so that all sequential information is optimally preserved.
 
@@ -2638,7 +2638,7 @@ _May 1st, 2022_
 
 * Transform your business with synthetic data that's effortlessly privacy-secure, efficient, and fast*
 * Take advantage of a synthetic data engine that's mindful of your time and hardware resources.
-* Benefit from a much-simplified preparation of your synthesization jobs. 
+* Benefit from a much-simplified preparation of your synthesization jobs.
 The web UI now serves your goals, while MOSTLY AI handles complex configurations in the background.
 * Our new user management system lets you create groups, manage group-level access permissions, and lets users share synthetic data assets with these groups.
 * MySQL support enables synthetic data in the cloud, integrating MOSTLY AI with cloud databases like AWS Aurora, Google Cloud SQL, and many more.
@@ -2670,7 +2670,7 @@ For the past few months, we have been working to make synthetic data work for yo
 
 *Privacy-security is now out-of-the-box and takes zero effort to realize*
 
-* MOSTLY AI protects rare categories by replacing them with non-rare categories. Release 2.2 replaces them in a context-aware manner. For instance, if a female data subject has a rare name, it will be replaced with a female non-rare name. 
+* MOSTLY AI protects rare categories by replacing them with non-rare categories. Release 2.2 replaces them in a context-aware manner. For instance, if a female data subject has a rare name, it will be replaced with a female non-rare name.
 
 * Rare category protection can no longer be adjusted or turned off.
 
@@ -2734,7 +2734,7 @@ MOSTLY AI 2.1 continues our mission to deliver an enterprise-grade synthetic dat
 
 Insurance claim reports, medical diagnoses, and other types of unstructured texts are very rich sources of information, capturing details that aren't present in numbers or other structured forms of data.
 
-Our new Text encoding type allows you to privacy-protect these texts and  put them to use in various AI/ML use cases, for example: 
+Our new Text encoding type allows you to privacy-protect these texts and  put them to use in various AI/ML use cases, for example:
 
 * *Named-entity recognition*
 * *Sentiment analysis*
@@ -2756,7 +2756,7 @@ Use them as a data source or as a destination, and enable synthetic data for mai
 
 Our privacy and accuracy charts are now available in the web UI, so you can intuitively evaluate the quality of your synthetic data.
 
-Spot opportunities to further improve quality and immediately apply them to the job settings. 
+Spot opportunities to further improve quality and immediately apply them to the job settings.
 
 * Use the search function to look up specific columns.
 * Interactive charts allow you to learn more about specific data points.
@@ -2776,7 +2776,7 @@ _Nov 2nd, 2021_
 
 *Synthetize your data wherever it is*
 
-Mostly AI 2.0 is now capable of synthesizing entire databases! 
+Mostly AI 2.0 is now capable of synthesizing entire databases!
 
 It connects to your data sources, recognizes its columns and their relationships, and provides you with a synthetic version of your data wherever you need it.
 

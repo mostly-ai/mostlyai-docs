@@ -31,14 +31,14 @@ With the Python SDK, you do not need to specify an encoding type when you submit
 
 1. On the generator **Data configuration** page, click a table to expand it and view its encoding types.
     <Image
-        src="/docs/docimages/generators/set-encoding-types/generator-01-highlight-and-click-table.webp"
+        src="/docimages/generators/set-encoding-types/generator-01-highlight-and-click-table.webp"
         alt="MOSTLY AI - Generator - Set column types - Select an added table"
         width={900}
         height={300}
     />
 2. Click in the **Encoding type** area for a column.
     <Image
-        src="/docs/docimages/generators/set-encoding-types/generator-02-select-encoding-type.webp"
+        src="/docimages/generators/set-encoding-types/generator-02-select-encoding-type.webp"
         alt="MOSTLY AI - Generator - Set column types - Select type"
         width={900}
         height={300}
@@ -56,7 +56,7 @@ config = {
    "tables": [
       {
          "name": "us-census-income",
-         "data": "https://mostly.ai/docs/datasets/us-census-income.csv.gz",
+         "data": "https://docs.mostly.ai/datasets/us-census-income.csv.gz",
          "columns": [
             {
                "name": "age",
@@ -281,7 +281,7 @@ The **LSTM** is a custom-trained model that synthesizes unstructured natural lan
 
 You can use this encoding type to generate realistic, representative, and anonymous financial transaction texts, short user feedback, medical assessments, PII fields, etc. As the resulting synthetic texts are representative of the terms, tokens, and their co-occurrence in the original data, they can be confidently used in analytics and machine learning use cases, such as sentiment analysis and named-entity recognition.
 
-Remember, the LSTM will perform better when trained on short, structured, repetitive sequences like names and short sentences while an LLM will perform better for longer, less structured samples like descriptions, email bodies, or notes. 
+Remember, the LSTM will perform better when trained on short, structured, repetitive sequences like names and short sentences while an LLM will perform better for longer, less structured samples like descriptions, email bodies, or notes.
 
 Our text synthesis model is language-agnostic and doesn't contain the biases of some pre-trained models—any content is solely learned from the original training data. This means that it can process any language, vernacular, and slang present in the original data.
 

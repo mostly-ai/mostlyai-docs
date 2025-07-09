@@ -13,7 +13,7 @@ The two-table scenario includes a **_subject table_** and a **_linked table_**. 
 For example, the figure below shows the `customers` and `purchases` tables from the [CDNOW dataset](/datasets#cdnow-dataset). The highlighted rows show the relationship between subject records from the `customers` table and their related events records from the `purchases` table.
 
 <Image
-    src="/docs/docimages/generators/set-table-relationships/two-table.webp"
+    src="/docimages/generators/set-table-relationships/two-table.webp"
     alt="MOSTLY AI - Two-table relationship - subject and linked table"
     width={900}
     height={300}
@@ -30,7 +30,7 @@ If you use the web interface, add both tables to the generator and set their rel
 1. In MOSTLY AI, select **Generators** from the top menu.
 2. On the **Generators** page, click **+ New generator**.
     <Image
-        src="/docs/docimages/generators/train/01-click-new-generator.webp"
+        src="/docimages/generators/train/01-click-new-generator.webp"
         alt="MOSTLY AI - Generators page - Click New generator"
         width={800}
         height={300}
@@ -38,7 +38,7 @@ If you use the web interface, add both tables to the generator and set their rel
 3. Upload the `customers` table.
     1. Click **Upload file**.
         <Image
-            src="/docs/docimages/generators/train/02-select-upload-file.webp"
+            src="/docimages/generators/train/02-select-upload-file.webp"
             alt="MOSTLY AI - Generators page - Select Upload file"
             width={800}
             height={300}
@@ -46,7 +46,7 @@ If you use the web interface, add both tables to the generator and set their rel
     2. Upload the `customers` table, leave its name as `customers`, and click **Proceed**.<br />
         **Step result**: The table is now added to the generator.
         <Image
-            src="/docs/docimages/generators/set-table-relationships/table-rel-01-customers-added.webp"
+            src="/docimages/generators/set-table-relationships/table-rel-01-customers-added.webp"
             alt="MOSTLY AI - Table CDNOW/customers added"
             width={800}
             height={300}
@@ -54,7 +54,7 @@ If you use the web interface, add both tables to the generator and set their rel
 5. Upload the `purchases` table.
     1. In the generator, click **Add table**.
         <Image
-            src="/docs/docimages/generators/set-table-relationships/table-rel-02-click-add-table.webp"
+            src="/docimages/generators/set-table-relationships/table-rel-02-click-add-table.webp"
             alt="MOSTLY AI - Click Add table"
             width={800}
             height={300}
@@ -66,7 +66,7 @@ If you use the web interface, add both tables to the generator and set their rel
     2. Expand **Table relationships**.
     3. Click **Modify**.
         <Image
-            src="/docs/docimages/generators/set-table-relationships/table-rel-03-expand-table-relationships-click-modify.webp"
+            src="/docimages/generators/set-table-relationships/table-rel-03-expand-table-relationships-click-modify.webp"
             alt="MOSTLY AI - Expand Table relationships and click Modify"
             width={800}
             height={300}
@@ -78,7 +78,7 @@ If you use the web interface, add both tables to the generator and set their rel
     6. Select the **Is context** checkbox.
     7. Click the confirmation button.
         <Image
-            src="/docs/docimages/generators/set-table-relationships/table-rel-04-configure-foreign-key.webp"
+            src="/docimages/generators/set-table-relationships/table-rel-04-configure-foreign-key.webp"
             alt="MOSTLY AI - Click Edit foreign keys"
             width={800}
             height={300}
@@ -90,7 +90,7 @@ If you use the web interface, add both tables to the generator and set their rel
 The two-table relationship foreign key is now set. The linked table `purchases` is now nested and indented under its subject table `customers`.
 
 <Image
-    src="/docs/docimages/generators/set-table-relationships/table-rel-05-two-table-foreign-key-set.webp"
+    src="/docimages/generators/set-table-relationships/table-rel-05-two-table-foreign-key-set.webp"
     alt="MOSTLY AI - Click Edit foreign keys"
     width={800}
     height={300}
@@ -101,7 +101,7 @@ With the context relationship defined, the generator can capture the correlation
 Optionally, you can click **Relationship diagram** to get an overview of all table relationships.
 
 <Image
-    src="/docs/docimages/generators/set-table-relationships/table-rel-06-relationship-diagram-two-table.webp"
+    src="/docimages/generators/set-table-relationships/table-rel-06-relationship-diagram-two-table.webp"
     alt="MOSTLY AI - Click Edit foreign keys"
     width={800}
     height={300}
@@ -127,7 +127,7 @@ config = {
     "name": "CDNOW",
     "tables": [
         {
-            "name": "users", 
+            "name": "users",
             "data": users_df,
             "primary_key": "id"
         },
