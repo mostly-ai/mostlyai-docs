@@ -58,10 +58,7 @@ const ModelsList = () => {
           } else {
             return (
               <li key={model} className="_my-2">
-                <a
-                  className="_text-primary-600 _underline _decoration-from-font [text-underline-position:from-font]"
-                  href={`https://huggingface.co/${model}`}
-                >
+                <a className="_text-primary-600 _underline _decoration-from-font [text-underline-position:from-font]" href={`https://huggingface.co/${model}`}>
                   {model}
                 </a>
               </li>
@@ -77,18 +74,12 @@ const ModelsList = () => {
         <br />
         <br />
         For the list of LLMs that MOSTLY AI provides, go to the Free version at
-        <a
-          className="_text-primary-600 _underline _decoration-from-font [text-underline-position:from-font]"
-          href="https://app.mostly.ai"
-        >
+        <a className="_text-primary-600 _underline _decoration-from-font [text-underline-position:from-font]" href="https://app.mostly.ai">
           {" "}
           https://app.mostly.ai{" "}
         </a>
         or check the
-        <a
-          className="_text-primary-600 _underline _decoration-from-font [text-underline-position:from-font]"
-          href="https://docs.mostly.ai/generators/configure/set-encoding-types#huggingface-llms"
-        >
+        <a className="_text-primary-600 _underline _decoration-from-font [text-underline-position:from-font]" href="https://docs.mostly.ai/generators/configure/set-encoding-types#huggingface-llms">
           {" "}
           public documentation
         </a>
