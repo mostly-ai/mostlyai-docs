@@ -1,406 +1,136 @@
 import Image from "next/image";
 
 export const KubernetesIcon = () => {
-  return (
-    <Image
-      className="card-icon"
-      src="/icons/third-party/kubernetes.svg"
-      alt="Kubernetes icon"
-      width={30}
-      height={30}
-    />
-  );
+  return <Image className="card-icon" src="/icons/third-party/kubernetes.svg" alt="Kubernetes icon" width={30} height={30} />;
 };
 
 export const MinikubeIcon = () => {
-  return (
-    <Image
-      className="card-icon"
-      src="/icons/third-party/minikube.svg"
-      alt="Minikube icon"
-      width={30}
-      height={30}
-    />
-  );
+  return <Image className="card-icon" src="/icons/third-party/minikube.svg" alt="Minikube icon" width={30} height={30} />;
 };
 
 export const AmazonEKSIcon = () => {
-  return (
-    <Image
-      className="card-icon"
-      src="/icons/third-party/aws-eks.svg"
-      alt="Amazon EKS icon"
-      width={30}
-      height={30}
-    />
-  );
+  return <Image className="card-icon" src="/icons/third-party/aws-eks.svg" alt="Amazon EKS icon" width={30} height={30} />;
 };
 
 export const GKEIcon = () => {
-  return (
-    <Image
-      className="card-icon"
-      src="/icons/third-party/gke-icon.png"
-      alt="Google Kubernetes Engine icon"
-      width={30}
-      height={30}
-    />
-  );
+  return <Image className="card-icon" src="/icons/third-party/gke-icon.png" alt="Google Kubernetes Engine icon" width={30} height={30} />;
 };
 
 export const AKSIcon = () => {
-  return (
-    <Image
-      className="card-icon"
-      src="/icons/third-party/aks-icon.svg"
-      alt="Azure Managed Kubernetes Services (AKS)"
-      width={30}
-      height={30}
-    />
-  );
+  return <Image className="card-icon" src="/icons/third-party/aks-icon.svg" alt="Azure Managed Kubernetes Services (AKS)" width={30} height={30} />;
 };
 
 export const OpenShiftIcon = () => {
-  return (
-    <Image
-      className="card-icon"
-      src="/icons/third-party/openshift.svg"
-      alt="OpenShift icon"
-      width={30}
-      height={30}
-    />
-  );
+  return <Image className="card-icon" src="/icons/third-party/openshift.svg" alt="OpenShift icon" width={30} height={30} />;
 };
 
 export const IngressIcon = () => {
-  return (
-    <Image
-      className="card-icon"
-      src="/icons/mostly-ai/ingress.svg"
-      alt="Ingress icon"
-      width={30}
-      height={30}
-    />
-  );
+  return <Image className="card-icon" src="/icons/mostly-ai/ingress.svg" alt="Ingress icon" width={30} height={30} />;
 };
 
 export const DatabaseIcon = () => {
-  return (
-    <Image
-      className="card-icon"
-      src="/icons/mostly-ai/database.png"
-      alt="Database icon"
-      width={30}
-      height={30}
-    />
-  );
+  return <Image className="card-icon" src="/icons/mostly-ai/database.png" alt="Database icon" width={30} height={30} />;
 };
 
 export const CloudIcon = () => {
-  return (
-    <Image
-      className="card-icon"
-      src="/icons/mostly-ai/cloud.png"
-      alt="Cloud icon"
-      width={30}
-      height={30}
-    />
-  );
+  return <Image className="card-icon" src="/icons/mostly-ai/cloud.png" alt="Cloud icon" width={30} height={30} />;
 };
 
 export const StorageIcon = () => {
-  return (
-    <Image
-      className="card-icon"
-      src="/icons/mostly-ai/storage.png"
-      alt="Storage icon"
-      width={22}
-      height={25}
-    />
-  );
+  return <Image className="card-icon" src="/icons/mostly-ai/storage.png" alt="Storage icon" width={22} height={25} />;
 };
 
 export const TerminalIcon = () => {
-  return (
-    <Image
-      className="card-icon"
-      src="/icons/mostly-ai/terminal.png"
-      alt="Terminal icon"
-      width={22}
-      height={25}
-    />
-  );
+  return <Image className="card-icon" src="/icons/mostly-ai/terminal.png" alt="Terminal icon" width={22} height={25} />;
 };
 
 export const ColabBadge = () => {
-  return (
-    <Image
-      className="card-icon"
-      src="/icons/third-party/colab-badge.svg"
-      alt="Google Colab icon"
-      width={120}
-      height={30}
-    />
-  );
+  return <Image className="card-icon" src="/icons/third-party/colab-badge.svg" alt="Google Colab icon" width={120} height={30} />;
 };
 
 export const GreenTickSign = () => {
-  return (
-    <Image
-      className="card-icon"
-      src="/icons/mostly-ai/green-tick-sign.svg"
-      alt="Green tick"
-      width={22}
-      height={22}
-    />
-  );
+  return <Image className="card-icon" src="/icons/mostly-ai/green-tick-sign.svg" alt="Green tick" width={22} height={22} />;
 };
 
 export const YellowWarningSign = () => {
-  return (
-    <Image
-      className="card-icon"
-      src="/icons/mostly-ai/warning-sign.svg"
-      alt="Yellow warning sign"
-      width={22}
-      height={22}
-    />
-  );
+  return <Image className="card-icon" src="/icons/mostly-ai/warning-sign.svg" alt="Yellow warning sign" width={22} height={22} />;
 };
 
 export const FileUploadIcon = () => {
-  return (
-    <Image
-      className="card-icon"
-      src="/icons/mostly-ai/file-upload.png"
-      alt="File upload"
-      width={30}
-      height={30}
-    />
-  );
+  return <Image className="card-icon" src="/icons/mostly-ai/file-upload.png" alt="File upload" width={30} height={30} />;
 };
 
 export const VialIcon = () => {
-  return (
-    <Image
-      className="card-icon"
-      src="/icons/mostly-ai/vial.png"
-      alt="Vial"
-      width={30}
-      height={30}
-    />
-  );
+  return <Image className="card-icon" src="/icons/mostly-ai/vial.png" alt="Vial" width={30} height={30} />;
 };
 
 export const TestTubeIcon = () => {
-  return (
-    <Image
-      className="card-icon"
-      src="/icons/mostly-ai/test-tube.png"
-      alt="Test tube"
-      width={30}
-      height={30}
-    />
-  );
+  return <Image className="card-icon" src="/icons/mostly-ai/test-tube.png" alt="Test tube" width={30} height={30} />;
 };
 
 export const MediaPlayerIcon = () => {
-  return (
-    <Image
-      className="card-icon"
-      src="/icons/mostly-ai/media-player.png"
-      alt="Media player"
-      width={30}
-      height={30}
-    />
-  );
+  return <Image className="card-icon" src="/icons/mostly-ai/media-player.png" alt="Media player" width={30} height={30} />;
 };
 
 export const ShareIcon = () => {
-  return (
-    <Image
-      className="card-icon"
-      src="/icons/mostly-ai/share.png"
-      alt="Share"
-      width={30}
-      height={30}
-    />
-  );
+  return <Image className="card-icon" src="/icons/mostly-ai/share.png" alt="Share" width={30} height={30} />;
 };
 
 export const ArchiveDownloadIcon = () => {
-  return (
-    <Image
-      className="card-icon"
-      src="/icons/mostly-ai/archive-download.png"
-      alt="Archive download"
-      width={30}
-      height={30}
-    />
-  );
+  return <Image className="card-icon" src="/icons/mostly-ai/archive-download.png" alt="Archive download" width={30} height={30} />;
 };
 
 export const PuzzleIcon = () => {
-  return (
-    <Image
-      className="card-icon"
-      src="/icons/mostly-ai/puzzle.png"
-      alt="Puzzle"
-      width={30}
-      height={30}
-    />
-  );
+  return <Image className="card-icon" src="/icons/mostly-ai/puzzle.png" alt="Puzzle" width={30} height={30} />;
 };
 
 export const Chip2Icon = () => {
-  return (
-    <Image
-      className="card-icon"
-      src="/icons/mostly-ai/chip.png"
-      alt="Computer chip"
-      width={30}
-      height={30}
-    />
-  );
+  return <Image className="card-icon" src="/icons/mostly-ai/chip.png" alt="Computer chip" width={30} height={30} />;
 };
 
 export const SSLCertIcon = () => {
-  return (
-    <Image
-      className="card-icon"
-      src="/icons/mostly-ai/ssl-cert.png"
-      alt="SSL certificate"
-      width={30}
-      height={30}
-    />
-  );
+  return <Image className="card-icon" src="/icons/mostly-ai/ssl-cert.png" alt="SSL certificate" width={30} height={30} />;
 };
 
 export const FileBadgeIcon = () => {
-  return (
-    <Image
-      className="card-icon"
-      src="/icons/mostly-ai/file-badge.png"
-      alt="File badge"
-      width={30}
-      height={30}
-    />
-  );
+  return <Image className="card-icon" src="/icons/mostly-ai/file-badge.png" alt="File badge" width={30} height={30} />;
 };
 
 export const RemovePrimaryKey = () => {
-  return (
-    <Image
-      className="card-icon"
-      src="/icons/mostly-ai/ui/remove-primary-key.svg"
-      alt="Remove primary key icon"
-      width={15}
-      height={15}
-      style={{ display: "inline", marginTop: "-2px" }}
-    />
-  );
+  return <Image className="card-icon" src="/icons/mostly-ai/ui/remove-primary-key.svg" alt="Remove primary key icon" width={15} height={15} style={{ display: "inline", marginTop: "-2px" }} />;
 };
 
 export const TwoTableIcon = () => {
-  return (
-    <Image
-      className="card-icon"
-      src="/icons/mostly-ai/table-relationships/two-table.svg"
-      alt="Two-table relationships"
-      width={45}
-      height={45}
-      style={{ display: "inline", marginTop: "-2px" }}
-    />
-  );
+  return <Image className="card-icon" src="/icons/mostly-ai/table-relationships/two-table.svg" alt="Two-table relationships" width={45} height={45} style={{ display: "inline", marginTop: "-2px" }} />;
 };
 
 export const MultiTableIcon = () => {
-  return (
-    <Image
-      className="card-icon"
-      src="/icons/mostly-ai/table-relationships/multi-table.svg"
-      alt="Multi-table relationships"
-      width={45}
-      height={45}
-      style={{ display: "inline", marginTop: "-2px" }}
-    />
-  );
+  return <Image className="card-icon" src="/icons/mostly-ai/table-relationships/multi-table.svg" alt="Multi-table relationships" width={45} height={45} style={{ display: "inline", marginTop: "-2px" }} />;
 };
 
 export const KeyIcon = () => {
-  return (
-    <Image
-      className="card-icon"
-      src="/icons/mostly-ai/table-relationships/key.svg"
-      alt="Primary key"
-      width={45}
-      height={45}
-      style={{ display: "inline", marginTop: "-2px" }}
-    />
-  );
+  return <Image className="card-icon" src="/icons/mostly-ai/table-relationships/key.svg" alt="Primary key" width={45} height={45} style={{ display: "inline", marginTop: "-2px" }} />;
 };
 
 export const RelDiagramIcon = () => {
-  return (
-    <Image
-      className="card-icon"
-      src="/icons/mostly-ai/table-relationships/relationship-diagram.svg"
-      alt="Relationship diagram"
-      width={45}
-      height={45}
-      style={{ display: "inline", marginTop: "-2px" }}
-    />
-  );
+  return <Image className="card-icon" src="/icons/mostly-ai/table-relationships/relationship-diagram.svg" alt="Relationship diagram" width={45} height={45} style={{ display: "inline", marginTop: "-2px" }} />;
 };
 
 export const ModelCreatorIcon = () => {
-  return (
-    <Image
-      className="card-icon"
-      src="/icons/mostly-ai/quickstart/model-creator.svg"
-      alt="Model creator"
-      width={45}
-      height={45}
-      style={{ display: "inline", marginTop: "-2px" }}
-    />
-  );
+  return <Image className="card-icon" src="/icons/mostly-ai/quickstart/model-creator.svg" alt="Model creator" width={45} height={45} style={{ display: "inline", marginTop: "-2px" }} />;
 };
 
 export const DataConsumerIcon = () => {
-  return (
-    <Image
-      className="card-icon"
-      src="/icons/mostly-ai/quickstart/data-consumer.svg"
-      alt="Data consumer"
-      width={45}
-      height={45}
-      style={{ display: "inline", marginTop: "-2px" }}
-    />
-  );
+  return <Image className="card-icon" src="/icons/mostly-ai/quickstart/data-consumer.svg" alt="Data consumer" width={45} height={45} style={{ display: "inline", marginTop: "-2px" }} />;
 };
 
 export const LLMIcon = () => {
-  return (
-    <Image
-      className="card-icon"
-      src="/icons/third-party/llm.svg"
-      alt="LLM"
-      width={45}
-      height={45}
-      style={{ display: "inline", marginTop: "-2px" }}
-    />
-  );
+  return <Image className="card-icon" src="/icons/third-party/llm.svg" alt="LLM" width={45} height={45} style={{ display: "inline", marginTop: "-2px" }} />;
 };
 
 export const GitPullRequestIcon = () => {
   return (
-    <svg
-      width="26"
-      height="26"
-      viewBox="0 0 36 36"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg width="26" height="26" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
         fillRule="evenodd"
         clip-rule="evenodd"
@@ -413,13 +143,7 @@ export const GitPullRequestIcon = () => {
 
 export const ChipIcon = () => {
   return (
-    <svg
-      width="26"
-      height="26"
-      viewBox="0 0 36 36"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg width="26" height="26" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
         fillRule="evenodd"
         clip-rule="evenodd"
@@ -432,13 +156,7 @@ export const ChipIcon = () => {
 
 export const WebFrontendIcon = () => {
   return (
-    <svg
-      width="26"
-      height="26"
-      viewBox="0 0 36 36"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg width="26" height="26" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
         fillRule="evenodd"
         clip-rule="evenodd"
@@ -451,13 +169,7 @@ export const WebFrontendIcon = () => {
 
 export const UserPersonaIcon = () => {
   return (
-    <svg
-      width="26"
-      height="26"
-      viewBox="0 0 36 36"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg width="26" height="26" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
         fillRule="evenodd"
         clip-rule="evenodd"
@@ -470,13 +182,7 @@ export const UserPersonaIcon = () => {
 
 export const DatabaseLockIcon = () => {
   return (
-    <svg
-      width="26"
-      height="26"
-      viewBox="0 0 36 36"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg width="26" height="26" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
         fillRule="evenodd"
         clip-rule="evenodd"
@@ -495,13 +201,7 @@ export const DatabaseLockIcon = () => {
 
 export const AssistantBrokerIcon = () => {
   return (
-    <svg
-      width="26"
-      height="26"
-      viewBox="0 0 36 36"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg width="26" height="26" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
         fill="currentColor"
         d="M28.5007 21.9009C29.1234 21.9012 29.6657 22.3263 29.8125 22.9314C30.0621 23.9633 30.5911 24.9075 31.3418 25.6582C32.0922 26.4086 33.0349 26.9378 34.0664 27.1875C34.6721 27.334 35.0989 27.8762 35.0991 28.4993C35.0991 29.1226 34.6722 29.6645 34.0664 29.811C33.0348 30.0607 32.0923 30.592 31.3418 31.3425C30.5914 32.0931 30.0621 33.0355 29.8125 34.0671C29.666 34.6727 29.1237 35.0995 28.5007 35.0999C27.8774 35.0999 27.3333 34.673 27.1868 34.0671C26.9371 33.0354 26.408 32.0931 25.6575 31.3425C24.9068 30.5918 23.9647 30.0607 22.9329 29.811C22.327 29.6645 21.9001 29.1226 21.9001 28.4993C21.9004 27.8762 22.3272 27.334 22.9329 27.1875C23.9644 26.9379 24.9069 26.4086 25.6575 25.6582C26.4082 24.9075 26.9371 23.9633 27.1868 22.9314L27.2615 22.7139C27.4721 22.2266 27.9555 21.9009 28.5007 21.9009ZM28.4985 26.4514C28.2201 26.8467 27.9116 27.2229 27.5669 27.5676C27.222 27.9125 26.8462 28.2208 26.4507 28.4993C26.8466 28.778 27.2217 29.0879 27.5669 29.4331C27.9113 29.7776 28.2202 30.1521 28.4985 30.5471C28.777 30.1517 29.0877 29.7779 29.4324 29.4331C29.7774 29.0881 30.1529 28.7779 30.5486 28.4993C30.1531 28.2207 29.7772 27.9125 29.4324 27.5676C29.0873 27.2225 28.7772 26.8473 28.4985 26.4514ZM30.1509 18.0007V12.5427L19.3491 18.7786V31.2568C19.8683 31.1988 20.3963 31.449 20.6719 31.9314C21.0416 32.5789 20.8162 33.403 20.1687 33.7727L19.9138 33.9089C19.3187 34.1985 18.6738 34.342 18.0286 34.3462C18.019 34.3464 18.0096 34.3506 18 34.3506C17.9897 34.3506 17.9795 34.3464 17.9692 34.3462C17.2311 34.341 16.4944 34.1513 15.8313 33.7727H15.8291L5.32837 27.761V27.7588C3.9838 26.9889 3.15088 25.5632 3.15088 24.0125V11.9868C3.15088 11.2957 3.31591 10.6285 3.6189 10.0334C3.64787 9.94206 3.68549 9.85184 3.73535 9.76538C3.79378 9.66417 3.86805 9.57701 3.94629 9.49731C4.30495 8.99096 4.7717 8.55754 5.32837 8.23828L15.8291 2.22656L15.8313 2.22437L16.084 2.09253C16.68 1.80252 17.3347 1.65088 18 1.65088L18.2834 1.65967C18.8507 1.69645 19.4049 1.84382 19.916 2.09253L20.1687 2.22437L20.1709 2.22656L30.6672 8.23608L30.9111 8.3855C31.3605 8.68234 31.748 9.06203 32.0581 9.50171C32.1346 9.58033 32.2073 9.66606 32.2646 9.76538C32.3145 9.85184 32.3521 9.94206 32.3811 10.0334C32.6874 10.6364 32.8479 11.3038 32.8491 11.9824V18.0007C32.8486 18.7459 32.2453 19.3499 31.5 19.3499C30.7547 19.3499 30.1514 18.7459 30.1509 18.0007ZM17.7825 4.3645C17.567 4.39264 17.3572 4.4628 17.1672 4.57104L7.26196 10.24L18 16.4407L28.7358 10.24L18.8328 4.57104L18.635 4.47437C18.4341 4.39235 18.2184 4.34912 18 4.34912L17.7825 4.3645ZM5.84912 24.0125C5.84912 24.516 6.08691 24.9894 6.48853 25.2957L6.6709 25.4165L16.6509 31.1294V18.7786L5.84912 12.5427V24.0125Z"
@@ -512,13 +212,7 @@ export const AssistantBrokerIcon = () => {
 
 export const DataDiscoveryIcon = () => {
   return (
-    <svg
-      width="26"
-      height="26"
-      viewBox="0 0 36 36"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg width="26" height="26" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
         fill="currentColor"
         fill-rule="evenodd"
@@ -531,46 +225,19 @@ export const DataDiscoveryIcon = () => {
 
 export const JupyterHubIcon = () => {
   return (
-    <svg
-      width="26"
-      height="26"
-      viewBox="0 0 36 36"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        fill="currentColor"
-        d="M29.5219 3.43032C29.5459 3.82202 29.4527 4.21198 29.2542 4.55053C29.0558 4.88908 28.761 5.16089 28.4075 5.33133C28.054 5.50177 27.6578 5.56313 27.2693 5.50759C26.8808 5.45205 26.5177 5.28213 26.2261 5.01947C25.9345 4.75681 25.7278 4.4133 25.6321 4.0327C25.5365 3.65211 25.5563 3.25165 25.689 2.88235C25.8217 2.51305 26.0614 2.19162 26.3775 1.959C26.6935 1.72639 27.0717 1.59313 27.4637 1.57619C27.7208 1.56205 27.9781 1.59886 28.2209 1.68451C28.4637 1.77016 28.6871 1.90295 28.8784 2.07527C29.0697 2.24758 29.225 2.456 29.3354 2.68855C29.4459 2.9211 29.5093 3.17319 29.5219 3.43032Z"
-      />
-      <path
-        fill="currentColor"
-        d="M17.9928 26.2664C12.7453 26.2664 8.13332 24.3832 5.74862 21.602C6.67389 24.104 8.34344 26.2625 10.5325 27.7869C12.7216 29.3114 15.3253 30.1286 17.9928 30.1286C20.6604 30.1286 23.264 29.3114 25.4531 27.7869C27.6422 26.2625 29.3118 24.104 30.2371 21.602C27.8582 24.3832 23.2637 26.2664 17.9928 26.2664Z"
-      />
-      <path
-        fill="currentColor"
-        d="M17.9928 8.181C23.2404 8.181 27.8524 10.0643 30.2371 12.8454C29.3118 10.3435 27.6422 8.18498 25.4531 6.66054C23.264 5.1361 20.6604 4.31888 17.9928 4.31888C15.3253 4.31888 12.7216 5.1361 10.5325 6.66054C8.34344 8.18498 6.67389 10.3435 5.74862 12.8454C8.13332 10.0585 12.722 8.181 17.9928 8.181Z"
-      />
-      <path
-        fill="currentColor"
-        d="M10.7688 31.6788C10.7996 32.1722 10.6828 32.6635 10.4333 33.0903C10.1838 33.5171 9.81296 33.8599 9.36793 34.0751C8.92291 34.2903 8.42389 34.3682 7.93445 34.2988C7.44501 34.2294 6.98731 34.0158 6.61967 33.6854C6.25202 33.3549 5.99108 32.9225 5.87008 32.4432C5.74909 31.9639 5.77351 31.4594 5.94025 30.994C6.10699 30.5287 6.40849 30.1235 6.80633 29.8301C7.20419 29.5367 7.68037 29.3684 8.17423 29.3466C8.49775 29.3292 8.8215 29.3759 9.12701 29.4837C9.43251 29.5916 9.71377 29.7585 9.95471 29.9751C10.1957 30.1917 10.3916 30.4536 10.5313 30.746C10.671 31.0383 10.7517 31.3553 10.7688 31.6788Z"
-      />
-      <path
-        fill="currentColor"
-        d="M6.34478 7.5475C6.06203 7.55531 5.78327 7.47934 5.54358 7.32915C5.30389 7.17895 5.11395 6.96124 4.99767 6.70339C4.88138 6.44553 4.84393 6.15905 4.89003 5.87997C4.93612 5.60089 5.06371 5.34167 5.25674 5.13491C5.44977 4.92815 5.69963 4.78308 5.97489 4.71794C6.25015 4.65281 6.53852 4.67052 6.80375 4.76884C7.06897 4.86716 7.2992 5.04171 7.46548 5.27054C7.63177 5.49936 7.72668 5.77225 7.73829 6.05487C7.74934 6.43703 7.6092 6.80812 7.3483 7.08757C7.0874 7.36703 6.72679 7.5323 6.34478 7.5475Z"
-      />
+    <svg width="26" height="26" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path fill="currentColor" d="M29.5219 3.43032C29.5459 3.82202 29.4527 4.21198 29.2542 4.55053C29.0558 4.88908 28.761 5.16089 28.4075 5.33133C28.054 5.50177 27.6578 5.56313 27.2693 5.50759C26.8808 5.45205 26.5177 5.28213 26.2261 5.01947C25.9345 4.75681 25.7278 4.4133 25.6321 4.0327C25.5365 3.65211 25.5563 3.25165 25.689 2.88235C25.8217 2.51305 26.0614 2.19162 26.3775 1.959C26.6935 1.72639 27.0717 1.59313 27.4637 1.57619C27.7208 1.56205 27.9781 1.59886 28.2209 1.68451C28.4637 1.77016 28.6871 1.90295 28.8784 2.07527C29.0697 2.24758 29.225 2.456 29.3354 2.68855C29.4459 2.9211 29.5093 3.17319 29.5219 3.43032Z" />
+      <path fill="currentColor" d="M17.9928 26.2664C12.7453 26.2664 8.13332 24.3832 5.74862 21.602C6.67389 24.104 8.34344 26.2625 10.5325 27.7869C12.7216 29.3114 15.3253 30.1286 17.9928 30.1286C20.6604 30.1286 23.264 29.3114 25.4531 27.7869C27.6422 26.2625 29.3118 24.104 30.2371 21.602C27.8582 24.3832 23.2637 26.2664 17.9928 26.2664Z" />
+      <path fill="currentColor" d="M17.9928 8.181C23.2404 8.181 27.8524 10.0643 30.2371 12.8454C29.3118 10.3435 27.6422 8.18498 25.4531 6.66054C23.264 5.1361 20.6604 4.31888 17.9928 4.31888C15.3253 4.31888 12.7216 5.1361 10.5325 6.66054C8.34344 8.18498 6.67389 10.3435 5.74862 12.8454C8.13332 10.0585 12.722 8.181 17.9928 8.181Z" />
+      <path fill="currentColor" d="M10.7688 31.6788C10.7996 32.1722 10.6828 32.6635 10.4333 33.0903C10.1838 33.5171 9.81296 33.8599 9.36793 34.0751C8.92291 34.2903 8.42389 34.3682 7.93445 34.2988C7.44501 34.2294 6.98731 34.0158 6.61967 33.6854C6.25202 33.3549 5.99108 32.9225 5.87008 32.4432C5.74909 31.9639 5.77351 31.4594 5.94025 30.994C6.10699 30.5287 6.40849 30.1235 6.80633 29.8301C7.20419 29.5367 7.68037 29.3684 8.17423 29.3466C8.49775 29.3292 8.8215 29.3759 9.12701 29.4837C9.43251 29.5916 9.71377 29.7585 9.95471 29.9751C10.1957 30.1917 10.3916 30.4536 10.5313 30.746C10.671 31.0383 10.7517 31.3553 10.7688 31.6788Z" />
+      <path fill="currentColor" d="M6.34478 7.5475C6.06203 7.55531 5.78327 7.47934 5.54358 7.32915C5.30389 7.17895 5.11395 6.96124 4.99767 6.70339C4.88138 6.44553 4.84393 6.15905 4.89003 5.87997C4.93612 5.60089 5.06371 5.34167 5.25674 5.13491C5.44977 4.92815 5.69963 4.78308 5.97489 4.71794C6.25015 4.65281 6.53852 4.67052 6.80375 4.76884C7.06897 4.86716 7.2992 5.04171 7.46548 5.27054C7.63177 5.49936 7.72668 5.77225 7.73829 6.05487C7.74934 6.43703 7.6092 6.80812 7.3483 7.08757C7.0874 7.36703 6.72679 7.5323 6.34478 7.5475Z" />
     </svg>
   );
 };
 
 export const ProbeAPIIcon = () => {
   return (
-    <svg
-      width="26"
-      height="26"
-      viewBox="0 0 36 36"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg width="26" height="26" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
         fill="currentColor"
         d="M24.5457 24.5457C25.0729 24.0184 25.9279 24.0184 26.4551 24.5457C26.982 25.0729 26.9822 25.928 26.4551 26.4551L24.4073 28.4985L26.4551 30.5464C26.9814 31.0734 26.9814 31.9266 26.4551 32.4536C25.9279 32.9808 25.0729 32.9808 24.5457 32.4536L21.5464 29.4543C21.0192 28.9271 21.0192 28.0721 21.5464 27.5449L24.5457 24.5457ZM29.0457 24.5457C29.5068 24.0846 30.2181 24.0267 30.742 24.3721L30.9551 24.5457L33.9544 27.5449C34.4816 28.0721 34.4816 28.9271 33.9544 29.4543L30.9551 32.4536L30.742 32.6272C30.218 32.9729 29.5069 32.9148 29.0457 32.4536C28.519 31.9265 28.519 31.0735 29.0457 30.5464L31.0892 28.4985L29.0457 26.4551L28.8721 26.2419C28.5267 25.718 28.5846 25.0067 29.0457 24.5457ZM18.0001 7.65088C24.0151 7.65088 28.8964 11.0364 32.658 17.3057C32.9137 17.7321 32.915 18.2651 32.6602 18.6921C32.3294 19.2466 31.9878 19.7746 31.6429 20.2764L31.4649 20.4851C31.0126 20.9207 30.3018 20.9931 29.7642 20.6235C29.1505 20.201 28.9948 19.3612 29.417 18.7471L29.8851 18.0439C29.8932 18.0313 29.8989 18.0171 29.907 18.0044C26.5567 12.7563 22.5875 10.3491 18.0001 10.3491C13.4136 10.3491 9.44296 12.754 6.09307 18C9.15721 22.7963 12.7313 25.2051 16.7938 25.5938C17.5359 25.6649 18.0798 26.3238 18.0088 27.0659C17.9377 27.8079 17.2787 28.3519 16.5367 28.281C11.1644 27.767 6.78391 24.4281 3.34209 18.6943C3.08584 18.267 3.08584 17.733 3.34209 17.3057C7.10367 11.0364 11.985 7.65088 18.0001 7.65088ZM19.6502 18C19.6502 17.5624 19.4762 17.1427 19.1668 16.8333C18.8574 16.5238 18.4377 16.3499 18.0001 16.3499C17.5624 16.3499 17.1427 16.5238 16.8333 16.8333C16.5239 17.1427 16.3499 17.5624 16.3499 18C16.3499 18.4376 16.5239 18.8573 16.8333 19.1667C17.1427 19.4762 17.5624 19.6501 18.0001 19.6501C18.4377 19.6501 18.8574 19.4762 19.1668 19.1667C19.4762 18.8573 19.6502 18.4376 19.6502 18ZM22.3506 18C22.3506 19.1537 21.892 20.2604 21.0762 21.0762C20.2604 21.892 19.1537 22.3506 18.0001 22.3506C16.8464 22.3506 15.7397 21.892 14.9239 21.0762C14.1081 20.2604 13.6495 19.1537 13.6495 18C13.6495 16.8463 14.1081 15.7396 14.9239 14.9238C15.7397 14.108 16.8464 13.6494 18.0001 13.6494C19.1537 13.6494 20.2604 14.108 21.0762 14.9238C21.892 15.7396 22.3506 16.8463 22.3506 18Z"
@@ -582,16 +249,7 @@ export const ProbeAPIIcon = () => {
 export const PrivateResourceIcon = () => {
   return (
     <span style={{ display: "inline-flex", verticalAlign: "middle" }}>
-      <svg
-        width="1em"
-        height="1em"
-        viewBox="0 0 24 24"
-        fill="currentColor"
-        xmlns="http://www.w3.org/2000/svg"
-        data-icon="mostly:lock"
-        aria-hidden="true"
-        style={{ transform: "translateY(-1px)" }}
-      >
+      <svg width="1em" height="1em" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" data-icon="mostly:lock" aria-hidden="true" style={{ transform: "translateY(-1px)" }}>
         <g clip-path="url(#clip0_943_76641)">
           <path
             fill-rule="evenodd"
@@ -608,16 +266,7 @@ export const PrivateResourceIcon = () => {
 export const PublicResourceIcon = () => {
   return (
     <span style={{ display: "inline-flex", verticalAlign: "middle" }}>
-      <svg
-        width="1em"
-        height="1em"
-        viewBox="0 0 16 16"
-        fill="currentColor"
-        xmlns="http://www.w3.org/2000/svg"
-        data-icon="mostly:world"
-        aria-hidden="true"
-        style={{ transform: "translateY(-1px)" }}
-      >
+      <svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg" data-icon="mostly:world" aria-hidden="true" style={{ transform: "translateY(-1px)" }}>
         <path
           fill-rule="evenodd"
           clip-rule="evenodd"
@@ -625,34 +274,10 @@ export const PublicResourceIcon = () => {
           fill="currentColor"
           fill-opacity="0.85"
         ></path>
-        <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
-          d="M1.79999 6.00001C1.79999 5.66864 2.06862 5.40001 2.39999 5.40001H13.6C13.9314 5.40001 14.2 5.66864 14.2 6.00001C14.2 6.33138 13.9314 6.60001 13.6 6.60001H2.39999C2.06862 6.60001 1.79999 6.33138 1.79999 6.00001Z"
-          fill="currentColor"
-          fill-opacity="0.85"
-        ></path>
-        <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
-          d="M1.79999 10C1.79999 9.66864 2.06862 9.40001 2.39999 9.40001H13.6C13.9314 9.40001 14.2 9.66864 14.2 10C14.2 10.3314 13.9314 10.6 13.6 10.6H2.39999C2.06862 10.6 1.79999 10.3314 1.79999 10Z"
-          fill="currentColor"
-          fill-opacity="0.85"
-        ></path>
-        <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
-          d="M7.98431 1.49099C8.26543 1.66643 8.35111 2.03654 8.17568 2.31766C7.11203 4.02212 6.54813 5.9909 6.54813 8.00001C6.54813 10.0091 7.11203 11.9779 8.17568 13.6824C8.35111 13.9635 8.26543 14.3336 7.98431 14.509C7.70318 14.6845 7.33307 14.5988 7.15764 14.3177C5.97508 12.4226 5.34813 10.2337 5.34813 8.00001C5.34813 5.76628 5.97508 3.57739 7.15764 1.68237C7.33307 1.40124 7.70318 1.31556 7.98431 1.49099Z"
-          fill="currentColor"
-          fill-opacity="0.85"
-        ></path>
-        <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
-          d="M8.01568 1.49099C8.2968 1.31556 8.66691 1.40124 8.84235 1.68237C10.0249 3.57739 10.6519 5.76628 10.6519 8.00001C10.6519 10.2337 10.0249 12.4226 8.84235 14.3177C8.66691 14.5988 8.2968 14.6845 8.01568 14.509C7.73456 14.3336 7.64888 13.9635 7.82431 13.6824C8.88796 11.9779 9.45186 10.0091 9.45186 8.00001C9.45186 5.9909 8.88796 4.02212 7.82431 2.31766C7.64888 2.03654 7.73456 1.66643 8.01568 1.49099Z"
-          fill="currentColor"
-          fill-opacity="0.85"
-        ></path>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M1.79999 6.00001C1.79999 5.66864 2.06862 5.40001 2.39999 5.40001H13.6C13.9314 5.40001 14.2 5.66864 14.2 6.00001C14.2 6.33138 13.9314 6.60001 13.6 6.60001H2.39999C2.06862 6.60001 1.79999 6.33138 1.79999 6.00001Z" fill="currentColor" fill-opacity="0.85"></path>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M1.79999 10C1.79999 9.66864 2.06862 9.40001 2.39999 9.40001H13.6C13.9314 9.40001 14.2 9.66864 14.2 10C14.2 10.3314 13.9314 10.6 13.6 10.6H2.39999C2.06862 10.6 1.79999 10.3314 1.79999 10Z" fill="currentColor" fill-opacity="0.85"></path>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M7.98431 1.49099C8.26543 1.66643 8.35111 2.03654 8.17568 2.31766C7.11203 4.02212 6.54813 5.9909 6.54813 8.00001C6.54813 10.0091 7.11203 11.9779 8.17568 13.6824C8.35111 13.9635 8.26543 14.3336 7.98431 14.509C7.70318 14.6845 7.33307 14.5988 7.15764 14.3177C5.97508 12.4226 5.34813 10.2337 5.34813 8.00001C5.34813 5.76628 5.97508 3.57739 7.15764 1.68237C7.33307 1.40124 7.70318 1.31556 7.98431 1.49099Z" fill="currentColor" fill-opacity="0.85"></path>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M8.01568 1.49099C8.2968 1.31556 8.66691 1.40124 8.84235 1.68237C10.0249 3.57739 10.6519 5.76628 10.6519 8.00001C10.6519 10.2337 10.0249 12.4226 8.84235 14.3177C8.66691 14.5988 8.2968 14.6845 8.01568 14.509C7.73456 14.3336 7.64888 13.9635 7.82431 13.6824C8.88796 11.9779 9.45186 10.0091 9.45186 8.00001C9.45186 5.9909 8.88796 4.02212 7.82431 2.31766C7.64888 2.03654 7.73456 1.66643 8.01568 1.49099Z" fill="currentColor" fill-opacity="0.85"></path>
       </svg>
     </span>
   );
@@ -661,16 +286,7 @@ export const PublicResourceIcon = () => {
 export const UnlistedResourceIcon = () => {
   return (
     <span style={{ display: "inline-flex", verticalAlign: "middle" }}>
-      <svg
-        width="1em"
-        height="1em"
-        viewBox="0 0 24 24"
-        fill="currentColor"
-        xmlns="http://www.w3.org/2000/svg"
-        data-icon="mostly:lock"
-        aria-hidden="true"
-        style={{ transform: "translateY(-1px)" }}
-      >
+      <svg width="1em" height="1em" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" data-icon="mostly:lock" aria-hidden="true" style={{ transform: "translateY(-1px)" }}>
         <path
           fill-rule="evenodd"
           clip-rule="evenodd"
@@ -683,27 +299,9 @@ export const UnlistedResourceIcon = () => {
 };
 
 export const APIIcon = () => {
-  return (
-    <Image
-      className="card-icon"
-      src="/icons/mostly-ai/api.svg"
-      alt="API Icon"
-      width={26}
-      height={26}
-      style={{ display: "inline", marginTop: "-2px" }}
-    />
-  );
+  return <Image className="card-icon" src="/icons/mostly-ai/api.svg" alt="API Icon" width={26} height={26} style={{ display: "inline", marginTop: "-2px" }} />;
 };
 
 export const GitHubIcon = () => {
-  return (
-    <Image
-      className="card-icon"
-      src="/icons/third-party/github.svg"
-      alt="GitHub Icon"
-      width={26}
-      height={26}
-      style={{ display: "inline", marginTop: "-2px" }}
-    />
-  );
+  return <Image className="card-icon" src="/icons/third-party/github.svg" alt="GitHub Icon" width={26} height={26} style={{ display: "inline", marginTop: "-2px" }} />;
 };
