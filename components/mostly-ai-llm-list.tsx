@@ -79,7 +79,7 @@ const ModelsList = () => {
           https://app.mostly.ai{" "}
         </a>
         or check the
-        <a className="_text-primary-600 _underline _decoration-from-font [text-underline-position:from-font]" href="/generators/configure/set-encoding-types#huggingface-llms">
+        <a className="_text-primary-600 _underline _decoration-from-font [text-underline-position:from-font]" href="https://docs.mostly.ai/generators/configure/set-encoding-types#huggingface-llms">
           {" "}
           public documentation
         </a>
