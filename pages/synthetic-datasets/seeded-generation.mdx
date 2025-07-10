@@ -42,10 +42,10 @@ If you use the web application, you can upload a seed dataset from the **Sample 
 2. On the **Synthetic dataset configuration** page, expand the subject table.
 3. Expand **Conditional simulation**.
 4. Click **Choose file**.
-    <Image 
-        src="/docs/docimages/synthetic-datasets/seeded-generation/02-click-upload-seed-file.webp" 
-        alt="Conditional simulation - Sample size - Click Upload file" 
-        width={800} 
+    <Image
+        src="/docimages/synthetic-datasets/seeded-generation/02-click-upload-seed-file.webp"
+        alt="Conditional simulation - Sample size - Click Upload file"
+        width={800}
         height={150}
     />
 5. (Optional) Adjust the rest of the generation settings.
@@ -106,7 +106,7 @@ To install in a Jupyter Notebook environment, use the following:
 2. Train a generator on the US Adult dataset or get an existing one.
     * Train a new generator.
         ```python filename="python" copy
-        df = pd.read_csv('http://mostly.ai/docs/datasets/us-census-income.csv.gz')
+        df = pd.read_csv('http://docs.mostly.ai/datasets/us-census-income.csv.gz')
         g = mostly.train(data=df, name="Tutorial Conditional Simulation - US Census")
         ```
     * Get an existing generator trained on the US Adult dataset.
@@ -146,7 +146,7 @@ To install in a Jupyter Notebook environment, use the following:
 To meet the criteria of removing the gender income gap, the generated synthetic records for women are now significantly older as shown in the chart.
 
 <Image
-    src="/docs/docimages/synthetic-datasets/seeded-generation/01-example-01-chart.webp"
+    src="/docimages/synthetic-datasets/seeded-generation/01-example-01-chart.webp"
     alt="Conditional simulation - Example 01 - Chart - Rebalance dataset"
     width={450}
     height={500}
@@ -232,7 +232,7 @@ To install in a Jupyter Notebook environment, use the following:
     ```python filename="python" copy
     # generate a synthetic dataset with a seed
     sd = mostly.generate(generator=g_airbnb, seed=df_seed)
-     
+
     # start using it
     syn_partial = sd.data()
     print(f"Created synthetic data with {syn_partial.shape[0]:,} records and {syn_partial.shape[1]:,} attributes")
@@ -242,22 +242,22 @@ To install in a Jupyter Notebook environment, use the following:
     %%capture --no-display
     def plot_manhattan(df, title):
         ax = df_orig.plot.scatter(
-            x='longitude', 
-            y='latitude', 
-            s=0.1, 
-            alpha=1, 
+            x='longitude',
+            y='latitude',
+            s=0.1,
+            alpha=1,
             color=np.log(df.price.clip(lower=50, upper=2_000)),
             cmap=plt.colormaps['YlOrRd'],
         )
         ax.set_aspect(1.3)
         ax.set_title(title)
         plt.show()
-        
+
     plot_manhattan(df_orig, 'Original Data')
     plot_manhattan(syn_partial, 'Partially Synthetic Data')
     ```
     <Image
-        src="/docs/docimages/synthetic-datasets/seeded-generation/02-example-01-chart.webp"
+        src="/docimages/synthetic-datasets/seeded-generation/02-example-01-chart.webp"
         alt="MOSTLY AI - Usage and credits - Generators usage"
         width={400}
         height={500}
@@ -283,7 +283,7 @@ To install in a Jupyter Notebook environment, use the following:
 1. Train a generator with a dataset containing names of people. For this example, we will use the **baseball** dataset.
     1. Create a new generator and add the `players.csv` table from the [baseball dataset](/datasets#baseball-dataset).
         <Image
-            src="/docs/docimages/synthetic-datasets/seeded-generation/03-example-generator-baseball-text-encoding-type.webp"
+            src="/docimages/synthetic-datasets/seeded-generation/03-example-generator-baseball-text-encoding-type.webp"
             alt="Conditional simulation - Example 03 - Generator with baseball/players table - names set to Language/Text"
             width={800}
             height={150}
@@ -293,7 +293,7 @@ To install in a Jupyter Notebook environment, use the following:
     3. Expand the `language` model for the **players** table.
     4. For **Model**, make sure the **MOSTLY_AI/LSTMFromScratch** model is selected.
         <Image
-            src="/docs/docimages/synthetic-datasets/seeded-generation/03-example-generator-configure-model-mostly-ai-lstm.webp"
+            src="/docimages/synthetic-datasets/seeded-generation/03-example-generator-configure-model-mostly-ai-lstm.webp"
             alt="Conditional simulation - Example 03 - Configure model - MOSTLY_AI/LSTMFromScratch"
             width={800}
             height={150}
@@ -302,7 +302,7 @@ To install in a Jupyter Notebook environment, use the following:
 2. Get the generator ID.
     1. With the generator open, click its kebab menu and select **Copy ID**.
         <Image
-            src="/docs/docimages/synthetic-datasets/seeded-generation/03-example-generator-copy-id.webp"
+            src="/docimages/synthetic-datasets/seeded-generation/03-example-generator-copy-id.webp"
             alt="Conditional simulation - Example 03 - Generator - Copy ID"
             width={800}
             height={150}

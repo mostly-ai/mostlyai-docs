@@ -11,7 +11,7 @@ With synthetic data, you can unlock the utility of your original data and at the
 
 ## Generated synthetic data does not have 1:1 relation to the original data
 
-<Image src="/docs/docimages/concepts/privacy/original-data-no-relation-synthetic-data.svg" alt="No relation between original and synthetic data" width={250} height={500} />
+<Image src="/docimages/concepts/privacy/original-data-no-relation-synthetic-data.svg" alt="No relation between original and synthetic data" width={250} height={500} />
 
 In contrast to anonymization techniques, MOSTLY AI uses your original data only as a learning material to train generative AI models. During training, the models learn the patterns, distributions, correlations, and other statistical characteristics of your original data. MOSTLY AI then uses the AI models to generate synthetic data from scratch.
 
@@ -19,7 +19,7 @@ As a result, the synthetic data bears no 1:1 relationship with the original data
 
 ## Probabilistic model with random draws
 
-<Image src="/docs/docimages/concepts/privacy/probabilistic-model.svg" alt="Probabilistic model with random draws" width={650} height={500} />
+<Image src="/docimages/concepts/privacy/probabilistic-model.svg" alt="Probabilistic model with random draws" width={650} height={500} />
 
 MOSTLY AI uses an unsupervised machine learning process to train a deep neural network with the original data as input. The resulting AI model contains only the statistical characteristics of the original data without any personal information. To create the synthetic data, MOSTLY AI performs random draws against the AI model.
 
@@ -33,7 +33,7 @@ Due to the probabilistic nature of this process, it is impossible to predict the
 
 ## Model overfitting prevention
 
-<Image src="/docs/docimages/concepts/privacy/model-overfitting-prevention.svg" alt="Model overfitting prevention" width={175} height={500} />
+<Image src="/docimages/concepts/privacy/model-overfitting-prevention.svg" alt="Model overfitting prevention" width={175} height={500} />
 
 In terms of privacy protection, model overfitting can mean that, during training, the AI model learns not only general patterns but also actual information that includes privacy-sensitive data.
 
@@ -47,7 +47,7 @@ Before MOSTLY AI runs the training of the generative AI model with your original
 
 ### Rare category protection
 
-<Image src="/docs/docimages/concepts/privacy/rare-category-protection.svg" alt="Rare category protection" width={175} height={500} />
+<Image src="/docimages/concepts/privacy/rare-category-protection.svg" alt="Rare category protection" width={175} height={500} />
 
 MOSTLY AI applies **Rare category protection** to categorical columns. This is a safeguard that prevents the training of the AI model with rare values. To maintain the correlation and distribution of the original data, MOSTLY AI substitutes such values with the category value `_RARE_`.
 
@@ -59,7 +59,7 @@ When MOSTLY AI removes this value before training, it ensures that the value nev
 
 ### Extreme value protection
 
-<Image src="/docs/docimages/concepts/privacy/extreme-value-protection.svg" alt="Extreme value protection" width={175} height={500} />
+<Image src="/docimages/concepts/privacy/extreme-value-protection.svg" alt="Extreme value protection" width={175} height={500} />
 
 MOSTLY AI applies **Extreme value protection** to numerical and date-time columns.
 
@@ -68,7 +68,7 @@ Before training, MOSTLY AI removes extreme values from the data distribtution of
 ### Extreme sequence length protection
 
 <Image
-    src="/docs/docimages/concepts/privacy/extreme-seq-length-protection.svg"
+    src="/docimages/concepts/privacy/extreme-seq-length-protection.svg"
     alt="Extreme sequence length protection"
     width={175}
     height={500}
@@ -87,7 +87,7 @@ When you synthesize data with MOSTLY AI, all privacy settings are on by default.
 MOSTLY AI enables the option **Value protection** by default for all categorical, numeric, and date-time columns.
 
 <Image
-    src="/docs/docimages/concepts/privacy/default-privacy-options-value-protection-enabled.webp"
+    src="/docimages/concepts/privacy/default-privacy-options-value-protection-enabled.webp"
     alt="Value protection enabled"
     width={800}
     height={500}

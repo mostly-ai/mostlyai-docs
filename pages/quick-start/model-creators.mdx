@@ -21,10 +21,10 @@ Here is how you can quickly train a new generator on original tabular data. You 
 <Tabs.Tab>
 1. In MOSTLY AI, select the **Generators** page.
 2. Click **+ New generator**.
-    <Image 
-        src="/docs/docimages/quickstart/model-creators/train-generator-01-click-new-generator.webp" 
-        alt="MOSTLY AI - Train a generator - 01 - Click New generator" 
-        width={800} 
+    <Image
+        src="/docimages/quickstart/model-creators/train-generator-01-click-new-generator.webp"
+        alt="MOSTLY AI - Train a generator - 01 - Click New generator"
+        width={800}
         height={150}
     />
 3. Select **Upload file**, browse for a dataset, and click **Proceed**.
@@ -32,24 +32,24 @@ Here is how you can quickly train a new generator on original tabular data. You 
     **Note**<br />
     If you don't have one, download the [UCI Adult income dataset](/datasets/us-census-income.csv.gz).
     </CustomCallout>
-    <Image 
-        src="/docs/docimages/quickstart/model-creators/train-generator-02-click-upload-files.webp" 
-        alt="MOSTLY AI - Train a generator - 02 - Click Upload files" 
-        width={800} 
+    <Image
+        src="/docimages/quickstart/model-creators/train-generator-02-click-upload-files.webp"
+        alt="MOSTLY AI - Train a generator - 02 - Click Upload files"
+        width={800}
         height={150}
     />
 4. At the **Data configuration** step, click **Configure models**.
-    <Image 
-        src="/docs/docimages/quickstart/model-creators/train-generator-03-click-configure-models.webp" 
-        alt="MOSTLY AI - Train a generator - 04 - Click Configure models" 
-        width={800} 
+    <Image
+        src="/docimages/quickstart/model-creators/train-generator-03-click-configure-models.webp"
+        alt="MOSTLY AI - Train a generator - 04 - Click Configure models"
+        width={800}
         height={150}
     />
 5. At the **Model configuration** step, click **Start training**.
-    <Image 
-        src="/docs/docimages/quickstart/model-creators/train-generator-04-click-start-training.webp" 
-        alt="MOSTLY AI - Train a generator - 04 - Click Start training" 
-        width={800} 
+    <Image
+        src="/docimages/quickstart/model-creators/train-generator-04-click-start-training.webp"
+        alt="MOSTLY AI - Train a generator - 04 - Click Start training"
+        width={800}
         height={150}
     />
 </Tabs.Tab>
@@ -58,7 +58,7 @@ Here is how you can quickly train a new generator on original tabular data. You 
     You can install and use the SDK in **Local** or **Client** mode.
     * In **Local mode**, you use the SDK with the compute resources on your local machine (or any Python environment) to [train generators](/generators/train) and [create synthetic datasets](/synthetic-datasets/generate).
     * In **Client mode**, you connect to a remote MOSTLY AI Platform instance and use its available compute resources.
-    
+
     For details, see [_Local and Client modes_](/python-sdk#local-and-client-modes).<br /><br />
 2. Create your first generator using the [US Census Income](/datasets#us-census-income-dataset) dataset, start its training, and wait for it to finish.
     <Tabs items={['Local mode', 'Client mode']}>
@@ -66,12 +66,12 @@ Here is how you can quickly train a new generator on original tabular data. You 
     ```python copy filename="python" {7}
     # 1. Load original data into a pd.DataFrame
     import pandas as pd
-    df = pd.read_csv("https://mostly.ai/docs/datasets/us-census-income.csv.gz")
+    df = pd.read_csv("https://docs.mostly.ai/datasets/us-census-income.csv.gz")
 
     # 2. Instantiate in Local use
     from mostlyai.sdk import MostlyAI
     mostly = MostlyAI(local=True)
-    
+
     # 3. Create a generator and launch its training
     g = mostly.train(data=df, start=True, wait=True)
     ```
@@ -80,12 +80,12 @@ Here is how you can quickly train a new generator on original tabular data. You 
     ```python copy filename="python" {7}
     # 1. Load original data into a pd.DataFrame
     import pandas as pd
-    df = pd.read_csv("https://mostly.ai/docs/datasets/us-census-income.csv.gz")
+    df = pd.read_csv("https://docs.mostly.ai/datasets/us-census-income.csv.gz")
 
     # 2. Instantiate in Client mode by connecting to a remote Platform instance
     from mostlyai.sdk import MostlyAI
     mostly_remote = MostlyAI(base_url="https://app.mostly.ai", api_key="INSERT_API_KEY")
-    
+
     # 3. Create a generator and launch its training
     g = mostly.train(data=df, start=True, wait=True)
     ```
@@ -103,14 +103,14 @@ After the generator training completes, you can generate synthetic data. You can
 1. In MOSTLY AI, open the generator from the **Generators** page.
 2. Click **Share**.
     <Image
-        src="/docs/docimages/organizations/add-assets-01-select-share.webp"
+        src="/docimages/organizations/add-assets-01-select-share.webp"
         alt="Share - 01 - Share button"
         width={700}
         height={300}
     />
 3. Select the organization to share the resource to.
     <Image
-        src="/docs/docimages/organizations/add-assets-02-select-share-org.webp"
+        src="/docimages/organizations/add-assets-02-select-share-org.webp"
         alt="Share - 02 - Select organization"
         width={700}
         height={300}
@@ -131,14 +131,14 @@ Generators capture only the statistical characteristics of the original data and
 1. Open the generator from the **Generators** page.
 2. Click **Share**.
     <Image
-        src="/docs/docimages/quickstart/model-creators/make-public-01-select-share.webp"
+        src="/docimages/quickstart/model-creators/make-public-01-select-share.webp"
         alt="MOSTLY AI - Make the generator publc - 02 - Select organization"
         width={800}
         height={150}
     />
 3. Select **Public** and click **Save**.
     <Image
-        src="/docs/docimages/quickstart/model-creators/make-public-02-select-public.webp"
+        src="/docimages/quickstart/model-creators/make-public-02-select-public.webp"
         alt="MOSTLY AI - Make the generator publc - 02 - Select organization"
         width={800}
         height={150}
@@ -149,7 +149,7 @@ Generators capture only the statistical characteristics of the original data and
 Public generators of organizations are listed on the organization's profile page.
 
 <Image
-    src="/docs/docimages/quickstart/model-creators/make-public-03-public-generator-org-profile.webp"
+    src="/docimages/quickstart/model-creators/make-public-03-public-generator-org-profile.webp"
     alt="MOSTLY AI - Make the generator publc - 03 - Public generator on organization profile"
     width={800}
     height={150}
@@ -158,7 +158,7 @@ Public generators of organizations are listed on the organization's profile page
 They are also available on the **Generators** page for all logged-in users.
 
 <Image
-    src="/docs/docimages/quickstart/model-creators/make-public-04-public-generator-user-generators-list.webp"
+    src="/docimages/quickstart/model-creators/make-public-04-public-generator-user-generators-list.webp"
     alt="MOSTLY AI - Make the generator publc - 04 - Public generator on user's Generators list"
     width={800}
     height={150}

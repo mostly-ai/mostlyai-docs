@@ -19,7 +19,7 @@ Based on keywords, you search within the names and descriptions of all entity ty
 In the web application, enter a search term in the top **Search** bar to find entities whose name or description contains the keyword.
 
 <Image
-    src="/docs/docimages/search/search.webp"
+    src="/docimages/search/search.webp"
     alt="MOSTLY AI - Search bar - Example"
     width={800}
     height={500}
@@ -41,7 +41,7 @@ all_results = list(g_search) + list(sd_search) + list(c_search)
 # Print all matching items
 for i in all_results:
     print(i)
-    print(f"{i.metadata.owner_name:}/{i.name}") 
+    print(f"{i.metadata.owner_name:}/{i.name}")
 ```
 </Tabs.Tab>
 </Tabs>
@@ -51,7 +51,7 @@ for i in all_results:
 For each entity type, you can filter the entities list from the dedicated search bar.
 
 <Image
-    src="/docs/docimages/search/search-generators.webp"
+    src="/docimages/search/search-generators.webp"
     alt="MOSTLY AI - Search generators"
     width={800}
     height={500}
@@ -62,7 +62,7 @@ For each entity type, you can filter the entities list from the dedicated search
 For each entity type, use the Owner filter to show all entities, only your entities, or only entities from your organizations.
 
 <Image
-    src="/docs/docimages/search/search-filter-by-ownership.webp"
+    src="/docimages/search/search-filter-by-ownership.webp"
     alt="MOSTLY AI - Filter by ownership"
     width={800}
     height={500}

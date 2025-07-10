@@ -13,7 +13,7 @@ import { CustomCallout } from '@components/custom-callout'
 MOSTLY AI integrates with well-known LLMs and gives the flexibility to use any LLM to generate privacy-safe synthetic text. When included in a tabular dataset, synthetic text data is intelligently aligned with the rest of the data, ensuring high correlation while safeguarding the privacy of real-world individuals.
 
 <Image
-    src="/docs/docimages/quickstart/unstructured-text/splash-unstructured-text.webp"
+    src="/docimages/quickstart/unstructured-text/splash-unstructured-text.webp"
     alt="MOSTLY AI for fine-tuning LLMs"
     width={800}
     height={300}
@@ -26,7 +26,7 @@ MOSTLY AI integrates with well-known LLMs and gives the flexibility to use any L
 
 * **Hardware**. The minimum recommended requirements to fine-tune an LLM with MOSTLY AI are:
     * GPU: Nvidia A10g or better (for example, A100, H100, RTX 4090)
-    * GPU VRAM: at least 24GB 
+    * GPU VRAM: at least 24GB
 * **Dataset with unstructured text in a supported format**. The dataset you will use for fine-tuning must be `CSV`, `Parquet`, `TSV`, where one or more of the columns contains unstructured text.
 * **Size of the training dataset**. Depending on the size of the dataset and the compute resources you use for training, it is possible that the generator training can fail with out-of-memory errors. For details, see [_Troubleshooting_](#troubleshooting).
 
@@ -35,7 +35,7 @@ MOSTLY AI integrates with well-known LLMs and gives the flexibility to use any L
 1. Create a new generator and upload a table file or add a table from a data source that contains unstructured text.
 2. On the **Data configuration** page, for the columns containing unstructured text, make sure that **Language/Text** is selected as **Encoding type**.
     <Image
-        src="/docs/docimages/quickstart/unstructured-text/01-generator-configuration-01-select-language-text.webp"
+        src="/docimages/quickstart/unstructured-text/01-generator-configuration-01-select-language-text.webp"
         alt="MOSTLY AI Unstructured text - Select Language/Text as Encoding type"
         width={800}
         height={300}
@@ -49,7 +49,7 @@ MOSTLY AI integrates with well-known LLMs and gives the flexibility to use any L
         If you need to use another LLM, contact [MOSTLY AI Support](mailto:support@mostly.ai).
         </CustomCallout>
         <Image
-            src="/docs/docimages/quickstart/unstructured-text/01-generator-configuration-02-select-language-model.webp"
+            src="/docimages/quickstart/unstructured-text/01-generator-configuration-02-select-language-model.webp"
             alt="MOSTLY AI Unstructured text - Select language model to use"
             width={800}
             height={300}
@@ -62,14 +62,14 @@ MOSTLY AI integrates with well-known LLMs and gives the flexibility to use any L
         * **GPU-based** computes include a specific number of GPU cores and GPU memory. For language model fine-tuning and language generation, it is typically faster to use GPUs.
         </CustomCallout>
         <Image
-            src="/docs/docimages/quickstart/unstructured-text/01-generator-configuration-03-select-compute.webp"
+            src="/docimages/quickstart/unstructured-text/01-generator-configuration-03-select-compute.webp"
             alt="MOSTLY AI Unstructured text - Select compute"
             width={800}
             height={300}
         />
 5. Click **Start training** in the upper right.
     <Image
-        src="/docs/docimages/quickstart/unstructured-text/01-generator-configuration-04-click-start-training.webp"
+        src="/docimages/quickstart/unstructured-text/01-generator-configuration-04-click-start-training.webp"
         alt="MOSTLY AI Unstructured text - Start training"
         width={800}
         height={300}
@@ -79,7 +79,7 @@ MOSTLY AI integrates with well-known LLMs and gives the flexibility to use any L
 
 1. Open the trained generator and click **Generate data** in the upper right.
     <Image
-        src="/docs/docimages/quickstart/unstructured-text/02-generate-unstructured-text-01-click-generate-data.webp"
+        src="/docimages/quickstart/unstructured-text/02-generate-unstructured-text-01-click-generate-data.webp"
         alt="MOSTLY AI Unstructured text - Click Generate data"
         width={800}
         height={300}
@@ -90,7 +90,7 @@ MOSTLY AI integrates with well-known LLMs and gives the flexibility to use any L
     3. (Optional) If needed, adjust the rest of the generation options.
 3. Click **Start generation** in the upper right.
     <Image
-        src="/docs/docimages/quickstart/unstructured-text/02-generate-unstructured-text-02-click-start-generation.webp"
+        src="/docimages/quickstart/unstructured-text/02-generate-unstructured-text-02-click-start-generation.webp"
         alt="MOSTLY AI Unstructured text - Click Start generation"
         width={800}
         height={300}

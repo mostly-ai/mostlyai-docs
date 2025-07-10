@@ -51,29 +51,29 @@ For example, `https://mostlyai.mycompany.com/auth`.
         admin_username: (base64 encoded)
         ...
         ```
-   
+
 
 3. Once you’re in the **Administration Console**, click the drop-down menu in the top left and switch from the `master` to the `mostly-generate` realm. Then, select **Groups** from the menu on the left.<br />
     You can now see the user groups that are currently available.<br />
     Click **New** to create a new group or **Edit** to manage the access permissions of an existing group.
-    <Image 
-        src="/docs/docimages/administration/users-groups/groups-keycloak-1.webp" 
-        alt="Keycloak 1" 
-        width={800} 
+    <Image
+        src="/docimages/administration/users-groups/groups-keycloak-1.webp"
+        alt="Keycloak 1"
+        width={800}
         height={150}
     />
 4. If you select **New**, a **Create group** page will appear where you can fill out the name of your new group. Click **Save** when done.
-    <Image 
-        src="/docs/docimages/administration/users-groups/groups-keycloak-2.webp" 
-        alt="Keycloak 2" 
-        width={800} 
+    <Image
+        src="/docimages/administration/users-groups/groups-keycloak-2.webp"
+        alt="Keycloak 2"
+        width={800}
         height={150}
     />
 5. On the next page, select the **Role mappings** tab to see the available and assigned roles for your group. Select the roles you want to assign and click on **Add selected**. You can leave Keycloak once you’re done.
-    <Image 
-        src="/docs/docimages/administration/users-groups/groups-keycloak-3.webp" 
-        alt="Keycloak 3" 
-        width={800} 
+    <Image
+        src="/docimages/administration/users-groups/groups-keycloak-3.webp"
+        alt="Keycloak 3"
+        width={800}
         height={150}
     />
     We recommend assigning the roles that start with Manage, Use, View, and Stop. These are composite roles that combine one or more granularly defined roles. You can identify these by the underscore (_) at the beginning of their name. The table below lists all the composite roles you can choose from.
@@ -81,7 +81,7 @@ For example, `https://mostlyai.mycompany.com/auth`.
 
     | Role | Description |
     | --- | -- |
-    | **ManageDataConnector** | Create, update, read, and delete connectors. | 
+    | **ManageDataConnector** | Create, update, read, and delete connectors. |
     | **UseDataConnector**    | Use connectors for synthetic datasets and catalogs and see their details. |
     | **ManageDataCatalog**   | Create, update, read, and delete catalogs. |
     | **UseDataCatalog**      | Use catalogs to generate synthetic datasets and see their details. |
@@ -144,32 +144,32 @@ For example, `https://mostlyai.mycompany.com/auth`.
         ```
 
 3. Once you are in Keycloak, click the drop-down menu in the top left and switch from the `master` to the `mostly-generate` realm. Then, click on **Users** in the left side menu and then on the **Add user** button on the **Users** page.
-    <Image 
-        src="/docs/docimages/administration/users-groups/users-keycloak-1.webp" 
-        alt="Users - Keycloak 1" 
-        width={800} 
+    <Image
+        src="/docimages/administration/users-groups/users-keycloak-1.webp"
+        alt="Users - Keycloak 1"
+        width={800}
         height={150}
     />
 3. If you’ve clicked on **Add user**, a new page appears where you can fill out their **Email**, **First Name**, and **Last Name**. Click **Save** when done.
-    <Image 
-        src="/docs/docimages/administration/users-groups/users-keycloak-2.webp" 
-        alt="Users - Keycloak 2" 
-        width={800} 
+    <Image
+        src="/docimages/administration/users-groups/users-keycloak-2.webp"
+        alt="Users - Keycloak 2"
+        width={800}
         height={150}
     />
 4. Next, the user profile page appears. Select the **Credentials** tab to set a password for this user account. Once you’ve entered the new password in the **Password** and **Password confirmation** fields, click **Set password** and confirm.
-    <Image 
-        src="/docs/docimages/administration/users-groups/users-keycloak-3.webp" 
-        alt="Users - Keycloak 3" 
-        width={800} 
+    <Image
+        src="/docimages/administration/users-groups/users-keycloak-3.webp"
+        alt="Users - Keycloak 3"
+        width={800}
         height={150}
     />
 
 5. Switch to the **Groups** tab to assign the user to one or more groups.
-    <Image 
-        src="/docs/docimages/administration/users-groups/users-keycloak-4.webp" 
-        alt="Users - Keycloak 4" 
-        width={800} 
+    <Image
+        src="/docimages/administration/users-groups/users-keycloak-4.webp"
+        alt="Users - Keycloak 4"
+        width={800}
         height={150}
     />
 
@@ -219,17 +219,17 @@ For example, `https://mostlyai.mycompany.com/auth`,
         ```
 
 3. Once you’re in Keycloak, click the drop-down menu in the top left and switch from the `master` to the `mostly-generate` realm. Then, click **User Federation** from the menu on the left **ldap** from the drop-down menu to navigate further.
-    <Image 
-        src="/docs/docimages/administration/users-groups/keycloak-ad-1.webp" 
-        alt="Integrate with Active Directory - Keycloak 1" 
-        width={800} 
+    <Image
+        src="/docimages/administration/users-groups/keycloak-ad-1.webp"
+        alt="Integrate with Active Directory - Keycloak 1"
+        width={800}
         height={150}
     />
 4. Next, fill out the fields on the **Add user federation** page. You can find descriptions for each field below the screenshot.
-    <Image 
-        src="/docs/docimages/administration/users-groups/keycloak-ad-3.webp" 
-        alt="Integrate with Active Directory - Keycloak 2" 
-        width={800} 
+    <Image
+        src="/docimages/administration/users-groups/keycloak-ad-3.webp"
+        alt="Integrate with Active Directory - Keycloak 2"
+        width={800}
         height={150}
     />
     <div className="empty_header_table"></div>

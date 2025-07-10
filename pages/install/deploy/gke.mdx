@@ -41,17 +41,17 @@ As a best practice, create a dedicated project for MOSTLY AI.
 
 1. Open the [Google Cloud Console](https://console.cloud.google.com/).
 2. Click the project menu at the top.
-    <Image 
-        src="/docs/docimages/install/gke/01-create-gcp-project-01-click-project-menu.webp" 
-        alt="Google Cloud - Click project menu" 
-        width={550} 
+    <Image
+        src="/docimages/install/gke/01-create-gcp-project-01-click-project-menu.webp"
+        alt="Google Cloud - Click project menu"
+        width={550}
         height={150}
     />
 3. Click **NEW PROJECT**.
-    <Image 
-        src="/docs/docimages/install/gke/01-create-gcp-project-02-click-NEW-PROJECT.webp" 
-        alt="Google Cloud - Click NEW PROJECT" 
-        width={800} 
+    <Image
+        src="/docimages/install/gke/01-create-gcp-project-02-click-NEW-PROJECT.webp"
+        alt="Google Cloud - Click NEW PROJECT"
+        width={800}
         height={150}
     />
 4. On the **New Project** page, configure the new project.
@@ -60,14 +60,14 @@ As a best practice, create a dedicated project for MOSTLY AI.
     3. For **Location**, select again your organization or click **BROWSE** to select another.
     4. Click **CREATE**.
         <Image
-            src="/docs/docimages/install/gke/01-create-gcp-project-03-select-org-click-CREATE.webp"
+            src="/docimages/install/gke/01-create-gcp-project-03-select-org-click-CREATE.webp"
             alt="Google Cloud - Select organization and click CREATE"
             width={450}
             height={150}
         />
 5. Select the newly created project to work with.
     <Image
-        src="/docs/docimages/install/gke/01-create-gcp-project-04-select-new-project.webp"
+        src="/docimages/install/gke/01-create-gcp-project-04-select-new-project.webp"
         alt="Google Cloud - Select project"
         width={800}
         height={150}
@@ -85,28 +85,28 @@ The GKE cluster is the container for your MOSTLY AI application. When you create
 
 1. From the Google Cloud Console, select **Kubernetes Engine** from the sidebar.
     <Image
-        src="/docs/docimages/install/gke/02-create-gke-cluster-01-select-kubernetes-engine.webp"
+        src="/docimages/install/gke/02-create-gke-cluster-01-select-kubernetes-engine.webp"
         alt="Google Cloud - Select Kubernetes Engine"
         width={800}
         height={150}
     />
 2. If not already enabled, click **ENABLE** to enable the Kubernetes Engine API.
     <Image
-        src="/docs/docimages/install/gke/02-create-gke-cluster-02-enable-kubernetes-engine-api.webp"
+        src="/docimages/install/gke/02-create-gke-cluster-02-enable-kubernetes-engine-api.webp"
         alt="Google Cloud - Enable Kubernetes Engine API"
         width={400}
         height={150}
     />
 3. From the sidebar, select **Clusters** and click **CREATE**.
     <Image
-        src="/docs/docimages/install/gke/02-create-gke-cluster-03-clusters-click-create.webp"
+        src="/docimages/install/gke/02-create-gke-cluster-03-clusters-click-create.webp"
         alt="Google Cloud - Click CREATE"
         width={800}
         height={150}
     />
 4. Switch to standard cluster creation.
     <Image
-        src="/docs/docimages/install/gke/02-create-gke-cluster-04-switch-to-standard-cluster.webp"
+        src="/docimages/install/gke/02-create-gke-cluster-04-switch-to-standard-cluster.webp"
         alt="Google Cloud - Switch to standard cluster"
         width={800}
         height={150}
@@ -115,10 +115,10 @@ The GKE cluster is the container for your MOSTLY AI application. When you create
 6. Configure the number of nodes in the cluster.
     1. From the sidebar under **NODE POOLS**, select the **default-pool**.
     2. Under **Size**, set the **Number of nodes** to **1**.
-        <Image 
-            src="/docs/docimages/install/gke/02-create-gke-cluster-06-configure-nodes-count.webp" 
-            alt="Google Cloud GKE - Configure nodes" 
-            width={800} 
+        <Image
+            src="/docimages/install/gke/02-create-gke-cluster-06-configure-nodes-count.webp"
+            alt="Google Cloud GKE - Configure nodes"
+            width={800}
             height={150}
         />
 4. Select a node type and configure the disk size.
@@ -126,18 +126,18 @@ The GKE cluster is the container for your MOSTLY AI application. When you create
     2. Under **Machine configuration**, select a powerful node to power your MOSTLY AI synthetic data workloads.
     3. For **Machine type**, select the **e2-standard-16** type with 16 vCPUs, 8 cores, and 64GB memory.
     4. For **Boot disk size**, define at least **200GB**.
-        <Image 
-            src="/docs/docimages/install/gke/02-create-gke-cluster-07-node-type-disk-size.webp" 
-            alt="Google Cloud GKE - Configure compute and disk space" 
-            width={800} 
+        <Image
+            src="/docimages/install/gke/02-create-gke-cluster-07-node-type-disk-size.webp"
+            alt="Google Cloud GKE - Configure compute and disk space"
+            width={800}
             height={150}
         />
 6. Leave the remaining default configurations.
 7. Click **CREATE** at the bottom.
-    <Image 
-        src="/docs/docimages/install/gke/02-create-gke-cluster-08-click-create.webp" 
-        alt="Google Cloud GKE - Click CREATE" 
-        width={800} 
+    <Image
+        src="/docimages/install/gke/02-create-gke-cluster-08-click-create.webp"
+        alt="Google Cloud GKE - Click CREATE"
+        width={800}
         height={150}
     />
 
@@ -149,15 +149,15 @@ The cluster creation starts. When complete, your cluster status turns green in t
 
 Select your cluster after its status turns green. You can then connect to the cluster using your CLI.
 
-<Image 
-    src="/docs/docimages/install/gke/02-create-gke-cluster-09-open-cluster.webp" 
-    alt="Google Cloud GKE - Open cluster" 
-    width={800} 
+<Image
+    src="/docimages/install/gke/02-create-gke-cluster-09-open-cluster.webp"
+    alt="Google Cloud GKE - Open cluster"
+    width={800}
     height={150}
 />
 
 ### Task 3: Connect to the GKE cluster
-    
+
 With the GKE cluster created, you can now use your command-line to connect to the cluster.
 
 Make sure that you install `gcloud CLI` and `kubectl` as listed in the [prerequisites](#prerequisites).
@@ -165,17 +165,17 @@ Make sure that you install `gcloud CLI` and `kubectl` as listed in the [prerequi
 **Steps**
 
 1. With the cluster open, click **CONNECT**.
-    <Image 
-        src="/docs/docimages/install/gke/03-connect-to-cluster-01-click-connect.webp" 
-        alt="Google Cloud GKE - Select Connect to cluster" 
-        width={800} 
+    <Image
+        src="/docimages/install/gke/03-connect-to-cluster-01-click-connect.webp"
+        alt="Google Cloud GKE - Select Connect to cluster"
+        width={800}
         height={150}
     />
 4. In the modal window **Connect to the cluster**, copy the command to configure your cluster access.
-    <Image 
-        src="/docs/docimages/install/gke/03-connect-to-cluster-02-copy-connect-command.webp" 
-        alt="Google Cloud GKE - Copy connect command" 
-        width={800} 
+    <Image
+        src="/docimages/install/gke/03-connect-to-cluster-02-copy-connect-command.webp"
+        alt="Google Cloud GKE - Copy connect command"
+        width={800}
         height={150}
     />
 5. Open a terminal or a command-line application, and paste and run the command.<br /><br />
@@ -216,63 +216,63 @@ MOSTLY AI is available in the Google Cloud Marketplace and you can use the offer
 
 1. Go to https://console.cloud.google.com/marketplace/browse?q=mostly%20ai.
 2. Select **MOSTLY AI Synthetic Data Platform BYOL**.
-    <Image 
-        src="/docs/docimages/install/gcp-marketplace/01-subscribe-01-open-mostly-ai-offerings.webp" 
-        alt="GCP Marketplace - View MOSTLY AI offerings" 
-        width={800} 
+    <Image
+        src="/docimages/install/gcp-marketplace/01-subscribe-01-open-mostly-ai-offerings.webp"
+        alt="GCP Marketplace - View MOSTLY AI offerings"
+        width={800}
         height={150}
     />
 3. Click **GET STARTED**.
-    <Image 
-        src="/docs/docimages/install/gcp-marketplace/01-subscribe-02-byol-get-started.webp" 
-        alt="GCP Marketplace - Click GET STARTED" 
-        width={800} 
+    <Image
+        src="/docimages/install/gcp-marketplace/01-subscribe-02-byol-get-started.webp"
+        alt="GCP Marketplace - Click GET STARTED"
+        width={800}
         height={150}
     />
 4. Select a Google Cloud project for MOSTLY AI, select the **Terms and agreements** checkbox, and click **AGREE**.
-    <Image 
-        src="/docs/docimages/install/gcp-marketplace/01-subscribe-03-select-project-click-agree.webp" 
-        alt="GCP Marketplace - Select Google Cloud project and click Agree" 
-        width={500} 
+    <Image
+        src="/docimages/install/gcp-marketplace/01-subscribe-03-select-project-click-agree.webp"
+        alt="GCP Marketplace - Select Google Cloud project and click Agree"
+        width={500}
         height={150}
     />
 5. Click **DEPLOY** in the prompt.
-    <Image 
-        src="/docs/docimages/install/gcp-marketplace/01-subscribe-04-click-deploy.webp" 
-        alt="GCP Marketplace - Click DEPLOY" 
-        width={800} 
+    <Image
+        src="/docimages/install/gcp-marketplace/01-subscribe-04-click-deploy.webp"
+        alt="GCP Marketplace - Click DEPLOY"
+        width={800}
         height={150}
     />
 6. On the **Deploy MOSTLY AI** page, click **OR SELECT AN EXISTING CLUSTER**.
-    <Image 
-        src="/docs/docimages/install/gcp-marketplace/01-subscribe-05-select-cluster.webp" 
-        alt="GCP Marketplace - Select existing cluster" 
-        width={800} 
+    <Image
+        src="/docimages/install/gcp-marketplace/01-subscribe-05-select-cluster.webp"
+        alt="GCP Marketplace - Select existing cluster"
+        width={800}
         height={150}
     />
 7. For **Existing Kubernetes Cluster**, select your GKE cluster.
-    <Image 
-        src="/docs/docimages/install/gcp-marketplace/01-subscribe-06-select-cluster-02.webp" 
-        alt="GCP Marketplace - Select existing cluster 02" 
-        width={800} 
+    <Image
+        src="/docimages/install/gcp-marketplace/01-subscribe-06-select-cluster-02.webp"
+        alt="GCP Marketplace - Select existing cluster 02"
+        width={800}
         height={150}
     />
 8. For **Namespace**, select **Create a namespace**, and for **New namespace name** set `mostly-ai`.
     <Callout>
     We recommend that you use a separate namespace called `mostly-ai` to aid deployment and eventual cleanup.
     </Callout>
-    <Image 
-        src="/docs/docimages/install/gcp-marketplace/01-subscribe-07-select-namespace.webp" 
-        alt="GCP Marketplace - Select namespace" 
-        width={800} 
+    <Image
+        src="/docimages/install/gcp-marketplace/01-subscribe-07-select-namespace.webp"
+        alt="GCP Marketplace - Select namespace"
+        width={800}
         height={150}
     />
 9. For **App instance name**, set the GKE app name.
 10. For **The domain name**, set a fully-qualified domain (FQDN) name for the MOSTLY AI app.
-    <Image 
-        src="/docs/docimages/install/gcp-marketplace/01-subscribe-08-set-fqdn.webp" 
-        alt="GCP Marketplace - Select namespace" 
-        width={800} 
+    <Image
+        src="/docimages/install/gcp-marketplace/01-subscribe-08-set-fqdn.webp"
+        alt="GCP Marketplace - Select namespace"
+        width={800}
         height={150}
     />
 11. Click **DEPLOY**.
@@ -281,19 +281,19 @@ MOSTLY AI is available in the Google Cloud Marketplace and you can use the offer
 
 Google Cloud redirects your browser to the **Applications** tab of your GKE cluster and shows the deployment progress.
 
-<Image 
-    src="/docs/docimages/install/gcp-marketplace/01-subscribe-09-deploy-in-progress.webp" 
-    alt="GCP Marketplace - MOSTLY AI deployment in progress" 
-    width={800} 
+<Image
+    src="/docimages/install/gcp-marketplace/01-subscribe-09-deploy-in-progress.webp"
+    alt="GCP Marketplace - MOSTLY AI deployment in progress"
+    width={800}
     height={150}
 />
 
 When the deployment completes, the **Application details** page lists all components and their status.
 
-<Image 
-    src="/docs/docimages/install/gcp-marketplace/01-subscribe-10-deploy-complete.webp" 
-    alt="GCP Marketplace - MOSTLY AI deployment complete" 
-    width={800} 
+<Image
+    src="/docimages/install/gcp-marketplace/01-subscribe-10-deploy-complete.webp"
+    alt="GCP Marketplace - MOSTLY AI deployment complete"
+    width={800}
     height={150}
 />
 
@@ -327,7 +327,7 @@ The `values.yaml` file is part of the [MOSTLY AI Helm chart](/install/deploy/hel
         tlsSecretName: &tlsSecretName your-tls-secret
     ...
     ```
-    **➡️ You do not use an TLS certificate**. Replace the  `your-tls-secret` with an empty string and, for `global.tls`, set `enabled` to `false`. 
+    **➡️ You do not use an TLS certificate**. Replace the  `your-tls-secret` with an empty string and, for `global.tls`, set `enabled` to `false`.
     ```yaml filename="values.yaml" copy {4,9}
     _customerInstallation:
     ...
@@ -404,7 +404,7 @@ Contact MOSTLY AI to obtain the supeadmin credentials as you need them to log in
 1. Open your FQDN in your browser.<br />
     **Step result**: You **Sign in** page for your MOSTLY AI deployment opens.
     <Image
-        src="/docs/docimages/install/minikube/02-minikube-dashboard-01-post-deployment-red.webp"
+        src="/docimages/install/minikube/02-minikube-dashboard-01-post-deployment-red.webp"
         alt="MOSTLY AI Deployment - Log in page"
         width={800}
         height={300}

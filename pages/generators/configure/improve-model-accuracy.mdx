@@ -24,9 +24,9 @@ The accuracy-related options with their default setting for each model are liste
 
 ## Use the **Accuracy** preset to increase training time
 
-Select the **Accuracy** configuration preset to use the recommended model configuration for accuracy. This increases the **Max training time** to **120 min** for all models to ensure enough training duration for the highest possible accuracy. 
+Select the **Accuracy** configuration preset to use the recommended model configuration for accuracy. This increases the **Max training time** to **120 min** for all models to ensure enough training duration for the highest possible accuracy.
 <Image
-   src="/docs/docimages/generators/improve-model-accuracy/model-configuration-00-select-accuracy-preset.webp"
+   src="/docimages/generators/improve-model-accuracy/model-configuration-00-select-accuracy-preset.webp"
    alt="MOSTLY AI - Generator configuration - Select Accuracy configuration preset"
    width={900}
    height={300}
@@ -43,9 +43,9 @@ If you use the web application, you can configure the maximum training time from
 1. With an untrained generator open, go to the **Model configuration** page by clicking **Configure models**.
 2. Click a model to expand its settings.
 3. Set the **Max training time** in minutes.
-    
+
     <Image
-        src="/docs/docimages/generators/improve-model-accuracy/model-configuration-02-set-max-training-time.webp"
+        src="/docimages/generators/improve-model-accuracy/model-configuration-02-set-max-training-time.webp"
         alt="MOSTLY AI - Generator configuration - Set maximum training time"
         width={900}
         height={300}
@@ -56,7 +56,7 @@ For the Python SDK, use the `max_training_time` in the `tabular_model_configurat
 
 ```python filename="python" copy {11}
 import pandas as pd
-df = pd.read_csv('https://mostly.ai/docs/datasets/us-census-income.csv.gz')
+df = pd.read_csv('https://docs.mostly.ai/datasets/us-census-income.csv.gz')
 
 config={
     "name": "US census",
@@ -90,7 +90,7 @@ If you use the web application, you can configure the training sample size for e
 3. Set the **Max sample size** as number of rows.
     1. For subject tables, you set the number of rows to be used for training from the original subject table.
         <Image
-            src="/docs/docimages/generators/improve-model-accuracy/model-configuration-01-set-max-sample-size-subjects.webp"
+            src="/docimages/generators/improve-model-accuracy/model-configuration-01-set-max-sample-size-subjects.webp"
             alt="MOSTLY AI - Generator configuration - Set maximum training sample size for subject tables"
             width={900}
             height={300}
@@ -102,7 +102,7 @@ If you use the web application, you can configure the training sample size for e
         Think of the training size for linked tables as defined by the number of subjects or sequences used to pull the related sequences for a subject.
         </Callout>
         <Image
-            src="/docs/docimages/generators/improve-model-accuracy/model-configuration-01.01-set-max-sample-size-linked.webp"
+            src="/docimages/generators/improve-model-accuracy/model-configuration-01.01-set-max-sample-size-linked.webp"
             alt="MOSTLY AI - Generator configuration - Set maximum training sample size for linked tables"
             width={900}
             height={300}
@@ -113,7 +113,7 @@ For the Python SDK, use the `max_sample_size` key in the `tabular_model_configur
 
 ```python filename="python" copy {11}
 import pandas as pd
-df = pd.read_csv('https://mostly.ai/docs/datasets/us-census-income.csv.gz')
+df = pd.read_csv('https://docs.mostly.ai/datasets/us-census-income.csv.gz')
 
 config = {
    "name": "US census",
@@ -148,9 +148,9 @@ If you use the web application, you can configure the model size from the **Mode
 1. With an untrained generator open, go to the **Model configuration** page by clicking **Configure models**.
 2. Click a model to expand its settings.
 3. For **Model**, select **MOSTLY_AI/Large**.
-    
+
     <Image
-        src="/docs/docimages/generators/improve-model-accuracy/model-configuration-03-increase-model-size.webp"
+        src="/docimages/generators/improve-model-accuracy/model-configuration-03-increase-model-size.webp"
         alt="MOSTLY AI - Generator configuration - Increase model size"
         width={900}
         height={300}
@@ -165,7 +165,7 @@ For the Python SDK, use the `model` key in the `tabular_model_configuration` dic
 
 ```python filename="python" copy {11}
 import pandas as pd
-df = pd.read_csv('https://mostly.ai/docs/datasets/us-census-income.csv.gz')
+df = pd.read_csv('https://docs.mostly.ai/datasets/us-census-income.csv.gz')
 
 config = {
    "name": "US census",

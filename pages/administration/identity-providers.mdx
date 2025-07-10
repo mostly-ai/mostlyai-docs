@@ -17,7 +17,7 @@ MOSTLY AI supports [PingOne](https://www.pingidentity.com/en.html) as an identit
 3. Click **Applications** and then again **Applications** from the sidebar.
 4. Click on **Plus** icon next to the **Application** title.
     <Image
-        src="/docs/docimages/administration/identity-providers/02-create-pingone-app-01-click-plus-button.webp"
+        src="/docimages/administration/identity-providers/02-create-pingone-app-01-click-plus-button.webp"
         alt="Create a PingOne application - Click Plus button"
         width={500}
         height={300}
@@ -26,7 +26,7 @@ MOSTLY AI supports [PingOne](https://www.pingidentity.com/en.html) as an identit
 5. Select the **OIDC Web App** card as the application type.
 6. Click **Save**.
     <Image
-        src="/docs/docimages/administration/identity-providers/02-create-pingone-app-02-configure-app-and-save.webp"
+        src="/docimages/administration/identity-providers/02-create-pingone-app-02-configure-app-and-save.webp"
         alt="Create a PingOne application - Click Plus button"
         width={800}
         height={300}
@@ -41,7 +41,7 @@ The application is created and PingOne shows its details.
 Take record of the **Client ID**, **Client Secret**, and **OIDC Discovery Endpoint**. All three are needed for the Keycloak configuration.
 
 <Image
-    src="/docs/docimages/administration/identity-providers/02-create-pingone-app-03-result-copy-details.webp"
+    src="/docimages/administration/identity-providers/02-create-pingone-app-03-result-copy-details.webp"
     alt="Create a PingOne application - Click Plus button"
     width={800}
     height={300}
@@ -52,7 +52,7 @@ Take record of the **Client ID**, **Client Secret**, and **OIDC Discovery Endpoi
 1. Log in to the Keycloak Admin Console.
 2. From the drop-down in the upper left, select **mostly-generate**.
     <Image
-        src="/docs/docimages/administration/switch-realm-01-select-mostly-generate.webp"
+        src="/docimages/administration/switch-realm-01-select-mostly-generate.webp"
         alt="Configure PingOne as IdP - Select mostly-generate realm"
         width={350}
         height={300}
@@ -60,7 +60,7 @@ Take record of the **Client ID**, **Client Secret**, and **OIDC Discovery Endpoi
 3. Select **Identity Providers** from the sidebar.
 4. Click **Add provider** and select **OpenID Connect v1.0**.
     <Image
-        src="/docs/docimages/administration/identity-providers/01-create-new-id-provider-01-click-add-and-openid-connect-1.0.webp"
+        src="/docimages/administration/identity-providers/01-create-new-id-provider-01-click-add-and-openid-connect-1.0.webp"
         alt="Configure PingOne as IdP - Add provide and select OpenID Connect v1.0"
         width={500}
         height={300}
@@ -85,7 +85,7 @@ Take record of the **Client ID**, **Client Secret**, and **OIDC Discovery Endpoi
         </Callout>
     6. Click **Add**.
         <Image
-            src="/docs/docimages/administration/identity-providers/01-create-new-id-provider-02-configure-pingone.webp"
+            src="/docimages/administration/identity-providers/01-create-new-id-provider-02-configure-pingone.webp"
             alt="Configure PingOne as IdP - Configure PingOne"
             width={800}
             height={300}
@@ -93,7 +93,7 @@ Take record of the **Client ID**, **Client Secret**, and **OIDC Discovery Endpoi
         **Step result**: The PingOne configuration is saved and it opens for review.
 6. Scroll down. Under **Advanced settings**, enable **Trust email**.
     <Image
-        src="/docs/docimages/administration/identity-providers/01-create-new-id-provider-03-enable-trust-email.webp"
+        src="/docimages/administration/identity-providers/01-create-new-id-provider-03-enable-trust-email.webp"
         alt="Configure PingOne as IdP - Enable Trust Email"
         width={500}
         height={300}
@@ -116,7 +116,7 @@ Take record of the **Client ID**, **Client Secret**, and **OIDC Discovery Endpoi
         https://<KEYCLOAK_HOST>/auth/realms/mostly-generate/broker/<IDP_ALIAS>/endpoint/logout_response
         ```
         <Image
-            src="/docs/docimages/administration/identity-providers/03-configure-ping-one-01-token-auth-method-and-signoff-url.webp"
+            src="/docimages/administration/identity-providers/03-configure-ping-one-01-token-auth-method-and-signoff-url.webp"
             alt="Configure PingOne application - Token Auth Method and Signoff URL"
             width={800}
             height={300}
@@ -166,7 +166,7 @@ The PingOne identity provider is now configured and ready to use with MOSTLY AI.
 Your users can now use their PingOne identity to sign up and log in to your MOSTLY AI deployment by clicking the **Log in with PingOne** button on the landing page 🎉
 
 <Image
-    src="/docs/docimages/administration/identity-providers/app-landing-page-with-pingone.webp"
+    src="/docimages/administration/identity-providers/app-landing-page-with-pingone.webp"
     alt="HuggingFace - Create a Read token"
     width={800}
     height={300}

@@ -26,7 +26,7 @@ If you use the web application, you can start the training of a new generator fr
 
 1. On the **Generators** page, click **+ New generator**.
     <Image
-        src="/docs/docimages/generators/train/01-click-new-generator.webp"
+        src="/docimages/generators/train/01-click-new-generator.webp"
         alt="MOSTLY AI - Generators page - Click New generator"
         width={800}
         height={300}
@@ -40,7 +40,7 @@ If you use the web application, you can start the training of a new generator fr
         You can also add data from a database or cloud bucket when you select **Connect to a source**. To learn more, see [Add data from a database](/generators/configure/add-data#add-data-from-a-database) and [Add data from a cloud storage bucket](/generators/configure/add-data#add-data-from-a-cloud-bucket).
         </Callout>
         <Image
-            src="/docs/docimages/generators/train/02-select-upload-file.webp"
+            src="/docimages/generators/train/02-select-upload-file.webp"
             alt="MOSTLY AI - Generators page - Click Upload file"
             width={800}
             height={300}
@@ -50,7 +50,7 @@ If you use the web application, you can start the training of a new generator fr
         If you need a dataset, download one from the [Datasets](/datasets) page.
         </Callout>
         <Image
-            src="/docs/docimages/generators/train/03-upload-file-drag-browse.webp"
+            src="/docimages/generators/train/03-upload-file-drag-browse.webp"
             alt="MOSTLY AI - Generators page - Drag to upload or click to browse"
             width={800}
             height={300}
@@ -58,7 +58,7 @@ If you use the web application, you can start the training of a new generator fr
     3. (Optional) Enter a name for the table.<br />
         The table name appears in the list of tables added to the generator. Also, the table name that you provide is what appears in each generated synthetic dataset.
         <Image
-            src="/docs/docimages/generators/train/04-enter-table-name.webp"
+            src="/docimages/generators/train/04-enter-table-name.webp"
             alt="MOSTLY AI - Generators page - Name the new table"
             width={575}
             height={300}
@@ -67,14 +67,14 @@ If you use the web application, you can start the training of a new generator fr
 3. Train the generator.
     1. Click **Configure models** in the upper right.
         <Image
-            src="/docs/docimages/generators/train/05-click-configure-models.webp"
+            src="/docimages/generators/train/05-click-configure-models.webp"
             alt="MOSTLY AI - Data configuration - Click Configure models"
             width={800}
             height={300}
         />
     2. On the **Model configuration** page, click **Start training**.
         <Image
-            src="/docs/docimages/generators/train/06-click-start-training.webp"
+            src="/docimages/generators/train/06-click-start-training.webp"
             alt="MOSTLY AI - Model configuration - click Start training"
             width={800}
             height={300}
@@ -91,7 +91,7 @@ Use the code example below to train a new generator with the MOSTLY AI Python SD
 import pandas as pd
 from mostlyai.sdk import MostlyAI
 mostly = MostlyAI(api_key="INSERT_API_KEY")
-df = pd.read_csv("https://mostly.ai/docs/datasets/us-census-income.csv.gz")
+df = pd.read_csv("https://docs.mostly.ai/datasets/us-census-income.csv.gz")
 g = mostly.train(data=df, name="US Census Income")
 ```
 </Tabs.Tab>

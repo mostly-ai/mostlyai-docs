@@ -28,10 +28,10 @@ When you configure a new synthetic dataset, you can specify the columns you want
 
 You can examine the [CDNOW dataset](/datasets#cdnow-dataset) where the distributions in the `gender` column of the `customers` table is 58% males and 42% females.
 
-<Image 
-    src="/docs/docimages/synthetic-datasets/rebalance-columns/cdnow-gender-distribution.webp" 
-    alt="MOSTLY AI - Synthetic datasets - Rebalance columns example CDNOW dataset" 
-    width={450} 
+<Image
+    src="/docimages/synthetic-datasets/rebalance-columns/cdnow-gender-distribution.webp"
+    alt="MOSTLY AI - Synthetic datasets - Rebalance columns example CDNOW dataset"
+    width={450}
     height={150}
 />
 
@@ -48,25 +48,25 @@ If you use the web application, you can select which column to rebalance from th
 3. Expand the generation settings for a table.
 4. Expand **Rebalancing**
 4. For **Column**, click and select the column to rebalance. In this case, select **income**.
-    <Image 
-        src="/docs/docimages/synthetic-datasets/rebalance-columns/rebalance-01-select-to-rebalance-income.webp" 
-        alt="MOSTLY AI - Synthetic datasets - Rebalancing column" 
-        width={800} 
+    <Image
+        src="/docimages/synthetic-datasets/rebalance-columns/rebalance-01-select-to-rebalance-income.webp"
+        alt="MOSTLY AI - Synthetic datasets - Rebalancing column"
+        width={800}
         height={150}
     />
 5. Under **Categories**, click **+ Add category**.
 6. Select the category to rebalance.
-   <Image 
-        src="/docs/docimages/synthetic-datasets/rebalance-columns/rebalance-02-select-category-to-rebalance.webp" 
-        alt="MOSTLY AI - Synthetic datasets - Rebalance category" 
-        width={800} 
+   <Image
+        src="/docimages/synthetic-datasets/rebalance-columns/rebalance-02-select-category-to-rebalance.webp"
+        alt="MOSTLY AI - Synthetic datasets - Rebalance category"
+        width={800}
         height={150}
     />
 7. Specify its new percentage and confirm.
-    <Image 
-        src="/docs/docimages/synthetic-datasets/rebalance-columns/rebalance-03-specify-rebalance-percentage.webp" 
-        alt="MOSTLY AI - Synthetic datasets - Rebalance category by percentage" 
-        width={800} 
+    <Image
+        src="/docimages/synthetic-datasets/rebalance-columns/rebalance-03-specify-rebalance-percentage.webp"
+        alt="MOSTLY AI - Synthetic datasets - Rebalance category by percentage"
+        width={800}
         height={150}
     />
 8. (Optional) Add more categories to rebalance.
@@ -85,7 +85,7 @@ g = mostly.train(config={
   "tables": [
     {
       "name": "census",
-      "data": "https://mostly.ai/docs/datasets/us-census-income.csv.gz"
+      "data": "https://docs.mostly.ai/datasets/us-census-income.csv.gz"
     }
   ]
 })

@@ -24,7 +24,7 @@ To examine how sequential context processing works, let's consider a multi-table
 The diagram below illustrates the relationships in this table schema.
 
 <Image
-    src="/docs/docimages/concepts/scp/six-table-schema.png"
+    src="/docimages/concepts/scp/six-table-schema.png"
     alt="Six-table schema"
     width={800}
     height={90}
@@ -40,23 +40,23 @@ So, when you read _**generated in the context of**_, bear in mind that _**traine
 
 At the top of the hierarchy is the `customers` table. This table acts as the primary context for all child and grandchild tables that follow in the hierarchy. This is also known as a **subject table**.
 
-<Image 
-    src="/docs/docimages/concepts/scp/01-single-table.svg" 
+<Image
+    src="/docimages/concepts/scp/01-single-table.svg"
     alt="Single table - no context"
-    width={200} 
+    width={200}
     height={90}
 />
 
 ### `loans` table
 
-The `loans` table is the first child table in the hierarchy. Along with the parent `customers` table, both tables represent a two-table scenario, where the `customers` table is a **subject** table and the `loans` table is a **linked** table. 
+The `loans` table is the first child table in the hierarchy. Along with the parent `customers` table, both tables represent a two-table scenario, where the `customers` table is a **subject** table and the `loans` table is a **linked** table.
 
 The records in the `loans` table are generated in the context of the parent records from the `customers` table.
 
-<Image 
-    src="/docs/docimages/concepts/scp/02-two-tables.svg" 
+<Image
+    src="/docimages/concepts/scp/02-two-tables.svg"
     alt="Two tables - the context are the parent records"
-    width={600} 
+    width={600}
     height={90}
 />
 
@@ -65,7 +65,7 @@ In addition, each record in the `loans` table is generated in the context of all
 After the first `loan` record for `Lucia Garcia` is generated, that first record is then used as context for the second `loan` record of `Lucia Garcia`.
 
 <Image
-    src="/docs/docimages/concepts/scp/01-mostly-ai-same-table-siblings-context-2nd-record.svg"
+    src="/docimages/concepts/scp/01-mostly-ai-same-table-siblings-context-2nd-record.svg"
     alt="Same-table siblings context - generating the 2nd record"
     width={600}
     height={90}
@@ -74,7 +74,7 @@ After the first `loan` record for `Lucia Garcia` is generated, that first record
 Afterwards, all previously generated sibling records (with parent `Lucia Garcia`) are passed as context for each new sibling to be generated.
 
 <Image
-    src="/docs/docimages/concepts/scp/01-mostly-ai-same-table-siblings-context-3rd-record.svg"
+    src="/docimages/concepts/scp/01-mostly-ai-same-table-siblings-context-3rd-record.svg"
     alt="Same-table siblings context - generating the 3rd record"
     width={600}
     height={90}
@@ -91,7 +91,7 @@ For details on how to set up a two-table scenario in MOSTLY AI, see [Two-table r
 
 ### `payments` table
 
-The `payments` table is the first grandchild table in the hierarchy. It is a child to the `loans` table, and a grandchild to the `customers` table. 
+The `payments` table is the first grandchild table in the hierarchy. It is a child to the `loans` table, and a grandchild to the `customers` table.
 
 When MOSTLY AI generates a `payment` record, it does so in the context of:
 
@@ -104,10 +104,10 @@ The context not used is as follows:
 
 * **same-table cousin** records (`payment` records that belong to other `loan` parent records)
 
-<Image 
-    src="/docs/docimages/concepts/scp/03-three-tables.svg" 
+<Image
+    src="/docimages/concepts/scp/03-three-tables.svg"
     alt="Three tables - context are the parent and grandparent records"
-    width={800} 
+    width={800}
     height={90}
 />
 
@@ -125,10 +125,10 @@ The context not used is as follows:
 
 * any records from the `payments` table
 
-<Image 
-    src="/docs/docimages/concepts/scp/04-four-tables.svg" 
+<Image
+    src="/docimages/concepts/scp/04-four-tables.svg"
     alt="Three tables - context are the parent and cross-table siblings"
-    width={800} 
+    width={800}
     height={90}
 />
 
@@ -149,10 +149,10 @@ The context not used is as follows:
 * all **cross-table cousin** records from the `payments` table (`payments` records whose parent `loan` record has as parent `Lucia Garcia`)
 * all **same-table cousin** records from the `cards` table (`cards` records that have another `account` as a parent whose parent is `Lucia Garcia`)
 
-<Image 
-    src="/docs/docimages/concepts/scp/05-five-tables.svg" 
+<Image
+    src="/docimages/concepts/scp/05-five-tables.svg"
     alt="Three tables - context are the parent and cross-table siblings"
-    width={800} 
+    width={800}
     height={90}
 />
 
@@ -175,10 +175,10 @@ The context not used is as follows:
 * **cross-table cousin** records from the `payments` table (`payments` records whose parent `loan` record belongs to `Lucia Garcia`)
 * **same-table cousin** records from the `transactions` table (`transaction` records with a different `account` parent record that belongs to `Lucia Garcia`)
 
-<Image 
-    src="/docs/docimages/concepts/scp/06-six-tables.svg" 
+<Image
+    src="/docimages/concepts/scp/06-six-tables.svg"
     alt="Three tables - context are the parent and cross-table siblings"
-    width={800} 
+    width={800}
     height={90}
 />
 
@@ -186,7 +186,7 @@ The context not used is as follows:
 
 The table below summarizes the types of records that can be passed as context by the Sequential Context Processor.
 
-| Records types               | TABULAR | LANGUAGE | 
+| Records types               | TABULAR | LANGUAGE |
 |-----------------------------|---------|----------|
 | parent                      | yes     | yes      |
 | grandparent                 | yes     | yes      |

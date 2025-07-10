@@ -24,10 +24,10 @@ If you use the web application, you can select a destination before you start th
 **Steps**
 
 1. On the **Synthetic dataset configuration** page, click **Dataset destination**.
-    <Image 
-        src="/docs/docimages/synthetic-datasets/deliver/01-configure-01-click-dataset-destination.webp" 
-        alt="Configure synthetic dataset destination" 
-        width={800} 
+    <Image
+        src="/docimages/synthetic-datasets/deliver/01-configure-01-click-dataset-destination.webp"
+        alt="Configure synthetic dataset destination"
+        width={800}
         height={150}
     />
 2. On the **Synthetic dataset destination** dialog, configure the destination.
@@ -35,25 +35,25 @@ If you use the web application, you can select a destination before you start th
         <Callout>
         The **Destination** drop-down lists only connectors that have the **Destination** access type. <br />You can type to filter the names among the list of destination connectors.
         </Callout>
-        <Image 
-            src="/docs/docimages/synthetic-datasets/deliver/01-configure-0X-select-destination.webp" 
-            alt="Configure synthetic dataset destination - Select Destination" 
-            width={800} 
+        <Image
+            src="/docimages/synthetic-datasets/deliver/01-configure-0X-select-destination.webp"
+            alt="Configure synthetic dataset destination - Select Destination"
+            width={800}
             height={150}
         />
     2. For **Location**, select a database, database schema, or cloud bucket folder where you want to deliver the generated synthetic dataset.<br /><br />
         For databases, you can select a database schema or a table from the **Location** drop-down menu.
-        <Image 
-            src="/docs/docimages/synthetic-datasets/deliver/01-configure-02-databases-location-drop-down.webp" 
-            alt="Configure synthetic dataset destination - Location drop-down menu for databases" 
-            width={800} 
+        <Image
+            src="/docimages/synthetic-datasets/deliver/01-configure-02-databases-location-drop-down.webp"
+            alt="Configure synthetic dataset destination - Location drop-down menu for databases"
+            width={800}
             height={150}
-        />  
+        />
         For cloud storage buckets, type the folder path in the **Location** text box.
-        <Image 
-            src="/docs/docimages/synthetic-datasets/deliver/01-configure-03-cloud-storage-location-text-box.webp" 
+        <Image
+            src="/docimages/synthetic-datasets/deliver/01-configure-03-cloud-storage-location-text-box.webp"
             alt="Configure synthetic dataset destination - Location drop-down menu for cloud buckets"
-            width={800} 
+            width={800}
             height={150}
         />
 3. (Optional) Select **Overwrite existing tables** if you deliver to the same destination over and over again and want to maintain a fresh copy of synthetic data.
@@ -65,17 +65,17 @@ When the synthetic dataset is generated, MOSTLY AI delivers it to the specified 
 </Tabs.Tab>
 <Tabs.Tab>
 1. Get the ID of the destination connector.
-    <Image 
-        src="/docs/docimages/synthetic-datasets/deliver/00-configure-python-01-get-destination-connector-uuid.webp" 
-        alt="MOSTLY AI - Synthetic datasets - Get connector ID" 
-        width={800} 
+    <Image
+        src="/docimages/synthetic-datasets/deliver/00-configure-python-01-get-destination-connector-uuid.webp"
+        alt="MOSTLY AI - Synthetic datasets - Get connector ID"
+        width={800}
         height={150}
     />
 2. Get the ID of the generator to use.
-    <Image 
-        src="/docs/docimages/synthetic-datasets/deliver/00-configure-python-02-get-generator-uuid.webp" 
-        alt="MOSTLY AI - Synthetic datasets - Get generator ID" 
-        width={800} 
+    <Image
+        src="/docimages/synthetic-datasets/deliver/00-configure-python-02-get-generator-uuid.webp"
+        alt="MOSTLY AI - Synthetic datasets - Get generator ID"
+        width={800}
         height={150}
     />
 3. Use `mostly.generate` with the generator ID and a `config` dictionary you specify that defines the `delivery` configuration.

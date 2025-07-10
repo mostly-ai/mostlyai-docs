@@ -40,7 +40,7 @@ With a solid grasp of the basics, we gradually increase the complexity of our da
 Finally, we are ready to take off. It's time to fully unleash the potential of synthetic data generation with MOSTLY AI. The "Run" phase is where you confidently integrate and apply everything learned, tackling large-scale, complex projects and sharing your generators with others!
 
 * **Collaborate and share**: A generator is a trained generative AI model on your tabular data. You can learn from it by conditionally generating data with new distributions, pushing the synthetic dataset into the new environment without any privacy concerns, and, most importantly, you can share this knowledge with other people! Generative AI tabular synthetic data unleashes innovation and collaboration. Be sure to share your generator with your organization.
-* **Deliver**: You can push the data into a new environment while configuring a new synthetic dataset. You can always download synthetic data directly from the synthetic dataset page and push the synthetic data on a destination connector. 
+* **Deliver**: You can push the data into a new environment while configuring a new synthetic dataset. You can always download synthetic data directly from the synthetic dataset page and push the synthetic data on a destination connector.
 * **Explore advanced configurations**: Now that you have mastered the generative tabular data synthesis, you can try new advanced options, like different encoding types, multi-table generation, seed generation, and many more. Check the **Training & Generation** section to learn more!
 
 Now that you mastered the "Run" phase, you're not just producing synthetic data. You become an architect of sophisticated, privacy-conscious data ecosystems that not only fuel innovation but also pave the way for informed, strategic decision-making across the board.
@@ -58,7 +58,7 @@ A row in this table represents the profile of **one** customer. It's like having
 **Best practices**
 
 * **Optimal subject table size**: For enriched data quality, we advocate for subject tables to encompass a minimum of 5,000 subjects. This volume fosters a robust dataset, conducive to generating high-quality synthetic data. Nevertheless, MOSTLY AI is designed with flexibility in mind, adeptly handling smaller datasets down to 100 subjects. While smaller datasets may present challenges in data quality, they offer a valuable opportunity to explore the platform's capabilities and ascertain the feasibility of your specific use case.
-* **Uniqueness**: Each subject in your table should be a mirror to a unique, real-world individual or entity, ensuring a one-to-one correspondence that enhances data clarity and utility. 
+* **Uniqueness**: Each subject in your table should be a mirror to a unique, real-world individual or entity, ensuring a one-to-one correspondence that enhances data clarity and utility.
 * **Data integrity**: Uphold the principle of singularity by avoiding duplicate records for the same subject. A singular row should encapsulate the entirety of a subject's information. If your table contains multiple rows referring to the same subject, most likely it is not a subject table.
 * **Row independence**: Maintain the independence of each data row; the arrangement of rows is inconsequential, preserving the standalone value of each data point without interdependencies.
 * **Privacy-conscious naming**: Select column names with privacy in mind, a practice that extends to all table types within your dataset. Column names do not contain privacy-sensitive information. This is recommended for all kinds of tables (incl. linked tables).
@@ -86,8 +86,8 @@ When splitting a table into subject and linked tables, careful data pre-processi
 * **Minimum Subject Table Size**: Aim for a subject table with at least 5,000 subjects to achieve good data quality. However, the platform can work with smaller subject tables, but the synthetic data quality might vary based on the dataset.
 * **Validation and Quality Assurance**: Before proceeding with model training and data synthesis, thoroughly validate your subject and linked tables. Check for any inconsistencies, duplicate records, or missing information.
 
-<Image 
-    src="/docs/docimages/best-practices/subject-linked-tables-best-practices.webp"
+<Image
+    src="/docimages/best-practices/subject-linked-tables-best-practices.webp"
     alt="Subject and linked tables - best practices"
     width={700}
     height={700}
@@ -110,8 +110,8 @@ MOSTLY AI needs geolocation coordinates to be represented in a single field with
 
 Assume you have a geolocation dataset with the following structure, where Latitude and Longitude are stored in a separate column:
 
-<Image 
-    src="/docs/docimages/best-practices/example-geolocation-dataset-structure.webp"
+<Image
+    src="/docimages/best-practices/example-geolocation-dataset-structure.webp"
     alt="Example: Geolocation dataset structure"
     width={300}
     height={700}
@@ -125,8 +125,8 @@ df["LatLong"] = df["Latitude"].astype(str) + ',' + df["Longitude"].astype(str)
 
 Now the structure of the dataset should look like this:
 
-<Image 
-    src="/docs/docimages/best-practices/example-geolocation-dataset-structure-preprocessed.webp"
+<Image
+    src="/docimages/best-practices/example-geolocation-dataset-structure-preprocessed.webp"
     alt="Example: Geolocation dataset structure"
     width={450}
     height={280}
@@ -148,14 +148,14 @@ Bear in mind that when configuring a generator having text columns the training 
 
 ### Numeric
 
-High-precision numeric variables will require more training time to complete. 
+High-precision numeric variables will require more training time to complete.
 
 For example:
 
-* Large integers: 
+* Large integers:
     * `1928127612`
     * `1217623232`
-* High precision float number: 
+* High precision float number:
     * `23.87923283`
     * `56.91013261`
 
@@ -168,7 +168,7 @@ If possible and not needed for the specific use case in mind, we first recommend
     * `23.88`
     * `56.91`
 
-If this is not possible, our default numerical type will sort this issue for you. 
+If this is not possible, our default numerical type will sort this issue for you.
 
 **Numeric - Auto** will heuristically select the most appropriate encoding type for each numeric variable. This selection is based on a simple heuristic that considers the following conditions:
 * If a numeric variable has less than 100 distinct values and more than 99.9% of values are non-rare, it will be encoded using 'Numeric Discrete.'
@@ -185,9 +185,9 @@ In more detail, the three encoding types for numerical variables are:
     Example:<br /><br />
     Consider you're working with a dataset containing a numerical column that consists of large integer values, such as "Number of Products Sold."
     * **Initial Data**: Your original dataset includes the "Number of Products Sold" column, which contains a wide range of integer values, from 1,000 to 1,000,000.
-    * **Binning**: During preprocessing, MOSTLY AI employs binning. It divides the range of integer values into quantiles, creating several bins that group similar values together. For instance, the bins might be defined as 
-        * "Low Sales": 1,000 - 10,000 
-        * "Moderate Sales: 10,001 - 100,000 and 
+    * **Binning**: During preprocessing, MOSTLY AI employs binning. It divides the range of integer values into quantiles, creating several bins that group similar values together. For instance, the bins might be defined as
+        * "Low Sales": 1,000 - 10,000
+        * "Moderate Sales: 10,001 - 100,000 and
         * "High Sales": 100,001 - 1,000,000
     * **Categorization and Sampling**: These bins effectively transform the numerical data into categorical information. The model then treats these categories as distinct during training. For synthetic data generation, the model samples a value from each bin. For instance, it might sample 1,500 from "Low Sales", 50,000 from "Moderate Sales", and 900,000 from "High Sales".
     * **Synthetic Data**: The generated synthetic dataset reflects the same pattern of distribution as the original data but ensures privacy and data protection. The "Number of Products Sold" column in the synthetic dataset now comprises sampled values from each bin, maintaining the overall distribution.
@@ -222,7 +222,7 @@ When deploying MOSTLY AI on different virtual machine (VM) sizes and working wit
 
 ### Virtual machine size
 
-The performance of MOSTLY AI can vary based on the VM size you deploy to. Different VM sizes offer varying computational resources when it comes to CPU and memory. 
+The performance of MOSTLY AI can vary based on the VM size you deploy to. Different VM sizes offer varying computational resources when it comes to CPU and memory.
 
 * **Training times**: Larger VM sizes can significantly reduce training times. More resources allow for faster model training, resulting in quicker training iterations. However, balancing the VM size with your budget and the urgency of results is important.
 * **Generation times**: Although data generation does not require as many resources as AI model training, a VM with more compute resources will also result in faster generation times.
@@ -243,8 +243,8 @@ When working with data, particularly wide tables with a varying number of column
 * **Number of Rows**<br /><br />
     The number of rows in your dataset affects the model's generalization ability. Larger datasets often lead to better model performance by providing more diverse examples. However, larger datasets also require more data preprocessing and training time.
     * **Subject tables**<br />
-        * Subject tables below 1 million rows are suitable. 
-        * Within the 1-10 million range, encoding types can impact performance. Consider using the sampling feature to only work with a subset of the data. 
+        * Subject tables below 1 million rows are suitable.
+        * Within the 1-10 million range, encoding types can impact performance. Consider using the sampling feature to only work with a subset of the data.
         * Beyond 10 million, sampling becomes a viable strategy to ensure manageable processing and training.<br /><br />
     * **Linked tables**<br />
         * Linked tables typically contain time-series data where every row describes a unique event.
@@ -282,7 +282,7 @@ Here is how you can achieve best results when working with different VM sizes an
 * VM Size: 64 CPUs, 256 GB RAM, 4 worker nodes
 * Data:
     * Number of tables: 2
-    * Subject table: 
+    * Subject table:
         * Number of rows: 5,000
         * Number of columns: 16
     * Linked table:
@@ -302,7 +302,7 @@ Here is how you can achieve best results when working with different VM sizes an
 * VM Size: 12 CPUs, 128 GB RAM, 4 worker nodes
 * Data:
     * Number of tables: 2
-    * Subject table: 
+    * Subject table:
         * Number of rows: 5,000
         * Number of columns: 16
     * Linked table:
@@ -346,10 +346,10 @@ Values, such as ZIP codes, can be indistinguishable from continuous values. This
 
 The solution is to change the encoding type to **Categorical**.
 
-<Image 
-    src="/docs/docimages/best-practices/incorrect-numerical-example.webp" 
-    alt="Incorrect numerical" 
-    width={300} 
+<Image
+    src="/docimages/best-practices/incorrect-numerical-example.webp"
+    alt="Incorrect numerical"
+    width={300}
     height={150}
 />
 
@@ -357,10 +357,10 @@ The solution is to change the encoding type to **Categorical**.
 
 Incorrect formatting of a date column results in it being encoded as a categorical column. Below is an example of an incorrectly formatted, and thus incorrectly encoded, `deathDate` column.
 
-<Image 
-    src="/docs/docimages/best-practices/incorrect-datetime-example.webp" 
-    alt="Incorrect datetime" 
-    width={300} 
+<Image
+    src="/docimages/best-practices/incorrect-datetime-example.webp"
+    alt="Incorrect datetime"
+    width={300}
     height={150}
 />
 
@@ -368,9 +368,9 @@ Incorrect formatting of a date column results in it being encoded as a categoric
 
 If the bivariate relation between two columns is lost (left example) or weakened (right example) in the synthetic data, MOSTLY AI recommends that you increase the number of training samples, and ensure that the training goal is set to Accuracy.
 
-<Image 
-    src="/docs/docimages/best-practices/sequential-correlations-example.webp" 
-    alt="Sequential correlations are lost" 
-    width={800} 
+<Image
+    src="/docimages/best-practices/sequential-correlations-example.webp"
+    alt="Sequential correlations are lost"
+    width={800}
     height={150}
 />
