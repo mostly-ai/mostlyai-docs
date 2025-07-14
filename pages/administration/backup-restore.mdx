@@ -15,15 +15,15 @@ You can backup and restore MOSTLY AI just like any other Kubernetes application 
 ## Backup workflow
 
 <Image
-  src="/docimages/administration/backup-restore/velero-diagram.webp"
+  src="/docimages/administration/backup-restore/new-velero-diagram.webp"
   alt="Velero diagram"
   width={800}
   height={15000}
 />
 
-## How Velero works?
+## How does Velero work?
 
-Each Velero operation – on-demand backup, scheduled backup, restore – is a custom resource, defined with a Kubernetes Custom Resource Definition (CRD) and stored in etcd. Velero also includes controllers that process the custom resources to perform backups, restores, and all related operations.
+Each Velero operation (for example, on-demand backup, scheduled backup, or restore) is a custom resource, defined with a Kubernetes Custom Resource Definition (CRD) and stored in etcd. Velero also includes controllers that process the custom resources to perform backups, restores, and other all related operations.
 
 You can back up or restore all objects in your cluster, or you can filter objects by type, namespace, and/or label.
 
@@ -33,8 +33,8 @@ You can back up or restore all objects in your cluster, or you can filter object
 
 * Access to a Kubernetes cluster, v1.16 or later, with DNS and container networking enabled. For more information on supported Kubernetes versions, see the [Velero compatibility matrix on GitHub](https://github.com/vmware-tanzu/velero#velero-compatibility-matrix).
 * Install `kubectl`.
-* Identify a storage provider<br /><br />Velero uses object storage to store backups and associated artifacts. It also optionally integrates with supported block storage systems to snapshot your persistent volumes. Before installing, you should identify the object storage provider and optional block storage provider you want to use. See the list of compatible providers [Velero Docs - Providers](https://velero.io/docs/v1.12/supported-providers/) that Velero supports.<br /><br />Velero supports storage providers for both cloud-provider environments and on-premises environments. For more details on on-premises scenarios, see the [on-premises documentation](https://velero.io/docs/v1.12/on-premises/).
-* (Optional) To set up **Velero CLI autocompletion**, see [Enabling shell autocompletion](https://velero.io/docs/v1.12/customize-installation/#optional-velero-cli-configurations) from the _Velero documentation_.
+* Identify a storage provider<br /><br />Velero uses object storage to store backups and associated artifacts. It also optionally integrates with supported block storage systems to snapshot your persistent volumes. Before installing, you should identify the object storage provider and optional block storage provider you want to use. See the [list of compatible providers](https://velero.io/docs/v1.12/supported-providers/) that Velero supports.<br /><br />Velero supports storage providers for both cloud-provider environments and on-premises environments. For more details on on-premises scenarios, see the [on-premises documentation](https://velero.io/docs/v1.12/on-premises/).
+* (Optional) To set up **Velero CLI autocompletion**, see [Enabling shell autocompletion](https://velero.io/docs/v1.12/customize-installation/#optional-velero-cli-configurations).
 
 ### 1. Install Velero CLI
 
@@ -86,7 +86,7 @@ _*Also configurable in air-gapped environments_
 
 ### 3. Install Velero plugins
 
-Velero uses plugins to integrate with a variety of storage systems and Kubernetes platforms to support backup, restore, and snapshot operations. [Velero Plugins](https://velero.io/plugins/).
+Velero uses plugins to integrate with a variety of storage systems and Kubernetes platforms to support backup, restore, and snapshot operations. For more information about plugins, see [Velero Plugins](https://velero.io/plugins/).
 
 ## Back up MOSTLY AI
 
@@ -111,7 +111,7 @@ nginx-ingress          Active   40d
 
 ### 2. Check Velero versions
 
-To do, run:
+Run:
 ```bash copy
 velero version
 ```
@@ -140,9 +140,9 @@ velero install \
   --use-node-agent
 ```
 
-**NOTE:** You need to take care on create AWS S3 bucket, for backup destination storage, as well as crate AWS credentials and point it with `--secret-file` parameter.
+**NOTE:** When creating an AWS S3 bucket for backup destination storage, as well as creating AWS credentials, be sure to include the `--secret-file` parameter.
 
-Format of `velero_credentials` file is:
+The expected format of `velero_credentials` file is:
 
 ```
 [default]
@@ -166,7 +166,7 @@ Server:
 
 ### 4. Create a backup with Velero
 
-With Velero in palce, you can now create a backup of MOSTLY AI.
+With Velero ready, you can create a MOSTLY AI backup.
 
 **Steps**
 
@@ -178,7 +178,7 @@ With Velero in palce, you can now create a backup of MOSTLY AI.
     ```bash copy
     velero backup describe mostly-ai-backup-poc
     ```
-    You should output similar to the one below.
+    Your output will be similar to the example shown below for a successful operation.
     ```
     Name:         mostly-ai-backup-poc
     Namespace:    velero
@@ -206,12 +206,12 @@ You now have a backup of MOSTLY AI and all related artifacts.
 
 **What's next**
 
-You can use velero to get information about the backup
+You can use Velero to get information about the backup
 
 ```bash copy
 velero backup describe mostly-ai-backup-poc
 ```
-The backup information should be similar to the one listed below.
+The backup information should be similar to the template shown below.
 ```
 Name:         mostly-ai-backup-poc
 Namespace:    velero
@@ -226,7 +226,7 @@ Phase:  Completed
 
 ## Restore MOSTLY AI from a backup
 
-The process below demonstrates how you can clean up the MOSTLY AI Kubernetes resources and restore MOSTLY AI from a backup.
+This process demonstrates how to clean up the MOSTLY AI Kubernetes resources and restore MOSTLY AI from a backup.
 
 ### 1. Clean up MOSTLY AI
 
@@ -238,7 +238,7 @@ To restore MOSTLY AI from a backup, make sure that the `mostly-ai` namespace no 
     ```bash copy
     helm list
     ```
-    If you have MOSTLY AI deployed in your cluster, you should see output similar to the one below.
+    If you have MOSTLY AI deployed in your cluster, the output will be similar to the template shown below.
     ```
     NAME     	NAMESPACE	REVISION	UPDATED                             	STATUS  	CHART          	APP VERSION
     mostly-ai	mostly-ai	6       	2023-12-05 16:11:11.386065 +0100 CET	deployed	mostly-ai-1.0.0	3.0.0
@@ -247,7 +247,7 @@ To restore MOSTLY AI from a backup, make sure that the `mostly-ai` namespace no 
     ```bash copy
     helm uninstall mostly-ai
     ```
-    If successful, the result from the command should be the following:
+    If successful, the result from the command will be the following:
     ```
     release "mostly-ai" uninstalled
     ```
@@ -263,7 +263,7 @@ To restore MOSTLY AI from a backup, make sure that the `mostly-ai` namespace no 
     ```bash copy
     kubectl get all --namespace mostly-ai
     ```
-    You should see the following:
+    You will see the following:
     ```
     No resources found in mostly-ai namespace.
     ```
@@ -283,7 +283,7 @@ Making sure that the `mostly-ai` namespace does not exist, you can now restore M
     ```bash copy
     velero restore describe mostly-ai-restore-poc
     ```
-    The output should be the following:
+    The output will be the following for a successful operation:
     ```
     Name:         mostly-ai-restore-poc
     Namespace:    velero
@@ -357,7 +357,7 @@ Making sure that the `mostly-ai` namespace does not exist, you can now restore M
     ```bash copy
     kubectl get pods
     ```
-    The MOSTLY AI pods should be back and stable.
+    The MOSTLY AI pods will be running and stable.
     ```
     NAME                                  READY   STATUS    RESTARTS      AGE
     mostly-app-57c86ffc9f-46m9x           1/1     Running   0             2m
