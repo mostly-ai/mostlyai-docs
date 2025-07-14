@@ -1,0 +1,16 @@
+:8888 {
+	log default
+	encode
+
+	metrics /metrics
+	handle_path /healthz {
+		respond 200
+	}
+
+	redir / /docs
+	handle_path /docs* {
+		root * /app/html
+		file_server
+		try_files {path} {path}.html
+	}
+}
