@@ -33,7 +33,7 @@ You can back up or restore all objects in your cluster, or you can filter object
 
 * Access to a Kubernetes cluster, v1.16 or later, with DNS and container networking enabled. For more information on supported Kubernetes versions, see the [Velero compatibility matrix on GitHub](https://github.com/vmware-tanzu/velero#velero-compatibility-matrix).
 * Install `kubectl`.
-* Identify a storage provider<br /><br />Velero uses object storage to store backups and associated artifacts. It also optionally integrates with supported block storage systems to snapshot your persistent volumes. Before installing, you should identify the object storage provider and optional block storage provider you want to use. See the [list of compatible providers](https://velero.io/docs/v1.12/supported-providers/) that Velero supports.<br /><br />Velero supports storage providers for both cloud-provider environments and on-premises environments. For more details on on-premises scenarios, see the [on-premises documentation](https://velero.io/docs/v1.12/on-premises/).
+* Identify a storage provider.<br /><br />Velero uses object storage to store backups and associated artifacts. It also optionally integrates with supported block storage systems to snapshot your persistent volumes. Before installing, you should identify the object storage provider and optional block storage provider you want to use. See the [list of compatible providers](https://velero.io/docs/v1.12/supported-providers/) that Velero supports.<br /><br />Velero supports storage providers for both cloud-provider environments and on-premises environments. For more details on on-premises scenarios, see the [on-premises documentation](https://velero.io/docs/v1.12/on-premises/).
 * (Optional) To set up **Velero CLI autocompletion**, see [Enabling shell autocompletion](https://velero.io/docs/v1.12/customize-installation/#optional-velero-cli-configurations).
 
 ### 1. Install Velero CLI
@@ -353,7 +353,7 @@ Making sure that the `mostly-ai` namespace does not exist, you can now restore M
     NAME                           READY   AGE
     statefulset.apps/mostly-psql   1/1     78s
     ```
-3. Check the status of the MOSTLY AI pods.
+4. Check the status of the MOSTLY AI pods.
     ```bash copy
     kubectl get pods
     ```
