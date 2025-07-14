@@ -8,6 +8,6 @@ jobs:
   #   uses: ./.github/workflows/lint-check.yaml
   #   secrets: inherit
   build-docker-image:
-    needs: [pre-commit-linting]
+    # needs: [pre-commit-linting]
     secrets: inherit
     uses: ./.github/workflows/build-docker-image.yaml
