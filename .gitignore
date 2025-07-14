@@ -8,5 +8,3 @@ out
 .DS_Store
 public/robots.txt
 public/sitemap-docs.xml
-docker
-Dockerfile

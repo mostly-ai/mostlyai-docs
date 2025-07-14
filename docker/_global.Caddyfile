@@ -1,0 +1,7 @@
+{
+	log default {
+		output stdout
+		level info
+	}
+	metrics
+}
