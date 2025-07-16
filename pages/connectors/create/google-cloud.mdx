@@ -40,21 +40,24 @@ If you use the web application, create a new Google Cloud storage connector from
 
 **Steps**
 
-1. From the **Connectors** page, click **Create connector**.
-   <Image src="/docimages/connectors/create-connector-01-click.webp" alt="Click Create connector button" width={800} height={500} />
-2. On the **Connect to cloud storage** tab, select **Google cloud storage**.
-   <Image src="/docimages/connectors/google-cloud/create-connector-02-select-google-cloud.webp" alt="Select Google Cloud storage connector" width={800} height={500} />
-3. On the **Create Google cloud connector** page, configure the connector.
-   1. For **Name**, enter a name that you can distinguish from other connectors.
-   2. For **Access type**, select whether you want to use the connector as a **source** or **destination**.
-   3. For **Key file**, paste the contents of your Google Cloud Storage key file.
-      <Image src="/docimages/connectors/google-cloud/create-connector-03-configure-gcp-bucket.webp" alt="Configure Google Cloud Storage bucket connector" width={300} height={500} />
-4. Click **Save** to save your new Databricks connector.<br /><br />
-   MOSTLY AI tests the connection. If you see an error, check the connection details, update them, and click **Save** again.<br /><br />
-   You can click **Save anyway** to save the connector disregarding any errors.
-   </Tabs.Tab>
-<Tabs.Tab>
-If you use the Python SDK, create a Google Cloud storage connector with `mostly.connect()` and provide a connector configuration dictionary as shown below.
+1.  From the **Connectors** page, click **Create connector**.
+    <Image src="/docimages/connectors/create-connector-01-click.webp" alt="Click Create connector button" width={800} height={500} />
+2.  On the **Connect to cloud storage** tab, select **Google cloud storage**.
+    <Image src="/docimages/connectors/google-cloud/create-connector-02-select-google-cloud.webp" alt="Select Google Cloud storage connector" width={800} height={500} />
+3.  On the **Create Google cloud connector** page, configure the connector.
+    1. For **Name**, enter a name that you can distinguish from other connectors.
+    2. For **Access type**, select whether you want to use the connector as a **source** or **destination**.
+    3. For **Key file**, paste the contents of your Google Cloud Storage key file.
+       <Image src="/docimages/connectors/google-cloud/create-connector-03-configure-gcp-bucket.webp" alt="Configure Google Cloud Storage bucket connector" width={300} height={500} />
+4.  Click **Save** to save your new Databricks connector.<br /><br />
+    MOSTLY AI tests the connection. If you see an error, check the connection details, update them, and click **Save** again.<br /><br />
+    You can click **Save anyway** to save the connector disregarding any errors.
+
+       </Tabs.Tab>
+
+          <Tabs.Tab>
+
+    If you use the Python SDK, create a Google Cloud storage connector with `mostly.connect()` and provide a connector configuration dictionary as shown below.
 
 ```python filename="python" copy {8,12}
 bigquerykey = os.path.basename('mostlyai-gcp-72d2350d1b1a.json')

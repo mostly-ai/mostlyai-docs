@@ -29,26 +29,29 @@ If you use the web application, create a new Oracle connector from the **Connect
 
 **Steps**
 
-1. From the **Connectors** page, click **New connector**.
-   <Image src="/docimages/connectors/create-connector-01-click.webp" alt="Click Create connector button" width={800} height={500} />
-2. From the **Create a new connector** window, select **Oracle Database**.
-   <Image src="/docimages/connectors/oracle/create-connector-02-select-oracle.webp" alt="Select Oracle connector" width={800} height={500} />
-3. On the **Create Oracle connector** page, configure the connector.
-   1. For **Name**, enter a name that you can distinguish from other connectors.
-   2. For **Access type**, select whether you want to use the connector as a **source** or **destination**.
-   3. For **Host**, enter the Oracle database hostname.
-   4. For **Port**, enter the database port.
-      <Callout type="info">The default port for Oracle databases is 1521.</Callout>
-   5. For **Username** and **Password**, enter your Oracle database credentials.
-   6. For **Database**, enter the name of the database SID or service name depending on your selection for **Connection type**.
-   7. For **Connection type**, select whether you the connection uses **SID** or **Service name**.
-      <Image src="/docimages/connectors/oracle/create-connector-03-configure-oracle.webp" alt="Select Oracle connector" width={300} height={500} />
-4. Click **Save** to save your new Oracle connector.<br /><br />
-   MOSTLY AI tests the connection. If you see an error, check the connection details, update them, and click **Save** again.<br /><br />
-   You can click **Save anyway** to save the connector disregarding any errors.
-   </Tabs.Tab>
-<Tabs.Tab>
-If you use the Python SDK, create an Oracle connector with `mostly.connect()` and provide a connector configuration dictionary as shown below.
+1.  From the **Connectors** page, click **New connector**.
+    <Image src="/docimages/connectors/create-connector-01-click.webp" alt="Click Create connector button" width={800} height={500} />
+2.  From the **Create a new connector** window, select **Oracle Database**.
+    <Image src="/docimages/connectors/oracle/create-connector-02-select-oracle.webp" alt="Select Oracle connector" width={800} height={500} />
+3.  On the **Create Oracle connector** page, configure the connector.
+    1. For **Name**, enter a name that you can distinguish from other connectors.
+    2. For **Access type**, select whether you want to use the connector as a **source** or **destination**.
+    3. For **Host**, enter the Oracle database hostname.
+    4. For **Port**, enter the database port.
+       <Callout type="info">The default port for Oracle databases is 1521.</Callout>
+    5. For **Username** and **Password**, enter your Oracle database credentials.
+    6. For **Database**, enter the name of the database SID or service name depending on your selection for **Connection type**.
+    7. For **Connection type**, select whether you the connection uses **SID** or **Service name**.
+       <Image src="/docimages/connectors/oracle/create-connector-03-configure-oracle.webp" alt="Select Oracle connector" width={300} height={500} />
+4.  Click **Save** to save your new Oracle connector.<br /><br />
+    MOSTLY AI tests the connection. If you see an error, check the connection details, update them, and click **Save** again.<br /><br />
+    You can click **Save anyway** to save the connector disregarding any errors.
+
+          </Tabs.Tab>
+
+          <Tabs.Tab>
+
+    If you use the Python SDK, create an Oracle connector with `mostly.connect()` and provide a connector configuration dictionary as shown below.
 
 ```python copy filename="python" {9}
 c = mostly.connect({

@@ -89,9 +89,11 @@ If you use the web application, you can configure the maximum training time from
 1. With an untrained generator open, go to the **Model configuration** page by clicking **Configure models**.
 2. Click a table to expand its model settings.
 3. Set the **Max training time** in minutes.
-   <Image src="/docimages/generators/speed-up-training/model-configuration-04-decrease-training-time.webp" alt="MOSTLY AI - Generator configuration - Set maximum training time" width={900} height={300}/>
-      </Tabs.Tab>
-      <Tabs.Tab>
+   <Image src="/docimages/generators/speed-up-training/model-configuration-04-decrease-training-time.webp" alt="MOSTLY AI - Generator configuration - Set maximum training time" width={900} height={300} />
+
+</Tabs.Tab>
+<Tabs.Tab>
+
 For the Python SDK, use the `max_training_time` in the `tabular_model_configuration` dictionary to set the training time for a model. Specify an integer for a duration in minutes.
 
 ```python filename="python" copy {8}
@@ -128,17 +130,14 @@ If you use the web application, you can configure the model from the **Model con
 
 **Steps**
 
-1. With an untrained generator open, go to the **Model configuration** page by clicking **Configure models**.
-2. Click a table to expand its model settings.
-3. For **Model**, select **MOSTLY_AI/Small**.
-   <Image
-                                                                                src="/docimages/generators/speed-up-training/model-configuration-05-reduce-model-size.webp"
-                                                                                alt="MOSTLY AI - Generator configuration - Reduce model size"
-                                                                                width={900}
-                                                                                height={300}
-                                                                            />
-      </Tabs.Tab>
-      <Tabs.Tab>
+1.  With an untrained generator open, go to the **Model configuration** page by clicking **Configure models**.
+2.  Click a table to expand its model settings.
+3.  For **Model**, select **MOSTLY_AI/Small**.
+    <Image src="/docimages/generators/speed-up-training/model-configuration-05-reduce-model-size.webp" alt="MOSTLY AI - Generator configuration - Reduce model size" width={900} height={300} />
+
+</Tabs.Tab>
+<Tabs.Tab>
+
 For the Python SDK, use the `model` key in the `tabular_model_configuration` dictionary.
 
 - Use `MOSTLY_AI/Small` for a small model size

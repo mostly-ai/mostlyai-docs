@@ -38,16 +38,19 @@ For conditional simulation, start a new synthetic dataset and provide a seed dat
 <Tabs.Tab>
 If you use the web application, you can upload a seed dataset from the **Sample size** options after you start a new synthetic dataset.
 
-1. Start a new synthetic dataset.
-2. On the **Synthetic dataset configuration** page, expand the subject table.
-3. Expand **Conditional simulation**.
-4. Click **Choose file**.
-   <Image src="/docimages/synthetic-datasets/seeded-generation/02-click-upload-seed-file.webp" alt="Conditional simulation - Sample size - Click Upload file" width={800} height={150} />
-5. (Optional) Adjust the rest of the generation settings.
-6. Click **Start generation** in the upper right.
-   </Tabs.Tab>
-<Tabs.Tab>
-If you use the Python SDK, use the `seed` parameter of `mostly.generate()` to specify a seed dataset.
+1.  Start a new synthetic dataset.
+2.  On the **Synthetic dataset configuration** page, expand the subject table.
+3.  Expand **Conditional simulation**.
+4.  Click **Choose file**.
+    <Image src="/docimages/synthetic-datasets/seeded-generation/02-click-upload-seed-file.webp" alt="Conditional simulation - Sample size - Click Upload file" width={800} height={150} />
+5.  (Optional) Adjust the rest of the generation settings.
+6.  Click **Start generation** in the upper right.
+
+          </Tabs.Tab>
+
+          <Tabs.Tab>
+
+    If you use the Python SDK, use the `seed` parameter of `mostly.generate()` to specify a seed dataset.
 
 ```python filename="python" copy
 sd = mostly.generate(generator=g, seed=seed)

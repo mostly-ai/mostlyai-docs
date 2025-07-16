@@ -14,26 +14,26 @@ After you have a [generator](/generators) trained on a single- or multi-table or
 <Tabs.Tab>
 **Steps**
 
-1. Start a new synthetic dataset in one of two ways.
-   - Open a trained generator (its status must be **Ready**) and click **Generate data**.
-     <Image src="/docimages/synthetic-datasets/create/01-from-generator-click-generate.webp" alt="MOSTLY AI - Synthetic datasets - Create a new synthetic dataset from inside a generator" width={800} height={150} />
-   - From the **Synthetic datasets** page, click **+ New synthetic dataset** and select a generator.
-2. (Optional) On the **Synthetic dataset configuration**, configure how you want to generate.
-   For details on specific configurations, see the related pages.
-   _ [Set sample size and temperature](set-size-temp)
-   _ [Data imputation](data-imputation)
-   _ [Rebalance columns](rebalance-columns)
-   _ [Deliver to databases or cloud buckets](deliver)
-3. Click **Start generation**.
-      <Image
-                                                         src="/docimages/synthetic-datasets/create/02-click-start-generation.webp"
-                                                         alt="MOSTLY AI - Synthetic datasets - Click Start generation"
-                                                         width={800}
-                                                         height={150}
-                                                     />
-   </Tabs.Tab>
-   <Tabs.Tab>
-With the Python SDK, use `mostly.generate` to create a synthetic dataset.
+1.  Start a new synthetic dataset in one of two ways.
+    - Open a trained generator (its status must be **Ready**) and click **Generate data**.
+      <Image src="/docimages/synthetic-datasets/create/01-from-generator-click-generate.webp" alt="MOSTLY AI - Synthetic datasets - Create a new synthetic dataset from inside a generator" width={800} height={150} />
+    - From the **Synthetic datasets** page, click **+ New synthetic dataset** and select a generator.
+2.  (Optional) On the **Synthetic dataset configuration**, configure how you want to generate.
+    For details on specific configurations, see the related pages.
+    _ [Set sample size and temperature](set-size-temp)
+    _ [Data imputation](data-imputation)
+    _ [Rebalance columns](rebalance-columns)
+    _ [Deliver to databases or cloud buckets](deliver)
+3.  Click **Start generation**.
+
+        {' '}
+        <Image src="/docimages/synthetic-datasets/create/02-click-start-generation.webp" alt="MOSTLY AI - Synthetic datasets - Click Start generation" width={800} height={150} />
+
+              </Tabs.Tab>
+
+           <Tabs.Tab>
+
+    With the Python SDK, use `mostly.generate` to create a synthetic dataset.
 
 To generate only a certain number of synthetic samples, use the `size` parameter.
 

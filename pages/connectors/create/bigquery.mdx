@@ -49,21 +49,24 @@ If you use the web application, create a new BigQuery connector from the **Conne
 
 **Steps**
 
-1. From the **Connectors** tab, click **New connector**.
-   <Image src="/docimages/connectors/create-connector-01-click.webp" alt="Click Create connector button" width={800} height={500} />
-2. On the **Connect to database** tab, select **Google BigQuery**.
-   <Image src="/docimages/connectors/bigquery/create-connector-02-select-bigquery.webp" alt="Select BigQuery connector" width={800} height={500} />
-3. On the **Create BigQuery connector** page, configure the connector.
-   1. For **Name**, enter a name that you can distinguish from other connectors.
-   2. For **Access type**, select whether you want to use the connector as a **source** or **destination**.
-   3. In **Key file**, paste the contents of your BigQuery key file.
-      <Image src="/docimages/connectors/bigquery/create-connector-03-configure-bigquery.webp" alt="Configure BigQuery connector" width={400} height={500} />
-4. Click **Save** to save your new Databricks connector.<br /><br />
-   MOSTLY AI tests the connection. If you see an error, check the connection details, update them, and click **Save** again.<br /><br />
-   You can click **Save anyway** to save the connector disregarding any errors.
-   </Tabs.Tab>
-<Tabs.Tab>
-If you use the Python SDK, create a BigQuery connector with `mostly.connect()` and provide a connector configuration dictionary as shown below.
+1.  From the **Connectors** tab, click **New connector**.
+    <Image src="/docimages/connectors/create-connector-01-click.webp" alt="Click Create connector button" width={800} height={500} />
+2.  On the **Connect to database** tab, select **Google BigQuery**.
+    <Image src="/docimages/connectors/bigquery/create-connector-02-select-bigquery.webp" alt="Select BigQuery connector" width={800} height={500} />
+3.  On the **Create BigQuery connector** page, configure the connector.
+    1. For **Name**, enter a name that you can distinguish from other connectors.
+    2. For **Access type**, select whether you want to use the connector as a **source** or **destination**.
+    3. In **Key file**, paste the contents of your BigQuery key file.
+       <Image src="/docimages/connectors/bigquery/create-connector-03-configure-bigquery.webp" alt="Configure BigQuery connector" width={400} height={500} />
+4.  Click **Save** to save your new Databricks connector.<br /><br />
+    MOSTLY AI tests the connection. If you see an error, check the connection details, update them, and click **Save** again.<br /><br />
+    You can click **Save anyway** to save the connector disregarding any errors.
+
+       </Tabs.Tab>
+
+          <Tabs.Tab>
+
+    If you use the Python SDK, create a BigQuery connector with `mostly.connect()` and provide a connector configuration dictionary as shown below.
 
 ```python copy filename="python"
 bigquerykey = os.path.basename('mostlyai-gcp-72d2350d1b1a.json')
