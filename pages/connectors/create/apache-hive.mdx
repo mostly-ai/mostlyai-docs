@@ -130,7 +130,9 @@ If you use the web application, enable the **Authenticate with Kerberos** checkb
 
 </Tabs.Tab>
 <Tabs.Tab>
+
 If you use the Python SDK, use the configuration as listed below.
+
 ```python filename="python" copy
 # Import required Python libraries and initialize MostlyAI() client
 import pandas as pd
@@ -200,8 +202,8 @@ config = {
 # Create the connector
 
 c = mostly.connect(config=config)
+```
 
-````
 </Tabs.Tab>
 </Tabs>
 
@@ -209,8 +211,8 @@ c = mostly.connect(config=config)
 
 Depending on whether you created a **source** or a **destination** connector, you can use the connector as:
 
-* [data source](../use/data-source) for a new generator
-* [data destination](../use/data-destination) for a new synthetic dataset
+- [data source](../use/data-source) for a new generator
+- [data destination](../use/data-destination) for a new synthetic dataset
 
 ## Considerations for Apache Hive as a destination
 
@@ -223,4 +225,4 @@ For example:
 ```sql filename="hive"
 CREATE TABLE table_name;
 LOAD DATA INPATH 's3://bucket-name/path/to/parquet-file' INTO TABLE table_name;
-````
+```

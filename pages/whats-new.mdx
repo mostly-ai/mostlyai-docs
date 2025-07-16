@@ -691,29 +691,28 @@ The [MOSTLY AI Synthetic Data SDK](https://github.com/mostly-ai/mostlyai/) is an
     ```
 2.  Generate synthetic data in your local environment.
 
-    ````python filename="python" copy # 1. Import the Synthetic Data SDK and pandas
+    ```python filename="python" copy # 1. Import the Synthetic Data SDK and pandas
     from mostlyai.sdk import MostlyAI
     import pandas as pd
 
-        # 2. Initialize the Synthetic Data SDK.
-        mostly = MostlyAI(local=True) # starts a local server that exposes the MOSTLY AI REST API
+    # 2. Initialize the Synthetic Data SDK.
+    mostly = MostlyAI(local=True) # starts a local server that exposes the MOSTLY AI REST API
 
-        # 3. Train a generator
-        df_original = pd.read_csv('https://github.com/mostly-ai/public-demo-data/raw/dev/census/census.csv.gz')
-        g = mostly.train(name='census', data=df_original)
+    # 3. Train a generator
+    df_original = pd.read_csv('https://github.com/mostly-ai/public-demo-data/raw/dev/census/census.csv.gz')
+    g = mostly.train(name='census', data=df_original)
 
-        # 4. Generate synthetic data with the trained generator
-        sd = mostly.generate(g)
+    # 4. Generate synthetic data with the trained generator
+    sd = mostly.generate(g)
 
-        # 5. Consume the synthetic data as a pandas DataFrame.
-        sd.data()
-        ```
+    # 5. Consume the synthetic data as a pandas DataFrame.
+    sd.data()
+    ```
 
     References:
-    ````
 
-- [_mostlyai_](https://github.com/mostly-ai/mostlyai/) repository on GitHub
-- [_Python package documentation_](https://mostly-ai.github.io/mostlyai/)
+    - [_mostlyai_](https://github.com/mostly-ai/mostlyai/) repository on GitHub
+    - [_Python package documentation_](https://mostly-ai.github.io/mostlyai/)
 
 ### MOSTLY AI Engine
 
