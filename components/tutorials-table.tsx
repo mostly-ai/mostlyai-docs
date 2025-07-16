@@ -1,7 +1,7 @@
 import React from "react";
 import ReactMarkdown from "react-markdown";
 import Link from "next/link"
-import { 
+import {
   ColabBadge, GitHubIcon
 } from '@components/icons'
 
@@ -31,69 +31,69 @@ type Tutorial = {
 };
 
 const tutorials: Tutorial[] = [
-  { 
-    title: "**Get started** with the SDK", 
-    colabUrl: "https://colab.research.google.com/github/mostly-ai/mostlyai/blob/main/docs/tutorials/getting-started/getting-started.ipynb" 
+  {
+    title: "**Get started** with the SDK",
+    colabUrl: "https://colab.research.google.com/github/mostly-ai/mostlyai/blob/main/docs/tutorials/getting-started/getting-started.ipynb"
   },
-  { 
-    title: "Validate synthetic data via **Train-Synthetic-Test-Real**", 
-    colabUrl: "https://colab.research.google.com/github/mostly-ai/mostlyai/blob/main/docs/tutorials/train-synthetic-test-real/TSTR.ipynb" 
+  {
+    title: "Validate synthetic data via **Train-Synthetic-Test-Real**",
+    colabUrl: "https://colab.research.google.com/github/mostly-ai/mostlyai/blob/main/docs/tutorials/train-synthetic-test-real/TSTR.ipynb"
   },
-  { 
-    title: "Explore the **size vs. accuracy trade-off** for synthetic data", 
-    colabUrl: "https://colab.research.google.com/github/mostly-ai/mostlyai/blob/main/docs/tutorials/size-vs-accuracy/size-vs-accuracy.ipynb" 
+  {
+    title: "Explore the **size vs. accuracy trade-off** for synthetic data",
+    colabUrl: "https://colab.research.google.com/github/mostly-ai/mostlyai/blob/main/docs/tutorials/size-vs-accuracy/size-vs-accuracy.ipynb"
   },
-  { 
-    title: "**Differentially private** synthetic data", 
-    colabUrl: "https://colab.research.google.com/github/mostly-ai/mostlyai/blob/main/docs/tutorials/differential-privacy/differential-privacy.ipynb" 
+  {
+    title: "**Differentially private** synthetic data",
+    colabUrl: "https://colab.research.google.com/github/mostly-ai/mostlyai/blob/main/docs/tutorials/differential-privacy/differential-privacy.ipynb"
   },
-  { 
-    title: "**Rebalance** synthetic datasets for data augmentation", 
-    colabUrl: "https://colab.research.google.com/github/mostly-ai/mostlyai/blob/main/docs/tutorials/rebalancing/rebalancing.ipynb" 
+  {
+    title: "**Rebalance** synthetic datasets for data augmentation",
+    colabUrl: "https://colab.research.google.com/github/mostly-ai/mostlyai/blob/main/docs/tutorials/rebalancing/rebalancing.ipynb"
   },
-  { 
-    title: "**Conditionally generate** synthetic (geo) data", 
-    colabUrl: "https://colab.research.google.com/github/mostly-ai/mostlyai/blob/main/docs/tutorials/conditional-generation/conditional-generation.ipynb" 
+  {
+    title: "**Conditionally generate** synthetic (geo) data",
+    colabUrl: "https://colab.research.google.com/github/mostly-ai/mostlyai/blob/main/docs/tutorials/conditional-generation/conditional-generation.ipynb"
   },
-  { 
-    title: "**Explain AI** with synthetic data", 
-    colabUrl: "https://colab.research.google.com/github/mostly-ai/mostlyai/blob/main/docs/tutorials/explainable-ai/explainable-ai.ipynb" 
+  {
+    title: "**Explain AI** with synthetic data",
+    colabUrl: "https://colab.research.google.com/github/mostly-ai/mostlyai/blob/main/docs/tutorials/explainable-ai/explainable-ai.ipynb"
   },
-  { 
-    title: "Generate **fair synthetic data**", 
-    colabUrl: "https://colab.research.google.com/github/mostly-ai/mostlyai/blob/main/docs/tutorials/fairness/fairness.ipynb" 
+  {
+    title: "Generate **fair synthetic data**",
+    colabUrl: "https://colab.research.google.com/github/mostly-ai/mostlyai/blob/main/docs/tutorials/fairness/fairness.ipynb"
   },
-  { 
-    title: "Generate **synthetic text** via a fast LSTM model trained from scratch", 
-    colabUrl: "https://colab.research.google.com/github/mostly-ai/mostlyai/blob/main/docs/tutorials/synthetic-text-lstm/synthetic-text-lstm.ipynb" 
+  {
+    title: "Generate **synthetic text** via a fast LSTM model trained from scratch",
+    colabUrl: "https://colab.research.google.com/github/mostly-ai/mostlyai/blob/main/docs/tutorials/synthetic-text-lstm/synthetic-text-lstm.ipynb"
   },
-  { 
-    title: "Generate **synthetic text** via a pre-trained Large Language Model", 
-    colabUrl: "https://colab.research.google.com/github/mostly-ai/mostlyai/blob/main/docs/tutorials/synthetic-text-llm/synthetic-text-llm.ipynb" 
+  {
+    title: "Generate **synthetic text** via a pre-trained Large Language Model",
+    colabUrl: "https://colab.research.google.com/github/mostly-ai/mostlyai/blob/main/docs/tutorials/synthetic-text-llm/synthetic-text-llm.ipynb"
   },
-  { 
-    title: "Perform **multi-table synthesis**", 
-    colabUrl: "https://colab.research.google.com/github/mostly-ai/mostlyai/blob/main/docs/tutorials/multi-table/multi-table.ipynb" 
+  {
+    title: "Perform **multi-table synthesis**",
+    colabUrl: "https://colab.research.google.com/github/mostly-ai/mostlyai/blob/main/docs/tutorials/multi-table/multi-table.ipynb"
   },
-  { 
-    title: "Analyse **star-schema correlations**", 
-    colabUrl: "https://colab.research.google.com/github/mostly-ai/mostlyai/blob/main/docs/tutorials/star-schema-correlations/star-schema-correlations.ipynb" 
+  {
+    title: "Analyse **star-schema correlations**",
+    colabUrl: "https://colab.research.google.com/github/mostly-ai/mostlyai/blob/main/docs/tutorials/star-schema-correlations/star-schema-correlations.ipynb"
   },
-  { 
-    title: "Develop a **fake or real discriminator** with Synthetic Data", 
-    colabUrl: "https://colab.research.google.com/github/mostly-ai/mostlyai/blob/main/docs/tutorials/fake-or-real/fake-or-real.ipynb" 
+  {
+    title: "Develop a **fake or real discriminator** with Synthetic Data",
+    colabUrl: "https://colab.research.google.com/github/mostly-ai/mostlyai/blob/main/docs/tutorials/fake-or-real/fake-or-real.ipynb"
   },
-  { 
-    title: "Close gaps in your data with **Smart Imputation**", 
-    colabUrl: "https://colab.research.google.com/github/mostly-ai/mostlyai/blob/main/docs/tutorials/smart-imputation/smart-imputation.ipynb" 
+  {
+    title: "Close gaps in your data with **Smart Imputation**",
+    colabUrl: "https://colab.research.google.com/github/mostly-ai/mostlyai/blob/main/docs/tutorials/smart-imputation/smart-imputation.ipynb"
   },
-  { 
-    title: "Calculate accuracy and privacy metrics for **Quality Assurance**", 
-    colabUrl: "https://colab.research.google.com/github/mostly-ai/mostlyai/blob/main/docs/tutorials/quality-assurance/quality-assurance.ipynb" 
+  {
+    title: "Calculate accuracy and privacy metrics for **Quality Assurance**",
+    colabUrl: "https://colab.research.google.com/github/mostly-ai/mostlyai/blob/main/docs/tutorials/quality-assurance/quality-assurance.ipynb"
   },
-  { 
-    title: "Enrich Sensitive Data with **LLMs using Synthetic Replicas**", 
-    colabUrl: "https://colab.research.google.com/github/mostly-ai/mostlyai/blob/main/docs/tutorials/synthetic-enrich/synthetic-enrich.ipynb" 
+  {
+    title: "Enrich Sensitive Data with **LLMs using Synthetic Replicas**",
+    colabUrl: "https://colab.research.google.com/github/mostly-ai/mostlyai/blob/main/docs/tutorials/synthetic-enrich/synthetic-enrich.ipynb"
   }
 ];
 

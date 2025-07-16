@@ -16,7 +16,7 @@ const triggerAlgoliaCrawler = async () => {
       console.log(`Skipping Algolia crawler trigger since VERCEL_ENV=${VERCEL_ENV}`);
       return;
     }
-    
+
     if (!ALGOLIA_CRAWLER_API_KEY) {
       throw new Error("ALGOLIA_CRAWLER_API_KEY is missing. Set it in your environment variables.");
     }

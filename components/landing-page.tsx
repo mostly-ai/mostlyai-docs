@@ -2,7 +2,7 @@ import React from 'react';
 import { CustomCard, CardProps } from './custom-card'
 import CustomImageCard from './custom-image-card'
 
-import { 
+import {
     BookIcon,
     TableIcon,
     RocketIcon,
@@ -141,15 +141,15 @@ const LandingPage: React.FC = () => {
         },
         description: '',
         links: [
-          { 
+          {
             text: 'Use a local database as source or destination',
             href: '/connectors/local-db'
           },
-          { 
+          {
             text: 'Deploy to an Azure AKS cluster',
             href: '/install/deploy/azure-aks'
           },
-          { 
+          {
             text: 'Deploy to a GKE cluster',
             href: '/install/deploy/gke'
           },
@@ -157,11 +157,11 @@ const LandingPage: React.FC = () => {
             text: 'Table relationship diagram',
             href: '/synthetic-datasets/configure#view-relationship-diagram'
           },
-          { 
+          {
             text: 'Best practices for using MOSTLY AI',
             href: '/best-practices'
           },
-          { 
+          {
             text: 'Deploy to an AWS EKS cluster',
             href: '/install/deploy/aws-eks'
           }
@@ -181,7 +181,7 @@ const LandingPage: React.FC = () => {
         ],
       },
     ];
-  
+
     return (
       <div className="card-container">
         <CustomCard {...cardsData[0]} />
@@ -208,5 +208,5 @@ const LandingPage: React.FC = () => {
       </div>
     );
   };
-  
+
   export default LandingPage;

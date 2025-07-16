@@ -16,7 +16,7 @@ When the deployment script creates a new EC2 instance, you might see the error b
 ```
 Status Reason: Could not launch On-Demand Instances. VcpuLimitExceeded - You have
 requested more vCPU capacity than your current vCPU limit of 32 allows for the
-instance bucket that the specified instance type belongs to. 
+instance bucket that the specified instance type belongs to.
 Please visit http://aws.amazon.com/contact-us/ec2-request to request an adjustment to
 this limit. Launching EC2 instance failed.
 ```
@@ -41,7 +41,7 @@ You can workaround this issue in one of two ways.
 By default, the deployment script uses the Standard EKS-optimised AMIs in `eu-central-1` AWS region. This is defined in the `EksAmiIds` section of the `eks-cluster.yaml` file
 
 ```yaml filename=eks-cluster.yaml {7}
-  EksAmiIds:   
+  EksAmiIds:
     # IDs of the "EKS-optimised AMIs" for the worker nodes:
     # https://docs.aws.amazon.com/eks/latest/userguide/retrieve-ami-id.html
     # IMPORTANT NOTE: Choose AWS EKS compatible ami IDs only for the region where you are creating the cluster and it's verion (1.27) in our case.

@@ -1,4 +1,4 @@
-export default { 
+export default {
     "compute": "Compute",
     "models": "Models",
     "users-groups": "Users and groups",

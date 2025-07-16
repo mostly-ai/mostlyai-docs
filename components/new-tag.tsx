@@ -4,7 +4,7 @@ import React from 'react';
 type ReleaseType = "LTS";
 
 const VersionTag: React.FC = ({releaseType}: {releaseType: ReleaseType}) => {
-    
+
     const NewTagStyle: React.CSSProperties = {
         // pointerEvents: "none",
         backgroundColor: "#EFF4FF",
