@@ -11,15 +11,18 @@ import Image from 'next/image'
 ## v4.9.0
 _July 11th, 2025_
 
-### Features
+### Datasets available in public API
 
-* {/* MSD-1897 */} New homepage design
-* {/* MSD-1880 */} Datasets available in public API
-* {/* MSD-1872 */} Resource usage tracking for popularity sort
+Adds Datasets as a new resource type, allowing users to upload files via a dedicated `FILE_UPLOAD` connector. Users can access datasets through [connectors](./connectors.mdx), select specific locations as the [Assistant’s](./assistant.mdx) initial focus, and use a new “Use a Dataset” thread action that injects a dataset-related prompt. A dedicated Artifact view for Datasets is introduced, similar to Connectors, displaying a list of available datasets. Sharing is supported, with owners receiving warnings before sharing and recipients seeing metadata alongside clear notices for any restricted connectors.
 
-### Enhancements
+### Resource usage tracking for popularity sort
 
-* {/* MSD-1877 */} New sidebar menu with list of chats
+Tracks how often resources like [generators](./generators.mdx), [synthetic datasets](./synthetic-datasets.mdx), and [connectors](./connectors.mdx) are used across chats. When a resource is shown in an [Assistant](./assistant.mdx) message, its usage is recorded; if the resource or chat is deleted, the corresponding usage entry is removed. Resources can now be sorted number of uses value on the platform.
+
+### Improvements
+
+* {/* MSD-1877 */} Platform: New homepage design 
+* {/* MSD-1877 */} Platform: New sidebar menu with list of chats
 
 ### Resolved issues
 
@@ -32,12 +35,17 @@ _July 11th, 2025_
 ## v4.8.3
 _July 3rd, 2025_
 
-### Enhancements
+### Enhance resource sharing experience
 
-* {/* MSD-1837 */} Platform - Enhance [resource sharing experience](https://docs.mostly.ai/organizations/manage-resources/#transfer-a-resource-to-an-organization)
+Introduce a [unified **Share** feature](https://docs.mostly.ai/organizations/manage-resources/#transfer-a-resource-to-an-organization) that combines visibility settings and ownership transfer into one place, replacing the previous separate controls. Users can access this modal either by clicking the Share button or directly on the visibility badge, streamlining how sharing and access control are managed.
+
+### Consider token usage for credit consumption
+
+Chatting with the [Assistant](./assistant.mdx) is billed at a rate of 5.0 credits for every 1M tokens processed. This ensures [token usage](./usage.mdx) is factored into billing alongside computational resource consumption.
+
+### Improvements
 * {/* MSD-1875 */} Platform - Make login page mobile responsive
 * {/* MSD-1431 */} Assistant - Indicate if a previous streaming chat is ongoing after reload
-* {/* MSD-1873 */} Assistant - Consider token usage for credit consumption
 * {/* MSD-1887 */} Assistant - Rename Threads to Chats, including URL routes
 * {/* MSD-1878 */} Assistant - Enhance List of Chats page
 * {/* MSD-xxxx */} Assistant - Skip autoExpand / autoCollapse for Python blocks
