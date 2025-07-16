@@ -3,9 +3,9 @@ title: 'Models configuration'
 description: 'Unstructured text generation in MOSTLY AI is available via the configuration of any text generation model available on Hugging Face as well as via the built-in LSTM model (that is not pre-trained) provided by MOSTLY AI.'
 ---
 
-import { Callout } from 'nextra/components'
-import { Tabs } from 'nextra/components'
-import Image from 'next/image'
+import { Callout } from 'nextra/components';
+import { Tabs } from 'nextra/components';
+import Image from 'next/image';
 
 # Models configuration
 
@@ -25,19 +25,9 @@ You need to sign up or use an existing account to obtain a HuggingFace token. Yo
 4. Under **Token type**, select **Read** to use only read permissions for the token.
 5. For **Token name**, provide a name, such as `mostly-ai`.
 6. Click **Create token**.
-    <Image
-        src="/docimages/administration/models/hugging-face-token-01-create-token.webp"
-        alt="HuggingFace - Create a Read token"
-        width={800}
-        height={300}
-    />
+   <Image src="/docimages/administration/models/hugging-face-token-01-create-token.webp" alt="HuggingFace - Create a Read token" width={800} height={300} />
 7. Copy your new token.
-    <Image
-        src="/docimages/administration/models/hugging-face-token-02-copy-token.webp"
-        alt="HuggingFace - Copy token"
-        width={800}
-        height={300}
-    />
+   <Image src="/docimages/administration/models/hugging-face-token-02-copy-token.webp" alt="HuggingFace - Copy token" width={800} height={300} />
 
 ## Add HuggingFace language models
 
@@ -50,26 +40,16 @@ You must be logged in as a superadmin to be able to add or remove HuggingFace mo
 **Steps**
 
 1. In MOSTLY AI, select **Models** from the profile menu.
-    <Image
-        src="/docimages/administration/models/configure-models-01-profile-select-models.webp"
-        alt="MOSTLY AI Models configurations - Select profile menu and then Models"
-        width={800}
-        height={300}
-    />
+   <Image src="/docimages/administration/models/configure-models-01-profile-select-models.webp" alt="MOSTLY AI Models configurations - Select profile menu and then Models" width={800} height={300} />
 2. For HuggingFace token, paste your [HuggingFace token](#create-a-huggingface-token).
 3. Under **Available models**, list the models you want to make available.<br />
-    Use the convention below. Place each model on a new line, without separators.<br />
-    ```
-    provider/Model-Name
-    provider/Model-Name
-    ```
-    <Image
-        src="/docimages/administration/models/01-configure-huggingface-models.webp"
-        alt="MOSTLY AI Deployment - Log in page"
-        width={800}
-        height={300}
-    />
-3. Click **Save**.
+   Use the convention below. Place each model on a new line, without separators.<br />
+   ```
+   provider/Model-Name
+   provider/Model-Name
+   ```
+   <Image src="/docimages/administration/models/01-configure-huggingface-models.webp" alt="MOSTLY AI Deployment - Log in page" width={800} height={300} />
+4. Click **Save**.
 
 **Result**
 

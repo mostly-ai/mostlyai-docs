@@ -3,11 +3,11 @@ title: 'Export and import generators'
 description: 'You can export already trained generators of MOSTLY AI from one environment and import them in another to avoid training a new generator with the same data from scratch.'
 ---
 
-import { Callout } from 'nextra/components'
-import { Tabs } from 'nextra/components'
-import { FileTree } from 'nextra/components'
-import { CustomCallout } from '@components/custom-callout'
-import Image from 'next/image'
+import { Callout } from 'nextra/components';
+import { Tabs } from 'nextra/components';
+import { FileTree } from 'nextra/components';
+import { CustomCallout } from '@components/custom-callout';
+import Image from 'next/image';
 
 # Export and import generators
 
@@ -30,29 +30,16 @@ To export a generator, you must be its creator or have the Admin role in the org
 
 **Steps**
 
-* Export a generator directly from the **Generators** page.
-    1. From the **Generators** page, click the kebab menu of a generator, and select **Export to file**.
-        <Image
-            src="/docimages/generators/export-import/export-02-generators-page-kebab-menu-select-export-to-file.webp"
-            alt="MOSTLY AI - Export a generator - 01 - From Generators page, kebab menu, Export to file"
-            width={800}
-            height={150}
-        />
-* Export a generator after you open it.
-    1. From the **Generators** page, click a generator to open it.
-    2. Click the kebab menu in the upper right, and select **Export to file**.
-        <Image
-            src="/docimages/generators/export-import/export-01-kebab-menu-select-export-to-file.webp"
-            alt="MOSTLY AI - Export a generator - 01 - Open kebab menu and select Export to file"
-            width={800}
-            height={150}
-        />
+- Export a generator directly from the **Generators** page.
+  1. From the **Generators** page, click the kebab menu of a generator, and select **Export to file**.
+     <Image src="/docimages/generators/export-import/export-02-generators-page-kebab-menu-select-export-to-file.webp" alt="MOSTLY AI - Export a generator - 01 - From Generators page, kebab menu, Export to file" width={800} height={150} />
+- Export a generator after you open it. 1. From the **Generators** page, click a generator to open it. 2. Click the kebab menu in the upper right, and select **Export to file**.
+  <Image src="/docimages/generators/export-import/export-01-kebab-menu-select-export-to-file.webp" alt="MOSTLY AI - Export a generator - 01 - Open kebab menu and select Export to file" width={800} height={150} />
+
 </Tabs.Tab>
 <Tabs.Tab>
 
-<CustomCallout type="API">
-Available in both [Local and Client modes](/python-sdk#local-and-client-modes).
-</CustomCallout>
+<CustomCallout type="API">Available in both [Local and Client modes](/python-sdk#local-and-client-modes).</CustomCallout>
 
 With the Python SDK, you can export a generator to a ZIP archive with the `export_to_file()` method. Optionally, you can specify a filename.
 
@@ -65,6 +52,7 @@ g.export_to_file()
 # Export with a specified filename
 g.export_to_file('INSERT_GENERATOR_FILENAME.zip')
 ```
+
 </Tabs.Tab>
 
 </Tabs>
@@ -84,51 +72,42 @@ You can use the UI of another instance of the MOSTLY AI Platform to import expor
 **Steps**
 
 1. On the **Generators** page, click **Import from file**.
-    <Image
-        src="/docimages/generators/export-import/import-01-click-import-from-file.webp"
-        alt="MOSTLY AI - Import a generator - 01 - Click Import from file"
-        width={800}
-        height={150}
-    />
+   <Image src="/docimages/generators/export-import/import-01-click-import-from-file.webp" alt="MOSTLY AI - Import a generator - 01 - Click Import from file" width={800} height={150} />
 2. On the **Import Generator** prompt, click in the upload area to browse or drag-and-drop the exported generator ZIP file.
-    <Image
-        src="/docimages/generators/export-import/import-02-click-upload-area.webp"
-        alt="MOSTLY AI - Import a generator - 02 - Click upload area"
-        width={800}
-        height={150}
-    />
+   <Image src="/docimages/generators/export-import/import-02-click-upload-area.webp" alt="MOSTLY AI - Import a generator - 02 - Click upload area" width={800} height={150} />
 3. Click **Proceed**.
 
 **Result**
 
 The imported generator opens immediately. You can now use it to [generate synthetic data](/synthetic-datasets/generate) in the new environment.
+
 </Tabs.Tab>
 <Tabs.Tab>
 
-<CustomCallout type="API">
-Available in both [Local and Client modes](/python-sdk#local-and-client-modes).
-</CustomCallout>
+<CustomCallout type="API">Available in both [Local and Client modes](/python-sdk#local-and-client-modes).</CustomCallout>
 
 You can import a generator with the `import_from_file()` method.
 
 ```python filename="python" copy
 g = mostly.generators.import_from_file('path/to/generator.zip')
 ```
+
 </Tabs.Tab>
 </Tabs>
-
 
 ## Generator folder structure
 
 You can explore the interactive folder and file structure of exported generators below.
 
 <CustomCallout>
-The structure below is an example containing template filenames.<br />
 
+The structure below is an example containing template filenames.<br/>
 For example, `<table_name>` is replaced by the actual table name in the generator.<br /><br />
 In an actual exported generator:
-* the template filenames depend on model types and table names
-* the number of model folders and QA reports depend on the number of models and the number of tables in the generator.
+
+- the template filenames depend on model types and table names
+- the number of model folders and QA reports depend on the number of models and the number of tables in the generator.
+
 </CustomCallout>
 
 <FileTree>
@@ -138,45 +117,45 @@ In an actual exported generator:
     <FileTree.File name="TRAIN_<MODEL_TYPE>-table-name/<model_type>-UUID.log" />
   </FileTree.Folder>
   <FileTree.Folder name="LogsResourceMonitor">
-      <FileTree.Folder name="UUID">
-        <FileTree.File name="resource_monitor-ANALYZE_TRAINING_DATA.parquet" />
-        <FileTree.File name="resource_monitor-CREATE_MODEL_REPORT.parquet" />
-        <FileTree.File name="resource_monitor-ENCODE_TRAINING_DATA.parquet" />
-        <FileTree.File name="resource_monitor-GENERATE_MODEL_REPORT_DATA.parquet" />
-        <FileTree.File name="resource_monitor-PULL_TRAINING_DATA.parquet" />
-        <FileTree.File name="resource_monitor-TRAIN_MODEL.parquet" />
-      </FileTree.Folder>
+    <FileTree.Folder name="UUID">
+      <FileTree.File name="resource_monitor-ANALYZE_TRAINING_DATA.parquet" />
+      <FileTree.File name="resource_monitor-CREATE_MODEL_REPORT.parquet" />
+      <FileTree.File name="resource_monitor-ENCODE_TRAINING_DATA.parquet" />
+      <FileTree.File name="resource_monitor-GENERATE_MODEL_REPORT_DATA.parquet" />
+      <FileTree.File name="resource_monitor-PULL_TRAINING_DATA.parquet" />
+      <FileTree.File name="resource_monitor-TRAIN_MODEL.parquet" />
+    </FileTree.Folder>
   </FileTree.Folder>
   <FileTree.Folder name="ModelQAReports">
     <FileTree.File name="<table_name>/<model_type>.parquet" />
   </FileTree.Folder>
   <FileTree.Folder name="ModelQAStatistics">
     <FileTree.Folder name="<table_name>/<model_type>" />
-        <FileTree.File name="bin_counts_biv.parquet" />
-        <FileTree.File name="bin_counts_uni.parquet" />
-        <FileTree.File name="bins.pickle" />
-        <FileTree.File name="bivariate_accuracies.parquet" />
-        <FileTree.File name="categorical_counts_uni.pickle" />
-        <FileTree.File name="correlations.parquet" />
-        <FileTree.File name="hol_pca.npy" />
-        <FileTree.File name="meta.json" />
-        <FileTree.File name="numeric_kdes_uni.pickle" />
-        <FileTree.File name="pca_model.pickle" />
-        <FileTree.File name="trn_pca.npy" />
-        <FileTree.File name="univariate_accuracies.parquet" />
-    </FileTree.Folder>
+    <FileTree.File name="bin_counts_biv.parquet" />
+    <FileTree.File name="bin_counts_uni.parquet" />
+    <FileTree.File name="bins.pickle" />
+    <FileTree.File name="bivariate_accuracies.parquet" />
+    <FileTree.File name="categorical_counts_uni.pickle" />
+    <FileTree.File name="correlations.parquet" />
+    <FileTree.File name="hol_pca.npy" />
+    <FileTree.File name="meta.json" />
+    <FileTree.File name="numeric_kdes_uni.pickle" />
+    <FileTree.File name="pca_model.pickle" />
+    <FileTree.File name="trn_pca.npy" />
+    <FileTree.File name="univariate_accuracies.parquet" />
+  </FileTree.Folder>
   <FileTree.Folder name="ModelStore">
     <FileTree.Folder name="<table_name>/<model_type>">
-        <FileTree.Folder name="model-data">
-            <FileTree.File name="lr-scheduler.pt" />
-            <FileTree.File name="model-configs.json" />
-            <FileTree.File name="model-weights.pt" />
-            <FileTree.File name="optimizer.pt" />
-            <FileTree.File name="progress-messages.csv" />
-        </FileTree.Folder>
-        <FileTree.Folder name="tgt-stats">
-            <FileTree.File name="stats.json" />
-        </FileTree.Folder>
+      <FileTree.Folder name="model-data">
+        <FileTree.File name="lr-scheduler.pt" />
+        <FileTree.File name="model-configs.json" />
+        <FileTree.File name="model-weights.pt" />
+        <FileTree.File name="optimizer.pt" />
+        <FileTree.File name="progress-messages.csv" />
+      </FileTree.Folder>
+      <FileTree.Folder name="tgt-stats">
+        <FileTree.File name="stats.json" />
+      </FileTree.Folder>
     </FileTree.Folder>
   </FileTree.Folder>
   <FileTree.Folder name="RandomSamples">

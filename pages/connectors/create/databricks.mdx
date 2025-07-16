@@ -3,10 +3,10 @@ title: 'Use Databricks for synthetic data'
 description: 'With MOSTLY AI, you can connect to a Databricks SQL Warehouse and use it as a data source or destination for your synthetic data.'
 ---
 
-import Image from 'next/image'
-import { Callout } from 'nextra/components'
-import { Tabs } from 'nextra/components'
-import { CustomCallout } from '@components/custom-callout'
+import Image from 'next/image';
+import { Callout } from 'nextra/components';
+import { Tabs } from 'nextra/components';
+import { CustomCallout } from '@components/custom-callout';
 
 # Use Databricks for synthetic data
 
@@ -19,66 +19,62 @@ To create a Databricks connector, you need to obtain your SQL Warehouse connecti
 - [Database connection details in Databricks](#get-connection-details-for-your-databricks-sql-warehouse)
 - [Catalog name in Databricks](#get-databricks-catalog-name)
 - [Personal access token in Databricks](#create-a-databricks-personal-access-token)
-    <CustomCallout>
-    **Note**:
-    As MOSTLY AI leverages [Unity Catalog Volumes in Databricks](https://www.databricks.com/blog/announcing-general-availability-unity-catalog-volumes) for data ingestion,
-    make sure that the user associated with the access token in your destination connector is granted the `CREATE TABLE` and `CREATE VOLUME` privileges.
-    </CustomCallout>
+  <CustomCallout>**Note**: As MOSTLY AI leverages [Unity Catalog Volumes in Databricks](https://www.databricks.com/blog/announcing-general-availability-unity-catalog-volumes) for data ingestion, make sure that the user associated with the access token in your destination connector is granted the `CREATE TABLE` and `CREATE VOLUME` privileges.</CustomCallout>
 
 ### Get connection details for your Databricks SQL Warehouse
 
 1. In Databricks, open the workspace that contains the SQL Warehouse you want to use.
-    <Image
-        src="/docimages/connectors/databricks/databricks-01-open-workspace.webp"
-        alt="Databricks - Open workspace"
-        width={550}
-        height={350}
-    />
+   <Image src="/docimages/connectors/databricks/databricks-01-open-workspace.webp" alt="Databricks - Open workspace" width={550} height={350} />
 2. Open the sidebar menu again and select **SQL Warehouses**.
-    <Image src="/docimages/connectors/databricks/databricks-03-sidebar-menu-select-sql-warehouses.webp" alt="Databricks - Sidebar Select SQL Warehouses" width={200} height={150} />
+
+   <Image src="/docimages/connectors/databricks/databricks-03-sidebar-menu-select-sql-warehouses.webp" alt="Databricks - Sidebar Select SQL Warehouses" width={200} height={150} />
 
 3. From the list, open the SQL warehouse you want to use for synthetic data.
-    <Image src="/docimages/connectors/databricks/databricks-04-select-sql-warehouse.webp" alt="Databricks - Open SQL Warehouses" width={550} height={350} />
+
+   <Image src="/docimages/connectors/databricks/databricks-04-select-sql-warehouse.webp" alt="Databricks - Open SQL Warehouses" width={550} height={350} />
 
 4. Select the **Connection details** tab.
-    <Image src="/docimages/connectors/databricks/databricks-05-sql-warehouse-open-connection-details.webp" alt="Databricks - SQL Warehouses Connection details" width={350} height={250} />
+
+   <Image src="/docimages/connectors/databricks/databricks-05-sql-warehouse-open-connection-details.webp" alt="Databricks - SQL Warehouses Connection details" width={350} height={250} />
 
 5. Copy the necessary connection details (hostname, port, protocol, and HTTP path) for the MOSTLY AI Databricks connector.
-    <Image src="/docimages/connectors/databricks/databricks-06-sql-warehouse-get-connection-params.webp" alt="Databricks - Get connection details" width={300} height={200} />
+   <Image src="/docimages/connectors/databricks/databricks-06-sql-warehouse-get-connection-params.webp" alt="Databricks - Get connection details" width={300} height={200} />
 
 ### Get Databricks catalog name
 
 1. From the Databricks sidebar menu, select **Data**.
-    <Image src="/docimages/connectors/databricks/databricks-catalog-01-sidebar-select-data.webp" alt="Databricks - Sidebar select Data" width={150} height={100} />
+
+   <Image src="/docimages/connectors/databricks/databricks-catalog-01-sidebar-select-data.webp" alt="Databricks - Sidebar select Data" width={150} height={100} />
 
 2. Copy the name of the catalog you want to use in MOSTLY AI.
-    <Image src="/docimages/connectors/databricks/databricks-catalog-02-copy-catalog-name.webp" alt="Databricks - Copy catalog name" width={450} height={300} />
+   <Image src="/docimages/connectors/databricks/databricks-catalog-02-copy-catalog-name.webp" alt="Databricks - Copy catalog name" width={450} height={300} />
 
 ### Create a Databricks personal access token
 
 1. In Databricks, open your account menu and select **User Settings**.
-    <Image src="/docimages/connectors/databricks/databricks-token-01-account-select-user-settings.webp" alt="Databricks account - User settings" width={250} height={200} />
+
+   <Image src="/docimages/connectors/databricks/databricks-token-01-account-select-user-settings.webp" alt="Databricks account - User settings" width={250} height={200} />
 
 2. Under **Settings**, select **Developer**.
 3. Click **Manage** for **Access Tokens**.
-    <Image src="/docimages/connectors/databricks/databricks-token-02-select-developer-manage-access-tokens.webp" alt="Databricks account - Select Developer and click Manage for Access Tokens" width={800} height={150} />
+
+   <Image src="/docimages/connectors/databricks/databricks-token-02-select-developer-manage-access-tokens.webp" alt="Databricks account - Select Developer and click Manage for Access Tokens" width={800} height={150} />
 
 4. Click **Generate new token**.
-    <Image src="/docimages/connectors/databricks/databricks-token-03-click-generate-new-token.webp" alt="Databricks account - Generate new token" width={800} height={150} />
 
-3. In the **Generate new token** window, enter a name that identifies where you intend to use the token.
-    <Callout>
-    Adjust the expiration of the token in the **Lifetime (days)** box.
-    </Callout>
+   <Image src="/docimages/connectors/databricks/databricks-token-03-click-generate-new-token.webp" alt="Databricks account - Generate new token" width={800} height={150} />
 
-4. Click **Generate**.
-    <Image src="/docimages/connectors/databricks/databricks-token-04-token-name-expiration.webp" alt="Databricks account - Adjust token name and expiry" width={800} height={250} />
+5. In the **Generate new token** window, enter a name that identifies where you intend to use the token.
 
-5. Copy the access token and save it in a secure location.
-    <Callout type="warning">
-    Before you close the window, save the token in a location you can access later.
-    </Callout>
-    <Image src="/docimages/connectors/databricks/databricks-token-04-copy-token.webp" alt="Databricks account - Copy token" width={310} height={220} />
+   <Callout>Adjust the expiration of the token in the **Lifetime (days)** box.</Callout>
+
+6. Click **Generate**.
+
+   <Image src="/docimages/connectors/databricks/databricks-token-04-token-name-expiration.webp" alt="Databricks account - Adjust token name and expiry" width={800} height={250} />
+
+7. Copy the access token and save it in a secure location.
+   <Callout type="warning">Before you close the window, save the token in a location you can access later.</Callout>
+   <Image src="/docimages/connectors/databricks/databricks-token-04-copy-token.webp" alt="Databricks account - Copy token" width={310} height={220} />
 
 ## Create a Databricks connector
 
@@ -87,24 +83,27 @@ To create a Databricks connector, you need to obtain your SQL Warehouse connecti
 If you use the web application, create a new Databricks connector from the **Connectors** page.
 
 **Steps**
-1. From the **Connectors** tab, click **Create connector**.
-    <Image src="/docimages/connectors/create-connector-01-click.webp" alt="Click Create connector button" width={800} height={150}/>
-2. On the **Connect to database** tab, select **Databricks**.
+
+1.  From the **Connectors** tab, click **Create connector**.
+    <Image src="/docimages/connectors/create-connector-01-click.webp" alt="Click Create connector button" width={800} height={150} />
+2.  On the **Connect to database** tab, select **Databricks**.
     <Image src="/docimages/connectors/databricks/create-connector-02-select-databricks.webp" alt="Select Databricks connector" width={800} height={250} />
-3. Configure the Databricks connector.
+3.  Configure the Databricks connector.
     1. For **Name**, enter a name you can distinguish from other connectors.
     2. For **Access type**, select whether you want to use the connector as a **source** or **destination**.
     3. For **Host**, enter your SQL warehouse server hostname. For more information, see the [Prerequisites](#prerequisites) above.
     4. For **HTTP path**, enter your SQL warehouse HTTP path.
     5. For **Access token**, enter your Databricks personal access token.
     6. For **Catalog**, enter the name of your Databricks catalog.
-        <Image src="/docimages/connectors/databricks/create-connector-03-configure-databricks.webp" alt="Configure Databricks connector" width={350} height={250} />
-4. Click **Save** to save your new Databricks connector.<br /><br />
+       <Image src="/docimages/connectors/databricks/create-connector-03-configure-databricks.webp" alt="Configure Databricks connector" width={350} height={250} />
+4.  Click **Save** to save your new Databricks connector.<br /><br />
     MOSTLY AI tests the connection. If you see an error, check the connection details, update them, and click **Save** again.<br /><br />
     You can click **Save anyway** to save the connector disregarding any errors.
+
 </Tabs.Tab>
 <Tabs.Tab>
-If you use the Python SDK, create a Databricks connector with `mostly.connect()` and provide a connector configuration dictionary as shown below.
+
+    If you use the Python SDK, create a Databricks connector with `mostly.connect()` and provide a connector configuration dictionary as shown below.
 
 ```python copy filename="python"
 c = mostly.connect({
@@ -122,6 +121,7 @@ c = mostly.connect({
     "test_connection": True
 })
 ```
+
 </Tabs.Tab>
 </Tabs>
 
@@ -136,8 +136,8 @@ In the web application, the Databricks connector configuration includes configur
 
 **Steps**
 
-1. To use a Service principal for authentication in your Databricks connector, select the **Authenticate with Service Principal** checkbox.
-2. Configure the Databricks connector.
+1.  To use a Service principal for authentication in your Databricks connector, select the **Authenticate with Service Principal** checkbox.
+2.  Configure the Databricks connector.
     1. For **Name**, enter a name you can distinguish from other connectors.
     2. For **Access type**, select whether you want to use the connector as a **source** or **destination**.
     3. For **Host**, enter your SQL warehouse server hostname. For more information, see the [Prerequisites](#prerequisites) above.
@@ -145,19 +145,16 @@ In the web application, the Databricks connector configuration includes configur
     5. For **Catalog**, enter the name of your Databricks catalog.
     6. For **Tenant ID**, enter your tenant ID.
     7. For **Client ID**, enter your client ID.
-    7. For **Client secret**, enter your client secret.
-        <Image
-            src="/docimages/connectors/databricks/create-connector-04-authenticate-with-service-principal.webp"
-            alt="Configure Databricks connector with a Service principal"
-            width={700}
-            height={250}
-        />
-3. Click **Save** to save your new Databricks connector.<br /><br />
+    8. For **Client secret**, enter your client secret.
+       <Image src="/docimages/connectors/databricks/create-connector-04-authenticate-with-service-principal.webp" alt="Configure Databricks connector with a Service principal" width={700} height={250} />
+3.  Click **Save** to save your new Databricks connector.<br /><br />
     MOSTLY AI tests the connection. If you see an error, check the connection details, update them, and click **Save** again.<br /><br />
     You can click **Save anyway** to save the connector disregarding any errors.
+
 </Tabs.Tab>
 <Tabs.Tab>
-If you use the Python SDK, you can create a Databricks connector with a Service principal account with the code snippet below.
+
+    If you use the Python SDK, you can create a Databricks connector with a Service principal account with the code snippet below.
 
 ```python copy filename="python"
 config={
@@ -180,6 +177,7 @@ config={
 }
 c = mostly.connect(config)
 ```
+
 </Tabs.Tab>
 </Tabs>
 
@@ -187,5 +185,5 @@ c = mostly.connect(config)
 
 Depending on whether you created a **source** or a **destination** connector, you can use the connector as:
 
-* [data source](../use/data-source) for a new generator
-* [data destination](../use/data-destination) for a new synthetic dataset
+- [data source](../use/data-source) for a new generator
+- [data destination](../use/data-destination) for a new synthetic dataset

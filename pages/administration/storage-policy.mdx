@@ -11,17 +11,17 @@ MOSTLY AI runs as a set of containerized applications and services that you can 
 
 The storage system of MOSTLY AI is MinIO or a compatible S3 storage. Storage is only used to store the following:
 
-* Aggregate analysis and lookup tables for encoding-decoding
-* AI model weight files
-* Configurations
-* Synthetic data
-* Quality reports
+- Aggregate analysis and lookup tables for encoding-decoding
+- AI model weight files
+- Configurations
+- Synthetic data
+- Quality reports
 
 The only place where original data is accessed is in the training job, which is a Kubernetes job. The original data is stored temporarily on the job’s volume, which is destroyed by Kubernetes when the job finishes. Hence, there is no original data stored in the MinIO storage.
 
 MOSTLY AI uses two types of Kubernetes storage classes.
 
-* **Block Storage**. Used by single pods, such as PostgreSQL and the license file.
-* **Shared Storage**. Shared by various pods to store models, synthetic data, and others.
+- **Block Storage**. Used by single pods, such as PostgreSQL and the license file.
+- **Shared Storage**. Shared by various pods to store models, synthetic data, and others.
 
 For more information on all supported storage classes, see [Storage classes](https://docs.mostly.ai/install/architecture#supported-kubernetes-storage-classes).

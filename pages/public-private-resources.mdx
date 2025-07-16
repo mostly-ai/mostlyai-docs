@@ -3,55 +3,49 @@ title: 'Public and private resources'
 description: 'In MOSTLY AI, all resources (generators, synthetic datasets, connectors, chats) are private by default. You can make generators and synthetic datasets public to share them with the world or keep them private for internal use.'
 ---
 
-import { Tabs } from 'nextra/components'
-import { Callout } from 'nextra/components'
-import Image from 'next/image'
-import { CustomCallout } from '@components/custom-callout'
-import { PrivateResourceIcon, PublicResourceIcon, UnlistedResourceIcon } from '@components/icons'
+import { Tabs } from 'nextra/components';
+import { Callout } from 'nextra/components';
+import Image from 'next/image';
+import { CustomCallout } from '@components/custom-callout';
+import { PrivateResourceIcon, PublicResourceIcon, UnlistedResourceIcon } from '@components/icons';
 
 # Public and private resources
 
-<PrivateResourceIcon/>In MOSTLY AI, all resources (generators, synthetic datasets, connectors, chats) are **private** immediately after you create them.
+<PrivateResourceIcon />
+In MOSTLY AI, all resources (generators, synthetic datasets, connectors, chats) are **private** immediately after you create them.
 
-<PublicResourceIcon/>You can make [generators](/generators), [synthetic datasets](/synthetic-datasets), and [connectors](/connectors) **public** to share with the world. Alternatively, you can keep them private for your internal use or that of your organization's.
+<PublicResourceIcon />
+You can make [generators](/generators), [synthetic datasets](/synthetic-datasets), and [connectors](/connectors) **public** to share with the world. Alternatively, you can keep them private for your internal use or that of your organization's.
 
-<UnlistedResourceIcon/>You can also make generators, synthetic datasets, connectors, and chats **unlisted**. Unlisted resources are not visible in public resource lists, but anyone with the link can access them.
+<UnlistedResourceIcon />
+You can also make generators, synthetic datasets, connectors, and chats **unlisted**. Unlisted resources are not visible in public resource lists, but anyone with the link can access them.
 
 <CustomCallout>
-_Public resource lists_ include:
-- Generators list
-- Synthetic datasets list
-- Connectors list
-- User profiles
-- Organization profiles
-- Search results
+
+_Public resource lists_ include: - Generators list - Synthetic datasets list - Connectors list - User profiles - Organization profiles - Search results
+
 </CustomCallout>
 
 [Chats](/assistant) are always private by default but can be shared as unlisted resources.
 
-
-| Resource              | Default visibility         | Visibility options                                                                 | Organizations visibility                                      |
-| ------------------ | -------------------------- | ---------------------------------------------------------------------------------- | ------------------------------------------------------------- |
-| Generators         | <PrivateResourceIcon/>Private | <PublicResourceIcon/>Public<br /><UnlistedResourceIcon/>Unlisted<br /><PrivateResourceIcon/>Private                            | <PublicResourceIcon/>Public<br /><UnlistedResourceIcon/>Unlisted<br /><PrivateResourceIcon/>Private (within organization) |
-| Synthetic datasets | <PrivateResourceIcon/>Private | <PublicResourceIcon/>Public<br /><UnlistedResourceIcon/>Unlisted<br /><PrivateResourceIcon/>Private                            | <PublicResourceIcon/>Public<br /><UnlistedResourceIcon/>Unlisted<br /><PrivateResourceIcon/>Private (within organization) |
-| Connectors         | <PrivateResourceIcon/>Private | <PublicResourceIcon/>Public<br /><UnlistedResourceIcon/>Unlisted<br /><PrivateResourceIcon/>Private                            | <PublicResourceIcon/>Public<br /><UnlistedResourceIcon/>Unlisted<br /><PrivateResourceIcon/>Private (within organization) |
-| Chats  | <PrivateResourceIcon/>Private | <PrivateResourceIcon/>Private<br /><UnlistedResourceIcon/>Unlisted | Cannot be transferred to an organization                       |
+| Resource           | Default visibility            | Visibility options                                                                                  | Organizations visibility                                                                                                  |
+| ------------------ | ----------------------------- | --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| Generators         | <PrivateResourceIcon/>Private | <PublicResourceIcon/>Public<br /><UnlistedResourceIcon/>Unlisted<br /><PrivateResourceIcon/>Private | <PublicResourceIcon/>Public<br /><UnlistedResourceIcon/>Unlisted<br /><PrivateResourceIcon/>Private (within organization) |
+| Synthetic datasets | <PrivateResourceIcon/>Private | <PublicResourceIcon/>Public<br /><UnlistedResourceIcon/>Unlisted<br /><PrivateResourceIcon/>Private | <PublicResourceIcon/>Public<br /><UnlistedResourceIcon/>Unlisted<br /><PrivateResourceIcon/>Private (within organization) |
+| Connectors         | <PrivateResourceIcon/>Private | <PublicResourceIcon/>Public<br /><UnlistedResourceIcon/>Unlisted<br /><PrivateResourceIcon/>Private | <PublicResourceIcon/>Public<br /><UnlistedResourceIcon/>Unlisted<br /><PrivateResourceIcon/>Private (within organization) |
+| Chats              | <PrivateResourceIcon/>Private | <PrivateResourceIcon/>Private<br /><UnlistedResourceIcon/>Unlisted                                  | Cannot be transferred to an organization                                                                                  |
 
 <Callout>
 The following applies to **public resources**:
 
-* If you made a generator, synthetic dataset, or connector public before transferring to an organization, the resource will remain public after the transfer. It will be visible from the organization profile.
-* Public resources are visible to everyone, including people who are not part of your organization.
+- If you made a generator, synthetic dataset, or connector public before transferring to an organization, the resource will remain public after the transfer. It will be visible from the organization profile.
+- Public resources are visible to everyone, including people who are not part of your organization.
+
 </Callout>
 
 **Steps**
 
 1. With a generator, synthetic dataset, or connector open, click **Share**.
-    <Image
-        src="/docimages/organizations/add-assets-01-select-share.webp"
-        alt="Manage visibility - 01 - Kebab menu"
-        width={700}
-        height={300}
-    />
+   <Image src="/docimages/organizations/add-assets-01-select-share.webp" alt="Manage visibility - 01 - Kebab menu" width={700} height={300} />
 2. Select whether the resource should be made **Public**, **Private**, or **Unlisted** in the **Visibilty** dropdown menu.
 3. Click **Save** to confirm your selection.

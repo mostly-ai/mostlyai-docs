@@ -1,13 +1,13 @@
 ---
-title: "Quick start for Data consumers"
-description: "As a Data consumer, you can use a trained generator in MOSTLY AI to generate new synthetic data. Use the new data for analysis, downstream machine learning (ML) tasks, or share it with others."
+title: 'Quick start for Data consumers'
+description: 'As a Data consumer, you can use a trained generator in MOSTLY AI to generate new synthetic data. Use the new data for analysis, downstream machine learning (ML) tasks, or share it with others.'
 ---
 
-import Image from 'next/image'
-import { Steps } from 'nextra/components'
-import { Tabs } from 'nextra/components'
-import { Callout } from 'nextra/components'
-import { CustomCallout } from '@components/custom-callout'
+import Image from 'next/image';
+import { Steps } from 'nextra/components';
+import { Tabs } from 'nextra/components';
+import { Callout } from 'nextra/components';
+import { CustomCallout } from '@components/custom-callout';
 
 # Quick start for Data consumers
 
@@ -26,48 +26,41 @@ To do so, you can use a MOSTLY AI trained generator for fresh and new synthetic 
 
     For details, see [Public and private resources](/public-private-resources).
     </Callout>
+
 2. With the generator open, click **Generate data**.
-    <Image
-        src="/docimages/quickstart/data-consumers/generate-sd-01-click-generate-data.webp"
-        alt="MOSTLY AI - Generate synthetic data - 01 - Click Generate data"
-        width={800}
-        height={150}
-    />
+   <Image src="/docimages/quickstart/data-consumers/generate-sd-01-click-generate-data.webp" alt="MOSTLY AI - Generate synthetic data - 01 - Click Generate data" width={800} height={150} />
 3. Click **Start generation**.
-    <Image
-        src="/docimages/quickstart/data-consumers/generate-sd-02-click-start-generation.webp"
-        alt="MOSTLY AI - Train a generator - 03 - Click Upload files"
-        width={800}
-        height={150}
-    />
+   <Image src="/docimages/quickstart/data-consumers/generate-sd-02-click-start-generation.webp" alt="MOSTLY AI - Train a generator - 03 - Click Upload files" width={800} height={150} />
 
 **What's next**
 
 When the generation of synthetic data completes, you can [download](/quick-start/data-consumers#step-2-download-synthetic-data) the data in CSV, Parquet, or XSLX format.
 
 You can also [make the synthetic dataset public](/quick-start/data-consumers#step-3-make-the-synthetic-dataset-public) so others can access its page, review the **Data report**, **Data samples**, **Generation steps**, and **Configuration**, or download the data in their preferred format.
+
 </Tabs.Tab>
 <Tabs.Tab>
 
-<CustomCallout type="API">
-Available in both [Local and Client modes](/python-sdk#local-and-client-modes).
-</CustomCallout>
+<CustomCallout type="API">Available in both [Local and Client modes](/python-sdk#local-and-client-modes).</CustomCallout>
 
 Use the imported generator object `g` to generate a new synthetic dataset.
 
 1. Generate your first synthetic dataset, using the imported generator.
-    ```python copy filename="python" /mostly_remote/ /mostly/
-    # Local mode
-    sd = mostly.generate(g, size=100)
 
-    # Client mode
-    # sd = mostly_remote.generate(g, size=100)
-    ```
+   ```python copy filename="python" /mostly_remote/ /mostly/
+   # Local mode
+   sd = mostly.generate(g, size=100)
+
+   # Client mode
+   # sd = mostly_remote.generate(g, size=100)
+   ```
+
 2. Consume the generated data.
-    ```python copy filename="python"
-    df = sd.data()
-    df
-    ```
+   `python copy filename="python"
+df = sd.data()
+df
+`
+
 </Tabs.Tab>
 </Tabs>
 
@@ -86,9 +79,7 @@ Use the imported generator object `g` to generate a new synthetic dataset.
 </Tabs.Tab>
 <Tabs.Tab>
 
-<CustomCallout type="API">
-Available in both [Local and Client modes](/python-sdk#local-and-client-modes).
-</CustomCallout>
+<CustomCallout type="API">Available in both [Local and Client modes](/python-sdk#local-and-client-modes).</CustomCallout>
 
 Use the Python SDK to easily download your synthetic data in the file format that you need.
 
@@ -102,25 +93,16 @@ sd.download(format="PARQUET")
 # download as Excel format
 sd.download(format="XLSX")
 ```
+
 </Tabs.Tab>
 </Tabs>
 
 ## Step 3: Make the synthetic dataset public
 
 1. With the synthetic dataset open, click **Share**.
-    <Image
-        src="/docimages/quickstart/data-consumers/datasets-make-public-01-select-share.webp"
-        alt="MOSTLY AI - Make the synthetic dataset public - 01 - Click Make public"
-        width={800}
-        height={150}
-    />
+   <Image src="/docimages/quickstart/data-consumers/datasets-make-public-01-select-share.webp" alt="MOSTLY AI - Make the synthetic dataset public - 01 - Click Make public" width={800} height={150} />
 2. Select **Public**.
-    <Image
-        src="/docimages/quickstart/data-consumers/datasets-make-public-02-select-public.webp"
-        alt="MOSTLY AI - Make the synthetic dataset public - 02 - Select Public"
-        width={800}
-        height={150}
-    />
+   <Image src="/docimages/quickstart/data-consumers/datasets-make-public-02-select-public.webp" alt="MOSTLY AI - Make the synthetic dataset public - 02 - Select Public" width={800} height={150} />
 3. Click **Save**.
 4. Copy and share the URL of the synthetic dataset.
 
@@ -129,4 +111,5 @@ sd.download(format="XLSX")
 Use the synthetic dataset to freely analyze the data without the privacy-related concerns.
 
 Share the dataset URL so others can do the same.
+
 </Steps>

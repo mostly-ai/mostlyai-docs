@@ -3,9 +3,9 @@ title: 'Deliver synthetic data to databases or cloud buckets'
 description: 'When you configure the generation of a synthetic dataset, you can select to deliver the generated synthetic data to a database or cloud storage bucket.'
 ---
 
-import { Callout } from 'nextra/components'
-import { Tabs } from 'nextra/components'
-import Image from 'next/image'
+import { Callout } from 'nextra/components';
+import { Tabs } from 'nextra/components';
+import Image from 'next/image';
 
 # Deliver synthetic data to databases or cloud buckets
 
@@ -15,53 +15,31 @@ When you configure the generation of a synthetic dataset, you can select to deli
 <Tabs.Tab>
 If you use the web application, you can select a destination before you start the synthetic dataset generation from the **Dataset destination** button.
 
-<Callout>
-* Regardless of any destination you select, the generated synthetic dataset will always be available to download as a Parquet file.
-* CSV downloads are also available for synthetic datasets with less than 10M data points.
-* XSLX downloads include up to 10k samples of data.
-</Callout>
+<Callout>* Regardless of any destination you select, the generated synthetic dataset will always be available to download as a Parquet file. * CSV downloads are also available for synthetic datasets with less than 10M data points. * XSLX downloads include up to 10k samples of data.</Callout>
 
 **Steps**
 
 1. On the **Synthetic dataset configuration** page, click **Dataset destination**.
-    <Image
-        src="/docimages/synthetic-datasets/deliver/01-configure-01-click-dataset-destination.webp"
-        alt="Configure synthetic dataset destination"
-        width={800}
-        height={150}
-    />
+   <Image src="/docimages/synthetic-datasets/deliver/01-configure-01-click-dataset-destination.webp" alt="Configure synthetic dataset destination" width={800} height={150} />
 2. On the **Synthetic dataset destination** dialog, configure the destination.
-    1. For **Destination**, select a database or cloud bucket destination.
-        <Callout>
-        The **Destination** drop-down lists only connectors that have the **Destination** access type. <br />You can type to filter the names among the list of destination connectors.
-        </Callout>
-        <Image
-            src="/docimages/synthetic-datasets/deliver/01-configure-0X-select-destination.webp"
-            alt="Configure synthetic dataset destination - Select Destination"
-            width={800}
-            height={150}
-        />
-    2. For **Location**, select a database, database schema, or cloud bucket folder where you want to deliver the generated synthetic dataset.<br /><br />
-        For databases, you can select a database schema or a table from the **Location** drop-down menu.
-        <Image
-            src="/docimages/synthetic-datasets/deliver/01-configure-02-databases-location-drop-down.webp"
-            alt="Configure synthetic dataset destination - Location drop-down menu for databases"
-            width={800}
-            height={150}
-        />
-        For cloud storage buckets, type the folder path in the **Location** text box.
-        <Image
-            src="/docimages/synthetic-datasets/deliver/01-configure-03-cloud-storage-location-text-box.webp"
-            alt="Configure synthetic dataset destination - Location drop-down menu for cloud buckets"
-            width={800}
-            height={150}
-        />
+   1. For **Destination**, select a database or cloud bucket destination.
+      <Callout>
+        The **Destination** drop-down lists only connectors that have the **Destination** access type. <br />
+        You can type to filter the names among the list of destination connectors.
+      </Callout>
+      <Image src="/docimages/synthetic-datasets/deliver/01-configure-0X-select-destination.webp" alt="Configure synthetic dataset destination - Select Destination" width={800} height={150} />
+   2. For **Location**, select a database, database schema, or cloud bucket folder where you want to deliver the generated synthetic dataset.<br /><br />
+      For databases, you can select a database schema or a table from the **Location** drop-down menu.
+      <Image src="/docimages/synthetic-datasets/deliver/01-configure-02-databases-location-drop-down.webp" alt="Configure synthetic dataset destination - Location drop-down menu for databases" width={800} height={150} />
+      For cloud storage buckets, type the folder path in the **Location** text box.
+      <Image src="/docimages/synthetic-datasets/deliver/01-configure-03-cloud-storage-location-text-box.webp" alt="Configure synthetic dataset destination - Location drop-down menu for cloud buckets" width={800} height={150} />
 3. (Optional) Select **Overwrite existing tables** if you deliver to the same destination over and over again and want to maintain a fresh copy of synthetic data.
 4. Click **Proceed**.
 
 **Result**
 
 When the synthetic dataset is generated, MOSTLY AI delivers it to the specified location.
+
 </Tabs.Tab>
 <Tabs.Tab>
 1. Get the ID of the destination connector.
@@ -92,5 +70,6 @@ When the synthetic dataset is generated, MOSTLY AI delivers it to the specified 
         }
     })
     ```
+
 </Tabs.Tab>
 </Tabs>

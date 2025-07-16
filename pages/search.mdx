@@ -3,8 +3,8 @@ title: 'Search and filtering'
 description: 'The Search bar offers direct access to all of your generators, synthetic datasets, connectors, and chats in MOSTLY AI. You also have dedicated search for each entity type. Each entity type you can also filter by the type of ownership: all, own, own organizations.'
 ---
 
-import { Tabs } from 'nextra/components'
-import Image from 'next/image'
+import { Tabs } from 'nextra/components';
+import Image from 'next/image';
 
 # Search and filtering
 
@@ -43,6 +43,7 @@ for i in all_results:
     print(i)
     print(f"{i.metadata.owner_name:}/{i.name}")
 ```
+
 </Tabs.Tab>
 </Tabs>
 
@@ -50,20 +51,10 @@ for i in all_results:
 
 For each entity type, you can filter the entities list from the dedicated search bar.
 
-<Image
-    src="/docimages/search/search-generators.webp"
-    alt="MOSTLY AI - Search generators"
-    width={800}
-    height={500}
-/>
+<Image src="/docimages/search/search-generators.webp" alt="MOSTLY AI - Search generators" width={800} height={500} />
 
 ## Filter by ownership
 
 For each entity type, use the Owner filter to show all entities, only your entities, or only entities from your organizations.
 
-<Image
-    src="/docimages/search/search-filter-by-ownership.webp"
-    alt="MOSTLY AI - Filter by ownership"
-    width={800}
-    height={500}
-/>
+<Image src="/docimages/search/search-filter-by-ownership.webp" alt="MOSTLY AI - Filter by ownership" width={800} height={500} />

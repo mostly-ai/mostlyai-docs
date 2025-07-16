@@ -1,19 +1,17 @@
 ---
-title: "Assistant configuration"
-description: "When you deploy MOSTLY AI, the Assistant is included as part of the deployment. For the Assistant to work, you need to configure access to the Language Learning Model (LLM)."
+title: 'Assistant configuration'
+description: 'When you deploy MOSTLY AI, the Assistant is included as part of the deployment. For the Assistant to work, you need to configure access to the Language Learning Model (LLM).'
 ---
 
-import Image from 'next/image'
-import { Callout } from 'nextra/components'
-import { CustomCallout } from '@components/custom-callout'
+import Image from 'next/image';
+import { Callout } from 'nextra/components';
+import { CustomCallout } from '@components/custom-callout';
 
 # Assistant configuration
 
 When you deploy MOSTLY AI, the Assistant is included as part of the deployment of Kubernetes services and containers. For the Assistant to work, you need to configure access to the Language Learning Model (LLM). The Assistant can use any LLM chosen by your organization.
 
-<CustomCallout>
-**Note**: You can only configure the Assistant with the **Super Admin** account.
-</CustomCallout>
+<CustomCallout>**Note**: You can only configure the Assistant with the **Super Admin** account.</CustomCallout>
 
 ## Enable the Assistant
 
@@ -23,12 +21,8 @@ Enabling and configuring the Assistant is a one-time operation.
 
 1. From the **Account** menu, select **Assistant settings**.
 
-    <Image
-        src="/docimages/assistant/chat-assistant-configuration.webp"
-        alt="MOSTLY AI - Assistant configuration"
-        width={800}
-        height={400}
-    />
+   <Image src="/docimages/assistant/chat-assistant-configuration.webp" alt="MOSTLY AI - Assistant configuration" width={800} height={400} />
+
 2. On the **Assistant settings** page, select **Enable Assistant**.
 3. Adjust the rest of the configuration option as listed in the sections below.
 4. When done, click **Save**.
@@ -51,9 +45,9 @@ For **LLM extra variables**, define any additional variables that your LLM provi
 
 For example, **AWS Bedrock** requires:
 
-* `aws_region_name=us-east-1`
-* `aws_access_key_id=XXX`
-* `aws_secret_access_key=XXX`
+- `aws_region_name=us-east-1`
+- `aws_access_key_id=XXX`
+- `aws_secret_access_key=XXX`
 
 ### System Instructions
 
@@ -69,13 +63,6 @@ Define a custom set of instructions for your MOSTLY AI Assistant to match the ne
 
 1. Switch to **Custom**.
 2. Define a set of instructions that modify the existing ones defined by MOSTLY AI.
-    <Image
-        src="/docimages/assistant/chat-assistant-configuration-custom-instructions.webp"
-        alt="MOSTLY AI - Assistant custom instructions"
-        width={800}
-        height={400}
-    />
+   <Image src="/docimages/assistant/chat-assistant-configuration-custom-instructions.webp" alt="MOSTLY AI - Assistant custom instructions" width={800} height={400} />
 
-<Callout>
-Update the existing instructions as much as possible. Overwriting the existing instructions will completely change how the Assistant replies to prompts.
-</Callout>
+<Callout>Update the existing instructions as much as possible. Overwriting the existing instructions will completely change how the Assistant replies to prompts.</Callout>

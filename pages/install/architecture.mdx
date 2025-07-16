@@ -1,21 +1,11 @@
 ---
 title: Architecture
-description: "MOSTLY AI runs as a set of containerized applications and services that you can deploy in a Kubernetes cluster and maintain a fault-tolerant and highly available application."
+description: 'MOSTLY AI runs as a set of containerized applications and services that you can deploy in a Kubernetes cluster and maintain a fault-tolerant and highly available application.'
 ---
 
-import Image from 'next/image'
-import { Callout } from 'nextra/components'
-import {
-            ChipIcon,
-            WebFrontendIcon,
-            UserPersonaIcon,
-            DatabaseLockIcon,
-            TerminalIcon,
-            StorageIcon,
-            AssistantBrokerIcon,
-            JupyterHubIcon,
-            ProbeAPIIcon
-        } from '@components/icons'
+import Image from 'next/image';
+import { Callout } from 'nextra/components';
+import { ChipIcon, WebFrontendIcon, UserPersonaIcon, DatabaseLockIcon, TerminalIcon, StorageIcon, AssistantBrokerIcon, JupyterHubIcon, ProbeAPIIcon } from '@components/icons';
 
 # Architecture
 
@@ -25,27 +15,26 @@ MOSTLY AI runs as a set of containerized applications and services that you can 
 
 ## Application Nodes
 
-|     | <div style={{width: '152px'}}>Pod and image name</div> | Description | Pod Lifecycle |
-| --- | --- | --- | --- |
-| <WebFrontendIcon/> Web frontend          | **mostly-ui**<br /><br />`mostly-app-ui`                           | Contains the frontend of MOSTLY AI. Reachable over port `8080`. | Service |
-| <TerminalIcon/> Backend                  | **mostly-app**<br /><br />`mostly-app-enterprise`                  | Contains the backend and public APIs of MOSTLY AI. | Service |
-| <DatabaseLockIcon /> Coordinator Service | **mostly-coordinator**<br /><br />`mostly-coordinator`             | Component that takes all requests from the web application and coordinates execution of tasks on the main AI engine. | Service |
-| <StorageIcon /> Data discovery           | **mostly-core-api**<br /><br />`mostly-core-api`                   | Component that reads metadata and analyzes data sources and destinations. | Service |
-| <UserPersonaIcon /> Keycloak             | **mostly-keycloak**<br /><br />`mostly-keycloak`                   | Keycloak is an open-source identity management, authentication, and authorization tool. This container has a pre-configured Keycloak instance for MOSTLY AI. | Service |
-| <DatabaseLockIcon /> PostgreSQL          | **mostly-psql**<br /><br />`postgres`                              | Database instance of the system. Contains databases for app, coordinator, and Keycloak. | Service |
-| <DatabaseLockIcon /> MinIO               | **mostly-minio**<br /><br />`minio`                                | Shared storage service. | Service |
-| <AssistantBrokerIcon /> Assistant Broker | **mostly-assistant-broker**<br /><br />`mostly-assistant-broker`   | Component that manages Assistant communication with the LLM service and the chat sessions. | Service |
-| <JupyterHubIcon /> Jupyter Hub           | **jupyter-hub**<br /><br />`jupyter-hub`                           | Manages Python sessions for the assistant service, providing isolated Jupyter environments for code execution. | Service |
-| <ProbeAPIIcon /> Probe API               | **mostly-probe**<br /><br />`mostly-probe`                         | Component responsible for online synthetic data generation from trained generators. | Service |
-
+|                                          | <div style={{width: '152px'}}>Pod and image name</div>           | Description                                                                                                                                                  | Pod Lifecycle |
+| ---------------------------------------- | ---------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- |
+| <WebFrontendIcon/> Web frontend          | **mostly-ui**<br /><br />`mostly-app-ui`                         | Contains the frontend of MOSTLY AI. Reachable over port `8080`.                                                                                              | Service       |
+| <TerminalIcon/> Backend                  | **mostly-app**<br /><br />`mostly-app-enterprise`                | Contains the backend and public APIs of MOSTLY AI.                                                                                                           | Service       |
+| <DatabaseLockIcon /> Coordinator Service | **mostly-coordinator**<br /><br />`mostly-coordinator`           | Component that takes all requests from the web application and coordinates execution of tasks on the main AI engine.                                         | Service       |
+| <StorageIcon /> Data discovery           | **mostly-core-api**<br /><br />`mostly-core-api`                 | Component that reads metadata and analyzes data sources and destinations.                                                                                    | Service       |
+| <UserPersonaIcon /> Keycloak             | **mostly-keycloak**<br /><br />`mostly-keycloak`                 | Keycloak is an open-source identity management, authentication, and authorization tool. This container has a pre-configured Keycloak instance for MOSTLY AI. | Service       |
+| <DatabaseLockIcon /> PostgreSQL          | **mostly-psql**<br /><br />`postgres`                            | Database instance of the system. Contains databases for app, coordinator, and Keycloak.                                                                      | Service       |
+| <DatabaseLockIcon /> MinIO               | **mostly-minio**<br /><br />`minio`                              | Shared storage service.                                                                                                                                      | Service       |
+| <AssistantBrokerIcon /> Assistant Broker | **mostly-assistant-broker**<br /><br />`mostly-assistant-broker` | Component that manages Assistant communication with the LLM service and the chat sessions.                                                                   | Service       |
+| <JupyterHubIcon /> Jupyter Hub           | **jupyter-hub**<br /><br />`jupyter-hub`                         | Manages Python sessions for the assistant service, providing isolated Jupyter environments for code execution.                                               | Service       |
+| <ProbeAPIIcon /> Probe API               | **mostly-probe**<br /><br />`mostly-probe`                       | Component responsible for online synthetic data generation from trained generators.                                                                          | Service       |
 
 ## AI Worker nodes
 
 {/* Internal note: The non-breaking hyphen character below &#x2011; prevents unreadable line breaks in the output */}
 
-|     | Pod and image name | Description | Pod Lifecycle |
-| --- | ------------------ | ----------- | ------------- |
-| <ChipIcon/> AI job                   | **engine-task-\<task-id>**<br /><br />`mostly-core`  | • Reads from data sources and writes into data destinations<br />• Performs AI training and data generation.<br />• Create Model and Data reports | Job |
+|                    | Pod and image name                                  | Description                                                                                                                                       | Pod Lifecycle |
+| ------------------ | --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| <ChipIcon/> AI job | **engine-task-\<task-id>**<br /><br />`mostly-core` | • Reads from data sources and writes into data destinations<br />• Performs AI training and data generation.<br />• Create Model and Data reports | Job           |
 
 ## Third-party integrations and connections
 
@@ -71,7 +60,7 @@ The Assistant Broker can connect to any Large Language Model (LLM) service that 
 
 MOSTLY AI uses two types of storage.
 
-* **Block Storage**. Used by single pods, such as PostgreSQL. Typically, this is automatically provisioned by the Kubernetes cluster.
-* **Shared Storage**. Shared by various pods to store models, synthetic data, and others. Two options exist for using shared storage:
-    * **MinIO**. MOSTLY AI provides shared storage via [MinIO](https://min.io/). This uses the block storage provisioned by the Kubernetes cluster.
-    * **External S3 storage**. You can use an external S3 storage solution instead of MinIO.
+- **Block Storage**. Used by single pods, such as PostgreSQL. Typically, this is automatically provisioned by the Kubernetes cluster.
+- **Shared Storage**. Shared by various pods to store models, synthetic data, and others. Two options exist for using shared storage:
+  - **MinIO**. MOSTLY AI provides shared storage via [MinIO](https://min.io/). This uses the block storage provisioned by the Kubernetes cluster.
+  - **External S3 storage**. You can use an external S3 storage solution instead of MinIO.

@@ -1,10 +1,10 @@
 ---
-title: "Python session status"
-description: "Each new chat runs a Python environment where MOSTLY AI runs the Python code to navigate you and show you data insights. The Python session becomes inactive after a period of inactivity but can restart automatically. Learn how to check and manage your Python session status."
+title: 'Python session status'
+description: 'Each new chat runs a Python environment where MOSTLY AI runs the Python code to navigate you and show you data insights. The Python session becomes inactive after a period of inactivity but can restart automatically. Learn how to check and manage your Python session status.'
 ---
 
-import Image from 'next/image'
-import { Callout } from 'nextra/components'
+import Image from 'next/image';
+import { Callout } from 'nextra/components';
 
 # Python session status
 
@@ -12,37 +12,20 @@ Each new chat runs a Python environment. It is in the Python environment where a
 
 After you create a new chat, the Python session is initialized in the background before it becomes ready for use. Until then, the Python session status is **Initializing**.
 
-<Image
-    src="/docimages/assistant/chat-python-session-initializing.webp"
-    alt="Python session initializing"
-    width={800}
-    height={400}
-/>
+<Image src="/docimages/assistant/chat-python-session-initializing.webp" alt="Python session initializing" width={800} height={400} />
 
 After the Python session becomes available, its status changes to **Running**.
 
-<Image
-    src="/docimages/assistant/chat-python-session-running.webp"
-    alt="Python session running"
-    width={800}
-    height={400}
-/>
+<Image src="/docimages/assistant/chat-python-session-running.webp" alt="Python session running" width={800} height={400} />
 
 After 10 minutes of inactivity, the Python session status changes to **Inactive**.
 
-<Image
-    src="/docimages/assistant/chat-python-session-expired.webp"
-    alt="Python session inactive"
-    width={800}
-    height={400}
-/>
+<Image src="/docimages/assistant/chat-python-session-expired.webp" alt="Python session inactive" width={800} height={400} />
 
 ## Handle inactive Python sessions
 
 When a Python session becomes inactive due to inactivity, it can automatically restart when you run Python code again. The Assistant is aware when the session has restarted and will intelligently manage variables that are no longer available from the previous session.
 
-<Callout type="info">
-Your uploaded files remain available even after the Python session restarts, so you can continue working with your data seamlessly.
-</Callout>
+<Callout type="info">Your uploaded files remain available even after the Python session restarts, so you can continue working with your data seamlessly.</Callout>
 
 The Assistant will automatically handle the session restart process and inform you if any previously defined variables need to be recreated due to the session restart.

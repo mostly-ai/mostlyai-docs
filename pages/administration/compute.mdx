@@ -3,8 +3,8 @@ title: 'Compute'
 description: 'With flexible compute, you can add any compute resources needed to complete your GenAI workloads in MOSTLY AI.'
 ---
 
-import Image from 'next/image'
-import { Callout } from 'nextra/components'
+import Image from 'next/image';
+import { Callout } from 'nextra/components';
 
 # Compute
 
@@ -16,69 +16,39 @@ You can define any of your existing Kubernetes compute resources as a new comput
 
 **Prerequisites**
 
-* Before you define a new compute, check the available compute resources in your Kubernetes cluster.
-* You need to be a super admin to add a new compute.
+- Before you define a new compute, check the available compute resources in your Kubernetes cluster.
+- You need to be a super admin to add a new compute.
 
 **Steps**
 
 1. From the profile menu, select **Compute**.
-    <Image
-      src="/docimages/administration/compute/01-profile-menu-select-compute.webp"
-      alt="MOSTLY AI - Profile menu - Select Compute"
-      width={800}
-      height={15000}
-    />
+   <Image src="/docimages/administration/compute/01-profile-menu-select-compute.webp" alt="MOSTLY AI - Profile menu - Select Compute" width={800} height={15000} />
 2. Click **+ New compute**.
-    <Image
-      src="/docimages/administration/compute/02-click-new-compute.webp"
-      alt="MOSTLY AI - Click New Compute"
-      width={800}
-      height={15000}
-    />
+   <Image src="/docimages/administration/compute/02-click-new-compute.webp" alt="MOSTLY AI - Click New Compute" width={800} height={15000} />
 3. Select **Kubernetes**.
-    <Image
-      src="/docimages/administration/compute/02.01-select-kubernetes.webp"
-      alt="MOSTLY AI - Select Kubernetes"
-      width={800}
-      height={15000}
-    />
-3. Define the compute configuration.
-    | Kubernetes compute parameter | Description |
-    | ---------------- | ------------------------------------------------------------------------------------------------------------------ |
-    | **Name**         | A unique name for the compute. |
-    | **CPUs**         | The number of CPU cores. |
-    | **Memory**       | The amount of memory. |
-    | **GPUs**         | The number of GPUs. |
-    | **GPU memory**   | The amount of GPU memory. |
-    | **Toleration**   | A toleration that matches the taint defined for your cluster.<br /><br />⚠️ Leave empty if in the `values.yaml` you need to set the `mostly_coordinator.deployment.core_job.tolerationOperator` to `Exists`.|
-    | **Order Index**  | The order in which the compute appears in the **Compute** drop-down.<br />The default compute has `order_index=1`. |
-    <Image
-      src="/docimages/administration/compute/03-new-kubernetes-compute.webp"
-      alt="MOSTLY AI - New Kubernetes compute"
-      width={800}
-      height={15000}
-    />
-4. Click **Save**.
+   <Image src="/docimages/administration/compute/02.01-select-kubernetes.webp" alt="MOSTLY AI - Select Kubernetes" width={800} height={15000} />
+4. Define the compute configuration.
+   | Kubernetes compute parameter | Description |
+   | ---------------- | ------------------------------------------------------------------------------------------------------------------ |
+   | **Name** | A unique name for the compute. |
+   | **CPUs** | The number of CPU cores. |
+   | **Memory** | The amount of memory. |
+   | **GPUs** | The number of GPUs. |
+   | **GPU memory** | The amount of GPU memory. |
+   | **Toleration** | A toleration that matches the taint defined for your cluster.<br /><br />⚠️ Leave empty if in the `values.yaml` you need to set the `mostly_coordinator.deployment.core_job.tolerationOperator` to `Exists`.|
+   | **Order Index** | The order in which the compute appears in the **Compute** drop-down.<br />The default compute has `order_index=1`. |
+   <Image src="/docimages/administration/compute/03-new-kubernetes-compute.webp" alt="MOSTLY AI - New Kubernetes compute" width={800} height={15000} />
+5. Click **Save**.
 
 **Result**
 
 The next time users configure a new generator training or synthetic dataset, they can select the new compute from the **Compute** drop-down list.
 
-<Image
-    src="/docimages/administration/compute/05-result-select-compute.webp"
-    alt="MOSTLY AI - Result - Select Compute"
-    width={800}
-    height={15000}
-/>
+<Image src="/docimages/administration/compute/05-result-select-compute.webp" alt="MOSTLY AI - Result - Select Compute" width={800} height={15000} />
 
 In addition, the new compute remains available in the **Computes** list.
 
-<Image
-    src="/docimages/administration/compute/04-new-compute-available.webp"
-    alt="MOSTLY AI - New Compute available"
-    width={800}
-    height={15000}
-/>
+<Image src="/docimages/administration/compute/04-new-compute-available.webp" alt="MOSTLY AI - New Compute available" width={800} height={15000} />
 
 ## Edit a compute
 
@@ -98,9 +68,7 @@ The compute configuration is now updated.
 
 You can delete an existing compute from its kebab menu.
 
-<Callout>
-Do not delete the **Default** compute as all common steps for generators and synthetic datasets rely on its availability.
-</Callout>
+<Callout>Do not delete the **Default** compute as all common steps for generators and synthetic datasets rely on its availability.</Callout>
 
 **Steps**
 

@@ -3,8 +3,8 @@ title: 'Manage primary keys'
 description: 'MOSTLY AI provides easy ways to set and remove primary keys for each table in a generator.'
 ---
 
-import Image from 'next/image'
-import { RemovePrimaryKey } from '@components/icons'
+import Image from 'next/image';
+import { RemovePrimaryKey } from '@components/icons';
 
 ## Manage primary keys
 
@@ -19,12 +19,7 @@ You can set the primary key for any table regardless of the synthetic data use c
 **Steps**
 
 1. On the **Data configuration** page, click the **Primary key** drop-down for a table.
-    <Image
-        src="/docimages/generators/set-table-relationships/primary-key-01-click-drop-down.webp"
-        alt="MOSTLY AI - Set primary key"
-        width={900}
-        height={300}
-    />
+   <Image src="/docimages/generators/set-table-relationships/primary-key-01-click-drop-down.webp" alt="MOSTLY AI - Set primary key" width={900} height={300} />
 2. Select the primary key column for the table.
 3. (Optional) Repeat for all tables.
 
@@ -32,18 +27,8 @@ You can set the primary key for any table regardless of the synthetic data use c
 
 To remove a primary key, hover over a table in the **Primary key** column and click the <RemovePrimaryKey/> button.
 
-<Image
-    src="/docimages/generators/set-table-relationships/remove-pk-01-hover-over-table-click-x.webp"
-    alt="MOSTLY AI - Remove primary key"
-    width={900}
-    height={300}
-/>
+<Image src="/docimages/generators/set-table-relationships/remove-pk-01-hover-over-table-click-x.webp" alt="MOSTLY AI - Remove primary key" width={900} height={300} />
 
 If a foreign key references the primary key you want to remove, you will get a warning that this will break the existing relationship.
 
-<Image
-    src="/docimages/generators/set-table-relationships/remove-pk-02-warning-relationship-break.webp"
-    alt="MOSTLY AI - Cannot remove primary key error"
-    width={900}
-    height={300}
-/>
+<Image src="/docimages/generators/set-table-relationships/remove-pk-02-warning-relationship-break.webp" alt="MOSTLY AI - Cannot remove primary key error" width={900} height={300} />

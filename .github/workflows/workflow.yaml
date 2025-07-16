@@ -4,10 +4,10 @@ on:
   push:
 
 jobs:
-  # pre-commit-linting:
-  #   uses: ./.github/workflows/lint-check.yaml
-  #   secrets: inherit
+  pre-commit-linting:
+    uses: ./.github/workflows/lint-check.yaml
+    secrets: inherit
   build-docker-image:
-    # needs: [pre-commit-linting]
+    needs: [pre-commit-linting]
     secrets: inherit
     uses: ./.github/workflows/build-docker-image.yaml

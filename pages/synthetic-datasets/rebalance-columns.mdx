@@ -3,9 +3,9 @@ title: 'Rebalance columns'
 description: 'With MOSTLY AI, you can generate synthetic datasets that rebalance column distributions in your original data and observe impacts of fairer distributions and bias mitigation on the rest of the features from your original data.'
 ---
 
-import { Tabs } from 'nextra/components'
-import Image from 'next/image'
-import { CustomCallout } from '@components/custom-callout'
+import { Tabs } from 'nextra/components';
+import Image from 'next/image';
+import { CustomCallout } from '@components/custom-callout';
 
 # Rebalance columns
 
@@ -14,8 +14,9 @@ With MOSTLY AI, you can generate synthetic datasets that rebalance column distri
 Rebalancing does not just impact the single variable you select to rebalance. All other variables in the dataset are also impacted based on the correlations they have with that variable. For example, you can use rebalancing to create a large number of relevant business scenarios out of the few that are present in your original data. Or you can use it to simulate _"what-if"_ scenarios based on your existing, historical data, or upsample minority classes to help downstream machine learning algorithms pick up their patterns.
 
 <CustomCallout type="tech">
-**Note**<br />
-Rebalancing is only available for **subject tables** and can only be applied to columns with the **Categorical** column type.
+  **Note**
+  <br />
+  Rebalancing is only available for **subject tables** and can only be applied to columns with the **Categorical** column type.
 </CustomCallout>
 
 ## Prerequisites
@@ -28,12 +29,7 @@ When you configure a new synthetic dataset, you can specify the columns you want
 
 You can examine the [CDNOW dataset](/datasets#cdnow-dataset) where the distributions in the `gender` column of the `customers` table is 58% males and 42% females.
 
-<Image
-    src="/docimages/synthetic-datasets/rebalance-columns/cdnow-gender-distribution.webp"
-    alt="MOSTLY AI - Synthetic datasets - Rebalance columns example CDNOW dataset"
-    width={450}
-    height={150}
-/>
+<Image src="/docimages/synthetic-datasets/rebalance-columns/cdnow-gender-distribution.webp" alt="MOSTLY AI - Synthetic datasets - Rebalance columns example CDNOW dataset" width={450} height={150} />
 
 The examples below show how to rebalance the `customers` column and achieve a 50% - 50% distribution of males and females in the generated synthetic data.
 
@@ -47,34 +43,20 @@ If you use the web application, you can select which column to rebalance from th
 2. Click **Generate data** in the upper right.
 3. Expand the generation settings for a table.
 4. Expand **Rebalancing**
-4. For **Column**, click and select the column to rebalance. In this case, select **income**.
-    <Image
-        src="/docimages/synthetic-datasets/rebalance-columns/rebalance-01-select-to-rebalance-income.webp"
-        alt="MOSTLY AI - Synthetic datasets - Rebalancing column"
-        width={800}
-        height={150}
-    />
-5. Under **Categories**, click **+ Add category**.
-6. Select the category to rebalance.
-   <Image
-        src="/docimages/synthetic-datasets/rebalance-columns/rebalance-02-select-category-to-rebalance.webp"
-        alt="MOSTLY AI - Synthetic datasets - Rebalance category"
-        width={800}
-        height={150}
-    />
-7. Specify its new percentage and confirm.
-    <Image
-        src="/docimages/synthetic-datasets/rebalance-columns/rebalance-03-specify-rebalance-percentage.webp"
-        alt="MOSTLY AI - Synthetic datasets - Rebalance category by percentage"
-        width={800}
-        height={150}
-    />
-8. (Optional) Add more categories to rebalance.
-9. Click **Start generation** in the upper right.
+5. For **Column**, click and select the column to rebalance. In this case, select **income**.
+   <Image src="/docimages/synthetic-datasets/rebalance-columns/rebalance-01-select-to-rebalance-income.webp" alt="MOSTLY AI - Synthetic datasets - Rebalancing column" width={800} height={150} />
+6. Under **Categories**, click **+ Add category**.
+7. Select the category to rebalance.
+   <Image src="/docimages/synthetic-datasets/rebalance-columns/rebalance-02-select-category-to-rebalance.webp" alt="MOSTLY AI - Synthetic datasets - Rebalance category" width={800} height={150} />
+8. Specify its new percentage and confirm.
+   <Image src="/docimages/synthetic-datasets/rebalance-columns/rebalance-03-specify-rebalance-percentage.webp" alt="MOSTLY AI - Synthetic datasets - Rebalance category by percentage" width={800} height={150} />
+9. (Optional) Add more categories to rebalance.
+10. Click **Start generation** in the upper right.
 
 **Result**
 
 In the generated **Data** report for the synthetic dataset, you can navigate to the Univariate distributions and check the `gender` column distribution which now contains an equal split of F (female) and M (male) values.
+
 </Tabs.Tab>
 <Tabs.Tab>
 If you use the Python SDK, add the `rebalancing` dictionary to the `tables.configuration` dictionary and add the `columns` key with the column name as its value, and then the `probabilities` dictionary, which enumerates the values to rebalance as keys and their percentage as an integer.
@@ -91,24 +73,27 @@ g = mostly.train(config={
 })
 
 # generate 2k balanced synthetic samples
+
 sd = mostly.generate(g, config={
-   "name": "US census rebalanced",
-   "tables": [
-      {
-         "name": "census",
-         "configuration": {
-            "rebalancing": {
-               "column": "income",
-               "probabilities": {
-                  ">50K": 0.5
-               }
-            }
-         }
-      }
-   ]
+"name": "US census rebalanced",
+"tables": [
+{
+"name": "census",
+"configuration": {
+"rebalancing": {
+"column": "income",
+"probabilities": {
+">50K": 0.5
+}
+}
+}
+}
+]
 })
 df_synthetic = sd.data()
 df_synthetic.income.value_counts()
+
 ```
 </Tabs.Tab>
 </Tabs>
+```

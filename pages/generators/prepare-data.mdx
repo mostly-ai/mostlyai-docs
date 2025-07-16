@@ -3,18 +3,19 @@ title: 'Prepare your data'
 description: 'Before you train a generator with MOSTLY AI, you can review some of the considerations and requirements that can help you avoid unexpected errors, maintain the privacy of the subjects (people, companies, or any other entities), and ensure higher accuracy of a trained generator.'
 ---
 
-import { Callout } from 'nextra/components'
+import { Callout } from 'nextra/components';
 
 # Prepare your data
 
 Before you train a generator with MOSTLY AI, review some of the considerations and requirements that can help you avoid unexpected errors, maintain the privacy of your data subjects (people, companies, or any other entities), and ensure higher accuracy of a trained generator.
 
-* MOSTLY AI supports uploading a generator configuration in CSV, TSV, and Parquet formats.
-    * If your original data is in CSV files, see [CSV file requirements](prepare-data/csv-requirements).
-* To prepare to train a two-table or multi-table generator, see [Subject and linked table requirements](prepare-data/subject-linked-requirements).
+- MOSTLY AI supports uploading a generator configuration in CSV, TSV, and Parquet formats.
+  - If your original data is in CSV files, see [CSV file requirements](prepare-data/csv-requirements).
+- To prepare to train a two-table or multi-table generator, see [Subject and linked table requirements](prepare-data/subject-linked-requirements).
 
 <Callout type="info">
 In the context of MOSTLY AI, subject tables are the tables that contain the private information of people, companies, or other entities.
 
 Linked tables typically have foreign keys to subject tables. Before you successfully train a generator on subject and linked tables, it is important to understand the requirements for how your original data in those tables should be structured.
+
 </Callout>

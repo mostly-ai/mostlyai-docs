@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from 'next/image';
 
 const CustomImageCard: React.FC = () => {
   return (
@@ -14,7 +14,7 @@ const CustomImageCard: React.FC = () => {
           min-height: 225px;
           flex-basis: 45%;
           position: relative;
-          margintop: "0.5em";
+          margintop: '0.5em';
         }
         .image-card-element {
           width: 100%;

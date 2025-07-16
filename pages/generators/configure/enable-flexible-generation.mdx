@@ -1,10 +1,10 @@
 ---
-title: "Flexible generation"
-description: "Generators in MOSTLY AI have flexible generation on by default. You can use such generators to rebalance your synthetic datasets, use data imputation to replace missing or null values with statistically reliable ones, and generate fair synthetic data."
+title: 'Flexible generation'
+description: 'Generators in MOSTLY AI have flexible generation on by default. You can use such generators to rebalance your synthetic datasets, use data imputation to replace missing or null values with statistically reliable ones, and generate fair synthetic data.'
 ---
 
-import { Tabs } from 'nextra/components'
-import Image from 'next/image'
+import { Tabs } from 'nextra/components';
+import Image from 'next/image';
 
 # Enable Flexible generation
 
@@ -12,10 +12,10 @@ Before you start the training of a generator, you can configure whether your mod
 
 Learn more about the benefits of **Flexible generation** from the table below.
 
-| Flexible generation status | Description |
-| --- | --- |
-| Enabled **Flexible generation** | During training, the original columns are fed in a randomly permuted order for every batch.<br /><br />With **Flexible generation** enabled, you can use the generator to:<br /><br />  • [rebalance data](/synthetic-datasets/rebalance-columns)<br />  • [impute data](/synthetic-datasets/data-imputation)<br />  • [generate fair synthetic data](/synthetic-datasets/fairness)<br />  • [generate synthetic data conditionally based on a seed dataset](/synthetic-datasets/seeded-generation)<br /><br />➡️ When enabled, **Flexible generation** can impact the model's accuracy. Most impacted are models trained on particularly wide tables. |
-| Disabled **Flexible generation** | During training, original columns are fed in the same order in which they appear in the original data.<br /><br />➡️ When **Flexible generation** is disabled, you can achieve maximum accuracy of the trained generator. |
+| Flexible generation status       | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Enabled **Flexible generation**  | During training, the original columns are fed in a randomly permuted order for every batch.<br /><br />With **Flexible generation** enabled, you can use the generator to:<br /><br /> • [rebalance data](/synthetic-datasets/rebalance-columns)<br /> • [impute data](/synthetic-datasets/data-imputation)<br /> • [generate fair synthetic data](/synthetic-datasets/fairness)<br /> • [generate synthetic data conditionally based on a seed dataset](/synthetic-datasets/seeded-generation)<br /><br />➡️ When enabled, **Flexible generation** can impact the model's accuracy. Most impacted are models trained on particularly wide tables. |
+| Disabled **Flexible generation** | During training, original columns are fed in the same order in which they appear in the original data.<br /><br />➡️ When **Flexible generation** is disabled, you can achieve maximum accuracy of the trained generator.                                                                                                                                                                                                                                                                                                                                                                                                                          |
 
 ## Set flexible generation
 
@@ -27,19 +27,17 @@ If you use the web application, you can configure flexible generation from the *
 
 **Steps**
 
-1. With an untrained generator open, click **Configure models**.
-2. Click a table to open its model configuration.
-3. Expand **Flexible generation**.
-3. Select **On** or **Off** depending on how you want to train this AI model.
-    <Image
-        src="/docimages/generators/enable-flexible-generation/flexible-generation-enabled.webp"
-        alt="MOSTLY AI - Generator - Configure flexible generation"
-        width={800}
-        height={150}
-    />
+1.  With an untrained generator open, click **Configure models**.
+2.  Click a table to open its model configuration.
+3.  Expand **Flexible generation**.
+4.  Select **On** or **Off** depending on how you want to train this AI model.
+    <Image src="/docimages/generators/enable-flexible-generation/flexible-generation-enabled.webp" alt="MOSTLY AI - Generator - Configure flexible generation" width={800} height={150} />
+
 </Tabs.Tab>
 <Tabs.Tab>
-For the Pyhon client, use the `enable_flexible_generation` key in the `tabular_model_configuration` dictionary and set to `True` to enable. Use `False` to disable.
+
+    For the Pyhon client, use the `enable_flexible_generation` key in the `tabular_model_configuration` dictionary and set to `True` to enable. Use `False` to disable.
+
 ```python filename="python" copy {8}
 config = {
     "name": "US census",
@@ -54,5 +52,7 @@ config = {
     ]
 }
 ```
+
 </Tabs.Tab>
+
 </Tabs>
