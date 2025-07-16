@@ -50,14 +50,11 @@ You can switch on the Value protection for a table from the **Model configuratio
    2. If **Value protection** is enabled, define how to replace rare categories.
       _ **Constant**. Replaces rare categories with the `\_RARE_`token and maintains the original distribution in categorical columns.
       \_ **Sample**. Replaces rare categories with one of the other non-rare categories in the column. This can skew the original distribution in categorical columns.
-      <Image
-                        src="/docimages/generators/fine-tune-privacy-mechanisms/01-value-protection-configuration.webp"
-                        alt="MOSTLY AI - Generator configuration - Define privacy mechanisms"
-                        width={900}
-                        height={300}
-                     />
-      </Tabs.Tab>
-      <Tabs.Tab>
+      <Image src="/docimages/generators/fine-tune-privacy-mechanisms/01-value-protection-configuration.webp" alt="MOSTLY AI - Generator configuration - Define privacy mechanisms" width={900} height={300} />
+
+</Tabs.Tab>
+<Tabs.Tab>
+
 To control value protection with the Python SDK, add the`tabular_model_configuration`dictionary for each table and use the`value_protection`key by setting it to`True`or`False`.
 
 To control how rare categories are replaced, use the `rare_category_replacement_method` key and set it to the `CONSTANT` or `SAMPLE` method.

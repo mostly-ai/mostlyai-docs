@@ -107,20 +107,19 @@ To continue the training of a generator from the Web UI, follow these steps.
 
 MOSTLY AI fetches the original data from the data source and continues the training from the already saved model weights.
 
-<Image
-    src="/docimages/generators/manage/continue-training-05-result.webp"
-    alt="MOSTLY AI - Continue training - 05 - Result"
-    width={800}
-    height={150}
-/>
+<Image src="/docimages/generators/manage/continue-training-05-result.webp" alt="MOSTLY AI - Continue training - 05 - Result" width={800} height={150} />
+
 </Tabs.Tab>
 <Tabs.Tab>
+
 To continue the training of a generator with the Python SDK, use the `clone()` method on a generator that has completed its training and set the `training_status` parameter set to `CONTINUE`.
+
 ```python filename="python" copy
 g = mostly.generators.get("INSERT_GENERATOR_ID_TO_CONTINUE_TRAINING")
 cloned_g = g.clone(training_status="CONTINUE") # clone the generator along with its saved model weights
 cloned_g.training.start() # start the training of the new cloned_g generator
 ```
+
 </Tabs.Tab>
 </Tabs>
 
