@@ -51,8 +51,8 @@ In MOSTLY AI, you enable differential privacy on the **Model configuration** pag
    <Image src="/docimages/generators/enable-differential-privacy/02-configure-differential-privacy-epsilon-max-gradient-norm-noise-multiplier.webp" alt="Configure differential privacy settings" width={800} height={400} />
 
 6. Click **Start training** in the upper right to train the generator with differential privacy.
-      </Tabs.Tab>
-   <Tabs.Tab>
+   </Tabs.Tab>
+<Tabs.Tab>
 To enable differential privacy for a generator, use the `differential_privacy` key under `tabular_model_configuration`, and nest the `max_epsilon`, `noise_multiplier`, `max_grad_norm`, and `delta` keys. Default values are applied if a key is undefined.
 
 ```python filename="python" copy {10-15}

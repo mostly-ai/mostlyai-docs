@@ -84,24 +84,27 @@ If you use the web application, create a new Databricks connector from the **Con
 
 **Steps**
 
-1. From the **Connectors** tab, click **Create connector**.
-   <Image src="/docimages/connectors/create-connector-01-click.webp" alt="Click Create connector button" width={800} height={150} />
-2. On the **Connect to database** tab, select **Databricks**.
-   <Image src="/docimages/connectors/databricks/create-connector-02-select-databricks.webp" alt="Select Databricks connector" width={800} height={250} />
-3. Configure the Databricks connector.
-   1. For **Name**, enter a name you can distinguish from other connectors.
-   2. For **Access type**, select whether you want to use the connector as a **source** or **destination**.
-   3. For **Host**, enter your SQL warehouse server hostname. For more information, see the [Prerequisites](#prerequisites) above.
-   4. For **HTTP path**, enter your SQL warehouse HTTP path.
-   5. For **Access token**, enter your Databricks personal access token.
-   6. For **Catalog**, enter the name of your Databricks catalog.
-      <Image src="/docimages/connectors/databricks/create-connector-03-configure-databricks.webp" alt="Configure Databricks connector" width={350} height={250} />
-4. Click **Save** to save your new Databricks connector.<br /><br />
-   MOSTLY AI tests the connection. If you see an error, check the connection details, update them, and click **Save** again.<br /><br />
-   You can click **Save anyway** to save the connector disregarding any errors.
-      </Tabs.Tab>
-   <Tabs.Tab>
-If you use the Python SDK, create a Databricks connector with `mostly.connect()` and provide a connector configuration dictionary as shown below.
+1.  From the **Connectors** tab, click **Create connector**.
+    <Image src="/docimages/connectors/create-connector-01-click.webp" alt="Click Create connector button" width={800} height={150} />
+2.  On the **Connect to database** tab, select **Databricks**.
+    <Image src="/docimages/connectors/databricks/create-connector-02-select-databricks.webp" alt="Select Databricks connector" width={800} height={250} />
+3.  Configure the Databricks connector.
+    1. For **Name**, enter a name you can distinguish from other connectors.
+    2. For **Access type**, select whether you want to use the connector as a **source** or **destination**.
+    3. For **Host**, enter your SQL warehouse server hostname. For more information, see the [Prerequisites](#prerequisites) above.
+    4. For **HTTP path**, enter your SQL warehouse HTTP path.
+    5. For **Access token**, enter your Databricks personal access token.
+    6. For **Catalog**, enter the name of your Databricks catalog.
+       <Image src="/docimages/connectors/databricks/create-connector-03-configure-databricks.webp" alt="Configure Databricks connector" width={350} height={250} />
+4.  Click **Save** to save your new Databricks connector.<br /><br />
+    MOSTLY AI tests the connection. If you see an error, check the connection details, update them, and click **Save** again.<br /><br />
+    You can click **Save anyway** to save the connector disregarding any errors.
+
+        </Tabs.Tab>
+
+        <Tabs.Tab>
+
+    If you use the Python SDK, create a Databricks connector with `mostly.connect()` and provide a connector configuration dictionary as shown below.
 
 ```python copy filename="python"
 c = mostly.connect({
@@ -134,23 +137,26 @@ In the web application, the Databricks connector configuration includes configur
 
 **Steps**
 
-1. To use a Service principal for authentication in your Databricks connector, select the **Authenticate with Service Principal** checkbox.
-2. Configure the Databricks connector.
-   1. For **Name**, enter a name you can distinguish from other connectors.
-   2. For **Access type**, select whether you want to use the connector as a **source** or **destination**.
-   3. For **Host**, enter your SQL warehouse server hostname. For more information, see the [Prerequisites](#prerequisites) above.
-   4. For **HTTP path**, enter your SQL warehouse HTTP path.
-   5. For **Catalog**, enter the name of your Databricks catalog.
-   6. For **Tenant ID**, enter your tenant ID.
-   7. For **Client ID**, enter your client ID.
-   8. For **Client secret**, enter your client secret.
-      <Image src="/docimages/connectors/databricks/create-connector-04-authenticate-with-service-principal.webp" alt="Configure Databricks connector with a Service principal" width={700} height={250} />
-3. Click **Save** to save your new Databricks connector.<br /><br />
-   MOSTLY AI tests the connection. If you see an error, check the connection details, update them, and click **Save** again.<br /><br />
-   You can click **Save anyway** to save the connector disregarding any errors.
-      </Tabs.Tab>
-   <Tabs.Tab>
-If you use the Python SDK, you can create a Databricks connector with a Service principal account with the code snippet below.
+1.  To use a Service principal for authentication in your Databricks connector, select the **Authenticate with Service Principal** checkbox.
+2.  Configure the Databricks connector.
+    1. For **Name**, enter a name you can distinguish from other connectors.
+    2. For **Access type**, select whether you want to use the connector as a **source** or **destination**.
+    3. For **Host**, enter your SQL warehouse server hostname. For more information, see the [Prerequisites](#prerequisites) above.
+    4. For **HTTP path**, enter your SQL warehouse HTTP path.
+    5. For **Catalog**, enter the name of your Databricks catalog.
+    6. For **Tenant ID**, enter your tenant ID.
+    7. For **Client ID**, enter your client ID.
+    8. For **Client secret**, enter your client secret.
+       <Image src="/docimages/connectors/databricks/create-connector-04-authenticate-with-service-principal.webp" alt="Configure Databricks connector with a Service principal" width={700} height={250} />
+3.  Click **Save** to save your new Databricks connector.<br /><br />
+    MOSTLY AI tests the connection. If you see an error, check the connection details, update them, and click **Save** again.<br /><br />
+    You can click **Save anyway** to save the connector disregarding any errors.
+
+    </Tabs.Tab>
+
+  <Tabs.Tab>
+
+    If you use the Python SDK, you can create a Databricks connector with a Service principal account with the code snippet below.
 
 ```python copy filename="python"
 config={

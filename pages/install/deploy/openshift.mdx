@@ -61,6 +61,7 @@ fqdn: mostlyai.your-organization.com
    <br />
    The value must not be wrapped in quotation marks and the line should look similar to the following, where the ellipsis (...) indicates the remaining characters of the complete secret key. ```yaml filename="ocp-values.yaml" ... mostlyRegistryDockerConfigJson: &mostlyRegistryDockerConfigJson exJhdXRocyI6eyJuZX... ... ```
 6. (Optional) Configure the image repository.
+
    1. If you have all of the necessary images to deploy MOSTLY AI in your internal repository, leave the URL of your repository under `_customerInstallation.deploymentSettings.mostlyRegistry`, replacing the existing value:
       ```yaml filename="ocp-values.yaml" {5}
       _customerInstallation:
@@ -70,6 +71,7 @@ fqdn: mostlyai.your-organization.com
       mostlyRegistry: &mostlyRegistry quay.io/mostlyai
       ```
    2. If you are using an internal repository, you need to complete the following 2 steps.
+
       1. Set `mostly-configuration.secrets.dockerConfig.create` to `false` to prevent the creation of a Docker pull secret.
 
          ```yaml filename="ocp-values.yaml" copy {5}
