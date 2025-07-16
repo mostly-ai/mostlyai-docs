@@ -3,8 +3,8 @@ title: '_RARE_ values in MOSTLY AI'
 description: 'In MOSTLY AI, the Rare category protection mechanism with the Constant method is on by default for all categorical columns. Depending on your data, MOSTLY AI masks rare categories with the _RARE_ token.'
 ---
 
-import Image from 'next/image'
-import { Callout } from 'nextra/components'
+import Image from 'next/image';
+import { Callout } from 'nextra/components';
 
 # `_RARE_` values
 
@@ -24,8 +24,8 @@ An example of a rare category in a **`Job title`** column can be the category **
 
 The goals of this approach are to:
 
-* prevent the training of the AI model with rare categories
-* retain the original distribution of categories in the synthetic data
+- prevent the training of the AI model with rare categories
+- retain the original distribution of categories in the synthetic data
 
 The **Constant** method is the default method for all categorical columns and is the reason why `_RARE_` values appear in your synthetic data.
 
@@ -37,12 +37,7 @@ For example, in a **`Job title`** column, the rare category **`President of the 
 
 With this method, you can prevent `_RARE_` values, but it comes with the trade-off of skewing the original distribution in the categorical column by boosting any non-rare categories that MOSTLY AI samples from.
 
-<Image
-    src="/docimages/generators/rare-values/rare-category-protection-modes.webp"
-    alt="Rare category protection modes - Constant and Sample"
-    width={800}
-    height={300}
-/>
+<Image src="/docimages/generators/rare-values/rare-category-protection-modes.webp" alt="Rare category protection modes - Constant and Sample" width={800} height={300} />
 
 ## Do not disable Value protection
 
@@ -94,23 +89,13 @@ Because each ID is unique in the column, the synthetic data for the column conta
 
 If the original column contains short strings with a consistent pattern (phone numbers, license plate numbers, company IDs, and so on), you can use the [Character encoding type](/generators/set-encoding-types#character) to train the Generative AI model for this table with the code patterns.
 
-<Image
-    src="/docimages/generators/rare-values/columns-with-codes-character-column-type.webp"
-    alt="Columns with codes - use Character column type"
-    width={800}
-    height={300}
-/>
+<Image src="/docimages/generators/rare-values/columns-with-codes-character-column-type.webp" alt="Columns with codes - use Character column type" width={800} height={300} />
 
 #### Set a primary key
 
 If the original column is a primary key column, you can set a **Primary key** to generate primary key values. MOSTLY AI generates UUID primary keys in the column to mantain the value uniqueness.
 
-<Image
-    src="/docimages/generators/rare-values/set-primary-key.webp"
-    alt="Set primary key"
-    width={800}
-    height={300}
-/>
+<Image src="/docimages/generators/rare-values/set-primary-key.webp" alt="Set primary key" width={800} height={300} />
 
 #### Pre-process your data to exclude primary keys
 

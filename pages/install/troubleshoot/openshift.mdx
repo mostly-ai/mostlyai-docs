@@ -3,7 +3,7 @@ title: 'Troubleshoot MOSTLY AI deployments to OpenShift'
 description: 'Learn how you can troubleshoot various issues when you deploy MOSTLY AI to an OpenShift cluster.'
 ---
 
-import Image from 'next/image'
+import Image from 'next/image';
 
 # Troubleshoot OpenShift deployment issues
 
@@ -55,16 +55,16 @@ W0714 14:04:39.711306   47432 warnings.go:70] would violate PodSecurity "restric
 
 **Solution**
 
-* Verify that you have the correct storage class defined for the `CORDINATOR: pvc: storageClassName` key. To check your OpenShift storageClassNames, open your OpenShift console, and navigate to **Storage** > **StorageClasses**. The name defined for `CORDINATOR: pvc: storageClassName` must match one of the entires.
-* Verify that you the `platform` key is set to `ocp` and not `k8s`.
-    ```yaml filename="values.yaml"
-    platform: k8s # incorrect
-    platform: ocp # correct
-    ```
-* Alternatively, keep in mind that this warning reflects the security constraints in your cluster. To better adapt to the, set the `platform` key to `other`. Like so, the suggested security contexts of the helm charts will be ignored and the deployment will follow the ones from your cluster.
-    ```yaml filename="values.yaml"
-    platform: other # alternative
-    ```
+- Verify that you have the correct storage class defined for the `CORDINATOR: pvc: storageClassName` key. To check your OpenShift storageClassNames, open your OpenShift console, and navigate to **Storage** > **StorageClasses**. The name defined for `CORDINATOR: pvc: storageClassName` must match one of the entires.
+- Verify that you the `platform` key is set to `ocp` and not `k8s`.
+  ```yaml filename="values.yaml"
+  platform: k8s # incorrect
+  platform: ocp # correct
+  ```
+- Alternatively, keep in mind that this warning reflects the security constraints in your cluster. To better adapt to the, set the `platform` key to `other`. Like so, the suggested security contexts of the helm charts will be ignored and the deployment will follow the ones from your cluster.
+  ```yaml filename="values.yaml"
+  platform: other # alternative
+  ```
 
 ## Failed to create resource
 
@@ -82,8 +82,8 @@ Make sure that you have set the Docker pull image secret in `docker_secret`.
 
 **Solution**
 
-* Double-check that you have the correct secret key in `docker_secret`.
-* Make sure that the secret key value is not wrapped in quotation marks.
+- Double-check that you have the correct secret key in `docker_secret`.
+- Make sure that the secret key value is not wrapped in quotation marks.
 
 If the suggestions above do not help to resolve the issue, contact your Customer Experience Engineer.
 
@@ -114,24 +114,29 @@ Error: UPGRADE FAILED: cannot patch "mostly-data" with kind PersistentVolumeClai
 You can work around the issue above by removing the `mostly-ai` project from your OpenShift cluster, recreating it, and running the installation again.
 
 1. Delete the the `mostly-ai` project from your OpenShift cluster.
-    ```bash copy
-    oc delete namespace mostly-ai
-    ```
+   ```bash copy
+   oc delete namespace mostly-ai
+   ```
 2. Create the `mostly-ai` project again.
-    ```bash copy
-    oc new-project mostly-ai
-    ```
-    1. Enter the following annotations for the pods of MOSTLY AI to be able to be scheduled in this namespace:
-    ```bash copy
-    oc annotate --overwrite namespace mostly-ai openshift.io/sa.scc.supplemental-groups="1000700000/10000"
-    ```
-    ```bash copy
-    oc annotate --overwrite namespace mostly-ai openshift.io/sa.scc.uid-range="1000700000/10000"
-    ```
+
+   ```bash copy
+   oc new-project mostly-ai
+   ```
+
+   1. Enter the following annotations for the pods of MOSTLY AI to be able to be scheduled in this namespace:
+
+   ```bash copy
+   oc annotate --overwrite namespace mostly-ai openshift.io/sa.scc.supplemental-groups="1000700000/10000"
+   ```
+
+   ```bash copy
+   oc annotate --overwrite namespace mostly-ai openshift.io/sa.scc.uid-range="1000700000/10000"
+   ```
+
 3. Run the deployment again with the `helm` command.
-    ```bash copy
-    helm upgrade --install mostly-ai ./mostly-combined --values ocp-values.yaml --namespace mostly-ai --create-namespace
-    ```
+   ```bash copy
+   helm upgrade --install mostly-ai ./mostly-combined --values ocp-values.yaml --namespace mostly-ai --create-namespace
+   ```
 
 ## Keycloak connection error
 
@@ -152,12 +157,7 @@ Keycloak connection error #3 - retrying (error: jakarta.ws.rs.ForbiddenException
 3. Select master realm.
 4. Select **Realm settings**.
 5. For **Require SSL**, select **None**.
-    <Image
-        src="/docimages/install/troubleshoot/openshift/ocp-troubleshoot-keycloak-turn-ssl-off.webp"
-        alt="MOSTLY AI Deployment troubleshooting - Resolve Keycloak connection error"
-        width={800}
-        height={300}
-    />
+   <Image src="/docimages/install/troubleshoot/openshift/ocp-troubleshoot-keycloak-turn-ssl-off.webp" alt="MOSTLY AI Deployment troubleshooting - Resolve Keycloak connection error" width={800} height={300} />
 6. Click **Save** for the changes to take effect.
 
 The pod will initialize, create the `mostly-generate` realm and the application will be then reachable.

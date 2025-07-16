@@ -3,8 +3,8 @@ title: 'Use Azure blob storage for synthetic data'
 description: 'To use Azure blob storage as a data source or destination for your synthetic data, you need to create an Azure connector in MOSTLY AI.'
 ---
 
-import { Tabs } from 'nextra/components'
-import Image from 'next/image'
+import { Tabs } from 'nextra/components';
+import Image from 'next/image';
 
 # Use Azure blob storage for synthetic data
 
@@ -19,27 +19,12 @@ To create an Azure storage connector in MOSTLY AI, you need to first obtain your
 **Steps**
 
 1. In Azure, select **Storage accounts** from the sidebar.
-    <Image
-        src="/docimages/connectors/azure/prereq-01-azure-sidebar-storage-accounts.webp"
-        alt="Azure sidebar - select Storage accounts"
-        width={175}
-        height={500}
-    />
+   <Image src="/docimages/connectors/azure/prereq-01-azure-sidebar-storage-accounts.webp" alt="Azure sidebar - select Storage accounts" width={175} height={500} />
 2. Copy your storage account name.
-    <Image
-        src="/docimages/connectors/azure/prereq-02-azure-storage-account-name.webp"
-        alt="Azure Storage account - copy storage account name"
-        width={350}
-        height={500}
-    />
+   <Image src="/docimages/connectors/azure/prereq-02-azure-storage-account-name.webp" alt="Azure Storage account - copy storage account name" width={350} height={500} />
 3. Click your storage account name.
 4. For the access key you want to use, click **Show** and then **Copy to clipboard**.
-    <Image
-        src="/docimages/connectors/azure/prereq-03-azure-storage-account-copy-access-key.webp"
-        alt="Azure Storage account - copy access key"
-        width={800}
-        height={500}
-    />
+   <Image src="/docimages/connectors/azure/prereq-03-azure-storage-account-copy-access-key.webp" alt="Azure Storage account - copy access key" width={800} height={500} />
 
 ## Create an Azure storage connector
 
@@ -52,36 +37,22 @@ If you use the web application, create a new Azure blob storage connector from t
 **Steps**
 
 1. From the **Connectors** page, click **New connector**.
-    <Image
-        src="/docimages/connectors/create-connector-01-click.webp"
-        alt="Click Create connector button"
-        width={800}
-        height={500}
-    />
+   <Image src="/docimages/connectors/create-connector-01-click.webp" alt="Click Create connector button" width={800} height={500} />
 2. From the **Create a new connector** window, select **Microsoft Azure**.
-    <Image
-        src="/docimages/connectors/azure/create-connector-02-select-azure.webp"
-        alt="Select Azure storage connector"
-        width={800}
-        height={500}
-    />
+   <Image src="/docimages/connectors/azure/create-connector-02-select-azure.webp" alt="Select Azure storage connector" width={800} height={500} />
 3. On the **New connector** page, configure the connector.
-    1. For **Name**, enter a name that you can distinguish from other connectors.
-    2. For **Access type**, select whether you want to use the connector as a **source** or **destination**.
-    3. For **Account name**, enter your Azure account name.
-    4. For **Account key**, enter your Azure account key.
-        <Image
-            src="/docimages/connectors/azure/create-connector-03-configure-azure.webp"
-            alt="Configure Azure blob storage connector"
-            width={350}
-            height={500}
-        />
+   1. For **Name**, enter a name that you can distinguish from other connectors.
+   2. For **Access type**, select whether you want to use the connector as a **source** or **destination**.
+   3. For **Account name**, enter your Azure account name.
+   4. For **Account key**, enter your Azure account key.
+      <Image src="/docimages/connectors/azure/create-connector-03-configure-azure.webp" alt="Configure Azure blob storage connector" width={350} height={500} />
 4. Click **Save** to save your new Azure connector.<br /><br />
-    MOSTLY AI tests the connection. If you see an error, check the connection details, update them, and click **Save** again.<br /><br />
-    You can click **Save anyway** to save the connector disregarding any errors.
-</Tabs.Tab>
-<Tabs.Tab>
+   MOSTLY AI tests the connection. If you see an error, check the connection details, update them, and click **Save** again.<br /><br />
+   You can click **Save anyway** to save the connector disregarding any errors.
+      </Tabs.Tab>
+   <Tabs.Tab>
 If you use the Python SDK, create an Azure blob storage connector with `mostly.connect()` and provide a connector configuration dictionary as shown below.
+
 ```python copy filename="python" {3,6,9}
 c = mostly.connect({
     "name": "Azure Storage Connector",
@@ -96,6 +67,7 @@ c = mostly.connect({
     "test_connection": True
 })
 ```
+
 </Tabs.Tab>
 </Tabs>
 
@@ -112,23 +84,18 @@ In the web application, the Azure connector configuration includes configuration
 
 1. To use a Service principal for authentication in your Azure storage connector, select the **Authenticate with Service Principal** checkbox.
 2. On the **New connector** page, configure the Azure connector with a Service principal account.
-    1. For **Name**, enter a name that you can distinguish from other connectors.
-    2. For **Access type**, select whether you want to use the connector as a **source** or **destination**.
-    3. Select **Authenticate with Service Principal**.
-    4. For **Tenant ID**, enter your tenant ID.
-    5. For **Client ID**, enter your client ID.
-    6. For **Client secret**, enter your client secret.
-        <Image
-            src="/docimages/connectors/azure/create-connector-04-azure-with-service-principal.webp"
-            alt="Configure Azure blob storage connector - Authenticate with Service Principal"
-            width={350}
-            height={500}
-        />
+   1. For **Name**, enter a name that you can distinguish from other connectors.
+   2. For **Access type**, select whether you want to use the connector as a **source** or **destination**.
+   3. Select **Authenticate with Service Principal**.
+   4. For **Tenant ID**, enter your tenant ID.
+   5. For **Client ID**, enter your client ID.
+   6. For **Client secret**, enter your client secret.
+      <Image src="/docimages/connectors/azure/create-connector-04-azure-with-service-principal.webp" alt="Configure Azure blob storage connector - Authenticate with Service Principal" width={350} height={500} />
 3. Click **Save** to save your new Azure connector.<br /><br />
-    MOSTLY AI tests the connection. If you see an error, check the connection details, update them, and click **Save** again.<br /><br />
-    You can click **Save anyway** to save the connector disregarding any errors.
-</Tabs.Tab>
-<Tabs.Tab>
+   MOSTLY AI tests the connection. If you see an error, check the connection details, update them, and click **Save** again.<br /><br />
+   You can click **Save anyway** to save the connector disregarding any errors.
+      </Tabs.Tab>
+   <Tabs.Tab>
 If you use the Python SDK, you can create an Azure connector with a Service principal account with the code snippet below.
 
 ```python filename="python" copy
@@ -153,10 +120,9 @@ c = mostly.connect(config)
 </Tabs.Tab>
 </Tabs>
 
-
 **What's next**
 
 Depending on whether you created a **source** or a **destination** connector, you can use the connector as:
 
-* [data source](../use/data-source) for a new generator
-* [data destination](../use/data-destination) for a new synthetic dataset
+- [data source](../use/data-source) for a new generator
+- [data destination](../use/data-destination) for a new synthetic dataset

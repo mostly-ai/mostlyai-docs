@@ -3,9 +3,9 @@ title: 'Troubleshoot deployment issues'
 description: 'Learn how you can troubleshoot issues that might appear in any Kubernetes environment when you deploy MOSTLY AI.'
 ---
 
-import Image from 'next/image'
-import { Tabs } from 'nextra/components'
-import { CustomCallout } from '@components/custom-callout'
+import Image from 'next/image';
+import { Tabs } from 'nextra/components';
+import { CustomCallout } from '@components/custom-callout';
 
 # Troubleshoot common deployment issues
 
@@ -29,11 +29,11 @@ https://your-fqdn.com
 
 **Solution**
 
-* Access the application through HTTP protocol, as shown in the URL below.
+- Access the application through HTTP protocol, as shown in the URL below.
   ```{1} /http/
   http://your-fqdn.com
   ```
-* If the issue persists, clear your browser cache and try again, or try opening the application in an Incognito or Private window in your browser.
+- If the issue persists, clear your browser cache and try again, or try opening the application in an Incognito or Private window in your browser.
 
 ## Generator is stuck in `Queued` status
 
@@ -47,56 +47,38 @@ After starting the training of a new generator, its status is `Queued` and it re
 
 The most likely cause for this is that in your `values.yaml` file, all CPU and memory resources available to the worker nodes have been allocated to the **Default** compute.
 
-<CustomCallout>
-To learn more about computes and how to manage them, see [_Compute_](/administration/compute).
-</CustomCallout>
+<CustomCallout>To learn more about computes and how to manage them, see [_Compute_](/administration/compute).</CustomCallout>
 
 **Solution**
 
 Reallocate the **Default** compute resources to be lower than the total resources allocated for your worker nodes. For example, if your worker nodes have 14 CPUs and 24 GB of memory each, allocate 10 CPUs and 20 GB of memory to the **Default** compute.
 
 1. In the `values.yaml` file, edit the `defaultComputePool` section for the `mostly-app` service.
-    ```yaml filename="values.yaml" copy {10-11}
-    mostly-app:
-      deployment:
-        ...
-        mostly:
-          defaultComputePool:
-            name: Default
-            type: KUBERNETES
-            toleration: engine-jobs
-            resources:
-              cpu: 10
-              memory: 20
-              gpu: 0
-    ```
+   ```yaml filename="values.yaml" copy {10-11}
+   mostly-app:
+     deployment:
+       ...
+       mostly:
+         defaultComputePool:
+           name: Default
+           type: KUBERNETES
+           toleration: engine-jobs
+           resources:
+             cpu: 10
+             memory: 20
+             gpu: 0
+   ```
 2. Save the `values.yaml` file.
-2. Remove your current deployment by deleting the `mostly-ai` namespace.
-    <Tabs items={['Kubernetes', 'OpenShift']}>
-    <Tabs.Tab>
-    ```bash copy
-    kubectl delete namespace mostly-ai
-    ```
-    </Tabs.Tab>
-    <Tabs.Tab>
-    ```bash copy
-    oc delete project mostly-ai
-    ```
-    </Tabs.Tab>
-    </Tabs>
-3. Re-deploy MOSTLY AI.
-    <Tabs items={['Kubernetes', 'OpenShift']}>
-    <Tabs.Tab>
-    ```bash copy
-    helm upgrade --install mostly-ai ./mostly-combined --values values.yaml --namespace mostly-ai --create-namespace
-    ```
-    </Tabs.Tab>
-    <Tabs.Tab>
-    ```bash copy
-    helm upgrade --install mostly-ai ./mostly-combined --values ocp-values.yaml --namespace mostly-ai --create-namespace
-    ```
-    </Tabs.Tab>
-    </Tabs>
+3. Remove your current deployment by deleting the `mostly-ai` namespace.
+   <Tabs items={['Kubernetes', 'OpenShift']}>
+     <Tabs.Tab>```bash copy kubectl delete namespace mostly-ai ```</Tabs.Tab>
+     <Tabs.Tab>```bash copy oc delete project mostly-ai ```</Tabs.Tab>
+   </Tabs>
+4. Re-deploy MOSTLY AI.
+   <Tabs items={['Kubernetes', 'OpenShift']}>
+     <Tabs.Tab>```bash copy helm upgrade --install mostly-ai ./mostly-combined --values values.yaml --namespace mostly-ai --create-namespace ```</Tabs.Tab>
+     <Tabs.Tab>```bash copy helm upgrade --install mostly-ai ./mostly-combined --values ocp-values.yaml --namespace mostly-ai --create-namespace ```</Tabs.Tab>
+   </Tabs>
 
 ## `Queued` jobs make no progress when scheduled on a worker node requiring the operator `Exists`
 
@@ -112,12 +94,7 @@ One reason may be that your Kubernetes cluster requires the definition of the `m
 
 Remove any **Toleration** values defined for your computes.
 
- 1. As a Super admin, go to the **Profile** menu in the upper right and select **Computes**.
- 2. For the **Default** compute, select it from the list and remove the **Toleration** value, and click **Save**.
-    <Image
-        src="/docimages/install/troubleshoot/common/computes-remove-toleration.webp"
-        alt="MOSTLY AI - Troubleshoot Queued jobs - Remove Toleration from computes"
-        width={550}
-        height={400}
-    />
- 3. Repeat for any additional computes added to your MOSTLY AI deployment.
+1.  As a Super admin, go to the **Profile** menu in the upper right and select **Computes**.
+2.  For the **Default** compute, select it from the list and remove the **Toleration** value, and click **Save**.
+    <Image src="/docimages/install/troubleshoot/common/computes-remove-toleration.webp" alt="MOSTLY AI - Troubleshoot Queued jobs - Remove Toleration from computes" width={550} height={400} />
+3.  Repeat for any additional computes added to your MOSTLY AI deployment.

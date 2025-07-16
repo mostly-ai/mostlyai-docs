@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from 'next/image';
 
 export const GraduationIcon = () => {
   return <Image className="card-icon" src="/icons/mostly-ai/landing-page/school.svg" alt="Graduation Icon" width={30} height={30} />;

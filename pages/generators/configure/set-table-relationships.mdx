@@ -3,8 +3,8 @@ title: 'Set table relationships'
 description: 'With MOSTLY AI, you can train a generator on multi-table datasets with existing relationships between tables by setting foreign keys.'
 ---
 
-import { Card, Cards } from 'nextra/components'
-import { RelDiagramIcon, KeyIcon, TwoTableIcon, MultiTableIcon } from '@components/icons'
+import { Card, Cards } from 'nextra/components';
+import { RelDiagramIcon, KeyIcon, TwoTableIcon, MultiTableIcon } from '@components/icons';
 
 # Set table relationships
 
@@ -43,5 +43,5 @@ In MOSTLY AI, a non-context foreign key helps to maintain the referential integr
 
 Regular foreign keys are useful in the following scenarios.
 
-* **Multiple foreign keys in a single table**. If a table has multiple foreign keys, you can prioritize one as the context (to retain correlations and referential integrity), and have the remaining as regular foreign keys (to retain the referential integrity).
-* **Relationship between two subject tables**. If you have two subject tables, you can retain their referential integrity with a non-context foreign key.
+- **Multiple foreign keys in a single table**. If a table has multiple foreign keys, you can prioritize one as the context (to retain correlations and referential integrity), and have the remaining as regular foreign keys (to retain the referential integrity).
+- **Relationship between two subject tables**. If you have two subject tables, you can retain their referential integrity with a non-context foreign key.

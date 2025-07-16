@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from 'next/image';
 
 export const mySQLIcon = () => {
   return <Image className="card-icon" src="/icons/third-party/mysql-icon.svg" alt="MySQL Icon" width={30} height={30} />;

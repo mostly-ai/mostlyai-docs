@@ -1,27 +1,25 @@
 ---
-title: "MOSTLY AI Python SDK"
-description: "Use the MOSTLY AI Python SDK to train generators, generate synthetic data, connect to data sources, share data with your team, and much more. Do so in a local Python environment or on a remote MOSTLY AI platform."
+title: 'MOSTLY AI Python SDK'
+description: 'Use the MOSTLY AI Python SDK to train generators, generate synthetic data, connect to data sources, share data with your team, and much more. Do so in a local Python environment or on a remote MOSTLY AI platform.'
 ---
 
-import Image from 'next/image'
-import { Callout } from 'nextra/components'
-import { Tabs } from 'nextra/components'
-import { CustomCallout } from '@components/custom-callout'
+import Image from 'next/image';
+import { Callout } from 'nextra/components';
+import { Tabs } from 'nextra/components';
+import { CustomCallout } from '@components/custom-callout';
 
 # MOSTLY AI Python SDK
 
 The MOSTLY AI Python SDK enables full programmatic use of the MOSTLY AI Platform features both in a local environment as well as by connecting to a remote MOSTLY AI Platform.
 
 | Intent                                        | Primitive                         |
-|-----------------------------------------------|-----------------------------------|
+| --------------------------------------------- | --------------------------------- |
 | Train a generator on tabular or language data | `g = mostly.train(config)`        |
 | Generate any number of synthetic data records | `sd = mostly.generate(g, config)` |
 | Live probe the generator on demand            | `df = mostly.probe(g, config)`    |
 | Connect to any data source within your org    | `c = mostly.connect(config)`      |
 
-<Callout>
-For a complete API reference, see the [Python SDK package documentation](https://mostly-ai.github.io/mostlyai/).
-</Callout>
+<Callout>For a complete API reference, see the [Python SDK package documentation](https://mostly-ai.github.io/mostlyai/).</Callout>
 
 ## Installation
 
@@ -34,8 +32,10 @@ Use `pip install` to install the latest version of `mostlyai`.
 pip install -U "mostlyai[local]"
 
 # GPU
+
 pip install -U "mostlyai[local-gpu]"
-```
+
+````
 <CustomCallout>
 GPU support in Local mode is available on Linux only.
 </CustomCallout>
@@ -44,7 +44,8 @@ If you need to use one of the supported [connectors](/connectors/create) in Loca
 
 ```shell copy filename="shell" /databricks/
 pip install -U "mostlyai[local,databricks]"
-```
+````
+
 </Tabs.Tab>
 <Tabs.Tab>
 ```shell copy filename="shell"
@@ -57,12 +58,12 @@ pip install -U mostlyai
 
 The Python SDK is designed to work in a **local environment** (your computer or any supported Python environment) or **by connecting to a remote MOSTLY AI Platform** (such as https://app.mostly.ai). See the comparison below.
 
-| | Local mode | Client mode |
-|-|-------------------|-----------------------------|
-| **Prerequisites** | Local Python installation (in Local mode) | • Remote MOSTLY AI Platform<br />• Platform API key<br />• Local Python installation (in Client mode) |
-| **Installation** | Install the Python SDK in Local mode | 1. Deploy MOSTLY AI Platform in a Kubernetes cluster<br />2. Connect to the Platform with Python SDK in Client mode |
-| **Service** | Use a locally running server that provides the REST API  | Connect to the MOSTLY AI platform REST API |
-| **Compute** | Uses local compute resources (CPU, GPU) | Uses compute resources available on the MOSTLY AI Platform |
+|                   | Local mode                                              | Client mode                                                                                                         |
+| ----------------- | ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Prerequisites** | Local Python installation (in Local mode)               | • Remote MOSTLY AI Platform<br />• Platform API key<br />• Local Python installation (in Client mode)               |
+| **Installation**  | Install the Python SDK in Local mode                    | 1. Deploy MOSTLY AI Platform in a Kubernetes cluster<br />2. Connect to the Platform with Python SDK in Client mode |
+| **Service**       | Use a locally running server that provides the REST API | Connect to the MOSTLY AI platform REST API                                                                          |
+| **Compute**       | Uses local compute resources (CPU, GPU)                 | Uses compute resources available on the MOSTLY AI Platform                                                          |
 
 The same API is available in Local and Client modes. The only difference is how you instantiate the `MostlyAI` client depending on the mode you need.
 
@@ -73,7 +74,8 @@ The same API is available in Local and Client modes. The only difference is how 
 from mostlyai.sdk import MostlyAI
 
 mostly = MostlyAI(local=True)
-```
+
+````
 </Tabs.Tab>
 <Tabs.Tab>
 ```python filename="python" {3,4,6} copy
@@ -83,9 +85,10 @@ api_key="INSERT_YOUR_API_KEY"
 base_url="https://app.mostly.ai" # replace with your Platform URL
 
 mostly_remote = MostlyAI(base_url=base_url, api_key=api_key)
-```
+````
 
 See the next section to learn how to get an API key.
+
 </Tabs.Tab>
 </Tabs>
 
@@ -96,19 +99,9 @@ Get your API key for the REST API or Python SDK from your user profile menu in t
 **Steps**
 
 1. Hover over the profile menu in the upper right and select **API key**.
-    <Image
-        src="/docimages/python-sdk/api-key/01-profile-select-API-key.webp"
-        alt="MOSTLY AI - Python SDK - From the Profile menu select API key"
-        width={250}
-        height={250}
-    />
+   <Image src="/docimages/python-sdk/api-key/01-profile-select-API-key.webp" alt="MOSTLY AI - Python SDK - From the Profile menu select API key" width={250} height={250} />
 2. Click **Generate API Key**.
-    <Image
-        src="/docimages/python-sdk/api-key/02-generate-api-key.webp"
-        alt="MOSTLY AI - Python SDK - Click Generate API key"
-        width={800}
-        height={150}
-    />
+   <Image src="/docimages/python-sdk/api-key/02-generate-api-key.webp" alt="MOSTLY AI - Python SDK - Click Generate API key" width={800} height={150} />
 
 **What's next**
 

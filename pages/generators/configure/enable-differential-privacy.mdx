@@ -1,13 +1,14 @@
 ---
-title: "Differential privacy"
-description: "With MOSTLY AI, you can train a generator with differential privacy enabled to ensure that it can generate differentially private synthetic data."
+title: 'Differential privacy'
+description: 'With MOSTLY AI, you can train a generator with differential privacy enabled to ensure that it can generate differentially private synthetic data.'
 ---
 
 import { Callout } from 'nextra/components';
-import { Tabs } from 'nextra/components'
+import { Tabs } from 'nextra/components';
 import Image from 'next/image';
 
 # Differential privacy
+
 With MOSTLY AI, you can train a generator with differential privacy enabled to ensure that it can generate differentially private synthetic data.
 
 ## When to use differential privacy?
@@ -28,35 +29,30 @@ In MOSTLY AI, you enable differential privacy on the **Model configuration** pag
 2. Click **Configure models** in the upper right.
 3. On the **Model configuration** page, expand a model to configure.
 4. Expand **Differential privacy** and select **On** to enable differential privacy for the model.
-    <Image
-        src="/docimages/generators/enable-differential-privacy/01-enable-differential-privacy.webp"
-        alt="Enable differential privacy"
-        width={800}
-        height={400}
-    />
-4. Configure the differential privacy options.<br />
-    | Differential privacy setting | Action |
-    | --- | --- |
-    | **DP max epsilon** | Set a maximum epsilon value for the model.<br /><br />If exceeded, this value acts as a stopping criteria for training. Only those model checkpoints that have an epsilon value below this threshold will be saved. If left blank, the training proceeds without a stopping criteria.<br /><br />For details, see [_Privacy budget (epsilon)_](#privacy-budget-epsilon).|
-    | **DP noise multiplier** | Set the noise multiplier for the model. The noise multiplier determines the amount of noise added to the model's gradients during training. A higher value results in more noise and stronger privacy, but may lead to less accurate results.<br /><br />The default is `1.5`.<br /><br />For details, see [_Noise multiplier_](#noise-multiplier).|
-    | **DP max gradient norm** | Set the maximum norm of the per-sample gradients. Gradients with norm higher than this will be clipped to this value.<br /><br />The default is `1`.<br /><br />For details, see [_Gradient clipping_](#gradient-clipping).|
-    | **Delta** | The delta value for differential privacy in the range of `1 x 10 ^ -3` to `1 x 10 ^ -12`. It is the probability of the privacy guarantee not holding. The smaller the delta, the more confident you can be that the privacy guarantee holds.<br />The default is `1 x 10 ^ -5`.|
-    | **Value protection epsilon** | Privacy budget allocated for protecting value ranges during analysis. A higher value provides more accurate ranges but reduces the budget available for model training.|
+   <Image src="/docimages/generators/enable-differential-privacy/01-enable-differential-privacy.webp" alt="Enable differential privacy" width={800} height={400} />
+5. Configure the differential privacy options.<br />
+   | Differential privacy setting | Action |
+   | --- | --- |
+   | **DP max epsilon** | Set a maximum epsilon value for the model.<br /><br />If exceeded, this value acts as a stopping criteria for training. Only those model checkpoints that have an epsilon value below this threshold will be saved. If left blank, the training proceeds without a stopping criteria.<br /><br />For details, see [_Privacy budget (epsilon)_](#privacy-budget-epsilon).|
+   | **DP noise multiplier** | Set the noise multiplier for the model. The noise multiplier determines the amount of noise added to the model's gradients during training. A higher value results in more noise and stronger privacy, but may lead to less accurate results.<br /><br />The default is `1.5`.<br /><br />For details, see [_Noise multiplier_](#noise-multiplier).|
+   | **DP max gradient norm** | Set the maximum norm of the per-sample gradients. Gradients with norm higher than this will be clipped to this value.<br /><br />The default is `1`.<br /><br />For details, see [_Gradient clipping_](#gradient-clipping).|
+   | **Delta** | The delta value for differential privacy in the range of `1 x 10 ^ -3` to `1 x 10 ^ -12`. It is the probability of the privacy guarantee not holding. The smaller the delta, the more confident you can be that the privacy guarantee holds.<br />The default is `1 x 10 ^ -5`.|
+   | **Value protection epsilon** | Privacy budget allocated for protecting value ranges during analysis. A higher value provides more accurate ranges but reduces the budget available for model training.|
 
-    <Callout>
-    **Note**<br />
-    The best amounts of epsilon, noise multiplier, and max gradient norm depend on your original data, specific use case, and the desired trade-off between privacy and accuracy.<br /><br />As a best practice, start with the default values and adjust them based on the results.
-    </Callout>
+   <Callout>
+     **Note**
+     <br />
+     The best amounts of epsilon, noise multiplier, and max gradient norm depend on your original data, specific use case, and the desired trade-off between privacy and accuracy.
+     <br />
+     <br />
+     As a best practice, start with the default values and adjust them based on the results.
+   </Callout>
 
-    <Image
-        src="/docimages/generators/enable-differential-privacy/02-configure-differential-privacy-epsilon-max-gradient-norm-noise-multiplier.webp"
-        alt="Configure differential privacy settings"
-        width={800}
-        height={400}
-    />
-5. Click **Start training** in the upper right to train the generator with differential privacy.
-</Tabs.Tab>
-<Tabs.Tab>
+   <Image src="/docimages/generators/enable-differential-privacy/02-configure-differential-privacy-epsilon-max-gradient-norm-noise-multiplier.webp" alt="Configure differential privacy settings" width={800} height={400} />
+
+6. Click **Start training** in the upper right to train the generator with differential privacy.
+      </Tabs.Tab>
+   <Tabs.Tab>
 To enable differential privacy for a generator, use the `differential_privacy` key under `tabular_model_configuration`, and nest the `max_epsilon`, `noise_multiplier`, `max_grad_norm`, and `delta` keys. Default values are applied if a key is undefined.
 
 ```python filename="python" copy {10-15}
@@ -82,6 +78,7 @@ dp_config = {
 }
 g = mostly.train(config=dp_config, start=True, wait=True)
 ```
+
 </Tabs.Tab>
 </Tabs>
 
@@ -91,20 +88,19 @@ You can track the training progress and the epsilon value by opening the **Train
 
 The **Training log** includes the **Diff privacy (ε/δ)** column and shows the values of epsilon and delta. The delta is typically a very low value (such as `1e-5`) and represents the probability threshold for potential privacy loss across the training epochs. A smaller delta implies a stricter privacy guarantee.
 
-<Image
-    src="/docimages/generators/enable-differential-privacy/03-open-training-log.webp"
-    alt="Open training log"
-    width={800}
-    height={400}
-/>
+<Image src="/docimages/generators/enable-differential-privacy/03-open-training-log.webp" alt="Open training log" width={800} height={400} />
 
 ## Appendix: Concepts
 
-Differential privacy is a mathematical definition of privacy that ensures that the output of a computation does not reveal information about the input data. It is a way to maximize the accuracy of queries from statistical databases while minimizing the chances of identifying  individual records.
+Differential privacy is a mathematical definition of privacy that ensures that the output of a computation does not reveal information about the input data. It is a way to maximize the accuracy of queries from statistical databases while minimizing the chances of identifying individual records.
 
 <Callout>
-**Example**<br />
-Imagine a database that contains the salaries of all employees in a company. If you query the database to get the average salary of all employees, the result will be different if you include or exclude the salary of a single employee.<br /><br />Differential privacy ensures that the result of the query is the same or very similar, regardless of whether the salary of a single employee is included or not.
+  **Example**
+  <br />
+  Imagine a database that contains the salaries of all employees in a company. If you query the database to get the average salary of all employees, the result will be different if you include or exclude the salary of a single employee.
+  <br />
+  <br />
+  Differential privacy ensures that the result of the query is the same or very similar, regardless of whether the salary of a single employee is included or not.
 </Callout>
 
 Key concepts of differential privacy are [**_noise addition_**](#noise-addition) and [**_privacy budget_**](#privacy-budget) (also known as **_epsilon_**).

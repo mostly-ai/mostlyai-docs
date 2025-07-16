@@ -2,9 +2,10 @@
 title: 'Speed up training'
 description: 'You can adjust the model settings in MOSTLY AI to get a quicker completion of AI model training for your tabular data.'
 ---
-import { Callout } from 'nextra/components'
-import { Tabs } from 'nextra/components'
-import Image from 'next/image'
+
+import { Callout } from 'nextra/components';
+import { Tabs } from 'nextra/components';
+import Image from 'next/image';
 
 # Speed up training
 
@@ -16,40 +17,30 @@ The actual training time depends mainly on your data. Because of this, there is 
 
 The training speed-related options with their default setting for each model are listed below:
 
-* Max sample size: 100%
-* Max training time: 10 min
-* Max training epochs: 100
-* Model: MOSTLY_AI/Medium
-* Batch size: Auto
-* Max sequence window (linked tables and Text models only): 100 rows
+- Max sample size: 100%
+- Max training time: 10 min
+- Max training epochs: 100
+- Model: MOSTLY_AI/Medium
+- Batch size: Auto
+- Max sequence window (linked tables and Text models only): 100 rows
 
 ## Use the **Speed** or **Turbo** presets
 
 Select the **Speed** configuration preset for faster AI model training while not compromising on accuracy. The **Speed** preset applies the following configuration:
 
-* Max sample size: 100%
-* Max training time: 10 min
-* Max sequence window (linked tables and Text models only): 20 rows
+- Max sample size: 100%
+- Max training time: 10 min
+- Max sequence window (linked tables and Text models only): 20 rows
 
-<Image
-   src="/docimages/generators/speed-up-training/model-configuration-01-select-speed-preset.webp"
-   alt="MOSTLY AI - Generator configuration - Select Speed configuration preset"
-   width={900}
-   height={300}
-/>
+<Image src="/docimages/generators/speed-up-training/model-configuration-01-select-speed-preset.webp" alt="MOSTLY AI - Generator configuration - Select Speed configuration preset" width={900} height={300} />
 
 Select the **Turbo** configuration preset to complete AI model training as quickly as possible at the cost of accuracy. Best for quick sanity checks. The **Turbo** preset applies the following configuration:
 
-* Max sample size: 100%
-* Max training time: 1 min
-* Max sequence window (linked tables and Text models only): 4 rows
+- Max sample size: 100%
+- Max training time: 1 min
+- Max sequence window (linked tables and Text models only): 4 rows
 
-<Image
-   src="/docimages/generators/speed-up-training/model-configuration-02-select-turbo-preset.webp"
-   alt="MOSTLY AI - Generator configuration - Select Turbo configuration preset"
-   width={900}
-   height={300}
-/>
+<Image src="/docimages/generators/speed-up-training/model-configuration-02-select-turbo-preset.webp" alt="MOSTLY AI - Generator configuration - Select Turbo configuration preset" width={900} height={300} />
 
 ## Decrease training sample size
 
@@ -64,13 +55,13 @@ If you use the web application, you can configure the training sample size for e
 1. With an untrained generator open, go to the **Model configuration** page by clicking **Configure models**.
 2. Click a table to expand its model settings.
 3. Set the **Max sample size** as number of rows.
-    <Image
-        src="/docimages/generators/speed-up-training/model-configuration-03-decrease-max-sample-size.webp"
-        alt="MOSTLY AI - Generator configuration - Decrease maximum training sample size"
-        width={900}
-        height={300}
-    />
-</Tabs.Tab>
+      <Image
+              src="/docimages/generators/speed-up-training/model-configuration-03-decrease-max-sample-size.webp"
+              alt="MOSTLY AI - Generator configuration - Decrease maximum training sample size"
+              width={900}
+              height={300}
+          />
+      </Tabs.Tab>
 <Tabs.Tab>
 For the Python SDK, use the `max_sample_size` key in the `tabular_model_configuration` dictionary.
 
@@ -88,6 +79,7 @@ config = {
     ]
 }
 ```
+
 </Tabs.Tab>
 </Tabs>
 
@@ -104,13 +96,13 @@ If you use the web application, you can configure the maximum training time from
 1. With an untrained generator open, go to the **Model configuration** page by clicking **Configure models**.
 2. Click a table to expand its model settings.
 3. Set the **Max training time** in minutes.
-    <Image
-        src="/docimages/generators/speed-up-training/model-configuration-04-decrease-training-time.webp"
-        alt="MOSTLY AI - Generator configuration - Set maximum training time"
-        width={900}
-        height={300}
-    />
-</Tabs.Tab>
+      <Image
+              src="/docimages/generators/speed-up-training/model-configuration-04-decrease-training-time.webp"
+              alt="MOSTLY AI - Generator configuration - Set maximum training time"
+              width={900}
+              height={300}
+          />
+      </Tabs.Tab>
 <Tabs.Tab>
 For the Python SDK, use the `max_training_time` in the `tabular_model_configuration` dictionary to set the training time for a model. Specify an integer for a duration in minutes.
 
@@ -128,6 +120,7 @@ config = {
     ]
 }
 ```
+
 </Tabs.Tab>
 </Tabs>
 
@@ -135,13 +128,11 @@ config = {
 
 The model size defines the amount of internal parameters that the AI model uses to learn from your data. A smaller model uses less parameters to analyze and train on your data. MOSTLY AI provides models with three different sizes.
 
-* **MOSTLY_AI/Small** uses fewer parameters, takes less memory and time, at the cost of accuracy.
-* **MOSTLY_AI/Medium** uses optimal parameters and is best for most use cases.
-* **MOSTLY_AI/Large** maximizes accuracy with more parameters but requires extra memory and time to complete training.
+- **MOSTLY_AI/Small** uses fewer parameters, takes less memory and time, at the cost of accuracy.
+- **MOSTLY_AI/Medium** uses optimal parameters and is best for most use cases.
+- **MOSTLY_AI/Large** maximizes accuracy with more parameters but requires extra memory and time to complete training.
 
-<Callout>
-In most cases, the **MOSTLY_AI/Medium** model is the most optimal. Select a **MOSTLY_AI/Small** model if you can compromise on accuracy and want to speed up training.
-</Callout>
+<Callout>In most cases, the **MOSTLY_AI/Medium** model is the most optimal. Select a **MOSTLY_AI/Small** model if you can compromise on accuracy and want to speed up training.</Callout>
 
 <Tabs items={['UI', 'Python SDK']}>
 <Tabs.Tab>
@@ -152,19 +143,19 @@ If you use the web application, you can configure the model from the **Model con
 1. With an untrained generator open, go to the **Model configuration** page by clicking **Configure models**.
 2. Click a table to expand its model settings.
 3. For **Model**, select **MOSTLY_AI/Small**.
-    <Image
-        src="/docimages/generators/speed-up-training/model-configuration-05-reduce-model-size.webp"
-        alt="MOSTLY AI - Generator configuration - Reduce model size"
-        width={900}
-        height={300}
-    />
-</Tabs.Tab>
+      <Image
+              src="/docimages/generators/speed-up-training/model-configuration-05-reduce-model-size.webp"
+              alt="MOSTLY AI - Generator configuration - Reduce model size"
+              width={900}
+              height={300}
+          />
+      </Tabs.Tab>
 <Tabs.Tab>
 For the Python SDK, use the `model` key in the `tabular_model_configuration` dictionary.
 
-* Use `MOSTLY_AI/Small` for a small model size
-* Use `MOSTLY_AI/Medium` for a medium model size
-* Use `MOSTLY_AI/Large` for a large model size
+- Use `MOSTLY_AI/Small` for a small model size
+- Use `MOSTLY_AI/Medium` for a medium model size
+- Use `MOSTLY_AI/Large` for a large model size
 
 ```python filename="python" copy {8}
 config = {
@@ -180,6 +171,7 @@ config = {
     ]
 }
 ```
+
 </Tabs.Tab>
 </Tabs>
 
@@ -195,24 +187,25 @@ If you use the web application, you can configure the model size from the **Mode
 
 **Steps**
 
-1. With an untrained generator open, go to the **Model configuration** page by clicking **Configure models**.
-2. Click a table to expand its model settings.
-3. Adjust the **Batch size**.
-   1. In most cases, use **Auto** and MOSTLY AI determines the optimal batch size for your table data.
-   2. Otherwise, set the batch size to a powers of 2 integer from the listed options.
+1.  With an untrained generator open, go to the **Model configuration** page by clicking **Configure models**.
+2.  Click a table to expand its model settings.
+3.  Adjust the **Batch size**. 1. In most cases, use **Auto** and MOSTLY AI determines the optimal batch size for your table data. 2. Otherwise, set the batch size to a powers of 2 integer from the listed options.
 
-    <Image
-        src="/docimages/generators/speed-up-training/model-configuration-06-increase-batch-size.webp"
-        alt="MOSTLY AI - Generator configuration - Increase batch size"
-        width={900}
-        height={300}
-    />
-</Tabs.Tab>
-<Tabs.Tab>
-For the Python SDK, use the `batch_size` key in the `tabular_model_configuration` dictionary.
+                <Image
+                    src="/docimages/generators/speed-up-training/model-configuration-06-increase-batch-size.webp"
+                    alt="MOSTLY AI - Generator configuration - Increase batch size"
+                    width={900}
+                    height={300}
+                />
 
-* When set to `null`, the batch size defaults to the **Auto** setting which uses a heuristic to set an optimal batch size based on your original data.
-* Set the batch size to a powers of 2 integer, such as `2`, `4`, `8`, ..., `32768`, `65536`.
+            </Tabs.Tab>
+
+        <Tabs.Tab>
+
+    For the Python SDK, use the `batch_size` key in the `tabular_model_configuration` dictionary.
+
+- When set to `null`, the batch size defaults to the **Auto** setting which uses a heuristic to set an optimal batch size based on your original data.
+- Set the batch size to a powers of 2 integer, such as `2`, `4`, `8`, ..., `32768`, `65536`.
 
 ```python filename="python" copy {8}
 config = {
@@ -228,6 +221,7 @@ config = {
     ]
 }
 ```
+
 </Tabs.Tab>
 </Tabs>
 

@@ -3,9 +3,9 @@ title: 'Usage and credits'
 description: 'Daily, MOSTLY AI provides 5 credits for the free generation of synthetic data points. 1 credits equals 1 million synthetic data points. 5 credits equals 1 million chat tokens.'
 ---
 
-import { Tabs } from 'nextra/components'
-import Image from 'next/image'
-import { CustomCallout } from '@components/custom-callout'
+import { Tabs } from 'nextra/components';
+import Image from 'next/image';
+import { CustomCallout } from '@components/custom-callout';
 
 # Usage and credits
 
@@ -16,6 +16,7 @@ The [MOSTLY AI Platform](https://app.mostly.ai) provides a daily limit of 5 cred
 When you use up your credits, you can no longer train new generators, create new synthetic datasets, or start chats.
 
 For more credits or for the configuration of credits on Enterprise deployments, [contact MOSTLY AI](https://mostly.ai/contact).
+
 </CustomCallout>
 
 ## Usage
@@ -26,35 +27,20 @@ For generators and synthetic datasets, you will find the virtual CPU/GPU time co
 
 **Chat details: Compute and token consumption**
 GPU and CPU time are measured in seconds while chat usage is measured in tokens. The total time is the sum of the GPU and CPU time used. Token consumption is calculated at a rate of 1M tokens per 5.0 Credits.
-<Image
-    src="/docimages/usage/g-virtual-cpu-gpu-times-with-tokens.webp"
-    alt="MOSTLY AI - Usage and credits - Token Consumption plus Virtual CPU and GPU times"
-    width={800}
-    height={500}
-/>
 
-<CustomCallout>
-**Note**
-Longer chats consume tokens at a much higher rate. When discussing a new topic or performing a new analysis, start a new chat by clicking **New Chat** to conserve tokens.
-</CustomCallout>
+<Image src="/docimages/usage/g-virtual-cpu-gpu-times-with-tokens.webp" alt="MOSTLY AI - Usage and credits - Token Consumption plus Virtual CPU and GPU times" width={800} height={500} />
+
+<CustomCallout>**Note** Longer chats consume tokens at a much higher rate. When discussing a new topic or performing a new analysis, start a new chat by clicking **New Chat** to conserve tokens.</CustomCallout>
 
 **Generator details: Compute and token consumption**
 GPU and CPU time are measured in seconds. The total time is the sum of the GPU and CPU time used. GPU time is only available when a GPU was selected to train a generator.
-<Image
-    src="/docimages/usage/g-virtual-cpu-gpu-times.webp"
-    alt="MOSTLY AI - Usage and credits - Virtual CPU and GPU times"
-    width={800}
-    height={500}
-/>
+
+<Image src="/docimages/usage/g-virtual-cpu-gpu-times.webp" alt="MOSTLY AI - Usage and credits - Virtual CPU and GPU times" width={800} height={500} />
 
 **Synthetic dataset details: Compute consumption**
 GPU time is only available when a GPU was selected to generate the synthetic dataset.
-<Image
-    src="/docimages/usage/sd-virtual-cpu-gpu-times.webp"
-    alt="MOSTLY AI - Usage and credits - Virtual CPU and GPU times"
-    width={800}
-    height={500}
-/>
+
+<Image src="/docimages/usage/sd-virtual-cpu-gpu-times.webp" alt="MOSTLY AI - Usage and credits - Virtual CPU and GPU times" width={800} height={500} />
 
 ## Credits
 
@@ -104,6 +90,7 @@ The result is a Python dictionary and you can find details about your current cr
     }
 }
 ```
+
 </Tabs.Tab>
 </Tabs>
 
@@ -119,9 +106,4 @@ From the profile menu, select **Usage report**.
 
 With **User: Me** selected from the drop-down menu, you can view the monthly usage statistics for your account.
 
-<Image
-    src="/docimages/usage/monthly-usage-report.webp"
-    alt="MOSTLY AI - Usage and credits - Monthly usage report"
-    width={800}
-    height={500}
-/>
+<Image src="/docimages/usage/monthly-usage-report.webp" alt="MOSTLY AI - Usage and credits - Monthly usage report" width={800} height={500} />

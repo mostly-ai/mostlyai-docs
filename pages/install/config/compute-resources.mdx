@@ -15,9 +15,9 @@ _**CPU**_ is less critical. Fewer CPUs slow down the job but do not cause failur
 
 By default, the [MOSTLY AI Helm chart](/install/deploy/helm-chart) uses taints to ensure that AI jobs run on dedicated worker nodes. MOSTLY AI recommends that you use the following taints on worker nodes:
 
-* **Key**: `scheduling.mostly.ai/node`
-* **Value**: `engine-jobs`
-* **Effect**: `NoSchedule`
+- **Key**: `scheduling.mostly.ai/node`
+- **Value**: `engine-jobs`
+- **Effect**: `NoSchedule`
 
 If you already have a taint in place for worker nodes and node pools, before deploying you can modify the `values.yaml` file to define your existing taint.
 
@@ -49,5 +49,5 @@ If you already have a taint in place for worker nodes and node pools, before dep
 
 Assign jobs to nodes where they will succeed and complete quickly. Use the following `values.yaml` parameters to configure the AI workloads on the worker nodes. Kubernetes will assign AI jobs to a node, which has at least this amount of resources available.
 
-  * `mostlyApp.deployment.mostly.defaultComputePool.resources.cpu`: To configure 14 cores, set `cpu: 14`.
-  * `mostlyApp.deployment.mostly.defaultComputePool.resources.memory`: To configure 24 GB memory, set `memory: 24`.
+- `mostlyApp.deployment.mostly.defaultComputePool.resources.cpu`: To configure 14 cores, set `cpu: 14`.
+- `mostlyApp.deployment.mostly.defaultComputePool.resources.memory`: To configure 24 GB memory, set `memory: 24`.

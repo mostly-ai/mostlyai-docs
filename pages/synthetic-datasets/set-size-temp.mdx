@@ -3,9 +3,9 @@ title: 'Set sample size and temperature'
 description: 'With MOSTLY AI, you can define the sample size as the amount of data you want to generate and specify the temperature and Top P generation parameters to configure how creative or conservative the generated synthetic samples should be.'
 ---
 
-import Image from 'next/image'
-import { Tabs } from 'nextra/components'
-import { CustomCallout } from '@components/custom-callout'
+import Image from 'next/image';
+import { Tabs } from 'nextra/components';
+import { CustomCallout } from '@components/custom-callout';
 
 # Set sample size and temperature
 
@@ -15,9 +15,7 @@ With MOSTLY AI, you can set the sample size, or that is, the amount of data to g
 
 With the default options, a generator generates each table with the same size (number of rows) as your original tables. You can set a different sample size.
 
-<CustomCallout>
-   **Note**: You can apply **Sample size** only to subject tables. Linked tables are generated based on the sequence length that each subject (row) in a subject table has in the linked table. Bear in mind that synthetic linked tables might have variations due to [extreme sequence length protection](/concepts/privacy-protection#extreme-sequence-length-protection).
-</CustomCallout>
+<CustomCallout>**Note**: You can apply **Sample size** only to subject tables. Linked tables are generated based on the sequence length that each subject (row) in a subject table has in the linked table. Bear in mind that synthetic linked tables might have variations due to [extreme sequence length protection](/concepts/privacy-protection#extreme-sequence-length-protection).</CustomCallout>
 
 <Tabs items={['UI', 'Python SDK']}>
 <Tabs.Tab>
@@ -28,13 +26,13 @@ If you use the web application, you can set the **Sample size** after you expand
 1. From a generator, click **Generate data** in the upper right.
 2. Expand the generation settings for a table.
 3. Set **Sample size** as the number of rows to generate.
-    <Image
-        src="/docimages/synthetic-datasets/set-size-temperature/set-size-01-rows.webp"
-        alt="MOSTLY AI - Synthetic datasets - Set sample size"
-        width={800}
-        height={150}
-    />
-</Tabs.Tab>
+      <Image
+              src="/docimages/synthetic-datasets/set-size-temperature/set-size-01-rows.webp"
+              alt="MOSTLY AI - Synthetic datasets - Set sample size"
+              width={800}
+              height={150}
+          />
+      </Tabs.Tab>
 <Tabs.Tab>
 If you use the Python SDK, set the `sample_size` key to the number of samples (rows) you want to generate for a specific table.
 
@@ -51,6 +49,7 @@ sd = mostly.generate("GENERATOR_ID", {
 })
 sd.data()
 ```
+
 </Tabs.Tab>
 </Tabs>
 
@@ -83,15 +82,16 @@ If you use the web application, you can set **Temperature** and **Top P** from t
 3. Expand **Sampling controls**.
 4. For **Temperature**, use the slider to set a value in the range of `0` to `2`, where `0` is extremely conservative and `2` is extremely creative.
 5. For **Top P**, use the slider to set a value in the range of `0.9` to `1.00`.
-    <Image
-        src="/docimages/synthetic-datasets/set-size-temperature/set-temp-topp-01-config.webp"
-        alt="MOSTLY AI - Synthetic datasets - Set temperature and Top P"
-        width={800}
-        height={150}
-    />
-</Tabs.Tab>
+      <Image
+              src="/docimages/synthetic-datasets/set-size-temperature/set-temp-topp-01-config.webp"
+              alt="MOSTLY AI - Synthetic datasets - Set temperature and Top P"
+              width={800}
+              height={150}
+          />
+      </Tabs.Tab>
 <Tabs.Tab>
 If you use the Python SDK, add the `sampling_temperature` and `sampling_top_p` keys to the `tables.configuration` dictionary.
+
 ```python copy filename="python" {6,7}
 sd = mostly.generate("GENERATOR_ID", {
    "tables": [
@@ -106,5 +106,6 @@ sd = mostly.generate("GENERATOR_ID", {
 })
 sd.data()
 ```
+
 </Tabs.Tab>
 </Tabs>

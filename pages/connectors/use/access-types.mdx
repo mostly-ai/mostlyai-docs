@@ -3,23 +3,18 @@ title: 'Connector access types'
 description: 'When you create a connector, you can specify the type of access that the connector has to the data source. You can restrict connectors to be available only for generator training, to be available for reading data for analysis and ML tasks via the SDK and the Assistant, or to be available for both reading from and writing data to as a data destination.'
 ---
 
-import Image from 'next/image'
+import Image from 'next/image';
 
 # Connector access types
 
 When you create a connector, you can specify the type of access that the connector has to the data source. You can restrict connectors to be available only for generator training, to be available for reading data for analysis and ML tasks via the SDK and the Assistant, or to be available for both reading from and writing data to as a data destination.
 
-| Access type | Description |
-| --- | --- |
-| **Read protected** | The connector is available only for reading data for generator training. |
-| **Read data** | The connector is available for reading data for generator training as well as analysis and ML tasks via the SDK and the Assistant. |
-| **Write data** | The connector is available for reading data as well as writing data to a data destination. |
+| Access type        | Description                                                                                                                        |
+| ------------------ | ---------------------------------------------------------------------------------------------------------------------------------- |
+| **Read protected** | The connector is available only for reading data for generator training.                                                           |
+| **Read data**      | The connector is available for reading data for generator training as well as analysis and ML tasks via the SDK and the Assistant. |
+| **Write data**     | The connector is available for reading data as well as writing data to a data destination.                                         |
 
 You set each connector's access type when you create the connector. You can change the access type later by editing the connector.
 
-<Image
-    src="/docimages/connectors/connector-access-types.webp"
-    alt="Connector - Select Write data under Connector type"
-    width={350}
-    height={30}
-/>
+<Image src="/docimages/connectors/connector-access-types.webp" alt="Connector - Select Write data under Connector type" width={350} height={30} />

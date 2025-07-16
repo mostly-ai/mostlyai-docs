@@ -1,13 +1,10 @@
 ---
-title: "Quick start"
-description: "Take your first steps in training generators on your tabular data and generating synthetic data."
+title: 'Quick start'
+description: 'Take your first steps in training generators on your tabular data and generating synthetic data.'
 ---
 
-import { Cards, Card } from 'nextra/components'
-import {
-    ModelCreatorIcon,
-    DataConsumerIcon,
-    LLMIcon } from '@components/icons'
+import { Cards, Card } from 'nextra/components';
+import { ModelCreatorIcon, DataConsumerIcon, LLMIcon } from '@components/icons';
 
 # Quick start
 
@@ -15,12 +12,12 @@ Welcome to the MOSTLY AI Quick start guides! Training new AI models on your tabu
 
 ## Quick starts for Model creators and Data consumers
 
-* **Model creators** are the guardians of original data and own the training of new AI models that make data privacy-safe for further utility.
-* **Data consumers**, through MOSTLY AI, have easy access to synthetic data they can analyze, use for downstream machine learning (ML) tasks, and share freely, without the privacy concerns.
+- **Model creators** are the guardians of original data and own the training of new AI models that make data privacy-safe for further utility.
+- **Data consumers**, through MOSTLY AI, have easy access to synthetic data they can analyze, use for downstream machine learning (ML) tasks, and share freely, without the privacy concerns.
 
 <Cards num={2}>
-    <Cards.Card icon={ModelCreatorIcon()} title="Model creators" href="/quick-start/model-creators" />
-    <Cards.Card icon={DataConsumerIcon()} title="Data consumers" href="/quick-start/data-consumers" />
+  <Cards.Card icon={ModelCreatorIcon()} title="Model creators" href="/quick-start/model-creators" />
+  <Cards.Card icon={DataConsumerIcon()} title="Data consumers" href="/quick-start/data-consumers" />
 </Cards>
 
 ## Quick start for fine-tuning LLMs
@@ -28,5 +25,5 @@ Welcome to the MOSTLY AI Quick start guides! Training new AI models on your tabu
 MOSTLY AI can easily integrate with any LLM for further fine-tuning on tabular datasets that contain columns with unstructured text data.
 
 <Cards num={1}>
-    <Cards.Card icon={LLMIcon()} title="Fine-tune LLMs" href="/quick-start/fine-tuning-llms" />
+  <Cards.Card icon={LLMIcon()} title="Fine-tune LLMs" href="/quick-start/fine-tuning-llms" />
 </Cards>

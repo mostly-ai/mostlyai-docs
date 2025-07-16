@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from 'next/image';
 
 export const Canceled = () => {
   return <Image className="card-icon" src="/icons/mostly-ai/statuses/status-pill-canceled.svg" alt="MOSTLY AI Status pill - Canceled" width={80} height={30} />;

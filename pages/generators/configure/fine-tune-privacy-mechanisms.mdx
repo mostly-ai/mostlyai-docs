@@ -1,10 +1,11 @@
 ---
-title: "Fine-tune privacy mechanisms"
-description: "When enabled, the **Value protection** setting replaces rare categories or removes numeric and date-time outliers from your original dataset before generator training."
+title: 'Fine-tune privacy mechanisms'
+description: 'When enabled, the **Value protection** setting replaces rare categories or removes numeric and date-time outliers from your original dataset before generator training.'
 ---
-import { Callout } from 'nextra/components'
-import { Tabs } from 'nextra/components'
-import Image from 'next/image'
+
+import { Callout } from 'nextra/components';
+import { Tabs } from 'nextra/components';
+import Image from 'next/image';
 
 # Fine-tune privacy mechanisms
 
@@ -13,8 +14,9 @@ You can enable or disable the value protection for each table in your generator.
 ## Value protection for categorical columns
 
 When enabled, **Value protection** replaces categories that occur rarely in a column and can, therefore, pose a re-identification risk. For example, the category of **President of the United States** in a **Job title** column will likely occur only once in that column and will be replaced. The replacement depends on the selected method.
-* **Constant**. The method maintains the original distribution of categories but replaces any rare categories with the `_RARE_` token in synthetic datasets.
-* **Sample**. The method replaces rare categories with one of the other categories in the table. This can lead to a skewed distribution of categories in synthetic datasets.
+
+- **Constant**. The method maintains the original distribution of categories but replaces any rare categories with the `_RARE_` token in synthetic datasets.
+- **Sample**. The method replaces rare categories with one of the other categories in the table. This can lead to a skewed distribution of categories in synthetic datasets.
 
 ## Value protection for numeric and datetime columns
 
@@ -24,6 +26,7 @@ When enabled, value protection removes the minimum and maximum outliers that mig
 Privacy protection is built-in the design of the Generative AI models of MOSTLY AI. For example, [data overfitting](/concepts/privacy-protection#model-overfitting-prevention) and [extreme sequence length protection](/concepts/privacy-protection#extreme-sequence-length-protection) are always enabled.
 
 For information about all privacy-protection mechanisms, see [Privacy-protection mechanisms](/concepts/privacy-protection).
+
 </Callout>
 
 ## Set value protection
@@ -39,20 +42,23 @@ You can switch on the Value protection for a table from the **Model configuratio
 1. With a generator open, click **Configure models** in the upper right.
 2. On the **Model configuration** page, configure the privacy-protection mechanism.
    1. Under **Value protection**, enable or disable value protection with the **On** and **Off** buttons.
-      <br /><br />This enables both the **rare category protection** and **extreme numeric and datetime value protection** mechanisms.
-      <br /><br />
+      <br />
+      <br />
+      This enables both the **rare category protection** and **extreme numeric and datetime value protection** mechanisms.
+      <br />
+      <br />
    2. If **Value protection** is enabled, define how to replace rare categories.
-      * **Constant**. Replaces rare categories with the `_RARE_` token and maintains the original distribution in categorical columns.
-      * **Sample**. Replaces rare categories with one of the other non-rare categories in the column. This can skew the original distribution in categorical columns.
-         <Image
-            src="/docimages/generators/fine-tune-privacy-mechanisms/01-value-protection-configuration.webp"
-            alt="MOSTLY AI - Generator configuration - Define privacy mechanisms"
-            width={900}
-            height={300}
-         />
-</Tabs.Tab>
-<Tabs.Tab>
-To control value protection with the Python SDK, add the `tabular_model_configuration` dictionary for each table and use the `value_protection` key by setting it to `True` or `False`.
+      _ **Constant**. Replaces rare categories with the `\_RARE_`token and maintains the original distribution in categorical columns.
+      \_ **Sample**. Replaces rare categories with one of the other non-rare categories in the column. This can skew the original distribution in categorical columns.
+      <Image
+                        src="/docimages/generators/fine-tune-privacy-mechanisms/01-value-protection-configuration.webp"
+                        alt="MOSTLY AI - Generator configuration - Define privacy mechanisms"
+                        width={900}
+                        height={300}
+                     />
+      </Tabs.Tab>
+      <Tabs.Tab>
+To control value protection with the Python SDK, add the`tabular_model_configuration`dictionary for each table and use the`value_protection`key by setting it to`True`or`False`.
 
 To control how rare categories are replaced, use the `rare_category_replacement_method` key and set it to the `CONSTANT` or `SAMPLE` method.
 
@@ -75,5 +81,6 @@ config = {
     ]
 }
 ```
+
 </Tabs.Tab>
 </Tabs>

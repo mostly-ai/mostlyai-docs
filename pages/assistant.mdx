@@ -3,26 +3,21 @@ title: 'Assistant'
 description: 'The MOSTLY AI Assistant provides by far the easiest interaction you can have about your data. With natural language, you can get rich data insights instantly and use all MOSTLY AI features from a single place without writing a single line of code.'
 ---
 
-import Image from 'next/image'
-import { Callout } from 'nextra/components'
+import Image from 'next/image';
+import { Callout } from 'nextra/components';
 
 # Assistant
 
 The MOSTLY AI Assistant provides by far the easiest interaction you can have about your data. With natural language, you can get rich data insights instantly and use all MOSTLY AI features from a single place without writing a single line of code.
 
-<Image
-    src="/docimages/assistant/chat-assistant.webp"
-    alt="MOSTLY AI - Assistant"
-    width={800}
-    height={400}
-/>
+<Image src="/docimages/assistant/chat-assistant.webp" alt="MOSTLY AI - Assistant" width={800} height={400} />
 
 The Assistant makes it easy to:
 
-* get data insights
-* generate data out of nothing
-* access privacy-safe data
-* enrich data
+- get data insights
+- generate data out of nothing
+- access privacy-safe data
+- enrich data
 
 ## Start a new chat
 
@@ -33,32 +28,20 @@ You can do so with using one of the prompts on the home page, starting a new cha
 ### Use a chat starter
 
 The MOSTLY AI home page includes prompts that guide your first Assistant conversation.
-    <Image
-        src="/docimages/assistant/assistant-start-chat-01-use-a-prompt.webp"
-alt="MOSTLY AI Assistant - Start a new chat - Use a prompt"
-        width={800}
-        height={400}
-    />
+
+<Image src="/docimages/assistant/assistant-start-chat-01-use-a-prompt.webp" alt="MOSTLY AI Assistant - Start a new chat - Use a prompt" width={800} height={400} />
 
 ### Start a brand new chat
 
 The **Assistant** page includes all existing chats. It is from here that you can also start a new chat. Just click **New chat** in the upper right.
-    <Image
-        src="/docimages/assistant/assistant-start-chat-02-new-chat.webp"
-alt="MOSTLY AI Assistant - Start a new chat - New chat button"
-        width={800}
-        height={400}
-    />
+
+<Image src="/docimages/assistant/assistant-start-chat-02-new-chat.webp" alt="MOSTLY AI Assistant - Start a new chat - New chat button" width={800} height={400} />
 
 ### Start from a generator or synthetic dataset
 
 You can also use the **Explore** button in the context of a generator or synthetic dataset to start a new Assistant chat. The conversation will start based on the structure, metadata, and data in the selected generator or synthetic dataset.
-    <Image
-        src="/docimages/assistant/assistant-start-chat-03-click-explore.webp"
-alt="MOSTLY AI Assistant - Start a new chat - Use a generator or synthetic dataset as context"
-        width={800}
-        height={400}
-    />
+
+<Image src="/docimages/assistant/assistant-start-chat-03-click-explore.webp" alt="MOSTLY AI Assistant - Start a new chat - Use a generator or synthetic dataset as context" width={800} height={400} />
 
 ## Features
 
@@ -68,16 +51,9 @@ The Assistant offers a range of features to use MOSTLY AI resources as well as u
 
 You can upload any file type that you can process with Python or its libraries. For example, you can upload CSV, Parquet, and Excel files for the Assistant to analyze for data insights.
 
-<Image
-    src="/docimages/assistant/assistant-upload-file.webp"
-    alt="MOSTLY AI Assistant - Upload files"
-    width={800}
-    height={400}
-/>
+<Image src="/docimages/assistant/assistant-upload-file.webp" alt="MOSTLY AI Assistant - Upload files" width={800} height={400} />
 
-<Callout>
-You cannot upload files once the [Python session status has expired](/assistant/python-session-status).
-</Callout>
+<Callout>You cannot upload files once the [Python session status has expired](/assistant/python-session-status).</Callout>
 
 ### Use a generator or a synthetic dataset
 
@@ -85,37 +61,22 @@ While you are in a chat, you can include any existing generator or synthetic dat
 
 On the left side of the prompt box, click the **Resources** button and select the **Use a generator** or **Use a synthetic dataset** options. You can then select any of your available resources.
 
-<Image
-    src="/docimages/assistant/assistant-feature-use-generator-or-synthetic-dataset.webp"
-    alt="MOSTLY AI Assistant - Use a generator or a synthetic dataset"
-    width={800}
-    height={400}
-/>
+<Image src="/docimages/assistant/assistant-feature-use-generator-or-synthetic-dataset.webp" alt="MOSTLY AI Assistant - Use a generator or a synthetic dataset" width={800} height={400} />
 
 ### Run Python code
 
 Use the **Python code** button at the bottom of the prompt editor to switch to Python mode.
 
-<Image
-    src="/docimages/assistant/assistant-feature-run-python-code-01.webp"
-    alt="MOSTLY AI Assistant - Run Python code"
-    width={800}
-    height={400}
-/>
+<Image src="/docimages/assistant/assistant-feature-run-python-code-01.webp" alt="MOSTLY AI Assistant - Run Python code" width={800} height={400} />
 
 Paste your code in the prompt and paste enter. The Assistant will run the code and display the output.
 
-<Image
-    src="/docimages/assistant/assistant-feature-run-python-code-02.webp"
-    alt="MOSTLY AI Assistant - Run Python code"
-    width={800}
-    height={400}
-/>
+<Image src="/docimages/assistant/assistant-feature-run-python-code-02.webp" alt="MOSTLY AI Assistant - Run Python code" width={800} height={400} />
 
 Click the **Python code** button again to switch back to the prompt editor.
 
 ## What's next
 
-* [**Prompt examples**](assistant/prompt-examples)<br />Check out the prompt examples for inspiration on what you can achieve with the MOSTLY AI Assistant.
-* [**Manage chats**](assistant/manage-chats)<br />To use the Assistant, select one of the prompts on the home page click **Explore** in the context of a generator or synthetic dataset. You can have many chats. Learn how to manage them as they grow.
-* [**Configuration**](assistant/configuration)<br />When you deploy MOSTLY AI, the Assistant requires a one-time configuration to set up the LLM of your choice. This page explains how.
+- [**Prompt examples**](assistant/prompt-examples)<br />Check out the prompt examples for inspiration on what you can achieve with the MOSTLY AI Assistant.
+- [**Manage chats**](assistant/manage-chats)<br />To use the Assistant, select one of the prompts on the home page click **Explore** in the context of a generator or synthetic dataset. You can have many chats. Learn how to manage them as they grow.
+- [**Configuration**](assistant/configuration)<br />When you deploy MOSTLY AI, the Assistant requires a one-time configuration to set up the LLM of your choice. This page explains how.

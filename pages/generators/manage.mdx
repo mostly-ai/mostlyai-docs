@@ -3,10 +3,10 @@ title: 'Manage generators'
 description: 'Train generators with MOSTLY AI and you can share them with peers and colleagues, generate synthetic datasets, transfer ownership, manage access, and more.'
 ---
 
-import { Callout } from 'nextra/components'
-import { Tabs } from 'nextra/components'
-import Image from 'next/image'
-import { Canceled, Generating, InProgress, OnHold, Ready, Failed, New, Queued, Continue } from '@components/status-pills'
+import { Callout } from 'nextra/components';
+import { Tabs } from 'nextra/components';
+import Image from 'next/image';
+import { Canceled, Generating, InProgress, OnHold, Ready, Failed, New, Queued, Continue } from '@components/status-pills';
 
 # Manage generators
 
@@ -16,15 +16,15 @@ To manage a generator, you need to be the owner or have Editor access to one.
 
 In the table below, you can find a list of all possible statuses a generator can have.
 
-| Status               | Description                                                                                         | Next actions                                                                                                         |
-|:---------------------|:----------------------------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------|
-| <New />              | A generator object exists with a default or modified configuration. Training not started.           | • Start training<br />• Clone configuration<br />• Delete                                                            |
-| <Queued />           | Generator training is queued until cluster resources become available.                              | • Share<br />• Clone configuration<br />• Cancel training<br />• Delete                                              |
-| <InProgress />       | Generator training is in progress.                                                                  | • Share<br/ >•&nbsp;Clone&nbsp;configuration<br />•&nbsp;Cancel&nbsp;training<br />• Delete                          |
-| <Continue />         | A trained generator was cloned to improve its quality with further training. Training not started.  | • Start&nbsp;training<br />• Share<br />• Clone configuration<br />• Delete                                          |
-| <Ready />            | The generator has completed training successfully and can now generate synthetic datasets.          | • Generate data<br />• Share<br />• Export to file<br />• Clone configuration<br />• Continue training<br />• Delete |
-| <Failed />           | The generator training started and then failed.                                                     | • Share<br />• Clone configuration<br />• Delete                                                                     |
-| <Canceled />         | The generator training was canceled while still in progress.                                        | • Share<br />• Clone configuration<br />• Delete                                                                     |
+| Status         | Description                                                                                        | Next actions                                                                                                         |
+| :------------- | :------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------- |
+| <New />        | A generator object exists with a default or modified configuration. Training not started.          | • Start training<br />• Clone configuration<br />• Delete                                                            |
+| <Queued />     | Generator training is queued until cluster resources become available.                             | • Share<br />• Clone configuration<br />• Cancel training<br />• Delete                                              |
+| <InProgress /> | Generator training is in progress.                                                                 | • Share<br/ >•&nbsp;Clone&nbsp;configuration<br />•&nbsp;Cancel&nbsp;training<br />• Delete                          |
+| <Continue />   | A trained generator was cloned to improve its quality with further training. Training not started. | • Start&nbsp;training<br />• Share<br />• Clone configuration<br />• Delete                                          |
+| <Ready />      | The generator has completed training successfully and can now generate synthetic datasets.         | • Generate data<br />• Share<br />• Export to file<br />• Clone configuration<br />• Continue training<br />• Delete |
+| <Failed />     | The generator training started and then failed.                                                    | • Share<br />• Clone configuration<br />• Delete                                                                     |
+| <Canceled />   | The generator training was canceled while still in progress.                                       | • Share<br />• Clone configuration<br />• Delete                                                                     |
 
 ## Clone a generator
 
@@ -33,9 +33,9 @@ If you need to reuse the data and model configuration from an existing generator
 <Callout>
 Before you start, keep in mind:
 
-* Cloning is available only for generators that use a database or a cloud storage connector as a data source.
-* **You cannot clone generators with uploaded files** because the uploaded data is deleted after the generator training completes.
-</Callout>
+- Cloning is available only for generators that use a database or a cloud storage connector as a data source.
+- **You cannot clone generators with uploaded files** because the uploaded data is deleted after the generator training completes.
+  </Callout>
 
 <Tabs items={['UI', 'Python SDK']}>
 <Tabs.Tab>
@@ -43,34 +43,19 @@ Clone a generator from the Web UI, by following the steps below.
 
 **Steps**
 
-* Clone a generator directly from the **Generators** page.
-    1. From the **Generators** page, click the kebab menu of a generator, and select **Clone**.
-        <Image
-            src="/docimages/generators/manage/clone-from-generators-page.webp"
-            alt="MOSTLY AI - Clone a generator - 01 - From Generators page, kebab menu, Clone"
-            width={800}
-            height={150}
-        />
-* Clone a generator after you open it.
-    1. From the **Generators** page, click a generator to open it.
-    2. Click the kebab menu in the upper right, and select **Clone**.
-        <Image
-            src="/docimages/generators/manage/clone-from-generator-details.webp"
-            alt="MOSTLY AI - Clone a generator - 02 - From Generators details page, kebab menu, Clone"
-            width={800}
-            height={150}
-        />
+- Clone a generator directly from the **Generators** page.
+  1. From the **Generators** page, click the kebab menu of a generator, and select **Clone**.
+     <Image src="/docimages/generators/manage/clone-from-generators-page.webp" alt="MOSTLY AI - Clone a generator - 01 - From Generators page, kebab menu, Clone" width={800} height={150} />
+- Clone a generator after you open it.
+  1. From the **Generators** page, click a generator to open it.
+  2. Click the kebab menu in the upper right, and select **Clone**.
+     <Image src="/docimages/generators/manage/clone-from-generator-details.webp" alt="MOSTLY AI - Clone a generator - 02 - From Generators details page, kebab menu, Clone" width={800} height={150} />
 
 **Result**
 
 A new generator is created. The generator name starts with **Clone -** and is then followed by the name of the original generator.
 
-<Image
-    src="/docimages/generators/manage/cloned-generator-result-name.webp"
-    alt="MOSTLY AI - Clone a generator - 03 - Name and result"
-    width={800}
-    height={150}
-/>
+<Image src="/docimages/generators/manage/cloned-generator-result-name.webp" alt="MOSTLY AI - Clone a generator - 03 - Name and result" width={800} height={150} />
 
 </Tabs.Tab>
 <Tabs.Tab>
@@ -80,6 +65,7 @@ To clone a generator with the Python SDK, use the `clone()` method on a generato
 g = mostly.generators.get("INSERT_GENERATOR_ID_TO_CLONE")
 cloned_g = g.clone(training_status="NEW") # clone the generator by reusing its data and model configuration and prepare for a new training
 ```
+
 </Tabs.Tab>
 </Tabs>
 
@@ -93,10 +79,10 @@ There may be cases where you need to improve the quality of a generator by resum
 
 **Prerequisites**
 
-* The generator you want to improve must have already completed training successfully. You cannot improve generators with **Failed** status.
-* You can only improve generators that use a [database](/connectors/create#database-connectors) or a [cloud storage bucket](/connectors/create#cloud-storage-connectors) as a data source. Due to the fact that uploaded files are deleted immediately after training, you cannot continue the training of such generators.
-* The source data must be available for in the data source.
-* You must have the Editor role.
+- The generator you want to improve must have already completed training successfully. You cannot improve generators with **Failed** status.
+- You can only improve generators that use a [database](/connectors/create#database-connectors) or a [cloud storage bucket](/connectors/create#cloud-storage-connectors) as a data source. Due to the fact that uploaded files are deleted immediately after training, you cannot continue the training of such generators.
+- The source data must be available for in the data source.
+- You must have the Editor role.
 
 You can continue the training of a generator from the Web UI and with the Python SDK.
 
@@ -107,35 +93,15 @@ To continue the training of a generator from the Web UI, follow these steps.
 **Steps**
 
 1. Continue the training of a generator in one of two ways.
-    * From the **Generators** page, click the kebab menu of a generator, and select **Clone**.
-        <Image
-            src="/docimages/generators/manage/continue-training-01-generators-page-kebab-menu.webp"
-            alt="MOSTLY AI - Continue training - 02 - From Generators page, kebab menu, Continue training"
-            width={800}
-            height={150}
-        />
-    * With a generator open, click the kebab menu in the upper right, and select **Clone**.
-        <Image
-            src="/docimages/generators/manage/continue-training-02-opened-generator.webp"
-            alt="MOSTLY AI - Continue training - 02 - From Generators details page, kebab menu, Continue training"
-            width={800}
-            height={150}
-        />
-    **Step result**: The generator is cloned with the status `CONTINUE` and you can now configure the model and training options. Its name begins with **Continue training -** followed by the name of the original generator.
+   - From the **Generators** page, click the kebab menu of a generator, and select **Clone**.
+     <Image src="/docimages/generators/manage/continue-training-01-generators-page-kebab-menu.webp" alt="MOSTLY AI - Continue training - 02 - From Generators page, kebab menu, Continue training" width={800} height={150} />
+   - With a generator open, click the kebab menu in the upper right, and select **Clone**.
+     <Image src="/docimages/generators/manage/continue-training-02-opened-generator.webp" alt="MOSTLY AI - Continue training - 02 - From Generators details page, kebab menu, Continue training" width={800} height={150} />
+     **Step result**: The generator is cloned with the status `CONTINUE` and you can now configure the model and training options. Its name begins with **Continue training -** followed by the name of the original generator.
 2. (Optional) Click a table to expand its model and training options and adjust as needed.
-    <Image
-        src="/docimages/generators/manage/continue-training-03-configure-model-training.webp"
-        alt="MOSTLY AI - Continue training - 03 - Configure model and training options"
-        width={800}
-        height={150}
-    />
+   <Image src="/docimages/generators/manage/continue-training-03-configure-model-training.webp" alt="MOSTLY AI - Continue training - 03 - Configure model and training options" width={800} height={150} />
 3. Click **Continue training** to continue the training of the generator.
-    <Image
-        src="/docimages/generators/manage/continue-training-04-click-continue-training.webp"
-        alt="MOSTLY AI - Continue training - 04 - Click Continue training"
-        width={800}
-        height={150}
-    />
+   <Image src="/docimages/generators/manage/continue-training-04-click-continue-training.webp" alt="MOSTLY AI - Continue training - 04 - Click Continue training" width={800} height={150} />
 
 **Result**
 

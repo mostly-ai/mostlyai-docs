@@ -4,8 +4,8 @@ import Link from 'next/link';
 export interface CardProps {
   icon: React.ReactNode;
   title: {
-    text: string,
-    link: string
+    text: string;
+    link: string;
   };
   description: string;
   links: {
@@ -20,21 +20,19 @@ export const CustomCard: React.FC<CardProps> = (props: CardProps) => {
       <div className="card">
         <div className="card-header">
           <div className="card-icon">{props.icon}</div>
-          {
-            props.title.link ? (
-              <h2 className="card-title"><Link href={`${props.title.link}`}>{props.title.text}</Link></h2>
-            ) : (
-              <h2 className="card-title">{props.title.text}</h2>
-            )
-          }
+          {props.title.link ? (
+            <h2 className="card-title">
+              <Link href={`${props.title.link}`}>{props.title.text}</Link>
+            </h2>
+          ) : (
+            <h2 className="card-title">{props.title.text}</h2>
+          )}
         </div>
         <div className="card-description">{props.description}</div>
         <ul className="card-links">
           {props.links.map((link, index) => (
             <li key={index}>
-              <Link href={link.href}>
-                {link.text}
-              </Link>
+              <Link href={link.href}>{link.text}</Link>
             </li>
           ))}
         </ul>
@@ -73,7 +71,7 @@ export const CustomCard: React.FC<CardProps> = (props: CardProps) => {
         .card-links li {
           font-size: 15px;
           margin-bottom: 5px;
-          line-height: 1.6
+          line-height: 1.6;
         }
       `}</style>
     </>

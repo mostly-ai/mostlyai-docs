@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from 'next/image';
 
 export const KubernetesIcon = () => {
   return <Image className="card-icon" src="/icons/third-party/kubernetes.svg" alt="Kubernetes icon" width={30} height={30} />;
@@ -97,35 +97,35 @@ export const FileBadgeIcon = () => {
 };
 
 export const RemovePrimaryKey = () => {
-  return <Image className="card-icon" src="/icons/mostly-ai/ui/remove-primary-key.svg" alt="Remove primary key icon" width={15} height={15} style={{ display: "inline", marginTop: "-2px" }} />;
+  return <Image className="card-icon" src="/icons/mostly-ai/ui/remove-primary-key.svg" alt="Remove primary key icon" width={15} height={15} style={{ display: 'inline', marginTop: '-2px' }} />;
 };
 
 export const TwoTableIcon = () => {
-  return <Image className="card-icon" src="/icons/mostly-ai/table-relationships/two-table.svg" alt="Two-table relationships" width={45} height={45} style={{ display: "inline", marginTop: "-2px" }} />;
+  return <Image className="card-icon" src="/icons/mostly-ai/table-relationships/two-table.svg" alt="Two-table relationships" width={45} height={45} style={{ display: 'inline', marginTop: '-2px' }} />;
 };
 
 export const MultiTableIcon = () => {
-  return <Image className="card-icon" src="/icons/mostly-ai/table-relationships/multi-table.svg" alt="Multi-table relationships" width={45} height={45} style={{ display: "inline", marginTop: "-2px" }} />;
+  return <Image className="card-icon" src="/icons/mostly-ai/table-relationships/multi-table.svg" alt="Multi-table relationships" width={45} height={45} style={{ display: 'inline', marginTop: '-2px' }} />;
 };
 
 export const KeyIcon = () => {
-  return <Image className="card-icon" src="/icons/mostly-ai/table-relationships/key.svg" alt="Primary key" width={45} height={45} style={{ display: "inline", marginTop: "-2px" }} />;
+  return <Image className="card-icon" src="/icons/mostly-ai/table-relationships/key.svg" alt="Primary key" width={45} height={45} style={{ display: 'inline', marginTop: '-2px' }} />;
 };
 
 export const RelDiagramIcon = () => {
-  return <Image className="card-icon" src="/icons/mostly-ai/table-relationships/relationship-diagram.svg" alt="Relationship diagram" width={45} height={45} style={{ display: "inline", marginTop: "-2px" }} />;
+  return <Image className="card-icon" src="/icons/mostly-ai/table-relationships/relationship-diagram.svg" alt="Relationship diagram" width={45} height={45} style={{ display: 'inline', marginTop: '-2px' }} />;
 };
 
 export const ModelCreatorIcon = () => {
-  return <Image className="card-icon" src="/icons/mostly-ai/quickstart/model-creator.svg" alt="Model creator" width={45} height={45} style={{ display: "inline", marginTop: "-2px" }} />;
+  return <Image className="card-icon" src="/icons/mostly-ai/quickstart/model-creator.svg" alt="Model creator" width={45} height={45} style={{ display: 'inline', marginTop: '-2px' }} />;
 };
 
 export const DataConsumerIcon = () => {
-  return <Image className="card-icon" src="/icons/mostly-ai/quickstart/data-consumer.svg" alt="Data consumer" width={45} height={45} style={{ display: "inline", marginTop: "-2px" }} />;
+  return <Image className="card-icon" src="/icons/mostly-ai/quickstart/data-consumer.svg" alt="Data consumer" width={45} height={45} style={{ display: 'inline', marginTop: '-2px' }} />;
 };
 
 export const LLMIcon = () => {
-  return <Image className="card-icon" src="/icons/third-party/llm.svg" alt="LLM" width={45} height={45} style={{ display: "inline", marginTop: "-2px" }} />;
+  return <Image className="card-icon" src="/icons/third-party/llm.svg" alt="LLM" width={45} height={45} style={{ display: 'inline', marginTop: '-2px' }} />;
 };
 
 export const GitPullRequestIcon = () => {
@@ -248,8 +248,8 @@ export const ProbeAPIIcon = () => {
 
 export const PrivateResourceIcon = () => {
   return (
-    <span style={{ display: "inline-flex", verticalAlign: "middle" }}>
-      <svg width="1em" height="1em" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" data-icon="mostly:lock" aria-hidden="true" style={{ transform: "translateY(-1px)" }}>
+    <span style={{ display: 'inline-flex', verticalAlign: 'middle' }}>
+      <svg width="1em" height="1em" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" data-icon="mostly:lock" aria-hidden="true" style={{ transform: 'translateY(-1px)' }}>
         <g clip-path="url(#clip0_943_76641)">
           <path
             fill-rule="evenodd"
@@ -265,8 +265,8 @@ export const PrivateResourceIcon = () => {
 
 export const PublicResourceIcon = () => {
   return (
-    <span style={{ display: "inline-flex", verticalAlign: "middle" }}>
-      <svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg" data-icon="mostly:world" aria-hidden="true" style={{ transform: "translateY(-1px)" }}>
+    <span style={{ display: 'inline-flex', verticalAlign: 'middle' }}>
+      <svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg" data-icon="mostly:world" aria-hidden="true" style={{ transform: 'translateY(-1px)' }}>
         <path
           fill-rule="evenodd"
           clip-rule="evenodd"
@@ -285,8 +285,8 @@ export const PublicResourceIcon = () => {
 
 export const UnlistedResourceIcon = () => {
   return (
-    <span style={{ display: "inline-flex", verticalAlign: "middle" }}>
-      <svg width="1em" height="1em" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" data-icon="mostly:lock" aria-hidden="true" style={{ transform: "translateY(-1px)" }}>
+    <span style={{ display: 'inline-flex', verticalAlign: 'middle' }}>
+      <svg width="1em" height="1em" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" data-icon="mostly:lock" aria-hidden="true" style={{ transform: 'translateY(-1px)' }}>
         <path
           fill-rule="evenodd"
           clip-rule="evenodd"
@@ -299,9 +299,9 @@ export const UnlistedResourceIcon = () => {
 };
 
 export const APIIcon = () => {
-  return <Image className="card-icon" src="/icons/mostly-ai/api.svg" alt="API Icon" width={26} height={26} style={{ display: "inline", marginTop: "-2px" }} />;
+  return <Image className="card-icon" src="/icons/mostly-ai/api.svg" alt="API Icon" width={26} height={26} style={{ display: 'inline', marginTop: '-2px' }} />;
 };
 
 export const GitHubIcon = () => {
-  return <Image className="card-icon" src="/icons/third-party/github.svg" alt="GitHub Icon" width={26} height={26} style={{ display: "inline", marginTop: "-2px" }} />;
+  return <Image className="card-icon" src="/icons/third-party/github.svg" alt="GitHub Icon" width={26} height={26} style={{ display: 'inline', marginTop: '-2px' }} />;
 };

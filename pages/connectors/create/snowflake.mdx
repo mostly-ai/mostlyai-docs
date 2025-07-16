@@ -3,9 +3,9 @@ title: 'Use Snowflake for synthetic data'
 description: 'With MOSTLY AI, you can connect to Snowflake and use it as a data source or destination for your synthetic data.'
 ---
 
-import { Callout } from 'nextra/components'
-import { Tabs } from 'nextra/components'
-import Image from 'next/image'
+import { Callout } from 'nextra/components';
+import { Tabs } from 'nextra/components';
+import Image from 'next/image';
 
 # Use Snowflake for synthetic data
 
@@ -15,47 +15,25 @@ With MOSTLY AI, you can connect to Snowflake and use it as a data source or dest
 
 To create a Snowflake connector, you need either your Snowflake [account identifier](#get-your-snowflake-account-identifier) or your [account URL](#get-your-snowflake-account-url).
 
-Account identifier format: *`<org_name>-<account_name>`*<br />
+Account identifier format: _`<org_name>-<account_name>`_<br />
 Account identifier URL format:
-    *`https://<org_name>-<account_name>.snowflakecomputing.com`*
-    <Callout type="info">
-        For more information, see the [Snowflake documentation](https://docs.snowflake.com/en/user-guide/admin-account-identifier).
-    </Callout>
+_`https://<org_name>-<account_name>.snowflakecomputing.com`_
 
+<Callout type="info">For more information, see the [Snowflake documentation](https://docs.snowflake.com/en/user-guide/admin-account-identifier).</Callout>
 
 ## Get your Snowflake account identifier
 
 1. In Snowflake, open the **Account** menu in the lower left.
-    <Image
-        src="/docimages/connectors/snowflake/prerequisite-snowflake-open-account-menu.webp"
-        alt="Open Snowflake account menu"
-        width={200}
-        height={500}
-    />
+   <Image src="/docimages/connectors/snowflake/prerequisite-snowflake-open-account-menu.webp" alt="Open Snowflake account menu" width={200} height={500} />
 2. Copy the organization name and account name and put them together in an account identifier, separated with a dash.
-    <Image
-        src="/docimages/connectors/snowflake/prerequisite-snowflake-account-identifier.webp"
-        alt="Open Snowflake account menu"
-        width={275}
-        height={500}
-    />
+   <Image src="/docimages/connectors/snowflake/prerequisite-snowflake-account-identifier.webp" alt="Open Snowflake account menu" width={275} height={500} />
 
 ## Get your Snowflake account URL
 
 1. In Snowflake, select **Admin** > **Accounts**.
-    <Image
-        src="/docimages/connectors/snowflake/prerequisite-snowflake-admin-accounts.webp"
-        alt="Snowflake open Admin > Accounts"
-        width={250}
-        height={500}
-    />
+   <Image src="/docimages/connectors/snowflake/prerequisite-snowflake-admin-accounts.webp" alt="Snowflake open Admin > Accounts" width={250} height={500} />
 2. Under **Accounts**, hover over your account identifier and click **Copy account URL** link.
-    <Image
-        src="/docimages/connectors/snowflake/prerequisite-copy-snowflake-account-url.webp"
-        alt="Copy Snowflake account URL"
-        width={450}
-        height={500}
-    />
+   <Image src="/docimages/connectors/snowflake/prerequisite-copy-snowflake-account-url.webp" alt="Copy Snowflake account URL" width={450} height={500} />
 
 ## Create a Snowflake connector
 
@@ -66,41 +44,24 @@ If you use the web application, create a new Databricks connector from the **Con
 **Steps**
 
 1. From the **Connectors** page, click **New connector**.
-    <Image
-        src="/docimages/connectors/create-connector-01-click.webp"
-        alt="Copy Snowflake account URL"
-        width={800}
-        height={500}
-    />
+   <Image src="/docimages/connectors/create-connector-01-click.webp" alt="Copy Snowflake account URL" width={800} height={500} />
 2. From the **Create a new connector** window, select **Snowflake**.
-    <Image
-        src="/docimages/connectors/snowflake/create-connector-02-select-snowflake.webp"
-        alt="Select Snowflake and click Proceed"
-        width={800}
-        height={500}
-    />
-4. From the **New connector** window, configure the Snowflake connector.
-    1. For **Name**, enter a name that you can distinguish from other connectors.
-    2. For **Access type**, select whether you want to use the connector as a source or destination.
-    3. For **Account**, enter your Snowflake account identifier.<br />
-        For more information, see the [Prerequisites](#prerequisites) above.
-    4. For **Username** and **Password**, enter your Snowflake credentials.
-    5. For **Database**, enter the name of a Snowflake database.
-    6. For **Warehouse**, enter the warehouse you want to use.
-        <Callout type="info">
-            By default, MOSTLY AI uses the default Snowflake warehouse **`COMPUTE_WH`**.
-        </Callout>
-        <Image
-            src="/docimages/connectors/snowflake/create-connector-03-configure.webp"
-            alt="Configure Snowflake connector"
-            width={600}
-            height={500}
-        />
-5. Click **Save**.<br /><br />
-    MOSTLY AI tests the connection. If you see an error, check the connection details, update them, and click **Save** again.<br /><br />
-    You can click **Save anyway** to save the connector disregarding any errors.
-</Tabs.Tab>
-<Tabs.Tab>
+   <Image src="/docimages/connectors/snowflake/create-connector-02-select-snowflake.webp" alt="Select Snowflake and click Proceed" width={800} height={500} />
+3. From the **New connector** window, configure the Snowflake connector.
+   1. For **Name**, enter a name that you can distinguish from other connectors.
+   2. For **Access type**, select whether you want to use the connector as a source or destination.
+   3. For **Account**, enter your Snowflake account identifier.<br />
+      For more information, see the [Prerequisites](#prerequisites) above.
+   4. For **Username** and **Password**, enter your Snowflake credentials.
+   5. For **Database**, enter the name of a Snowflake database.
+   6. For **Warehouse**, enter the warehouse you want to use.
+      <Callout type="info">By default, MOSTLY AI uses the default Snowflake warehouse **`COMPUTE_WH`**.</Callout>
+      <Image src="/docimages/connectors/snowflake/create-connector-03-configure.webp" alt="Configure Snowflake connector" width={600} height={500} />
+4. Click **Save**.<br /><br />
+   MOSTLY AI tests the connection. If you see an error, check the connection details, update them, and click **Save** again.<br /><br />
+   You can click **Save anyway** to save the connector disregarding any errors.
+      </Tabs.Tab>
+   <Tabs.Tab>
 If you use the Python SDK, create a Snowflake storage connector with `mostly.connect()` and provide a connector configuration dictionary as shown below.
 
 ```python copy filename="python" {3,6,8,9}
@@ -120,6 +81,7 @@ c = mostly.connect({
     "test_connection": True
 })
 ```
+
 </Tabs.Tab>
 </Tabs>
 
@@ -131,5 +93,5 @@ Your Snowflake connector is now saved.
 
 Depending on whether you created a **source** or a **destination** connector, you can use the connector as:
 
-* [data source](../use/data-source) for a new generator
-* [data destination](../use/data-destination) for a new synthetic dataset
+- [data source](../use/data-source) for a new generator
+- [data destination](../use/data-destination) for a new synthetic dataset

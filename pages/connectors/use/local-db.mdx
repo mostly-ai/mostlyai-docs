@@ -1,10 +1,10 @@
 ---
-title: "Local database as a source or destination"
-description: "If you want to use a database running in your local environment as a data source or destination for synthetic data, you can use `ngrok` to expose the local database and then add the ngrok forwarding address in a new MOSTLY AI connector."
+title: 'Local database as a source or destination'
+description: 'If you want to use a database running in your local environment as a data source or destination for synthetic data, you can use `ngrok` to expose the local database and then add the ngrok forwarding address in a new MOSTLY AI connector.'
 ---
 
-import Image from 'next/image'
-import { Callout } from 'nextra/components'
+import Image from 'next/image';
+import { Callout } from 'nextra/components';
 
 # Use a local database as a source or destination
 
@@ -20,16 +20,12 @@ If you want to use a database running in your local environment as a data source
 2. Install `ngrok` with the steps for your operating system from https://dashboard.ngrok.com/get-started/setup.
 3. Copy your authentication token from https://dashboard.ngrok.com/get-started/your-authtoken.
 
-    <Image
-        src="/docimages/connectors/destination/local-db/ngrok-copy-token.webp"
-        alt="Local database as a data destination - Copy ngrok authentication token"
-        width={700}
-        height={150}
-    />
+   <Image src="/docimages/connectors/destination/local-db/ngrok-copy-token.webp" alt="Local database as a data destination - Copy ngrok authentication token" width={700} height={150} />
+
 4. Add the authentication token to your local environment.
-    ```bash copy
-    ngrok config add-authtoken TOKEN
-    ```
+   ```bash copy
+   ngrok config add-authtoken TOKEN
+   ```
 
 **Result**
 
@@ -44,34 +40,35 @@ The steps below show how to run a PostgreSQL database.
 **Steps**
 
 1. Create a new YAML file with the name `mostly-ai-postgresql-compose.yaml` and paste the contents below.
-    ```yaml filename="mostly-ai-postgresql-compose.yaml" copy
-    version: '3.7'
-    services:
-        mostly_ai_sd_db:
-            image: postgres
-            environment:
-                POSTGRES_USER: postgres
-                POSTGRES_PASSWORD: changeme
-                POSTGRES_DB: my_synthetic_db
-            ports:
-                - "5432:5432"
-            volumes:
-                - mostly_ai_sd_db:/var/lib/postgresql/data
-    volumes:
-        mostly_ai_sd_db:
-    ```
+   ```yaml filename="mostly-ai-postgresql-compose.yaml" copy
+   version: '3.7'
+   services:
+     mostly_ai_sd_db:
+       image: postgres
+       environment:
+         POSTGRES_USER: postgres
+         POSTGRES_PASSWORD: changeme
+         POSTGRES_DB: my_synthetic_db
+       ports:
+         - '5432:5432'
+       volumes:
+         - mostly_ai_sd_db:/var/lib/postgresql/data
+   volumes:
+     mostly_ai_sd_db:
+   ```
 2. Set the credentials and database name in the lines highlighted below.
-    ```yaml filename="mostly-ai-postgresql-compose.yaml" {2-4}
-    ...
-                POSTGRES_USER: postgres
-                POSTGRES_PASSWORD: changeme
-                POSTGRES_DB: my_synthetic_db
-    ...
-    ```
+
+   ```yaml filename="mostly-ai-postgresql-compose.yaml" {2-4}
+   ---
+   POSTGRES_USER: postgres
+   POSTGRES_PASSWORD: changeme
+   POSTGRES_DB: my_synthetic_db
+   ```
+
 3. Run `docker compose` to start the service defined in the YAML file.
-    ```bash copy
-    docker compose -f ./mostly-ai-postgresql-compose.yaml logs
-    ```
+   ```bash copy
+   docker compose -f ./mostly-ai-postgresql-compose.yaml logs
+   ```
 
 **Result**
 
@@ -84,17 +81,12 @@ To expose your database from your local environment, you need to know the port a
 **Steps**
 
 1. Run `ngrok` to expose your database port.
-    ```bash copy
-    ngrok tcp PORT
-    ```
-    **Step result**: `ngrok` randomly assigns a hostname and a forwarding port for your database.
+   ```bash copy
+   ngrok tcp PORT
+   ```
+   **Step result**: `ngrok` randomly assigns a hostname and a forwarding port for your database.
 2. Copy the forwarding address that is listed in the `ngrok` command status.
-    <Image
-        src="/docimages/connectors/destination/local-db/ngrok-forwarding.webp"
-        alt="Local database as a data destination - ngrok status with forwarding address"
-        width={700}
-        height={150}
-    />
+   <Image src="/docimages/connectors/destination/local-db/ngrok-forwarding.webp" alt="Local database as a data destination - ngrok status with forwarding address" width={700} height={150} />
 
 ## Task 4: Create a connector
 
@@ -105,23 +97,14 @@ You can use your local database as a data source, data destination, or both. In 
 1. From the **Connectors** page, click **+ New connector**.
 2. Select the connector type for your local database.
 3. Provide the connector details.
-    1. For **Access type**, select **Source** or **Destination**.
-    2. For **Host**, paste the `ngrok` forwarding address.
-    3. For **Port**, paste the `ngrok` forwarding port number.
-        <Callout>
-        You can find the **forwarding address** and **port** in the output of the `ngrok` command from [Task 3](#task-3-expose-your-database-with-ngrok).
-        </Callout>
-    4. For **Username**, **Password**, and **Database**, set the database credentials and the database name.
-        <Callout>
-        If you plan to use the same database as a source and destination, create a separate database for the destination connector to prevent potential loss of original data.
-        </Callout>
-        <Image
-            src="/docimages/connectors/destination/local-db/destination-connect-config.webp"
-            alt="Local database as a data destination - Destination connector configuration"
-            width={325}
-            height={150}
-        />
-5. Click **Save**.
+   1. For **Access type**, select **Source** or **Destination**.
+   2. For **Host**, paste the `ngrok` forwarding address.
+   3. For **Port**, paste the `ngrok` forwarding port number.
+      <Callout>You can find the **forwarding address** and **port** in the output of the `ngrok` command from [Task 3](#task-3-expose-your-database-with-ngrok).</Callout>
+   4. For **Username**, **Password**, and **Database**, set the database credentials and the database name.
+      <Callout>If you plan to use the same database as a source and destination, create a separate database for the destination connector to prevent potential loss of original data.</Callout>
+      <Image src="/docimages/connectors/destination/local-db/destination-connect-config.webp" alt="Local database as a data destination - Destination connector configuration" width={325} height={150} />
+4. Click **Save**.
 
 **What's next**
 
