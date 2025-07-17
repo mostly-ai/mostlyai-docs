@@ -33,7 +33,7 @@ For information about all privacy-protection mechanisms, see [Privacy-protection
 
 You can control whether **Value protection** is on or off for each table in a generator.
 
-<Tabs items={['UI', 'Python SDK']}>
+<Tabs items={['UI', 'Synthetic Data SDK']}>
 <Tabs.Tab>
 You can switch on the Value protection for a table from the **Model configuration** page.
 
@@ -55,7 +55,7 @@ You can switch on the Value protection for a table from the **Model configuratio
 </Tabs.Tab>
 <Tabs.Tab>
 
-To control value protection with the Python SDK, add the`tabular_model_configuration`dictionary for each table and use the`value_protection`key by setting it to`True`or`False`.
+To control value protection with the Synthetic Data SDK, add the`tabular_model_configuration`dictionary for each table and use the`value_protection`key by setting it to`True`or`False`.
 
 To control how rare categories are replaced, use the `rare_category_replacement_method` key and set it to the `CONSTANT` or `SAMPLE` method.
 

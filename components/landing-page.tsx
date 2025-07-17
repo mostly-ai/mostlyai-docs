@@ -103,7 +103,7 @@ const LandingPage: React.FC = () => {
       },
       description: '',
       links: [
-        { text: 'Python SDK', href: '/python-sdk' },
+        { text: 'Synthetic DataSDK', href: '/python-sdk' },
         { text: 'REST API', href: 'https://api-docs.mostly.ai/' },
       ],
     },

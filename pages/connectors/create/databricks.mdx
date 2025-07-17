@@ -78,7 +78,7 @@ To create a Databricks connector, you need to obtain your SQL Warehouse connecti
 
 ## Create a Databricks connector
 
-<Tabs items={['UI', 'Python SDK']}>
+<Tabs items={['UI', 'Synthetic Data SDK']}>
 <Tabs.Tab>
 If you use the web application, create a new Databricks connector from the **Connectors** page.
 
@@ -103,7 +103,7 @@ If you use the web application, create a new Databricks connector from the **Con
 </Tabs.Tab>
 <Tabs.Tab>
 
-    If you use the Python SDK, create a Databricks connector with `mostly.connect()` and provide a connector configuration dictionary as shown below.
+    If you use the Synthetic Data SDK, create a Databricks connector with `mostly.connect()` and provide a connector configuration dictionary as shown below.
 
 ```python copy filename="python"
 c = mostly.connect({
@@ -129,7 +129,7 @@ c = mostly.connect({
 
 With MOSTLY AI, you can use a Service principal account to access original data stored in Databricks.
 
-<Tabs items={['UI', 'Python SDK']}>
+<Tabs items={['UI', 'Synthetic Data SDK']}>
 <Tabs.Tab>
 
 In the web application, the Databricks connector configuration includes configuration details that support the authentication with a Service principal account.
@@ -154,7 +154,7 @@ In the web application, the Databricks connector configuration includes configur
 </Tabs.Tab>
 <Tabs.Tab>
 
-    If you use the Python SDK, you can create a Databricks connector with a Service principal account with the code snippet below.
+    If you use the Synthetic Data SDK, you can create a Databricks connector with a Service principal account with the code snippet below.
 
 ```python copy filename="python"
 config={

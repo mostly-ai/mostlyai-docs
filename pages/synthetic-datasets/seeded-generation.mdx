@@ -34,7 +34,7 @@ For conditional simulation, start a new synthetic dataset and provide a seed dat
   - **Seed categorical columns must contain the same categories** as in the dataset used for training. For example, `Female` and `Male` categories in a `sex` column must match exactly the ones used for training.
   - Bear in mind that **conditionally-generated numeric and datetime values are kept within the range of the original data**. For example, if the column `age` ranges between `18` and `80` in the original data, age `15` in a seed dataset will be clipped to `18` in the conditionally-generated data.
 
-<Tabs items={['UI', 'Python SDK']}>
+<Tabs items={['UI', 'Synthetic Data SDK']}>
 <Tabs.Tab>
 If you use the web application, you can upload a seed dataset from the **Sample size** options after you start a new synthetic dataset.
 
@@ -49,7 +49,7 @@ If you use the web application, you can upload a seed dataset from the **Sample 
 </Tabs.Tab>
 <Tabs.Tab>
 
-    If you use the Python SDK, use the `seed` parameter of `mostly.generate()` to specify a seed dataset.
+    If you use the Synthetic Data SDK, use the `seed` parameter of `mostly.generate()` to specify a seed dataset.
 
 ```python filename="python" copy
 sd = mostly.generate(generator=g, seed=seed)
@@ -78,7 +78,7 @@ The information below provides a sequence of steps with an explanation of each s
 
 To reproduce this example, you need the following Python packages.
 
-- [MOSTLY AI Python SDK](https://pypi.org/project/mostlyai/)
+- [MOSTLY AI Synthetic Data SDK](https://pypi.org/project/mostlyai/)
 - [Pandas](https://pandas.pydata.org/)
 - [NumPy](https://numpy.org/)
 - [Matplotlib](https://matplotlib.org/)
@@ -97,7 +97,7 @@ To install in a Jupyter Notebook environment, use the following:
    import pandas as pd
    import numpy as np
    ```
-1. Get an API key and instantiate the Python SDK. For details, see [here](/python-sdk#get-an-api-key).
+1. Get an API key and instantiate the Synthetic Data SDK. For details, see [here](/python-sdk#get-an-api-key).
    ```python filename="python" copy
    mostly = MostlyAI(api_key="INSERT_API_KEY")
    ```
@@ -157,7 +157,7 @@ For this use case, you will be using [2019 AirBnB listings for Manhattan](https:
 
 To reproduce this example, you need the following Python packages.
 
-- [MOSTLY AI Python SDK](https://pypi.org/project/mostlyai/)
+- [MOSTLY AI Synthetic Data SDK](https://pypi.org/project/mostlyai/)
 - [Pandas](https://pandas.pydata.org/)
 - [Matplotlib](https://matplotlib.org/)
 
@@ -270,7 +270,7 @@ With the [**Language/Text**](/generators/configure/set-encoding-types#languagete
 
 To reproduce this example, you need the following Python packages.
 
-- [MOSTLY AI Python SDK](https://pypi.org/project/mostlyai/)
+- [MOSTLY AI Synthetic Data SDK](https://pypi.org/project/mostlyai/)
 - [Pandas](https://pandas.pydata.org/)
 
 To install in a Jupyter Notebook environment, use the following:

@@ -28,7 +28,7 @@ To use an SSL connection, you need the following files:
 - client certificate (`.crt`)
 - client private key (`.key`)
 
-<Tabs items={['UI', 'Python SDK']}>
+<Tabs items={['UI', 'Synthetic Data SDK']}>
 <Tabs.Tab>
 If you use the web application, create a new PostgreSQL connector from the **Connectors** page.
 
@@ -59,7 +59,7 @@ If you use the web application, create a new PostgreSQL connector from the **Con
 </Tabs.Tab>
 <Tabs.Tab>
 
-    If you use the Python SDK, create a PostgreSQL connector with `mostly.connect()` and provide a connector configuration dictionary as shown below.
+    If you use the Synthetic Data SDK, create a PostgreSQL connector with `mostly.connect()` and provide a connector configuration dictionary as shown below.
 
 ```python copy filename="python"
 c = mostly.connect({

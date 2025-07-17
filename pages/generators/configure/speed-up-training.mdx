@@ -46,7 +46,7 @@ Select the **Turbo** configuration preset to complete AI model training as quick
 
 By default, MOSTLY AI uses all records in a table to train the Generative AI model for that table. Decrease the training sample size if you want to speed up model training.
 
-<Tabs items={['UI', 'Python SDK']}>
+<Tabs items={['UI', 'Synthetic Data SDK']}>
 <Tabs.Tab>
 If you use the web application, you can configure the training sample size for each table from the **Model configuration** page of a generator.
 
@@ -56,7 +56,7 @@ If you use the web application, you can configure the training sample size for e
 2. Click a table to expand its model settings.
 3. Set the **Max sample size** as number of rows.
    <Image src="/docimages/generators/speed-up-training/model-configuration-03-decrease-max-sample-size.webp" alt="MOSTLY AI - Generator configuration - Decrease maximum training sample size" width={900} height={300} />
-   For the Python SDK, use the `max_sample_size` key in the `tabular_model_configuration` dictionary.
+   For the Synthetic Data SDK, use the `max_sample_size` key in the `tabular_model_configuration` dictionary.
 
 ```python filename="python" copy {8}
 config = {
@@ -80,7 +80,7 @@ config = {
 
 MOSTLY AI sets the default maximum training time to 60 minutes for an AI model. Decrease it to speed up training.
 
-<Tabs items={['UI', 'Python SDK']}>
+<Tabs items={['UI', 'Synthetic Data SDK']}>
 <Tabs.Tab>
 If you use the web application, you can configure the maximum training time from the **Model configuration** page of a generator.
 
@@ -94,7 +94,7 @@ If you use the web application, you can configure the maximum training time from
 </Tabs.Tab>
 <Tabs.Tab>
 
-For the Python SDK, use the `max_training_time` in the `tabular_model_configuration` dictionary to set the training time for a model. Specify an integer for a duration in minutes.
+For the Synthetic Data SDK, use the `max_training_time` in the `tabular_model_configuration` dictionary to set the training time for a model. Specify an integer for a duration in minutes.
 
 ```python filename="python" copy {8}
 config = {
@@ -124,7 +124,7 @@ The model size defines the amount of internal parameters that the AI model uses 
 
 <Callout>In most cases, the **MOSTLY_AI/Medium** model is the most optimal. Select a **MOSTLY_AI/Small** model if you can compromise on accuracy and want to speed up training.</Callout>
 
-<Tabs items={['UI', 'Python SDK']}>
+<Tabs items={['UI', 'Synthetic Data SDK']}>
 <Tabs.Tab>
 If you use the web application, you can configure the model from the **Model configuration** page of a generator.
 
@@ -138,7 +138,7 @@ If you use the web application, you can configure the model from the **Model con
 </Tabs.Tab>
 <Tabs.Tab>
 
-For the Python SDK, use the `model` key in the `tabular_model_configuration` dictionary.
+For the Synthetic Data SDK, use the `model` key in the `tabular_model_configuration` dictionary.
 
 - Use `MOSTLY_AI/Small` for a small model size
 - Use `MOSTLY_AI/Medium` for a medium model size
@@ -168,7 +168,7 @@ Batch size refers to the number of records used to complete a training pass of t
 
 By default, the batch size is set to **Auto** and MOSTLY AI determines a batch size that is appropriate for your data. Set a high batch size for a model to speed up model training when accuracy is not a priority.
 
-<Tabs items={['UI', 'Python SDK']}>
+<Tabs items={['UI', 'Synthetic Data SDK']}>
 <Tabs.Tab>
 If you use the web application, you can configure the model size from the **Model configuration** page of a generator.
 
@@ -182,7 +182,7 @@ If you use the web application, you can configure the model size from the **Mode
 </Tabs.Tab>
 <Tabs.Tab>
 
-    For the Python SDK, use the `batch_size` key in the `tabular_model_configuration` dictionary.
+    For the Synthetic Data SDK, use the `batch_size` key in the `tabular_model_configuration` dictionary.
 
 - When set to `null`, the batch size defaults to the **Auto** setting which uses a heuristic to set an optimal batch size based on your original data.
 - Set the batch size to a powers of 2 integer, such as `2`, `4`, `8`, ..., `32768`, `65536`.

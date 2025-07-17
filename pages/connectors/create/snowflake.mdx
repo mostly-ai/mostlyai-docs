@@ -37,7 +37,7 @@ _`https://<org_name>-<account_name>.snowflakecomputing.com`_
 
 ## Create a Snowflake connector
 
-<Tabs items={['UI', 'Python SDK']}>
+<Tabs items={['UI', 'Synthetic Data SDK']}>
 <Tabs.Tab>
 If you use the web application, create a new Databricks connector from the **Connectors** page.
 
@@ -64,7 +64,7 @@ If you use the web application, create a new Databricks connector from the **Con
 </Tabs.Tab>
 <Tabs.Tab>
 
-    If you use the Python SDK, create a Snowflake storage connector with `mostly.connect()` and provide a connector configuration dictionary as shown below.
+    If you use the Synthetic Data SDK, create a Snowflake storage connector with `mostly.connect()` and provide a connector configuration dictionary as shown below.
 
 ```python copy filename="python" {3,6,8,9}
 c = mostly.connect({

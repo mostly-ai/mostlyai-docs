@@ -38,7 +38,7 @@ Before you start, keep in mind:
 
 </Callout>
 
-<Tabs items={['UI', 'Python SDK']}>
+<Tabs items={['UI', 'Synthetic Data SDK']}>
 <Tabs.Tab>
 Clone a generator from the Web UI, by following the steps below.
 
@@ -60,7 +60,7 @@ A new generator is created. The generator name starts with **Clone -** and is th
 
 </Tabs.Tab>
 <Tabs.Tab>
-To clone a generator with the Python SDK, use the `clone()` method on a generator that has completed its training and set the `training_status` parameter to `NEW`. This reuses the existing generator configuration and prepares the cloned generator to train from scratch.
+To clone a generator with the Synthetic Data SDK, use the `clone()` method on a generator that has completed its training and set the `training_status` parameter to `NEW`. This reuses the existing generator configuration and prepares the cloned generator to train from scratch.
 
 ```python filename="python" copy
 g = mostly.generators.get("INSERT_GENERATOR_ID_TO_CLONE")
@@ -85,9 +85,9 @@ There may be cases where you need to improve the quality of a generator by resum
 - The source data must be available for in the data source.
 - You must have the Editor role.
 
-You can continue the training of a generator from the Web UI and with the Python SDK.
+You can continue the training of a generator from the Web UI and with the Synthetic Data SDK.
 
-<Tabs items={['UI', 'Python SDK']}>
+<Tabs items={['UI', 'Synthetic Data SDK']}>
 <Tabs.Tab>
 To continue the training of a generator from the Web UI, follow these steps.
 
@@ -113,7 +113,7 @@ MOSTLY AI fetches the original data from the data source and continues the train
 </Tabs.Tab>
 <Tabs.Tab>
 
-To continue the training of a generator with the Python SDK, use the `clone()` method on a generator that has completed its training and set the `training_status` parameter set to `CONTINUE`.
+To continue the training of a generator with the Synthetic Data SDK, use the `clone()` method on a generator that has completed its training and set the `training_status` parameter set to `CONTINUE`.
 
 ```python filename="python" copy
 g = mostly.generators.get("INSERT_GENERATOR_ID_TO_CONTINUE_TRAINING")

@@ -13,13 +13,13 @@ import Image from 'next/image';
 
 MOSTLY AI allows you to export already trained generators from one environment and import them into another.
 
-The export and import of generators is useful when you need to have a separation of concerns. For example, you can train a generator with the Python SDK in an environment where you have direct and secure access to the original data, and where it is safe to train generators on the original data. In this scenario, the data remains private as the generator learns only the statistical properties and never memorizes specific data points.
+The export and import of generators is useful when you need to have a separation of concerns. For example, you can train a generator with the Synthetic Data SDK in an environment where you have direct and secure access to the original data, and where it is safe to train generators on the original data. In this scenario, the data remains private as the generator learns only the statistical properties and never memorizes specific data points.
 
 You can then export the trained generator from the secure environment and import it into a running instance of the MOSTLY AI Platform. That instance can be made available to everyone in your organization. People can then use the Platform to generate privacy-safe synthetic data and extract data insights with the [Assistant](/assistant) without access to the original data.
 
 ## Export a generator
 
-<Tabs items={['UI', 'Python SDK']}>
+<Tabs items={['UI', 'Synthetic Data SDK']}>
 <Tabs.Tab>
 
 If you use the UI of the MOSTLY AI Platform, you can export a generator in one of two ways.
@@ -41,7 +41,7 @@ To export a generator, you must be its creator or have the Admin role in the org
 
 <CustomCallout type="API">Available in both [Local and Client modes](/python-sdk#local-and-client-modes).</CustomCallout>
 
-With the Python SDK, you can export a generator to a ZIP archive with the `export_to_file()` method. Optionally, you can specify a filename.
+With the Synthetic Data SDK, you can export a generator to a ZIP archive with the `export_to_file()` method. Optionally, you can specify a filename.
 
 ```python filename="python" copy
 g = mostly.generators.get('INSERT_GENERATOR_ID')
@@ -63,9 +63,9 @@ The generator is exported as a `ZIP` archive. You can now import it into another
 
 ## Import a generator
 
-Learn how to import generators into another instance of the MOSTLY AI Platform with the UI and the Python SDK. You can do so in a local environment as well as in a remotely running MOSTLY AI Platform.
+Learn how to import generators into another instance of the MOSTLY AI Platform with the UI and the Synthetic Data SDK. You can do so in a local environment as well as in a remotely running MOSTLY AI Platform.
 
-<Tabs items={['UI', 'Python SDK']}>
+<Tabs items={['UI', 'Synthetic Data SDK']}>
 <Tabs.Tab>
 You can use the UI of another instance of the MOSTLY AI Platform to import exported generators.
 

@@ -42,7 +42,7 @@ If you plan to use BigQuery as both a data source and a destination, MOSTLY AI r
 
 ## Create a BigQuery connector
 
-<Tabs items={['UI', 'Python SDK']}>
+<Tabs items={['UI', 'Synthetic Data SDK']}>
 <Tabs.Tab>
 
 If you use the web application, create a new BigQuery connector from the **Connectors** page.
@@ -65,7 +65,7 @@ If you use the web application, create a new BigQuery connector from the **Conne
 </Tabs.Tab>
 <Tabs.Tab>
 
-    If you use the Python SDK, create a BigQuery connector with `mostly.connect()` and provide a connector configuration dictionary as shown below.
+    If you use the Synthetic Data SDK, create a BigQuery connector with `mostly.connect()` and provide a connector configuration dictionary as shown below.
 
 ```python copy filename="python"
 bigquerykey = os.path.basename('mostlyai-gcp-72d2350d1b1a.json')
