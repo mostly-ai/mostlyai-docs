@@ -16,7 +16,7 @@ For example, the figure below shows the `customers` and `purchases` tables from 
 
 To train a generator on a two-table dataset, you need to define the foreign key from the `purchases` table that points to the primary key to the `users` table.
 
-<Tabs items={['UI', 'Python SDK']}>
+<Tabs items={['UI', 'Synthetic Data SDK']}>
 <Tabs.Tab>
 If you use the web interface, add both tables to the generator and set their relationship.
 
@@ -68,7 +68,7 @@ You can now train the generator on the CDNOW dataset with the default options. T
 
 </Tabs.Tab>
 <Tabs.Tab>
-With the Python SDK, define each table as a dictionary in the `tables` list and include the `primary_key` and the `foreign_keys` keys for the subject and linked table. It is important to set `is_context: True{:python}` for the foreign key. For more information, see [Context foreign key](../set-table-relationships#context-foreign-key).
+With the Synthetic Data SDK, define each table as a dictionary in the `tables` list and include the `primary_key` and the `foreign_keys` keys for the subject and linked table. It is important to set `is_context: True{:python}` for the foreign key. For more information, see [Context foreign key](../set-table-relationships#context-foreign-key).
 ```python filename="python" copy {15,20}
 # load data
 import pandas as pd

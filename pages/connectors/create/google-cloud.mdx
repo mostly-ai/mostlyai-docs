@@ -33,7 +33,7 @@ To create a Google Cloud bucket connector, you need the
 
 ## Create a Google Cloud object storage connector
 
-<Tabs items={['UI', 'Python SDK']}>
+<Tabs items={['UI', 'Synthetic Data SDK']}>
 <Tabs.Tab>
 
 If you use the web application, create a new Google Cloud storage connector from the **Connectors** page.
@@ -56,7 +56,7 @@ If you use the web application, create a new Google Cloud storage connector from
 </Tabs.Tab>
 <Tabs.Tab>
 
-    If you use the Python SDK, create a Google Cloud storage connector with `mostly.connect()` and provide a connector configuration dictionary as shown below.
+    If you use the Synthetic Data SDK, create a Google Cloud storage connector with `mostly.connect()` and provide a connector configuration dictionary as shown below.
 
 ```python filename="python" copy {8,12}
 bigquerykey = os.path.basename('mostlyai-gcp-72d2350d1b1a.json')

@@ -30,7 +30,7 @@ Select the **Accuracy** configuration preset to use the recommended model config
 
 You can also increase the **Max training time** if you notice that your model training is cut short at the 60-minute mark or the 120-minute mark if you use the **Accuracy** preset.
 
-<Tabs items={['UI', 'Python SDK']}>
+<Tabs items={['UI', 'Synthetic Data SDK']}>
 <Tabs.Tab>
 If you use the web application, you can configure the maximum training time from the **Model configuration** page of a generator.
 
@@ -44,7 +44,7 @@ If you use the web application, you can configure the maximum training time from
 </Tabs.Tab>
 <Tabs.Tab>
 
-    For the Python SDK, use the `max_training_time` in the `tabular_model_configuration` dictionary to set the training time for a model. Specify an integer for a duration in minutes.
+    For the Synthetic Data SDK, use the `max_training_time` in the `tabular_model_configuration` dictionary to set the training time for a model. Specify an integer for a duration in minutes.
 
 ```python filename="python" copy {11}
 import pandas as pd
@@ -71,7 +71,7 @@ config={
 
 By default, MOSTLY AI uses all records in a table to train the Generative AI model for that table. If your model configuration already uses a percentage or number of rows that are less than what you have in your original table, you can increase that for higher model accuracy.
 
-<Tabs items={['UI', 'Python SDK']}>
+<Tabs items={['UI', 'Synthetic Data SDK']}>
 <Tabs.Tab>
 
 If you use the web application, you can configure the training sample size for each table from the **Model configuration** page of a generator.
@@ -88,7 +88,7 @@ If you use the web application, you can configure the training sample size for e
 </Tabs.Tab>
 <Tabs.Tab>
 
-            For the Python SDK, use the `max_sample_size` key in the `tabular_model_configuration` dictionary.
+            For the Synthetic Data SDK, use the `max_sample_size` key in the `tabular_model_configuration` dictionary.
 
 ```python filename="python" copy {11}
 import pandas as pd
@@ -119,7 +119,7 @@ Model size defines the amount of internal parameters that the AI model uses to l
 - **MOSTLY_AI/Medium** uses optimal parameters and is best for most use cases.
 - **MOSTLY_AI/Large** can further improve accuracy for large datasets, but requires significantly more memory and compute time.
 
-<Tabs items={['UI', 'Python SDK']}>
+<Tabs items={['UI', 'Synthetic Data SDK']}>
 <Tabs.Tab>
 If you use the web application, you can configure the model size from the **Model configuration** page of a generator.
 
@@ -133,7 +133,7 @@ If you use the web application, you can configure the model size from the **Mode
 </Tabs.Tab>
 <Tabs.Tab>
 
-    For the Python SDK, use the `model` key in the `tabular_model_configuration` dictionary.
+    For the Synthetic Data SDK, use the `model` key in the `tabular_model_configuration` dictionary.
 
 - Use `MOSTLY_AI/Small` for a small model size
 - Use `MOSTLY_AI/Medium` for a medium model size

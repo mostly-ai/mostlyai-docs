@@ -36,7 +36,7 @@ By default, **Max sequence window** is set to 100.
 
 <Image src="/docimages/generators/configure-time-series/max-sequence-window.svg" alt="MOSTLY AI - Generator configuration - Max sequence window" width={900} height={300} />
 
-<Tabs items={['UI', 'Python SDK']}>
+<Tabs items={['UI', 'Synthetic Data SDK']}>
 <Tabs.Tab>
 If you use the web application, you can configure the maximum sequence window from the **Model configuration** page of a generator.
 
@@ -50,7 +50,7 @@ If you use the web application, you can configure the maximum sequence window fr
 </Tabs.Tab>
 <Tabs.Tab>
 
-    For the Python SDK, set the `max_sequence_window` key in the `tabular_model_configuration` dictionary.
+    For the Synthetic Data SDK, set the `max_sequence_window` key in the `tabular_model_configuration` dictionary.
 
 ```python filename="python" copy {13}
 config = {

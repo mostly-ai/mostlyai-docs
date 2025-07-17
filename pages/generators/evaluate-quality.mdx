@@ -262,9 +262,9 @@ After the training or fine-tuning of all models in the generator completes, come
 
 Any disabled Model reports will not be available for the generator as well as for any synthetic datasets generated with the generator.
 
-## Get quality metrics with the Python SDK
+## Get quality metrics with the Synthetic Data SDK
 
-The Python SDK provides direct access to the metrics of each generator. Get a generator with `mostly.generators.get('GENERATOR_ID')` and then access the metrics with `g.tables[0].tabular_model_metrics` (for tabular models) and `g.tables[0].language_model_metrics` (for language models).
+The Synthetic Data SDK provides direct access to the metrics of each generator. Get a generator with `mostly.generators.get('GENERATOR_ID')` and then access the metrics with `g.tables[0].tabular_model_metrics` (for tabular models) and `g.tables[0].language_model_metrics` (for language models).
 
 - `g.tables[0].tabular_model_metrics` - returns the metrics of the first table model in the generator. Increment `0` for each subsequent model in the generator.
 - `g.tables[0].language_model_metrics` - returns the metrics of the language model of the first table in the generator (available when a text column has the **Language/Text** encoding type).
@@ -275,7 +275,7 @@ g = mostly.generators.get('GENERATOR_ID')
 g.tables[0].tabular_model_metrics
 ```
 
-The following is an example of the model metrics obtained with the Python SDK.
+The following is an example of the model metrics obtained with the Synthetic Data SDK.
 
 ```json
 {

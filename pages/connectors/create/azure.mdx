@@ -30,7 +30,7 @@ To create an Azure storage connector in MOSTLY AI, you need to first obtain your
 
 With the Azure storage account name and access key, you can now create your Azure storage connector in MOSTLY AI.
 
-<Tabs items={['UI', 'Python SDK']}>
+<Tabs items={['UI', 'Synthetic Data SDK']}>
 <Tabs.Tab>
 If you use the web application, create a new Azure blob storage connector from the **Connectors** page.
 
@@ -53,7 +53,7 @@ If you use the web application, create a new Azure blob storage connector from t
 </Tabs.Tab>
 <Tabs.Tab>
 
-    If you use the Python SDK, create an Azure blob storage connector with `mostly.connect()` and provide a connector configuration dictionary as shown below.
+    If you use the Synthetic Data SDK, create an Azure blob storage connector with `mostly.connect()` and provide a connector configuration dictionary as shown below.
 
 ```python copy filename="python" {3,6,9}
 c = mostly.connect({
@@ -77,7 +77,7 @@ c = mostly.connect({
 
 With MOSTLY AI, you can use a Service principal account to access original data stored in Azure blob storage.
 
-<Tabs items={['UI', 'Python SDK']}>
+<Tabs items={['UI', 'Synthetic Data SDK']}>
 <Tabs.Tab>
 
 In the web application, the Azure connector configuration includes configuration details that support the authentication with a Service principal account.
@@ -100,7 +100,7 @@ In the web application, the Azure connector configuration includes configuration
 </Tabs.Tab>
 <Tabs.Tab>
 
-    If you use the Python SDK, you can create an Azure connector with a Service principal account with the code snippet below.
+    If you use the Synthetic Data SDK, you can create an Azure connector with a Service principal account with the code snippet below.
 
 ```python filename="python" copy
 config={

@@ -33,7 +33,7 @@ You can examine the [CDNOW dataset](/datasets#cdnow-dataset) where the distribut
 
 The examples below show how to rebalance the `customers` column and achieve a 50% - 50% distribution of males and females in the generated synthetic data.
 
-<Tabs items={['UI', 'Python SDK']}>
+<Tabs items={['UI', 'Synthetic Data SDK']}>
 <Tabs.Tab>
 If you use the web application, you can select which column to rebalance from the **Rebalancing column** drop-down on the **Synthetic dataset configuration** page.
 
@@ -59,7 +59,7 @@ In the generated **Data** report for the synthetic dataset, you can navigate to 
 
 </Tabs.Tab>
 <Tabs.Tab>
-If you use the Python SDK, add the `rebalancing` dictionary to the `tables.configuration` dictionary and add the `columns` key with the column name as its value, and then the `probabilities` dictionary, which enumerates the values to rebalance as keys and their percentage as an integer.
+If you use the Synthetic Data SDK, add the `rebalancing` dictionary to the `tables.configuration` dictionary and add the `columns` key with the column name as its value, and then the `probabilities` dictionary, which enumerates the values to rebalance as keys and their percentage as an integer.
 ```python copy filename="python" {19-24}
 # train generator on imbalanced data
 g = mostly.train(config={

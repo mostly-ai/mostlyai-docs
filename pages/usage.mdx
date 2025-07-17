@@ -52,7 +52,7 @@ Credits are consumed based on the total virtual CPU and GPU time used to train g
 
 As you train generators, generate synthetic datasets, and chat with the Assistant, you can track the usage and the remaining credits you have on your account.
 
-<Tabs items={['UI', 'Python SDK']}>
+<Tabs items={['UI', 'Synthetic Data SDK']}>
 <Tabs.Tab>
 If you use the web application, you can check your usage from the **Credits** status bar and tooltip in the upper right.
 
@@ -64,7 +64,7 @@ If you use the web application, you can check your usage from the **Credits** st
 />
 </Tabs.Tab>
 <Tabs.Tab>
-You can use the Python SDK `mostly.me()` primitive to check the usage on your account.
+You can use the Synthetic Data SDK `mostly.me()` primitive to check the usage on your account.
 ```python filename="python" copy
 from mostlyai.sdk import MostlyAI
 mostly = MostlyAI(api_key="INSERT_API_KEY")

@@ -18,7 +18,7 @@ For more details, see [_Connector access types_](/connectors/use/access-types).
 
 <Image src="/docimages/connectors/source/select-connector-access-type.webp" alt="Connector - Select Connector access type" width={350} height={30} />
 
-<Tabs items={['UI', 'Python SDK']}>
+<Tabs items={['UI', 'Synthetic Data SDK']}>
 <Tabs.Tab>
 If you use the web application, select a source connector to add data to a new generator.
 
@@ -45,7 +45,7 @@ The selected tables (and, if selected, any referencing child tables) are added t
 
 </Tabs.Tab>
 <Tabs.Tab>
-If you use the Python SDK, add the `name`, `location`, and `source_connector_id` to the table dictionary in the `tables` list.
+If you use the Synthetic Data SDK, add the `name`, `location`, and `source_connector_id` to the table dictionary in the `tables` list.
 
 - `name` key - define the table name as it appears in the generator and in the synthetic datasets that you create with the generator
 - `location` key

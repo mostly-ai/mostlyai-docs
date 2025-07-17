@@ -17,7 +17,7 @@ With the default options, a generator generates each table with the same size (n
 
 <CustomCallout>**Note**: You can apply **Sample size** only to subject tables. Linked tables are generated based on the sequence length that each subject (row) in a subject table has in the linked table. Bear in mind that synthetic linked tables might have variations due to [extreme sequence length protection](/concepts/privacy-protection#extreme-sequence-length-protection).</CustomCallout>
 
-<Tabs items={['UI', 'Python SDK']}>
+<Tabs items={['UI', 'Synthetic Data SDK']}>
 <Tabs.Tab>
 If you use the web application, you can set the **Sample size** after you expand a table on the **Configure synthetic dataset** page.
 
@@ -32,7 +32,7 @@ If you use the web application, you can set the **Sample size** after you expand
 </Tabs.Tab>
 <Tabs.Tab>
 
-If you use the Python SDK, set the `sample_size` key to the number of samples (rows) you want to generate for a specific table.
+If you use the Synthetic Data SDK, set the `sample_size` key to the number of samples (rows) you want to generate for a specific table.
 
 ```python copy filename="python" {6}
 sd = mostly.generate("GENERATOR_ID", {
@@ -69,7 +69,7 @@ By default, MOSTLY AI applies **Top P** with a setting of `1` to all columns. Wh
 
 For a simplified example, with **Top P** set to `1`, the probability to generate the value **France** for a column `countries` is equal to the frequency at which the country appears in the original data. If that frequency is 5% and three other countries appear most frequently with 30% probability for each, then the model will disregard the generation of **France** if **Top P** is set to `0.9` and will generate primarily from the top 3 countries.
 
-<Tabs items={['UI', 'Python SDK']}>
+<Tabs items={['UI', 'Synthetic Data SDK']}>
 <Tabs.Tab>
 If you use the web application, you can set **Temperature** and **Top P** from the respective sliders on the **Configure synthetic dataset** page.
 
@@ -85,7 +85,7 @@ If you use the web application, you can set **Temperature** and **Top P** from t
 </Tabs.Tab>
 <Tabs.Tab>
 
-If you use the Python SDK, add the `sampling_temperature` and `sampling_top_p` keys to the `tables.configuration` dictionary.
+If you use the Synthetic Data SDK, add the `sampling_temperature` and `sampling_top_p` keys to the `tables.configuration` dictionary.
 
 ```python copy filename="python" {6,7}
 sd = mostly.generate("GENERATOR_ID", {

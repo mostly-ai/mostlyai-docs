@@ -49,12 +49,12 @@ export default {
   'release-lifecycle': 'Release support lifecycle',
   support: 'Support',
   'pythonsdk-header': {
-    title: 'Python SDK',
+    title: 'Synthetic Data SDK',
     type: 'page',
     href: '/python-sdk',
   },
   'python-sdk': {
-    title: 'Python SDK',
+    title: 'Synthetic DataSDK',
     display: 'hidden',
   },
   api: {

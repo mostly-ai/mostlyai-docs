@@ -23,7 +23,7 @@ Obtain the Apache Hive connection details. To use Kerberos, see [Use Kerberos fo
 - port
 - credentials
 
-<Tabs items={['UI', 'Python SDK']}>
+<Tabs items={['UI', 'Synthetic Data SDK']}>
 <Tabs.Tab>
 If you use the web application, create a new Apache Hive connector from the **Connectors** page.
 
@@ -49,7 +49,7 @@ If you use the web application, create a new Apache Hive connector from the **Co
 </Tabs.Tab>
 <Tabs.Tab>
 
-    If you use the Python SDK, create an Apache Hive connector with `mostly.connect()` and provide a connector configuration dictionary as shown below.
+    If you use the Synthetic Data SDK, create an Apache Hive connector with `mostly.connect()` and provide a connector configuration dictionary as shown below.
 
 ```python copy filename="python"
 c = mostly.connect({
@@ -111,7 +111,7 @@ To create an Apache Hive connector with Kerberos authentication, contact your Ke
   keytool -exportcert -alias hivessl-ss -keystore /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/security/hivessl-ss.p12 -storepass 123456 -file /tmp/ca-cert.pem -rfc
   ```
 
-<Tabs items={['UI', 'Python SDK']}>
+<Tabs items={['UI', 'Synthetic Data SDK']}>
 <Tabs.Tab>
 
 If you use the web application, enable the **Authenticate with Kerberos** checkbox in your Apache Hive connector and provide the required information.
@@ -131,7 +131,7 @@ If you use the web application, enable the **Authenticate with Kerberos** checkb
 </Tabs.Tab>
 <Tabs.Tab>
 
-If you use the Python SDK, use the configuration as listed below.
+If you use the Synthetic Data SDK, use the configuration as listed below.
 
 ```python filename="python" copy
 # Import required Python libraries and initialize MostlyAI() client

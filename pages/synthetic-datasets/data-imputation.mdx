@@ -20,7 +20,7 @@ To use **Imputed columns**, the model responsible for the table containing missi
 
 When you configure a new synthetic dataset, you can specify any columns you want to impute.
 
-<Tabs items={['UI', 'Python SDK']}>
+<Tabs items={['UI', 'Synthetic Data SDK']}>
 <Tabs.Tab>
 In the web application, you can select which columns to impute from the **Imputed columns** menu on the **Synthetic dataset configuration** page.
 
@@ -46,7 +46,7 @@ When you examine the `age_category` column in the `customers` of the generated d
 
 <CustomCallout type="API">Available in both [Local and Client modes](/python-sdk#local-and-client-modes).</CustomCallout>
 
-With the Python SDK, add the `imputation.columns` list to the `tables.configuration` dictionary, listing as strings all columns to impute.
+With the Synthetic Data SDK, add the `imputation.columns` list to the `tables.configuration` dictionary, listing as strings all columns to impute.
 
 ```python copy filename="python" {7-9}
 sd = mostly.generate("GENERATOR_ID", {
