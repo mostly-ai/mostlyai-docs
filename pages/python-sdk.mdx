@@ -60,12 +60,12 @@ pip install -U mostlyai
 
 The Synthetic Data SDK by MOSTLY AI is designed to work in a **local environment** (your computer or any supported Python environment) or **by connecting to a remote MOSTLY AI Platform** (such as https://app.mostly.ai). See the comparison below.
 
-|                   | Local mode                                              | Client mode                                                                                                         |
-| ----------------- | ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| **Prerequisites** | Local Python installation (in Local mode)               | • Remote MOSTLY AI Platform<br />• Platform API key<br />• Local Python installation (in Client mode)               |
-| **Installation**  | Install the Synthetic Data SDK in Local mode                    | 1. Deploy MOSTLY AI Platform in a Kubernetes cluster<br />2. Connect to the Platform with Synthetic Data SDK in Client mode |
-| **Service**       | Use a locally running server that provides the REST API | Connect to the MOSTLY AI platform REST API                                                                          |
-| **Compute**       | Uses local compute resources (CPU, GPU)                 | Uses compute resources available on the MOSTLY AI Platform                                                          |
+|                   | Local mode                                              | Client mode                                                                                                                 |
+| ----------------- | ------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| **Prerequisites** | Local Python installation (in Local mode)               | • Remote MOSTLY AI Platform<br />• Platform API key<br />• Local Python installation (in Client mode)                       |
+| **Installation**  | Install the Synthetic Data SDK in Local mode            | 1. Deploy MOSTLY AI Platform in a Kubernetes cluster<br />2. Connect to the Platform with Synthetic Data SDK in Client mode |
+| **Service**       | Use a locally running server that provides the REST API | Connect to the MOSTLY AI platform REST API                                                                                  |
+| **Compute**       | Uses local compute resources (CPU, GPU)                 | Uses compute resources available on the MOSTLY AI Platform                                                                  |
 
 The same API is available in Local and Client modes. The only difference is how you instantiate the `MostlyAI` client depending on the mode you need.
 
