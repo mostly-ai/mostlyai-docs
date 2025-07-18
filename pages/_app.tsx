@@ -1,19 +1,14 @@
 import type { AppProps } from 'next/app';
 import { useEffect } from 'react';
-import { useRouter } from 'next/router';
-import { initTagManager } from "../utils/gtm";
+import { initTagManager } from '../utils/gtm';
 import '../styles/global.css';
 
 function App({ Component, pageProps }: AppProps) {
-  const router = useRouter();
-
   useEffect(() => {
     initTagManager();
-  }, [router.events]);
+  }, []);
 
-  return (
-      <Component {...pageProps} />
-  );
+  return <Component {...pageProps} />;
 }
 
 export default App;

@@ -1,0 +1,39 @@
+---
+title: Select a compute environment
+description: 'MOSTLY AI assigns the most appropriate compute for each new synthetic dataset. You always have the option to select a different compute for a synthetic dataset.'
+---
+
+import Image from 'next/image';
+import { Callout } from 'nextra/components';
+
+# Select a compute environment
+
+MOSTLY AI assigns the most appropriate compute for each new synthetic dataset. For example, if the generator includes fine-tuned LLMs, MOSTLY AI assigns a GPU compute, if one is available.
+
+The assigned compute is used to perform the tasks listed below:
+
+- generate the synthetic data for each table
+- generate a Data report for each table ([if the Data report is enabled](/synthetic-datasets/evaluate-quality#disable-data-reports)).
+
+You always have the option to select a different compute for a synthetic dataset.
+
+**Steps**
+
+1. On the **Synthetic dataset configuration** page, click **Compute** in the upper right.
+   <Image src="/docimages/synthetic-datasets/select-compute/01-click-compute.webp" alt="Configure a synthetic datasets - Select a compute environment - 01 - Click Compute" width={800} height={300} />
+2. From the **Compute** pop-up window, select a compute.
+   <Image src="/docimages/synthetic-datasets/select-compute/02-select-compute.webp" alt="Configure a synthetic datasets - Select a compute environment - 01 - Select compute" width={800} height={300} />
+3. Click **Proceed**.
+
+**What's next**
+
+You can now [generate the synthetic dataset](/synthetic-datasets/generate) with the selected compute.
+
+In addition, you can configure any of the remaining options on the **Synthetic dataset configuration** page.
+
+- [Set sample size and temperature](/synthetic-datasets/set-size-temp)
+- [Rebalance columns](/synthetic-datasets/rebalance-columns)
+- [Data imputation](/synthetic-datasets/data-imputation)
+- [Configure fairness](/synthetic-datasets/fairness)
+- [Conditional simulation](/synthetic-datasets/seeded-generation)
+- [Deliver to a database or a cloud storage bucket](/synthetic-datasets/deliver)

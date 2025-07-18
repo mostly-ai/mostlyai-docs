@@ -1,84 +1,70 @@
 ---
 title: 'Usage and credits'
-description: 'Daily, MOSTLY AI provides 5 credits for the free generation of synthetic data points. 1 credits equals 1 million synthetic data points.'
+description: 'Daily, MOSTLY AI provides 5 credits for the free generation of synthetic data points. 1 credits equals 1 million synthetic data points. 5 credits equals 1 million chat tokens.'
 ---
 
-import { Tabs } from 'nextra/components'
-import Image from 'next/image'
-import { CustomCallout } from '@components/custom-callout'
+import { Tabs } from 'nextra/components';
+import Image from 'next/image';
+import { CustomCallout } from '@components/custom-callout';
 
 # Usage and credits
 
-The MOSTLY AI Platform at https://app.mostly.ai provides a daily limit of 5 credits to generate synthetic data points and use the Assistant. Enterprise deployments have a usage-based configuration which can be adjusted according to the organization's needs.
+The [MOSTLY AI Platform](https://app.mostly.ai) provides a daily limit of 5 credits to train generators, generate synthetic datasets, and use the [Assistant](./assistant.mdx). Enterprise deployments have a usage-based configuration which can be adjusted according to the organization's needs.
 
 <CustomCallout>
 **Note**
-When you use up your credits, you can no longer train new generators or create new synthetic datasets.
+When you use up your credits, you can no longer train new generators, create new synthetic datasets, or start chats.
 
-For more credits on https://app.mostly.ai or for the configuration of credits on Enterprise deployments, contact MOSTLY AI.
+For more credits or for the configuration of credits on Enterprise deployments, [contact MOSTLY AI](https://mostly.ai/contact).
+
 </CustomCallout>
 
-## Credits usage
+## Usage
 
-With credits available, you can use the Assistant and generate synthetic data. The credits usage for both is slightly different. Learn how each impacts your credit balance.
+Platform usage is tracked based on **Total CPU time**, **Total GPU time**, and **Token Consumption**.
 
-### Credits usage for synthetic data
+For generators and synthetic datasets, you will find the virtual CPU/GPU time consumed in the **Training status** section. For chats, you will find the total token consumption as well as virtual CPU/GPU time consumed in the **Python Session status** section.
 
-1 credit is worth the generation of 1 million synthetic data points. Synthetic data points include:
+**Chat details: Compute and token consumption**
+GPU and CPU time are measured in seconds while chat usage is measured in tokens. The total time is the sum of the GPU and CPU time used. Token consumption is calculated at a rate of 1M tokens per 5.0 Credits.
 
-* single-cell values
-* tokens in Text columns
+<Image src="/docimages/usage/g-virtual-cpu-gpu-times-with-tokens.webp" alt="MOSTLY AI - Usage and credits - Token Consumption plus Virtual CPU and GPU times" width={800} height={500} />
 
-Examples:
+<CustomCallout>**Note** Longer chats consume tokens at a much higher rate. When discussing a new topic or performing a new analysis, start a new chat by clicking **New Chat** to conserve tokens.</CustomCallout>
 
-* a synthetic dataset that includes 10 columns and 5,000 rows is worth 50,000 synthetic data points. This equals 0.05 credits.
-* if the synthetic dataset includes a Text column, the synthetic data points include the number of tokens in the Text column. Each token counts as 1 synthetic data point.
+**Generator details: Compute and token consumption**
+GPU and CPU time are measured in seconds. The total time is the sum of the GPU and CPU time used. GPU time is only available when a GPU was selected to train a generator.
 
-<CustomCallout>
-To learn what a _**token**_ is, see [What are tokens and how to count them](https://help.openai.com/en/articles/4936856-what-are-tokens-and-how-to-count-them) in the _OpenAI Help Center_. You can also use the [Tokenizer tool](https://platform.openai.com/tokenizer) by OpenAI to see how a piece of text is tokenized and how many tokens it contains.
-</CustomCallout>
+<Image src="/docimages/usage/g-virtual-cpu-gpu-times.webp" alt="MOSTLY AI - Usage and credits - Virtual CPU and GPU times" width={800} height={500} />
 
-### Credits usage for the Assistant
+**Synthetic dataset details: Compute consumption**
+GPU time is only available when a GPU was selected to generate the synthetic dataset.
 
-1 credit is worth 300,000 tokens when you use the Assistant. For each Assistant thread, you can track the number of tokens used in a thread.
+<Image src="/docimages/usage/sd-virtual-cpu-gpu-times.webp" alt="MOSTLY AI - Usage and credits - Virtual CPU and GPU times" width={800} height={500} />
 
-<Image
-    src="/docs/docimages/usage/assistant-usage.webp"
-    alt="MOSTLY AI - Usage and credits - Assistant usage"
-    width={800}
-    height={500}
-/>
+## Credits
 
-What is included in the number of tokens used:
+Credits are consumed based on the total virtual CPU and GPU time used to train generators and generate synthetic datasets. Credits are also be consumed during conversation with the Assistant at a rate of 5 credits per 1M tokens.
 
-* all messages sent by the user and replies generated by the Assistant
-* the [system instructions](/assistant/configuration#system-instructions)
-* any [custom system instructions](assistant/configuration#custom-instructions)
-* the user's custom instructions
+`Credits` = `𝐴` × `Total Virtual CPU Time` + `𝐵` × `Total Virtual GPU Time`, where `𝐴` and `𝐵`are the unit prices for CPU and GPU time respectively.
 
-Also, every time you send a new message, the Assistant also receives all previous messages and responses to take into account (as context). This also counts towards the total number of tokens used.
+### Check your daily credits
 
-<CustomCallout>
-To learn what a _**token**_ is, see [What are tokens and how to count them](https://help.openai.com/en/articles/4936856-what-are-tokens-and-how-to-count-them) in the _OpenAI Help Center_. You can also use the [Tokenizer tool](https://platform.openai.com/tokenizer) by OpenAI to see how a piece of text is tokenized and how many tokens it contains.
-</CustomCallout>
+As you train generators, generate synthetic datasets, and chat with the Assistant, you can track the usage and the remaining credits you have on your account.
 
-### Check your credits usage
-
-As you generate synthetic data, you can track the usage and the remaining credits you have on your account.
-
-<Tabs items={['UI', 'Python SDK']}>
+<Tabs items={['UI', 'Synthetic Data SDK']}>
 <Tabs.Tab>
 If you use the web application, you can check your usage from the **Credits** status bar and tooltip in the upper right.
 
 <Image
-    src="/docs/docimages/usage/usage-credits-dropdown.webp"
+    src="/docimages/usage/usage-credits-dropdown.webp"
     alt="Click Create connector button"
     width={800}
     height={500}
 />
 </Tabs.Tab>
 <Tabs.Tab>
-You can use the Python SDK `mostly.me()` primitive to check the usage on your account.
+You can use the Synthetic Data SDK `mostly.me()` primitive to check the usage on your account.
 ```python filename="python" copy
 from mostlyai.sdk import MostlyAI
 mostly = MostlyAI(api_key="INSERT_API_KEY")
@@ -104,156 +90,20 @@ The result is a Python dictionary and you can find details about your current cr
     }
 }
 ```
+
 </Tabs.Tab>
 </Tabs>
 
-## Usage of generators, synthetic datasets, and connectors
+### Check your monthly credits
 
-You can track the usage of generators, synthetic datasets, and connectors in the MOSTLY AI web application and with the Python SDK.
-
-### Usage of generators
-
-For each generator, you can track the metrics below.
-
-* **likes**
-* **times used to generate a synthetic dataset**
-
-<Tabs items={['UI', 'Python SDK']}>
-<Tabs.Tab>
-
-If you use the web application, the **Generators** page contains an **Activity** column that shows the generator usage metrics.
-
-<Image
-    src="/docs/docimages/usage/generators-usage.webp"
-    alt="MOSTLY AI - Usage and credits - Generators usage"
-    width={800}
-    height={500}
-/>
-
-The same metrics are also available when you open a generator.
-
-<Image
-    src="/docs/docimages/usage/generators-summary-usage.webp"
-    alt="MOSTLY AI - Usage and credits - Generators usage"
-    width={800}
-    height={500}
-/>
-</Tabs.Tab>
-<Tabs.Tab>
-If you use the Python SDK, you get metrics about generator usage with `g.usage`.
-
-```python filename="python" copy
-g = mostly.generators.get('INSERT_GENERATOR_ID')
-g.usage
-```
-The result is an object with all metrics.
-```python filename="python"
-{
-    'total_datapoints': 1287456,
-    'total_compute_time': 176,
-    'no_of_synthetic_datasets': 2,
-    'no_of_likes': 2
-}
-```
-</Tabs.Tab>
-</Tabs>
-
-### Usage of synthetic datasets
-
-For each synthetic dataset, you can track how the number of **data points generated** and the number of **credits used**.
-For each synthetic dataset, you can track the metrics below.
-
-* **likes**
-* **data points generated**
-* **credits used**
-
-<Tabs items={['UI', 'Python SDK']}>
-<Tabs.Tab>
-In the web application, the metrics are available after you open a synthetic dataset.
-
-<Image
-    src="/docs/docimages/usage/synthetic-datasets-usage.webp"
-    alt="MOSTLY AI - Usage and credits - Synthetic datasets usage"
-    width={800}
-    height={500}
-/>
-</Tabs.Tab>
-<Tabs.Tab>
-If you use the Python SDK, you get metrics about generator usage with `sd.usage`.
-
-```python filename="python" copy
-sd = mostly.synthetic_datasets.get('INSERT_SYNTHETIC_DATASET_ID')
-sd.usage
-```
-The result is an object with all metrics.
-```python filename="python"
-{
-    'total_datapoints': 189129,
-    'total_credits': 0.1891,
-    'total_compute_time': 171,
-    'no_of_likes': 1
-}
-```
-</Tabs.Tab>
-</Tabs>
-
-### Usage of connectors
-
-For each **source connector**, you can track _the number of generators using the connector as a data source_. For each **destination connector**, _the number of synthetic datasets delivered to the connector destination_ are available.
-
-<Tabs items={['UI', 'Python SDK']}>
-<Tabs.Tab>
-In the web application, the **Connectors** page contains an **Activity** column that shows the connector usage metrics.
-
-<Image
-    src="/docs/docimages/usage/connectors-usage.webp"
-    alt="MOSTLY AI - Usage and credits - Connectors usage"
-    width={800}
-    height={500}
-/>
-</Tabs.Tab>
-<Tabs.Tab>
-If you use the Python SDK, you get metrics about connector usage with `c.usage`.
-
-```python filename="python" copy
-c = mostly.connectors.get('INSERT_CONNECTOR_ID')
-c.usage
-```
-The result is the `ConnectorUsage` object which includes all metrics.
-```python filename="python"
-ConnectorUsage(
-    no_of_generators=4
-)
-```
-</Tabs.Tab>
-</Tabs>
-
-## Monthly usage reports (Enterprise-only)
-
-For organizations that use MOSTLY AI after deploying in their own private cloud environments, administrators can track their organization's monthly usage. The **Monthly reports** option is available only to Admin users.
-
-If you are using the web application, you can track your organization's monthly usage statistics from your administrator profile menu.
+You can keep track of your monthly credits usage from the **Usage report** page.
 
 **Steps**
 
-1. Open the profile menu.
-2. Select **Monthly reports**.
+From the profile menu, select **Usage report**.
 
 **Result**
 
-The **Monthly reports** page displays the monthly usage statistics for your organization.
+With **User: Me** selected from the drop-down menu, you can view the monthly usage statistics for your account.
 
-    <Image
-        src="/docs/docimages/usage/monthly-report/monthly-report.webp"
-        alt="MOSTLY AI - Usage and credits - Monthly report"
-        width={800}
-        height={500}
-    />
-
-Each monthly report includes a monthly aggregation of the following metrics:
-
-* generated rows
-* generated data points <sup>[1](#^1)</sup>
-* credits used
-
-<sup><a name="^1">1</a></sup> _The **data points** metrics includes both data points generated in synthetic dataset as well as those generated by live probing generators._
+<Image src="/docimages/usage/monthly-usage-report.webp" alt="MOSTLY AI - Usage and credits - Monthly usage report" width={800} height={500} />

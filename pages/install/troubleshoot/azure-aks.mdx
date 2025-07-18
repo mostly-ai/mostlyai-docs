@@ -70,18 +70,19 @@ failed to create resource
 **Solution**
 
 1. Define NGINX only one time in `values.yaml`. Comment out the `ingressClassName` line.
-    ```yaml filename="values.yaml" {2}
-    ingress:
-    # ingressClassName: nginx
-    kubernetes.io/ingress.class: nginx
+   ```yaml filename="values.yaml" {2}
+   ingress:
+   # ingressClassName: nginx
+   kubernetes.io/ingress.class: nginx
+   ```
 2. Delete the `mostly-ai` namespace. This deletes all running MOSTLY AI pods and bound storage volumes.
-    ```bash copy
-    kubectl delete namespace mostly-ai
-    ```
+   ```bash copy
+   kubectl delete namespace mostly-ai
+   ```
 3. Redeploy MOSTLY AI.
-    ```bash copy
-    helm upgrade --install mostly-ai ./ --values values.yaml --namespace mostly-ai
-    ```
+   ```bash copy
+   helm upgrade --install mostly-ai ./ --values values.yaml --namespace mostly-ai
+   ```
 
 ## Error: `Subscription not registered to use 'Microsoft.Storage'`
 
@@ -96,16 +97,16 @@ The subscription is not registered to use namespace 'Microsoft.Storage'
 **Solution**
 
 1. Register your subscription to use the `Microsoft.Storage` service.
-    ```bash copy
-    az provider register --namespace Microsoft.Storage
-    ```
+   ```bash copy
+   az provider register --namespace Microsoft.Storage
+   ```
 2. Check the registration status.
-    ```bash copy
-    az provider show -n Microsoft.Storage --output table
-    ```
-    The output should be similar to the following:
-    ```
-    Namespace          RegistrationPolicy    RegistrationState
-    -----------------  --------------------  -------------------
-    Microsoft.Storage  RegistrationRequired  Registered
-    ```
+   ```bash copy
+   az provider show -n Microsoft.Storage --output table
+   ```
+   The output should be similar to the following:
+   ```
+   Namespace          RegistrationPolicy    RegistrationState
+   -----------------  --------------------  -------------------
+   Microsoft.Storage  RegistrationRequired  Registered
+   ```

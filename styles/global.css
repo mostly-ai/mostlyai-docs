@@ -2,26 +2,53 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu,
-    Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    Segoe UI,
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    Fira Sans,
+    Droid Sans,
+    Helvetica Neue,
+    sans-serif;
   font-size: 16px;
   font-weight: 500;
   letter-spacing: -0.2px;
 }
 
-body p, li {
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu,
-    Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-    font-weight: 400;
-    /* letter-spacing: -0.8px; */
+body p,
+li {
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    Segoe UI,
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    Fira Sans,
+    Droid Sans,
+    Helvetica Neue,
+    sans-serif;
+  font-weight: 400;
+  /* letter-spacing: -0.8px; */
 }
 * {
   box-sizing: border-box;
 }
 
-a:link { text-decoration: none; }
-a:visited { text-decoration: none; }
-a:active { text-decoration: none; }
+a:link {
+  text-decoration: none;
+}
+a:visited {
+  text-decoration: none;
+}
+a:active {
+  text-decoration: none;
+}
 
 a {
   /* color: #0070f3; */
@@ -59,11 +86,25 @@ img {
   font-weight: 400;
 }
 
-h1, h2, h3, h4, h5 {
+h1,
+h2,
+h3,
+h4,
+h5 {
   border-bottom: none;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu,
-    Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-    font-weight: 500;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    Segoe UI,
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    Fira Sans,
+    Droid Sans,
+    Helvetica Neue,
+    sans-serif;
+  font-weight: 500;
 }
 
 /* Hack to remove bold from On this page TOC */
@@ -82,7 +123,8 @@ table {
 }
 
 /* Hide the table header on Markdown tables that don't need one */
-div.empty_header_table + table th, div.empty_header_table + table th:empty {
+div.empty_header_table + table th,
+div.empty_header_table + table th:empty {
   display: none;
 }
 
@@ -217,10 +259,10 @@ article ul ul {
   margin-top: 1rem;
   margin-bottom: 1rem;
   padding: 1rem;
-  background-color: rgba(250,250,250);
+  background-color: rgba(250, 250, 250);
 }
 .FAQ summary {
-  font-size: 16px
+  font-size: 16px;
 }
 
 /*** Body - micro formatting ***/

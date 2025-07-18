@@ -3,10 +3,10 @@ title: 'Train a new generator'
 description: 'With generators, MOSTLY AI makes it easy to use Generative AI to train your own AI models on single- and multi-table datasets. You can then use a trained generator to generate endless amounts of high-quality and privacy-protected synthetic data.'
 ---
 
-import Image from 'next/image'
-import { Callout } from 'nextra/components'
-import { Tabs } from 'nextra/components'
-import { CustomCallout } from '@components/custom-callout'
+import Image from 'next/image';
+import { Callout } from 'nextra/components';
+import { Tabs } from 'nextra/components';
+import { CustomCallout } from '@components/custom-callout';
 
 # Train a new generator
 
@@ -14,85 +14,53 @@ With generators, MOSTLY AI makes it easy to use Generative AI to train your own 
 
 You can quickly train a new generator with a single tabular data file.
 
-<CustomCallout>
-You can also train generators with two-table and multi-table datasets. For more information, see [Set table relationships](/generators/configure/set-table-relationships).
-</CustomCallout>
+<CustomCallout>You can also train generators with two-table and multi-table datasets. For more information, see [Set table relationships](/generators/configure/set-table-relationships).</CustomCallout>
 
-<Tabs items={['UI', 'Python SDK']}>
+<Tabs items={['UI', 'Synthetic Data SDK']}>
 <Tabs.Tab>
 If you use the web application, you can start the training of a new generator from the **Generators** page.
 
 **Steps**
 
 1. On the **Generators** page, click **+ New generator**.
-    <Image
-        src="/docs/docimages/generators/train/01-click-new-generator.webp"
-        alt="MOSTLY AI - Generators page - Click New generator"
-        width={800}
-        height={300}
-    />
-    **Step result**: You now have a generator object created in the MOSTLY AI database and the generator is listed on the **Generators** page.
 
-    The **Add data** window appears prompting you to add tabular data for your generator to train on.
+   <Image src="/docimages/generators/train/01-click-new-generator.webp" alt="MOSTLY AI - Generators page - Click New generator" width={800} height={300} />
+   **Step result**: You now have a generator object created in the MOSTLY AI database and the generator is listed on the **Generators** page.
+
+   The **Add data** window appears prompting you to add tabular data for your generator to train on.
+
 2. Add a table with file upload.
-    1. From the **Add data** window, click **Upload file**.
-        <Callout>
-        You can also add data from a database or cloud bucket when you select **Connect to a source**. To learn more, see [Add data from a database](/generators/configure/add-data#add-data-from-a-database) and [Add data from a cloud storage bucket](/generators/configure/add-data#add-data-from-a-cloud-bucket).
-        </Callout>
-        <Image
-            src="/docs/docimages/generators/train/02-select-upload-file.webp"
-            alt="MOSTLY AI - Generators page - Click Upload file"
-            width={800}
-            height={300}
-        />
-    2. Under **Upload file**, drag a local file onto the box or click the box to browse your local file system.<br />
-        <Callout>
-        If you need a dataset, download one from the [Datasets](/datasets) page.
-        </Callout>
-        <Image
-            src="/docs/docimages/generators/train/03-upload-file-drag-browse.webp"
-            alt="MOSTLY AI - Generators page - Drag to upload or click to browse"
-            width={800}
-            height={300}
-        />
-    3. (Optional) Enter a name for the table.<br />
-        The table name appears in the list of tables added to the generator. Also, the table name that you provide is what appears in each generated synthetic dataset.
-        <Image
-            src="/docs/docimages/generators/train/04-enter-table-name.webp"
-            alt="MOSTLY AI - Generators page - Name the new table"
-            width={575}
-            height={300}
-        />
-    4. Click **Proceed**.
+   1. From the **Add data** window, click **Upload file**.
+      <Callout>You can also add data from a database or cloud bucket when you select **Connect to a source**. To learn more, see [Add data from a database](/generators/configure/add-data#add-data-from-a-database) and [Add data from a cloud storage bucket](/generators/configure/add-data#add-data-from-a-cloud-bucket).</Callout>
+      <Image src="/docimages/generators/train/02-select-upload-file.webp" alt="MOSTLY AI - Generators page - Click Upload file" width={800} height={300} />
+   2. Under **Upload file**, drag a local file onto the box or click the box to browse your local file system.<br />
+      <Callout>If you need a dataset, download one from the [Datasets](/datasets) page.</Callout>
+      <Image src="/docimages/generators/train/03-upload-file-drag-browse.webp" alt="MOSTLY AI - Generators page - Drag to upload or click to browse" width={800} height={300} />
+   3. (Optional) Enter a name for the table.<br />
+      The table name appears in the list of tables added to the generator. Also, the table name that you provide is what appears in each generated synthetic dataset.
+      <Image src="/docimages/generators/train/04-enter-table-name.webp" alt="MOSTLY AI - Generators page - Name the new table" width={575} height={300} />
+   4. Click **Proceed**.
 3. Train the generator.
-    1. Click **Configure models** in the upper right.
-        <Image
-            src="/docs/docimages/generators/train/05-click-configure-models.webp"
-            alt="MOSTLY AI - Data configuration - Click Configure models"
-            width={800}
-            height={300}
-        />
-    2. On the **Model configuration** page, click **Start training**.
-        <Image
-            src="/docs/docimages/generators/train/06-click-start-training.webp"
-            alt="MOSTLY AI - Model configuration - click Start training"
-            width={800}
-            height={300}
-        />
+   1. Click **Configure models** in the upper right.
+      <Image src="/docimages/generators/train/05-click-configure-models.webp" alt="MOSTLY AI - Data configuration - Click Configure models" width={800} height={300} />
+   2. On the **Model configuration** page, click **Start training**.
+      <Image src="/docimages/generators/train/06-click-start-training.webp" alt="MOSTLY AI - Model configuration - click Start training" width={800} height={300} />
 
 **Result**
 
 Your generator now starts training. When the training completes, your generator is ready to generate synthetic data.
+
 </Tabs.Tab>
 <Tabs.Tab>
-Use the code example below to train a new generator with the MOSTLY AI Python SDK.
+Use the code example below to train a new generator with the MOSTLY AI Synthetic Data SDK.
 
 ```python copy filename="python"
 import pandas as pd
 from mostlyai.sdk import MostlyAI
 mostly = MostlyAI(api_key="INSERT_API_KEY")
-df = pd.read_csv("https://mostly.ai/docs/datasets/us-census-income.csv.gz")
+df = pd.read_csv("https://docs.mostly.ai/datasets/us-census-income.csv.gz")
 g = mostly.train(data=df, name="US Census Income")
 ```
+
 </Tabs.Tab>
 </Tabs>

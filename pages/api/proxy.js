@@ -4,8 +4,8 @@ export default async function handler(req, res) {
     method: req.method,
     headers: {
       'Content-Type': 'application/json',
-      'Accept': 'application/json',
-      'X-MOSTLY-API-KEY': process.env.MOSTLY_AI_API_KEY
+      Accept: 'application/json',
+      'X-MOSTLY-API-KEY': process.env.MOSTLY_AI_API_KEY,
     },
   });
 

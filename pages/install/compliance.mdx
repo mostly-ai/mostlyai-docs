@@ -1,6 +1,6 @@
 ---
 title: OCI compliance and security of MOSTLY AI container images
-description: ""
+description: ''
 ---
 
 # OCI compliance and security of MOSTLY AI container images
@@ -19,11 +19,11 @@ MOSTLY AI does not impose a Kubernetes distribution to customers. You are free t
 
 The list of the officially supported distributions are:
 
-* Amazon Elastic Kubernetes Service (EKS)
-* Google Kubernetes Engine (GKE)
-* Azure Kubernetes Service (AKS)
-* Red Hat OpenShift
-* Vanilla Kubernetes
+- Amazon Elastic Kubernetes Service (EKS)
+- Google Kubernetes Engine (GKE)
+- Azure Kubernetes Service (AKS)
+- Red Hat OpenShift
+- Vanilla Kubernetes
 
 ## How do I make sure to run MOSTLY AI in an OCI Compliant environment?
 
@@ -34,3 +34,7 @@ If you are using a different Kubernetes distribution, check with the vendor if t
 ## Do you scan your images for vulnerabilities?
 
 MOSTLY AI uses [Trivy Open Source](https://trivy.dev/) vulnerability scanner in CI/CD pipelines and the scans of DockerHub, when pushing to the MOSTLY AI repository.
+
+## How are connector secrets stored in MOSTLY AI?
+
+The secrets (passwords, API keys, secret keys, and so on) for each saved connector in MOSTLY AI are stored in encrypted form in the PostgreSQL database that is part of the [MOSTLY AI application services](/install/architecture#application-nodes). The secrets are not only encrypted at rest, but also in transit.

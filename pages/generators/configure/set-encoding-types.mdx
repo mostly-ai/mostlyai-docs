@@ -3,11 +3,11 @@ title: 'Set encoding types'
 description: 'MOSTLY AI supports well-known data types and implements logic on how to encode the data in each column for AI model training. Setting the correct encoding type ensures that the generated synthetic data accurately represents your original data.'
 ---
 
-import { Callout } from 'nextra/components'
-import { Tabs } from 'nextra/components'
-import Image from 'next/image'
-import { CustomCallout } from '@components/custom-callout'
-import ModelsList from '@components/mostly-ai-llm-list'
+import { Callout } from 'nextra/components';
+import { Tabs } from 'nextra/components';
+import Image from 'next/image';
+import { CustomCallout } from '@components/custom-callout';
+import ModelsList from '@components/mostly-ai-llm-list';
 
 # Set encoding types
 
@@ -23,32 +23,23 @@ As a best practice, check the auto-detected encoding types and, if needed, selec
 
 When you add a table to a generator in the web application, MOSTLY AI analyzes the data in each column and auto-assigns the best possible encoding type. You can always select a different encoding type.
 
-With the Python SDK, you do not need to specify an encoding type when you submit a new generator configuration for training. MOSTLY AI will again analyze each column and assign the best possible encoding type. You can still use the `model_encoding_type` key to enforce an encoding type.
+With the Synthetic Data SDK, you do not need to specify an encoding type when you submit a new generator configuration for training. MOSTLY AI will again analyze each column and assign the best possible encoding type. You can still use the `model_encoding_type` key to enforce an encoding type.
 
-<Tabs items={['UI', 'Python SDK']}>
+<Tabs items={['UI', 'Synthetic Data SDK']}>
 <Tabs.Tab>
 **Steps**
 
 1. On the generator **Data configuration** page, click a table to expand it and view its encoding types.
-    <Image
-        src="/docs/docimages/generators/set-encoding-types/generator-01-highlight-and-click-table.webp"
-        alt="MOSTLY AI - Generator - Set column types - Select an added table"
-        width={900}
-        height={300}
-    />
+   <Image src="/docimages/generators/set-encoding-types/generator-01-highlight-and-click-table.webp" alt="MOSTLY AI - Generator - Set column types - Select an added table" width={900} height={300} />
 2. Click in the **Encoding type** area for a column.
-    <Image
-        src="/docs/docimages/generators/set-encoding-types/generator-02-select-encoding-type.webp"
-        alt="MOSTLY AI - Generator - Set column types - Select type"
-        width={900}
-        height={300}
-    />
+   <Image src="/docimages/generators/set-encoding-types/generator-02-select-encoding-type.webp" alt="MOSTLY AI - Generator - Set column types - Select type" width={900} height={300} />
 3. Set a column type that best describes the data in the column.
 
 For more information about each type, see the sections below.
+
 </Tabs.Tab>
 <Tabs.Tab>
-To set encoding types with the Python SDK, use the `table.columns` dictionary as shown in the example below. For each column in your source data, define the column with a `name` and set the encoding type with the `model_encoding_type` key.
+To set encoding types with the Synthetic Data SDK, use the `table.columns` dictionary as shown in the example below. For each column in your source data, define the column with a `name` and set the encoding type with the `model_encoding_type` key.
 
 ```python copy {7-16}
 config = {
@@ -56,7 +47,7 @@ config = {
    "tables": [
       {
          "name": "us-census-income",
-         "data": "https://mostly.ai/docs/datasets/us-census-income.csv.gz",
+         "data": "https://docs.mostly.ai/datasets/us-census-income.csv.gz",
          "columns": [
             {
                "name": "age",
@@ -100,20 +91,20 @@ For a column, the `model_encoding_type` key accepts one of the values listed bel
 
 When you select an encoding type, you also [select the model to train or fine-tune](#models). MOSTLY AI supports tabular and language models.
 
-[**Tabular models**](#tabular-models). Tabular models train on original tabular data to then generate privacy-preserving **tabular synthetic data**. Their encoding types are prefixed with **Tabular/** (in the Platform UI) or `TABULAR_` (for the Python SDK). MOSTLY AI supports three tabular model sizes.
+[**Tabular models**](#tabular-models). Tabular models train on original tabular data to then generate privacy-preserving **tabular synthetic data**. Their encoding types are prefixed with **Tabular/** (in the Platform UI) or `TABULAR_` (for the Synthetic Data SDK). MOSTLY AI supports three tabular model sizes.
 
 The list of tabular models includes:
-   * [MOSTLY AI/Small](#mostly-aismall)
-   * [MOSTLY AI/Medium](#mostly-aimedium)
-   * [MOSTLY AI/Large](#mostly-ailarge)
-      <Callout>
-      Selecting a model size is part of the _speed vs accuracy_ trade-off when training a generator. For details, see [_Increase model size_](/generators/configure/improve-model-accuracy#increase-model-size) and [_Select a smaller model_](/generators/configure/speed-up-training#select-a-smaller-model).
-      </Callout>
-[**Language models**](#language-models). With language models, you can generate privacy-preserving **synthetic text data**. Encoding types for language models are prefixed with **Language/** (when using the Platform UI) or `LANGUAGE_` (when using the Python SDK). To learn more about the supported use cases, check out each Language encoding type.
+
+- [MOSTLY AI/Small](#mostly-aismall)
+- [MOSTLY AI/Medium](#mostly-aimedium)
+- [MOSTLY AI/Large](#mostly-ailarge)
+  <Callout>Selecting a model size is part of the _speed vs accuracy_ trade-off when training a generator. For details, see [_Increase model size_](/generators/configure/improve-model-accuracy#increase-model-size) and [_Select a smaller model_](/generators/configure/speed-up-training#select-a-smaller-model).</Callout>
+  [**Language models**](#language-models). With language models, you can generate privacy-preserving **synthetic text data**. Encoding types for language models are prefixed with **Language/** (when using the Platform UI) or `LANGUAGE_` (when using the Synthetic Data SDK). To learn more about the supported use cases, check out each Language encoding type.
 
 The list of language models includes:
-   * [MOSTLY_AI/LSTMFromScratch-3m](#mostly_ailstmfromscratch-3m)
-   * [HuggingFace LLMs](#huggingface-llms)
+
+- [MOSTLY_AI/LSTMFromScratch-3m](#mostly_ailstmfromscratch-3m)
+- [HuggingFace LLMs](#huggingface-llms)
 
 ### Tabular
 
@@ -125,16 +116,14 @@ A categorical variable has a fixed set of possible values that are already prese
 
 If the automatic encoding type detection does not recognize a **Numeric** or **Datetime** column as such, it is encoded as **Categorical**.
 
-You can control how the rare category protection mechanism works with **Value protection** settings and the **Rare category replacement method** which appear on the **Model configuration** page of a generator. These settings help with protecting rare categories. Rare categories may cause re-identification of outliers among your data subjects if they’re present in the resulting synthetic data.
+You can control how the rare category protection mechanism works with **Value protection** settings and the **Rare category replacement method** which appear on the **Model configuration** page of a generator. These settings help with protecting rare categories. Rare categories may cause re-identification of outliers among your data subjects if they're present in the resulting synthetic data.
 
 There are two rare category protection methods available with which you can mask these categories:
 
 **Constant**<br />
 Replaces rare categories with the value `_RARE_`.
 
-<Callout type="info">
-The use of **Constant** introduces the `_RARE`_ category in your synthetic data and that can impact your downstream tasks. To avoid that, you can use the **Sample** method.
-</Callout>
+<Callout type="info">The use of **Constant** introduces the `_RARE`_ category in your synthetic data and that can impact your downstream tasks. To avoid that, you can use the **Sample** method.</Callout>
 
 **Sample**<br />
 Replaces rare categories with categories that will appear in the synthetic version of this column. The categories are sampled from the original data based on their frequency. The more frequent a category is, the more likely it will be selected.
@@ -146,9 +135,10 @@ With **Numeric: Auto**, MOSTLY AI uses heuristics to decide the most appropriate
 #### Numeric: Discrete
 
 **Discrete** treats the numeric data in the column as categorical values. You can use this option for columns that have categorical numeric codes, such as:
-  * ZIP codes, postal codes, country phone codes
-  * binary `True` or `False` that are represented as the numeric values `0` and `1`
-  * any categorical data which are represented with numeric values
+
+- ZIP codes, postal codes, country phone codes
+- binary `True` or `False` that are represented as the numeric values `0` and `1`
+- any categorical data which are represented with numeric values
 
 **Rare category protection** also applies to **Numeric: Discrete** columns. When you generate a synthetic dataset, MOSTLY AI replaces rare numeric categories with a non-rare numeric category in the column (applying the **Sample** method as explained above for Categorical columns). `_RARE_` values are not generated for **Numeric: Discrete** columns.
 
@@ -160,13 +150,11 @@ You can use **Binned** for columns containing large integers or long decimals. M
 
 **Numeric: Digit** recognizes the data in the column as numeric values.
 
-<Callout type="info">
-MOSTLY AI can synthesize floating-point values with a precision of up to 8 digits after the decimal point.
-</Callout>
+<Callout type="info">MOSTLY AI can synthesize floating-point values with a precision of up to 8 digits after the decimal point.</Callout>
 
 #### Character
 
-Use the **Character** encoding type to synthesize short strings with a consistent pattern, such as phone numbers, license plate numbers, company ID’s, transaction ID, and social security ID’s.
+Use the **Character** encoding type to synthesize short strings with a consistent pattern, such as phone numbers, license plate numbers, company ID's, transaction ID, and social security ID's.
 
 #### Datetime
 
@@ -174,47 +162,42 @@ Datetime refers to values that contain a date part and a time part. This encodin
 
 The following formats are supported:
 
-| | Format | Example |
-| --- | --- | --- |
-| **Date** | `yyyy-MM-dd` | `2020-02-08` |
-| **Datetime with hours** | `yyyy-MM-dd HH`<br />`yyyy-MM-ddTHH`<br />`yyyy-MM-ddTHHZ` | `2020-02-08 09`<br />`2020-02-08T09`<br />`2020-02-08T09Z` |
-| **Datetime with minutes** | `yyyy-MM-dd HH:mm`<br />`yyyy-MM-ddTHH:mm`<br />`yyyy-MM-ddTHH:mmZ` | `2020-02-08 09:30`<br />`2020-02-08T09:30`<br />`2020-02-08T09:30Z` |
-| **Datetime with seconds** | `yyyy-MM-dd HH:mm:ss`<br />`yyyy-MM-ddTHH:mm:ss`<br />`yyyy-MM-ddTHH:mm:ssZ` | `2020-02-08 09:30:26`<br />`2020-02-08T09:30:26`<br />`2020-02-08T09:30:26Z` |
+|                                | Format                                                                                   | Example                                                                                  |
+| ------------------------------ | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| **Date**                       | `yyyy-MM-dd`                                                                             | `2020-02-08`                                                                             |
+| **Datetime with hours**        | `yyyy-MM-dd HH`<br />`yyyy-MM-ddTHH`<br />`yyyy-MM-ddTHHZ`                               | `2020-02-08 09`<br />`2020-02-08T09`<br />`2020-02-08T09Z`                               |
+| **Datetime with minutes**      | `yyyy-MM-dd HH:mm`<br />`yyyy-MM-ddTHH:mm`<br />`yyyy-MM-ddTHH:mmZ`                      | `2020-02-08 09:30`<br />`2020-02-08T09:30`<br />`2020-02-08T09:30Z`                      |
+| **Datetime with seconds**      | `yyyy-MM-dd HH:mm:ss`<br />`yyyy-MM-ddTHH:mm:ss`<br />`yyyy-MM-ddTHH:mm:ssZ`             | `2020-02-08 09:30:26`<br />`2020-02-08T09:30:26`<br />`2020-02-08T09:30:26Z`             |
 | **Datetime with milliseconds** | `yyyy-MM-dd HH:mm:ss.SSS`<br />`yyyy-MM-ddTHH:mm:ss.SSS`<br />`yyyy-MM-ddTHH:mm:ss.SSSZ` | `2020-02-08 09:30:26.123`<br />`2020-02-08T09:30:26.123`<br />`2020-02-08T09:30:26.123Z` |
 
 #### Datetime: Relative
 
 **Datetime: Relative** models the time interval between two subsequent events in the synthetic dataset. This encoding type causes the time between events to become very accurate, but the dates become less accurate.
 
-<Callout type="info">
-The **Datetime: Relative** encoding type is only available for linked tables.
-</Callout>
+<Callout type="info">The **Datetime: Relative** encoding type is only available for linked tables.</Callout>
 
 #### Latitude, Longitude
 
 Use the **Latitude, Longitude** encoding type to synthesize geolocation coordinates.
 
-MOSTLY AI requires a geolocation coordinate to be encoded in a single field with the latitude and longitude as comma-separated values. The latitude must be on the comma’s left side and the longitude on the right.
+MOSTLY AI requires a geolocation coordinate to be encoded in a single field with the latitude and longitude as comma-separated values. The latitude must be on the comma's left side and the longitude on the right.
 
 The values must be in decimal degrees format and range from `-90` to `90` for latitude and `-180` to `180` for longitude. Their precision cannot be larger than five digits after the decimal dot. This translates to an accuracy of approx. 1 meter. Any additional digits will be ignored.
 
-| Start location | End location | Some other location |
-| --- | --- | --- |
-| `70.31311, 150.1` | `-90.0, 180.0` | `37.311, 173.8998` |
-| `-39.0, 120.33114` | `78.31112, -100.031` | `-10.10, -80.901` |
+| Start location     | End location         | Some other location |
+| ------------------ | -------------------- | ------------------- |
+| `70.31311, 150.1`  | `-90.0, 180.0`       | `37.311, 173.8998`  |
+| `-39.0, 120.33114` | `78.31112, -100.031` | `-10.10, -80.901`   |
 
-<Callout type="info">
-For CSV files, wrap each coordinate in double quotes.
-To learn more, see [CSV files requirements](/generators/prepare-data/csv-requirements).
-</Callout>
+<Callout type="info">For CSV files, wrap each coordinate in double quotes. To learn more, see [CSV files requirements](/generators/prepare-data/csv-requirements).</Callout>
 
 ### Language
 
 Use **Language** encoding types for the following use cases:
 
-* fine-tune LLMs with tabular categorical, numeric, and datetime data
-* fine-tune LLMs with original unstructured text data to then generate synthetic text data
-* train on short text data to later generate privacy-preserving names, emails, and others
+- fine-tune LLMs with tabular categorical, numeric, and datetime data
+- fine-tune LLMs with original unstructured text data to then generate synthetic text data
+- train on short text data to later generate privacy-preserving names, emails, and others
 
 #### Categorical
 
@@ -222,31 +205,27 @@ Use the **Language/Categorical** encoding type to fine-tune an LLM with the cate
 
 When you [generate a synthetic dataset](/synthetic-datasets/generate), you leverage the LLM pre-training and knowledge in the use cases listed below.
 
-* Generate representative categories even when fine-tuning with smaller datasets
-* Apply [conditional generation by seeding](/synthetic-datasets/seeded-generation) numeric values that weren't present in the original data
+- Generate representative categories even when fine-tuning with smaller datasets
+- Apply [conditional simulation by seeding](/synthetic-datasets/seeded-generation) numeric values that weren't present in the original data
 
 #### Numeric
 
 Use the **Language/Numeric** encoding type to fine-tune an LLM with the numeric data in the selected column.
 
-<CustomCallout>
-Use cases for LLM-generated numeric data are the same as the ones listed in [**Language/Categorical**](#languagecategorical).
-</CustomCallout>
+<CustomCallout>Use cases for LLM-generated numeric data are the same as the ones listed in [**Language/Categorical**](#languagecategorical).</CustomCallout>
 
 #### Datetime
 
 Use the **Language/Categorical** encoding type to fine-tune an LLM with the numeric data in the selected column.
 
-<CustomCallout>
-Use cases for LLM-generated datetime data are the same as the ones listed in [**Language/Categorical**](#languagecategorical).
-</CustomCallout>
+<CustomCallout>Use cases for LLM-generated datetime data are the same as the ones listed in [**Language/Categorical**](#languagecategorical).</CustomCallout>
 
 #### Text
 
 With the **Language/Text** encoding type, you have two general choices:
 
-* train the not pre-trained [MOSTLY AI/LSTM](#mostly_ailstmfromscratch-3m) model with unstructured text to be able to generate unstructured natural language texts up to 1,000 characters
-* fine-tune a [HuggingFace LLM](https://huggingface.co/) with original unstructured language texts of any length to generate unstructured synthetic text data
+- train the not pre-trained [MOSTLY AI/LSTM](#mostly_ailstmfromscratch-3m) model with unstructured text to be able to generate unstructured natural language texts up to 1,000 characters
+- fine-tune a [HuggingFace LLM](https://huggingface.co/) with original unstructured language texts of any length to generate unstructured synthetic text data
 
 ## Models
 
@@ -272,138 +251,70 @@ The **MOSTLY AI/Large** tabular model maximizes accuracy with more parameters bu
 
 For unstructured text data, you can:
 
-* train the not pre-trained [MOSTLY AI/LSTM](#mostly_ailstmfromscratch-3m)
-* fine-tune a [HuggingFace LLM](https://huggingface.co/)
+- train the not pre-trained [MOSTLY AI/LSTM](#mostly_ailstmfromscratch-3m)
+- fine-tune a [HuggingFace LLM](https://huggingface.co/)
 
 #### MOSTLY AI/LSTMFromScratch-3m
 
-The **LSTM** is not a pre-trained model and you can use it to synthesize unstructured natural language texts up to 1,000 characters.
+The **LSTM** is a custom-trained model that synthesizes unstructured natural language texts.
 
-You can use this encoding type to generate realistic, representative, and anonymous financial transaction texts, short user feedback, medical assessments, PII fields, etc. As the resulting synthetic texts are representative of the terms, tokens, and their co-occurrence in the original data, they can be confidently used in analytics and machine learning use cases, such as sentiment analysis and named-entity recognition. Even though they might look noisy and not very human-readable, they will work perfectly for these use cases.
+You can use this encoding type to generate realistic, representative, and anonymous financial transaction texts, short user feedback, medical assessments, PII fields, etc. As the resulting synthetic texts are representative of the terms, tokens, and their co-occurrence in the original data, they can be confidently used in analytics and machine learning use cases, such as sentiment analysis and named-entity recognition.
 
-Our text synthesis model is language-agnostic and doesn’t contain the biases of some pre-trained models—any content is solely learned from the original training data. This means that it can process any language, vernacular, and slang present in the original data.
+Remember, the LSTM will perform better when trained on short, structured, repetitive sequences like names and short sentences while an LLM will perform better for longer, less structured samples like descriptions, email bodies, or notes.
+
+Our text synthesis model is language-agnostic and doesn't contain the biases of some pre-trained models—any content is solely learned from the original training data. This means that it can process any language, vernacular, and slang present in the original data.
 
 The amount of data required to produce usable results depends on the diversity of the original texts' vocabulary, categories, names, etc. As a rule of thumb, the more structure there is, the fewer samples are needed.
 
-The synthetic texts are generated in a context-aware manner—the messages from a teenager are different from those of an 85-year old grandmother, for instance. By considering the other attributes of a synthetic subject’s profile, MOSTLY AI is capable of synthesizing appropriate natural language texts for each of them.
+The synthetic texts are generated in a context-aware manner—the messages from a teenager are different from those of an 85-year old grandmother, for instance. By considering the other attributes of a synthetic subject's profile, MOSTLY AI is capable of synthesizing appropriate natural language texts for each of them.
 
-Below, you can find two examples. The first example demonstrates MOSTLY AI’s ability to synthesize entirely new names from a multilingual dataset. And the second example shows the result of synthesizing Tripadvisor reviews. Here you can see that the resulting texts accurately retain the context of the establishment they discuss (Restaurant or Hotel) and the synthesized rating.
+Below, you can find two examples. The first example demonstrates MOSTLY AI's ability to synthesize entirely new names from a multilingual dataset. And the second example shows the result of synthesizing Tripadvisor reviews. Here you can see that the resulting texts accurately retain the context of the establishment they discuss (Restaurant or Hotel) and the synthesized rating.
 
 **Multilingual names dataset**
 
 <br />
 <table>
-<thead>
-<tr>
-<th width="50%">Original</th>
-<th width="50%">Synthetic</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style={{verticalAlign: 'top'}}>
-```
-   Nationality     Name
-1: Czech           Svoboda
-2: Greek           Chrysanthopoulos
-3: Spanish         Ventura
-4: Russian         Gagarin
-5: Japanese        Yokoyama
-6: English         Parsons
-7: Spanish         Ruiz
-8: Russian         Chekhov
-9: English         Blake
-10: English         Wigley
-```
-</td>
-<td style={{verticalAlign: 'top'}}>
-```
-    Nationality     Name
- 1: English         Olsewood
- 2: German          Kort
- 3: Japanese        Misaghi
- 4: English         Roger
- 5: Russian         Lusov
- 6: Russian         Zhuszenko
- 7: Japanese        Noraghi
- 8: English         Dalman
- 9: Russian         Michov
-10: Polish          Poskan
-11: Arabic          Shaif
-```
-</td>
-</tr>
-</tbody>
+  <thead>
+    <tr>
+      <th width="50%">Original</th>
+      <th width="50%">Synthetic</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style={{ verticalAlign: 'top' }}>``` Nationality Name 1: Czech Svoboda 2: Greek Chrysanthopoulos 3: Spanish Ventura 4: Russian Gagarin 5: Japanese Yokoyama 6: English Parsons 7: Spanish Ruiz 8: Russian Chekhov 9: English Blake 10: English Wigley ```</td>
+      <td style={{ verticalAlign: 'top' }}>``` Nationality Name 1: English Olsewood 2: German Kort 3: Japanese Misaghi 4: English Roger 5: Russian Lusov 6: Russian Zhuszenko 7: Japanese Noraghi 8: English Dalman 9: Russian Michov 10: Polish Poskan 11: Arabic Shaif ```</td>
+    </tr>
+  </tbody>
 </table>
 
 **Tripadvisor reviews**
 
 <br />
 <table>
-<thead>
-<tr>
-<th>Original</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style={{verticalAlign: 'top'}}>
-```
-   Establishment    Rating  Review
-1: Restaurant       6       Not bad, great interior but let down by
-                            unimaginative food. Perfectly good for a
-                            quick lunch or drink though, good ales
-2: Hotel            2       Awful!!!! stunk of smoke guttering outside
-                            window ledge filled with cigarette ends and
-                            bottles. NOISY air con unit in room, husband
-                            had no sleep.
-3: Restaurant       8       Helpful staff, pleasant enough with quick
-                            service. Sat at bar by revolving food server.
-                            Everything seemed nice and fresh. Good value.
-4: Hotel            8       We stayed in a standard room at the hotel.
-                            The room was adequate, though a bit short on
-                            cupboard drawer space.
-5: Hotel            4       Expected much more from here and they just
-                            didn't deliver, for the price of the room it
-                            was no different than any of the other cheaper
-                            aparthotels.
-```
-</td>
-</tr>
-</tbody>
+  <thead>
+    <tr>
+      <th>Original</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style={{ verticalAlign: 'top' }}>``` Establishment Rating Review 1: Restaurant 6 Not bad, great interior but let down by unimaginative food. Perfectly good for a quick lunch or drink though, good ales 2: Hotel 2 Awful!!!! stunk of smoke guttering outside window ledge filled with cigarette ends and bottles. NOISY air con unit in room, husband had no sleep. 3: Restaurant 8 Helpful staff, pleasant enough with quick service. Sat at bar by revolving food server. Everything seemed nice and fresh. Good value. 4: Hotel 8 We stayed in a standard room at the hotel. The room was adequate, though a bit short on cupboard drawer space. 5: Hotel 4 Expected much more from here and they just didn't deliver, for the price of the room it was no different than any of the other cheaper aparthotels. ```</td>
+    </tr>
+  </tbody>
 </table>
 
 <table>
-<thead>
-<tr>
-<th>Synthetic</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style={{verticalAlign: 'top'}}>
-```
-   Establishment    Rating  Review
-1: Restaurant       8       My only complaint are the portion sizes. Lovely
-                            restaurant with good food, though.
-2: Restaurant       8       I'm a year-round regular. Service is really
-                            friendly. The starters are OK and the seafood
-                            buffet is amazing and tasty. Overall a nice menu
-                            throughout and our children love it.
-3: Hotel            8       This is a fantastic hotel. Great food but few
-                            options, a brilliant room and spent an excellent
-                            time. Very clean environment and a high level of
-                            service.
-4: Hotel            2       I booked an offer for a spa day. The food was
-                            below-average, the room was dated, smelled of
-                            fried fish, and the staff has an attitude.
-5: Hotel            2       We've been here before. But for £70, the rooms
-                            are still poor and glamourless. We spent a few
-                            days with 5 people and 4 were not impressed.
-```
-</td>
-</tr>
-</tbody>
+  <thead>
+    <tr>
+      <th>Synthetic</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style={{ verticalAlign: 'top' }}>``` Establishment Rating Review 1: Restaurant 8 My only complaint are the portion sizes. Lovely restaurant with good food, though. 2: Restaurant 8 I'm a year-round regular. Service is really friendly. The starters are OK and the seafood buffet is amazing and tasty. Overall a nice menu throughout and our children love it. 3: Hotel 8 This is a fantastic hotel. Great food but few options, a brilliant room and spent an excellent time. Very clean environment and a high level of service. 4: Hotel 2 I booked an offer for a spa day. The food was below-average, the room was dated, smelled of fried fish, and the staff has an attitude. 5: Hotel 2 We've been here before. But for £70, the rooms are still poor and glamourless. We spent a few days with 5 people and 4 were not impressed. ```</td>
+    </tr>
+  </tbody>
 </table>
 
 #### HuggingFace LLMs
@@ -418,6 +329,7 @@ On the MOSTLY AI Platform at https://app.mostly.ai, you can find the following t
 The list below includes all models you can use with the **Language/Text** encoding type. You will find the not pre-trained MOSTLY AI/LSTM model and the HuggingFace LLMs currently available on [https://app.mostly.ai](https://app.mostly.ai).
 
 If a model you want to use is not available, contact [MOSTLY AI Support](mailto:support@mostly.ai).
+
 </Callout>
 
-<ModelsList/>
+<ModelsList />

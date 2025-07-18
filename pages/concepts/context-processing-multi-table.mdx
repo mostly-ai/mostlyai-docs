@@ -3,8 +3,8 @@ title: 'Context processing in multi-table datasets'
 description: 'SCP'
 ---
 
-import Image from 'next/image'
-import { Callout } from 'nextra/components'
+import Image from 'next/image';
+import { Callout } from 'nextra/components';
 
 # Context processing in multi-table schemas
 
@@ -14,102 +14,71 @@ MOSTLY AI provides powerful features for the training on and generation of multi
 
 To examine how sequential context processing works, let's consider a multi-table scenario with six tables, as listed below.
 
-* `customers` table
-* `loans` table
-* `payments` table
-* `accounts` table
-* `cards` table
-* `transactions` table
+- `customers` table
+- `loans` table
+- `payments` table
+- `accounts` table
+- `cards` table
+- `transactions` table
 
 The diagram below illustrates the relationships in this table schema.
 
-<Image
-    src="/docs/docimages/concepts/scp/six-table-schema.png"
-    alt="Six-table schema"
-    width={800}
-    height={90}
-/>
+<Image src="/docimages/concepts/scp/six-table-schema.png" alt="Six-table schema" width={800} height={90} />
 
 <Callout>
 For ease of reading, the text below refers to _**generating records in the context of other records**_. However, the same rules of context apply when training MOSTLY AI generators.
 
 So, when you read _**generated in the context of**_, bear in mind that _**trained on in the context of**_ applies just as equally.
+
 </Callout>
 
 ### `customers` table
 
 At the top of the hierarchy is the `customers` table. This table acts as the primary context for all child and grandchild tables that follow in the hierarchy. This is also known as a **subject table**.
 
-<Image 
-    src="/docs/docimages/concepts/scp/01-single-table.svg" 
-    alt="Single table - no context"
-    width={200} 
-    height={90}
-/>
+<Image src="/docimages/concepts/scp/01-single-table.svg" alt="Single table - no context" width={200} height={90} />
 
 ### `loans` table
 
-The `loans` table is the first child table in the hierarchy. Along with the parent `customers` table, both tables represent a two-table scenario, where the `customers` table is a **subject** table and the `loans` table is a **linked** table. 
+The `loans` table is the first child table in the hierarchy. Along with the parent `customers` table, both tables represent a two-table scenario, where the `customers` table is a **subject** table and the `loans` table is a **linked** table.
 
 The records in the `loans` table are generated in the context of the parent records from the `customers` table.
 
-<Image 
-    src="/docs/docimages/concepts/scp/02-two-tables.svg" 
-    alt="Two tables - the context are the parent records"
-    width={600} 
-    height={90}
-/>
+<Image src="/docimages/concepts/scp/02-two-tables.svg" alt="Two tables - the context are the parent records" width={600} height={90} />
 
 In addition, each record in the `loans` table is generated in the context of all **same-table sibling** records. Let's consider how the `loans` records are generated for the parent `Lucia Garcia`.
 
 After the first `loan` record for `Lucia Garcia` is generated, that first record is then used as context for the second `loan` record of `Lucia Garcia`.
 
-<Image
-    src="/docs/docimages/concepts/scp/01-mostly-ai-same-table-siblings-context-2nd-record.svg"
-    alt="Same-table siblings context - generating the 2nd record"
-    width={600}
-    height={90}
-/>
+<Image src="/docimages/concepts/scp/01-mostly-ai-same-table-siblings-context-2nd-record.svg" alt="Same-table siblings context - generating the 2nd record" width={600} height={90} />
 
 Afterwards, all previously generated sibling records (with parent `Lucia Garcia`) are passed as context for each new sibling to be generated.
 
-<Image
-    src="/docs/docimages/concepts/scp/01-mostly-ai-same-table-siblings-context-3rd-record.svg"
-    alt="Same-table siblings context - generating the 3rd record"
-    width={600}
-    height={90}
-/>
+<Image src="/docimages/concepts/scp/01-mostly-ai-same-table-siblings-context-3rd-record.svg" alt="Same-table siblings context - generating the 3rd record" width={600} height={90} />
 
 To summarize, when MOSTLY AI generates a `loan` record, it does so in the context of:
 
-* **parent** `customer` record (`Lucia Garcia`)
-* **same-table sibling** `loan` records (the second `Consumer` loan is generated in the context of the first two loans `Consumer` and `Mortgage` of `Lucia Garcia`)
+- **parent** `customer` record (`Lucia Garcia`)
+- **same-table sibling** `loan` records (the second `Consumer` loan is generated in the context of the first two loans `Consumer` and `Mortgage` of `Lucia Garcia`)
 
-<Callout>
-For details on how to set up a two-table scenario in MOSTLY AI, see [Two-table relationships](/generators/configure/set-table-relationships/two-table).
-</Callout>
+<Callout>For details on how to set up a two-table scenario in MOSTLY AI, see [Two-table relationships](/generators/configure/set-table-relationships/two-table).</Callout>
 
 ### `payments` table
 
-The `payments` table is the first grandchild table in the hierarchy. It is a child to the `loans` table, and a grandchild to the `customers` table. 
+The `payments` table is the first grandchild table in the hierarchy. It is a child to the `loans` table, and a grandchild to the `customers` table.
 
 When MOSTLY AI generates a `payment` record, it does so in the context of:
 
-* the **grandparent** `customer` record (`Lucia Garcia`)
-* **parent** `loan` record (`Consumer` loan)
-* **parent sibling** `loan` records (the `Mortgage` and the two `Consumer` loans)
-* **same-table sibling** `payment` records (the `payment` records that belong to the same `Consumer` loan)
+- the **grandparent** `customer` record (`Lucia Garcia`)
+- **parent** `loan` record (`Consumer` loan)
+- **parent sibling** `loan` records (the `Mortgage` and the two `Consumer` loans)
+- **same-table sibling** `payment` records (the `payment` records that belong to the same `Consumer` loan)
 
 The context not used is as follows:
 
-* **same-table cousin** records (`payment` records that belong to other `loan` parent records)
+- **same-table cousin** records (`payment` records that belong to other `loan` parent records)
 
-<Image 
-    src="/docs/docimages/concepts/scp/03-three-tables.svg" 
-    alt="Three tables - context are the parent and grandparent records"
-    width={800} 
-    height={90}
-/>
+<Image src="/docimages/concepts/scp/03-three-tables.svg" alt="Three tables - context are the parent and grandparent records" width={800} height={90} />
 
 ### `accounts` table
 
@@ -117,20 +86,15 @@ The `accounts` table is the second child to the `customers` table and a sibling 
 
 However, what the Sequential Context Processor includes is also the `loans` records as context. This means that every time an `account` record is generated, MOSTLY AI provides as context:
 
-* **parent** `customer` record (`Lucia Garcia`)
-* **cross-table sibling** `loan` records (the 2 `Consumer` loans and the `Mortgage` loan)
-* **same table sibling** `account` records (the `Savings` account is passed as context when generating the `Checking` account)
+- **parent** `customer` record (`Lucia Garcia`)
+- **cross-table sibling** `loan` records (the 2 `Consumer` loans and the `Mortgage` loan)
+- **same table sibling** `account` records (the `Savings` account is passed as context when generating the `Checking` account)
 
 The context not used is as follows:
 
-* any records from the `payments` table
+- any records from the `payments` table
 
-<Image 
-    src="/docs/docimages/concepts/scp/04-four-tables.svg" 
-    alt="Three tables - context are the parent and cross-table siblings"
-    width={800} 
-    height={90}
-/>
+<Image src="/docimages/concepts/scp/04-four-tables.svg" alt="Three tables - context are the parent and cross-table siblings" width={800} height={90} />
 
 ### `cards` table
 
@@ -138,23 +102,18 @@ The `cards` table is the second grandchild table in the hierarchy. It is a child
 
 When MOSTLY AI generates a `card` record, it does so in the context of:
 
-* the **grandparent** `customer` record (`Lucia Garcia`)
-* the **parent** `account` record (the `Savings` account of `Lucia Garcia`)
-* all **same-table parent sibling** `account` records (the `Checking` account of `Lucia Garcia`)
-* all **cross-table parent sibling** `loan` records (the 2 `Consumer` and 1 `Mortgage` records)
-* all previously generated **same-table sibling** `card` records
+- the **grandparent** `customer` record (`Lucia Garcia`)
+- the **parent** `account` record (the `Savings` account of `Lucia Garcia`)
+- all **same-table parent sibling** `account` records (the `Checking` account of `Lucia Garcia`)
+- all **cross-table parent sibling** `loan` records (the 2 `Consumer` and 1 `Mortgage` records)
+- all previously generated **same-table sibling** `card` records
 
 The context not used is as follows:
 
-* all **cross-table cousin** records from the `payments` table (`payments` records whose parent `loan` record has as parent `Lucia Garcia`)
-* all **same-table cousin** records from the `cards` table (`cards` records that have another `account` as a parent whose parent is `Lucia Garcia`)
+- all **cross-table cousin** records from the `payments` table (`payments` records whose parent `loan` record has as parent `Lucia Garcia`)
+- all **same-table cousin** records from the `cards` table (`cards` records that have another `account` as a parent whose parent is `Lucia Garcia`)
 
-<Image 
-    src="/docs/docimages/concepts/scp/05-five-tables.svg" 
-    alt="Three tables - context are the parent and cross-table siblings"
-    width={800} 
-    height={90}
-/>
+<Image src="/docimages/concepts/scp/05-five-tables.svg" alt="Three tables - context are the parent and cross-table siblings" width={800} height={90} />
 
 ### `transactions` table
 
@@ -162,32 +121,27 @@ The generation of the `transactions` records occurs with the richest context com
 
 When MOSTLY AI generates `transaction` records for an`account` (for example, the `Savings` account as shown in the diagram below), it does so in the context of:
 
-* the **grandparent** `customer` record (`Lucia Garcia`)
-* the **parent** `account` record (the `Savings` account that belongs to `Lucia Garcia`)
-* all **same-table parent sibling** `account` records (the `Checking` account that also belongs to `Lucia Garcia`)
-* all **cross-table parent sibling** `loan` records (the 2 `Mortgage` and 1 `Consumer` loans that belong to `Lucia Garcia`)
-* all **cross-table sibling** `card` records (the `Debit` and `Credit` cards that also belong to the same parent `Savings` account)
-* all previously generated **same-table sibling** `transaction` records
+- the **grandparent** `customer` record (`Lucia Garcia`)
+- the **parent** `account` record (the `Savings` account that belongs to `Lucia Garcia`)
+- all **same-table parent sibling** `account` records (the `Checking` account that also belongs to `Lucia Garcia`)
+- all **cross-table parent sibling** `loan` records (the 2 `Mortgage` and 1 `Consumer` loans that belong to `Lucia Garcia`)
+- all **cross-table sibling** `card` records (the `Debit` and `Credit` cards that also belong to the same parent `Savings` account)
+- all previously generated **same-table sibling** `transaction` records
 
 The context not used is as follows:
 
-* **cross-table cousin** records from the `cards` table (`cards` that have another `account` as parent whose parent is `Lucia Garcia`)
-* **cross-table cousin** records from the `payments` table (`payments` records whose parent `loan` record belongs to `Lucia Garcia`)
-* **same-table cousin** records from the `transactions` table (`transaction` records with a different `account` parent record that belongs to `Lucia Garcia`)
+- **cross-table cousin** records from the `cards` table (`cards` that have another `account` as parent whose parent is `Lucia Garcia`)
+- **cross-table cousin** records from the `payments` table (`payments` records whose parent `loan` record belongs to `Lucia Garcia`)
+- **same-table cousin** records from the `transactions` table (`transaction` records with a different `account` parent record that belongs to `Lucia Garcia`)
 
-<Image 
-    src="/docs/docimages/concepts/scp/06-six-tables.svg" 
-    alt="Three tables - context are the parent and cross-table siblings"
-    width={800} 
-    height={90}
-/>
+<Image src="/docimages/concepts/scp/06-six-tables.svg" alt="Three tables - context are the parent and cross-table siblings" width={800} height={90} />
 
 ## Summary of context processing scenarios
 
 The table below summarizes the types of records that can be passed as context by the Sequential Context Processor.
 
-| Records types               | TABULAR | LANGUAGE | 
-|-----------------------------|---------|----------|
+| Records types               | TABULAR | LANGUAGE |
+| --------------------------- | ------- | -------- |
 | parent                      | yes     | yes      |
 | grandparent                 | yes     | yes      |
 | same-table siblings         | yes     | yes      |

@@ -1,44 +1,46 @@
 ---
 title: Architecture
-description: "MOSTLY AI runs as a set of containerized applications and services that you can deploy in a Kubernetes cluster and maintain a fault-tolerant and highly available application."
+description: 'MOSTLY AI runs as a set of containerized applications and services that you can deploy in a Kubernetes cluster and maintain a fault-tolerant and highly available application.'
 ---
 
-import Image from 'next/image'
-import { Callout } from 'nextra/components'
-import { 
-            ChipIcon,
-            WebFrontendIcon,
-            UserPersonaIcon,
-            DatabaseLockIcon,
-            TerminalIcon,
-            StorageIcon
-        } from '@components/icons'
+import Image from 'next/image';
+import { Callout } from 'nextra/components';
+import { ChipIcon, WebFrontendIcon, UserPersonaIcon, DatabaseLockIcon, TerminalIcon, StorageIcon, AssistantBrokerIcon, JupyterHubIcon, ProbeAPIIcon } from '@components/icons';
 
 # Architecture
 
 MOSTLY AI runs as a set of containerized applications and services that you can deploy in a Kubernetes cluster and maintain a fault-tolerant and highly available application.
 
-<Image src="/docs/docimages/install/mostly-ai-architecture.svg" alt="MOSTLY AI architecture diagram" width={800} height={30} />
+<Image src="/docimages/install/mostly-ai-architecture.svg" alt="MOSTLY AI architecture diagram" width={800} height={30} />
 
 ## Application Nodes
 
-|     | <div style={{width: '152px'}}>Pod and image name</div> | Description | Pod Lifecycle |
-| --- | --- | --- | --- |
-| <WebFrontendIcon/> Web frontend          | **mostly-ui**<br /><br />`mostly-app-ui`               | Contains the frontend of MOSTLY AI. Reachable over port `8080`. | Service |
-| <TerminalIcon/> Backend                  | **mostly-app**<br /><br />`mostly-app-enterprise`      | Contains the backend and public APIs of MOSTLY AI. | Service |
-| <DatabaseLockIcon /> Coordinator Service | **mostly-coordinator**<br /><br />`mostly-coordinator` | Component that takes all requests from the web application and coordinates execution of tasks on the main AI engine. | Service |
-| <StorageIcon /> Data discovery           | **mostly-core-api**<br /><br />`mostly-core-api`       | Component that reads metadata and analyzes data sources and destinations. | Service |
-| <UserPersonaIcon /> Keycloak             | **mostly-keycloak**<br /><br />`mostly-keycloak`       | Keycloak is an open-source identity management, authentication, and authorization tool. This container has a pre-configured Keycloak instance for MOSTLY AI. | Service |
-| <DatabaseLockIcon /> PostgreSQL          | **mostly-psql**<br /><br />`postgres`                  | Database instance of the system. Contains databases for app, coordinator, and Keycloak. | Service |
-| <DatabaseLockIcon /> MinIO               | **mostly-minio**<br /><br />`minio`                    | Shared storage service. | Service |
+| <div style={{width: '172px'}} />Image name / `Pod name`          | Description                                                                                                                                                  | Pod Lifecycle |
+| ---------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- |
+| **mostly-core**<br /><br />`mostly-core-api`                     | Component that reads metadata and analyzes data sources and destinations.                                                                                    | Service       |
+| **mostly-app-v2**<br /><br />`mostly-app`                        | Contains the backend and public APIs of MOSTLY AI.                                                                                                           | Service       |
+| **mostly-keycloak**<br /><br />`mostly-keycloak`                 | Keycloak is an open-source identity management, authentication, and authorization tool. This container has a pre-configured Keycloak instance for MOSTLY AI. | Service       |
+| **mostly-coordinator**<br /><br />`mostly-coordinator`           | Component that takes all requests from the web application and coordinates execution of tasks on the main AI engine.                                         | Service       |
+| **mostly-core-gpu**<br /><br />`mostly-core-gpu`                 | Service for running AI tasks on GPU nodes.                                                                                                                   | Service       |
+| **mostly-postgresql**<br /><br />`mostly-pqsl`                   | Database instance. Contains databases for app, coordinator, and Keycloak.                                                                                    | Service       |
+| **mostly-app-ui**<br /><br />`mostly-ui`                         | Contains the frontend of MOSTLY AI. Reachable over port 8080.                                                                                                | Service       |
+| **mostly-assistant-broker**<br /><br />`mostly-assistant-broker` | Service for managing the communication between the MOSTLY AI Assistant, an LLM, JEG Kernels, and MOSTLY AI application.                                      | Service       |
+| **mostly-enterprise-gateway**<br /><br />`mostly-jeg`            | Jupyter Enterprise Gateway. Supports the management of multiple Assistant Python sessions for multiple users.                                                | Service       |
+| **mostly-jeg-kernel**<br /><br />`mostly-jeg-kernel`             | Jupyter Python Kernel. The base image for each Python session in the MOSTLY AI Assistant.                                                                    | Service       |
+| **mostly-troubleshooter**                                        | Troubleshooting tool for MOSTLY AI deployments.                                                                                                              | Service       |
+| **mostly-backup**<br /><br />`mostly-backup`                     | Backup service for MOSTLY AI.                                                                                                                                | Service       |
+| **docs**<br /><br />`mostly-docs`                                | Documentation service that provides guides and API documentation.                                                                                            | Service       |
+| `mostly-ai-haproxy`                                              | Automatic load balancer and ingress management service.                                                                                                      | Service       |
+| `mostly-ai-minio`                                                | Shared storage service.                                                                                                                                      | Service       |
+| `mostly-core-probe-api`                                          | Service for live-probing generators.                                                                                                                         | Service       |
 
 ## AI Worker nodes
 
 {/* Internal note: The non-breaking hyphen character below &#x2011; prevents unreadable line breaks in the output */}
 
-|     | Pod and image name | Description | Pod Lifecycle |
-| --- | ------------------ | ----------- | ------------- |
-| <ChipIcon/> AI job                   | **engine-task-\<task-id>**<br /><br />`mostly-core`  | • Reads from data sources and writes into data destinations<br />• Performs AI training and data generation.<br />• Create Model and Data reports | Job |
+|                    | Image name / Pod name                               | Description                                                                                                                                        | Pod Lifecycle |
+| ------------------ | --------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| <ChipIcon/> AI job | **engine-task-\<task-id>**<br /><br />`mostly-core` | • Reads from data sources and writes into data destinations<br />• Performs AI training and data generation.<br />• Creates Model and Data reports | Job           |
 
 ## Third-party integrations and connections
 
@@ -56,11 +58,15 @@ MOSTLY AI can connect to your internal databases (with the help of [connectors](
 
 In addition to databases, you can also read original data and deliver synthetic data from and to cloud storage buckets (AWS S3, Azure blob storage, Google Cloud storage buckets).
 
+### LLM services
+
+The Assistant Broker can connect to any Large Language Model (LLM) service that supports tool calling via LiteLLM. This includes publicly available LLM services such as Claude or OpenAI, or privately hosted LLM services deployed within your customer infrastructure. This integration enables the assistant service to provide intelligent responses and coordinate code execution through the internal Jupyter Hub nodes.
+
 ### Storage requirements
 
 MOSTLY AI uses two types of storage.
 
-* **Block Storage**. Used by single pods, such as PostgreSQL. Typically, this is automatically provisioned by the Kubernetes cluster.
-* **Shared Storage**. Shared by various pods to store models, synthetic data, and others. Two options exist for using shared storage:
-    * **MinIO**. MOSTLY AI provides shared storage via [MinIO](https://min.io/). This uses the block storage provisioned by the Kubernetes cluster.
-    * **External S3 storage**. You can use an external S3 storage solution instead of MinIO.
+- **Block Storage**. Used by single pods, such as PostgreSQL. Typically, this is automatically provisioned by the Kubernetes cluster.
+- **Shared Storage**. Shared by various pods to store models, synthetic data, and others. Two options exist for using shared storage:
+  - **MinIO**. MOSTLY AI provides shared storage via [MinIO](https://min.io/). This uses the block storage provisioned by the Kubernetes cluster.
+  - **External S3 storage**. You can use an external S3 storage solution instead of MinIO.

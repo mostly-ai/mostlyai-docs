@@ -1,7 +1,12 @@
 export default {
-    "-- Welcome": {
-        "type": "separator",
-        "title": "INTRODUCTION"
+  '-- Welcome': {
+    type: 'separator',
+    title: 'INTRODUCTION',
+  },
+  index: {
+    title: 'Welcome',
+    theme: {
+      breadcrumb: false,
     },
     "index": {
         "title":"Welcome",

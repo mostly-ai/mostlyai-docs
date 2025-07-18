@@ -1,19 +1,17 @@
 ---
-title: "Assistant configuration"
-description: "When you deploy MOSTLY AI, the Assistant is included as part of the deployment. For the Assistant to work, you need to configure access to the Language Learning Model (LLM) and DataLLM."
+title: 'Assistant configuration'
+description: 'When you deploy MOSTLY AI, the Assistant is included as part of the deployment. For the Assistant to work, you need to configure access to the Language Learning Model (LLM).'
 ---
 
-import Image from 'next/image'
-import { Callout } from 'nextra/components'
-import { CustomCallout } from '@components/custom-callout'
+import Image from 'next/image';
+import { Callout } from 'nextra/components';
+import { CustomCallout } from '@components/custom-callout';
 
 # Assistant configuration
 
-When you deploy MOSTLY AI, the Assistant is included as part of the deployment of Kubernetes services and containers. For the Assistant to work, you need to configure access to the Language Learning Model (LLM) and DataLLM. The Assistant can use any LLM chosen by your organization.
+When you deploy MOSTLY AI, the Assistant is included as part of the deployment of Kubernetes services and containers. For the Assistant to work, you need to configure access to the Language Learning Model (LLM). The Assistant can use any LLM chosen by your organization.
 
-<CustomCallout>
-**Note**: You can only configure the Assistant with the **Super Admin** account.
-</CustomCallout>
+<CustomCallout>**Note**: You can only configure the Assistant with the **Super Admin** account.</CustomCallout>
 
 ## Enable the Assistant
 
@@ -22,13 +20,9 @@ Enabling and configuring the Assistant is a one-time operation.
 **Steps**
 
 1. From the **Account** menu, select **Assistant settings**.
-    
-    <Image
-        src="/docs/docimages/assistant/ai-assistant-configuration.webp"
-        alt="MOSTLY AI - Assistant configuration"
-        width={800}
-        height={400}
-    />
+
+   <Image src="/docimages/assistant/chat-assistant-configuration.webp" alt="MOSTLY AI - Assistant configuration" width={800} height={400} />
+
 2. On the **Assistant settings** page, select **Enable Assistant**.
 3. Adjust the rest of the configuration option as listed in the sections below.
 4. When done, click **Save**.
@@ -39,7 +33,7 @@ MOSTLY AI uses [LiteLLM](https://www.litellm.ai/) to integrate with different LL
 
 ### LLM Model
 
-For **LLM Model**, set the LLM model you want to use from your LLM provider. For example, `openai/gpt-4o`. For example, here are the available [OpenAI models](https://docs.litellm.ai/docs/providers/openai#openai-chat-completion-models) and [Mistral AI](https://docs.litellm.ai/docs/providers/mistral#supported-models-1) models. You can also use any model and provider supported by LiteLLM.
+For **LLM Model**, set the LLM model you want to use from your LLM provider. For example, `openai/gpt-4o`. For example, here are the available [OpenAI models](https://docs.litellm.ai/docs/providers/openai#openai-chat-completion-models) and [Mistral AI](https://docs.litellm.ai/docs/providers/mistral#supported-models-1) models. You can also use any model and provider supported by LiteLLM which supports tool calling (also known as function calling).
 
 ### LLM API Key
 
@@ -49,17 +43,11 @@ For `LLM API Key`, enter your LLM API key. Navigate to the documentation of your
 
 For **LLM extra variables**, define any additional variables that your LLM provider requires. See the LiteLLM docs for details.
 
-For example, **AWS Bedrock** requires: 
+For example, **AWS Bedrock** requires:
 
-* `aws_region_name=us-east-1`
-* `aws_access_key_id=XXX`
-* `aws_secret_access_key=XXX`
-
-### DataLLM API Key
-
-For DataLLM API key, go to https://data.mostly.ai and get an API key for DataLLM.
-
-The key is required when Data consumers at your organization need to use DataLLM to generate data out of nothing (mock data) or enrich existing datasets and the Assistant will help them run DataLLM Python client code.
+- `aws_region_name=us-east-1`
+- `aws_access_key_id=XXX`
+- `aws_secret_access_key=XXX`
 
 ### System Instructions
 
@@ -75,13 +63,6 @@ Define a custom set of instructions for your MOSTLY AI Assistant to match the ne
 
 1. Switch to **Custom**.
 2. Define a set of instructions that modify the existing ones defined by MOSTLY AI.
-    <Image
-        src="/docs/docimages/assistant/ai-assistant-configuration-custom-instructions.webp"
-        alt="MOSTLY AI - Assistant custom instructions"
-        width={800}
-        height={400}
-    />
+   <Image src="/docimages/assistant/chat-assistant-configuration-custom-instructions.webp" alt="MOSTLY AI - Assistant custom instructions" width={800} height={400} />
 
-<Callout>
-Update the existing instructions as much as possible. Overwriting the existing instructions will completely change how the Assistant replies to prompts.
-</Callout>
+<Callout>Update the existing instructions as much as possible. Overwriting the existing instructions will completely change how the Assistant replies to prompts.</Callout>
