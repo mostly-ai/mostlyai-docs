@@ -7,36 +7,40 @@ description: 'MOSTLY AI provides support for Istio Virtual Services in case you 
 
 MOSTLY AI provides support for Istio Virtual Services in case you are already using it in your Kubernetes cluster. To enable the support for Istio Virtual Services, you need to edit the files listed below.
 
-* `mostly-combined/values.yaml`
-* `values.yaml`
+- `mostly-combined/values.yaml`
+- `values.yaml`
 
 **Steps**
 
 1. Edit the `mostly-combined/values.yaml` file and enable the `istioVirtualService` implementation.
-    ```yaml copy filename="mostly-combined/values.yaml"
-    ...
-        implementation: istioVirtualService
-    ...
-    ```
+
+   ```yaml copy filename="mostly-combined/values.yaml"
+   ---
+   implementation: istioVirtualService
+   ```
+
 2. Edit the `values.yaml` from the root folder.
-    1. The `global.ingress.hostname` parameter must be defined.
-        ```yaml copy filename="values.yaml" {4}
-        ...
-        global:
-            ingress:
-                hostname: your.company.fqdn.com
-        ...
-        ```
-    2. If `global.tls.enabled` is set to `True`, you must then define `global.tls.secretName`.
-        ```yaml copy filename="values.yaml" {4,5} /INSERT-TLS-SECRET-NAME/
-        ...
-        global:
-            tls:
-                enabled: True
-                secretName: INSERT-TLS-SECRET-NAME
-        ...
-        ```
-5. Save both files.
+
+   1. The `global.ingress.hostname` parameter must be defined.
+
+      ```yaml copy filename="values.yaml" {4}
+      ---
+      global:
+        ingress:
+          hostname: your.company.fqdn.com
+      ```
+
+   2. If `global.tls.enabled` is set to `True`, you must then define `global.tls.secretName`.
+
+      ```yaml copy filename="values.yaml" {4,5} /INSERT-TLS-SECRET-NAME/
+      ---
+      global:
+        tls:
+          enabled: True
+          secretName: INSERT-TLS-SECRET-NAME
+      ```
+
+3. Save both files.
 
 **Result**
 

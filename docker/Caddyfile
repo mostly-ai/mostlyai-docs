@@ -1,0 +1,2 @@
+import /etc/caddy.d/_global.Caddyfile
+import /etc/caddy.d/config/*

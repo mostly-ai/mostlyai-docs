@@ -1,27 +1,25 @@
 ---
-title: "MOSTLY AI Python SDK"
-description: "Use the MOSTLY AI Python SDK to train generators, generate synthetic data, connect to data sources, share data with your team, and much more. Do so in a local Python environment or on a remote MOSTLY AI platform."
+title: 'Synthetic Data SDK by MOSTLY AI'
+description: 'Use the Synthetic Data SDK by MOSTLY AI to train generators, generate synthetic data, connect to data sources, share data with your team, and much more. Do so in a local Python environment or on a remote MOSTLY AI platform.'
 ---
 
-import Image from 'next/image'
-import { Callout } from 'nextra/components'
-import { Tabs } from 'nextra/components'
-import { CustomCallout } from '@components/custom-callout'
+import Image from 'next/image';
+import { Callout } from 'nextra/components';
+import { Tabs } from 'nextra/components';
+import { CustomCallout } from '@components/custom-callout';
 
-# MOSTLY AI Python SDK
+# Synthetic Data SDK by MOSTLY AI
 
-The MOSTLY AI Python SDK enables full programmatic use of the MOSTLY AI Platform features both in a local environment as well as by connecting to a remote MOSTLY AI Platform.
+The [Synthetic Data SDK by MOSTLY AI](https://github.com/mostly-ai/mostlyai?tab=readme-ov-file#synthetic-data-sdk-) enables full programmatic use of the MOSTLY AI Platform features both in a local environment as well as by connecting to the MOSTLY AI Platform.
 
 | Intent                                        | Primitive                         |
-|-----------------------------------------------|-----------------------------------|
+| --------------------------------------------- | --------------------------------- |
 | Train a generator on tabular or language data | `g = mostly.train(config)`        |
 | Generate any number of synthetic data records | `sd = mostly.generate(g, config)` |
 | Live probe the generator on demand            | `df = mostly.probe(g, config)`    |
 | Connect to any data source within your org    | `c = mostly.connect(config)`      |
 
-<Callout>
-For a complete API reference, see the [Python SDK package documentation](https://mostly-ai.github.io/mostlyai/).
-</Callout>
+<Callout>For a complete API reference, see the [Synthetic Data SDK package documentation](https://mostly-ai.github.io/mostlyai/).</Callout>
 
 ## Installation
 
@@ -29,53 +27,60 @@ Use `pip install` to install the latest version of `mostlyai`.
 
 <Tabs items={["Local mode", "Client mode"]}>
 <Tabs.Tab>
+
 ```shell copy filename="shell"
 # CPU
 pip install -U "mostlyai[local]"
 
 # GPU
+
 pip install -U "mostlyai[local-gpu]"
+
 ```
-<CustomCallout>
-GPU support in Local mode is available on Linux only.
-</CustomCallout>
+
+<CustomCallout>GPU support in Local mode is available on Linux only.</CustomCallout>
 
 If you need to use one of the supported [connectors](/connectors/create) in Local mode, install with the optional dependencies: `databricks`, `googlebigquery`, `hive`, `mssql`, `mysql`, `oracle`, `postgres`, `snowflake`.
 
 ```shell copy filename="shell" /databricks/
 pip install -U "mostlyai[local,databricks]"
 ```
+
 </Tabs.Tab>
 <Tabs.Tab>
+
 ```shell copy filename="shell"
 pip install -U mostlyai
 ```
+
 </Tabs.Tab>
 </Tabs>
 
 ## Local and Client modes
 
-The Python SDK is designed to work in a **local environment** (your computer or any supported Python environment) or **by connecting to a remote MOSTLY AI Platform** (such as https://app.mostly.ai). See the comparison below.
+The Synthetic Data SDK by MOSTLY AI is designed to work in a **local environment** (your computer or any supported Python environment) or **by connecting to a remote MOSTLY AI Platform** (such as https://app.mostly.ai). See the comparison below.
 
-| | Local mode | Client mode |
-|-|-------------------|-----------------------------|
-| **Prerequisites** | Local Python installation (in Local mode) | • Remote MOSTLY AI Platform<br />• Platform API key<br />• Local Python installation (in Client mode) |
-| **Installation** | Install the Python SDK in Local mode | 1. Deploy MOSTLY AI Platform in a Kubernetes cluster<br />2. Connect to the Platform with Python SDK in Client mode |
-| **Service** | Use a locally running server that provides the REST API  | Connect to the MOSTLY AI platform REST API |
-| **Compute** | Uses local compute resources (CPU, GPU) | Uses compute resources available on the MOSTLY AI Platform |
+|                   | Local mode                                              | Client mode                                                                                                                 |
+| ----------------- | ------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| **Prerequisites** | Local Python installation (in Local mode)               | • Remote MOSTLY AI Platform<br />• Platform API key<br />• Local Python installation (in Client mode)                       |
+| **Installation**  | Install the Synthetic Data SDK in Local mode            | 1. Deploy MOSTLY AI Platform in a Kubernetes cluster<br />2. Connect to the Platform with Synthetic Data SDK in Client mode |
+| **Service**       | Use a locally running server that provides the REST API | Connect to the MOSTLY AI platform REST API                                                                                  |
+| **Compute**       | Uses local compute resources (CPU, GPU)                 | Uses compute resources available on the MOSTLY AI Platform                                                                  |
 
 The same API is available in Local and Client modes. The only difference is how you instantiate the `MostlyAI` client depending on the mode you need.
 
 <Tabs items={["Local mode", "Client mode"]}>
-
 <Tabs.Tab>
+
 ```python filename="python" {3} copy
 from mostlyai.sdk import MostlyAI
 
 mostly = MostlyAI(local=True)
 ```
+
 </Tabs.Tab>
 <Tabs.Tab>
+
 ```python filename="python" {3,4,6} copy
 from mostlyai.sdk import MostlyAI
 
@@ -86,41 +91,32 @@ mostly_remote = MostlyAI(base_url=base_url, api_key=api_key)
 ```
 
 See the next section to learn how to get an API key.
+
 </Tabs.Tab>
 </Tabs>
 
 ## Get an API key
 
-Get your API key for the REST API or Python SDK from your user profile menu in the web application.
+Get your API key for the REST API or Synthetic Data SDK from your user profile menu in the web application.
 
 **Steps**
 
 1. Hover over the profile menu in the upper right and select **API key**.
-    <Image 
-        src="/docs/docimages/python-sdk/api-key/01-profile-select-API-key.webp" 
-        alt="MOSTLY AI - Python SDK - From the Profile menu select API key" 
-        width={250} 
-        height={250}
-    />
+   <Image src="/docimages/python-sdk/api-key/01-profile-select-API-key.webp" alt="MOSTLY AI - Synthetic Data SDK - From the Profile menu select API key" width={250} height={250} />
 2. Click **Generate API Key**.
-    <Image 
-        src="/docs/docimages/python-sdk/api-key/02-generate-api-key.webp" 
-        alt="MOSTLY AI - Python SDK - Click Generate API key" 
-        width={800} 
-        height={150}
-    />
+   <Image src="/docimages/python-sdk/api-key/02-generate-api-key.webp" alt="MOSTLY AI - Synthetic Data SDK - Click Generate API key" width={800} height={150} />
 
 **What's next**
 
-Your key is immediately copied to your clipboard. You can now use it for the REST API or to instantiate your Python SDK in Client mode.
+Your key is immediately copied to your clipboard. You can now use it for the REST API or to instantiate your Synthetic Data SDK in Client mode.
 
 ## Examples
 
-As you explore the [Generators](/generators), [Synthetic datasets](/synthetic-datasets), and [Connectors](/connectors) pages, you will find Python code snippets that show how to accomplish a task with the Python SDK. Use the **UI** tab for the UI steps in the MOSTLY AI Platform and the **Python SDK** tab to switch between UI steps in the Platform and how to accomplish the same with the Python SDK.
+As you explore the [Generators](/generators), [Synthetic datasets](/synthetic-datasets), and [Connectors](/connectors) pages, you will find Python code snippets that show how to accomplish a task with the Synthetic Data SDK. Use the **UI** tab for the UI steps in the MOSTLY AI Platform and the **Synthetic Data SDK** tab to switch between UI steps in the Platform and how to accomplish the same with the Synthetic Data SDK.
 
 ## Quick start
 
-Use the Python SDK quick start below to train a generator locally on a tabular dataset, probe it, generate synthetic data, and export it to a file. Then, import the generator into a remote MOSTLY AI platform.
+Use the Synthetic Data SDK quick start below to train a generator locally on a tabular dataset, probe it, generate synthetic data, and export it to a file. Then, import the generator into a remote MOSTLY AI platform.
 
 ```python filename="python" copy
 import pandas as pd

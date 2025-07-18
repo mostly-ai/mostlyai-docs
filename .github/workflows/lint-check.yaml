@@ -1,0 +1,23 @@
+name: Pre-commit Lint mostlyai-docs
+
+on:
+  workflow_dispatch:
+  workflow_call:
+
+env:
+  PLATFORMS: linux/amd64
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Setup | Checkout
+        uses: actions/checkout@v4
+        with: {fetch-depth: 1}
+
+      - name: Build | Pre-Commit Check
+        uses: pre-commit/action@v3.0.1
+        with:
+          extra_args: --all-files

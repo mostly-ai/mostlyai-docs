@@ -3,10 +3,10 @@ title: 'Manage synthetic datasets'
 description: 'Track the status of each synthetic datasets with MOSTLY AI. You can then manage existing datasets by cloning or deleting them.'
 ---
 
-import { Callout } from 'nextra/components'
-import { Tabs } from 'nextra/components'
-import Image from 'next/image'
-import { Canceled, Failed, New, Ready, InProgress } from '@components/status-pills'
+import { Callout } from 'nextra/components';
+import { Tabs } from 'nextra/components';
+import Image from 'next/image';
+import { Canceled, Failed, New, Ready, InProgress } from '@components/status-pills';
 
 # Manage synthetic datasets
 
@@ -16,13 +16,13 @@ To manage a synthetic dataset, you need to be the owner or have Editor access to
 
 In the table below, you can find a list of all possible statuses a synthetic dataset can have.
 
-| Status               | Description                                                                                                 | Next actions                                |
-|:---------------------|:------------------------------------------------------------------------------------------------------------|:--------------------------------------------|
-| <New />              | A synthetic dataset object exists with a default or modified configuration. Generation has not yet started. | • Start generation<br />• Delete             |
-| <InProgress />       | Synthetic data generation is in progress.                                                                   | •&nbsp;Cancel&nbsp;generation<br />• Delete |
-| <Ready />            | The synthetic dataset has been generated successfully.                                                      | • Generate<br />• Delete       |
-| <Failed />           | The synthetic dataset generation started and then failed.                                                   | • Delete                                    |
-| <Canceled />         | The synthetic dataset generation was canceled while still in progress.                                      | • Delete                                    |
+| Status         | Description                                                                                                 | Next actions                                |
+| :------------- | :---------------------------------------------------------------------------------------------------------- | :------------------------------------------ |
+| <New />        | A synthetic dataset object exists with a default or modified configuration. Generation has not yet started. | • Start generation<br />• Delete            |
+| <InProgress /> | Synthetic data generation is in progress.                                                                   | •&nbsp;Cancel&nbsp;generation<br />• Delete |
+| <Ready />      | The synthetic dataset has been generated successfully.                                                      | • Generate<br />• Delete                    |
+| <Failed />     | The synthetic dataset generation started and then failed.                                                   | • Delete                                    |
+| <Canceled />   | The synthetic dataset generation was canceled while still in progress.                                      | • Delete                                    |
 
 ## Clone a synthetic dataset
 
@@ -30,38 +30,27 @@ You can clone a synthetic dataset in one of two ways.
 
 **Steps**
 
-* Clone a synthetic dataset directly from the **synthetic datasets** page.
-    1. From the **synthetic datasets** page, click the kebab menu of a synthetic dataset, and select **Clone**.
-        <Image 
-            src="/docs/docimages/synthetic-datasets/manage/clone-from-synthetic-datasets-page.webp" 
-            alt="MOSTLY AI - Clone a synthetic dataset - 01 - From synthetic datasets page, kebab menu, Clone" 
-            width={800} 
-            height={150}
-        />
-* Clone a synthetic dataset after you open it.
-    1. From the **synthetic datasets** page, click a synthetic dataset to open it.
-    2. Click the kebab menu in the upper right, and select **Clone**.
-        <Image 
-            src="/docs/docimages/synthetic-datasets/manage/clone-from-synthetic-dataset-details.webp" 
-            alt="MOSTLY AI - Clone a synthetic dataset - 02 - From synthetic datasets details page, kebab menu, Clone" 
-            width={800} 
-            height={150}
-        />
+- Clone a synthetic dataset directly from the **synthetic datasets** page.
+  1. From the **synthetic datasets** page, click the kebab menu of a synthetic dataset, and select **Clone**.
+     <Image src="/docimages/synthetic-datasets/manage/clone-from-synthetic-datasets-page.webp" alt="MOSTLY AI - Clone a synthetic dataset - 01 - From synthetic datasets page, kebab menu, Clone" width={800} height={150} />
+- Clone a synthetic dataset after you open it.
+  1. From the **synthetic datasets** page, click a synthetic dataset to open it.
+  2. Click the kebab menu in the upper right, and select **Clone**.
+     <Image src="/docimages/synthetic-datasets/manage/clone-from-synthetic-dataset-details.webp" alt="MOSTLY AI - Clone a synthetic dataset - 02 - From synthetic datasets details page, kebab menu, Clone" width={800} height={150} />
 
 **Result**
 
 A new synthetic dataset is created. The synthetic dataset name starts with **Clone -** and is then followed by the name of the original synthetic dataset.
 
-<Image 
-    src="/docs/docimages/synthetic-datasets/manage/cloned-synthetic-dataset.webp" 
-    alt="MOSTLY AI - Clone a synthetic dataset - 03 - Name and result"
-    width={800} 
-    height={150}
-/>
+<Image src="/docimages/synthetic-datasets/manage/cloned-synthetic-dataset.webp" alt="MOSTLY AI - Clone a synthetic dataset - 03 - Name and result" width={800} height={150} />
 
 **What's new**
 
 You can now reuse the generation configuration from the previous synthetic dataset and make any necessary changes before generating again.
+
+## Share a synthetic dataset
+
+You can share a synthetic dataset with members of your organization, see [Manage Resources](../organizations/manage-resources.mdx#share-a-resource-with-an-organization)
 
 ## Delete a synthetic dataset
 

@@ -3,7 +3,7 @@ title: 'Configure a domain TLS certificate'
 description: 'To deploy MOSTLY AI, you need to configure TLS certificates for your fully-qualified domain name (FQDN) to enable secure access to the MOSTLY AI web app.'
 ---
 
-import { Callout } from 'nextra/components'
+import { Callout } from 'nextra/components';
 
 # Configure a domain TLS certificate
 
@@ -11,23 +11,23 @@ To provide encrypted HTTPS access to the MOSTLY AI web application, you need to 
 
 **Prerequisites**
 
-* Obtain your FQDN TLS certificate file (`.crt` or `.pem`) and private key file (`.key`).
-* If you have access to the Kubernetes cluster and the certificate, create the secret in the `mostly-ai` namespace as follows:
-    ```shell copy filename="shell" /INSERT_MOSTLY_TLS_SECRET_NAME/
-    kubectl create secret tls INSERT_MOSTLY_TLS_SECRET_NAME --cert=cert.crt --key=cert.key -n mostly-ai
-    ```
+- Obtain your FQDN TLS certificate file (`.crt` or `.pem`) and private key file (`.key`).
+- If you have access to the Kubernetes cluster and the certificate, create the secret in the `mostly-ai` namespace as follows:
+  ```shell copy filename="shell" /INSERT_MOSTLY_TLS_SECRET_NAME/
+  kubectl create secret tls INSERT_MOSTLY_TLS_SECRET_NAME --cert=cert.crt --key=cert.key -n mostly-ai
+  ```
 
 **Steps**
 
 1. Edit the `values.yaml` file.
 2. Set the TLS secret name to the name of the secret you created under `_customerInstallation.deploymentSettings.tlsSecretName`.
-    ```yaml filename="values.yaml" {4} /INSERT_MOSTLY_TLS_SECRET_NAME/
-        _customerInstallation:
-          ...
-          deploymentSettings:
-            tlsSecretName: &tlsSecretName INSERT_MOSTLY_TLS_SECRET_NAME
-          ...
-    ```
+   ```yaml filename="values.yaml" {4} /INSERT_MOSTLY_TLS_SECRET_NAME/
+       _customerInstallation:
+         ...
+         deploymentSettings:
+           tlsSecretName: &tlsSecretName INSERT_MOSTLY_TLS_SECRET_NAME
+         ...
+   ```
 3. Save the file.
 
 **What's next**

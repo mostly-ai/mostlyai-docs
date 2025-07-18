@@ -1,29 +1,36 @@
 {
-    "dependencies": {
-        "@docsearch/react": "^3.6.0",
-        "@types/node": "22.10.7",
-        "axios": "^1.7.9",
-        "dompurify": "^3.2.4",
-        "dotenv": "^16.4.7",
-        "katex": "^0.16.21",
-        "next": "^15.0.3",
-        "next-sitemap": "^4.2.2",
-        "nextra": "^3.3.1",
-        "nextra-theme-docs": "^3.3.1",
-        "path-to-regexp": ">=6.3.0",
-        "react": "^18.2.0",
-        "react-dom": "^18.2.0",
-        "react-gtm-module": "^2.0.11",
-        "react-markdown": "^9.0.3",
-        "tar": ">=6.2.1",
-        "ts-node": "^10.9.2"
-    },
-    "scripts": {
-        "dev": "next dev",
-        "build": "next build",
-        "postbuild": "next-sitemap && ts-node postbuild.mjs",
-        "start": "next start",
-        "lint": "next lint",
-        "export": "NEXT_PUBLIC_ALGOLIA_SEARCH=false UNOPTIMIZED_IMAGES=true NEXT_OUTPUT=export next build"
-    }
+  "dependencies": {
+    "@docsearch/react": "^3.6.0",
+    "@types/node": "22.10.7",
+    "axios": "^1.8.2",
+    "dompurify": "^3.2.4",
+    "dotenv": "^16.4.7",
+    "katex": "^0.16.21",
+    "next": "^15.2.4",
+    "next-sitemap": "^4.2.2",
+    "nextra": "^3.3.1",
+    "nextra-theme-docs": "^3.3.1",
+    "path-to-regexp": ">=6.3.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-gtm-module": "^2.0.11",
+    "react-markdown": "^9.0.3",
+    "remark-reading-time": "^2.0.1",
+    "tar": ">=6.2.1",
+    "ts-node": "^10.9.2"
+  },
+  "overrides": {
+    "estree-util-value-to-estree": "^3.3.3",
+    "axios": "^1.8.2"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "postbuild": "next-sitemap && ts-node postbuild.mjs",
+    "start": "next start",
+    "lint": "next lint",
+    "format": "prettier --write . && git add .",
+    "export": "NEXT_BASE_PATH=/docs NEXT_PUBLIC_ALGOLIA_SEARCH=false UNOPTIMIZED_IMAGES=true NEXT_OUTPUT=export next build",
+    "export-static": "UNOPTIMIZED_IMAGES=true NEXT_OUTPUT=export NEXT_TRAILING_SLASH=true next build"
+  }
 }

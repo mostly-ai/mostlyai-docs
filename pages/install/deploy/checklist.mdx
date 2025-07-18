@@ -20,8 +20,8 @@ The checklist below provides a list of prerequisites to ensure a successful inst
 **Networking requirements**
 
 - [ ] Your Kubernetes cluster can access the **container image repository**.
-    * By default, MOSTLY AI serves the container images from the MOSTLY AI image repository at `nexus.test.mostlylab.com`. To deploy the images, your Kubernetes cluster needs to have Internet access.
-    * If your internal IT policies require that you pull the images from an internal repository, ensure that your Kubernetes cluster has access to it. For more information, [Configure an internal image repository](../config/internal-image-repo).
+  - By default, MOSTLY AI serves the container images from the MOSTLY AI image repository. To download the images, your Kubernetes cluster needs to have Internet access.
+  - If your internal IT policies require that you pull the images from an internal repository, ensure that your Kubernetes cluster has access to it. For more information, see [Configure an internal image repository](../config/internal-image-repo).
 - [ ] Your Kubernetes cluster has network access to the defined storage classes and to the data sources (databases and cloud object storage providers) from which you want to pull original data.
 - [ ] Collaborate with your IT department and Customer Experience Engineer to configure an domain SSL certificate for your Kubernetes cluster and for the MOSTLY AI Helm chart.
 
@@ -30,16 +30,18 @@ The checklist below provides a list of prerequisites to ensure a successful inst
 - [ ] Your Kubernetes cluster user has permissions to read and write into the storage class.
 - [ ] On the AI worker nodes where MOSTLY AI jobs run, you should have no [taints](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) defined that might not allow pods to be created with the minimum and maximum resource requirements specified in the `values.yaml` for the engine. Otherwise, MOSTLY AI jobs will fail to run.
 - [ ] If you already have taints on your worker nodes, you need to add tolerations on the MOSTLY AI pods in the `values.yaml` file, under `agent.tolerations` and `engine.tolerations`.
+
 ```yaml filename="values.yaml" copy
     ...
     tolerations:
         # Replace with the actual key label of the taint
         # For example: `Tainted-worker:NoSchedule`
-        - key: "Tainted-worker" 
+        - key: "Tainted-worker"
             operator: "Exists"
             effect: "NoSchedule"
     ...
 ```
+
 - [ ] On the AI worker nodes where MOSTLY AI jobs run, make sure that no other pods belonging to other applications can run so as not to interfere with MOSTLY AI workloads. You can apply [taints](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) on nodes dedicated to MOSTLY AI workloads so as to prevent other workloads from running.
 - [ ] Verify that any [resource quotas](https://kubernetes.io/docs/tasks/administer-cluster/manage-resources/quota-memory-cpu-namespace/) created for your namespace allow MOSTLY AI to successfully run worker nodes based on [their requirements](../requirements#worker-nodes-requirements).
 - [ ] If you have specific username requirements to access databases or other resources, update the [Helm chart](helm-chart) `values.yaml` file. In specific cases, due to Oracle security policies you might need to allowlist container users in Oracle.
@@ -55,13 +57,12 @@ The checklist below provides a list of prerequisites to ensure a successful inst
 - [ ] **Compute resources**. The AWS EKS cluster has at least six worker nodes of type `m5.xlarge`. For more information, see [Amazon EC2 instance types](https://aws.amazon.com/ec2/instance-types/).
 - [ ] **Storage (required for single- and multi-node)**. Integrate with Amazon Elastic Block Store (EBS) with your EKS cluster by installing and configuring the `aws-ebs-csi-driver`. For more information, [Amazon EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html).
 - [ ] **Networking**. Create a Virtual Private Cloud (VPC) with a `/16` subnet netmask. This provides up to 65,536 private IPv4 addresses. For more information, see the AWS VPC documentation.
-    * [How Amazon VPC works](https://docs.aws.amazon.com/vpc/latest/userguide/how-it-works.html)
-    * [Get started with Amazon VPC](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-getting-started.html)
-    * [Create a VPC](https://docs.aws.amazon.com/vpc/latest/userguide/create-vpc.html)
+  - [How Amazon VPC works](https://docs.aws.amazon.com/vpc/latest/userguide/how-it-works.html)
+  - [Get started with Amazon VPC](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-getting-started.html)
+  - [Create a VPC](https://docs.aws.amazon.com/vpc/latest/userguide/create-vpc.html)
 - [ ] **Networking**. Integrate with Amazon Elastic Load Balancing (ALB) to automatically distribute your incoming traffic across multiple targets, such as EC2 instances, containers, and IP addresses, in one or more Availability Zones. Install the `aws-load-balancer-controller` in your EKS cluster to manage your ALBs and create an Ingress that uses this controller​.<br />For more information, see [Installing the AWS Load Balancer Controller add-on](https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html).
 - [ ] **Networking**. Create a Domain name in Route 53 that will point to your ALB​. Amazon Route 53 is a highly available and scalable Domain Name System (DNS) web service. To configure a domain registered in Route 53 to point to AWS ALB, you can use the [Amazon Route 53 Documentation​](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-to-elb-load-balancer.html). For specific configurations and support, contact AWS Support.
 - [ ] **Security**. AWS Certificate Manager (ACM) helps you to provision, manage, and renew publicly trusted TLS certificates on AWS based websites. Create an SSL certificate in ACM that can be used with your ALB​. For more information, see [AWS Certificate Manager > Requesting a public certificate](https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html).
-
 
 ## MOSTLY AI Helm charts checklist
 

@@ -3,8 +3,8 @@ title: 'Backup and restore'
 description: 'You can backup and restore MOSTLY AI just like any other Kubernetes application in your infrastructure by using Velero.'
 ---
 
-import Image from 'next/image'
-import { Callout } from 'nextra/components'
+import Image from 'next/image';
+import { Callout } from 'nextra/components';
 
 # Backup and restore
 
@@ -14,16 +14,11 @@ You can backup and restore MOSTLY AI just like any other Kubernetes application 
 
 ## Backup workflow
 
-<Image
-  src="/docs/docimages/administration/backup-restore/velero-diagram.webp" 
-  alt="Velero diagram"
-  width={800}
-  height={15000}
-/>
+<Image src="/docimages/administration/backup-restore/new-velero-diagram.webp" alt="Velero diagram" width={800} height={15000} />
 
-## How Velero works?
+## How does Velero work?
 
-Each Velero operation – on-demand backup, scheduled backup, restore – is a custom resource, defined with a Kubernetes Custom Resource Definition (CRD) and stored in etcd. Velero also includes controllers that process the custom resources to perform backups, restores, and all related operations.
+Each Velero operation (for example, on-demand backup, scheduled backup, or restore) is a custom resource, defined with a Kubernetes Custom Resource Definition (CRD) and stored in etcd. Velero also includes controllers that process the custom resources to perform backups, restores, and other all related operations.
 
 You can back up or restore all objects in your cluster, or you can filter objects by type, namespace, and/or label.
 
@@ -31,10 +26,10 @@ You can back up or restore all objects in your cluster, or you can filter object
 
 ### Prerequisites
 
-* Access to a Kubernetes cluster, v1.16 or later, with DNS and container networking enabled. For more information on supported Kubernetes versions, see the [Velero compatibility matrix on GitHub](https://github.com/vmware-tanzu/velero#velero-compatibility-matrix).
-* Install `kubectl`.
-* Identify a storage provider<br /><br />Velero uses object storage to store backups and associated artifacts. It also optionally integrates with supported block storage systems to snapshot your persistent volumes. Before installing, you should identify the object storage provider and optional block storage provider you want to use. See the list of compatible providers [Velero Docs - Providers](https://velero.io/docs/v1.12/supported-providers/) that Velero supports.<br /><br />Velero supports storage providers for both cloud-provider environments and on-premises environments. For more details on on-premises scenarios, see the [on-premises documentation](https://velero.io/docs/v1.12/on-premises/).
-* (Optional) To set up **Velero CLI autocompletion**, see [Enabling shell autocompletion](https://velero.io/docs/v1.12/customize-installation/#optional-velero-cli-configurations) from the _Velero documentation_.
+- Access to a Kubernetes cluster, v1.16 or later, with DNS and container networking enabled. For more information on supported Kubernetes versions, see the [Velero compatibility matrix on GitHub](https://github.com/vmware-tanzu/velero#velero-compatibility-matrix).
+- Install `kubectl`.
+- Identify a storage provider.<br /><br />Velero uses object storage to store backups and associated artifacts. It also optionally integrates with supported block storage systems to snapshot your persistent volumes. Before installing, you should identify the object storage provider and optional block storage provider you want to use. See the [list of compatible providers](https://velero.io/docs/v1.12/supported-providers/) that Velero supports.<br /><br />Velero supports storage providers for both cloud-provider environments and on-premises environments. For more details on on-premises scenarios, see the [on-premises documentation](https://velero.io/docs/v1.12/on-premises/).
+- (Optional) To set up **Velero CLI autocompletion**, see [Enabling shell autocompletion](https://velero.io/docs/v1.12/customize-installation/#optional-velero-cli-configurations).
 
 ### 1. Install Velero CLI
 
@@ -49,9 +44,9 @@ brew install velero
 
 1. Download the [latest release’s](https://github.com/vmware-tanzu/velero/releases/latest) tarball for your client platform.
 2. Extract the tarball:
-    ```bash copy
-    tar -xvf <RELEASE-TARBALL-NAME>.tar.gz
-    ```
+   ```bash copy
+   tar -xvf <RELEASE-TARBALL-NAME>.tar.gz
+   ```
 
 Move the extracted `velero` binary to somewhere in your `$PATH` (`/usr/local/bin` for most users).
 
@@ -78,15 +73,15 @@ There are two supported methods for installing the Velero server components:
 If you are running MOSTLY AI on-prem, you can use your NFS as a storage destination for backup and restore.
 
 For such cases, see
-[Configuring an NFS Storage Destination](https://docs.replicated.com/enterprise/snapshots-configuring-nfs)*.
+[Configuring an NFS Storage Destination](https://docs.replicated.com/enterprise/snapshots-configuring-nfs)\*.
 
-_*Also configurable in air-gapped environments_
+_\*Also configurable in air-gapped environments_
 
 </Callout>
 
 ### 3. Install Velero plugins
 
-Velero uses plugins to integrate with a variety of storage systems and Kubernetes platforms to support backup, restore, and snapshot operations. [Velero Plugins](https://velero.io/plugins/).
+Velero uses plugins to integrate with a variety of storage systems and Kubernetes platforms to support backup, restore, and snapshot operations. For more information about plugins, see [Velero Plugins](https://velero.io/plugins/).
 
 ## Back up MOSTLY AI
 
@@ -99,6 +94,7 @@ kubectl get namespaces
 ```
 
 Output:
+
 ```
 NAME                   STATUS   AGE
 default                Active   40d
@@ -111,16 +107,19 @@ nginx-ingress          Active   40d
 
 ### 2. Check Velero versions
 
-To do, run:
+Run:
+
 ```bash copy
 velero version
 ```
+
 Output:
+
 ```
 Client:
 	Version: v1.12.2
 	Git commit: -
-<error getting server version: no matches for kind "ServerStatusRequest" 
+<error getting server version: no matches for kind "ServerStatusRequest"
 in version "velero.io/v1">
 ```
 
@@ -140,9 +139,9 @@ velero install \
   --use-node-agent
 ```
 
-**NOTE:** You need to take care on create AWS S3 bucket, for backup destination storage, as well as crate AWS credentials and point it with `--secret-file` parameter. 
+**NOTE:** When creating an AWS S3 bucket for backup destination storage, as well as creating AWS credentials, be sure to include the `--secret-file` parameter.
 
-Format of `velero_credentials` file is:
+The expected format of `velero_credentials` file is:
 
 ```
 [default]
@@ -155,7 +154,9 @@ Check Velero versions once again to be sure client and server versions are in sy
 ```bash copy
 velero version
 ```
+
 Output:
+
 ```
 Client:
 	Version: v1.12.2
@@ -166,39 +167,42 @@ Server:
 
 ### 4. Create a backup with Velero
 
-With Velero in palce, you can now create a backup of MOSTLY AI.
+With Velero ready, you can create a MOSTLY AI backup.
 
 **Steps**
 
 1. Initiate the backup with Velero.
-    ```bash copy
-    velero backup create mostly-ai-backup-poc --include-namespaces mostly-ai
-    ```
+   ```bash copy
+   velero backup create mostly-ai-backup-poc --include-namespaces mostly-ai
+   ```
 2. Check the status of the backup and its progress:
-    ```bash copy
-    velero backup describe mostly-ai-backup-poc
-    ```
-    You should output similar to the one below.
-    ```
-    Name:         mostly-ai-backup-poc
-    Namespace:    velero
-    Labels:       velero.io/storage-location=default
-    Annotations:  velero.io/resource-timeout=10m0s
-                  velero.io/source-cluster-k8s-gitversion=v1.27.8-eks-8cb36c9
-                  velero.io/source-cluster-k8s-major-version=1
-                  velero.io/source-cluster-k8s-minor-version=27+
 
-    Phase:  InProgress
-    {...}
-    Resources:
-      Included:        *
-      Excluded:        <none>
-      Cluster-scoped:  auto
-    {...}
-    kopia Backups (specify --details for more information):
-      Completed:  1
-      New:        1
-    ```
+   ```bash copy
+   velero backup describe mostly-ai-backup-poc
+   ```
+
+   Your output will be similar to the example shown below for a successful operation.
+
+   ```
+   Name:         mostly-ai-backup-poc
+   Namespace:    velero
+   Labels:       velero.io/storage-location=default
+   Annotations:  velero.io/resource-timeout=10m0s
+                 velero.io/source-cluster-k8s-gitversion=v1.27.8-eks-8cb36c9
+                 velero.io/source-cluster-k8s-major-version=1
+                 velero.io/source-cluster-k8s-minor-version=27+
+
+   Phase:  InProgress
+   {...}
+   Resources:
+     Included:        *
+     Excluded:        <none>
+     Cluster-scoped:  auto
+   {...}
+   kopia Backups (specify --details for more information):
+     Completed:  1
+     New:        1
+   ```
 
 **Result**
 
@@ -206,12 +210,14 @@ You now have a backup of MOSTLY AI and all related artifacts.
 
 **What's next**
 
-You can use velero to get information about the backup
+You can use Velero to get information about the backup
 
 ```bash copy
 velero backup describe mostly-ai-backup-poc
 ```
-The backup information should be similar to the one listed below.
+
+The backup information should be similar to the template shown below.
+
 ```
 Name:         mostly-ai-backup-poc
 Namespace:    velero
@@ -226,7 +232,7 @@ Phase:  Completed
 
 ## Restore MOSTLY AI from a backup
 
-The process below demonstrates how you can clean up the MOSTLY AI Kubernetes resources and restore MOSTLY AI from a backup.
+This process demonstrates how to clean up the MOSTLY AI Kubernetes resources and restore MOSTLY AI from a backup.
 
 ### 1. Clean up MOSTLY AI
 
@@ -235,38 +241,38 @@ To restore MOSTLY AI from a backup, make sure that the `mostly-ai` namespace no 
 **Steps**
 
 1. List the Helm releases installed in your cluster.
-    ```bash copy
-    helm list
-    ```
-    If you have MOSTLY AI deployed in your cluster, you should see output similar to the one below.
-    ```
-    NAME     	NAMESPACE	REVISION	UPDATED                             	STATUS  	CHART          	APP VERSION
-    mostly-ai	mostly-ai	6       	2023-12-05 16:11:11.386065 +0100 CET	deployed	mostly-ai-1.0.0	3.0.0
-    ```
+   ```bash copy
+   helm list
+   ```
+   If you have MOSTLY AI deployed in your cluster, the output will be similar to the template shown below.
+   ```
+   NAME     	NAMESPACE	REVISION	UPDATED                             	STATUS  	CHART          	APP VERSION
+   mostly-ai	mostly-ai	6       	2023-12-05 16:11:11.386065 +0100 CET	deployed	mostly-ai-1.0.0	3.0.0
+   ```
 2. Use `helm` to uninstall the MOSTLY AI release running in your cluster.
-    ```bash copy
-    helm uninstall mostly-ai
-    ```
-    If successful, the result from the command should be the following:
-    ```
-    release "mostly-ai" uninstalled
-    ```
+   ```bash copy
+   helm uninstall mostly-ai
+   ```
+   If successful, the result from the command will be the following:
+   ```
+   release "mostly-ai" uninstalled
+   ```
 3. Delete the `mostly-ai` namespace.
-    ```bash copy
-    kubectl delete namespace mostly-ai
-    ```
-    Output on success:
-    ```
-    namespace "mostly-ai" deleted
-    ```
+   ```bash copy
+   kubectl delete namespace mostly-ai
+   ```
+   Output on success:
+   ```
+   namespace "mostly-ai" deleted
+   ```
 4. Verify that the `mostly-ai` namespace no longer exists.
-    ```bash copy
-    kubectl get all --namespace mostly-ai
-    ```
-    You should see the following:
-    ```
-    No resources found in mostly-ai namespace.
-    ```
+   ```bash copy
+   kubectl get all --namespace mostly-ai
+   ```
+   You will see the following:
+   ```
+   No resources found in mostly-ai namespace.
+   ```
 
 ### 2. Restore MOSTLY AI from a backup
 
@@ -275,96 +281,104 @@ Making sure that the `mostly-ai` namespace does not exist, you can now restore M
 **Steps**
 
 1. Use `velero restore` to initiate a restore from a backup.<br /><br />
-  The command below uses the `mostly-ai-backup-poc` backup that was created in the previous sections and names the restore as `mostly-ai-restore-poc`.
-    ```bash copy
-    velero restore create mostly-ai-restore-poc --from-backup mostly-ai-backup-poc
-    ```
-2. Check status of the restore: 
-    ```bash copy
-    velero restore describe mostly-ai-restore-poc
-    ```
-    The output should be the following:
-    ```
-    Name:         mostly-ai-restore-poc
-    Namespace:    velero
-    Labels:       <none>
-    Annotations:  <none>
+   The command below uses the `mostly-ai-backup-poc` backup that was created in the previous sections and names the restore as `mostly-ai-restore-poc`.
+   ```bash copy
+   velero restore create mostly-ai-restore-poc --from-backup mostly-ai-backup-poc
+   ```
+2. Check status of the restore:
 
-    Phase:                                 InProgress
-    Estimated total items to be restored:  93
-    Items restored so far:                 93
+   ```bash copy
+   velero restore describe mostly-ai-restore-poc
+   ```
 
-    Started:    2023-12-21 08:18:34 +0100 CET
-    Completed:  <n/a>
+   The output will be the following for a successful operation:
 
-    Backup:  mostly-ai-backup-poc
-    {...}
+   ```
+   Name:         mostly-ai-restore-poc
+   Namespace:    velero
+   Labels:       <none>
+   Annotations:  <none>
 
-    Existing Resource Policy:   <none>
-    ItemOperationTimeout:       4h0m0s
+   Phase:                                 InProgress
+   Estimated total items to be restored:  93
+   Items restored so far:                 93
 
-    Preserve Service NodePorts:  auto
-    ``` 
+   Started:    2023-12-21 08:18:34 +0100 CET
+   Completed:  <n/a>
+
+   Backup:  mostly-ai-backup-poc
+   {...}
+
+   Existing Resource Policy:   <none>
+   ItemOperationTimeout:       4h0m0s
+
+   Preserve Service NodePorts:  auto
+   ```
+
 3. Check the `mostly-ai` namespace:
-    ```bash copy
-    kubectl get all --namespace mostly-ai
-    ```
-    The output should be the following:
-    ```
-    NAME                                      READY   STATUS    RESTARTS      AGE
-    pod/mostly-app-57c86ffc9f-46m9x           1/1     Running   0             84s
-    pod/mostly-coordinator-86c4f9f588-gd4cc   1/1     Running   2 (39s ago)   84s
-    pod/mostly-data-fd7bb94dd-57xcb           1/1     Running   0             84s
-    pod/mostly-keycloak-777b555447-gf5lw      1/1     Running   0             84s
-    pod/mostly-psql-0                         1/1     Running   0             84s
-    pod/mostly-ui-864ffb7799-hlq6x            1/1     Running   0             84s
-    pod/replicated-6748579dd9-jbpzq           1/1     Running   0             84s
 
-    NAME                         TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)              AGE
-    service/mostly-app           NodePort    172.20.10.105    <none>        8080:31125/TCP       82s
-    service/mostly-coordinator   ClusterIP   172.20.7.60      <none>        8081/TCP             81s
-    service/mostly-data          ClusterIP   172.20.206.27    <none>        8000/TCP             81s
-    service/mostly-db            ClusterIP   172.20.130.113   <none>        5432/TCP             81s
-    service/mostly-keycloak      NodePort    172.20.113.58    <none>        8080:31784/TCP       81s
-  
-    service/mostly-ui            NodePort    172.20.5.52      <none>        8888:31465/TCP       81s
-    service/replicated           ClusterIP   172.20.165.239   <none>        3000/TCP             81s
+   ```bash copy
+   kubectl get all --namespace mostly-ai
+   ```
 
-    NAME                                 READY   UP-TO-DATE   AVAILABLE   AGE
-    deployment.apps/mostly-app           1/1     1            1           81s
-    deployment.apps/mostly-coordinator   1/1     1            1           81s
-    deployment.apps/mostly-data          1/1     1            1           80s
-    deployment.apps/mostly-keycloak      1/1     1            1           80s
-    deployment.apps/mostly-ui            1/1     1            1           80s
-    deployment.apps/replicated           1/1     1            1           80s
+   The output should be the following:
 
-    NAME                                            DESIRED   CURRENT   READY   AGE
-    replicaset.apps/mostly-app-57c86ffc9f           1         1         1       83s
-    replicaset.apps/mostly-coordinator-86c4f9f588   1         1         1       83s
-    replicaset.apps/mostly-data-fd7bb94dd           1         1         1       83s
-    replicaset.apps/mostly-keycloak-777b555447      1         1         1       83s
-    replicaset.apps/mostly-ui-864ffb7799            1         1         1       83s
-    replicaset.apps/replicated-57d8f65c98           0         0         0       83s
-    replicaset.apps/replicated-6748579dd9           1         1         1       83s
-    replicaset.apps/replicated-77d9748bd            0         0         0       83s
-    replicaset.apps/replicated-7d4d987ccc           0         0         0       83s
-    replicaset.apps/replicated-7d6c87494c           0         0         0       82s
+   ```
+   NAME                                      READY   STATUS    RESTARTS      AGE
+   pod/mostly-app-57c86ffc9f-46m9x           1/1     Running   0             84s
+   pod/mostly-coordinator-86c4f9f588-gd4cc   1/1     Running   2 (39s ago)   84s
+   pod/mostly-data-fd7bb94dd-57xcb           1/1     Running   0             84s
+   pod/mostly-keycloak-777b555447-gf5lw      1/1     Running   0             84s
+   pod/mostly-psql-0                         1/1     Running   0             84s
+   pod/mostly-ui-864ffb7799-hlq6x            1/1     Running   0             84s
+   pod/replicated-6748579dd9-jbpzq           1/1     Running   0             84s
 
-    NAME                           READY   AGE
-    statefulset.apps/mostly-psql   1/1     78s
-    ```
-3. Check the status of the MOSTLY AI pods.
-    ```bash copy
-    kubectl get pods
-    ```
-    The MOSTLY AI pods should be back and stable.
-    ```
-    NAME                                  READY   STATUS    RESTARTS      AGE
-    mostly-app-57c86ffc9f-46m9x           1/1     Running   0             2m
-    mostly-coordinator-86c4f9f588-gd4cc   1/1     Running   2 (75s ago)   2m
-    mostly-data-fd7bb94dd-57xcb           1/1     Running   0             2m
-    mostly-keycloak-777b555447-gf5lw      1/1     Running   0             2m
-    mostly-psql-0                         1/1     Running   0             2m
-    mostly-ui-864ffb7799-hlq6x            1/1     Running   0             2m
-    replicated-6748579dd9-jbpzq           1/1     Running   0             2m
-    ```
+   NAME                         TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)              AGE
+   service/mostly-app           NodePort    172.20.10.105    <none>        8080:31125/TCP       82s
+   service/mostly-coordinator   ClusterIP   172.20.7.60      <none>        8081/TCP             81s
+   service/mostly-data          ClusterIP   172.20.206.27    <none>        8000/TCP             81s
+   service/mostly-db            ClusterIP   172.20.130.113   <none>        5432/TCP             81s
+   service/mostly-keycloak      NodePort    172.20.113.58    <none>        8080:31784/TCP       81s
+
+   service/mostly-ui            NodePort    172.20.5.52      <none>        8888:31465/TCP       81s
+   service/replicated           ClusterIP   172.20.165.239   <none>        3000/TCP             81s
+
+   NAME                                 READY   UP-TO-DATE   AVAILABLE   AGE
+   deployment.apps/mostly-app           1/1     1            1           81s
+   deployment.apps/mostly-coordinator   1/1     1            1           81s
+   deployment.apps/mostly-data          1/1     1            1           80s
+   deployment.apps/mostly-keycloak      1/1     1            1           80s
+   deployment.apps/mostly-ui            1/1     1            1           80s
+   deployment.apps/replicated           1/1     1            1           80s
+
+   NAME                                            DESIRED   CURRENT   READY   AGE
+   replicaset.apps/mostly-app-57c86ffc9f           1         1         1       83s
+   replicaset.apps/mostly-coordinator-86c4f9f588   1         1         1       83s
+   replicaset.apps/mostly-data-fd7bb94dd           1         1         1       83s
+   replicaset.apps/mostly-keycloak-777b555447      1         1         1       83s
+   replicaset.apps/mostly-ui-864ffb7799            1         1         1       83s
+   replicaset.apps/replicated-57d8f65c98           0         0         0       83s
+   replicaset.apps/replicated-6748579dd9           1         1         1       83s
+   replicaset.apps/replicated-77d9748bd            0         0         0       83s
+   replicaset.apps/replicated-7d4d987ccc           0         0         0       83s
+   replicaset.apps/replicated-7d6c87494c           0         0         0       82s
+
+   NAME                           READY   AGE
+   statefulset.apps/mostly-psql   1/1     78s
+   ```
+
+4. Check the status of the MOSTLY AI pods.
+   ```bash copy
+   kubectl get pods
+   ```
+   The MOSTLY AI pods will be running and stable.
+   ```
+   NAME                                  READY   STATUS    RESTARTS      AGE
+   mostly-app-57c86ffc9f-46m9x           1/1     Running   0             2m
+   mostly-coordinator-86c4f9f588-gd4cc   1/1     Running   2 (75s ago)   2m
+   mostly-data-fd7bb94dd-57xcb           1/1     Running   0             2m
+   mostly-keycloak-777b555447-gf5lw      1/1     Running   0             2m
+   mostly-psql-0                         1/1     Running   0             2m
+   mostly-ui-864ffb7799-hlq6x            1/1     Running   0             2m
+   replicated-6748579dd9-jbpzq           1/1     Running   0             2m
+   ```

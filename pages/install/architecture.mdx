@@ -1,24 +1,17 @@
 ---
 title: Architecture
-description: "MOSTLY AI runs as a set of containerized applications and services that you can deploy in a Kubernetes cluster and maintain a fault-tolerant and highly available application."
+description: 'MOSTLY AI runs as a set of containerized applications and services that you can deploy in a Kubernetes cluster and maintain a fault-tolerant and highly available application.'
 ---
 
-import Image from 'next/image'
-import { Callout } from 'nextra/components'
-import { 
-            ChipIcon,
-            WebFrontendIcon,
-            UserPersonaIcon,
-            DatabaseLockIcon,
-            TerminalIcon,
-            StorageIcon
-        } from '@components/icons'
+import Image from 'next/image';
+import { Callout } from 'nextra/components';
+import { ChipIcon, WebFrontendIcon, UserPersonaIcon, DatabaseLockIcon, TerminalIcon, StorageIcon, AssistantBrokerIcon, JupyterHubIcon, ProbeAPIIcon } from '@components/icons';
 
 # Architecture
 
 MOSTLY AI runs as a set of containerized applications and services that you can deploy in a Kubernetes cluster and maintain a fault-tolerant and highly available application.
 
-<Image src="/docs/docimages/install/mostly-ai-architecture.svg" alt="MOSTLY AI architecture diagram" width={800} height={30} />
+<Image src="/docimages/install/mostly-ai-architecture.svg" alt="MOSTLY AI architecture diagram" width={800} height={30} />
 
 ## Application Nodes
 
@@ -40,7 +33,6 @@ MOSTLY AI runs as a set of containerized applications and services that you can 
 | `mostly-ai-haproxy`                                              | Automatic load balancer and ingress management service.                     | Service       |
 | `mostly-ai-minio`                                                | Shared storage service.                                                     | Service       |
 | `mostly-core-probe-api`                                          | Service for live-probing generators.                                        | Service       |
-
 
 ## AI Worker nodes
 
@@ -66,11 +58,15 @@ MOSTLY AI can connect to your internal databases (with the help of [connectors](
 
 In addition to databases, you can also read original data and deliver synthetic data from and to cloud storage buckets (AWS S3, Azure blob storage, Google Cloud storage buckets).
 
+### LLM services
+
+The Assistant Broker can connect to any Large Language Model (LLM) service that supports tool calling via LiteLLM. This includes publicly available LLM services such as Claude or OpenAI, or privately hosted LLM services deployed within your customer infrastructure. This integration enables the assistant service to provide intelligent responses and coordinate code execution through the internal Jupyter Hub nodes.
+
 ### Storage requirements
 
 MOSTLY AI uses two types of storage.
 
-* **Block Storage**. Used by single pods, such as PostgreSQL. Typically, this is automatically provisioned by the Kubernetes cluster.
-* **Shared Storage**. Shared by various pods to store models, synthetic data, and others. Two options exist for using shared storage:
-    * **MinIO**. MOSTLY AI provides shared storage via [MinIO](https://min.io/). This uses the block storage provisioned by the Kubernetes cluster.
-    * **External S3 storage**. You can use an external S3 storage solution instead of MinIO.
+- **Block Storage**. Used by single pods, such as PostgreSQL. Typically, this is automatically provisioned by the Kubernetes cluster.
+- **Shared Storage**. Shared by various pods to store models, synthetic data, and others. Two options exist for using shared storage:
+  - **MinIO**. MOSTLY AI provides shared storage via [MinIO](https://min.io/). This uses the block storage provisioned by the Kubernetes cluster.
+  - **External S3 storage**. You can use an external S3 storage solution instead of MinIO.
