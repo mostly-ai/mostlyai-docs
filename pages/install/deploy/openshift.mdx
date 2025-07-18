@@ -3,8 +3,8 @@ title: 'Deploy MOSTLY AI to an OpenShift cluster'
 description: 'You can install MOSTLY AI in an OpenShift cluster. This page covers the list of prerequisites you need and the steps for a successful installation.'
 ---
 
-import { Callout } from 'nextra/components'
-import Image from 'next/image'
+import { Callout } from 'nextra/components';
+import Image from 'next/image';
 
 # Deploy MOSTLY AI to an OpenShift cluster
 
@@ -12,146 +12,115 @@ You can install MOSTLY AI in an OpenShift cluster. This page covers the list of 
 
 **Prerequisites**
 
-* An OpenShift (4.2 or higher) cluster
-    * Your OpenShift cluster meets the [resource requirements](../requirements).
-* Install [helm](https://helm.sh/docs/intro/install/).
-* Install [OpenShift CLI tools](https://access.redhat.com/documentation/en-us/openshift_container_platform/4.13/html/cli_tools/openshift-cli-oc#installing-openshift-cli).
-* Log in to your cluster. See [Logging in to the OpenShift CLI](https://access.redhat.com/documentation/en-us/openshift_container_platform/4.13/html/cli_tools/openshift-cli-oc#cli-logging-in_cli-developer-commands).
-* Internet connectivity to pull the Docker images from the MOSTLY AI repository.
-* Fully-qualified domain name (FQDN) for the MOSTLY AI application. A TLS certificate is optional.
-* Obtain deployment details from your Customer Experience Engineer.
-    * MOSTLY AI Helm chart
-    * Secret key to access the MOSTLY AI image repository
-    * First-time log in credentials for the MOSTLY AI application
+- An OpenShift (4.2 or higher) cluster
+  - Your OpenShift cluster meets the [resource requirements](../requirements).
+- Install [helm](https://helm.sh/docs/intro/install/).
+- Install [OpenShift CLI tools](https://access.redhat.com/documentation/en-us/openshift_container_platform/4.13/html/cli_tools/openshift-cli-oc#installing-openshift-cli).
+- Log in to your cluster. See [Logging in to the OpenShift CLI](https://access.redhat.com/documentation/en-us/openshift_container_platform/4.13/html/cli_tools/openshift-cli-oc#cli-logging-in_cli-developer-commands).
+- Internet connectivity to pull the Docker images from the MOSTLY AI repository.
+- Fully-qualified domain name (FQDN) for the MOSTLY AI application. A TLS certificate is optional.
+- Obtain deployment details from your Customer Experience Engineer.
+  - MOSTLY AI Helm chart
+  - Secret key to access the MOSTLY AI image repository
+  - First-time log in credentials for the MOSTLY AI application
 
 **Steps**
 
 1. Create the `mostly-ai` namespace in your OpenShift cluster.
-    ```bash copy
-    oc new-project mostly-ai
-    ```
-2. Unarchive the MOSTLY AI Helm chart and from a terminal or a command line, change directory to the one that contains your  `MOSTLY_AI_helm_charts`.
-    ```bash copy
-    cd MOSTLY_AI_helm_charts
-    ```
+   ```bash copy
+   oc new-project mostly-ai
+   ```
+2. Unarchive the MOSTLY AI Helm chart and from a terminal or a command line, change directory to the one that contains your `MOSTLY_AI_helm_charts`.
+   ```bash copy
+   cd MOSTLY_AI_helm_charts
+   ```
 3. Open the `ocp-values.yaml` file in an editor. You set the configurations required to deploy MOSTLI AI in an OpenShift cluster in this file.
 4. Set the fully-qualified domain name (FQDN) of your organization.
-    1. Set your FQDN for the `fqdn:`, `host:` and `hostname:` keys accordingly.<br /><br />
-    The excerpt below shows `mostlyai.your-organization.com` as the configured FQDN. Replace it with your FQDN.
-        ```yaml filename="ocp-values.yaml"
-        ...
-        fqdn: mostlyai.your-organization.com
-        ...
-        ```
-    2. (Optional) Apply one of the configurations below depending on whether you intend to use SSL-encrypted access to the MOSTLY AI application.<br /><br />
-        **➡️ You use an SSL certificate**. Replace `your-tls-secret` with the TLS secret name as defined in your cluster configuration.
-        <Callout>
-        Your IT department or Kubernetes administrator creates the FQDN and its SSL certificate and adds it to the configuration of your cluster. When added, it comes with a TLS secret name that you can define in the `ocp-values.yaml` file. For details, see [_Configure your domain SSL certificate_](/install/config/domain-tls-cert).
-        </Callout>
-        ```yaml filename="ocp-values.yaml" copy {4}
-        _customerInstallation:
-        ...
-          deploymentSettings:
-            tlsSecretName: &tlsSecretName your-tls-secret
-        ...
-        ```
-        **➡️ You do not use an SSL certificate**. Replace the  `your-tls-secret` with an empty string and, for `global.tls`, set `enabled` to `false`. 
-        ```yaml filename="ocp-values.yaml" copy {4,9}
-        _customerInstallation:
-        ...
-          deploymentSettings:
-            tlsSecretName: &tlsSecretName [] # your-tls-secret
-        ...
-        global:
-          ...
-          tls:
-            enabled: false
-        ...
-        ```
+   1. Set your FQDN for the `fqdn:`, `host:` and `hostname:` keys accordingly.<br /><br />
+      The excerpt below shows `mostlyai.your-organization.com` as the configured FQDN. Replace it with your FQDN.
+      `yaml filename="ocp-values.yaml"
+...
+fqdn: mostlyai.your-organization.com
+...
+`
+   2. (Optional) Apply one of the configurations below depending on whether you intend to use SSL-encrypted access to the MOSTLY AI application.<br /><br />
+      **➡️ You use an SSL certificate**. Replace `your-tls-secret` with the TLS secret name as defined in your cluster configuration.
+      <Callout>Your IT department or Kubernetes administrator creates the FQDN and its SSL certificate and adds it to the configuration of your cluster. When added, it comes with a TLS secret name that you can define in the `ocp-values.yaml` file. For details, see [_Configure your domain SSL certificate_](/install/config/domain-tls-cert).</Callout>
+      ```yaml filename="ocp-values.yaml" copy {4}
+      _customerInstallation: ... deploymentSettings: tlsSecretName: &tlsSecretName your-tls-secret ... ``` **➡️ You do not use an SSL certificate**. Replace the `your-tls-secret` with an empty string and, for `global.tls`, set `enabled` to `false`. ```yaml filename="ocp-values.yaml" copy {(4, 9)}
+      _customerInstallation: ... deploymentSettings: tlsSecretName: &tlsSecretName [] # your-tls-secret ... global: ... tls: enabled: false ... ```
 5. Set your Docker pull image secret key in the `_customerInstallation.deploymentSettings.mostlyRegistryDockerConfigJson` key. The secret key is your authentication for the MOSTLY AI Helm repository.
-    ```yaml filename="ocp-values.yaml" {5}
-    _customerInstallation:
-    ...
-      deploymentSettings:
-    ...
-        mostlyRegistryDockerConfigJson: &mostlyRegistryDockerConfigJson eyJh...
-    ...
-    ```
-    Replace the default value after `&mostlyRegistryDockerConfigJson` (in the example above, this is `eyJh...`) with the Docker pull image secret key provided by your Customer Experience Engineer.<br />
-    <br />
-    The value must not be wrapped in quotation marks and the line should look similar to the following, where the ellipsis (...) indicates the remaining characters of the complete secret key.
-    ```yaml filename="ocp-values.yaml"
-    ...
-    mostlyRegistryDockerConfigJson: &mostlyRegistryDockerConfigJson exJhdXRocyI6eyJuZX...
-    ...
-    ```
+   ```yaml filename="ocp-values.yaml" {5}
+   _customerInstallation:
+   ---
+   deploymentSettings:
+   ---
+   mostlyRegistryDockerConfigJson: &mostlyRegistryDockerConfigJson eyJh...
+   ```
+   Replace the default value after `&mostlyRegistryDockerConfigJson` (in the example above, this is `eyJh...`) with the Docker pull image secret key provided by your Customer Experience Engineer.<br />
+   <br />
+   The value must not be wrapped in quotation marks and the line should look similar to the following, where the ellipsis (...) indicates the remaining characters of the complete secret key. ```yaml filename="ocp-values.yaml" ... mostlyRegistryDockerConfigJson: &mostlyRegistryDockerConfigJson exJhdXRocyI6eyJuZX... ... ```
 6. (Optional) Configure the image repository.
-    1. If you have all of the necessary images to deploy MOSTLY AI in your internal repository, leave the URL of your repository under `_customerInstallation.deploymentSettings.mostlyRegistry`, replacing the existing value:
-        ```yaml filename="ocp-values.yaml" {5}
-        _customerInstallation:
-        ...
-          deploymentSettings:
-        ...
-            mostlyRegistry: &mostlyRegistry quay.io/mostlyai
-        ...
-        ```
+
+   1. If you have all of the necessary images to deploy MOSTLY AI in your internal repository, leave the URL of your repository under `_customerInstallation.deploymentSettings.mostlyRegistry`, replacing the existing value:
+      ```yaml filename="ocp-values.yaml" {5}
+      _customerInstallation:
+      ---
+      deploymentSettings:
+      ---
+      mostlyRegistry: &mostlyRegistry quay.io/mostlyai
+      ```
    2. If you are using an internal repository, you need to complete the following 2 steps.
-        1. Set `mostly-configuration.secrets.dockerConfig.create` to `false` to prevent the creation of a Docker pull secret. 
-            ```yaml filename="ocp-values.yaml" copy {5}
+
+      1. Set `mostly-configuration.secrets.dockerConfig.create` to `false` to prevent the creation of a Docker pull secret.
+
+         ```yaml filename="ocp-values.yaml" copy {5}
+         ---
+         mostly-configurations:
+           secrets:
+             dockerConfig:
+               create: false
+         ```
+
+      2. Map the name of the secret for your repository under `global.image.mostlyPullSecret`.
+         ```yaml filename="ocp-values.yaml" {6}
+         ...
+         global:
             ...
-            mostly-configurations:
-              secrets:
-                dockerConfig:
-                  create: false
-            ```
-        2. Map the name of the secret for your repository under `global.image.mostlyPullSecret`.
-           ```yaml filename="ocp-values.yaml" {6}
-           ...
-           global:
-              ...
-              image:
-                mostlyRegistry: *mostlyRegistry
-                mostlyPullSecret: mostly-ai-docker-credentials-production
-           ...
-           ```
-11. Save your changes in the `ocp-values.yaml` file.
-12. Set the taint on the workers node on which MOSTLY AI compute jobs will run.<br />
-    Get a list of your worker nodes.
-    ```shell copy
-    oc get nodes
-    ```
-    Apply the taint to each node you intend to use as a worker node.
-    ```shell copy
-    oc taint nodes <node_name> scheduling.mostly.ai/node=engine-jobs:NoSchedule
-    ```
-    You should see the following:
-    ```
-    node/<node_name> tainted
-    ```
-    In the OpenShift web console, select **Compute**, then **Nodes**. Click under **Taints** to review the list of taints for the node.
-    <Image
-        src="/docs/docimages/install/openshift/ocp-node-taints.webp"
-        alt="Taints on OpenShift nodes"
-        width={800}
-        height={400}
-    />
-12. Deploy MOSTLY AI with `helm` from the same directory where you have the `ocp-values.yaml` file.
-    ```bash copy
-    helm upgrade --install mostly-ai ./mostly-combined --values ocp-values.yaml --namespace mostly-ai
-    ```
+            image:
+              mostlyRegistry: *mostlyRegistry
+              mostlyPullSecret: mostly-ai-docker-credentials-production
+         ...
+         ```
+
+7. Save your changes in the `ocp-values.yaml` file.
+8. Set the taint on the workers node on which MOSTLY AI compute jobs will run.<br />
+   Get a list of your worker nodes.
+   ```shell copy
+   oc get nodes
+   ```
+   Apply the taint to each node you intend to use as a worker node.
+   ```shell copy
+   oc taint nodes <node_name> scheduling.mostly.ai/node=engine-jobs:NoSchedule
+   ```
+   You should see the following:
+   ```
+   node/<node_name> tainted
+   ```
+   In the OpenShift web console, select **Compute**, then **Nodes**. Click under **Taints** to review the list of taints for the node.
+   <Image src="/docimages/install/openshift/ocp-node-taints.webp" alt="Taints on OpenShift nodes" width={800} height={400} />
+9. Deploy MOSTLY AI with `helm` from the same directory where you have the `ocp-values.yaml` file.
+   ```bash copy
+   helm upgrade --install mostly-ai ./mostly-combined --values ocp-values.yaml --namespace mostly-ai
+   ```
 
 **What's next**
 
 If all pods run as expected, you can log in for the first time to your MOSTLY AI deployment to set a new password for the `superadmin` user. Contact MOSTLY AI to obtain the `superadmin` credentials.
 
 1. In a web browser, open the FQDN for the deployment.
-**Step result**: Your **Sign in** page for your MOSTLY AI deployment opens.
-    <Image
-        src="/docs/docimages/install/minikube/02-minikube-dashboard-01-post-deployment-red.webp"
-        alt="MOSTLY AI Deployment - Log in page"
-        width={800}
-        height={300}
-    />
+   **Step result**: Your **Sign in** page for your MOSTLY AI deployment opens.
+   <Image src="/docimages/install/minikube/02-minikube-dashboard-01-post-deployment-red.webp" alt="MOSTLY AI Deployment - Log in page" width={800} height={300} />
 2. Enter the superadmin credentials and click **Sign in**.
 3. Provide a new password and click **Change password**.
 

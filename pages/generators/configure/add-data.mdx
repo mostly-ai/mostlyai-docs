@@ -3,23 +3,20 @@ title: 'Add data to a generator'
 description: 'Before you start training a generator, you can add tabular data to it. You can add data from multiple sources: file upload (CSV, Parquet), databases, cloud storage buckets.'
 ---
 
-import { Callout } from 'nextra/components'
-import { Tabs } from 'nextra/components'
-import { CustomCallout } from '@components/custom-callout'
-import Image from 'next/image'
+import { Callout } from 'nextra/components';
+import { Tabs } from 'nextra/components';
+import { CustomCallout } from '@components/custom-callout';
+import Image from 'next/image';
 
 # Add data to a generator
 
 While a generator has the **New** status (created but training has not started), you can add tabular data to it. And you can add data from multiple sources:
 
-* file upload (CSV, Parquet)
-* databases
-* cloud storage buckets
+- file upload (CSV, Parquet)
+- databases
+- cloud storage buckets
 
-<CustomCallout>
-**Note**
-You cannot add data to already trained generators.
-</CustomCallout>
+<CustomCallout>**Note** You cannot add data to already trained generators.</CustomCallout>
 
 ## Add via file upload
 
@@ -28,41 +25,21 @@ From the web application, open an untrained generator to add tables to it.
 **Steps**
 
 1. On the **Generators** page, click **+ New generator**.
-    <Image
-        src="/docs/docimages/generators/train/01-click-new-generator.webp"
-        alt="MOSTLY AI - Generators page - Click New generator"
-        width={800}
-        height={300}
-    />
-    **Step result**: You now have a generator object created in the MOSTLY AI database and the generator is listed on the **Generators** page.
 
-    The **Add data** window appears prompting you to add tabular data for your generator to train on.
+   <Image src="/docimages/generators/train/01-click-new-generator.webp" alt="MOSTLY AI - Generators page - Click New generator" width={800} height={300} />
+   **Step result**: You now have a generator object created in the MOSTLY AI database and the generator is listed on the **Generators** page.
+
+   The **Add data** window appears prompting you to add tabular data for your generator to train on.
+
 2. Click **Upload file**.
-    <Image
-        src="/docs/docimages/generators/train/02-select-upload-file.webp"
-        alt="MOSTLY AI - Generators page - Click Upload file"
-        width={800}
-        height={300}
-    />
+   <Image src="/docimages/generators/train/02-select-upload-file.webp" alt="MOSTLY AI - Generators page - Click Upload file" width={800} height={300} />
 3. Under **Upload file**, drag a local file onto the box or click the box to browse your local file system.<br />
-    <Callout>
-    If you need a dataset, download one from the [Datasets](/datasets) page.
-    </Callout>
-    <Image
-        src="/docs/docimages/generators/train/03-upload-file-drag-browse.webp"
-        alt="MOSTLY AI - Generators page - Drag to upload or click to browse"
-        width={600}
-        height={300}
-    />
+   <Callout>If you need a dataset, download one from the [Datasets](/datasets) page.</Callout>
+   <Image src="/docimages/generators/train/03-upload-file-drag-browse.webp" alt="MOSTLY AI - Generators page - Drag to upload or click to browse" width={600} height={300} />
 4. (Optional) For **Table name**, change the default name for the table.<br />
-    MOSTLY AI captures the table name from the file provided.<br />
-    **Info**: The name specified here will appear in the list of tables added to the generator. Also, this table name appears in each synthetic dataset created with this generator.
-    <Image
-        src="/docs/docimages/generators/train/04-enter-table-name.webp"
-        alt="MOSTLY AI - Generators page - Name the new table"
-        width={600}
-        height={300}
-    />
+   MOSTLY AI captures the table name from the file provided.<br />
+   **Info**: The name specified here will appear in the list of tables added to the generator. Also, this table name appears in each synthetic dataset created with this generator.
+   <Image src="/docimages/generators/train/04-enter-table-name.webp" alt="MOSTLY AI - Generators page - Name the new table" width={600} height={300} />
 5. Click **Proceed**.
 
 ## Add data from a database
@@ -75,38 +52,16 @@ From the web application, open an untrained generator to add tables to it.
 
 1. In the generator, click **Add data** on the **Data configuration** page.
 2. Select **Connect to source**.
-    <Image 
-        src="/docs/docimages/generators/add-data/add-data-01-click-connect-to-source.webp" 
-        alt="MOSTLY AI - Generators Add data - 02 - Click Connect to source" 
-        width={800} 
-        height={150}
-    />
+   <Image src="/docimages/generators/add-data/add-data-01-click-connect-to-source.webp" alt="MOSTLY AI - Generators Add data - 02 - Click Connect to source" width={800} height={150} />
 3. Select a database connector.
-    <CustomCallout>
-    If you do not have one, click **+ New connector** to create a database connector. When done, the app brings you back to select a connector.
-    </CustomCallout>
-    <Image 
-        src="/docs/docimages/generators/add-data/from-db-03-select-connector.webp" 
-        alt="MOSTLY AI - Generators Add data - 03 - Select a source" 
-        width={800} 
-        height={150}
-    />
+   <CustomCallout>If you do not have one, click **+ New connector** to create a database connector. When done, the app brings you back to select a connector.</CustomCallout>
+   <Image src="/docimages/generators/add-data/from-db-03-select-connector.webp" alt="MOSTLY AI - Generators Add data - 03 - Select a source" width={800} height={150} />
 4. Select a schema and a table.
-    <Image 
-        src="/docs/docimages/generators/add-data/from-db-04-select-location.webp" 
-        alt="MOSTLY AI - Generators Add data - 04 - Select a database schema and table" 
-        width={800} 
-        height={150}
-    />
-    <Callout>
-    You can search for your schemas and tables when you type in the **Select schema** and **Select table** boxes.
-        <Image
-            src="/docs/docimages/generators/add-data/from-db-05-search-location.webp" 
-            alt="MOSTLY AI - Generators Add data - 05 - Search database schemas and tables" 
-            width={800} 
-            height={150}
-        />
-    </Callout>
+   <Image src="/docimages/generators/add-data/from-db-04-select-location.webp" alt="MOSTLY AI - Generators Add data - 04 - Select a database schema and table" width={800} height={150} />
+   <Callout>
+     You can search for your schemas and tables when you type in the **Select schema** and **Select table** boxes.
+     <Image src="/docimages/generators/add-data/from-db-05-search-location.webp" alt="MOSTLY AI - Generators Add data - 05 - Search database schemas and tables" width={800} height={150} />
+   </Callout>
 5. Click **Proceed**.
 
 **Result**
@@ -121,34 +76,12 @@ Use a source cloud storage connector to add tables to generators.
 
 1. In an untrained generator, click **Add data**.
 2. Click **Connect to source**.
-    <Image 
-        src="/docs/docimages/generators/add-data/add-data-01-click-connect-to-source.webp" 
-        alt="MOSTLY AI - Generators Add data from cloud storage - 02 - Select a connector" 
-        width={800} 
-        height={150}
-    />
+   <Image src="/docimages/generators/add-data/add-data-01-click-connect-to-source.webp" alt="MOSTLY AI - Generators Add data from cloud storage - 02 - Select a connector" width={800} height={150} />
 3. Select a cloud storage connector.
-    <CustomCallout>
-    If you do not have one, click **+ New connector** to create a cloud storage connector. When done, the app brings you back to select a connector.
-    </CustomCallout>
-    <Image 
-        src="/docs/docimages/generators/add-data/from-cloud-storage-02-select-connector.webp" 
-        alt="MOSTLY AI - Generators Add data from cloud storage - 02 - Select a connector" 
-        width={800} 
-        height={150}
-    />
+   <CustomCallout>If you do not have one, click **+ New connector** to create a cloud storage connector. When done, the app brings you back to select a connector.</CustomCallout>
+   <Image src="/docimages/generators/add-data/from-cloud-storage-02-select-connector.webp" alt="MOSTLY AI - Generators Add data from cloud storage - 02 - Select a connector" width={800} height={150} />
 4. Click **Select table** and navigate to the bucket path to select your table data file.
-    <Image
-        src="/docs/docimages/generators/add-data/from-cloud-storage-03-select-table-path.webp" 
-        alt="MOSTLY AI - Generators Add data from cloud storage - 03 - Define table path"
-        width={800} 
-        height={150}
-    />
+   <Image src="/docimages/generators/add-data/from-cloud-storage-03-select-table-path.webp" alt="MOSTLY AI - Generators Add data from cloud storage - 03 - Define table path" width={800} height={150} />
 5. For Table name, set a name for the table. This is the name that appears in the generator and each synthetic dataset generated with this generator.
-    <Image
-        src="/docs/docimages/generators/add-data/from-cloud-storage-04-set-table-name.webp" 
-        alt="MOSTLY AI - Generators Add data from cloud storage - 04 - Set table name"
-        width={800} 
-        height={150}
-    />
+   <Image src="/docimages/generators/add-data/from-cloud-storage-04-set-table-name.webp" alt="MOSTLY AI - Generators Add data from cloud storage - 04 - Set table name" width={800} height={150} />
 6. Click **Proceed**.

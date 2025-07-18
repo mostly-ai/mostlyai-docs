@@ -3,8 +3,8 @@ title: 'Deploy MOSTLY AI to an Azure AKS cluster'
 description: 'You can deploy MOSTLY AI to an Azure AKS cluster. This page covers the list of prerequisites you need to have in place and the pre-deployment and deployment steps for a successful installation.'
 ---
 
-import Image from 'next/image'
-import { Callout } from 'nextra/components'
+import Image from 'next/image';
+import { Callout } from 'nextra/components';
 
 # Deploy MOSTLY AI to an Azure AKS cluster
 
@@ -12,25 +12,25 @@ You can deploy MOSTLY AI to an Azure AKS cluster. This page covers the list of p
 
 ## Prerequisites
 
-* Create an [Azure account](https://learn.microsoft.com/en-us/dotnet/azure/create-azure-account).
-* Create an [Azure subscription](https://learn.microsoft.com/en-us/azure/cost-management-billing/manage/create-subscription).
-* Install [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli).
-* Install [kubectl](https://kubernetes.io/docs/tasks/tools/).
-* Install [helm](https://helm.sh/docs/intro/install/).
-* Prepare a fully-qualified domain name (FQDN). A TLS certificate is optional.
-* Obtain deployment details from your Customer Experience Engineer.
-    * [MOSTLY AI Helm chart](/install/deploy/helm-chart). Required for [Task 5](#task-5-configure-mostly-ai-helm-chart).
-    * (Optional) MOSTLY AI image repository pull secret. Required only if you intend to use the MOSTLY AI image repository to pull the container images. Optional for [Task 5](#task-5-configure-mostly-ai-helm-chart).
-    * First-time log in credentials for the MOSTLY AI application. Required in [Task 8](#task-8-log-in-to-your-mostly-ai-deployment).
+- Create an [Azure account](https://learn.microsoft.com/en-us/dotnet/azure/create-azure-account).
+- Create an [Azure subscription](https://learn.microsoft.com/en-us/azure/cost-management-billing/manage/create-subscription).
+- Install [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli).
+- Install [kubectl](https://kubernetes.io/docs/tasks/tools/).
+- Install [helm](https://helm.sh/docs/intro/install/).
+- Prepare a fully-qualified domain name (FQDN). A TLS certificate is optional.
+- Obtain deployment details from your Customer Experience Engineer.
+  - [MOSTLY AI Helm chart](/install/deploy/helm-chart). Required for [Task 5](#task-5-configure-mostly-ai-helm-chart).
+  - (Optional) MOSTLY AI image repository pull secret. Required only if you intend to use the MOSTLY AI image repository to pull the container images. Optional for [Task 5](#task-5-configure-mostly-ai-helm-chart).
+  - First-time log in credentials for the MOSTLY AI application. Required in [Task 8](#task-8-log-in-to-your-mostly-ai-deployment).
 
 ## Pre-deployment
 
 Before you deploy MOSTLY AI to an Azure AKS cluster, you need to complete several pre-deployment tasks.
 
-* [Task 1: Create an AKS cluster](#task-1-create-an-aks-cluster)
-* [Task 2: Log in to the Azure CLI](#task-2-log-in-to-the-azure-cli)
-* [Task 3: Connect to the Azure AKS cluster](#task-3-connect-to-the-azure-aks-cluster)
-* [Task 4: Configure an ingress controler](#task-4-configure-an-ingress-controller)
+- [Task 1: Create an AKS cluster](#task-1-create-an-aks-cluster)
+- [Task 2: Log in to the Azure CLI](#task-2-log-in-to-the-azure-cli)
+- [Task 3: Connect to the Azure AKS cluster](#task-3-connect-to-the-azure-aks-cluster)
+- [Task 4: Configure an ingress controler](#task-4-configure-an-ingress-controller)
 
 ### Task 1. Create an AKS cluster
 
@@ -39,129 +39,57 @@ Use the **Create Kubernetes cluster** wizard in Azure to create your AKS cluster
 **Steps**
 
 1. Log in to Microsoft Azure and select **Create a resource**.
-    <Image 
-        src="/docs/docimages/install/azure-aks/01-azure-01-select-create-a-resource.webp"
-        alt="Azure - Create AKS cluster - Select Create a resource"
-        width={800}
-        height={700}
-    />
+   <Image src="/docimages/install/azure-aks/01-azure-01-select-create-a-resource.webp" alt="Azure - Create AKS cluster - Select Create a resource" width={800} height={700} />
 2. In the services search bar, type `aks` and press Enter.
-    <Image 
-        src="/docs/docimages/install/azure-aks/01-azure-02-search-aks.webp"
-        alt="Azure - Create AKS cluster - Search for 'aks'"
-        width={800}
-        height={700}
-    />
+   <Image src="/docimages/install/azure-aks/01-azure-02-search-aks.webp" alt="Azure - Create AKS cluster - Search for 'aks'" width={800} height={700} />
 3. From the results, select **Azure Kubernetes Service (AKS)**.
-    <Image 
-        src="/docs/docimages/install/azure-aks/01-azure-03-select-azure-kubernetes-services.webp"
-        alt="Azure - Create AKS cluster - Select Azure Kubernetes Services"
-        width={800}
-        height={700}
-    />
+   <Image src="/docimages/install/azure-aks/01-azure-03-select-azure-kubernetes-services.webp" alt="Azure - Create AKS cluster - Select Azure Kubernetes Services" width={800} height={700} />
 4. Click **Create**.
-    <Image 
-        src="/docs/docimages/install/azure-aks/01-azure-04-click-create.webp"
-        alt="Azure - Create AKS cluster - Click Create on AKS page"
-        width={450}
-        height={700}
-    />
-    **Step result**: The **Create Kubernetes cluster** wizard starts.
+   <Image src="/docimages/install/azure-aks/01-azure-04-click-create.webp" alt="Azure - Create AKS cluster - Click Create on AKS page" width={450} height={700} />
+   **Step result**: The **Create Kubernetes cluster** wizard starts.
 5. Configure the **Basics** page of the wizard.
-    <Callout>
-    You can change the settings below to suit your needs. The steps provide a minimal configuration to help you set up a new cluster quickly.
-    </Callout>
-    1. For **Subscription**, select the Azure subscription you want to use for the cluster.
-    <br />For more information, see the [Prerequisites](#prerequisites).
-    2. For **Resource group**, define a new resource group for your MOSTLY AI cluster.
-    <br />For more information, see [Manage resource groups](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-portal) in the _Azure documentation_.
-    3. For **Cluster preset configuration**, select **Production Standard**.
-    4. For **Kubernetes cluster name**, define the cluster name.
-    <br />For example, `MOSTLYAI-AKS`.
-    5. (Optional) For **Region**, select the region to use for the cluster.
-        <Image 
-            src="/docs/docimages/install/azure-aks/01-azure-05-basics-page.webp"
-            alt="Azure - Create AKS cluster - Configure Basic page of Create cluster wizard"
-            width={450}
-            height={700}
-        />
-    6. Retain the remaining default options and click **Next**.
+   <Callout>You can change the settings below to suit your needs. The steps provide a minimal configuration to help you set up a new cluster quickly.</Callout>
+   1. For **Subscription**, select the Azure subscription you want to use for the cluster.
+   <br />
+   For more information, see the [Prerequisites](#prerequisites). 2. For **Resource group**, define a new resource group for your MOSTLY AI cluster.
+   <br />
+   For more information, see [Manage resource groups](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-portal) in the _Azure documentation_. 3. For **Cluster preset configuration**, select **Production Standard**. 4. For **Kubernetes cluster name**, define the cluster name.
+   <br />
+   For example, `MOSTLYAI-AKS`. 5. (Optional) For **Region**, select the region to use for the cluster.
+   <Image src="/docimages/install/azure-aks/01-azure-05-basics-page.webp" alt="Azure - Create AKS cluster - Configure Basic page of Create cluster wizard" width={450} height={700} />
+   6. Retain the remaining default options and click **Next**.
 6. Configure the **Node pools** page of the wizard.
-    1. For the **agentpool** node pool, click the **Node size** entry.
-        <Image 
-            src="/docs/docimages/install/azure-aks/01-azure-06-click-node-size.webp"
-            alt="Azure - Create AKS cluster - Click node size"
-            width={450}
-            height={700}
-        />
-    2. On the **Update node pool** page, for **Node size** click **Choose a size**.
-        <Image 
-            src="/docs/docimages/install/azure-aks/01-azure-07-choose-node-size.webp"
-            alt="Azure - Create AKS cluster - Choose a node size"
-            width={450}
-            height={700}
-        />
-    3. On the **Select a VM size** page, select **D8s_v3** and click **Select**.
-        <Image 
-            src="/docs/docimages/install/azure-aks/01-azure-08-select-vm-size.webp"
-            alt="Azure - Create AKS cluster - Select VM size"
-            width={800}
-            height={700}
-        />
-    4. Back on the **Update node pool** page, for **Scale method**, select **Manual** and leave **Node count** to **1**.
-        <Image 
-            src="/docs/docimages/install/azure-aks/01-azure-09-scale-node-count.webp"
-            alt="Azure - Create AKS cluster - Select Scale method and Node count"
-            width={450}
-            height={700}
-        />
-    5. For the **userpool** node pool, click the **Node size** entry.
-        <Image
-            src="/docs/docimages/install/azure-aks/01-azure-09.02-click-userpool-node-size.webp"
-            alt="Azure - Create AKS cluster - Select userpool node size"
-            width={450}
-            height={700}
-        />
-    6. On the **Update node pool** page, for **Node size** click **Choose a size**.
-    7. On the **Select a VM size** page, select **Standard_D16ls_v5** and click **Select**.
-    8. Back on the **Update node pool** page, for **Scale method**, select **Manual** and leave **Node count** to **2**.
-    9. Click **Next**.
+   1. For the **agentpool** node pool, click the **Node size** entry.
+      <Image src="/docimages/install/azure-aks/01-azure-06-click-node-size.webp" alt="Azure - Create AKS cluster - Click node size" width={450} height={700} />
+   2. On the **Update node pool** page, for **Node size** click **Choose a size**.
+      <Image src="/docimages/install/azure-aks/01-azure-07-choose-node-size.webp" alt="Azure - Create AKS cluster - Choose a node size" width={450} height={700} />
+   3. On the **Select a VM size** page, select **D8s_v3** and click **Select**.
+      <Image src="/docimages/install/azure-aks/01-azure-08-select-vm-size.webp" alt="Azure - Create AKS cluster - Select VM size" width={800} height={700} />
+   4. Back on the **Update node pool** page, for **Scale method**, select **Manual** and leave **Node count** to **1**.
+      <Image src="/docimages/install/azure-aks/01-azure-09-scale-node-count.webp" alt="Azure - Create AKS cluster - Select Scale method and Node count" width={450} height={700} />
+   5. For the **userpool** node pool, click the **Node size** entry.
+      <Image src="/docimages/install/azure-aks/01-azure-09.02-click-userpool-node-size.webp" alt="Azure - Create AKS cluster - Select userpool node size" width={450} height={700} />
+   6. On the **Update node pool** page, for **Node size** click **Choose a size**.
+   7. On the **Select a VM size** page, select **Standard_D16ls_v5** and click **Select**.
+   8. Back on the **Update node pool** page, for **Scale method**, select **Manual** and leave **Node count** to **2**.
+   9. Click **Next**.
 7. Configure the **Networking** page of the wizard.
-    1. For **Network policy**, select **None**.    
-        <Image 
-            src="/docs/docimages/install/azure-aks/01-azure-10-network-policy.webp"
-            alt="Azure - Select Network policy - None"
-            width={800}
-            height={700}
-        />
+   1. For **Network policy**, select **None**.
+      <Image src="/docimages/install/azure-aks/01-azure-10-network-policy.webp" alt="Azure - Select Network policy - None" width={800} height={700} />
 8. (Optional) Review the **Integrations**, **Advanced**, and **Tags** pages.
 9. Click **Review + Create**.
 10. If the final configuration validation completes, click **Create**.
-    <Image 
-        src="/docs/docimages/install/azure-aks/01-azure-11-config-validation-complete.webp"
-        alt="Azure - Select Network policy - None"
-        width={450}
-        height={700}
-    />
+    <Image src="/docimages/install/azure-aks/01-azure-11-config-validation-complete.webp" alt="Azure - Select Network policy - None" width={450} height={700} />
 
 **Result**
 
 The cluster deployment starts. Wait several minutes until Azure creates your AKS cluster.
 
-<Image 
-    src="/docs/docimages/install/azure-aks/01-azure-12-cluster-creation-in-progress.webp"
-    alt="Azure - Select Network policy - None"
-    width={800}
-    height={700}
-/>
+<Image src="/docimages/install/azure-aks/01-azure-12-cluster-creation-in-progress.webp" alt="Azure - Select Network policy - None" width={800} height={700} />
 
 When the cluster is created, Azure reports that the deployment is complete.
-<Image 
-    src="/docs/docimages/install/azure-aks/01-azure-13-cluster-deployment-complete.webp"
-    alt="Azure - Select Network policy - None"
-    width={800}
-    height={700}
-/>
+
+<Image src="/docimages/install/azure-aks/01-azure-13-cluster-deployment-complete.webp" alt="Azure - Select Network policy - None" width={800} height={700} />
 
 ### Task 2. Log in to the Azure CLI
 
@@ -171,14 +99,15 @@ As listed in the [Prerequisites](#prerequisites), install the Azure CLI and use 
 
 1. In a web browser, log in to your Azure account.
 2. Log in to the Azure CLI.
-    ```bash copy
-    az login
-    ```
-**Result**
+   `bash copy
+az login
+`
+   **Result**
 
 The command opens a browser window where it authenticates the Azure CLI.
 
 In the command line, you should see output similar to the following:
+
 <Callout>
 Real values are obfuscated with asterisks (`*`).
 </Callout>
@@ -209,42 +138,20 @@ You can find the exact Azure CLI commands to connect to your AKS cluster from th
 **Steps**
 
 1. From the AKS cluster page, click **Connect to cluster**.
-    <Image 
-        src="/docs/docimages/install/azure-aks/03-connect-to-cluster-01-cluster-page-connect.webp"
-        alt="Azure AKS cluster page - Click Connect to cluster"
-        width={800}
-        height={700}
-    />
+   <Image src="/docimages/install/azure-aks/03-connect-to-cluster-01-cluster-page-connect.webp" alt="Azure AKS cluster page - Click Connect to cluster" width={800} height={700} />
 2. Copy and run the commands to connect to your cluster.
-    <Image 
-        src="/docs/docimages/install/azure-aks/03-connect-to-cluster-02-copy-commands.webp"
-        alt="Azure AKS cluster page - Run commands to connect to the cluster"
-        width={800}
-        height={700}
-    />
-    1. Use the Azure CLI to set the account subscription.
-        <Callout>
-        Real values are obfuscated with asterisks (`*`).
-        </Callout>
-        ```bash copy
-        az account set --subscription ********-4a22-414c-a2a6-************
-        ```
-    2. Set the credentials to register your AKS cluster as the current CLI context.
-        ```bash copy
-        az aks get-credentials --resource-group MOSTLYAI-AKS --name MOSTLYAI-AKS
-        ```
-        You should see output similar to the following:
-        ```cli
-        Merged "MOSTLYAI-AKS" as current context in /Users/mostlyzach/.kube/config
-        ```
+   <Image src="/docimages/install/azure-aks/03-connect-to-cluster-02-copy-commands.webp" alt="Azure AKS cluster page - Run commands to connect to the cluster" width={800} height={700} />
+   1. Use the Azure CLI to set the account subscription.
+   <Callout>Real values are obfuscated with asterisks (`*`).</Callout>
+   ```bash copy az account set --subscription ********-4a22-414c-a2a6-************ ``` 2. Set the credentials to register your AKS cluster as the current CLI context. ```bash copy az aks get-credentials --resource-group MOSTLYAI-AKS --name MOSTLYAI-AKS ``` You should see output similar to the following: ```cli Merged "MOSTLYAI-AKS" as current context in /Users/mostlyzach/.kube/config ```
 3. (Optional) Check the cluster name of your current CLI context.
-    ```bash copy
-    kubectl config view --minify -o jsonpath='{.clusters[].name}'
-    ```
-    Depending on the cluster name you defined (in our case `MOSTLYAI-AKS`), you should see output similar to the following:
-    ```
-    MOSTLYAI-AKS%
-    ```
+   ```bash copy
+   kubectl config view --minify -o jsonpath='{.clusters[].name}'
+   ```
+   Depending on the cluster name you defined (in our case `MOSTLYAI-AKS`), you should see output similar to the following:
+   ```
+   MOSTLYAI-AKS%
+   ```
 
 **Result**
 
@@ -260,9 +167,9 @@ For details on how to configure each, see [_Ingress controllers_](../config/ingr
 
 When you are ready with the pre-deployment tasks, you can configure your deployment in the `values.yaml` file and use the `helm` command to start the deployment process.
 
-* [Task 5. Configure MOSLTY AI Helm chart](#task-5-configure-mostly-ai-helm-chart)
-* [Task 6. Add taints to the worker nodes pool](#task-6-add-taints-to-the-worker-nodes-pool)
-* [Task 7. Deploy MOSTLY AI](#task-7-deploy-mostly-ai)
+- [Task 5. Configure MOSLTY AI Helm chart](#task-5-configure-mostly-ai-helm-chart)
+- [Task 6. Add taints to the worker nodes pool](#task-6-add-taints-to-the-worker-nodes-pool)
+- [Task 7. Deploy MOSTLY AI](#task-7-deploy-mostly-ai)
 
 ### Task 5. Configure MOSTLY AI Helm chart
 
@@ -274,69 +181,44 @@ As mentioned in the [Prerequisites](#prerequisites), you need to obtain the [MOS
 
 1. Open the `values.yaml` file in a text editor.
 2. At the start, set the application domain name to an FQDN.
-    <Callout>
-    `minio` is the shared storage service.
-    </Callout>
-    ```yaml filename="values.yaml" copy {3-4}
-    _customerInstallation:
-      domainNames:
-        mostly-ai: &fqdn yourfqdn.com
-    ```
-2. (Optional) Apply one of the configurations below depending on whether you intend to use TLS-encrypted access to the MOSTLY AI application.<br /><br />
-    **➡️ You use an TLS certificate**. Replace `your-tls-secret` with the TLS secret name as defined in your cluster configuration.
-    <Callout>
-    Your IT department or Kubernetes administrator creates the FQDN and its TLS certificate and adds it to the configuration of your cluster. When added, it comes with a TLS secret name that you can define in the `values.yaml` file. For details, see [_Configure your domain TLS certificate_](/install/config/domain-tls-cert).
-    </Callout>
-    ```yaml filename="values.yaml" copy {4}
-    _customerInstallation:
-    ...
-      deploymentSettings:
-        tlsSecretName: &tlsSecretName your-tls-secret
-    ...
-    ```
-    **➡️ You do not use an TLS certificate**. Replace the  `your-tls-secret` with an empty string and, for `global.tls`, set `enabled` to `false`. 
-    ```yaml filename="values.yaml" copy {4,9}
-    _customerInstallation:
-    ...
-      deploymentSettings:
-        tlsSecretName: &tlsSecretName [] # your-tls-secret
-    ...
-    global:
-      ...
-      tls:
-        enabled: false
-    ...
-    ```
-3. (Optional) If you host third-party container images in an internal repository, replace `docker.io` in `registryFor3rdPartyComponents`.
-    ```yaml filename="values.yaml" copy {5}
-    _customerInstallation:
-    ...
-      deploymentSettings:
-      ...
-        registryFor3rdPartyComponents: &registryFor3rdPartyComponents docker.io
-    ...
-    ```
-4. (Optional) If you need to host MOSTLY AI container images in an internal repository, replace `quay.io/mostlyai` in `mostlyRegistry`.
-    ```yaml filename="values.yaml" copy {5}
-    _customerInstallation:
-    ...
-      deploymentSettings:
-      ...
-        mostlyRegistry: &mostlyRegistry quay.io/mostlyai
-    ...
-    ```
-5. (Optional) If you intend to use the MOSTLY AI image repository at `quay.io/mostlyai`, set its secret in `mostlyRegistryDockerConfigJson`.
-    <Callout>
-    To obtain the secret, contact your MOSTLY AI Customer Experience Engineer.
-    </Callout>
-    ```yaml filename="values.yaml" copy {5}
-    _customerInstallation:
-    ...
-      deploymentSettings:
-      ...
-        mostlyRegistryDockerConfigJson: &mostlyRegistryDockerConfigJson <HARBOR_SECRET>
-    ...
-    ```
+   <Callout>`minio` is the shared storage service.</Callout>
+   ```yaml filename="values.yaml" copy {3 - 4}
+   _customerInstallation: domainNames: mostly-ai: &fqdn yourfqdn.com ```
+3. (Optional) Apply one of the configurations below depending on whether you intend to use TLS-encrypted access to the MOSTLY AI application.<br /><br />
+   **➡️ You use an TLS certificate**. Replace `your-tls-secret` with the TLS secret name as defined in your cluster configuration.
+   <Callout>Your IT department or Kubernetes administrator creates the FQDN and its TLS certificate and adds it to the configuration of your cluster. When added, it comes with a TLS secret name that you can define in the `values.yaml` file. For details, see [_Configure your domain TLS certificate_](/install/config/domain-tls-cert).</Callout>
+   ```yaml filename="values.yaml" copy {4}
+   _customerInstallation: ... deploymentSettings: tlsSecretName: &tlsSecretName your-tls-secret ... ``` **➡️ You do not use an TLS certificate**. Replace the `your-tls-secret` with an empty string and, for `global.tls`, set `enabled` to `false`. ```yaml filename="values.yaml" copy {(4, 9)}
+   _customerInstallation: ... deploymentSettings: tlsSecretName: &tlsSecretName [] # your-tls-secret ... global: ... tls: enabled: false ... ```
+4. (Optional) If you host third-party container images in an internal repository, replace `docker.io` in `registryFor3rdPartyComponents`.
+   ```yaml filename="values.yaml" copy {5}
+   _customerInstallation:
+   ...
+     deploymentSettings:
+     ...
+       registryFor3rdPartyComponents: &registryFor3rdPartyComponents docker.io
+   ...
+   ```
+5. (Optional) If you need to host MOSTLY AI container images in an internal repository, replace `quay.io/mostlyai` in `mostlyRegistry`.
+   ```yaml filename="values.yaml" copy {5}
+   _customerInstallation:
+   ...
+     deploymentSettings:
+     ...
+       mostlyRegistry: &mostlyRegistry quay.io/mostlyai
+   ...
+   ```
+6. (Optional) If you intend to use the MOSTLY AI image repository at `quay.io/mostlyai`, set its secret in `mostlyRegistryDockerConfigJson`.
+   <Callout>To obtain the secret, contact your MOSTLY AI Customer Experience Engineer.</Callout>
+
+```yaml filename="values.yaml" copy {5}
+_customerInstallation:
+...
+  deploymentSettings:
+  ...
+    mostlyRegistryDockerConfigJson: &mostlyRegistryDockerConfigJson <HARBOR_SECRET>
+...
+```
 
 **Result**
 
@@ -350,30 +232,15 @@ The MOSTLY AI worker pods can only run on nodes with the `engine-jobs` taint. Yo
 
 1. For your Azure AKS cluster, select **Settings** > **Node pools**.
 2. Select the `userpool` node pool.
-    <Image
-        src="/docs/docimages/install/azure-aks/xx-taint-node-pools-01-select-userpool.webp"
-        alt="Deploy MOSTLY AI to Azure AKS - Node pools"
-        width={550}
-        height={700}
-    />
+   <Image src="/docimages/install/azure-aks/xx-taint-node-pools-01-select-userpool.webp" alt="Deploy MOSTLY AI to Azure AKS - Node pools" width={550} height={700} />
 3. For **Taints**, click **edit**.
-    <Image
-        src="/docs/docimages/install/azure-aks/xx-taint-node-pools-02-click-edit-for-taints.webp"
-        alt="Deploy MOSTLY AI to Azure AKS - Edit taints"
-        width={800}
-        height={700}
-    />
+   <Image src="/docimages/install/azure-aks/xx-taint-node-pools-02-click-edit-for-taints.webp" alt="Deploy MOSTLY AI to Azure AKS - Edit taints" width={800} height={700} />
 4. Add the `engine-jobs` taint with the `NoSchedule` effect.
-    1. For **Key**, enter `scheduling.mostly.ai/node`.
-    2. For **Value**, enter `engine-jobs`.
-    3. For **Effect**, select `NoSchedule`.
-    4. Click **Save**.
-        <Image
-            src="/docs/docimages/install/azure-aks/xx-taint-node-pools-03-define-taint.webp"
-            alt="Deploy MOSTLY AI to Azure AKS - Define taint"
-            width={800}
-            height={700}
-        />
+   1. For **Key**, enter `scheduling.mostly.ai/node`.
+   2. For **Value**, enter `engine-jobs`.
+   3. For **Effect**, select `NoSchedule`.
+   4. Click **Save**.
+      <Image src="/docimages/install/azure-aks/xx-taint-node-pools-03-define-taint.webp" alt="Deploy MOSTLY AI to Azure AKS - Define taint" width={800} height={700} />
 
 **Result**
 
@@ -386,31 +253,26 @@ With all required configurations made in the `values.yaml` and worker nodes tain
 **Steps**
 
 1. Create the `mostly-ai` namespace.
-    ```bash copy
-    kubectl create ns mostly-ai
-    ```
+   ```bash copy
+   kubectl create ns mostly-ai
+   ```
 2. Deploy the MOSTLY AI Helm chart.
-    ```bash copy
-    helm upgrade --install mostly-ai ./mostly-combined --values values.yaml --namespace mostly-ai
-    ```
-    The result from the command should be similar to the following. If you see errors, see the [Troubleshooting](#troubleshooting) section.
-    ```
-    Release "mostly-ai" does not exist. Installing it now.
-    NAME: mostly-ai
-    LAST DEPLOYED: Fri Nov 10 18:45:58 2023
-    NAMESPACE: mostly-ai
-    STATUS: deployed
-    REVISION: 1
-    TEST SUITE: None
-    ```
+   ```bash copy
+   helm upgrade --install mostly-ai ./mostly-combined --values values.yaml --namespace mostly-ai
+   ```
+   The result from the command should be similar to the following. If you see errors, see the [Troubleshooting](#troubleshooting) section.
+   ```
+   Release "mostly-ai" does not exist. Installing it now.
+   NAME: mostly-ai
+   LAST DEPLOYED: Fri Nov 10 18:45:58 2023
+   NAMESPACE: mostly-ai
+   STATUS: deployed
+   REVISION: 1
+   TEST SUITE: None
+   ```
 3. In Azure, go to your AKS cluster and select **Workloads**.<br />
-    Initially, all of the MOSTLY AI pods are in progress of starting and connecting to storage and to each services. Wait for a few minutes until AKS provisions pods and all pods connect successfully to all required services.
-    <Image 
-        src="/docs/docimages/install/azure-aks/06-deploy-01-workloads-started.webp"
-        alt="Deploy MOSTLY AI to Azure AKS - Pods started"
-        width={800}
-        height={700}
-    />
+   Initially, all of the MOSTLY AI pods are in progress of starting and connecting to storage and to each services. Wait for a few minutes until AKS provisions pods and all pods connect successfully to all required services.
+   <Image src="/docimages/install/azure-aks/06-deploy-01-workloads-started.webp" alt="Deploy MOSTLY AI to Azure AKS - Pods started" width={800} height={700} />
 
 ## Post-deployment
 
@@ -427,13 +289,8 @@ Contact MOSTLY AI to obtain the `superadmin` credentials. You need them to log i
 **Steps**
 
 1. Open your FQDN in your browser.<br />
-    **Step result**: You **Sign in** page for your MOSTLY AI deployment opens.
-    <Image
-        src="/docs/docimages/install/minikube/02-minikube-dashboard-01-post-deployment-red.webp"
-        alt="MOSTLY AI Deployment - Log in page"
-        width={800}
-        height={300}
-    />
+   **Step result**: You **Sign in** page for your MOSTLY AI deployment opens.
+   <Image src="/docimages/install/minikube/02-minikube-dashboard-01-post-deployment-red.webp" alt="MOSTLY AI Deployment - Log in page" width={800} height={300} />
 2. Enter the superadmin credentials and click **Sign in**.
 3. Provide a new password and click **Change password**.
 
@@ -458,18 +315,14 @@ Use the Azure CLI to delete your AKS cluster.
 **Steps**
 
 1. Obtain your cluster name and resource group name in Azure.
-    
-    <Image 
-        src="/docs/docimages/install/azure-aks/uninstall-02-delete-cluster.webp"
-        alt="Uninstall MOSTLY AI - obtain Azure AKS cluster name and resource group"
-        width={450}
-        height={700}
-    />
+
+   <Image src="/docimages/install/azure-aks/uninstall-02-delete-cluster.webp" alt="Uninstall MOSTLY AI - obtain Azure AKS cluster name and resource group" width={450} height={700} />
+
 2. Delete your cluster with the following command.
-    ```bash copy
-    az aks delete --name MyClusterName --resource-group MyResourceGroup
-    ```
+   ```bash copy
+   az aks delete --name MyClusterName --resource-group MyResourceGroup
+   ```
 3. Enter `y` and press Enter at the prompt.
-    ```
-    Are you sure you want to perform this operation? (y/n): y
-    ```
+   ```
+   Are you sure you want to perform this operation? (y/n): y
+   ```

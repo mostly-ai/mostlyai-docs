@@ -1,16 +1,17 @@
 ---
 title: 'Live probing'
-description: 'You can use the MOSTLY AI Python SDK to probe a trained generator for a number of synthetic samples in real-time without the need to generate a synthetic dataset.'
+description: 'You can use the MOSTLY AI Synthetic Data SDK to probe a trained generator for a number of synthetic samples in real-time without the need to generate a synthetic dataset.'
 ---
 
 # Live probing of generators
 
-You can use the MOSTLY AI Python SDK to probe a trained generator for a number of synthetic samples in real-time without the need to generate a synthetic dataset.
+You can use the MOSTLY AI Synthetic Data SDK to probe a trained generator for a number of synthetic samples in real-time without the need to generate a synthetic dataset.
 
 ```bash copy filename="python"
 g = mostly.generators.get('INSERT_GENERATOR_ID') # Get the generator by its ID
 sp = mostly.probe(g, size=3)                       # Probe the generator for 3 synthetic samples
 ```
+
 Based on the specified `size`, you get 3 synthetic data samples generated.
 
 ```

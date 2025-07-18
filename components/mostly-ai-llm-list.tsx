@@ -8,18 +8,18 @@ const ModelsList = () => {
   const [isMostlyAiDocs, setIsMostlyAiDocs] = useState(false);
 
   useEffect(() => {
-    // Check if the current URL contains 'https://mostly.ai/docs' or `vercel.app/docs` for preview deployments
+    // Check if the current URL contains 'https://docs.mostly.ai' or `vercel.app` for preview deployments
     const currentUrl = window.location.href;
     if (
-      currentUrl.includes('https://mostly.ai/docs') || 
-      currentUrl.includes('vercel.app/docs') ||
+      currentUrl.includes('https://docs.mostly.ai') ||
+      currentUrl.includes('vercel.app') ||
       currentUrl.includes('localhost:3000') // For local testing: (1) keep to test dynamic LLMs retrieval, (2) remove to test the static callout for Enterprise deployments
     ) {
       setIsMostlyAiDocs(true);
 
       const fetchModels = async () => {
         try {
-          const response = await fetch('/docs/api/proxy', {
+          const response = await fetch('/api/proxy', {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
@@ -58,10 +58,7 @@ const ModelsList = () => {
           } else {
             return (
               <li key={model} className="_my-2">
-                <a
-                  className="_text-primary-600 _underline _decoration-from-font [text-underline-position:from-font]"
-                  href={`https://huggingface.co/${model}`}
-                >
+                <a className="_text-primary-600 _underline _decoration-from-font [text-underline-position:from-font]" href={`https://huggingface.co/${model}`}>
                   {model}
                 </a>
               </li>
@@ -74,18 +71,19 @@ const ModelsList = () => {
     return (
       <Callout type="info">
         This an Enterprise deployment of MOSTLY AI Documentation.
-        <br /><br />
-        For the list of LLMs that MOSTLY AI provides, go to the Free version at 
-        <a 
-          className="_text-primary-600 _underline _decoration-from-font [text-underline-position:from-font]"
-          href="https://app.mostly.ai"
-        > https://app.mostly.ai </a> 
-        or check the 
-        <a
-          className="_text-primary-600 _underline _decoration-from-font [text-underline-position:from-font]"
-          href="https://mostly.ai/docs/generators/configure/set-encoding-types#huggingface-llms"
-        > public documentation
-        </a>.
+        <br />
+        <br />
+        For the list of LLMs that MOSTLY AI provides, go to the Free version at
+        <a className="_text-primary-600 _underline _decoration-from-font [text-underline-position:from-font]" href="https://app.mostly.ai">
+          {' '}
+          https://app.mostly.ai{' '}
+        </a>
+        or check the
+        <a className="_text-primary-600 _underline _decoration-from-font [text-underline-position:from-font]" href="https://docs.mostly.ai/generators/configure/set-encoding-types#huggingface-llms">
+          {' '}
+          public documentation
+        </a>
+        .
       </Callout>
     );
   }

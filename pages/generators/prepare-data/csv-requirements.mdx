@@ -3,8 +3,8 @@ title: 'CSV requirements'
 description: 'To successfully synthesize your dataset, the content must be encoded in UTF-8, have commas (,) or semicolons (;) as comma separators, and contain the column names as a header row.'
 ---
 
-import Image from 'next/image'
-import { Callout } from 'nextra/components'
+import Image from 'next/image';
+import { Callout } from 'nextra/components';
 
 # CSV requirements
 
@@ -13,50 +13,48 @@ typed data types. But data can be certainly also provided in CSV format, either 
 given they adhere to the following rules. They must be encoded in UTF-8, use commas (`,`), semicolons (`;`) or tab (`\t`) as
 column separators, and start with a single header line, containing the column names.
 
-<Image 
-    src="/docs/docimages/generators/prepare-your-data/csv-requirements.webp" 
-    alt="CSV requirements" 
-    width={800} 
-    height={150}
-/>
+<Image src="/docimages/generators/prepare-your-data/csv-requirements.webp" alt="CSV requirements" width={800} height={150} />
 
 ## 1. Header row
 
-* The first row must contain the column names.
-* Each column name in a table must be unique.
+- The first row must contain the column names.
+- Each column name in a table must be unique.
 
 ## 2. Rows
 
-* Each row in the file must contain the same number of cells.
+- Each row in the file must contain the same number of cells.
 
 ## 3. Alphanumeric entries (text, categories, strings)
 
-* Entries containing line breaks, and spaces at the beginning or end, must be quoted with double-quotes.
+- Entries containing line breaks, and spaces at the beginning or end, must be quoted with double-quotes.
+
 ```
 “this is, one column”
 “this is \n two lines”
 “ space at the beginning and end “
 ```
-* double quotes in entries must be escaped with double quotes itself
+
+- double quotes in entries must be escaped with double quotes itself
+
 ```
 “this does contain “”quoted text”””
 ```
 
 ## 4. Datetime values
 
-* must be encoded in one of the formats below
-* missing values must appear as empty strings
+- must be encoded in one of the formats below
+- missing values must appear as empty strings
 
-| | Format | Example |
-| --- | --- | --- |
-| **Date** | `yyyy-MM-dd` | `2020-02-08` |
-| **Datetime with hours** | `yyyy-MM-dd HH`<br />`yyyy-MM-ddTHH`<br />`yyyy-MM-ddTHHZ` | `2020-02-08 09`<br />`2020-02-08T09`<br />`2020-02-08T09Z` |
-| **Datetime with minutes** | `yyyy-MM-dd HH:mm`<br />`yyyy-MM-ddTHH:mm`<br />`yyyy-MM-ddTHH:mmZ` | `2020-02-08 09:30`<br />`2020-02-08T09:30`<br />`2020-02-08T09:30Z` |
-| **Datetime with seconds** | `yyyy-MM-dd HH:mm:ss`<br />`yyyy-MM-ddTHH:mm:ss`<br />`yyyy-MM-ddTHH:mm:ssZ` | `2020-02-08 09:30:26`<br />`2020-02-08T09:30:26`<br />`2020-02-08T09:30:26Z` |
+|                                | Format                                                                                   | Example                                                                                  |
+| ------------------------------ | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| **Date**                       | `yyyy-MM-dd`                                                                             | `2020-02-08`                                                                             |
+| **Datetime with hours**        | `yyyy-MM-dd HH`<br />`yyyy-MM-ddTHH`<br />`yyyy-MM-ddTHHZ`                               | `2020-02-08 09`<br />`2020-02-08T09`<br />`2020-02-08T09Z`                               |
+| **Datetime with minutes**      | `yyyy-MM-dd HH:mm`<br />`yyyy-MM-ddTHH:mm`<br />`yyyy-MM-ddTHH:mmZ`                      | `2020-02-08 09:30`<br />`2020-02-08T09:30`<br />`2020-02-08T09:30Z`                      |
+| **Datetime with seconds**      | `yyyy-MM-dd HH:mm:ss`<br />`yyyy-MM-ddTHH:mm:ss`<br />`yyyy-MM-ddTHH:mm:ssZ`             | `2020-02-08 09:30:26`<br />`2020-02-08T09:30:26`<br />`2020-02-08T09:30:26Z`             |
 | **Datetime with milliseconds** | `yyyy-MM-dd HH:mm:ss.SSS`<br />`yyyy-MM-ddTHH:mm:ss.SSS`<br />`yyyy-MM-ddTHH:mm:ss.SSSZ` | `2020-02-08 09:30:26.123`<br />`2020-02-08T09:30:26.123`<br />`2020-02-08T09:30:26.123Z` |
 
 ## 5. Numerical values
 
-* must have a `.` as decimal separator
-* must not have a thousands separator
-* must have missing values encoded as empty strings
+- must have a `.` as decimal separator
+- must not have a thousands separator
+- must have missing values encoded as empty strings

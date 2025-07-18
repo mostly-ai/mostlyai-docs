@@ -15,15 +15,15 @@ Ask your Customer Success Engineer to provide a Helm chart with enabled HAProxy.
 
 1. Edit the `values.yaml` file.
 2. Assign the `ingressClassName` to be `haproxy` under `_customerInstallation.deploymentSettings`.
-    ```yaml filename="values.yaml" copy {5}
-    _customerInstallation:
-      ...
-      deploymentSettings:
-        ...
-        ingressClassName: &ingressClassName haproxy
-        ...
-    ```
-3. Save the file. 
+   ```yaml filename="values.yaml" copy {5}
+   _customerInstallation:
+     ...
+     deploymentSettings:
+       ...
+       ingressClassName: &ingressClassName haproxy
+       ...
+   ```
+3. Save the file.
 
 **What's next**
 

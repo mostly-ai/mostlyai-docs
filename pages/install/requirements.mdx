@@ -3,7 +3,7 @@ title: 'Requirements'
 description: "Before you deploy MOSTLY AI in your organization's cloud, make sure that your environment meets the requirements."
 ---
 
-import { Callout } from 'nextra/components'
+import { Callout } from 'nextra/components';
 
 # Requirements
 
@@ -17,17 +17,18 @@ You can deploy MOSTLY AI in a single-server environment that runs as a single-no
 
 The **minimum requirements** for a successful single-node deployment of MOSTLY AI are as follows:
 
-| Resources   | Size     |
+| Resources   |     Size |
 | ----------- | -------: |
 | **CPU**     | 24 cores |
-| **RAM**     | 48 GB    |
-| **Storage** | 256 GB   |
+| **RAM**     |    48 GB |
+| **Storage** |   256 GB |
 
 Depending on the datasets you intend to synthesize, you might need a node with more compute resources.
 
 <Callout type="info">
-    **Note**<br />
-    To learn how to size your infrastructure based on the size of the datasets you want to synthesize, see the [best practices for virtual machine sizes](/best-practices#virtual-machine-size) and refer to the `resourcesPreset` definitions in the helm charts.
+  **Note**
+  <br />
+  To learn how to size your infrastructure based on the size of the datasets you want to synthesize, see the [best practices for virtual machine sizes](/best-practices#virtual-machine-size) and refer to the `resourcesPreset` definitions in the helm charts.
 </Callout>
 
 ## Multi-node deployments
@@ -42,11 +43,11 @@ The application node runs the web-based user interface and distributes the synth
 
 The **minimum requirements** for the application node are as follows:
 
-| Resources   | Size    |
+| Resources   |    Size |
 | ----------- | ------: |
 | **CPU**     | 8 cores |
-| **RAM**     | 16 GB   |
-| **Storage** | 20 GB   |
+| **RAM**     |   16 GB |
+| **Storage** |   20 GB |
 
 ### Worker nodes minimum requirements
 
@@ -54,15 +55,16 @@ You need at least 1 worker node to run jobs for generator training or synthetic 
 
 The worker nodes are responsible for running and processing each job to train a generator or to generate a synthetic dataset. The **minimum requirements** for each worker node are as follows:
 
-| Resources                       | Size     |
-| ------------------------------- | -------: |
-| **CPU**                         | 16 cores |
-| **RAM**                         | 32 GB    |
-| **Storage**                     | 256 GB   |
+| Resources   |     Size |
+| ----------- | -------: |
+| **CPU**     | 16 cores |
+| **RAM**     |    32 GB |
+| **Storage** |   256 GB |
 
 Depending on the datasets you intend to synthesize, you might need worker nodes with more compute resources.
 
 <Callout type="info">
-    **Note**<br />
-    To learn how to size your infrastructure based on the datasets you want to synthesize, check the [best practices to identify your virtual machine size](/best-practices#virtual-machine-size) and refer to the `resourcesPreset` definitions in the [Helm chart](/install/deploy/helm-chart).
+  **Note**
+  <br />
+  To learn how to size your infrastructure based on the datasets you want to synthesize, check the [best practices to identify your virtual machine size](/best-practices#virtual-machine-size) and refer to the `resourcesPreset` definitions in the [Helm chart](/install/deploy/helm-chart).
 </Callout>

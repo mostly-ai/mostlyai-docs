@@ -3,8 +3,8 @@ title: 'Manage connectors'
 description: 'In MOSTLY AI, you can manage the connections to all of your synthetic data sources and destinations from the Connectors page.'
 ---
 
-import Image from 'next/image'
-import { Callout } from 'nextra/components'
+import Image from 'next/image';
+import { Callout } from 'nextra/components';
 
 # Manage connectors
 
@@ -14,12 +14,7 @@ In MOSTLY AI, you can manage the connections to all of your synthetic data sourc
 
 To view all existing connectors, select **Connectors** from the main menu.
 
-<Image
-    src="/docs/docimages/connectors/connectors-list.webp"
-    alt="Connectors list"
-    width={800}
-    height={500}
-/>
+<Image src="/docimages/connectors/connectors-list.webp" alt="Connectors list" width={800} height={500} />
 
 ## Edit a connector
 
@@ -32,8 +27,12 @@ This might be necessary only if MOSTLY AI encountered errors when saving the con
 1. On the **Connectors** page, click a connector.
 2. Update the connection details.
 3. Click **Save**.<br /><br />
-    MOSTLY AI checks if it can establish a successful connection. If you see an error, check the connection details, update them if necessary, and click **Save** again.<br /><br />
-    You can disregard any errors by clicking **Save anyway** to save the connector details.
+   MOSTLY AI checks if it can establish a successful connection. If you see an error, check the connection details, update them if necessary, and click **Save** again.<br /><br />
+   You can disregard any errors by clicking **Save anyway** to save the connector details.
+
+## Share a connector
+
+You can share a connector with members of your organization, see [Manage Resources](../organizations/manage-resources.mdx#share-a-resource-with-an-organization)
 
 ## Delete a connector
 
@@ -42,10 +41,5 @@ You can delete any of your saved connectors as long as it is not in use by a gen
 **Steps**
 
 1. On the **Connectors** page, hover over a connector, open its kebab menu, and select **Delete**.
-    <Image
-        src="/docs/docimages/connectors/connector-delete-01.webp"
-        alt="Hover over a connector and select Delete"
-        width={800}
-        height={500}
-    />
+   <Image src="/docimages/connectors/connector-delete-01.webp" alt="Hover over a connector and select Delete" width={800} height={500} />
 2. Click **Yes, delete connector** in the confirmation window.

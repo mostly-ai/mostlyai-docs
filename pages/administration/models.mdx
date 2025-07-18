@@ -3,9 +3,9 @@ title: 'Models configuration'
 description: 'Unstructured text generation in MOSTLY AI is available via the configuration of any text generation model available on Hugging Face as well as via the built-in LSTM model (that is not pre-trained) provided by MOSTLY AI.'
 ---
 
-import { Callout } from 'nextra/components'
-import { Tabs } from 'nextra/components'
-import Image from 'next/image'
+import { Callout } from 'nextra/components';
+import { Tabs } from 'nextra/components';
+import Image from 'next/image';
 
 # Models configuration
 
@@ -25,19 +25,9 @@ You need to sign up or use an existing account to obtain a HuggingFace token. Yo
 4. Under **Token type**, select **Read** to use only read permissions for the token.
 5. For **Token name**, provide a name, such as `mostly-ai`.
 6. Click **Create token**.
-    <Image
-        src="/docs/docimages/administration/models/hugging-face-token-01-create-token.webp"
-        alt="HuggingFace - Create a Read token"
-        width={800}
-        height={300}
-    />
+   <Image src="/docimages/administration/models/hugging-face-token-01-create-token.webp" alt="HuggingFace - Create a Read token" width={800} height={300} />
 7. Copy your new token.
-    <Image
-        src="/docs/docimages/administration/models/hugging-face-token-02-copy-token.webp"
-        alt="HuggingFace - Copy token"
-        width={800}
-        height={300}
-    />
+   <Image src="/docimages/administration/models/hugging-face-token-02-copy-token.webp" alt="HuggingFace - Copy token" width={800} height={300} />
 
 ## Add HuggingFace language models
 
@@ -50,26 +40,16 @@ You must be logged in as a superadmin to be able to add or remove HuggingFace mo
 **Steps**
 
 1. In MOSTLY AI, select **Models** from the profile menu.
-    <Image
-        src="/docs/docimages/administration/models/configure-models-01-profile-select-models.webp"
-        alt="MOSTLY AI Models configurations - Select profile menu and then Models"
-        width={800}
-        height={300}
-    />
+   <Image src="/docimages/administration/models/configure-models-01-profile-select-models.webp" alt="MOSTLY AI Models configurations - Select profile menu and then Models" width={800} height={300} />
 2. For HuggingFace token, paste your [HuggingFace token](#create-a-huggingface-token).
 3. Under **Available models**, list the models you want to make available.<br />
-    Use the convention below. Place each model on a new line, without separators.<br />
-    ```
-    provider/Model-Name
-    provider/Model-Name
-    ```
-    <Image
-        src="/docs/docimages/administration/models/01-configure-huggingface-models.webp"
-        alt="MOSTLY AI Deployment - Log in page"
-        width={800}
-        height={300}
-    />
-3. Click **Save**.
+   Use the convention below. Place each model on a new line, without separators.<br />
+   ```
+   provider/Model-Name
+   provider/Model-Name
+   ```
+   <Image src="/docimages/administration/models/01-configure-huggingface-models.webp" alt="MOSTLY AI Deployment - Log in page" width={800} height={300} />
+4. Click **Save**.
 
 **Result**
 
@@ -81,6 +61,6 @@ After a user with `superadmin` privileges adds a model, that model appears in th
 
 After the generator training starts, MOSTLY AI connects to HuggingFace to download the model. At this point, the model is cached and is available for further use without the need to download the model again.
 
-<Callout>
-Internet connection is required to download HuggingFace models. Contact MOSTLY AI to learn how to add models if internet connectivity is not available for your deployment due to security policies.
-</Callout>
+## Manual model download and installation
+
+To install HuggingFace models on airgapped platforms, follow the official [HuggingFace documentation](https://huggingface.co/docs/huggingface_hub/guides/download) for downloading models locally. For gated models, ensure you generate an access token and configure it using `HF_TOKEN`, `HF_TOKEN_PATH`, or by passing it explicitly, as described in their docs. Once downloaded, copy the model files from your local HuggingFace cache (typically in `~/.cache/huggingface/hub`, unless overridden by [environment variables](https://huggingface.co/docs/huggingface_hub/package_reference/environment_variables)) to the [Shared Storage](https://docs.mostly.ai/administration/storage-policy/), in the `models/hub/` subdirectory (e.g. `${BUCKET}/models/hub/`). For a code example, refer to our [MOSTLY AI SDK documentation](https://mostly-ai.github.io/mostlyai/#air-gapped-environments).

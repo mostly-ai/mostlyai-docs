@@ -3,8 +3,8 @@ title: 'Deploy MOSTLY AI to a minikube cluster'
 description: 'One of the options to install MOSTLY AI without the need of a multi-node Kubernetes cluster is to do so on a 1local Kubernetes cluster with `minikube`. More specifically, this page covers the steps to install MOSTLY AI on a Ubuntu Server LTS.'
 ---
 
-import { Callout } from 'nextra/components'
-import Image from 'next/image'
+import { Callout } from 'nextra/components';
+import Image from 'next/image';
 
 # Deploy MOSTLY AI to a minikube cluster
 
@@ -12,157 +12,138 @@ One of the options to install MOSTLY AI without the need of a multi-node Kuberne
 
 ## Prerequisites
 
-* A virtual machine or server that meets the [minimum requirements](/install/requirements).
-    * Ubuntu Server LTS. For example, in terms of an AWS EC2 instance, your virtual machine could be of the type `m5a.8xlarge`
-    * 24 vCPUs minimum
-    * 48GB RAM minimum
-    * 150-200GB disk spae
-* Microsoft Remote Desktop application
+- A virtual machine or server that meets the [minimum requirements](/install/requirements).
+  - Ubuntu Server LTS. For example, in terms of an AWS EC2 instance, your virtual machine could be of the type `m5a.8xlarge`
+  - 24 vCPUs minimum
+  - 48GB RAM minimum
+  - 150-200GB disk spae
+- Microsoft Remote Desktop application
 
 ## Pre-deploy
 
 ### Task 1: Add the Docker repository to APT sources
 
 1. Install the packages needed to use a repository over HTTPS.
-    ```bash copy
-    sudo apt-get install ca-certificates curl gnupg lsb-release
-    ```
+   ```bash copy
+   sudo apt-get install ca-certificates curl gnupg lsb-release
+   ```
 2. Add the official Docker GPG key.
-    ```bash copy
-    sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-    ```
+   ```bash copy
+   sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+   ```
 3. Add the Docker repository to APT sources.
-    ```bash copy
-    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-    ```
+   ```bash copy
+   echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+   ```
 4. Update the `apt` package index.
-    ```bash copy
-    sudo apt-get update
-    ```
+   ```bash copy
+   sudo apt-get update
+   ```
 
 ### Task 2: Install Docker Engine
 
 1. Install Docker, containerd, and Docker Compose.
-    ```bash copy
-    sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y
-    ```
+   ```bash copy
+   sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y
+   ```
 2. Start Docker.
-    ```bash copy
-    sudo systemctl start docker
-    ```
+   ```bash copy
+   sudo systemctl start docker
+   ```
 
 ### Task 3: Install minikube
 
 1. Download the minikube Linux binaries.
-    ```bash copy
-    curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
-    ```
+   ```bash copy
+   curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+   ```
 2. Install the minikube binaries in `/usr/local/bin/minikube`.
-    ```bash copy
-    sudo install minikube-linux-amd64 /usr/local/bin/minikube
-    ```
+   ```bash copy
+   sudo install minikube-linux-amd64 /usr/local/bin/minikube
+   ```
 
 ### Task 4: Install kubectl
 
 1. Download and install the `kubectl` Linux binaries.
-    ```bash copy
-    sudo snap install kubectl --classic
-    ```
+   ```bash copy
+   sudo snap install kubectl --classic
+   ```
 2. Check the `kubectl` version.
-    ```bash copy
-    kubectl version --client
-    ```
-    The output should be similar to the following:
-    ```
-    Client Version: v1.28.3
-    Kustomize Version: v5.0.4-0.20230601165947-6ce0bf390ce3
-    ```
+   ```bash copy
+   kubectl version --client
+   ```
+   The output should be similar to the following:
+   ```
+   Client Version: v1.28.3
+   Kustomize Version: v5.0.4-0.20230601165947-6ce0bf390ce3
+   ```
 
 ### Task 5: Install Ubuntu Desktop
 
 1. Switch from the current user to the super user account `su`.
-    ```bash copy
-    sudo su -
-    ```
+   ```bash copy
+   sudo su -
+   ```
 2. Change the password for the `ubuntu` user.
-    ```bash copy
-    passwd ubuntu
-    ```
+   ```bash copy
+   passwd ubuntu
+   ```
 3. Update the APT package index.
-    ```bash copy
-    sudo apt update
-    ```
+   ```bash copy
+   sudo apt update
+   ```
 4. Install the Ubuntu Desktop package.
-    <Callout>
-    The dependency list for the Ubuntu Desktop is long. It might take several minutes to install all dependent packages.
-    </Callout>
-    ```bash copy
-    sudo apt install ubuntu-desktop
-    ```
+   <Callout>The dependency list for the Ubuntu Desktop is long. It might take several minutes to install all dependent packages.</Callout>
+   ```bash copy sudo apt install ubuntu-desktop ```
 5. Install the `xrdp` package to enable graphical login via RDP (Microsoft Remote Desktop Protocol).
-    ```bash copy
-    sudo apt install xrdp
-    ```
+   ```bash copy
+   sudo apt install xrdp
+   ```
 6. Verify the installation of `xrdp`.
-    ```bash copy
-    sudo systemctl status xrdp
-    ```
-    The output from the command should be similar to the following:
-    ```
-    ● xrdp.service - xrdp daemon
-        Loaded: loaded (/lib/systemd/system/xrdp.service; enabled; vendor preset: enabled)
-        Active: active (running) since Tue 2023-11-07 20:05:16 UTC; 19s ago
-        Docs: man:xrdp(8)
-                man:xrdp.ini(5)
-        Process: 32722 ExecStartPre=/bin/sh /usr/share/xrdp/socksetup (code=exited, status=0/SUCCESS)
-        Process: 32730 ExecStart=/usr/sbin/xrdp $XRDP_OPTIONS (code=exited, status=0/SUCCESS)
-    Main PID: 32731 (xrdp)
-        Tasks: 1 (limit: 75773)
-        Memory: 856.0K
-            CPU: 16ms
-        CGroup: /system.slice/xrdp.service
-                └─32731 /usr/sbin/xrdp
-    ```
-6. Allow connections through the Remote Desktop port `3389`.
-    ```bash copy
-    sudo ufw allow 3389
-    ```
-    The output from the command should be similar to the following:
-    ```bash copy
-    Rules updated
-    Rules updated (v6)
-    ```
+   ```bash copy
+   sudo systemctl status xrdp
+   ```
+   The output from the command should be similar to the following:
+   ```
+   ● xrdp.service - xrdp daemon
+       Loaded: loaded (/lib/systemd/system/xrdp.service; enabled; vendor preset: enabled)
+       Active: active (running) since Tue 2023-11-07 20:05:16 UTC; 19s ago
+       Docs: man:xrdp(8)
+               man:xrdp.ini(5)
+       Process: 32722 ExecStartPre=/bin/sh /usr/share/xrdp/socksetup (code=exited, status=0/SUCCESS)
+       Process: 32730 ExecStart=/usr/sbin/xrdp $XRDP_OPTIONS (code=exited, status=0/SUCCESS)
+   Main PID: 32731 (xrdp)
+       Tasks: 1 (limit: 75773)
+       Memory: 856.0K
+           CPU: 16ms
+       CGroup: /system.slice/xrdp.service
+               └─32731 /usr/sbin/xrdp
+   ```
+7. Allow connections through the Remote Desktop port `3389`.
+   ```bash copy
+   sudo ufw allow 3389
+   ```
+   The output from the command should be similar to the following:
+   ```bash copy
+   Rules updated
+   Rules updated (v6)
+   ```
 
 ### Task 6: Allow RDP connection to the machine
 
-This task describes the process to allow RDP connections to an AWS EC2 instance. 
+This task describes the process to allow RDP connections to an AWS EC2 instance.
 
 **Steps**
 
 1. In AWS, open EC2 and open your instance details.
 2. Select the **Security** tab from the bottom.
 3. Click the **Security group** for the instance.
-    <Image 
-        src="/docs/docimages/install/minikube/00-aws-ec2-01-ec2-instance-security-group.webp"
-        alt="AWS EC2 Security - Select security group"
-        width={800}
-        height={700}
-    />
-3. For **Inbound rules** at the bottom, click **Edit inbound rules**.
-    <Image 
-        src="/docs/docimages/install/minikube/00-aws-ec2-02-edit-inbound-rules.webp"
-        alt="AWS EC2 Security - Click Edit inbound rules"
-        width={800}
-        height={700}
-    />
-4. For **Type**, select **RDP** and for **Source**, select **0.0.0.0/0**.
-5. Click **Save rules**.
-    <Image 
-        src="/docs/docimages/install/minikube/00-aws-ec2-03-select-type-and-cidr.webp"
-        alt="AWS EC2 Security - Select type and CIDR"
-        width={800}
-        height={700}
-    />
+   <Image src="/docimages/install/minikube/00-aws-ec2-01-ec2-instance-security-group.webp" alt="AWS EC2 Security - Select security group" width={800} height={700} />
+4. For **Inbound rules** at the bottom, click **Edit inbound rules**.
+   <Image src="/docimages/install/minikube/00-aws-ec2-02-edit-inbound-rules.webp" alt="AWS EC2 Security - Click Edit inbound rules" width={800} height={700} />
+5. For **Type**, select **RDP** and for **Source**, select **0.0.0.0/0**.
+6. Click **Save rules**.
+   <Image src="/docimages/install/minikube/00-aws-ec2-03-select-type-and-cidr.webp" alt="AWS EC2 Security - Select type and CIDR" width={800} height={700} />
 
 **Result**
 
@@ -176,12 +157,7 @@ This task describes the process to use Microsoft Remote Desktop for macOS. The s
 
 Obtain the public IPv4 address or DNS of your machine. For example, for an EC2 instance, you can copy the value from the **Public IPv4 DNS** or the **Public IPv4 address** fields.
 
-<Image 
-    src="/docs/docimages/install/minikube/01-rdp-01-get-ip-or-hostname.webp"
-    alt="AWS - Obtain instance IPv4 or DNS name"
-    width={800}
-    height={700}
-/>
+<Image src="/docimages/install/minikube/01-rdp-01-get-ip-or-hostname.webp" alt="AWS - Obtain instance IPv4 or DNS name" width={800} height={700} />
 
 **Steps**
 
@@ -189,12 +165,7 @@ Obtain the public IPv4 address or DNS of your machine. For example, for an EC2 i
 2. Select **Add PC**.
 3. Paste the IP address or DNS of your machine and click **Add**.
 4. Double-click the new machine or right-click and select **Connect**.
-    <Image 
-        src="/docs/docimages/install/minikube/01-rdp-02-right-click-machine-connect.webp"
-        alt="AWS - Click Connect for an EC2 instance"
-        width={300}
-        height={700}
-    />
+   <Image src="/docimages/install/minikube/01-rdp-02-right-click-machine-connect.webp" alt="AWS - Click Connect for an EC2 instance" width={300} height={700} />
 5. Enter the `ubuntu` username and password your defined in [Task 5](#task-5-install-ubuntu-desktop).
 6. Enter the password again at the authentication prompt.
 
@@ -209,139 +180,121 @@ From the Ubuntu Terminal app, start minikub following the steps below.
 **Prerequisites**
 
 Add the `docker` user to the `docker` group.
-    ```bash copy
+`bash copy
     sudo usermod -aG docker $USER && newgrp docker
-    ```
+    `
 **Steps**
 
 1. Start a minikube cluster.
-    ```bash copy
-    minikube start --driver=docker --memory 24000 --cpus 14
-    ```
-    <Callout type="default" emoji="💡">
-    **Tip**<br />
-    Use the provided values of 24 GB memory and 14 CPU cores as the minimum requirements to set the default compute required by MOSTLY AI. For all other purposes, increase the values as necessary.
-    </Callout>
-    The output from the command should be similar to the following:
-    ```
-    😀  minikube v1.31.2 on Ubuntu 22.04
-    ✨  Using the docker driver based on user configuration
-    📌  Using Docker driver with root privileges
-    👍  Starting control plane node minikube in cluster minikube
-    🚜  Pulling base image ...
-    💾  Downloading Kubernetes v1.27.4 preload ...
-        > preloaded-images-k8s-v18-v1...:  393.21 MiB / 393.21 MiB  100.00% 39.28 M
-        > gcr.io/k8s-minikube/kicbase...:  447.62 MiB / 447.62 MiB  100.00% 35.84 M
-    🔥  Creating docker container (CPUs=2, Memory=24000MB) ...
-    🐳  Preparing Kubernetes v1.27.4 on Docker 24.0.4 ...
-        ▪ Generating certificates and keys ...
-        ▪ Booting up control plane ...
-        ▪ Configuring RBAC rules ...
-    📎  Configuring bridge CNI (Container Networking Interface) ...
-        ▪ Using image gcr.io/k8s-minikube/storage-provisioner:v5
-    🔍  Verifying Kubernetes components...
-    🌟  Enabled addons: storage-provisioner, default-storageclass
-    🏄  Done! kubectl is now configured to use "minikube" cluster and "default" namespace by default
-    ```
+   ```bash copy
+   minikube start --driver=docker --memory 24000 --cpus 14
+   ```
+   <Callout type="default" emoji="💡">
+     **Tip**
+     <br />
+     Use the provided values of 24 GB memory and 14 CPU cores as the minimum requirements to set the default compute required by MOSTLY AI. For all other purposes, increase the values as necessary.
+   </Callout>
+   The output from the command should be similar to the following: ``` 😀 minikube v1.31.2 on Ubuntu 22.04 ✨ Using the docker driver based on user configuration 📌 Using Docker driver with root privileges 👍 Starting control plane node minikube in cluster minikube 🚜 Pulling base image ... 💾 Downloading Kubernetes v1.27.4 preload ... > preloaded-images-k8s-v18-v1...: 393.21 MiB / 393.21 MiB 100.00% 39.28 M > gcr.io/k8s-minikube/kicbase...: 447.62 MiB / 447.62 MiB 100.00% 35.84 M 🔥 Creating docker container (CPUs=2, Memory=24000MB) ... 🐳 Preparing Kubernetes v1.27.4 on Docker 24.0.4 ... ▪ Generating certificates and keys ... ▪ Booting up control plane ... ▪ Configuring RBAC rules ... 📎 Configuring bridge CNI (Container Networking Interface) ... ▪ Using image gcr.io/k8s-minikube/storage-provisioner:v5 🔍 Verifying Kubernetes components... 🌟 Enabled addons: storage-provisioner, default-storageclass 🏄 Done! kubectl is now configured to use "minikube" cluster and "default" namespace
+   by default ```
 2. (Optional) Make `docker` the default driver. The next time you start minikube, you do not need to specify a driver.
-    ```bash copy
-    minikube config set driver docker
-    ```
+   ```bash copy
+   minikube config set driver docker
+   ```
 
 ### Task 9: Create a namespace to install MOSTLY AI
 
 1. Verify the installation of `kubectl` by listing your pods and namespaces.
-    ```bash copy
-    kubectl get po -A
-    ```
-    The output should be similar to the following listing.
-    ```bash copy
-    NAMESPACE     NAME                                READY     STATUS    RESTARTS    AGE
-    kube-system   coredns-787d4945fb-qw4r8            1/1       Running   0           1m19s
-    kube-system   etcd-minikube                       1/1       Running   0           1m32s
-    kube-system   kube-apiserver-minikube             1/1       Running   0           1m33s
-    kube-system   kube-controller-manager-minikube    1/1       Running   0           1m33s
-    kube-system   kube-proxy-bx9kb                    1/1       Running   0           1m19s
-    kube-system   kube-scheduler-minikub              1/1       Running   0           1m34s
-    kube-system   storage-provisioner                 1/1       Running   0           1m31s
-    ```
+   ```bash copy
+   kubectl get po -A
+   ```
+   The output should be similar to the following listing.
+   ```bash copy
+   NAMESPACE     NAME                                READY     STATUS    RESTARTS    AGE
+   kube-system   coredns-787d4945fb-qw4r8            1/1       Running   0           1m19s
+   kube-system   etcd-minikube                       1/1       Running   0           1m32s
+   kube-system   kube-apiserver-minikube             1/1       Running   0           1m33s
+   kube-system   kube-controller-manager-minikube    1/1       Running   0           1m33s
+   kube-system   kube-proxy-bx9kb                    1/1       Running   0           1m19s
+   kube-system   kube-scheduler-minikub              1/1       Running   0           1m34s
+   kube-system   storage-provisioner                 1/1       Running   0           1m31s
+   ```
 2. Create a namespace for MOSTLY AI.
-    ```bash copy
-    kubectl create ns mostly-ai
-    ```
+   ```bash copy
+   kubectl create ns mostly-ai
+   ```
 3. Verify the newly created `mostly-ai` namespace.
-    ```bash copy
-    kubectl get ns
-    ```
-    The resulting listing should be similar to the following.
-    ```bash copy {6}
-    NAME              STATUS   AGE
-    default           Active   3m
-    kube-node-lease   Active   3m
-    kube-public       Active   3m
-    kube-system       Active   3m
-    mostly-ai         Active   37s
-    ```
+   ```bash copy
+   kubectl get ns
+   ```
+   The resulting listing should be similar to the following.
+   ```bash copy {6}
+   NAME              STATUS   AGE
+   default           Active   3m
+   kube-node-lease   Active   3m
+   kube-public       Active   3m
+   kube-system       Active   3m
+   mostly-ai         Active   37s
+   ```
 4. Set the `mostly-ai` namespace as the default.
-    ```bash copy
-    kubectl config set-context --current --namespace=mostly-ai
-    ```
-    If successful, the result from the command is the following:
-    ```bash copy
-    Context "minikube" modified.
-    ```
+   ```bash copy
+   kubectl config set-context --current --namespace=mostly-ai
+   ```
+   If successful, the result from the command is the following:
+   ```bash copy
+   Context "minikube" modified.
+   ```
 
 ### Task 10: Install required minikube addons
 
 1. Install the NGINX add-on.
-    ```bash copy
-    minikube addons enable ingress
-    ```
+   ```bash copy
+   minikube addons enable ingress
+   ```
 2. Install the volume snapshots add-on.
-    ```bash copy
-    minikube addons enable volumesnapshots
-    ```
+   ```bash copy
+   minikube addons enable volumesnapshots
+   ```
 3. Install the CSI hostpath driver add-on.
-    ```bash copy
-    minikube addons enable csi-hostpath-driver
-    ```
+   ```bash copy
+   minikube addons enable csi-hostpath-driver
+   ```
 4. Verify the installed add-ons.
-    ```bash copy
-    minikube addons list
-    ```
-    The output from the command is a table that should contain the highlight lines below:
-    ```bash {4-6}
-    |-----------------------------|----------|--------------|--------------------------------|
-    |         ADDON NAME          | PROFILE  |    STATUS    |           MAINTAINER           |
-    |-----------------------------|----------|--------------|--------------------------------|
-    | csi-hostpath-driver         | minikube | enabled ✅   | Kubernetes                     |
-    | ingress                     | minikube | enabled ✅   | Kubernetes                     |
-    | volumesnapshots             | minikube | enabled ✅   | Kubernetes                     |
-    |-----------------------------|----------|--------------|--------------------------------|
-    ```
+   ```bash copy
+   minikube addons list
+   ```
+   The output from the command is a table that should contain the highlight lines below:
+   ```bash {4-6}
+   |-----------------------------|----------|--------------|--------------------------------|
+   |         ADDON NAME          | PROFILE  |    STATUS    |           MAINTAINER           |
+   |-----------------------------|----------|--------------|--------------------------------|
+   | csi-hostpath-driver         | minikube | enabled ✅   | Kubernetes                     |
+   | ingress                     | minikube | enabled ✅   | Kubernetes                     |
+   | volumesnapshots             | minikube | enabled ✅   | Kubernetes                     |
+   |-----------------------------|----------|--------------|--------------------------------|
+   ```
 
 ### Task 11: Install Helm
 
 1. Add the Helm GPG key.
-    ```bash copy
-    curl https://baltocdn.com/helm/signing.asc | gpg --dearmor | sudo tee /usr/share/keyrings/helm.gpg > /dev/null
-    ```
+   ```bash copy
+   curl https://baltocdn.com/helm/signing.asc | gpg --dearmor | sudo tee /usr/share/keyrings/helm.gpg > /dev/null
+   ```
 2. Install the APT HTTPS transport to use repositories over HTTPS.
-    ```bash copy
-    sudo apt-get install apt-transport-https --yes
-    ```
+   ```bash copy
+   sudo apt-get install apt-transport-https --yes
+   ```
 3. Add the Helm repository to APT sources.
-    ```bash copy
-    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
-    ```
+   ```bash copy
+   echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
+   ```
 4. Update the `apt` package index.
-    ```bash copy
-    sudo apt-get update
-    ```
+   ```bash copy
+   sudo apt-get update
+   ```
 5. Install Helm.
-    ```bash copy
-    sudo apt-get install helm
-    ```
+   ```bash copy
+   sudo apt-get install helm
+   ```
 
 ## Deploy
 
@@ -353,20 +306,15 @@ With minikube running, you can open the minikube dashboard in a web browser and 
 
 1. In the machine, open a Terminal app.
 2. Start the minikube dashboard.
-    ```bash copy
-    minikube dashboard
-    ```
+   ```bash copy
+   minikube dashboard
+   ```
 
 **Result**
 
 In the default web browser, the minikube dashboard opens.
 
-<Image 
-    src="/docs/docimages/install/minikube/02-minikube-dashboard-default.webp"
-    alt="Azure - Select Network policy - None"
-    width={800}
-    height={700}
-/>
+<Image src="/docimages/install/minikube/02-minikube-dashboard-default.webp" alt="Azure - Select Network policy - None" width={800} height={700} />
 
 ### Task 13: Define a local DNS name
 
@@ -377,14 +325,14 @@ By default, minikube exposes applications with an IP address `192.168.49.2`. You
 **Steps**
 
 1. Edit `/etc/hosts`.
-    ```
-    sudo vi /etc/hosts
-    ```
+   ```
+   sudo vi /etc/hosts
+   ```
 2. Add the following line.
-    ```csv filename="/etc/hosts" {2}
-    127.0.0.1 localhost
-    192.168.49.2 mostly.local
-    ```
+   ```csv filename="/etc/hosts" {2}
+   127.0.0.1 localhost
+   192.168.49.2 mostly.local
+   ```
 
 **Result**
 
@@ -404,97 +352,73 @@ scp -i KEYPAIR_FILENAME.pem MOSTLY_AI_Helm_chart.zip ubuntu@IP_ADDRESS:~
 
 1. On the machine, unzip the Helm chart.
 2. Edit the `values.yaml` file as highlighted below.
-    1. At the start, set the application domain name to `mostly.local`.
-        <Callout>
-        `minio` is the shared storage service.
-        </Callout>
-        ```yaml filename="values.yaml" copy {3-4}
-        _customerInstallation:
-          domainNames:
-            mostly-ai: &fqdn mostly.local
-        ```
-    2. (Optional) Apply one of the configurations below depending on whether you intend to use SSL-encrypted access to the MOSTLY AI application.<br /><br />
-        **➡️ You use an SSL certificate**. Replace `your-tls-secret` with the TLS secret name as defined in your cluster configuration.
-        <Callout>
-        Your IT department or Kubernetes administrator creates the FQDN and its SSL certificate and adds it to the configuration of your cluster. When added, it comes with a TLS secret name that you can define in the `values.yaml` file. For details, see [_Configure your domain SSL certificate_](/install/config/domain-tls-cert).
-        </Callout>
-        ```yaml filename="values.yaml" copy {4}
-        _customerInstallation:
+   1. At the start, set the application domain name to `mostly.local`.
+      <Callout>`minio` is the shared storage service.</Callout>
+      ```yaml filename="values.yaml" copy {3 - 4}
+      _customerInstallation: domainNames: mostly-ai: &fqdn mostly.local ```
+   2. (Optional) Apply one of the configurations below depending on whether you intend to use SSL-encrypted access to the MOSTLY AI application.<br /><br />
+      **➡️ You use an SSL certificate**. Replace `your-tls-secret` with the TLS secret name as defined in your cluster configuration.
+      <Callout>Your IT department or Kubernetes administrator creates the FQDN and its SSL certificate and adds it to the configuration of your cluster. When added, it comes with a TLS secret name that you can define in the `values.yaml` file. For details, see [_Configure your domain SSL certificate_](/install/config/domain-tls-cert).</Callout>
+      ```yaml filename="values.yaml" copy {4}
+      _customerInstallation: ... deploymentSettings: tlsSecretName: &tlsSecretName your-tls-secret ... ``` **➡️ You do not use an SSL certificate**. Replace the `your-tls-secret` with an empty string and, for `global.tls`, set `enabled` to `false`. ```yaml filename="values.yaml" copy {(4, 9)}
+      _customerInstallation: ... deploymentSettings: tlsSecretName: &tlsSecretName [] # your-tls-secret ... global: ... tls: enabled: false ... ```
+   3. (Optional) If you host third-party container images in an internal repository, replace `docker.io` in `registryFor3rdPartyComponents`.
+      ```yaml filename="values.yaml" copy {5}
+      _customerInstallation:
+      ...
+        deploymentSettings:
         ...
-          deploymentSettings:
-            tlsSecretName: &tlsSecretName your-tls-secret
+          registryFor3rdPartyComponents: &registryFor3rdPartyComponents docker.io
+      ...
+      ```
+   4. (Optional) If you need to host MOSTLY AI container images in an internal repository, replace `quay.io/mostlyai` in `mostlyRegistry`.
+      ```yaml filename="values.yaml" copy {5}
+      _customerInstallation:
+      ...
+        deploymentSettings:
         ...
-        ```
-        **➡️ You do not use an SSL certificate**. Replace the  `your-tls-secret` with an empty string and, for `global.tls`, set `enabled` to `false`. 
-        ```yaml filename="values.yaml" copy {4,9}
-        _customerInstallation:
-        ...
-          deploymentSettings:
-            tlsSecretName: &tlsSecretName [] # your-tls-secret
-        ...
-        global:
-          ...
-          tls:
-            enabled: false
-        ...
-        ```
-    3. (Optional) If you host third-party container images in an internal repository, replace `docker.io` in `registryFor3rdPartyComponents`.
-        ```yaml filename="values.yaml" copy {5}
-        _customerInstallation:
-        ...
-          deploymentSettings:
-          ...
-            registryFor3rdPartyComponents: &registryFor3rdPartyComponents docker.io
-        ...
-        ```
-    4. (Optional) If you need to host MOSTLY AI container images in an internal repository, replace `quay.io/mostlyai` in `mostlyRegistry`.
-        ```yaml filename="values.yaml" copy {5}
-        _customerInstallation:
-        ...
-          deploymentSettings:
-          ...
-            mostlyRegistry: &mostlyRegistry quay.io/mostlyai
-        ...
-        ```
-    5. (Optional) If you intend to use the MOSTLY AI image repository at `quay.io/mostlyai`, set its secret in `mostlyRegistryDockerConfigJson`.
-        <Callout>
-        To obtain the secret, contact your MOSTLY AI Customer Experience Engineer.
-        </Callout>
-        ```yaml filename="values.yaml" copy {5}
-        _customerInstallation:
-        ...
-          deploymentSettings:
-          ...
-            mostlyRegistryDockerConfigJson: &mostlyRegistryDockerConfigJson <HARBOR_SECRET>
-        ...
-        ```
-    6. Enable the `ingress` annotations.
-        a. Enable the ingress annotations under `mostly-app`.
-            ```yaml filename="values.yaml" copy {3-9}
-            mostly-app:
-                ingress:
-                    annotations:
-                      nginx.ingress.kubernetes.io/proxy-body-size: 10240m
-                      nginx.ingress.kubernetes.io/proxy-buffer-size: 128k
-                      nginx.org/proxy-connect-timeout: 3000s
-                      nginx.org/proxy-read-timeout: 3000s
-                      nginx.org/client-max-body-size: 3000m
-                    # annotations: {}
-            ```
-        b. Enable the ingress annotations under `mostly-keycloak`.
-            ```yaml filename="values.yaml" copy {7-10}
-            mostly-keycloak:
-                deployment:
-                    resources: {}
-                    tolerations: []
-                    affinity: {}
-                ingress:
-                    annotations:
-                        nginx.ingress.kubernetes.io/proxy-body-size: 10240m
-                        nginx.ingress.kubernetes.io/proxy-buffer-size: 128k
-                    # annotations: {}
-            ```
-3. Save the `values.yaml` file.
+          mostlyRegistry: &mostlyRegistry quay.io/mostlyai
+      ...
+      ```
+   5. (Optional) If you intend to use the MOSTLY AI image repository at `quay.io/mostlyai`, set its secret in `mostlyRegistryDockerConfigJson`.
+      <Callout>To obtain the secret, contact your MOSTLY AI Customer Experience Engineer.</Callout>
+
+```yaml filename="values.yaml" copy {5}
+_customerInstallation:
+...
+  deploymentSettings:
+  ...
+    mostlyRegistryDockerConfigJson: &mostlyRegistryDockerConfigJson <HARBOR_SECRET>
+...
+```
+
+6. Enable the `ingress` annotations.
+   a. Enable the ingress annotations under `mostly-app`.
+   `yaml filename="values.yaml" copy {3-9}
+mostly-app:
+    ingress:
+        annotations:
+          nginx.ingress.kubernetes.io/proxy-body-size: 10240m
+          nginx.ingress.kubernetes.io/proxy-buffer-size: 128k
+          nginx.org/proxy-connect-timeout: 3000s
+          nginx.org/proxy-read-timeout: 3000s
+          nginx.org/client-max-body-size: 3000m
+        # annotations: {}
+`
+   b. Enable the ingress annotations under `mostly-keycloak`.
+   `yaml filename="values.yaml" copy {7-10}
+mostly-keycloak:
+    deployment:
+        resources: {}
+        tolerations: []
+        affinity: {}
+    ingress:
+        annotations:
+            nginx.ingress.kubernetes.io/proxy-body-size: 10240m
+            nginx.ingress.kubernetes.io/proxy-buffer-size: 128k
+        # annotations: {}
+`
+7. Save the `values.yaml` file.
 
 ### Task 16: Add a taint to your compute nodes
 
@@ -506,10 +430,10 @@ Contact your IT department or system administrator to check who can set taints o
 
 **Steps**
 
-* Set the taint on the only `minikube` node on which MOSTLY AI compute jobs will run.
-    ```bash copy
-    kubectl taint nodes minikube scheduling.mostly.ai/node=engine-jobs:NoSchedule
-    ```
+- Set the taint on the only `minikube` node on which MOSTLY AI compute jobs will run.
+  ```bash copy
+  kubectl taint nodes minikube scheduling.mostly.ai/node=engine-jobs:NoSchedule
+  ```
 
 **Result**
 
@@ -525,21 +449,17 @@ node/minikube tainted
 
 1. Make sure you are in the root folder of the Helm chart, where `mostly-combined` is located and is a subfolder.
 2. Use `helm` to deploy MOSTLY AI with the edited `values.yaml` file.
-    ```bash copy
-    helm upgrade --install mostly-ai ./mostly-combined --values values.yaml --namespace mostly-ai --create-namespace
-    ```
+   ```bash copy
+   helm upgrade --install mostly-ai ./mostly-combined --values values.yaml --namespace mostly-ai --create-namespace
+   ```
 3. Open the web browser running the minikube dashboard.
 4. In the dashboard, select the **mostly-ai** namespace and then **Workloads** > **Pods**.
 
 **Result**
 
 Immediately after running the Helm command, you will see all pods (in the dashboard, go to **Workloads** > **Pods**) with different status.
-<Image 
-    src="/docs/docimages/install/minikube/02-minikube-dashboard-01-post-deployment-red.webp"
-    alt="Azure - Select Network policy - None"
-    width={800}
-    height={700}
-/>
+
+<Image src="/docimages/install/minikube/02-minikube-dashboard-01-post-deployment-red.webp" alt="Azure - Select Network policy - None" width={800} height={700} />
 
 Wait for a while for all pods status to turn green.
 
@@ -558,13 +478,8 @@ Contact MOSTLY AI to obtain the `superadmin` credentials. You need them to log i
 **Steps**
 
 1. Open the locally defined hostname `mostly.local` in a web browser.<br />
-    **Step result**: Your **Sign in** page for your MOSTLY AI deployment opens.
-    <Image
-        src="/docs/docimages/install/minikube/02-minikube-dashboard-01-post-deployment-red.webp"
-        alt="MOSTLY AI Deployment - Log in page"
-        width={800}
-        height={300}
-    />
+   **Step result**: Your **Sign in** page for your MOSTLY AI deployment opens.
+   <Image src="/docimages/install/minikube/02-minikube-dashboard-01-post-deployment-red.webp" alt="MOSTLY AI Deployment - Log in page" width={800} height={300} />
 2. Enter the superadmin credentials and click **Sign in**.
 3. Provide a new password and click **Change password**.
 
