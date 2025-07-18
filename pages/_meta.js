@@ -8,77 +8,72 @@ export default {
     theme: {
       breadcrumb: false,
     },
-    "index": {
-        "title":"Welcome",
-        "theme": {
-            "breadcrumb": false
-        }
+    'quick-start': 'Quick start',
+    concepts: 'Concepts',
+    'best-practices': 'Best practices',
+    '-- Assistant': {
+      type: 'separator',
+      title: 'ASSISTANT',
     },
-    "quick-start": "Quick start",
-    "concepts": "Concepts",
-    "best-practices": "Best practices",
-    "-- Assistant": {
-        "type": "separator",
-        "title": "ASSISTANT"
+    assistant: 'Assistant',
+    '-- Create synthetic data': {
+      type: 'separator',
+      title: 'TRAINING & GENERATION',
     },
-    "assistant": "Assistant",
-    "-- Create synthetic data": {
-        "type": "separator",
-        "title": "TRAINING & GENERATION"
+    generators: 'Generators',
+    'synthetic-datasets': 'Synthetic datasets',
+    connectors: 'Connectors',
+    datasets: 'Demo datasets',
+    '-- Global features': {
+      type: 'separator',
+      title: 'GLOBAL FEATURES',
     },
-    "generators": "Generators",
-    "synthetic-datasets": "Synthetic datasets",
-    "connectors": "Connectors",
-    "datasets": "Demo datasets",
-    "-- Global features": {
-        "type": "separator",
-        "title": "GLOBAL FEATURES"
+    organizations: 'Organizations',
+    'public-private-resources': 'Public and private resources',
+    search: 'Search',
+    usage: 'Usage and credits',
+    notifications: 'Notifications',
+    '-- Platform integrations': {
+      type: 'separator',
+      title: 'PLATFORM INTEGRATIONS',
     },
-    "organizations": "Organizations",
-    "public-private-resources": "Public and private resources",
-    "search": "Search",
-    "usage": "Usage and credits",
-    "notifications": "Notifications",
-    "-- Platform integrations": {
-        "type": "separator",
-        "title": "PLATFORM INTEGRATIONS"
+    databricks: 'Databricks',
+    '-- Installation and administration': {
+      type: 'separator',
+      title: 'INSTALLATION AND ADMINISTRATION',
     },
-    "databricks": "Databricks",
-    "-- Installation and administration": {
-        "type": "separator",
-        "title": "INSTALLATION AND ADMINISTRATION"
+    install: 'Installation',
+    administration: 'Administration',
+    '-- Releases and support': {
+      type: 'separator',
+      title: 'RELEASES AND SUPPORT',
     },
-    "install": "Installation",
-    "administration": "Administration",
-    "-- Releases and support": {
-        "type": "separator",
-        "title": "RELEASES AND SUPPORT"
+    'whats-new': 'Release notes',
+    'release-lifecycle': 'Release support lifecycle',
+    support: 'Support',
+    'pythonsdk-header': {
+      title: 'Python SDK',
+      type: 'page',
+      href: '/python-sdk',
     },
-    "whats-new": "Release notes",
-    "release-lifecycle": "Release support lifecycle",
-    "support": "Support",
-    "pythonsdk-header": {
-        "title": "Python SDK",
-        "type": "page",
-        "href": "/python-sdk"
+    'python-sdk': {
+      title: 'Python SDK',
+      display: 'hidden',
     },
-    "python-sdk": {
-        "title": "Python SDK",
-        "display": "hidden"
+    api: {
+      title: 'REST API ↗',
+      type: 'page',
+      href: 'https://api-docs.mostly.ai',
+      newWindow: true,
     },
-    "api": {
-        "title": "REST API ↗",
-        "type": "page",
-        "href": "https://api-docs.mostly.ai",
-        "newWindow": true
+    'tutorials-header': {
+      title: 'Tutorials',
+      type: 'page',
+      href: '/tutorials',
     },
-    "tutorials-header": {
-        "title": "Tutorials",
-        "type": "page",
-        "href": "/tutorials"
+    tutorials: {
+      title: 'Tutorials',
+      display: 'hidden',
     },
-    "tutorials": {
-        "title": "Tutorials",
-        "display": "hidden"
-    }
-}
+  },
+};
