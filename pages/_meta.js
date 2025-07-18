@@ -57,12 +57,12 @@ export default {
     "whats-new": "Release notes",
     "release-lifecycle": "Release support lifecycle",
     "support": "Support",
-    "pythonsdk-header": { 
+    "pythonsdk-header": {
         "title": "Python SDK",
         "type": "page",
         "href": "/python-sdk"
     },
-    "python-sdk": { 
+    "python-sdk": {
         "title": "Python SDK",
         "display": "hidden"
     },
@@ -77,7 +77,7 @@ export default {
         "type": "page",
         "href": "/tutorials"
     },
-    "tutorials": { 
+    "tutorials": {
         "title": "Tutorials",
         "display": "hidden"
     }
