@@ -74,11 +74,11 @@ Take record of the **Client ID**, **Client Secret**, and **OIDC Discovery Endpoi
    1. Under **OIDC Settings**, make sure that the **Token Auth Method** for PingOne uses the same client authentication method as Keycloak.
    2. For **Signoff URLs**, you can set the URL to redirect to after the user logs out of the application.<br /><br />
       For example:
-        <Callout>
-  Replace:
-  _ `KEYCLOAK_HOST` with your MOSTLY AI FQDN.
-  _ `IDP_ALIAS` with the Keycloak IdP alias.
-  </Callout>
+      <Callout>
+      Replace:
+      _ `KEYCLOAK_HOST` with your MOSTLY AI FQDN.
+      _ `IDP_ALIAS` with the Keycloak IdP alias.
+        </Callout>
   `bash filename="Signoff URL" copy
 https://<KEYCLOAK_HOST>/auth/realms/mostly-generate/broker/<IDP_ALIAS>/endpoint/logout_response
 `
