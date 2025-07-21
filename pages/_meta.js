@@ -24,7 +24,7 @@ export default {
   generators: 'Generators',
   'synthetic-datasets': 'Synthetic datasets',
   connectors: 'Connectors',
-  datasets: 'Demo datasets',
+  'demo-datasets': 'Demo datasets',
   '-- Global features': {
     type: 'separator',
     title: 'GLOBAL FEATURES',
