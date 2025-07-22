@@ -19,7 +19,7 @@ export default {
   assistant: 'Assistant',
   '-- Create synthetic data': {
     type: 'separator',
-    title: 'TRAINING & GENERATION',
+    title: 'RESOURCES',
   },
   datasets: 'Datasets',
   generators: 'Generators',
