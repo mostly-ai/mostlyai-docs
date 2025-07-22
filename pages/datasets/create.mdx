@@ -22,14 +22,14 @@ Create a human-readble description for your dataset. The **Description** fields 
 
 A good description helps others users who interact with your dataset quickly understand its publisher, structure, and reference any citations that may be necessary when using it for research purposes.
 
-The [Assistant](../assisatnt.mdx) can read your description and use it to gather insights about your dataset so treating it like a [prompt](../assistant/prompt-examples.mdx) is a great idea.
+The [Assistant](../assistant.mdx) can read your description and use it to gather insights about your dataset so treating it like a [prompt](../assistant/prompt-examples.mdx) is a great idea.
 
 ## Upload a file
 
 You can create a dataset by uploading a file:
 
 1. Click the upload widget to select a file from an accessible local file system or drag and drop a dataset file into the upload widget workspace.
-2. Allow the uploader to complete the process.
+2. Depending on file size, the uploader usually completes the operation in a matter of seconds.
 
 ## Use a connector
 
@@ -42,11 +42,13 @@ You can create a dataset by connecting to a connector:
 
 At any point during the configuration process, you can give your new dataset a name.
 
-1. Click the default **New dataset** name in the top artifact menu and select **Rename**.
+1. Use the **Name** field during dataset creation or click the default **New dataset** name in the top artifact menu and select **Rename**.
 2. Provide a descriptive name in the **Rename dataset** modal and click **Save**.
 
 When selecting a name, especially for a dataset you are planning to [make public](../public-private-resources.mdx) or [share within your organization](../organizations/manage-resources.mdx), providing a descriptive name ensures that your dataset is usable by everyone.
 
 ## Save the upload
 
-Once you have uploaded the dataset, click **Save**. Your dataset can be used in Assistant chats or Synthetic Data SDK by referencing the assigned `id` value. You can extract this value by checking the dataset URL (for example: `https://dev.env.mostlylab.com/d/datasets/873ce6eb-e271-594b-833e-74cbf2c844d4`), the `id` value is the alphanumeric GUID at the end of the URL. In the case of the example URL: `873ce6eb-e271-594b-833e-74cbf2c844d4`.
+Once you have uploaded the dataset, click **Save**. Your dataset can be used in Assistant chats by clicking **Explore** on the dataset page.
+
+You can also access it with the Synthetic Data SDK by referencing the assigned `id` value. You can capture this value by checking the dataset URL (for example: `https://dev.env.mostlylab.com/d/datasets/873ce6eb-e271-594b-833e-74cbf2c844d4`), the `id` value is the alphanumeric GUID at the end of the URL. In the case of the example URL: `873ce6eb-e271-594b-833e-74cbf2c844d4`.
