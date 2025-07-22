@@ -1,0 +1,51 @@
+---
+title: Create a dataset
+description: 'A dataset is a collection of files and connected data sources grouped together. These instructions walk you through the process of creating a new dataset.'
+---
+
+# Create a dataset
+
+MOSTLY AI supports uploading datasets in many popular [formats](./prepare-data.mdx). You can also create a dataset using a [connector](../connectors.mdx).
+
+<Image src="/docimages/datasets/001-datasets-new-dataset.webp" alt="MOSTLY AI - Datasets page" width={800} height={300} />
+
+Follow these instructions to create a dataset with the MOSTLY AI platform:
+
+1. To start the process of creating a new dataset, open **Datasets** from the navigation menu on the left side of any page in the platform.
+2. On the Datasets page, click **New dataset**.
+
+## Provide a description
+
+Create a human-readble description for your dataset. The **Description** fields supports [markdown](https://commonmark.org/help/) formatting and emoji symbols.
+
+A good description helps others users who interact with your dataset quickly understand its publisher, structure, and reference any citations that may be necessary when using it for research purposes.
+
+The [Assistant](../assisatnt.mdx) can read your description and use it to gather insights about your dataset so treating it like a [prompt](../assistant/prompt-examples.mdx) is a great idea.
+
+## Upload a file
+
+You can create a dataset by uploading a file:
+
+1. Click the upload widget to select a file from an accessible local file system or drag and drop a dataset file into the upload widget workspace.
+2. Allow the uploader to complete the process.
+
+## Use a connector
+
+You can create a dataset by connecting to a connector:
+
+1. Click **Add connector**
+2. Select the connector you wish to use from the list of available connectors. If you don't see the expected connector or wish to add a new one, follow [these instructions](../connectors/create.mdx) to do so.
+
+## Give the dataset a name
+
+At any point during the configuration process, you can give your new dataset a name. 
+
+1. Click the default **New dataset** name in the top artifact menu and select **Rename**.
+2. Provide a descriptive name in the **Rename dataset** modal and click **Save**.
+
+When selecting a name, especially for a dataset you are planning to [make public](../public-private-resources.mdx) or [share within your organization](../organizations/manage-resources.mdx), providing a descriptive name ensures that your dataset is usable by everyone.
+
+
+## Save the upload
+
+Once you have uploaded the dataset, click **Save**. Your dataset can be used in Assistant chats or Synthetic Data SDK by referencing the assigned `id` value. You can extract this value by checking the dataset URL (for example: `https://dev.env.mostlylab.com/d/datasets/873ce6eb-e271-594b-833e-74cbf2c844d4`), the `id` value is the alphanumeric GUID at the end of the URL. In the case of the example URL: `873ce6eb-e271-594b-833e-74cbf2c844d4`.

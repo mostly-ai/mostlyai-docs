@@ -21,9 +21,10 @@ export default {
     type: 'separator',
     title: 'TRAINING & GENERATION',
   },
+  datasets: 'Datasets',
   generators: 'Generators',
-  'synthetic-datasets': 'Synthetic datasets',
   connectors: 'Connectors',
+  'synthetic-datasets': 'Synthetic datasets',
   'demo-datasets': 'Demo datasets',
   '-- Global features': {
     type: 'separator',
@@ -54,7 +55,7 @@ export default {
     href: '/python-sdk',
   },
   'python-sdk': {
-    title: 'Synthetic DataSDK',
+    title: 'Synthetic Data SDK',
     display: 'hidden',
   },
   api: {
