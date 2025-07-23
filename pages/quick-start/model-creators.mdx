@@ -17,7 +17,7 @@ Here is how you can quickly train a new generator on original tabular data. You 
 <Steps>
 ## Step 1: Train a generator
 
-<Tabs items={['UI', 'Synthetic Data SDK']}>
+<Tabs items={['Manual', 'Assistant', 'Synthetic Data SDK']}>
 <Tabs.Tab>
 
 1. In MOSTLY AI, select the **Generators** page.
@@ -34,6 +34,22 @@ Here is how you can quickly train a new generator on original tabular data. You 
    <Image src="/docimages/quickstart/model-creators/train-generator-03-click-configure-models.webp" alt="MOSTLY AI - Train a generator - 04 - Click Configure models" width={800} height={150} />
 5. At the **Model configuration** step, click **Start training**.
    <Image src="/docimages/quickstart/model-creators/train-generator-04-click-start-training.webp" alt="MOSTLY AI - Train a generator - 04 - Click Start training" width={800} height={150} />
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+1. Start a new chat with the Assistant by clicking **New chat** in the left-side navigation menu.
+2. Prompt the Assistant to connect to a configured [dataset](/datasets) or upload a dataset file into the Assistant workspace.
+
+```bash
+Connect to the Berka dataset and briefly describe this resource.
+```
+
+3. Prompt the Assistant to create a generator with the defined resource.
+
+```bash
+Configure a generator that will produce data which follows the statistical patterns of the least active accounts in the dataset.
+```
 
 </Tabs.Tab>
 <Tabs.Tab>
