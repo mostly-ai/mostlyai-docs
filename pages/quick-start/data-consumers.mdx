@@ -18,7 +18,7 @@ To do so, you can use a MOSTLY AI trained generator for fresh and new synthetic 
 <Steps>
 ## Step 1: Generate synthetic data
 
-<Tabs items={['UI', 'Synthetic Data SDK']}>
+<Tabs items={['Manual', 'Assistant', 'Synthetic Data SDK']}>
 <Tabs.Tab>
 1. Open the link of the shared generator.
     <Callout>
@@ -37,6 +37,25 @@ To do so, you can use a MOSTLY AI trained generator for fresh and new synthetic 
 When the generation of synthetic data completes, you can [download](/quick-start/data-consumers#step-2-download-synthetic-data) the data in CSV, Parquet, or XSLX format.
 
 You can also [make the synthetic dataset public](/quick-start/data-consumers#step-3-make-the-synthetic-dataset-public) so others can access its page, review the **Data report**, **Data samples**, **Generation steps**, and **Configuration**, or download the data in their preferred format.
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+1. Start a new chat with the Assistant by clicking **New chat** in the left-side navigation menu.
+2. Prompt the Assistant to connect to the synthetic data generator that you would like to use. Alternatively, you can click **Explore** from the generator page of any generator.
+```bash
+Connect to the Baseball Generator and describe this resource.
+```
+3. Define the synthetic dataset that you would like to generate with this generator.
+```bash
+Generate a synthetic dataset containing 1000 players with a batting average over 0.300 using this generator.
+```
+
+<Callout>
+The Assitant can help you generate code to use with the Synthetic Data SDK as well!
+
+Describe your use case and the resources that you'd like to use and ask the Assistant to provide the code to use with the Synthetic Data SDK.
+</Callout>
 
 </Tabs.Tab>
 <Tabs.Tab>
