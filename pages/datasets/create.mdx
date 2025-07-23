@@ -1,0 +1,198 @@
+---
+title: Create a dataset
+description: 'A dataset is a collection of files and connected data sources grouped together. These instructions walk you through the process of creating a new dataset.'
+---
+
+import Image from 'next/image';
+
+# Create a dataset
+
+MOSTLY AI supports uploading datasets in many popular [formats](./prepare-data.mdx). You can also create a dataset using a [connector](../connectors.mdx). You can create a dataset just by writing a description as well, which serves as a starting prompt for a new Assistant chat.
+
+<Image src="/docimages/datasets/001-datasets-new-dataset.webp" alt="MOSTLY AI - Datasets page" width={800} height={300} />
+
+Follow these instructions to create a dataset with the MOSTLY AI platform:
+
+1. To start the process of creating a new dataset, open **Datasets** from the navigation menu on the left side of any page in the platform.
+2. On the Datasets page, click **New dataset**.
+
+## Provide a description
+
+Create a human-readble description for your dataset. The **Description** fields supports [markdown](https://commonmark.org/help/) formatting and emoji symbols.
+
+A good description helps the Assistant and others users who interact with your dataset quickly understand its publisher, structure, and reference any citations that may be necessary when using it for research purposes.
+
+The [Assistant](../assistant.mdx) reads your description and uses it to gather insights about your dataset so treating it like a [prompt](../assistant/prompt-examples.mdx) is a great idea.
+
+### Description examples
+
+Unlike a normal system prompt, the **Description** field is one of potentially three components which comprise a dataset in MOSTLY AI.
+
+You can use this field alone, with a [dataset file](#upload-a-file), with a [connector](#use-a-connector), or both. Each of the examples below demonstrates a different scenario and shows how to maximize the effectiveness of your description.
+
+**Use a description alone**
+
+You might use a description alone to generate mock data or test out a data model structure. Here's a great description prompt to help you do that:
+
+````markdown
+# Data Model Experiment
+
+Create a dataset with the following three-table structure:
+
+```sql
+CREATE TABLE authors (
+  author_id INT PRIMARY KEY,
+  name VARCHAR(100)
+);
+
+CREATE TABLE books (
+  book_id INT PRIMARY KEY,
+  title VARCHAR(100),
+  author_id INT,
+  FOREIGN KEY (author_id) REFERENCES authors(author_id)
+);
+
+CREATE TABLE reviews (
+  review_id INT PRIMARY KEY,
+  book_id INT,
+  rating INT,
+  FOREIGN KEY (book_id) REFERENCES books(book_id)
+);
+```
+````
+
+Generate 50 rows of mock data to use whenever this dataset is opened.
+
+**Use a description with a dataset file**
+
+You can use a description to prompt the Assistant how to understand a particular dataset (such as data defintions) and helpful starting points.
+
+```markdown
+# Dataset Documentation: `estat_hlth_hc_phys2.xml`
+
+## 📄 Dataset Description
+
+This dataset, sourced from Eurostat, provides annual data on the average number of physician consultations per inhabitant across European countries. It includes two healthcare consultation types: **total consultations (CONSULT)** and **physician consultations only (PCONSULT)**. The data is structured according to the SDMX-ML 2.1 format, ideal for time series analysis and cross-country healthcare comparison.
+
+---
+
+## 📊 Dataset Size and Shape
+
+- **Countries (geo):** 35+ (e.g., AT, BE, DE, FR, etc.)
+- **Time span:** Varies by country, generally between 1960 and 2023
+- **Observations:** ~2,000+
+- **Structure:** Time series, one observation per year per country per healthcare type
+
+---
+
+## 🧾 Field Definitions and Data Types
+
+| Field         | Description                                    | Type    | Notes                                                   |
+| ------------- | ---------------------------------------------- | ------- | ------------------------------------------------------- |
+| `geo`         | Country code (ISO 2-letter)                    | String  | Example: "AT" = Austria                                 |
+| `unit`        | Unit of measure                                | String  | Always `NR_HAB` (number per inhabitant)                 |
+| `freq`        | Frequency of observation                       | String  | Always `A` (Annual)                                     |
+| `hlthcare`    | Healthcare measure type                        | String  | Either `CONSULT` or `PCONSULT`                          |
+| `TIME_PERIOD` | Observation year                               | Integer | E.g., 2020                                              |
+| `OBS_VALUE`   | Average number of consultations per inhabitant | Float   | E.g., 9.72                                              |
+| `OBS_FLAG`    | Observation status (optional)                  | String  | Flags like 'd', 'b', 'p' (provisional, estimated, etc.) |
+
+---
+
+## 📈 Helpful Analyses to Perform
+
+- **Descriptive Statistics:**
+  - Mean, median, min/max consultation rate per year and country.
+- **Time Series Analysis:**
+  - Trends over time within countries or groups (e.g., EU-27, Nordic countries).
+- **Impact of COVID-19:**
+  - Year-on-year changes between 2019–2021.
+- **Clustering:**
+  - Group countries by similar healthcare utilization patterns.
+- **Correlation Analysis:**
+  - Between consultation rates and other public health indicators (if merged with other datasets).
+- **Flag Interpretation:**
+  - Understand and possibly filter or highlight flagged data entries (`OBS_FLAG`).
+
+---
+
+## 📂 Source
+
+Extracted from: `estat_hlth_hc_phys2.xml`, structured using SDMX (Statistical Data and Metadata eXchange).
+
+Date of extraction: July 15, 2025
+Publisher: Eurostat
+
+---
+```
+
+**Use a description with a connector**
+
+You can use the description to prompt the Asstant when connecting to a remote data source location with a connector. Use this feature to guide [Data Consumers](/quick-start/data-consumers) through usage of your dataset.
+
+```markdown
+# Initial behavior
+
+When connecting to this remote data source via connector, the assistant should:
+
+1. **Confirm the connection** and print a success or failure message.
+2. **Print out all available locations**, schema names, or logical partitions present in the dataset (e.g., country names, data folders, table groups, etc.).
+3. **Print out the shape and size** of the dataset(s), including:
+
+   - Number of rows and columns
+   - Estimated memory footprint
+   - Data types summary (categorical, numerical, datetime, etc.)
+
+4. **Suggest first exploratory actions**, such as:
+
+   - List all column names and infer their types or usage
+   - Show missing values per column
+   - Plot a histogram of numerical fields
+   - Summarize text columns (e.g., most common values)
+   - Identify potential primary keys or date fields
+   - Generate a correlation matrix for numeric features
+   - Detect outliers or anomalies
+   - Suggest useful filters or groupings
+
+5. **Ask how to proceed**, with suggestions like:
+
+   - "Would you like to filter by a specific location?"
+   - "Should I analyze a specific column or feature?"
+   - "Would you like to view statistics grouped by time period?"
+   - "Do you want me to automatically detect relationships between columns?"
+
+6. **Set up an interactive flow**, where the user can choose to:
+   - Drill down by location, feature, or date range
+   - Export part of the dataset
+   - Visualize specific fields
+   - Apply transformations (e.g., pivot, normalize, deduplicate)
+```
+
+## Upload a file
+
+You can create a dataset by uploading a file:
+
+1. Click the upload widget to select a file from an accessible local file system or drag and drop a dataset file into the upload widget workspace.
+2. Depending on file size, the uploader usually completes the operation in a matter of seconds.
+
+## Use a connector
+
+You can create a dataset by connecting to a connector:
+
+1. Click **Add connector**
+2. Select the connector you wish to use from the list of available connectors. If you don't see the expected connector or wish to add a new one, follow [these instructions](../connectors/create.mdx) to do so.
+
+## Give the dataset a name
+
+At any point during the configuration process, you can give your new dataset a name.
+
+1. Use the **Name** field during dataset creation or click the default **New dataset** name in the top artifact menu and select **Rename**.
+2. Provide a descriptive name in the **Rename dataset** modal and click **Save**.
+
+When selecting a name, especially for a dataset you are planning to [make public](../public-private-resources.mdx) or [share within your organization](../organizations/manage-resources.mdx), providing a descriptive name ensures that your dataset is usable by everyone.
+
+## Save the upload
+
+Once you have uploaded the dataset, click **Save**. Your dataset can be used in Assistant chats by clicking **Explore** on the dataset page.
+
+You can also access it with the Synthetic Data SDK by referencing the assigned `id` value. You can capture this value by checking the dataset URL (for example: `https://dev.env.mostlylab.com/d/datasets/873ce6eb-e271-594b-833e-74cbf2c844d4`), the `id` value is the alphanumeric GUID at the end of the URL. In the case of the example URL: `873ce6eb-e271-594b-833e-74cbf2c844d4`.

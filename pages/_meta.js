@@ -19,12 +19,12 @@ export default {
   assistant: 'Assistant',
   '-- Create synthetic data': {
     type: 'separator',
-    title: 'TRAINING & GENERATION',
+    title: 'RESOURCES',
   },
+  datasets: 'Datasets',
   generators: 'Generators',
-  'synthetic-datasets': 'Synthetic datasets',
   connectors: 'Connectors',
-  'demo-datasets': 'Demo datasets',
+  'synthetic-datasets': 'Synthetic datasets',
   '-- Global features': {
     type: 'separator',
     title: 'GLOBAL FEATURES',
@@ -54,7 +54,7 @@ export default {
     href: '/python-sdk',
   },
   'python-sdk': {
-    title: 'Synthetic DataSDK',
+    title: 'Synthetic Data SDK',
     display: 'hidden',
   },
   api: {
