@@ -67,7 +67,7 @@ Generate 50 rows of mock data to use whenever this dataset is opened.
 
 You can use a description to prompt the Assistant how to understand a particular dataset (such as data defintions) and helpful starting points.
 
-````markdown
+```markdown
 # Dataset Documentation: `estat_hlth_hc_phys2.xml`
 
 ## 📄 Dataset Description
@@ -87,15 +87,15 @@ This dataset, sourced from Eurostat, provides annual data on the average number 
 
 ## 🧾 Field Definitions and Data Types
 
-| Field         | Description                                           | Type     | Notes                                  |
-|---------------|-------------------------------------------------------|----------|----------------------------------------|
-| `geo`         | Country code (ISO 2-letter)                           | String   | Example: "AT" = Austria                |
-| `unit`        | Unit of measure                                       | String   | Always `NR_HAB` (number per inhabitant) |
-| `freq`        | Frequency of observation                              | String   | Always `A` (Annual)                    |
-| `hlthcare`    | Healthcare measure type                               | String   | Either `CONSULT` or `PCONSULT`         |
-| `TIME_PERIOD` | Observation year                                      | Integer  | E.g., 2020                             |
-| `OBS_VALUE`   | Average number of consultations per inhabitant        | Float    | E.g., 9.72                             |
-| `OBS_FLAG`    | Observation status (optional)                         | String   | Flags like 'd', 'b', 'p' (provisional, estimated, etc.) |
+| Field         | Description                                    | Type    | Notes                                                   |
+| ------------- | ---------------------------------------------- | ------- | ------------------------------------------------------- |
+| `geo`         | Country code (ISO 2-letter)                    | String  | Example: "AT" = Austria                                 |
+| `unit`        | Unit of measure                                | String  | Always `NR_HAB` (number per inhabitant)                 |
+| `freq`        | Frequency of observation                       | String  | Always `A` (Annual)                                     |
+| `hlthcare`    | Healthcare measure type                        | String  | Either `CONSULT` or `PCONSULT`                          |
+| `TIME_PERIOD` | Observation year                               | Integer | E.g., 2020                                              |
+| `OBS_VALUE`   | Average number of consultations per inhabitant | Float   | E.g., 9.72                                              |
+| `OBS_FLAG`    | Observation status (optional)                  | String  | Flags like 'd', 'b', 'p' (provisional, estimated, etc.) |
 
 ---
 
@@ -124,7 +124,7 @@ Date of extraction: July 15, 2025
 Publisher: Eurostat
 
 ---
-````
+```
 
 **Use a description with a connector**
 
