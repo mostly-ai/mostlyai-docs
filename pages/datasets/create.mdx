@@ -34,10 +34,11 @@ You can use this field alone, with a [dataset file](#upload-a-file), with a [con
 
 You might use a description alone to generate mock data or test out a data model structure. Here's a great description prompt to help you do that:
 
-```markdown
+````markdown
 # Data Model Experiment
 
 Create a dataset with the following three-table structure:
+
 ```sql
 CREATE TABLE authors (
   author_id INT PRIMARY KEY,
@@ -58,9 +59,11 @@ CREATE TABLE reviews (
   FOREIGN KEY (book_id) REFERENCES books(book_id)
 );
 ```
+````
 
 Generate 50 rows of mock data to use whenever this dataset is opened.
-```
+
+````
 
 **Use a description with a dataset file**
 
@@ -119,11 +122,11 @@ This dataset, sourced from Eurostat, provides annual data on the average number 
 
 Extracted from: `estat_hlth_hc_phys2.xml`, structured using SDMX (Statistical Data and Metadata eXchange).
 
-Date of extraction: July 15, 2025  
+Date of extraction: July 15, 2025
 Publisher: Eurostat
 
 ---
-```
+````
 
 **Use a description with a connector**
 
@@ -137,11 +140,13 @@ When connecting to this remote data source via connector, the assistant should:
 1. **Confirm the connection** and print a success or failure message.
 2. **Print out all available locations**, schema names, or logical partitions present in the dataset (e.g., country names, data folders, table groups, etc.).
 3. **Print out the shape and size** of the dataset(s), including:
+
    - Number of rows and columns
    - Estimated memory footprint
    - Data types summary (categorical, numerical, datetime, etc.)
 
 4. **Suggest first exploratory actions**, such as:
+
    - List all column names and infer their types or usage
    - Show missing values per column
    - Plot a histogram of numerical fields
@@ -152,6 +157,7 @@ When connecting to this remote data source via connector, the assistant should:
    - Suggest useful filters or groupings
 
 5. **Ask how to proceed**, with suggestions like:
+
    - "Would you like to filter by a specific location?"
    - "Should I analyze a specific column or feature?"
    - "Would you like to view statistics grouped by time period?"
