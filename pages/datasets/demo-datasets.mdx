@@ -1,11 +1,11 @@
 ---
-title: 'Demo datasets'
+title: 'Public datasets'
 description: 'The datasets below are popular for machine learning use cases. You can use them in MOSTLY AI to generate synthetic data versions and compare them to the original versions.'
 ---
 
-# Ready-to-use datasets
+# Public datasets
 
-In case you don’t have your own dataset ready, you can still get started right away with one of the provided datasets below:
+Even if you don’t have your own dataset yet, you can still get started right away. MOSTLY AI hosts a repository of [public datasets](https://github.com/mostly-ai/public-demo-data/tree/dev?tab=readme-ov-file#public-demo-datasets) which can be used to explore the platform, other users can create their own [datasets](/datasets) and make them [public](public-private-resources), giving other MOSTLY AI users access to those datasets, and MOSTLY AI provides several datasets out of the box on the platform.
 
 ## US Census Income dataset
 
@@ -153,4 +153,43 @@ Click [here](/datasets/netflix_10k.zip) to download the `.zip` file.
 501285   2649207  2005-06-08                   Friday Night Lights       2
 501286   2649207  2005-06-16  The Hitchhiker's Guide to the Galaxy       1
 501287   2649207  2005-08-14                                   Ray       3
+```
+
+## Meteostat weather dataset
+
+This dataset provides global historical weather observations and 30-year climate normals, including daily temperature, precipitation, wind, and sunshine data from 1948 to 2025. There are stations all over the world.
+
+Click [here](https://app.mostly.ai/d/datasets/17da17c9-3606-423f-996b-4a458f5997b5) to use it on the MOSLTY AI Platform.
+
+Use the `stations` table to identify which station you'd like to use:
+
+```csv filename="stations.csv"
+  station_name country region wmo_id icao_id      lat       lon  elev_m  hourly_from  hourly_to daily_from   daily_to monthly_from monthly_to
+0  Holden Agdm      CA     AB  71227    CXHD  53.1900 -112.2500   688.0  2020-01-01 2024-12-07 2002-11-01 2024-03-13   2003-01-01 2022-01-01
+1  Athabasca 1      CA     AB   &lt;NA&gt;    &lt;NA&gt;  54.7200 -113.2900   515.0         NaT        NaT 2000-01-01 2022-07-12   2000-01-01 2010-01-01
+2    Jan Mayen      NO   &lt;NA&gt;  01001    ENJA  70.9333   -8.6667    10.0  1931-01-01 2025-03-20 1921-12-31 2025-07-21   1922-01-01 2022-01-01
+3     Grahuken      NO     SJ  01002    &lt;NA&gt;  79.7833   14.4667     0.0  1986-11-09 2025-03-20 2010-10-07 2020-08-17          NaT        NaT
+4     Hornsund      NO   &lt;NA&gt;  01003    &lt;NA&gt;  77.0000   15.5000    10.0  1985-06-01 2025-03-20 2009-11-26 2020-08-31   2016-01-01 2017-01-01
+```
+
+```csv filename="lhr-weather-sample.csv"
+           station country       date  avg_temp_c  min_temp_c  max_temp_c  precip_mm  pressure_hpa
+0  London Heathrow      GB 2022-07-30        21.2        15.9        27.0        0.0        1018.3
+1  London Heathrow      GB 2022-07-31        22.4        19.8        27.6        0.0        1016.2
+2  London Heathrow      GB 2022-08-01        21.9        18.2        27.8        0.0        1018.0
+3  London Heathrow      GB 2022-08-02        21.7        18.3        26.9        0.0        1015.3
+4  London Heathrow      GB 2022-08-03        21.5        17.8        27.2        0.0        1013.5
+```
+
+## Yahoo financial market data
+
+This dataset provides daily historical financial market data, including closing prices, for global equities and indices via Yahoo! Finance's API.
+
+```csv
+        date      GOOGL      NVDA
+  2021-01-04     85.79     13.08
+  2021-01-05     86.48     13.37
+  2021-01-06     85.63     12.58
+  2021-01-07     88.19     13.31
+  2021-01-08     89.36     13.24
 ```
