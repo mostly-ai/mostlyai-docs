@@ -8,38 +8,35 @@ import { Callout } from 'nextra/components';
 
 # Assistant
 
-The MOSTLY AI Assistant provides by far the easiest interaction you can have about your data. With natural language, you can get rich data insights instantly and use all MOSTLY AI features from a single place without writing a single line of code.
+The MOSTLY AI Assistant provides the simplest interface for interaction with your data. With natural language, you can get rich data insights instantly and use all MOSTLY AI features from a single place without writing a single line of code.
 
 <Image src="/docimages/assistant/chat-assistant.webp" alt="MOSTLY AI - Assistant" width={800} height={400} />
 
-The Assistant makes it easy to:
+The Assistant can help you:
 
-- get data insights
-- generate data from scratch
-- access privacy-safe data
-- enrich data
+- Build resources like [generators](../generators) and [connectors](../connectors)
+- Explore resources like [synthetic datasets](../synthetic-datasets) and [datasets](../datasets)
+- Create [artifacts](./artifacts)
+- Generate and execute code to use the [Synthetic Data SDK](https://github.com/mostly-ai/mostlyai) or [Synthetic Data Quality Assurance](https://github.com/mostly-ai/mostlyai-qa) libraries
+- Enrich and transform data using [natural language](./prompt-examples)
 
 ## Start a new chat
 
-To use, you need to start a new Assistant chat.
+You can start a new chat by clicking one of the prompts on the home page, starting a new chat from the Assistant page, or by clicking **Explore** on a resource page.
 
-You can do so with using one of the prompts on the home page, starting a new chat from the Assistant page, or in the context of a generator or a synthetic dataset.
-
-### Use a chat starter
+### Use a prompt
 
 The MOSTLY AI home page includes prompts that guide your first Assistant conversation.
 
 <Image src="/docimages/assistant/assistant-start-chat-01-use-a-prompt.webp" alt="MOSTLY AI Assistant - Start a new chat - Use a prompt" width={800} height={400} />
 
-### Start a brand new chat
+### Start a new chat
 
-The **Assistant** page includes all existing chats. It is from here that you can also start a new chat. Just click **New chat** in the upper right.
+The **Assistant** page includes all existing chats. Click **New chat** from anywhere on the platform to start a new chat.
 
-<Image src="/docimages/assistant/assistant-start-chat-02-new-chat.webp" alt="MOSTLY AI Assistant - Start a new chat - New chat button" width={800} height={400} />
+### Start from a resource
 
-### Start from a generator or synthetic dataset
-
-You can also use the **Explore** button in the context of a generator or synthetic dataset to start a new Assistant chat. The conversation will start based on the structure, metadata, and data in the selected generator or synthetic dataset.
+You can also use the **Explore** button in the context of a generator or synthetic dataset to start a new Assistant chat. The conversation will start based on the structure, metadata, and data in the selected resource.
 
 <Image src="/docimages/assistant/assistant-start-chat-03-click-explore.webp" alt="MOSTLY AI Assistant - Start a new chat - Use a generator or synthetic dataset as context" width={800} height={400} />
 
@@ -49,19 +46,15 @@ The Assistant offers a range of features to use MOSTLY AI resources as well as u
 
 ### Upload files
 
-You can upload any file type that you can process with Python or its libraries. For example, you can upload CSV, Parquet, and Excel files for the Assistant to analyze for data insights.
-
-<Image src="/docimages/assistant/assistant-upload-file.webp" alt="MOSTLY AI Assistant - Upload files" width={800} height={400} />
-
-<Callout>You cannot upload files once the [Python session status has expired](/assistant/python-session-status).</Callout>
+You can upload files to the Assistant that you can process with Python or its libraries. For example, you can upload CSV, Parquet, and Excel files for the Assistant to analyze for data insights or create a new datset.
 
 ### Use a generator or a synthetic dataset
 
-While you are in a chat, you can include any existing generator or synthetic dataset as a resource in the conversation.
+During a chat, you can reference any existing generator or synthetic dataset as a resource in the conversation.
 
 On the left side of the prompt box, click the **Resources** button and select the **Use a generator** or **Use a synthetic dataset** options. You can then select any of your available resources.
 
-<Image src="/docimages/assistant/assistant-feature-use-generator-or-synthetic-dataset.webp" alt="MOSTLY AI Assistant - Use a generator or a synthetic dataset" width={800} height={400} />
+<Image src="/docimages/assistant/assistant-feature-use-resource.webp" alt="MOSTLY AI Assistant - Use a resource" width={800} height={400} />
 
 ### Run Python code
 

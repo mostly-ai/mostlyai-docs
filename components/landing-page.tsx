@@ -100,13 +100,14 @@ const LandingPage: React.FC = () => {
     {
       icon: <CLIIcon />,
       title: {
-        text: 'APIs',
+        text: 'More tools',
         link: null,
       },
       description: '',
       links: [
-        { text: 'Synthetic DataSDK', href: '/python-sdk' },
         { text: 'REST API', href: 'https://api-docs.mostly.ai/' },
+        { text: 'Synthetic Data SDK', href: '/python-sdk' },
+        { text: 'Synthetic Data Quality Assurance', href: 'https://github.com/mostly-ai/mostlyai-qa' },
       ],
     },
     {
