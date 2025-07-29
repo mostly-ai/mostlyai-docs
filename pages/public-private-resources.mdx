@@ -11,13 +11,10 @@ import { PrivateResourceIcon, PublicResourceIcon, UnlistedResourceIcon } from '@
 
 # Public and private resources
 
-<PrivateResourceIcon />
-In MOSTLY AI, all resources (generators, synthetic datasets, connectors, chats, datasets) are **private** immediately after you create them.
+In MOSTLY AI, all resources are **private** upon creation.
 
-<PublicResourceIcon />
-You can make [generators](/generators), [synthetic datasets](/synthetic-datasets), [datasets](/datasets) and [connectors](/connectors) **public** to share with the world. Alternatively, you can keep them private for your internal use or that of your organization's.
+You can make [artifacts](/assistant/artifacts), [generators](/generators), [synthetic datasets](/synthetic-datasets), [datasets](/datasets) and [connectors](/connectors) **public** to share with the world. Alternatively, you can keep them private for your internal use or that of your organization's.
 
-<UnlistedResourceIcon />
 You can also make generators, synthetic datasets, connectors, datasets, and chats **unlisted**. Unlisted resources are not visible in public resource lists, but anyone with the link can access them.
 
 <CustomCallout>
@@ -30,11 +27,12 @@ _Public resource lists_ include: - Generators list - Synthetic datasets list - C
 
 | Resource           | Default visibility            | Visibility options                                                                                  | Organizations visibility                                                                                                  |
 | ------------------ | ----------------------------- | --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| Artifacts          | <PrivateResourceIcon/>Private | <PublicResourceIcon/>Public<br />                                                                   | Cannot be transferred to an organization                                                                                  |
+| Chats              | <PrivateResourceIcon/>Private | <PrivateResourceIcon/>Private<br /><UnlistedResourceIcon/>Unlisted                                  | Cannot be transferred to an organization                                                                                  |
+| Connectors         | <PrivateResourceIcon/>Private | <PublicResourceIcon/>Public<br /><UnlistedResourceIcon/>Unlisted<br /><PrivateResourceIcon/>Private | <PublicResourceIcon/>Public<br /><UnlistedResourceIcon/>Unlisted<br /><PrivateResourceIcon/>Private (within organization) |
+| Datasets           | <PrivateResourceIcon/>Private | <PublicResourceIcon/>Public<br /><UnlistedResourceIcon/>Unlisted<br /><PrivateResourceIcon/>Private | <PublicResourceIcon/>Public<br /><UnlistedResourceIcon/>Unlisted<br /><PrivateResourceIcon/>Private (within organization) |
 | Generators         | <PrivateResourceIcon/>Private | <PublicResourceIcon/>Public<br /><UnlistedResourceIcon/>Unlisted<br /><PrivateResourceIcon/>Private | <PublicResourceIcon/>Public<br /><UnlistedResourceIcon/>Unlisted<br /><PrivateResourceIcon/>Private (within organization) |
 | Synthetic datasets | <PrivateResourceIcon/>Private | <PublicResourceIcon/>Public<br /><UnlistedResourceIcon/>Unlisted<br /><PrivateResourceIcon/>Private | <PublicResourceIcon/>Public<br /><UnlistedResourceIcon/>Unlisted<br /><PrivateResourceIcon/>Private (within organization) |
-| Connectors         | <PrivateResourceIcon/>Private | <PublicResourceIcon/>Public<br /><UnlistedResourceIcon/>Unlisted<br /><PrivateResourceIcon/>Private | <PublicResourceIcon/>Public<br /><UnlistedResourceIcon/>Unlisted<br /><PrivateResourceIcon/>Private (within organization) |
-| Chats              | <PrivateResourceIcon/>Private | <PrivateResourceIcon/>Private<br /><UnlistedResourceIcon/>Unlisted                                  | Cannot be transferred to an organization                                                                                  |
-| Datasets           | <PrivateResourceIcon/>Private | <PublicResourceIcon/>Public<br /><UnlistedResourceIcon/>Unlisted<br /><PrivateResourceIcon/>Private | <PublicResourceIcon/>Public<br /><UnlistedResourceIcon/>Unlisted<br /><PrivateResourceIcon/>Private (within organization) |
 
 <Callout>
 The following applies to **public resources**:
