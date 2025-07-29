@@ -14,9 +14,9 @@ const LandingPage: React.FC = () => {
       },
       description: '',
       links: [
-        { text: 'Quick start for Model creators', href: '/quick-start/model-creators' },
-        { text: 'Quick start for Data consumers', href: '/quick-start/data-consumers' },
-        { text: 'Quick start for fine-tuning LLMs 🌟', href: '/quick-start/fine-tuning-llms' },
+        { text: 'Model creators', href: '/quick-start/model-creators' },
+        { text: 'Data consumers', href: '/quick-start/data-consumers' },
+        { text: 'Fine-tuning LLMs', href: '/quick-start/fine-tuning-llms' },
       ],
     },
     {
@@ -27,10 +27,11 @@ const LandingPage: React.FC = () => {
       },
       description: '',
       links: [
-        { text: 'About the Assistant', href: '/assistant' },
-        { text: 'Prompt examples', href: '/assistant/prompt-examples' },
-        { text: 'Manage chats', href: '/assistant/manage-chats' },
         { text: 'Configuration', href: '/assistant/configuration' },
+        { text: 'Manage chats', href: '/assistant/manage-chats' },
+        { text: 'Manage artifacts', href: '/assistant/artifacts' },
+        { text: 'Prompt examples', href: '/assistant/prompt-examples' },
+        { text: 'Python sessions', href: '/assistant/python-session-status' },
       ],
     },
     {
@@ -98,13 +99,14 @@ const LandingPage: React.FC = () => {
     {
       icon: <CLIIcon />,
       title: {
-        text: 'APIs',
+        text: 'More tools',
         link: null,
       },
       description: '',
       links: [
-        { text: 'Synthetic DataSDK', href: '/python-sdk' },
         { text: 'REST API', href: 'https://api-docs.mostly.ai/' },
+        { text: 'Synthetic Data SDK', href: '/python-sdk' },
+        { text: 'Synthetic Data Quality Assurance', href: 'https://github.com/mostly-ai/mostlyai-qa' },
       ],
     },
     {

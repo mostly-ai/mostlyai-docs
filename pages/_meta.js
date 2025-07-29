@@ -12,9 +12,9 @@ export default {
   'quick-start': 'Quick start',
   concepts: 'Concepts',
   'best-practices': 'Best practices',
-  '-- Assistant': {
+  '-- Platform': {
     type: 'separator',
-    title: 'ASSISTANT',
+    title: 'PLATFORM',
   },
   assistant: 'Assistant',
   '-- Create synthetic data': {
@@ -25,9 +25,9 @@ export default {
   generators: 'Generators',
   connectors: 'Connectors',
   'synthetic-datasets': 'Synthetic datasets',
-  '-- Global features': {
+  '-- Features': {
     type: 'separator',
-    title: 'GLOBAL FEATURES',
+    title: 'FEATURES',
   },
   organizations: 'Organizations',
   'user-profiles': 'User profiles',
@@ -35,9 +35,9 @@ export default {
   search: 'Search',
   usage: 'Usage and credits',
   notifications: 'Notifications',
-  '-- Installation and administration': {
+  '-- Administration': {
     type: 'separator',
-    title: 'INSTALLATION AND ADMINISTRATION',
+    title: 'ADMINISTRATION',
   },
   install: 'Installation',
   administration: 'Administration',
