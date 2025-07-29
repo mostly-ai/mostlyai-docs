@@ -14,7 +14,7 @@ export default {
   'best-practices': 'Best practices',
   '-- Platform': {
     type: 'separator',
-    title: 'ASSISTANT',
+    title: 'PLATFORM',
   },
   assistant: 'Assistant',
   '-- Create synthetic data': {

@@ -28,9 +28,11 @@ const LandingPage: React.FC = () => {
       description: '',
       links: [
         { text: 'About the Assistant', href: '/assistant' },
-        { text: 'Prompt examples', href: '/assistant/prompt-examples' },
-        { text: 'Manage chats', href: '/assistant/manage-chats' },
         { text: 'Configuration', href: '/assistant/configuration' },
+        { text: 'Manage chats', href: '/assistant/manage-chats' },
+        { text: 'Manage artifacts', href: '/assistant/artifacts' },
+        { text: 'Prompt examples', href: '/assistant/prompt-examples' },
+        { text: 'Python sessions', href: '/assistant/python-session-status' },
       ],
     },
     {
