@@ -1,7 +1,7 @@
 export default {
-  configuration: 'Configuration',
-  'manage-chats': 'Manage chats',
   artifacts: 'Artifacts',
-  'python-session-status': 'Python session status',
-  'prompt-examples': 'Prompt examples',
+  'manage-chats': 'Chats',
+  configuration: 'Configuration',
+  'prompt-examples': 'Prompts',
+  'python-session-status': 'Python sessions',
 };
