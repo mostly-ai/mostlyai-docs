@@ -1,5 +1,5 @@
 export default {
-  compute: 'Compute',
+  compute: 'Computes',
   models: 'Models',
   'users-groups': 'Users and groups',
   'identity-providers': 'Identity providers',
