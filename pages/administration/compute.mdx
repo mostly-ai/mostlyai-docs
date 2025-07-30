@@ -1,32 +1,31 @@
 ---
-title: 'Compute'
+title: 'Computes'
 description: 'With flexible compute, you can add any compute resources needed to complete your GenAI workloads in MOSTLY AI.'
 ---
 
 import Image from 'next/image';
 import { Callout } from 'nextra/components';
 
-# Compute
+# Computes
 
-With flexible compute, you can define compute resources from Kubernetes clusters that you can then assign to run your generator training and synthetic data generation workloads. You can use compute resources to add GPU-capable compute that can significantly speed up the time to train new generators and generate synthetic datasets.
+With flexible computes, you can define compute resources from Kubernetes clusters that you can then assign to run your generator training and synthetic data generation workloads. You can use compute resources to add GPU-capable compute that can significantly speed up the time to train new generators and generate synthetic datasets.
 
-## Add a new Kubernetes compute
+## Add a new compute
 
 You can define any of your existing Kubernetes compute resources as a new compute in MOSTLY AI.
 
 **Prerequisites**
 
-- Before you define a new compute, check the available compute resources in your Kubernetes cluster.
-- You need to be a super admin to add a new compute.
+- Before you define a new compute, confirm the available compute resources in your Kubernetes cluster.
+- You need to be an account Super Admin to add a new compute.
+
+### Kubernetes compute
 
 **Steps**
 
-1. From the profile menu, select **Compute**.
-   <Image src="/docimages/administration/compute/01-profile-menu-select-compute.webp" alt="MOSTLY AI - Profile menu - Select Compute" width={800} height={15000} />
-2. Click **+ New compute**.
-   <Image src="/docimages/administration/compute/02-click-new-compute.webp" alt="MOSTLY AI - Click New Compute" width={800} height={15000} />
+1. From the profile menu, select **Computes**.
+2. On the Computes page, click **+ New compute**.
 3. Select **Kubernetes**.
-   <Image src="/docimages/administration/compute/02.01-select-kubernetes.webp" alt="MOSTLY AI - Select Kubernetes" width={800} height={15000} />
 4. Define the compute configuration.
    | Kubernetes compute parameter | Description |
    | ---------------- | ------------------------------------------------------------------------------------------------------------------ |
@@ -37,18 +36,16 @@ You can define any of your existing Kubernetes compute resources as a new comput
    | **GPU memory** | The amount of GPU memory. |
    | **Toleration** | A toleration that matches the taint defined for your cluster.<br /><br />⚠️ Leave empty if in the `values.yaml` you need to set the `mostly_coordinator.deployment.core_job.tolerationOperator` to `Exists`.|
    | **Order Index** | The order in which the compute appears in the **Compute** drop-down.<br />The default compute has `order_index=1`. |
-   <Image src="/docimages/administration/compute/03-new-kubernetes-compute.webp" alt="MOSTLY AI - New Kubernetes compute" width={800} height={15000} />
+   <Image src="/docimages/administration/compute/03-new-kubernetes-computes.webp" alt="MOSTLY AI - New Kubernetes compute" width={800} height={15000} />
 5. Click **Save**.
 
 **Result**
 
 The next time users configure a new generator training or synthetic dataset, they can select the new compute from the **Compute** drop-down list.
 
-<Image src="/docimages/administration/compute/05-result-select-compute.webp" alt="MOSTLY AI - Result - Select Compute" width={800} height={15000} />
+<Image src="/docimages/administration/compute/05-result-select-compute-new.webp" alt="MOSTLY AI - Result - Select Compute" width={800} height={15000} />
 
-In addition, the new compute remains available in the **Computes** list.
-
-<Image src="/docimages/administration/compute/04-new-compute-available.webp" alt="MOSTLY AI - New Compute available" width={800} height={15000} />
+In addition, the new compute remains available in the **Computes** list. A Super Admin can edit or delete it at any time.
 
 ## Edit a compute
 
