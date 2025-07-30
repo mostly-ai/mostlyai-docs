@@ -27,16 +27,17 @@ You can define any of your existing Kubernetes compute resources as a new comput
 2. On the Computes page, click **+ New compute**.
 3. Select **Kubernetes**.
 4. Define the compute configuration.
-   | Kubernetes compute parameter | Description |
-   | ---------------- | ------------------------------------------------------------------------------------------------------------------ |
-   | **Name** | A unique name for the compute. |
-   | **CPUs** | The number of CPU cores. |
-   | **Memory** | The amount of memory. |
-   | **GPUs** | The number of GPUs. |
-   | **GPU memory** | The amount of GPU memory. |
-   | **Toleration** | A toleration that matches the taint defined for your cluster.<br /><br />⚠️ Leave empty if in the `values.yaml` you need to set the `mostly_coordinator.deployment.core_job.tolerationOperator` to `Exists`.|
-   | **Order Index** | The order in which the compute appears in the **Compute** drop-down.<br />The default compute has `order_index=1`. |
-   <Image src="/docimages/administration/compute/03-new-kubernetes-computes.webp" alt="MOSTLY AI - New Kubernetes compute" width={800} height={15000} />
+
+   | Kubernetes compute parameter | Description                                                                                                                                                                                                  |
+   | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+   | **Name**                     | A unique name for the compute.                                                                                                                                                                               |
+   | **CPUs**                     | The number of CPU cores.                                                                                                                                                                                     |
+   | **Memory**                   | The amount of memory.                                                                                                                                                                                        |
+   | **GPUs**                     | The number of GPUs.                                                                                                                                                                                          |
+   | **GPU memory**               | The amount of GPU memory.                                                                                                                                                                                    |
+   | **Toleration**               | A toleration that matches the taint defined for your cluster.<br /><br />⚠️ Leave empty if in the `values.yaml` you need to set the `mostly_coordinator.deployment.core_job.tolerationOperator` to `Exists`. |
+   | **Order Index**              | The order in which the compute appears in the **Compute** drop-down.<br />The default compute has `order_index=1`.                                                                                           |
+
 5. Click **Save**.
 
 **Result**
