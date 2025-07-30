@@ -18,7 +18,7 @@ Follow the steps below to manually add users:
 1. Navigate to Keycloack by appending `/auth` to your MOSTLY AI platform URL, for example: `https://mostlyai.mycompany.com/auth`.
 2. Login with the Admin credentials created during installation.
 
-   - If you are running a Docker-based version of MOSTLY AI, you can find these credentials in the `docker-compose.yml` file located in the `/opt/mostly-ai/etc/` directory:
+   - If you have deployed a Docker-based version of MOSTLY AI, you can find these credentials in the `docker-compose.yml` file located in the `/opt/mostly-ai/etc/` directory.
      The credentials are stored in the `KEYCLOAK_USER` and `KEYCLOAK_PASSWORD` fields.
 
      ```yaml
@@ -69,7 +69,7 @@ Follow these steps to integrate Keycloak with your organizational Active Directo
 1. Navigate to Keycloack by appending `/auth` to your MOSTLY AI platform URL, for example: `https://mostlyai.mycompany.com/auth`.
 2. Login with the Admin credentials created during installation.
 
-   - If you are running a Docker-based version of MOSTLY AI, you can find these credentials in the `docker-compose.yml` file located in the `/opt/mostly-ai/etc/` directory:
+   - If you have deployed a Docker-based version of MOSTLY AI, you can find these credentials in the `docker-compose.yml` file located in the `/opt/mostly-ai/etc/` directory.
      The credentials are stored in the `KEYCLOAK_USER` and `KEYCLOAK_PASSWORD` fields.
      ```yaml
      mostly-keycloak:
@@ -103,3 +103,4 @@ Follow these steps to integrate Keycloak with your organizational Active Directo
 4. Click **User Federation** in the left-side navigaton menu.
 5. Select **Add LDAP provider**.
 6. Complete the fields on the **Add LDAP provier** page. Each field is described in the Keycloak UI.
+7. Click **Save** to complete the process.
