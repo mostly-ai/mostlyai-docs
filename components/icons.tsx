@@ -303,5 +303,5 @@ export const APIIcon = () => {
 };
 
 export const GitHubIcon = () => {
-  return <Image className="card-icon" src="/icons/third-party/github.svg" alt="GitHub Icon" width={26} height={26} style={{ display: 'inline' }} />;
+  return <Image src="/icons/third-party/github.svg" alt="GitHub Icon" width={26} height={26} className="w-[26px] h-[26px] block" />;
 };

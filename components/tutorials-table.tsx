@@ -117,7 +117,7 @@ const TutorialsTable: React.FC = () => {
               </Link>
             </td>
             <td className="_m-0 _border _border-gray-300 _px-4 _py-2 dark:_border-gray-600">
-              <div className="flex justify-center items-center min-h-[40px]">
+              <div className="flex items-center justify-center h-[40px]">
                 <ColabToGitHubLink colabUrl={tutorial.colabUrl} />
               </div>
             </td>
