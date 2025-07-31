@@ -1,21 +1,21 @@
 ---
 title: 'Release lifecycle and support'
-description: 'Our guide to software release management and support policies, including LTS and regular releases, end-of-support details, security updates, and user best practices.'
+description: 'A comprehensive overview of software release management and support policies, covering semantic versioning, end-of-support timelines, security update procedures, and recommended user practices.'
 ---
 
 # Release lifecycle and support
 
-Our guide to software release management and support policies, including semantic versioning, end-of-support details, security updates, and user best practices.
+A comprehensive overview of software release management and support policies, covering semantic versioning, end-of-support timelines, security update procedures, and recommended user practices.
 
-## Release types
+## Semantic Versioning
 
-**Semantic versioning**. Releases will follow a semantic versioning system. Each release is identified by a version number in the format `vX.Y.Z`, where:
+Releases follow a semantic versioning system. Each release is identified by a version number in the format `vX.Y.Z`, where:
 
 - `X` (major version): Increments signify major changes or breaking changes.
 - `Y` (minor version): Increments signify the addition of new features in a backward-compatible manner.
 - `Z` (patch version): Increments signify backward-compatible bug fixes or security updates.
 
-Examples
+**Examples**
 
 - `v4.0.0`: Initial release of a major version.
 - `v4.0.1`: Bug fixes or security updates for the `v4.0.0` release.
@@ -29,12 +29,7 @@ Each version is supported until a new major or minor version is released. For ex
 For all releases:
 
 - End of support occurs when a newer major or minor version is released.
-- After this point, no further updates (including security patches) will be provided for the old version.
-
-## Release cadence
-
-- Releases will occur as needed, with no specific cadence. It is possible to have multiple releases per week, including major, minor, or patch updates.
-- Each release will supersede the previous version in its series (major or minor).
+- After this point, no further updates (including security patches) will be provided for deprecated versions.
 
 ## Security updates
 
@@ -42,11 +37,10 @@ For all releases:
 - These updates address security vulnerabilities and ensure the version remains secure.
 - Major versions of internal components - such as databases, tools, and frameworks - may change with major or minor version updates to introduce new features or enhancements.
 
-## Upgrade recommendations
+## Recommendations
 
-- Users are encouraged to promptly update to the latest release to benefit from new features, security patches, and bug fixes.
-- Security should remain a top priority, and all users are advised to apply updates as soon as they are available.
+Users are encouraged to promptly update to the latest release to benefit from new features, security patches, and bug fixes. Security is a top priority, and all users are advised to apply updates as soon as they are available.
 
 ## Review and revision
 
-This release and support lifecycle document will be periodically reviewed and revised to reflect any changes in the release and support processes.
+This release and support lifecycle documentation will be periodically reviewed and revised to reflect any changes in the release and support processes.
