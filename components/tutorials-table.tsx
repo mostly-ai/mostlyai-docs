@@ -102,7 +102,7 @@ const TutorialsTable: React.FC = () => {
         <tr>
           <th className="_m-0 _border _border-gray-300 _px-4 _py-2 _font-semibold dark:_border-gray-600">Tutorial</th>
           <th className="_m-0 _border _border-gray-300 _px-4 _py-2 _font-semibold dark:_border-gray-600">Colab Link</th>
-          <th className="_m-0 _border _border-gray-300 _px-4 _py-2 _font-semibold dark:_border-gray-600">GitHub Link</th>
+          <th className="_m-0 _border _border-gray-300 _px-4 _py-2 _font-semibold dark:_border-gray-600 text-center">GitHub Link</th>
         </tr>
       </thead>
       <tbody>
