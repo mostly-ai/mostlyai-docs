@@ -10,7 +10,7 @@ import { CustomCallout } from '@components/custom-callout';
 
 # Synthetic Data SDK by MOSTLY AI
 
-The [Synthetic Data SDK by MOSTLY AI](https://github.com/mostly-ai/mostlyai?tab=readme-ov-file#synthetic-data-sdk-) enables full programmatic use of the MOSTLY AI Platform features both in a local environment as well as by connecting to the MOSTLY AI Platform.
+The [Synthetic Data SDK by MOSTLY AI](https://github.com/mostly-ai/mostlyai?tab=readme-ov-file#synthetic-data-sdk-) enables full programmatic use of the MOSTLY AI Platform features both in a local environment as well as by connecting to the MOSTLY AI Platform remotely.
 
 | Intent                                        | Primitive                         |
 | --------------------------------------------- | --------------------------------- |
@@ -19,22 +19,22 @@ The [Synthetic Data SDK by MOSTLY AI](https://github.com/mostly-ai/mostlyai?tab=
 | Live probe the generator on demand            | `df = mostly.probe(g, config)`    |
 | Connect to any data source within your org    | `c = mostly.connect(config)`      |
 
-<Callout>For a complete API reference, see the [Synthetic Data SDK package documentation](https://mostly-ai.github.io/mostlyai/).</Callout>
+<Callout>For a complete API reference, see the [REST API documentation](https://api-docs.mostly.ai).</Callout>
 
 ## Installation
 
-Use `pip install` to install the latest version of `mostlyai`.
+Use `uv pip install` to install the latest version of `mostlyai`. See the [Astral documentation](https://docs.astral.sh/uv/getting-started/installation/) for `uv` installation instructions.
 
 <Tabs items={["Local mode", "Client mode"]}>
 <Tabs.Tab>
 
 ```shell copy filename="shell"
 # CPU
-pip install -U "mostlyai[local]"
+uv pip install -U "mostlyai[local]"
 
 # GPU
 
-pip install -U "mostlyai[local-gpu]"
+uv pip install -U "mostlyai[local-gpu]"
 
 ```
 
@@ -43,14 +43,14 @@ pip install -U "mostlyai[local-gpu]"
 If you need to use one of the supported [connectors](/connectors/create) in Local mode, install with the optional dependencies: `databricks`, `googlebigquery`, `hive`, `mssql`, `mysql`, `oracle`, `postgres`, `snowflake`.
 
 ```shell copy filename="shell" /databricks/
-pip install -U "mostlyai[local,databricks]"
+uv pip install -U "mostlyai[local,databricks]"
 ```
 
 </Tabs.Tab>
 <Tabs.Tab>
 
 ```shell copy filename="shell"
-pip install -U mostlyai
+uv pip install -U mostlyai
 ```
 
 </Tabs.Tab>
