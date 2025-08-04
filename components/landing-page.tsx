@@ -14,8 +14,8 @@ const LandingPage: React.FC = () => {
       },
       description: '',
       links: [
-        { text: 'Model creators', href: '/quick-start/model-creators' },
-        { text: 'Data consumers', href: '/quick-start/data-consumers' },
+        { text: 'Generators', href: '/quick-start/model-creators' },
+        { text: 'Synthetic data', href: '/quick-start/data-consumers' },
         { text: 'Fine-tuning LLMs', href: '/quick-start/fine-tuning-llms' },
       ],
     },

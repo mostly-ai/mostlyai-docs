@@ -1,18 +1,19 @@
 ---
-title: 'Quick start for model creators'
-description: 'As a model creator, you can train brand new generators and AI models on tabular data. You can then share with peers and data consumers in your teams and organization and they can share brand new privacy-safe synthetic data.'
+title: 'Quick start: Generators'
+description: 'Model creators build generators that can be used to create privacy-safe synthetic data.'
 ---
 
 import Image from 'next/image';
+import { Callout } from 'nextra/components';
 import { Steps } from 'nextra/components';
 import { Tabs } from 'nextra/components';
 import { CustomCallout } from '@components/custom-callout';
 
-# Quick start for Model creators
+# Quick start: Generators
 
-As Model creators, you carry the torch of democratizing data within and outside of your organization!
+Generators are models trained on data and used to create synthetic data based on your requirements. See [Generators](/generators) for more information about how generators are trained and the models offered by MOSTLY AI or see [Fine-tuning LLMs](/fine-tuning-llms) for instructions on using your own large language model.
 
-Here is how you can quickly train a new generator on original tabular data. You can then transfer the generator to an organization and make it public. Peers, colleagues, and third parties can then use it to create privacy-safe synthetic data.
+Follow these instructions to create a new generator. You can transfer the generator to an organization or make it public so others can use it to create synthetic data.
 
 <Steps>
 ## Step 1: Train a generator
@@ -20,20 +21,37 @@ Here is how you can quickly train a new generator on original tabular data. You 
 <Tabs items={['Manual', 'Assistant', 'Synthetic Data SDK']}>
 <Tabs.Tab>
 
-1. In MOSTLY AI, select the **Generators** page.
-2. Click **+ New generator**.
-   <Image src="/docimages/quickstart/model-creators/train-generator-01-click-new-generator.webp" alt="MOSTLY AI - Train a generator - 01 - Click New generator" width={800} height={150} />
-3. Select **Upload file**, browse for a dataset, and click **Proceed**.
-   <CustomCallout>
-     **Note**
-     <br />
-     If you don't have one, download the [UCI Adult income dataset](/datasets/us-census-income.csv.gz).
-   </CustomCallout>
-   <Image src="/docimages/quickstart/model-creators/train-generator-02-click-upload-files.webp" alt="MOSTLY AI - Train a generator - 02 - Click Upload files" width={800} height={150} />
-4. At the **Data configuration** step, click **Configure models**.
-   <Image src="/docimages/quickstart/model-creators/train-generator-03-click-configure-models.webp" alt="MOSTLY AI - Train a generator - 04 - Click Configure models" width={800} height={150} />
-5. At the **Model configuration** step, click **Start training**.
-   <Image src="/docimages/quickstart/model-creators/train-generator-04-click-start-training.webp" alt="MOSTLY AI - Train a generator - 04 - Click Start training" width={800} height={150} />
+1. On the MOSTLY AI platform, open **Generators** from the left-side navigation menu.
+2. There are four ways to create a new generator:
+
+| Method                 | Description                                                                               |
+| ---------------------- | ----------------------------------------------------------------------------------------- |
+| Start from a connector | Use an existing [connector](/connectors) to train a new generator.                        |
+| Upload your data       | Provide a CSV, Parquet, or TSV file to train a new generator from your local file system. |
+| Use the SDK            | Navigate to the [Synthetic Data SDK](/python-sdk) repository.                             |
+| Import a generator     | Upload a [configured generator](/generators/export-import#export-a-generator) file.       |
+
+3. After selecting your training method and uploading any required files, click **Configure models**.
+4. Each connected or uploaded table supports its own configuration. Expand each table description to customize model behavior.
+
+| Method               | Description                                                                                                                                                                                                                                                                                                                                                       |
+| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Model                | The model your generator uses to create synthetic data.                                                                                                                                                                                                                                                                                                           |
+| Compute              | The [compute resources](/administration/compute) used to train the generator.                                                                                                                                                                                                                                                                                     |
+| Training parameters  | The model-level parameters which control the training process. Each parameter is defined by a tooltip in the platform.                                                                                                                                                                                                                                            |
+| Differential privacy | Use differential privacy when you need a mathematical guarantee of privacy, with epsilon quantifying the upper bound on an individual's impact on the trained model.                                                                                                                                                                                              |
+| Flexible generation  | Enabled by default, flexible generation gives you the option to apply smart imputation, data rebalancing, seeded generation and apply fairness when you generate synthetic datasets with the model.                                                                                                                                                               |
+| Value protection     | Value protection prevents membership inference by replacing rare categories and removing extreme values from your dataset.                                                                                                                                                                                                                                        |
+| Model report         | Enabled by default, the Model report provides metrics and charts to gauge the quality of a model. The calculated metrics and charts include accuracy, similarity, and distances between original and synthetic samples, and the correlations, univariate, and bivariate distribution charts to compare the original and synthetic correlations and distributions. |
+
+{' '}
+
+<Callout>MOSTLY AI offers three training Presets in the **Model configuration** section header if you don't want to configure individual parameters: **Accuracy**, **Speed**, and **Turbo**.</Callout>
+
+5. In the **Model configuration** section header, you can optionally configure **Random State** which is a seed value to ensure reproducible results during training. If left empty, a random seed will be used each time.
+6. After completing configuration, click **Start training** to begin the training process.
+
+Follow progress in the **Training status** section on the generator page.
 
 </Tabs.Tab>
 <Tabs.Tab>
@@ -106,13 +124,9 @@ After the generator training completes, you can generate synthetic data. You can
 
 ## Step 2: Share the generator with your organization
 
-1. In MOSTLY AI, open the generator from the **Generators** page.
-2. Click **Share**.
-   <Image src="/docimages/organizations/add-assets-01-select-share.webp" alt="Share - 01 - Share button" width={700} height={300} />
-3. Select the organization to share the resource to.
-   <Image src="/docimages/organizations/add-assets-02-select-share-org.webp" alt="Share - 02 - Select organization" width={700} height={300} />
-
-**Result**
+1. Open the generator from the **Generators** page.
+2. Click **Share** in the upper-right corner.
+3. Select the organization to which to share the resource using the **Owner** dropdown and click **Save**.
 
 The generator is now available to all members of your organization and they can use it to generate synthetic data.
 
@@ -122,26 +136,20 @@ You can make the generator public so that it is available to all logged-in users
 
 ## Step 3: Make the generator public
 
-Generators capture only the statistical characteristics of the original data and they never memorize data points. This makes it perfectly safe to make a generator public.
+Generators capture only the statistical characteristics of the original data and they never memorize data points. It is perfectly safe to make a generator public.
 
 1. Open the generator from the **Generators** page.
 2. Click **Share**.
-   <Image src="/docimages/quickstart/model-creators/make-public-01-select-share.webp" alt="MOSTLY AI - Make the generator publc - 02 - Select organization" width={800} height={150} />
-3. Select **Public** and click **Save**.
-   <Image src="/docimages/quickstart/model-creators/make-public-02-select-public.webp" alt="MOSTLY AI - Make the generator publc - 02 - Select organization" width={800} height={150} />
+3. Select **Public** from the **Visibility** dropdown and click **Save**.
 
 **Result**
 
 Public generators of organizations are listed on the organization's profile page.
 
-<Image src="/docimages/quickstart/model-creators/make-public-03-public-generator-org-profile.webp" alt="MOSTLY AI - Make the generator publc - 03 - Public generator on organization profile" width={800} height={150} />
-
 They are also available on the **Generators** page for all logged-in users.
-
-<Image src="/docimages/quickstart/model-creators/make-public-04-public-generator-user-generators-list.webp" alt="MOSTLY AI - Make the generator publc - 04 - Public generator on user's Generators list" width={800} height={150} />
 
 **What's next**
 
-To generate synthetic data, see [Quickstart for Data consumers](data-consumers).
+To generate synthetic data, see [Quickstart: Synthetic data](data-consumers).
 
 </Steps>

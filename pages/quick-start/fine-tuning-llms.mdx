@@ -1,5 +1,5 @@
 ---
-title: 'Quick start for fine-tuning LLMs'
+title: 'Quick start: Fine-tuning LLMs'
 description: 'Learn how easy it is to fine-tune an LLM with MOSTLY AI to train and generate unstructured synthetic text data.'
 ---
 
@@ -8,28 +8,27 @@ import { Steps } from 'nextra/components';
 import { Tabs } from 'nextra/components';
 import { CustomCallout } from '@components/custom-callout';
 
-## Quick start for fine-tuning LLMs
+# Quick start: Fine-tuning LLMs
 
-MOSTLY AI integrates with well-known LLMs and gives the flexibility to use any LLM to generate privacy-safe synthetic text. When included in a tabular dataset, synthetic text data is intelligently aligned with the rest of the data, ensuring high correlation while safeguarding the privacy of real-world individuals.
+MOSTLY AI supports integration with LLMs hosted on Hugging Face to generate privacy-safe synthetic text. If you need to use another LLM, contact [MOSTLY AI Support](mailto:support@mostly.ai).
 
-<Image src="/docimages/quickstart/unstructured-text/splash-unstructured-text.webp" alt="MOSTLY AI for fine-tuning LLMs" width={800} height={300} />
+When included in a tabular dataset, synthetic text data is intelligently aligned with the rest of the data, ensuring high correlation while safeguarding the privacy of real-world individuals.
 
 <Steps>
-### Step 1: Train a generator to fine-tune an LLM
+## Step 1: Train a generator to fine-tune an LLM
 
 **Prerequisites**
 
 - **Hardware**. The minimum recommended requirements to fine-tune an LLM with MOSTLY AI are:
   - GPU: Nvidia A10g or better (for example, A100, H100, RTX 4090)
   - GPU VRAM: at least 24GB
-- **Dataset with unstructured text in a supported format**. The dataset you will use for fine-tuning must be `CSV`, `Parquet`, `TSV`, where one or more of the columns contains unstructured text.
-- **Size of the training dataset**. Depending on the size of the dataset and the compute resources you use for training, it is possible that the generator training can fail with out-of-memory errors. For details, see [_Troubleshooting_](#troubleshooting).
+- **Dataset with unstructured text in a supported format**. The dataset you use for fine-tuning must be stored in `CSV`, `Parquet`, or `TSV` format, where one or more of the columns contains unstructured text.
+- **Size of the training dataset**. Depending on the size of the dataset and the compute resources you use for training, it is possible that the generator training can fail with out-of-memory errors. For more information, see [Troubleshooting](#troubleshooting).
 
 **Steps**
 
-1.  Create a new generator and upload a table file or add a table from a data source that contains unstructured text.
+1.  [Create a new generator](/quick-start/model-creators) and upload a table file or add a table from a data source that contains unstructured text.
 2.  On the **Data configuration** page, for the columns containing unstructured text, make sure that **Language/Text** is selected as **Encoding type**.
-    <Image src="/docimages/quickstart/unstructured-text/01-generator-configuration-01-select-language-text.webp" alt="MOSTLY AI Unstructured text - Select Language/Text as Encoding type" width={800} height={300} />
 3.  Click **Configure models** in the upper right.
 4.  On the **Model configuration** page, expand the `language` model and configure it.
 
@@ -39,11 +38,7 @@ MOSTLY AI integrates with well-known LLMs and gives the flexibility to use any L
 
         The list of available models includes [HuggingFace text generation models](/generators/configure/set-encoding-types#huggingface-text-models) and the [not-pre-trained MOSTLY AI LSTM model](/generators/configure/set-encoding-types#mostly-ai-lstm).
 
-              If you need to use another LLM, contact [MOSTLY AI Support](mailto:support@mostly.ai).
-
               </CustomCallout>
-
-        <Image src="/docimages/quickstart/unstructured-text/01-generator-configuration-02-select-language-model.webp" alt="MOSTLY AI Unstructured text - Select language model to use" width={800} height={300} />
 
     2.  For **Compute**, select an available compute. We recommend the use of GPUs for language models.
 
@@ -53,21 +48,16 @@ MOSTLY AI integrates with well-known LLMs and gives the flexibility to use any L
 
         </CustomCallout>
 
-        <Image src="/docimages/quickstart/unstructured-text/01-generator-configuration-03-select-compute.webp" alt="MOSTLY AI Unstructured text - Select compute" width={800} height={300} />
-
 5.  Click **Start training** in the upper right.
-    <Image src="/docimages/quickstart/unstructured-text/01-generator-configuration-04-click-start-training.webp" alt="MOSTLY AI Unstructured text - Start training" width={800} height={300} />
 
-### Step 2: Generate text
+## Step 2: Generate text
 
 1. Open the trained generator and click **Generate data** in the upper right.
-   <Image src="/docimages/quickstart/unstructured-text/02-generate-unstructured-text-01-click-generate-data.webp" alt="MOSTLY AI Unstructured text - Click Generate data" width={800} height={300} />
 2. Configure the generation.
    1. For **Tabular compute**, select the compute to use for tabular data. It is usually best to use a CPU-based compute.
    2. For **Language compute**, select the compute to use for language data. GPUs tend to be faster for language generation.
    3. (Optional) If needed, adjust the rest of the generation options.
 3. Click **Start generation** in the upper right.
-   <Image src="/docimages/quickstart/unstructured-text/02-generate-unstructured-text-02-click-start-generation.webp" alt="MOSTLY AI Unstructured text - Click Start generation" width={800} height={300} />
 
 </Steps>
 
