@@ -23,9 +23,9 @@ Follow these instructions to create a new generator. You can transfer the genera
 1. On the MOSTLY AI platform, open **Generators** from the left-side navigation menu.
 2. There are four ways to create a new generator:
 
-| Method              | Description                                                                                  |
-|---------------------|----------------------------------------------------------------------------------------------|
-| Start from a connector | Use an existing [connector](/connectors) to train a new generator.                         |
+| Method                 | Description                                                                               |
+| ---------------------- | ----------------------------------------------------------------------------------------- |
+| Start from a connector | Use an existing [connector](/connectors) to train a new generator.                        |
 | Upload your data       | Provide a CSV, Parquet, or TSV file to train a new generator from your local file system. |
 | Use the SDK            | Navigate to the [Synthetic Data SDK](/python-sdk) repository.                             |
 | Import a generator     | Upload a [configured generator](/generators/export-import#export-a-generator) file.       |
@@ -33,19 +33,18 @@ Follow these instructions to create a new generator. You can transfer the genera
 3. After selecting your training method and uploading any required files, click **Configure models**.
 4. Each connected or uploaded table supports its own configuration. Expand each table description to customize model behavior.
 
-| Method               | Description                                                                                                                                                                                                                                                                                                              |
-|----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Model                | The model your generator uses to create synthetic data.                                                                                                                                                                                                                                                                  |
-| Compute              | The [compute resources](/administration/compute) used to train the generator.                                                                                                                                                                                                                                            |
-| Training parameters  | The model-level parameters which control the training process. Each parameter is defined by a tooltip in the platform.                                                                                                                                                                                                  |
-| Differential privacy | Use differential privacy when you need a mathematical guarantee of privacy, with epsilon quantifying the upper bound on an individual's impact on the trained model.                                                                                                                                                   |
-| Flexible generation  | Enabled by default, flexible generation gives you the option to apply smart imputation, data rebalancing, seeded generation and apply fairness when you generate synthetic datasets with the model.                                                                                                                     |
-| Value protection     | Value protection prevents membership inference by replacing rare categories and removing extreme values from your dataset.                                                                                                                                                                                               |
+| Method               | Description                                                                                                                                                                                                                                                                                                                                                       |
+| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Model                | The model your generator uses to create synthetic data.                                                                                                                                                                                                                                                                                                           |
+| Compute              | The [compute resources](/administration/compute) used to train the generator.                                                                                                                                                                                                                                                                                     |
+| Training parameters  | The model-level parameters which control the training process. Each parameter is defined by a tooltip in the platform.                                                                                                                                                                                                                                            |
+| Differential privacy | Use differential privacy when you need a mathematical guarantee of privacy, with epsilon quantifying the upper bound on an individual's impact on the trained model.                                                                                                                                                                                              |
+| Flexible generation  | Enabled by default, flexible generation gives you the option to apply smart imputation, data rebalancing, seeded generation and apply fairness when you generate synthetic datasets with the model.                                                                                                                                                               |
+| Value protection     | Value protection prevents membership inference by replacing rare categories and removing extreme values from your dataset.                                                                                                                                                                                                                                        |
 | Model report         | Enabled by default, the Model report provides metrics and charts to gauge the quality of a model. The calculated metrics and charts include accuracy, similarity, and distances between original and synthetic samples, and the correlations, univariate, and bivariate distribution charts to compare the original and synthetic correlations and distributions. |
 
-   <Callout>
-    MOSTLY AI offers three training Presets in the **Model configuration** section header if you don't want to configure individual parameters: **Accuracy**, **Speed**, and **Turbo**.
-   </Callout>
+{' '}
+<Callout>MOSTLY AI offers three training Presets in the **Model configuration** section header if you don't want to configure individual parameters: **Accuracy**, **Speed**, and **Turbo**.</Callout>
 
 5. In the **Model configuration** section header, you can optionally configure **Random State** which is a seed value to ensure reproducible results during training. If left empty, a random seed will be used each time.
 6. After completing configuration, click **Start training** to begin the training process.
