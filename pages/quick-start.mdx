@@ -6,11 +6,19 @@ description: 'Take your first steps in training generators on your tabular data 
 import { Cards, Card } from 'nextra/components';
 import { ModelCreatorIcon, DataConsumerIcon, LLMIcon } from '@components/icons';
 
-# Quick start
+# Generators and synthetic data
 
 Follow these guides to get started training generators and generating synthetic data with the MOSTLY AI platform.
 
 <Cards num={2}>
   <Cards.Card icon={ModelCreatorIcon()} title="Model creators" href="/quick-start/model-creators" />
   <Cards.Card icon={DataConsumerIcon()} title="Data consumers" href="/quick-start/data-consumers" />
+</Cards>
+
+# Fine-tuning LLMs
+
+MOSTLY AI can easily integrate with any LLM for further fine-tuning on tabular datasets that contain columns with unstructured text data.
+
+<Cards num={1}>
+  <Cards.Card icon={LLMIcon()} title="Fine-tuning LLMs" href="/quick-start/fine-tuning-llms" />
 </Cards>
