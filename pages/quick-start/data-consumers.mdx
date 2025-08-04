@@ -1,6 +1,6 @@
 ---
-title: 'Quick start for Data consumers'
-description: 'As a Data consumer, you can use a trained generator in MOSTLY AI to generate new synthetic data. Use the new data for analysis, downstream machine learning (ML) tasks, or share it with others.'
+title: 'Quick start: Synthetic data'
+description: 'Synthetic data is artificially generated data that mimics the structure and statistical properties of real data, but contains no actual personal or sensitive information.'
 ---
 
 import Image from 'next/image';
@@ -9,28 +9,34 @@ import { Tabs } from 'nextra/components';
 import { Callout } from 'nextra/components';
 import { CustomCallout } from '@components/custom-callout';
 
-# Quick start for Data consumers
+# Quick start: Synthetic data
 
-As Data consumers, through synthetic data you can get easy and privacy-safe access to data that otherwise remains locked.
+Synthetic data is artificially generated data that mimics the structure and statistical properties of real data, but contains no actual personal or sensitive information.
 
-To do so, you can use a MOSTLY AI trained generator for fresh and new synthetic data. The Model creators in your organization can share a generator with you.
+Use a [generator](/generators) to create sythetic data based on your requirements. Follow the [generator quick start guide](/quick-start/model-creators) if you want to create your own generator.
 
 <Steps>
 ## Step 1: Generate synthetic data
 
 <Tabs items={['Manual', 'Assistant', 'Synthetic Data SDK']}>
 <Tabs.Tab>
-1. Open the link of the shared generator.
-    <Callout>
-    Model creators within your organization can share a link to a **public** generator or a link to a **private** generator within an [organization](/organizations).
+1. Navigate to the generator that you wish to use by clicking **Generators** in the left-side navigation menu and selecting from the available generators.
+2. On the generator page, click **Generate data**.
+3. Configure the generation parameters based on your requirements:
 
-    For details, see [Public and private resources](/public-private-resources).
-    </Callout>
+| Parameter | Description |
+|-----------|-------------|
+| Sample size | Define the number of rows to generate for your synthetic data. |
+| Conditional simulation | Use a seed dataset as context for conditional simulation. |
+| Sampling controls | Adjust how closely your synthetic data mirrors the original distribution. |
+| Fairness | Apply statistical parity to a target column with respect to selected sensitive columns, ensuring statistical independence. |
+| Rebalancing | Rebalance the distribution in a categorical column based on specified categories and their new percentages. |
+| Imputation | Replace missing values in a column with statistically coherent values from the same column. |
+| Data report | Control data report generation for this model. Disable it to speed up the process of finalizing synthetic dataset generation. |
 
-2. With the generator open, click **Generate data**.
-   <Image src="/docimages/quickstart/data-consumers/generate-sd-01-click-generate-data.webp" alt="MOSTLY AI - Generate synthetic data - 01 - Click Generate data" width={800} height={150} />
-3. Click **Start generation**.
-   <Image src="/docimages/quickstart/data-consumers/generate-sd-02-click-start-generation.webp" alt="MOSTLY AI - Train a generator - 03 - Click Upload files" width={800} height={150} />
+4. Click **Start generation**.
+
+Follow progress in the **Generation status** section on the synthetic dataset page.
 
 **What's next**
 
