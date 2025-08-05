@@ -1,0 +1,97 @@
+---
+title: 'Quick start: Datasets'
+description: 'Datasets are collections of data that can be used to train generators and create synthetic data.'
+---
+
+import Image from 'next/image';
+import { Callout } from 'nextra/components';
+import { Steps } from 'nextra/components';
+import { Tabs } from 'nextra/components';
+import { CustomCallout } from '@components/custom-callout';
+
+# Quick start: Datasets
+
+Datasets are collections of data that can be used to train [generators](/quick-start/model-creators) and create [synthetic data](/quick-start/data-consumers).
+
+Follow these instructions to create a new dataset. You can share datasets with other MOSTLY AI users by making it public so others can use it to create synthetic data.
+
+<Steps>
+## Step 1: Create a dataset
+
+<Tabs items={['Manual', 'Assistant']}>
+<Tabs.Tab>
+
+1. On the MOSTLY AI platform, open **Datasets** from the left-side navigation menu.
+2. Click **New dataset**.
+3. Configure the dataset parameters.
+
+| Parameter   | Description                                                                                                                                                                                                                                                                                                                                                                                                                   |
+|-------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Name        | Human-readable name which identifies the dataset on the platform.                                                                                                                                                                                                                                                                                                                                                             |
+| Description | Instructions and information to guide the Assistant and data consumers. Note that a dataset can consist entirely of just a description which provides the link to a data resource and instructions for the Assistant to download the dataset found at that location.                                                                                                                  |
+| File upload | Upload any files to include in your dataset. You can include files that are not explicitly data, but can be used during analysis, such as geographical shapefiles.                                                                                                                                                                                                                     |
+| Connector   | Connect to [external data sources](quick-start/conector-quickstart) that have been configured in the platform.                                                                                                                                                                                                                                                                         |
+
+4. Click **Save**.
+
+The dataset is now available on the **Datasets** page.
+
+**What's next**
+
+You can now use the dataset to train a generator or explore with the [Assistant](/assistant).
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+1. Start a new chat with the Assistant by clicking **New chat** in the left-side navigation menu.
+2. Prompt the Assistant to create a new [dataset](/datasets) by providing natural language instructions.
+
+```bash
+Open the URL `https://github.com/mostly-ai/public-demo-data` and download an interesting dataset for me to explore.
+```
+
+3. Prompt the Assistant to create a dataset with the defined resource.
+
+```bash
+Create a dataset that contains the data that you've suggested.
+```
+
+</Tabs.Tab>
+
+</Tabs>
+
+**What's next**
+
+After you've created a new dataset, you can use it to train a generator and generate synthetic data. You can also transfer it to an organization.
+
+## Step 2: Share the dataset with your organization
+
+1. Open the dataset from the **Datasets** page.
+2. Click **Share** in the upper-right corner.
+3. Select the organization to which to share the resource using the **Owner** dropdown and click **Save**.
+
+The dataset is now available to all members of your organization and they can use it to create a generator or other [artifacts](/assistant/artifacts).
+
+**What's next**
+
+You can make the dataset public so that it is available to all logged-in users in the platform.
+
+## Step 3: Make the dataset public
+
+If your dataset might be of interest to other users, you can make it public. Be cautious not to share datasets which may contain any sensitive information.
+
+1. Open the dataset from the **Datasets** page.
+2. Click **Share**.
+3. Select **Public** from the **Visibility** dropdown and click **Save**.
+
+**Result**
+
+Public datasets of organizations are listed on the organization's profile page.
+
+They are also available on the **Datasets** page for all logged-in users.
+
+**What's next**
+
+To create a generator, see [Quickstart: Generators](model-creators).
+
+</Steps>

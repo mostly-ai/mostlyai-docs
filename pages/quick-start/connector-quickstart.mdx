@@ -1,0 +1,159 @@
+---
+title: 'Quick start: Connectors'
+description: 'Datasets are collections of data that can be used to train generators and create synthetic data.'
+---
+
+import Image from 'next/image';
+import { Steps } from 'nextra/components';
+import { Tabs } from 'nextra/components';
+import { CustomCallout } from '@components/custom-callout';
+
+# Quick start: Connectors
+
+Connectors are the resources that contain the connection details needed to connect to a database or a cloud storage bucket.
+
+Follow these instructions to create a new connector. You can share connectors with other MOSTLY AI users by making them public so others can use them to create [generators](/quick-start/model-creators), [datasets](/quick-start/dataset-quickstart), and [synthetic datasets](/quick-start/data-consumers).
+
+<Steps>
+## Step 1: Create a connector
+
+<Tabs items={['Manual', 'Assistant', 'Synthetic Data SDK']}>
+<Tabs.Tab>
+
+1. On the MOSTLY AI platform, open **Connectors** from the left-side navigation menu.
+2. Select the connector template you want to use and provide the connection details. MOSTLY AI offers the following templates:
+    - [Apache Hive](/connectors/apache-hive)
+    - [Azure](/connectors/azure)
+    - [BigQuery](/connectors/bigquery)
+    - [Databricks](/connectors/databricks)
+    - [Google Cloud](/connectors/google-cloud)
+    - [Maria DB](/connectors/mariadb)
+    - [MySQL](/connectors/mysql)
+    - [Oracle](/connectors/oracle)
+    - [PostgreSQL](/connectors/postgresql)
+    - [S3](/connectors/s3)
+    - [Snowflake](/connectors/snowflake)
+    - [SQL Server](/connectors/sql-server)
+
+3. Click **Save**.
+
+The connector is now available on the **Connectors** page.
+
+**What's next**
+
+You can now use the connector to create a new [dataset](/quick-start/dataset-quickstart), train a [generator](/quick-start/model-creators), or explore with the [Assistant](/assistant).
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+1. Start a new chat with the Assistant by clicking **New chat** in the left-side navigation menu.
+2. Prompt the Assistant to create a new connector by providing natural language instructions.
+
+```bash
+I want to create a connector to my Snowflake database. Please walk me through the process step by step.
+```
+
+3. Prompt the Assistant to create a data with the defined resource.
+
+```bash
+Use these connection details to create a new connector.
+```
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+1. [Install the MOSTLY AI Synthetic Data SDK](/python-sdk#installation).<br /><br />
+   You can install and use the SDK in **Local** or **Client** mode.
+
+   - In **Local mode**, you use the SDK with the compute resources on your local machine (or any Python environment) to [train generators](/generators/train) and [create synthetic datasets](/synthetic-datasets/generate).
+   - In **Client mode**, you connect to a remote MOSTLY AI Platform instance and use its available compute resources.
+     For details, see [_Local and Client modes_](/python-sdk#local-and-client-modes).<br /><br />
+
+2. Create your first connector according to the AWS S3 template shown below:
+
+<Tabs items={['Local mode', 'Client mode']}>
+<Tabs.Tab>
+
+```python copy filename="python"
+from mostlyai.sdk import MostlyAI
+mostly = MostlyAI()
+c = mostly.connect(
+    config={
+        'access_type': 'READ_PROTECTED',
+        'type': 'S3_STORAGE',
+        'config': {
+            'accessKey': '...',
+        },
+        'secrets': {
+            'secretKey': '...'
+        }
+    }
+)
+```
+
+<CustomCallout>Payload templates for each connector type are available in the [SDK documentation](https://mostly-ai.github.io/mostlyai/api_client/#mostlyai.sdk.client.api.MostlyAI.connect).</CustomCallout>
+
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+```python copy filename="python" 
+from mostlyai.sdk import MostlyAI
+mostly = MostlyAI()
+c = mostly.connect(
+    config={
+        'access_type': 'READ_PROTECTED',
+        'type': 'S3_STORAGE',
+        'config': {
+            'accessKey': '...',
+        },
+        'secrets': {
+            'secretKey': '...'
+        }
+    }
+)
+```
+
+<CustomCallout>Payload templates for each connector type are available in the [SDK documentation](https://mostly-ai.github.io/mostlyai/api_client/#mostlyai.sdk.client.api.MostlyAI.connect).</CustomCallout>
+
+</Tabs.Tab>
+</Tabs>
+
+</Tabs.Tab>
+</Tabs>
+
+**What's next**
+
+After you've created a connector, you can use it to train a generator, create a dataset, or generate synthetic data. You can also transfer it to an organization.
+
+## Step 2: Share the dataset with your organization
+
+1. Open the connector from the **Connectors** page.
+2. Click **Share** in the upper-right corner.
+3. Select the organization to which to share the resource using the **Owner** dropdown and click **Save**.
+
+The connector is now available to all members of your organization and they can use it to create a generator or other [artifacts](/assistant/artifacts).
+
+**What's next**
+
+You can make the connector public so that it is available to all logged-in users in the platform.
+
+## Step 3: Make the dataset public
+
+If your connector might be of interest to other users, you can make it public. Be cautious not to share connectors which may allow access to data which contain any sensitive information.
+
+1. Open the connector from the **Connectors** page.
+2. Click **Share**.
+3. Select **Public** from the **Visibility** dropdown and click **Save**.
+
+**Result**
+
+Public connectors of organizations are listed on the organization's profile page.
+
+They are also available on the **Connectors** page for all logged-in users.
+
+**What's next**
+
+To create a generator, see [Quickstart: Generators](model-creators).
+
+</Steps>
