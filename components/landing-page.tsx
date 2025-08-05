@@ -14,6 +14,8 @@ const LandingPage: React.FC = () => {
       },
       description: '',
       links: [
+        { text: 'Datasets', href: '/quick-start/dataset-quickstart' },
+        { text: 'Connectors', href: '/quick-start/connector-quickstart' },
         { text: 'Generators', href: '/quick-start/model-creators' },
         { text: 'Synthetic data', href: '/quick-start/data-consumers' },
       ],
