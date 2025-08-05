@@ -7,5 +7,6 @@ export default {
   'export-import': 'Export and import generators',
   manage: 'Manage generators',
   'live-probing': 'Live-probe generators',
+  'fine-tuning-llms': 'Fine-tuning LLMs',
   'rare-values': '_RARE_ values',
 };
