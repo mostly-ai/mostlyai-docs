@@ -37,7 +37,7 @@ export const DatabricksIcon = () => {
 };
 
 export const AzureIcon = () => {
-  return <Image className="card-icon" src="/icons/third-party/azure-icon.svg" alt="Azure Icon" width={30} height={30} />;
+  return <Image className="card-icon" src="/icons/third-party/azure-blob-storage-icon.svg" alt="Azure Blob Storage Icon" width={30} height={30} />;
 };
 
 export const GoogleCloudIcon = () => {
@@ -45,5 +45,5 @@ export const GoogleCloudIcon = () => {
 };
 
 export const AWSIcon = () => {
-  return <Image className="card-icon" src="/icons/third-party/aws-icon.svg" alt="AWS Icon" width={30} height={30} />;
+  return <Image className="card-icon" src="/icons/third-party/aws-s3-storage-icon.svg" alt="AWS S3 Storage Icon" width={30} height={30} />;
 };

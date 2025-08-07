@@ -1,6 +1,6 @@
 ---
 title: 'Use Azure blob storage for synthetic data'
-description: 'To use Azure blob storage as a data source or destination for your synthetic data, you need to create an Azure connector in MOSTLY AI.'
+description: 'To use Azure blob storage as a data source or destination for your synthetic data, you need to create an Azure connector.'
 ---
 
 import { Tabs } from 'nextra/components';
@@ -8,11 +8,11 @@ import Image from 'next/image';
 
 # Use Azure blob storage for synthetic data
 
-To use Azure blob storage as a data source or destination for your synthetic data, you need to create an Azure connector in MOSTLY AI.
+To use Azure blob storage as a data source or destination for your synthetic data, you need to create an Azure connector.
 
 If you want to keep your generated synthetic data in a separate Azure blob container, you need to create a second connector that points to that container.
 
-## Get your Azure storage account name and access key
+## Collect Azure storage account name and access key
 
 To create an Azure storage connector in MOSTLY AI, you need to first obtain your Azure storage account name and access key.
 
@@ -28,27 +28,27 @@ To create an Azure storage connector in MOSTLY AI, you need to first obtain your
 
 ## Create an Azure storage connector
 
-With the Azure storage account name and access key, you can now create your Azure storage connector in MOSTLY AI.
+With the Azure storage account name and access key, you can now create your Azure storage connector.
 
 <Tabs items={['UI', 'Synthetic Data SDK']}>
 <Tabs.Tab>
-If you use the web application, create a new Azure blob storage connector from the **Connectors** page.
+Create a new Azure blob storage connector from the **Connectors** page.
 
 **Steps**
 
-1.  From the **Connectors** page, click **New connector**.
-    <Image src="/docimages/connectors/create-connector-01-click.webp" alt="Click Create connector button" width={800} height={500} />
-2.  From the **Create a new connector** window, select **Microsoft Azure**.
-    <Image src="/docimages/connectors/azure/create-connector-02-select-azure.webp" alt="Select Azure storage connector" width={800} height={500} />
-3.  On the **New connector** page, configure the connector.
-    1. For **Name**, enter a name that you can distinguish from other connectors.
-    2. For **Access type**, select whether you want to use the connector as a **source** or **destination**.
-    3. For **Account name**, enter your Azure account name.
-    4. For **Account key**, enter your Azure account key.
-       <Image src="/docimages/connectors/azure/create-connector-03-configure-azure.webp" alt="Configure Azure blob storage connector" width={350} height={500} />
-4.  Click **Save** to save your new Azure connector.<br /><br />
-    MOSTLY AI tests the connection. If you see an error, check the connection details, update them, and click **Save** again.<br /><br />
-    You can click **Save anyway** to save the connector disregarding any errors.
+1.  From the **Connectors** page, select **Microsoft Azure** under the **Connect your data** header.
+2.  On the **New connector** modal, configure the connector.
+
+| Field            | Description                                                                      |
+| ---------------- | -------------------------------------------------------------------------------- |
+| **Name**         | Enter a name that you can distinguish from other connectors.                     |
+| **Access type**  | Select whether you want to use the connector as a **source** or **destination**. |
+| **Account name** | Your Azure account name.                                                         |
+| **Account key**  | Your Azure account key.                                                          |
+
+3.  Click **Save** to save your new Azure connector.
+    - MOSTLY AI tests the connection. If you see an error, check the connection details, update them, and click **Save** again.<br /><br />
+    - You can click **Save anyway** to save the connector and disregard any errors.
 
 </Tabs.Tab>
 <Tabs.Tab>
@@ -85,17 +85,19 @@ In the web application, the Azure connector configuration includes configuration
 **Steps**
 
 1.  To use a Service principal for authentication in your Azure storage connector, select the **Authenticate with Service Principal** checkbox.
-2.  On the **New connector** page, configure the Azure connector with a Service principal account.
-    1. For **Name**, enter a name that you can distinguish from other connectors.
-    2. For **Access type**, select whether you want to use the connector as a **source** or **destination**.
-    3. Select **Authenticate with Service Principal**.
-    4. For **Tenant ID**, enter your tenant ID.
-    5. For **Client ID**, enter your client ID.
-    6. For **Client secret**, enter your client secret.
-       <Image src="/docimages/connectors/azure/create-connector-04-azure-with-service-principal.webp" alt="Configure Azure blob storage connector - Authenticate with Service Principal" width={350} height={500} />
-3.  Click **Save** to save your new Azure connector.<br /><br />
-    MOSTLY AI tests the connection. If you see an error, check the connection details, update them, and click **Save** again.<br /><br />
-    You can click **Save anyway** to save the connector disregarding any errors.
+2.  On the **New connector** modal, configure the Azure connector with a Service principal account.
+
+| Field             | Description                                                                      |
+| ----------------- | -------------------------------------------------------------------------------- |
+| **Name**          | Enter a name that you can distinguish from other connectors.                     |
+| **Access type**   | Select whether you want to use the connector as a **source** or **destination**. |
+| **Tenant ID**     | Your tenant ID.                                                                  |
+| **Client ID**     | Your client ID.                                                                  |
+| **Client secret** | Your client secret.                                                              |
+
+3.  Click **Save** to save your new Azure connector.
+    - MOSTLY AI tests the connection. If you see an error, check the connection details, update them, and click **Save** again.<br /><br />
+    - You can click **Save anyway** to save the connector and disregard any errors.
 
 </Tabs.Tab>
 <Tabs.Tab>
@@ -128,5 +130,5 @@ c = mostly.connect(config)
 
 Depending on whether you created a **source** or a **destination** connector, you can use the connector as:
 
-- [data source](../use/data-source) for a new generator
-- [data destination](../use/data-destination) for a new synthetic dataset
+- [Data source](../use/data-source) for a new generator
+- [Data destination](../use/data-destination) for a new synthetic dataset

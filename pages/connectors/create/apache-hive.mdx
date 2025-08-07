@@ -1,6 +1,6 @@
 ---
 title: 'Use Apache Hive for synthetic data'
-description: 'With MOSTLY AI, you can use Apache Hive as a source for original data as well as a destination to deliver synthetic data. To do so, you need to create Apache Hive connectors.'
+description: 'To use Apache Hive as a data source for original data as well as a destination for synthetic data.'
 ---
 
 import { Callout } from 'nextra/components';
@@ -9,7 +9,7 @@ import Image from 'next/image';
 
 # Use Apache Hive for synthetic data
 
-MOSTLY AI can use Apache Hive as a data source for original data as well as a destination for synthetic data. To do so, you need to create Apache Hive connectors.
+To use Apache Hive as a data source for original data as well as a destination for synthetic data, you need to create an Apache Hive connector.
 
 ## Create an Apache Hive connector
 
@@ -19,32 +19,32 @@ For each Apache Hive data source or destination, you need a separate connector.
 
 Obtain the Apache Hive connection details. To use Kerberos, see [Use Kerberos for authentication](#use-kerberos-for-authentication).
 
-- host
-- port
-- credentials
+- Host
+- Port
+- Username
+- Password
 
 <Tabs items={['UI', 'Synthetic Data SDK']}>
 <Tabs.Tab>
-If you use the web application, create a new Apache Hive connector from the **Connectors** page.
+Create a new Apache Hive connector from the **Connectors** page.
 
 **Steps**
 
-1.  From the **Connectors** page, click **New connector**.
-    <Image src="/docimages/connectors/create-connector-01-click.webp" alt="Click Create connector button" width={800} height={500} />
-2.  From the **Create a new connector** window, select **Apache Hive**.
-    <Image src="/docimages/connectors/apache-hive/create-connector-02-select-apache-hive.webp" alt="Select Apache Hive connector" width={800} height={500} />
-3.  From the **New connector** page, configure the connector.
-    1. For **Name**, enter a name that you can distinguish from other connectors.
-    2. For **Access type**, select whether you want to use the connector as a **source** or **destination**.
-       <Callout>If you plan to use Apache Hive as a destination for synthetic data, MOSTLY AI recommends that you load the data into Apache Hive using Parquet files. For more information, see [Considerations for Apache Hive as a destination](#considerations-for-apache-hive-as-a-destination).</Callout>
-    3. For **Host**, enter the Apache Hive hostname.
-    4. For **Port**, enter the port number.
-       <Callout type="info">The default port for Apache Hive is 10000.</Callout>
-    5. For **Username** and **Password**, enter your Apache Hive credentials.
-       <Image src="/docimages/connectors/apache-hive/create-connector-03-configure-apache-hive.webp" alt="Configure Apache Hive connector" width={300} height={500} />
-4.  Click **Save** to save your new Apache Hive connector.<br /><br />
-    MOSTLY AI tests the connection. If you see an error, check the connection details, update them, and click **Save** again.<br /><br />
-    You can click **Save anyway** to save the connector disregarding any errors.
+1.  From the **Connectors** page, select **Apache Hive** under the **Connect your data** header.
+2.  On the **New connector** modal, configure the connector.
+
+| Field           | Description                                                                                                                                                                                                                                                                                                                                          |
+| --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Name**        | Enter a name that you can distinguish from other connectors.                                                                                                                                                                                                                                                                                         |
+| **Access type** | Select whether you want to use the connector as a **source** or **destination**. If you plan to use Apache Hive as a destination for synthetic data, MOSTLY AI recommends that you load the data using Parquet files. For more information, see [Considerations for Apache Hive as a destination](#considerations-for-apache-hive-as-a-destination). |
+| **Host**        | Enter the Apache Hive hostname.                                                                                                                                                                                                                                                                                                                      |
+| **Port**        | Enter the port number. The default port for Apache Hive is 10000.                                                                                                                                                                                                                                                                                    |
+| **Username**    | Your Apache Hive username.                                                                                                                                                                                                                                                                                                                           |
+| **Password**    | Your Apache Hive password.                                                                                                                                                                                                                                                                                                                           |
+
+3.  Click **Save** to save your new Apache Hive connector.
+    - MOSTLY AI tests the connection. If you see an error, check the connection details, update them, and click **Save** again.<br /><br />
+    - You can click **Save anyway** to save the connector and disregard any errors.
 
 </Tabs.Tab>
 <Tabs.Tab>
@@ -101,7 +101,7 @@ To create an Apache Hive connector with Kerberos authentication, contact your Ke
   hive-kerberized.domain.com = INTERNAL
   ```
 
-- **Kerberos keytab**. Short for "key table", keytab files are used in Kerberos authentication to store keys needed to log in to Kerberos-aware services. Keytab files allow automated processes (scripts and service authentication) to authenticate using Kerberos without requiring a human to enter a password.
+- **Kerberos keytab**. Short for key table, keytab files are used in Kerberos authentication to store keys needed to log in to Kerberos-aware services. Keytab files allow automated processes (scripts and service authentication) to authenticate using Kerberos without requiring a human to enter a password.
 - **CA certificate**. If you have access to your keystore file from which you want to extract the CA certificate, you can use the following command to extract the CA certificate in PEM format.
   ```shell filename="shell" copy
   keytool -exportcert -alias ALIAS -keystore KEYSTORE_FILE -storepass STORE_PASSWORD -file ca-certificate.pem -rfc
@@ -123,9 +123,7 @@ If you use the web application, enable the **Authenticate with Kerberos** checkb
    1. For **Kerberos principal**, type or paste the Kerberos principal.
    2. For **Kerberos krb5 config**, paste the contents of a `krb5.conf` file.
    3. For **Kerberos keytab**, click the **Upload** button and select a Kerberos keytab file from your local file system.
-      <Image src="/docimages/connectors/apache-hive/kerberos/apache-hive-connector-config-with-kerberos.webp" alt="Apache Hive connector configuration - Kerberos authentication" width={800} height={500} />
 3. Enable **SSL** and provide the CA certificate.
-   <Image src="/docimages/connectors/apache-hive/kerberos/apache-hive-connector-config-with-kerberos-enable-ssl.webp" alt="Apache Hive connector configuration - Kerberos authentication with SSL" width={400} height={150} />
 4. Click **Save**.
 
 </Tabs.Tab>
@@ -211,8 +209,8 @@ c = mostly.connect(config=config)
 
 Depending on whether you created a **source** or a **destination** connector, you can use the connector as:
 
-- [data source](../use/data-source) for a new generator
-- [data destination](../use/data-destination) for a new synthetic dataset
+- [Data source](../use/data-source) for a new generator
+- [Data destination](../use/data-destination) for a new synthetic dataset
 
 ## Considerations for Apache Hive as a destination
 
