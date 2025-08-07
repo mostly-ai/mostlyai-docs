@@ -115,12 +115,12 @@ In this scenario, MOSTLY AI fully retains the correlations between columns in th
 
 <div className="empty_header_table"></div>
 
-|  |  |
-|--|--|
-| <GreenTickSign /> | Referential integrity is preserved |
-| <GreenTickSign /> | Correlations between all columns are retained |
+|                   |                                                               |
+| ----------------- | ------------------------------------------------------------- |
+| <GreenTickSign /> | Referential integrity is preserved                            |
+| <GreenTickSign /> | Correlations between all columns are retained                 |
 | <GreenTickSign /> | Correlations between events of the same customer are retained |
-| <GreenTickSign /> | Privacy of customers is protected |
+| <GreenTickSign /> | Privacy of customers is protected                             |
 
 ### Three tables - Star schema
 
@@ -128,16 +128,16 @@ In this scenario, MOSTLY AI fully retains the correlations between columns in th
 
 <div className="empty_header_table"></div>
 
-|  |  |
-|--|--|
-| <GreenTickSign /> | Referential integrity is preserved |
-| <GreenTickSign /> | Correlations between customers and clicks are retained |
-| <GreenTickSign /> | Correlations between customers and visits are retained |
-| <GreenTickSign /> | Correlations between clicks and visits are retained |
+|                   |                                                                   |
+| ----------------- | ----------------------------------------------------------------- |
+| <GreenTickSign /> | Referential integrity is preserved                                |
+| <GreenTickSign /> | Correlations between customers and clicks are retained            |
+| <GreenTickSign /> | Correlations between customers and visits are retained            |
+| <GreenTickSign /> | Correlations between clicks and visits are retained               |
 | <GreenTickSign /> | Correlations between all clicks of the same customer are retained |
 | <GreenTickSign /> | Correlations between all visits of the same customer are retained |
-| <GreenTickSign /> | Correlations between events of the same customer are retained |
-| <GreenTickSign /> | Privacy of customers is protected |
+| <GreenTickSign /> | Correlations between events of the same customer are retained     |
+| <GreenTickSign /> | Privacy of customers is protected                                 |
 
 ### Three tables - Nested schema
 
@@ -145,15 +145,15 @@ In this scenario, MOSTLY AI fully retains the correlations between columns in th
 
 <div className="empty_header_table"></div>
 
-|  |  |
-|--|--|
-| <GreenTickSign /> | Referential integrity is preserved |
-| <GreenTickSign /> | Correlations between customers and accounts and between accounts and transactions are retained |
-| <GreenTickSign /> | Correlations between customers and transactions are retained |
-| <GreenTickSign /> | Correlations between all accounts of the same customer are retained |
-| <GreenTickSign /> | Correlations between all transactions of the same customer are retained |
-| <YellowWarningSign /> | Correlations between transactions across accounts are NOT retained |
-| <GreenTickSign /> | Privacy of all entities is protected |
+|                       |                                                                                                |
+| --------------------- | ---------------------------------------------------------------------------------------------- |
+| <GreenTickSign />     | Referential integrity is preserved                                                             |
+| <GreenTickSign />     | Correlations between customers and accounts and between accounts and transactions are retained |
+| <GreenTickSign />     | Correlations between customers and transactions are retained                                   |
+| <GreenTickSign />     | Correlations between all accounts of the same customer are retained                            |
+| <GreenTickSign />     | Correlations between all transactions of the same customer are retained                        |
+| <YellowWarningSign /> | Correlations between transactions across accounts are NOT retained                             |
+| <GreenTickSign />     | Privacy of all entities is protected                                                           |
 
 ### Graph schemas - Non-hierarchical relations
 
@@ -161,14 +161,14 @@ In this scenario, MOSTLY AI fully retains the correlations between columns in th
 
 <div className="empty_header_table"></div>
 
-|  |  |
-|--|--|
-| <GreenTickSign /> | Referential integrity is preserved |
-| <GreenTickSign /> | Correlations between customers and logins are retained |
-| <GreenTickSign /> | Correlations between all logins of the same customer are retained |
-| <YellowWarningSign /> | Correlations between logins and accounts are NOT retained |
+|                       |                                                                                                                                       |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| <GreenTickSign />     | Referential integrity is preserved                                                                                                    |
+| <GreenTickSign />     | Correlations between customers and logins are retained                                                                                |
+| <GreenTickSign />     | Correlations between all logins of the same customer are retained                                                                     |
+| <YellowWarningSign /> | Correlations between logins and accounts are NOT retained                                                                             |
 | <YellowWarningSign /> | Correlations between logins to the same account are NOT retained. In particular, the cardinality of the relationship is NOT retained. |
-| <GreenTickSign /> | Privacy of all entities is protected |
+| <GreenTickSign />     | Privacy of all entities is protected                                                                                                  |
 
 ### Graph schemas - Self-relation
 
