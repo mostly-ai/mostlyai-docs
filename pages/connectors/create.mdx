@@ -14,16 +14,16 @@ Create connectors to supported databases and storage providers and use them as [
 
 To synthesize data from the contents of a database, you need to define a connector that points to an existing database as the source of original data. If you also want to deliver the generated synthetic data to a database, you need to define another connector that points to an empty database.
 
-<Cards num={7}>
-  <Cards.Card icon={mySQLIcon()} arrow title="MySQL" href="create/mysql" />
-  <Cards.Card icon={PostgresIcon()} arrow title="PostgreSQL" href="create/postgresql" />
-  <Cards.Card icon={SqlServerIcon()} arrow title="SQL Server" href="create/sql-server" />
-  <Cards.Card icon={OracleIcon()} arrow title="Oracle" href="create/oracle" />
-  <Cards.Card icon={MariaDBIcon()} arrow title="MariaDB" href="create/mariadb" />
-  <Cards.Card icon={ApacheHiveIcon()} arrow title="Apache Hive" href="create/apache-hive" />
-  <Cards.Card icon={BigQueryIcon()} arrow title="BigQuery" href="create/bigquery" />
-  <Cards.Card icon={SnowflakeIcon()} arrow title="Snowflake" href="create/snowflake" />
+<Cards num={9}>
+  <Cards.Card icon={BigQueryIcon()} arrow title="Google BigQuery" href="create/bigquery" />
   <Cards.Card icon={DatabricksIcon()} arrow title="Databricks" href="create/databricks" />
+  <Cards.Card icon={MariaDBIcon()} arrow title="MariaDB" href="create/mariadb" />
+  <Cards.Card icon={SqlServerIcon()} arrow title="Microsoft SQL Server" href="create/sql-server" />
+  <Cards.Card icon={mySQLIcon()} arrow title="MySQL" href="create/mysql" />
+  <Cards.Card icon={OracleIcon()} arrow title="Oracle Database" href="create/oracle" />
+  <Cards.Card icon={PostgresIcon()} arrow title="PostgreSQL" href="create/postgresql" />
+  <Cards.Card icon={SnowflakeIcon()} arrow title="Snowflake" href="create/snowflake" />
+  <Cards.Card icon={ApacheHiveIcon()} arrow title="Apache Hive" href="create/apache-hive" />
 </Cards>
 
 ## Cloud storage connectors
@@ -33,7 +33,7 @@ Create connectors to use AWS S3 buckets, Google Cloud storage, and Azure blob st
 To use a cloud storage provider as a data source or destination for synthetic data in MOSTLY AI, you need to create a connector.
 
 <Cards num={3}>
-  <Cards.Card icon={AzureIcon()} arrow title="Azure" href="create/azure" />
-  <Cards.Card icon={GoogleCloudIcon()} arrow title="Google Cloud" href="create/google-cloud" />
-  <Cards.Card icon={AWSIcon()} arrow title="AWS" href="create/aws" />
+  <Cards.Card icon={AzureIcon()} arrow title="Azure Blob Storage" href="create/azure" />
+  <Cards.Card icon={GoogleCloudIcon()} arrow title="Google Cloud Storage" href="create/google-cloud" />
+  <Cards.Card icon={AWSIcon()} arrow title="AWS S3 Storage" href="create/aws" />
 </Cards>
