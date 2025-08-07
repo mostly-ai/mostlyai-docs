@@ -16,51 +16,102 @@ You can quickly train a new generator with a single tabular data file.
 
 <CustomCallout>You can also train generators with two-table and multi-table datasets. For more information, see [Set table relationships](/generators/configure/set-table-relationships).</CustomCallout>
 
-<Tabs items={['UI', 'Synthetic Data SDK']}>
+<Tabs items={['Platform', 'Assistant', 'Synthetic Data SDK']}>
 <Tabs.Tab>
-If you use the web application, you can start the training of a new generator from the **Generators** page.
 
-**Steps**
+1. On the MOSTLY AI platform, open **Generators** from the left-side navigation menu.
+2. There are four ways to create a new generator:
 
-1. On the **Generators** page, click **+ New generator**.
+| Method                 | Description                                                                               |
+| ---------------------- | ----------------------------------------------------------------------------------------- |
+| Start from a connector | Use an existing [connector](/connectors) to train a new generator.                        |
+| Upload your data       | Provide a CSV, Parquet, or TSV file to train a new generator from your local file system. |
+| Use the SDK            | Navigate to the [Synthetic Data SDK](/python-sdk) repository.                             |
+| Import a generator     | Upload a [configured generator](/generators/export-import#export-a-generator) file.       |
 
-   <Image src="/docimages/generators/train/01-click-new-generator.webp" alt="MOSTLY AI - Generators page - Click New generator" width={800} height={300} />
-   **Step result**: You now have a generator object created in the MOSTLY AI database and the generator is listed on the **Generators** page.
+3. After selecting your training method and uploading any required files, click **Configure models**.
+4. Each connected or uploaded table supports its own configuration. Expand each table description to customize model behavior.
 
-   The **Add data** window appears prompting you to add tabular data for your generator to train on.
+| Method               | Description                                                                                                                                                                                                                                                                                                                                                       |
+| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Model                | The model your generator uses to create synthetic data.                                                                                                                                                                                                                                                                                                           |
+| Compute              | The [compute resources](/administration/compute) used to train the generator.                                                                                                                                                                                                                                                                                     |
+| Training parameters  | The model-level parameters which control the training process. Each parameter is defined by a tooltip in the platform.                                                                                                                                                                                                                                            |
+| Differential privacy | Use differential privacy when you need a mathematical guarantee of privacy, with epsilon quantifying the upper bound on an individual's impact on the trained model.                                                                                                                                                                                              |
+| Flexible generation  | Enabled by default, flexible generation gives you the option to apply smart imputation, data rebalancing, seeded generation and apply fairness when you generate synthetic datasets with the model.                                                                                                                                                               |
+| Value protection     | Value protection prevents membership inference by replacing rare categories and removing extreme values from your dataset.                                                                                                                                                                                                                                        |
+| Model report         | Enabled by default, the Model report provides metrics and charts to gauge the quality of a model. The calculated metrics and charts include accuracy, similarity, and distances between original and synthetic samples, and the correlations, univariate, and bivariate distribution charts to compare the original and synthetic correlations and distributions. |
 
-2. Add a table with file upload.
-   1. From the **Add data** window, click **Upload file**.
-      <Callout>You can also add data from a database or cloud bucket when you select **Connect to a source**. To learn more, see [Add data from a database](/generators/configure/add-data#add-data-from-a-database) and [Add data from a cloud storage bucket](/generators/configure/add-data#add-data-from-a-cloud-bucket).</Callout>
-      <Image src="/docimages/generators/train/02-select-upload-file.webp" alt="MOSTLY AI - Generators page - Click Upload file" width={800} height={300} />
-   2. Under **Upload file**, drag a local file onto the box or click the box to browse your local file system.<br />
-      <Callout>If you need a dataset, download one from the [Datasets](/datasets) page.</Callout>
-      <Image src="/docimages/generators/train/03-upload-file-drag-browse.webp" alt="MOSTLY AI - Generators page - Drag to upload or click to browse" width={800} height={300} />
-   3. (Optional) Enter a name for the table.<br />
-      The table name appears in the list of tables added to the generator. Also, the table name that you provide is what appears in each generated synthetic dataset.
-      <Image src="/docimages/generators/train/04-enter-table-name.webp" alt="MOSTLY AI - Generators page - Name the new table" width={575} height={300} />
-   4. Click **Proceed**.
-3. Train the generator.
-   1. Click **Configure models** in the upper right.
-      <Image src="/docimages/generators/train/05-click-configure-models.webp" alt="MOSTLY AI - Data configuration - Click Configure models" width={800} height={300} />
-   2. On the **Model configuration** page, click **Start training**.
-      <Image src="/docimages/generators/train/06-click-start-training.webp" alt="MOSTLY AI - Model configuration - click Start training" width={800} height={300} />
+{' '}
 
-**Result**
+<Callout>MOSTLY AI offers three training Presets in the **Model configuration** section header if you don't want to configure individual parameters: **Accuracy**, **Speed**, and **Turbo**.</Callout>
 
-Your generator now starts training. When the training completes, your generator is ready to generate synthetic data.
+5. In the **Model configuration** section header, you can optionally configure **Random State** which is a seed value to ensure reproducible results during training. If left empty, a random seed will be used each time.
+6. After completing configuration, click **Start training** to begin the training process.
+
+Follow progress in the **Training status** section on the generator page.
 
 </Tabs.Tab>
 <Tabs.Tab>
-Use the code example below to train a new generator with the MOSTLY AI Synthetic Data SDK.
 
-```python copy filename="python"
-import pandas as pd
-from mostlyai.sdk import MostlyAI
-mostly = MostlyAI(api_key="INSERT_API_KEY")
-df = pd.read_csv("https://docs.mostly.ai/datasets/us-census-income.csv.gz")
-g = mostly.train(data=df, name="US Census Income")
+1. Start a new chat with the Assistant by clicking **New chat** in the left-side navigation menu.
+2. Prompt the Assistant to connect to a configured [dataset](/datasets) or upload a dataset file into the Assistant workspace.
+
+```bash
+Connect to the Berka dataset and briefly describe this resource.
 ```
+
+3. Prompt the Assistant to create a generator with the defined resource.
+
+```bash
+Configure a generator that will produce data which follows the statistical patterns of the least active accounts in the dataset.
+```
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+1. [Install the MOSTLY AI Synthetic Data SDK](/python-sdk#installation).<br /><br />
+   You can install and use the SDK in **Local** or **Client** mode.
+
+   - In **Local mode**, you use the SDK with the compute resources on your local machine (or any Python environment) to [train generators](/generators/train) and [create synthetic datasets](/synthetic-datasets/generate).
+   - In **Client mode**, you connect to a remote MOSTLY AI Platform instance and use its available compute resources.
+     For details, see [_Local and Client modes_](/python-sdk#local-and-client-modes).<br /><br />
+
+2. Create your first generator using the [US Census Income](/datasets#us-census-income-dataset) dataset, start its training, and wait for it to finish.
+
+<Tabs items={['Local mode', 'Client mode']}>
+<Tabs.Tab>
+
+```python copy filename="python" {7} # 1. Load original data into a pd.DataFrame
+import pandas as pd
+df = pd.read_csv("https://docs.mostly.ai/datasets/us-census-income.csv.gz")
+
+# 2. Instantiate in Local use
+from mostlyai.sdk import MostlyAI
+mostly = MostlyAI(local=True)
+
+# 3. Create a generator and launch its training
+g = mostly.train(data=df, start=True, wait=True)
+```
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+```python copy filename="python" {7}
+# 1. Load original data into a pd.DataFrame
+import pandas as pd
+df = pd.read_csv("https://docs.mostly.ai/datasets/us-census-income.csv.gz")
+
+# 2. Instantiate in Client mode by connecting to a remote Platform instance
+from mostlyai.sdk import MostlyAI
+mostly_remote = MostlyAI(base_url="https://app.mostly.ai", api_key="INSERT_API_KEY")
+
+# 3. Create a generator and launch its training
+g = mostly.train(data=df, start=True, wait=True)
+```
+
+</Tabs.Tab>
+</Tabs>
 
 </Tabs.Tab>
 </Tabs>
