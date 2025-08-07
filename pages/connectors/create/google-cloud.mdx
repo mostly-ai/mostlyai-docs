@@ -1,6 +1,6 @@
 ---
 title: 'Connect to Google Cloud object storage'
-description: 'To use datasets that you keep in Google Cloud storage buckets as a data source for synthetic data, you need to create a Google Cloud connector in MOSTLY AI.'
+description: 'To use Google Cloud storage buckets as a data source for synthetic data, you need to create a Google Cloud connector.'
 ---
 
 import Image from 'next/image';
@@ -8,55 +8,49 @@ import { Tabs } from 'nextra/components';
 
 # Connect to Google Cloud object storage
 
-To use datasets that you keep in Google Cloud storage buckets as a data source for synthetic data, you need to create a Google Cloud connector in MOSTLY AI.
+To use Google Cloud storage buckets as a data source for synthetic data, you need to create a Google Cloud connector.
 
-If you want to keep the generated synthetic data in a separate bucket, you need another Google Cloud connector that points to the bucket.
+If you want to keep generated synthetic data in a separate bucket, you need another Google Cloud connector that points to that bucket.
 
 ## Prerequisites
 
-To create a Google Cloud bucket connector, you need the
-[contents of your Google Cloud key file](#download-your-google-cloud-storage-key-file) and the name of the bucket where you keep your original data.
+To create a Google Cloud bucket connector, you need the contents of your Google Cloud key file and the name of the bucket where you keep your original data.
 
 ## Download your Google Cloud storage key file
 
-1. In Google Cloud BigQuery, open the main sidebar menu and select **APIs & Services** > **Enabled APIs & services**.
-   <Image src="/docimages/connectors/bigquery/bigquery-apis-services.webp" alt="Google Cloud BigQuery - Select APIs and Services > Enabled APIs and services" width={350} height={500} />
+1. In Google Cloud, open the main sidebar menu and select **APIs & Services** > **Enabled APIs & services**.
 2. From the sidebar, select **Credentials**.
-   <Image src="/docimages/connectors/bigquery/bigquery-sidebar-select-credentials.webp" alt="Google Cloud BigQuery - Select Credentials" width={175} height={500} />
 3. Click your service account.
-   <Image src="/docimages/connectors/bigquery/bigquery-click-service-account.webp" alt="Google Cloud BigQuery - Click Service account" width={550} height={500} />
 4. Select the **KEYS** tab.
 5. Click **ADD KEY** and select **Create new key**.
-   <Image src="/docimages/connectors/bigquery/bigquery-click-add-key-select-new-key.webp" alt="Google Cloud BigQuery - Click Add key and select New key" width={350} height={500} />
 6. In the prompt, select **JSON** and click **Create**.
-   <Image src="/docimages/connectors/bigquery/bigquery-select-json-click-create.webp" alt="Google Cloud BigQuery - Select JSON and click Create" width={350} height={500} />
 
 ## Create a Google Cloud object storage connector
 
 <Tabs items={['UI', 'Synthetic Data SDK']}>
 <Tabs.Tab>
 
-If you use the web application, create a new Google Cloud storage connector from the **Connectors** page.
+Create a new Google Cloud storage connector from the **Connectors** page.
 
 **Steps**
 
-1.  From the **Connectors** page, click **Create connector**.
-    <Image src="/docimages/connectors/create-connector-01-click.webp" alt="Click Create connector button" width={800} height={500} />
-2.  On the **Connect to cloud storage** tab, select **Google cloud storage**.
-    <Image src="/docimages/connectors/google-cloud/create-connector-02-select-google-cloud.webp" alt="Select Google Cloud storage connector" width={800} height={500} />
-3.  On the **Create Google cloud connector** page, configure the connector.
-    1. For **Name**, enter a name that you can distinguish from other connectors.
-    2. For **Access type**, select whether you want to use the connector as a **source** or **destination**.
-    3. For **Key file**, paste the contents of your Google Cloud Storage key file.
-       <Image src="/docimages/connectors/google-cloud/create-connector-03-configure-gcp-bucket.webp" alt="Configure Google Cloud Storage bucket connector" width={300} height={500} />
-4.  Click **Save** to save your new Databricks connector.<br /><br />
-    MOSTLY AI tests the connection. If you see an error, check the connection details, update them, and click **Save** again.<br /><br />
-    You can click **Save anyway** to save the connector disregarding any errors.
+1.  From the **Connectors** page, select **Google Cloud Storage** under the **Connect your data** header.
+2.  On the **New connector** modal, configure the connector.
+
+| Field           | Description                                                                      |
+| --------------- | -------------------------------------------------------------------------------- |
+| **Name**        | Enter a name that you can distinguish from other connectors.                     |
+| **Access type** | Select whether you want to use the connector as a **source** or **destination**. |
+| **Key file**    | The contents of your Google Cloud Storage key file.                              |
+
+3.  Click **Save** to save your new Google Cloud storage connector.
+    - MOSTLY AI tests the connection. If you see an error, check the connection details, update them, and click **Save** again.<br /><br />
+    - You can click **Save anyway** to save the connector and disregard any errors.
 
 </Tabs.Tab>
 <Tabs.Tab>
 
-    If you use the Synthetic Data SDK, create a Google Cloud storage connector with `mostly.connect()` and provide a connector configuration dictionary as shown below.
+If you use the Synthetic Data SDK, create a Google Cloud storage connector with `mostly.connect()` and provide a connector configuration dictionary as shown below.
 
 ```python filename="python" copy {8,12}
 bigquerykey = os.path.basename('mostlyai-gcp-72d2350d1b1a.json')
@@ -83,5 +77,5 @@ c = mostly.connect({
 
 Depending on whether you created a **source** or a **destination** connector, you can use the connector as:
 
-- [data source](../use/data-source) for a new generator
-- [data destination](../use/data-destination) for a new synthetic dataset
+- [Data source](../use/data-source) for a new generator
+- [Data destination](../use/data-destination) for a new synthetic dataset

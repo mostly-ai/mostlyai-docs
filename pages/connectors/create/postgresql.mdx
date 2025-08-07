@@ -1,6 +1,6 @@
 ---
 title: 'Use a PostgreSQL database for synthetic data'
-description: 'MOSTLY AI can use a PostgreSQL database as a source for original data as well as a destination to deliver synthetic data. To do so, you need to create PostgreSQL connectors.'
+description: 'To use a PostgreSQL database as a source for original data as well as a destination to deliver synthetic data, you need to create PostgreSQL connectors.'
 ---
 
 import { Callout } from 'nextra/components';
@@ -9,57 +9,56 @@ import Image from 'next/image';
 
 # Use a PostgreSQL database for synthetic data
 
-MOSTLY AI can use a PostgreSQL database as a source for original data as well as a destination to deliver synthetic data. To do so, you need to create PostgreSQL connectors.
+To use a PostgreSQL database as a source for original data as well as a destination to deliver synthetic data, you need to create PostgreSQL connectors.
 
 For each PostgreSQL data source or destination, you need a separate connector.
 
-**Prerequisites**
+## Prerequisites
 
-Obtain the connection details for your PostgreSQL database.
+To create a PostgreSQL connector, you need the PostgreSQL database connection details.
 
-- host
-- port
-- database credentials
-- database name
+- Host
+- Port
+- Database credentials
+- Database name
 
 To use an SSL connection, you need the following files:
 
-- root certificate (`.crt`)
-- client certificate (`.crt`)
-- client private key (`.key`)
+- Root certificate (`.crt`)
+- Client certificate (`.crt`)
+- Client private key (`.key`)
 
 <Tabs items={['UI', 'Synthetic Data SDK']}>
 <Tabs.Tab>
-If you use the web application, create a new PostgreSQL connector from the **Connectors** page.
+Create a new PostgreSQL connector from the **Connectors** page.
 
 **Steps**
 
-1.  From the **Connectors** tab, click **Create connector**.
-    <Image src="/docimages/connectors/create-connector-01-click.webp" alt="Click Create connector button" width={800} height={500} />
-2.  From the **Create a new connector** window, select **PostgreSQL**.
-    <Image src="/docimages/connectors/postgresql/create-connector-02-select-postgresql.webp" alt="Select MySQL connector" width={800} height={500} />
-3.  From the **New connector** window, configure the connector.
-    1. For **Name**, enter a name that you can distinguish from other connectors.
-    2. For **Access type**, select whether you want to use the connector as a **source** or **destination**.
-    3. For **Host**, enter the database hostname.
-    4. For **Port**, enter the database port.
-       <Callout type="info">The default port for PostgreSQL databases is 5432.</Callout>
-    5. For **Username** and **Password**, enter your PostgreSQL database credentials.
-    6. For **Database**, enter the name of the database.
-       <Image src="/docimages/connectors/postgresql/create-connector-03-configure-postgresql.webp" alt="Configure PostgreSQL connector" width={350} height={500} />
+1.  From the **Connectors** page, select **PostgreSQL** under the **Connect your data** header.
+2.  On the **New connector** modal, configure the connector.
+
+| Field           | Description                                                                      |
+| --------------- | -------------------------------------------------------------------------------- |
+| **Name**        | Enter a name that you can distinguish from other connectors.                     |
+| **Access type** | Select whether you want to use the connector as a **source** or **destination**. |
+| **Host**        | The PostgreSQL database hostname.                                                |
+| **Port**        | The database port. The default port for PostgreSQL databases is **5432**.        |
+| **Username**    | The PostgreSQL database username.                                                |
+| **Password**    | The PostgreSQL database password.                                                |
+| **Database**    | The name of the database.                                                        |
+
 4.  To use an encrypted connection to the database, select **Use SSL**.
-    1. For **Root certificate**, upload your server root certificate.
-    2. For **SSL certificate**, upload your client certificate.
-    3. For **SSL certificate key**, upload your client private key.
-       <Image src="/docimages/connectors/postgresql/create-connector-04-enable-ssl.webp" alt="Configure PostgreSQL SSL connection" width={400} height={500} />
-5.  Click **Save** to save your new PostgreSQL connector.<br /><br />
-    MOSTLY AI tests the connection. If you see an error, check the connection details, update them, and click **Save** again.<br /><br />
-    You can click **Save anyway** to save the connector disregarding any errors.
+    - For **Root certificate**, upload your server root certificate.
+    - For **SSL certificate**, upload your client certificate.
+    - For **SSL certificate key**, upload your client private key.
+5.  Click **Save** to save your new PostgreSQL connector.
+    - MOSTLY AI tests the connection. If you see an error, check the connection details, update them, and click **Save** again.<br /><br />
+    - You can click **Save anyway** to save the connector and disregard any errors.
 
 </Tabs.Tab>
 <Tabs.Tab>
 
-    If you use the Synthetic Data SDK, create a PostgreSQL connector with `mostly.connect()` and provide a connector configuration dictionary as shown below.
+If you use the Synthetic Data SDK, create a PostgreSQL connector with `mostly.connect()` and provide a connector configuration dictionary as shown below.
 
 ```python copy filename="python"
 c = mostly.connect({
@@ -86,5 +85,5 @@ c = mostly.connect({
 
 Depending on whether you created a **source** or a **destination** connector, you can use the connector as:
 
-- [data source](../use/data-source) for a new generator
-- [data destination](../use/data-destination) for a new synthetic dataset
+- [Data source](../use/data-source) for a new generator
+- [Data destination](../use/data-destination) for a new synthetic dataset

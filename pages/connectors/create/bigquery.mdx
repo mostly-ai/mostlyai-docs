@@ -9,7 +9,7 @@ import { Tabs } from 'nextra/components';
 
 # Use BigQuery for synthetic data
 
-With MOSTLY AI, you can connect to BigQuery and use it as a data source or destination for your synthetic data.
+To use BigQuery as a data source or destination for your synthetic data, you need to create a BigQuery connector.
 
 ## Prerequisites
 
@@ -17,7 +17,7 @@ Create and download a JSON key file for a Google Cloud service account.
 
 ## Recommendations
 
-If you plan to use BigQuery as both a data source and a destination, MOSTLY AI recommends the following best practices.
+If you plan to use BigQuery as both a data source and a destination, we recommend the following best practices.
 
 - Store original (production) and synthetic data in separate Google Cloud projects.
 - Create two Google Cloud service accounts with specific permissions.
@@ -32,40 +32,38 @@ If you plan to use BigQuery as both a data source and a destination, MOSTLY AI r
    <Image src="/docimages/connectors/bigquery/bigquery-apis-services.webp" alt="Google Cloud BigQuery - Select APIs and Services > Enabled APIs and services" width={350} height={500} />
 2. From the sidebar, select **Credentials**.
    <Image src="/docimages/connectors/bigquery/bigquery-sidebar-select-credentials.webp" alt="Google Cloud BigQuery - Select Credentials" width={175} height={500} />
-3. Click your service account.
-   <Image src="/docimages/connectors/bigquery/bigquery-click-service-account.webp" alt="Google Cloud BigQuery - Click Service account" width={550} height={500} />
+3. Open your service account.
 4. Select the **KEYS** tab.
 5. Click **ADD KEY** and select **Create new key**.
    <Image src="/docimages/connectors/bigquery/bigquery-click-add-key-select-new-key.webp" alt="Google Cloud BigQuery - Click Add key and select New key" width={350} height={500} />
 6. In the prompt, select **JSON** and click **Create**.
-   <Image src="/docimages/connectors/bigquery/bigquery-select-json-click-create.webp" alt="Google Cloud BigQuery - Select JSON and click Create" width={350} height={500} />
 
 ## Create a BigQuery connector
 
 <Tabs items={['UI', 'Synthetic Data SDK']}>
 <Tabs.Tab>
 
-If you use the web application, create a new BigQuery connector from the **Connectors** page.
+Create a new BigQuery connector from the **Connectors** page.
 
 **Steps**
 
-1.  From the **Connectors** tab, click **New connector**.
-    <Image src="/docimages/connectors/create-connector-01-click.webp" alt="Click Create connector button" width={800} height={500} />
-2.  On the **Connect to database** tab, select **Google BigQuery**.
-    <Image src="/docimages/connectors/bigquery/create-connector-02-select-bigquery.webp" alt="Select BigQuery connector" width={800} height={500} />
-3.  On the **Create BigQuery connector** page, configure the connector.
-    1. For **Name**, enter a name that you can distinguish from other connectors.
-    2. For **Access type**, select whether you want to use the connector as a **source** or **destination**.
-    3. In **Key file**, paste the contents of your BigQuery key file.
-       <Image src="/docimages/connectors/bigquery/create-connector-03-configure-bigquery.webp" alt="Configure BigQuery connector" width={400} height={500} />
-4.  Click **Save** to save your new Databricks connector.<br /><br />
-    MOSTLY AI tests the connection. If you see an error, check the connection details, update them, and click **Save** again.<br /><br />
-    You can click **Save anyway** to save the connector disregarding any errors.
+1.  From the **Connectors** page, select **Google BigQuery** under the **Connect your data** header.
+2.  On the **New connector** modal, configure the connector.
+
+| Field           | Description                                                                      |
+| --------------- | -------------------------------------------------------------------------------- |
+| **Name**        | Enter a name that you can distinguish from other connectors.                     |
+| **Access type** | Select whether you want to use the connector as a **source** or **destination**. |
+| **Key file**    | Your BigQuery key file.                                                          |
+
+3.  Click **Save** to save your new BigQuery connector.
+    - MOSTLY AI tests the connection. If you see an error, check the connection details, update them, and click **Save** again.<br /><br />
+    - You can click **Save anyway** to save the connector and disregard any errors.
 
 </Tabs.Tab>
 <Tabs.Tab>
 
-    If you use the Synthetic Data SDK, create a BigQuery connector with `mostly.connect()` and provide a connector configuration dictionary as shown below.
+If you use the Synthetic Data SDK, create a BigQuery connector with `mostly.connect()` and provide a connector configuration dictionary as shown below.
 
 ```python copy filename="python"
 bigquerykey = os.path.basename('mostlyai-gcp-72d2350d1b1a.json')

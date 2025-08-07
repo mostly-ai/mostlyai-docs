@@ -1,6 +1,6 @@
 ---
 title: 'Use a MariaDB database for synthetic data'
-description: 'MOSTLY AI can use a MariaDB database as a source for original data as well as a destination to deliver synthetic data. To do so, you need to create MariaDB connectors.'
+description: 'To use a MariaDB database as a source for original data as well as a destination to deliver synthetic data, you need to create MariaDB connectors.'
 ---
 
 import { Callout } from 'nextra/components';
@@ -9,44 +9,44 @@ import Image from 'next/image';
 
 # Use a MariaDB database for synthetic data
 
-MOSTLY AI can use a MariaDB database as a source for original data as well as a destination to deliver synthetic data. To do so, you need to create MariaDB connectors.
+To use a MariaDB database as a source for original data as well as a destination to deliver synthetic data, you need to create MariaDB connectors.
 
 For each MariaDB data source or destination, you need a separate connector.
 
-**Prerequisites**
+## Prerequisites
 
-Obtain the MariaDB connection details.
+To create a MariaDB connector, you need the MariaDB connection details.
 
-- host
-- port
-- credentials
+- Host
+- Port
+- Credentials
 
 <Tabs items={['UI', 'Synthetic Data SDK']}>
 <Tabs.Tab>
-If you use the web application, create a new Oracle connector from the **Connectors** page.
+Create a new MariaDB connector from the **Connectors** page.
 
 **Steps**
 
-1.  From the **Connectors** page, click **New connector**.
-    <Image src="/docimages/connectors/create-connector-01-click.webp" alt="Click Create connector button" width={800} height={500} />
-2.  From the **Create a new connector** window, select **MariaDB**.
-    <Image src="/docimages/connectors/mariadb/create-connector-02-select-mariadb.webp" alt="Select MariaDB connector" width={800} height={500} />
-3.  From the **New connector** page, configure the connector.
-    1. For **Name**, enter a name that you can distinguish from other connectors.
-    2. For **Access type**, select whether you want to use the connector as a **source** or **destination**.
-    3. For **Host**, enter the MariaDB database hostname.
-    4. For **Port**, enter the database port.
-       <Callout type="info">The default port for MariaDB databases is 3306.</Callout>
-    5. For **Username** and **Password**, enter your MariaDB database credentials.
-       <Image src="/docimages/connectors/mariadb/create-connector-03-configure-mariadb.webp" alt="Configure MariaDB connector" width={300} height={500} />
-4.  Click **Save** to save your new MariaDB connector.<br /><br />
-    MOSTLY AI tests the connection. If you see an error, check the connection details, update them, and click **Save** again.<br /><br />
-    You can click **Save anyway** to save the connector disregarding any errors.
+1.  From the **Connectors** page, select **MariaDB** under the **Connect your data** header.
+2.  On the **New connector** modal, configure the connector.
+
+| Field           | Description                                                                      |
+| --------------- | -------------------------------------------------------------------------------- |
+| **Name**        | Enter a name that you can distinguish from other connectors.                     |
+| **Access type** | Select whether you want to use the connector as a **source** or **destination**. |
+| **Host**        | The MariaDB database hostname.                                                   |
+| **Port**        | The database port.                                                               |
+| **Username**    | The MariaDB database username.                                                   |
+| **Password**    | The MariaDB database password.                                                   |
+
+4.  Click **Save** to save your new MariaDB connector.
+    - MOSTLY AI tests the connection. If you see an error, check the connection details, update them, and click **Save** again.<br /><br />
+    - You can click **Save anyway** to save the connector and disregard any errors.
 
 </Tabs.Tab>
 <Tabs.Tab>
 
-    If you use the Synthetic Data SDK, create a MariaDB connector with `mostly.connect()` and provide a connector configuration dictionary as shown below.
+If you use the Synthetic Data SDK, create a MariaDB connector with `mostly.connect()` and provide a connector configuration dictionary as shown below.
 
 ```python copy filename="python"
 c = mostly.connect({
@@ -72,5 +72,5 @@ c = mostly.connect({
 
 Depending on whether you created a **source** or a **destination** connector, you can use the connector as:
 
-- [data source](../use/data-source) for a new generator
-- [data destination](../use/data-destination) for a new synthetic dataset
+- [Data source](../use/data-source) for a new generator
+- [Data destination](../use/data-destination) for a new synthetic dataset

@@ -1,6 +1,6 @@
 ---
 title: 'Use a MySQL database for synthetic data'
-description: 'MOSTLY AI can use a MySQL database as a source for original data as well as a destination to deliver synthetic data. To do so, you need to create MySQL connectors.'
+description: 'To use a MySQL database as a source for original data as well as a destination to deliver synthetic data, you need to create MySQL connectors.'
 ---
 
 import { Callout } from 'nextra/components';
@@ -9,43 +9,39 @@ import Image from 'next/image';
 
 # Use a MySQL database for synthetic data
 
-MOSTLY AI can use a MySQL database as a source for original data as well as a destination to deliver synthetic data. To do so, you need to create MySQL connectors.
+To use a MySQL database as a source for original data as well as a destination to deliver synthetic data, you need to create MySQL connectors.
 
 For each MySQL data source or destination, you need a separate connector.
 
-**Prerequisites**
+## Prerequisites
 
-Obtain the MySQL database connection details.
+To create a MySQL connector, you need the MySQL database connection details.
 
-- host
-- port
-- database credentials
+- Host
+- Port
+- Credentials
 
 <Tabs items={['UI', 'Synthetic Data SDK']}>
 <Tabs.Tab>
-If you use the web application, create a new MySQL connector from the **Connectors** page.
+Create a new MySQL connector from the **Connectors** page.
 
 **Steps**
 
-1. From the **Connectors** tab, click **New connector**.
-   <Image src="/docimages/connectors/create-connector-01-click.webp" alt="Click Create connector button" width={800} height={500} />
-2. From the **Create a new connector** window, select **MySQL**.
-   <Image src="/docimages/connectors/mysql/create-connector-02-select-mysql.webp" alt="Select MySQL connector" width={800} height={500} />
-3. From the **New connector** window, configure the connector.
-   1. For **Name**, enter a name that you can distinguish from other connectors.
-   2. For **Access type**, select whether you want to use the connector as a **source** or **destination**.
-   3. For **Host**, enter the MySQL database hostname.
-   4. For **Port**, enter the database port.
-      <Callout type="info">The default MySQL port is **3306**.</Callout>
-   5. For **Username** and **Password**, enter your MySQL database credentials.
-      <Image src="/docimages/connectors/mysql/create-connector-03-configure-mysql.webp" alt="Select MySQL connector" width={300} height={500} />
-4. Click **Save** to save your new MySQL connector.<br /><br />
-   MOSTLY AI tests the connection. If you see an error, check the connection details, update them, and click **Save** again.<br /><br />
-   You can click **Save anyway** to save the connector disregarding any errors.
+1. From the **Connectors** page, select **MySQL** under the **Connect your data** header.
+2. On the **New connector** modal, configure the connector.
 
-**Result**
+| Field           | Description                                                                      |
+| --------------- | -------------------------------------------------------------------------------- |
+| **Name**        | Enter a name that you can distinguish from other connectors.                     |
+| **Access type** | Select whether you want to use the connector as a **source** or **destination**. |
+| **Host**        | The MySQL database hostname.                                                     |
+| **Port**        | The database port.                                                               |
+| **Username**    | The MySQL database username.                                                     |
+| **Password**    | The MySQL database password.                                                     |
 
-Your connector is now saved.
+4. Click **Save** to save your new MySQL connector.
+   - MOSTLY AI tests the connection. If you see an error, check the connection details, update them, and click **Save** again.<br /><br />
+   - You can click **Save anyway** to save the connector and disregard any errors.
 
 </Tabs.Tab>
 <Tabs.Tab>
@@ -75,5 +71,5 @@ c = mostly.connect({
 
 Depending on whether you created a **source** or a **destination** connector, you can use the connector as:
 
-- [data source](../use/data-source) for a new generator
-- [data destination](../use/data-destination) for a new synthetic dataset
+- [Data source](../use/data-source) for a new generator
+- [Data destination](../use/data-destination) for a new synthetic dataset
