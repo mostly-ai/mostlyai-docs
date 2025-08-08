@@ -1,0 +1,35 @@
+---
+title: 'What is mock data?'
+description: 'Mock data is artificial data that corresponds to some broad criteria, but does not necessarily correlate to real-world trends based on some underlying subject dataset.'
+---
+
+import Image from 'next/image';
+import { Callout } from 'nextra/components';
+
+# What is mock data?
+
+Mock data is artificial data that corresponds to some broad criteria, but does not necessarily correlate to real-world trends based on some underlying subject dataset.
+
+Mock data is distinct from [synthetic data](/concepts/what-is-synthetic-data), which is artificial data that retains the characteristics of real-world data. However, a key feature of synthetic data is that it does not directly correspond to real-world entities like people, organizations, institutions, and others contained in the original dataset.
+
+## What is AI-generated mock data?
+
+MOSTLY AI provides capabilities to generate mock data using the [MOSTLY AI Assistant](/assistant) or via the [MOSTLY AI Mock library](https://github.com/mostly-ai/mostlyai-mock).
+
+<Image src="/docimages/concepts/tabular-md/tabular-mock-data.webp" alt="Tabular mock data" width={800} height={300} />
+
+### Generative AI models
+
+MOSTLY AI offers support for many generative AI models, including those from providers like OpenAI, Anthropic, Meta, Mistral, and others. For the entire library of available models, see the [LiteLLM Providers documentation](https://docs.litellm.ai/docs/providers/). You can also [provide your own model](/administration/models) hosted on Hugging Face.
+
+## Why AI-generated mock data?
+
+AI-generated mock data allows you to quickly create realistic, customizable datasets without exposing sensitive information, making it ideal for testing, prototyping, and development.
+
+With AI-generated mock data, you can:
+
+- Use LLMs to generate any tabular data to suit your needs.
+- Create entire datasets from scratch, including those with complex relationships.
+- Expand existing datasets to include new columns.
+- Enrich existing tables with new columns.
+- Use realistic and private data for testing and development.
