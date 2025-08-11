@@ -4,22 +4,17 @@ description: 'Take your first steps in training generators on your tabular data 
 ---
 
 import { Cards, Card } from 'nextra/components';
-import { ModelCreatorIcon, DataConsumerIcon, LLMIcon } from '@components/icons';
+import { ModelCreatorIcon, DataConsumerIcon, LLMIcon, TwoTableIcon, MultiTableIcon } from '@components/icons';
 
-## Generators and synthetic datasets
+## Quick start guides
 
-Follow these guides to get started training generators and generating synthetic data with the MOSTLY AI platform.
+This section of the MOSTLY AI documentation provides quick start guides for getting started with the platform. Follow the step-by-step procedures to learn to [crawl, walk, and run](/best-practices#crawl-walk-run) with MOSTLY AI.
 
-<Cards num={2}>
+Each guide is designed to help you get started with a specific feature of the platform and can be adapted to your use case.
+
+<Cards num={4}>
+  <Cards.Card icon={TwoTableIcon()} title="Datasets" href="/quick-start/dataset-quickstart" />
+  <Cards.Card icon={MultiTableIcon()} title="Connectors" href="/quick-start/connector-quickstart" />
   <Cards.Card icon={ModelCreatorIcon()} title="Generators" href="/quick-start/model-creators" />
   <Cards.Card icon={DataConsumerIcon()} title="Synthetic datasets" href="/quick-start/data-consumers" />
-</Cards>
-
-## Connectors and datasets
-
-Follow these guides to get started connecting to your own data sources and creating datasets on the MOSTLY AI platform.
-
-<Cards num={2}>
-  <Cards.Card icon={ModelCreatorIcon()} title="Connectors" href="/quick-start/connector-quickstart" />
-  <Cards.Card icon={DataConsumerIcon()} title="Datasets" href="/quick-start/dataset-quickstart" />
 </Cards>
