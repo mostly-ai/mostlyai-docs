@@ -16,31 +16,25 @@ For each new synthetic dataset, you can set a destination (database or cloud sto
 
 Create a connector for a database or cloud storage bucket and select **Write data** under **Access type**. You can use all supported databases and cloud object storage.
 
-For more details, see [_Connector access types_](/connectors/use/access-types).
+For more details, see [Connector access types](/connectors/use/access-types).
 
-<Image src="/docimages/connectors/destination/select-write-data-connector.webp" alt="Connector - Select Write data under Connector type" width={350} height={30} />
-
-<Tabs items={['UI', 'Synthetic Data SDK']}>
+<Tabs items={['Platform', 'Synthetic Data SDK']}>
 <Tabs.Tab>
-If you use the web application, set a destination from the **Dataset destination** option when you configure a new synthetic dataset.
+On the platform, set a destination from the **Dataset destination** option when you configure a new synthetic dataset.
 
 **Steps**
 
 1. Start a new synthetic dataset in one of two ways.
-   - From the **Synthetic datasets** page, click **+ New synthetic data** and select a trained generator.
+   - From the **Synthetic datasets** page, click **Browse generators** and select a trained generator.
    - From the **Generators** page with a trained generator open, click **Generate data**.
-2. Click **Dataset destination**.
-   <Image src="/docimages/connectors/destination/click-dataset-destination.webp" alt="Synthetic dataset configuration - click Dataset destination" width={800} height={30} />
-3. In the modal window, select a destination connector from the **Destination** drop-down.
-   <Image src="/docimages/connectors/destination/select-destination-connector.webp" alt="Synthetic dataset configuration - Select a destinaiton connector" width={800} height={30} />
+2. Open the **Dataset destination** modal from the menu in the upper-right corner.
+3. In the modal window, select a destination connector from the **Destination** drop-down. The defauly value is a downloadable Parquet file.
 4. For **Location**, follow the steps depending on whether you deliver to a database or cloud storage destination.
    - For databases, select a database and in which schema you want to deliver the synthetic dataset.
-     <Image src="/docimages/connectors/destination/destination-database-select-location.webp" alt="Synthetic dataset - Select a destination - Database configuration" width={800} height={30} />
    - For cloud storage, click in the **Location** field and expand the bucket tree structure to select a destination folder.
-     <Image src="/docimages/connectors/destination/destination-cloud-storage-tree-view-select-location.webp" alt="Synthetic dataset - Select a destination - Cloud storage configuration" width={800} height={30} />
 5. (Optional) Select **Overwrite existing table** to replace database tables or cloud storage files that have the same name as the tables in your synthetic data.
    <CustomCallout>**Note**: The best use case for overwriting existing tables is when you are delivering multiple times to the same database or cloud bucket.</CustomCallout>
-6. Click **Proceed**.
+6. Click **Generate**.
 
 **Result**
 
@@ -52,8 +46,8 @@ If you use the Synthetic Data SDK, add `delivery` to your synthetic dataset `con
 
 To **deliver to databases with a schema**, use the code snippet below and replace as follows:
 
-- `GENERATOR_ID` with the generator ID
-- `DESTINATION_CONNECTOR_ID` with the ID of a destination connector
+- `GENERATOR_ID` with the generator UUID
+- `DESTINATION_CONNECTOR_ID` with the UUID of a destination connector
 - `SCHEMA` with the database schema
 - `TABLE` with the table name
 
@@ -70,7 +64,7 @@ config = {
 sd = mostly.generate(g, config=config)
 ```
 
-To **deliver to databases with no schema**, use the code snippet below and replace as follows:
+To **deliver to databases with no schema**, update the template below with your values:
 
 - `GENERATOR_ID` with the generator ID
 - `DESTINATION_CONNECTOR_ID` with the ID of a destination connector
@@ -89,10 +83,10 @@ config = {
 sd = mostly.generate(g, config=config)
 ```
 
-To **deliver to cloud buckets**, use the code snippet below and replace as follows:
+To **deliver to cloud buckets**, update the template below with your values:
 
-- `GENERATOR_ID` with the generator ID
-- `DESTINATION_CONNECTOR_ID` with the ID of a destination connector
+- `GENERATOR_ID` with the generator UUID
+- `DESTINATION_CONNECTOR_ID` with the UUID of a destination connector
 - `path` with cloud bucket path to the destination file
 - `file.csv` with the filename and extension (one of `.csv`, `.parquet`, or `.xslx`)
 

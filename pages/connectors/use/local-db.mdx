@@ -10,18 +10,15 @@ import { Callout } from 'nextra/components';
 
 If you want to use a database running in your local environment as a data source or destination for synthetic data, you can use `ngrok` to expose the local database for external connections over the Internet and then add the `ngrok` forwarding address and port in a new MOSTLY AI connector.
 
-## Task 1: Install `ngrok`
+## Install `ngrok`
 
 [`ngrok`](https://ngrok.com/) makes it possible to expose a locally running server to the Internet. To do so, you need an `ngrok` account and an `ngrok` authentication token.
 
 **Steps**
 
-1. Go to https://dashboard.ngrok.com/signup and sign up for an `ngrok` account.
-2. Install `ngrok` with the steps for your operating system from https://dashboard.ngrok.com/get-started/setup.
-3. Copy your authentication token from https://dashboard.ngrok.com/get-started/your-authtoken.
-
-   <Image src="/docimages/connectors/destination/local-db/ngrok-copy-token.webp" alt="Local database as a data destination - Copy ngrok authentication token" width={700} height={150} />
-
+1. [Create an `ngrok` account](https://dashboard.ngrok.com/signup).
+2. [Install `ngrok`](https://dashboard.ngrok.com/get-started/setup).
+3. [Copy your authentication token](https://dashboard.ngrok.com/get-started/your-authtoken).
 4. Add the authentication token to your local environment.
    ```bash copy
    ngrok config add-authtoken TOKEN
@@ -31,7 +28,7 @@ If you want to use a database running in your local environment as a data source
 
 `ngrok` can now use the token to connect to your account.
 
-## Task 2: Run a local database
+## Run a local database
 
 With [Docker Compose](https://docs.docker.com/compose/), you can quickly run a database locally as a Docker container just by defining a new service in a YAML file.
 
@@ -74,7 +71,7 @@ The steps below show how to run a PostgreSQL database.
 
 The PostgreSQL database is now running locally.
 
-## Task 3: Expose your database with `ngrok`
+## Expose your database with `ngrok`
 
 To expose your database from your local environment, you need to know the port at which the database service is listening. Check your database configuration for that. For example, the default port for PostgreSQL is `5432`, for MySQL - `3306`.
 
@@ -88,23 +85,21 @@ To expose your database from your local environment, you need to know the port a
 2. Copy the forwarding address that is listed in the `ngrok` command status.
    <Image src="/docimages/connectors/destination/local-db/ngrok-forwarding.webp" alt="Local database as a data destination - ngrok status with forwarding address" width={700} height={150} />
 
-## Task 4: Create a connector
+## Create a connector
 
 You can use your local database as a data source, data destination, or both. In either case, you need a separate connector (a source or a destination) in MOSTLY AI.
 
 **Steps**
 
-1. From the **Connectors** page, click **+ New connector**.
-2. Select the connector type for your local database.
-3. Provide the connector details.
+1. From the **Connectors** page, select the type of connector you want to create from the available sources.
+2. Provide the connector details.
    1. For **Access type**, select **Source** or **Destination**.
    2. For **Host**, paste the `ngrok` forwarding address.
    3. For **Port**, paste the `ngrok` forwarding port number.
-      <Callout>You can find the **forwarding address** and **port** in the output of the `ngrok` command from [Task 3](#task-3-expose-your-database-with-ngrok).</Callout>
+      <Callout>You can find the **forwarding address** and **port** in the output of the `ngrok` command from [Expose your database with `ngrok`](#expose-your-database-with-ngrok).</Callout>
    4. For **Username**, **Password**, and **Database**, set the database credentials and the database name.
       <Callout>If you plan to use the same database as a source and destination, create a separate database for the destination connector to prevent potential loss of original data.</Callout>
-      <Image src="/docimages/connectors/destination/local-db/destination-connect-config.webp" alt="Local database as a data destination - Destination connector configuration" width={325} height={150} />
-4. Click **Save**.
+3. Click **Save**.
 
 **What's next**
 
