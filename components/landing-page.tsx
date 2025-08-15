@@ -86,7 +86,7 @@ const LandingPage: React.FC = () => {
     {
       icon: <DatabaseIcon />,
       title: {
-        text: 'Sources and destinations',
+        text: 'Connectors',
         link: '/connectors',
       },
       description: '',
