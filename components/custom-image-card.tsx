@@ -3,7 +3,7 @@ import Image from 'next/image';
 const CustomImageCard: React.FC = () => {
   return (
     <div className="image-card-container hide-on-mobile">
-      <Image className="image-card-element" src="/docimages/_diagrams/settings-dashboard.svg" alt="Settings dashboard" fill={true} />
+      <Image className="image-card-element" src="/docimages/_diagrams/docs-homepage.svg" alt="Docs Homepage" fill={true} />
       <style jsx>{`
         .image-card-container {
           border: 0px solid #ccc;
