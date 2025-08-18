@@ -8,13 +8,10 @@ import { Callout } from 'nextra/components';
 
 # Deploy MOSTLY AI to an AWS EKS cluster
 
-To run MOSTLY AI in AWS, you need to create an Elastic Kubernetes Service (EKS) cluster. MOSTLY AI provides a set of automated scripts and configuration files that can help you create and configure an EKS cluster as well as create and mount the required EFS storage, and create and configure an AWS Application Load Balancer (ALB) for the application.
+To run MOSTLY AI in AWS, you need an Elastic Kubernetes Service (EKS) cluster. Please refer to the [infrastructure requirements](https://docs.mostly.ai/install/requirements) and to your own company infrastructure team for reference on how to create your cluster, according to your internal guidelines and best practices.
 
-This page contains step-by-step tasks that guide you through the process of deploying MOSTLY AI in an AWS EKS cluster. The tasks are grouped into the categories below.
+> We believe that infrastructure should always be tailored to the specific needs of the company deploying it. As such, please note that while this guide will get you up and running, none of the modules/examples are direct requirements for the installation. Instead, treat them as a starting point for your own infrastructure setup.
 
-- [Pre-deployment](#pre-deployment)
-- [Deployment](#deployment)
-- [Post-deployment](#post-deployment)
 
 Use the tasks on this page as a reference for what you might need to complete to reach the point in which MOSTLY AI runs in an EKS cluster.
 
@@ -22,522 +19,283 @@ Before you start, make sure you complete the prerequisites in the next section.
 
 ## Prerequisites
 
-- An AWS account.
+- An AWS account where you have admin rights (no need to create IAM Users, you will use your Admin credentials for the account).
+- A `fqdn` OR A valid hosted zone where you can create a new record.
+  - You can validate if your hosted zone is exposed by running `dig <your hostedzonedomain>` in a terminal with Internet access. This should return `NOERROR` and its authority.
 - Install the tools listed below.
   - Install [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
   - Install [Helm](https://helm.sh/docs/intro/install/).
   - Install [`kubectl`](https://kubernetes.io/docs/tasks/tools/).
   - Install [`eksctl`](https://eksctl.io/installation/).
-- Decide in which AWS region you want to deploy MOSTLY AI. The page documents the steps in detail to deploy to **`eu-central-1`**. If you need to deploy to another region, read the information about the [Region-specific EKS images](#region-specific-eks-image) and how to configure for that.
+- Decide in which AWS region you want to deploy MOSTLY AI. The page documents the steps in detail to deploy to **`eu-central-1`**. If you need to deploy to another region, adjust your deployment accordingly.
 - Obtain deployment details from your Customer Experience Engineer.
   - **MOSTLY AI Helm chart**. Required for [Task 13](#task-13-edit-the-valuesyaml-file).
   - **First-time log in credentials** for the MOSTLY AI application. Required for [Task 16](#task-16-log-in-to-your-mostly-ai-deployment).
-  - (Optional) **MOSTLY AI image repository pull secret**. Required only if you intend to use the MOSTLY AI image repository to pull the container images. Optional for [Task 13](#task-13-edit-the-valuesyaml-file) and [Task 14](#task-14-deploy-mostly-ai).
+  - (Optional) **MOSTLY AI image repository pull secret**. Required only if you don't already have the images from MOSTLY AI in your company internal image repository and instead intend to use the MOSTLY AI image repository to pull the container images. Optional for [Task 13](#task-13-edit-the-valuesyaml-file) and [Task 14](#task-14-deploy-mostly-ai).
+
+- Recommended:
+  - An IDE like `vscode`
 
 ## Pre-deployment
 
-### Task 1: Create a key pair in EC2
+### Task 1: Export your Admin Credentials for AWS
 
-When you create a key pair in EC2, you can use the generated security credentials to use `ssh` and log in to the EC2 instances that the MOSTLY AI deployment script creates.
+Go to your AWS Access Portal.
+From the Account where you have **AdministratorAccess** and you will use to create the cluster and deploy the platform, click on **Access keys**.
+From the **Option 1: Set AWS environment variables**, click the button to copy your key, secret and token. Open a terminal in your IDE where you already have the MOSTLY AI helm charts available and paste them there.
 
-**Prerequisites**
+`#export <your aws key>`
 
-- Log in to the [AWS Management Console](https://aws.amazon.com/console/). You can do the steps here with your root AWS account.
-- Select the zone in which you want to create your Kubernetes cluster.
+`#export <your aws secret>`
 
-**Steps**
+`#export <your aws token>`
 
-1. From AWS Services, search and open **EC2**.
-   <Image src="/docimages/install/aws-eks/02-key-pair-01-open-ec2.webp" alt="AWS Services - Open EC2" width={700} height={700} />
-2. In **EC2**, select **Key Pairs** under **Network & Security** from the sidebar.
-   <Image src="/docimages/install/aws-eks/02-key-pair-02-ec2-select-key-pair.webp" alt="Get a key pair - Open EC2 > Key pair" width={700} height={700} />
-3. Click **Create key pair**.
-   <Image src="/docimages/install/aws-eks/02-key-pair-03-click-create.webp" alt="Get a key pair - Click Create" width={700} height={700} />
-4. Enter a name for the new key pair and click **Create key pair**.
 
-   <Callout>Leave the default options: - **Key pair type**: RSA - **Private key file format**: `.pem`</Callout>
-   <Image src="/docimages/install/aws-eks/02-key-pair-04-name-and-create.webp" alt="Get a key pair - Name and create" width={450} height={300} />
+Make sure to **also save your credentials in the aws cli** via `aws configure` (hit <Enter> after updating the values in every line to save the parameters):
+
+`AWS Access Key ID [none]: <your aws key>`
+
+`AWS Secret Access Key [none]: <your aws secret>`
+
+`Default region name [none]: <your aws region>`
+
+`Default output format [none]: json`
+
+Validate that your credentials are enabled and that you have access to AWS:
+
+   ```shell copy filename="shell"
+   aws sts get-caller-identity
+   ```
 
 **Result**
+- You should see your own credentials and the account you just saved, e.g:
 
-The new key pair appears in the list. The generated `.pem` file that contains the certificate and access keys download automatically.
+>`{
+    "UserId": "AROAMOSTLYAIQ:julio.zambrano@mostly.ai",
+    "Account": "1234567890",
+    "Arn": "arn:aws:sts::1234567890:assumed-role/AWSReservedSSO_AdministratorAccess_0987654321/julio.zambrano@mostly.ai"
+} `
 
-<Image src="/docimages/install/aws-eks/02-key-pair-05-result.webp" alt="Get a key pair - Created key pair" width={450} height={300} />
 
-**What's next**
-
-You can now create a non-ROOT user which is a requirement to run the deployment script in [Task 11](#task-11-run-deployment-script).
-
-Also, later in [Task 10](#task-10-download-and-configure-deployment-files), you define the key pair name in the `eks-cluster.yaml` deployment configuration file which is a requirement before you run the deployment. You can also use the downloaded certificate to log in to the Kubernetes pods that MOSTLY AI deploys.
-
-### Task 2: Create a user group
-
-As a best practice, create a user group to which you will assign the required policies and add the user that will run the deployment script.
-
-**Steps**
-
-1. From AWS Services, search and open **Identity and Access Management (IAM)**.
-   <Image src="/docimages/install/aws-eks/03-user-group-01-open-iam.webp" alt="AWS Services - Open IAM" width={700} height={700} />
-2. In **IAM**, select **User groups** from the sidebar.
-   <Image src="/docimages/install/aws-eks/03-user-group-02-click-user-groups.webp" alt="AWS IAM - click User groups" width={225} height={300} />
-3. Click **Create group**.
-   <Image src="/docimages/install/aws-eks/03-user-group-03-click-create-group.webp" alt="AWS IAM - click Create group" width={800} height={300} />
-4. Name the group **`eksctl-group`** and click **Create group**.
-   <Image src="/docimages/install/aws-eks/03-user-group-04-name-the-group.webp" alt="AWS IAM - Name the group" width={350} height={300} />
-
-**Result**
-
-The user group **`eksctl-group`** is now listed under **User groups**.
-
-<Image src="/docimages/install/aws-eks/03-user-group-05-result.webp" alt="AWS IAM - User group created" width={800} height={300} />
-
-### Task 3: Assign an administrator policy to the user group
-
-Allow the user group to act as an administrator which will grant the user that runs the deployment script the privileges required to create an EKS cluster and all related resources.
-
-**Steps**
-
-1. From **User groups**, click the **`eksctl-group`** to open its settings.
-2. Select the **Permissions** tab.
-3. Click **Add permissions** and select **Attach policies** from the drop-down menu.
-   <Image src="/docimages/install/aws-eks/04-user-group-policies-01-permissions-attach-policies.webp" alt="AWS IAM User group - Attach policies" width={800} height={300} />
-4. Select the **`AdministratorAccess`** policy.
-   <Image src="/docimages/install/aws-eks/04-user-group-policies-02-select-admin-access.webp" alt="AWS IAM User group - Select Administrator Access policy" width={800} height={300} />
-5. Click **Add permissions**.
-   <Image src="/docimages/install/aws-eks/04-user-group-policies-03-click-add-permissions.webp" alt="AWS IAM User group - Click Add permissions" width={800} height={300} />
-
-**Result**
-
-The required **`AdministratorAccess`** policy is now added to the user group **`eksctl-group`**.
-
-<Image src="/docimages/install/aws-eks/04-user-group-policies-04-result.webp" alt="AWS IAM User group - Group with added permissions" width={800} height={300} />
-
-### Task 4: Create a user
-
-Create a non-ROOT user that should be part of the new user group and will have permissions to run the MOSTLY AI deployment script.
-
-**Steps**
-
-1. Open **Identity and Access Management (IAM)**.
-2. Select **Users** from the sidebar.
-   <Image src="/docimages/install/aws-eks/05-user-01-select-users.webp" alt="AWS IAM - Select Users from sidebar" width={225} height={300} />
-3. Click **Create user**.
-   <Image src="/docimages/install/aws-eks/05-user-02-click-create-user.webp" alt="AWS IAM - Click Create user" width={750} height={300} />
-4. Name the user **`eksctl`** and click **Next**.
-   <Image src="/docimages/install/aws-eks/05-user-03-name-and-click-next.webp" alt="AWS IAM - Name user and click Next" width={800} height={300} />
-5. On the **Set permissions** step, select the **`eksctl-group`** and click **Next**.
-   <Image src="/docimages/install/aws-eks/05-user-04-select-user-group-click-next.webp" alt="AWS IAM - select user group and click Next" width={800} height={300} />
-6. On the **Review and create** step, click **Create user**.
-   <Image src="/docimages/install/aws-eks/05-user-05-click-create-user.webp" alt="AWS IAM - click Create user" width={800} height={300} />
-
-**Result**
-
-The user is now created and appears in the **Users** table.
-
-<Image src="/docimages/install/aws-eks/05-user-06-result.webp" alt="AWS IAM - new user added" width={800} height={300} />
-
-### Task 5: Create an access key for the user
-
-Create an access key for the created user. You use the access key to configure and use the AWS CLI and run automated commands or scripts.
-
-**Step**
-
-1. In **IAM** > **Users**, select the **`eksctl`** user.
-2. Click **Create access key**.
-   <Image src="/docimages/install/aws-eks/06-user-access-key-01-click-create-access-key.webp" alt="AWS IAM - click Create access key" width={800} height={300} />
-3. Select **Comand Line Interface**.
-4. Select the **I understand the above recommendation...** checkbox.
-5. Click **Next**.
-   <Image src="/docimages/install/aws-eks/06-user-access-key-02-best-practices.webp" alt="AWS IAM - Best practices" width={800} height={300} />
-6. Click **Create access key**.
-   <Image src="/docimages/install/aws-eks/06-user-access-key-03-click-create-access-key.webp" alt="AWS IAM - Click Create access key" width={800} height={300} />
-7. (Optional) View the **Access key** and **Secret access key** values.
-8. Click **Download .csv file** to download the access key locally.
-   <Image src="/docimages/install/aws-eks/06-user-access-key-04-download-access-key.webp" alt="AWS IAM - Download access key" width={800} height={300} />
-
-**Result**
-
-The file **`eksctl_accessKeys.csv`** is saved locally and contains the **Access key** and **Secret access key** values.
-
-### Task 6: Configure AWS CLI
-
-With the user created specifically for the creation and deployment of MOSTLY AI, you can use it configure AWS CLI so that the user performs all scripted tasks.
-
-**Prerequisites**
-
-- AWS CLI. See [Install or update the latest version of the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) in the _AWS Documentation_.
-- Prepare your **Access key** and **Secret access key** from the previous task.
-
-**Steps**
-
-1. Open a command-line application.
-2. Create an AWS CLI named profile for the `eksctl` user with the `aws configure` command.
-   ```bash copy
-   aws configure --profile eksctl
-   ```
-3. Complete the prompts for the `aws configure` command.
-   1. For `AWS Access Key ID [None]`, paste your access key.
-   2. For `AWS Secret Access Key [None]`, paste your secret access key.
-   3. For `Default region name [None]`, type the default AWS region you want to use. For example, `eu-central-1`.
-   4. For `Default output format [None]`, type `json`.
-
-**Result**
-
-You AWS CLI profile for the **`eksctl`** user is now created.
-
-You can verify the configuration from your home folder. If you did not have a previously configured profile, the following commands should produce results similar to the ones below.
-
-1. View the contents of `.aws/config` in your home folder to see the configured profiles.
-   ```bash copy
-   cat ~/.aws/config
-   ```
-   Without any previously configured profiles, the result should be similar to the following:
-   ```
-   [profile eksctl]
-   region = eu-central-1
-   output = json
-   ```
-2. View the contents of `.aws/credentials` in your home folder to see the saved access key and secret access key for the profile.
-   ```bash copy
-   cat ~/.aws/credentials
-   ```
-   Without any previously configured profiles, the result should be similar to the following (actual secret values are obfuscated with asterisks):
-   ```
-   [eksctl]
-   aws_access_key_id = AK******************
-   aws_secret_access_key = ******************
-   ```
-3. Finally, you can use the `aws sts-caller-identity` command to check if the previous configurations were correct:
-   ```bash copy
-   aws sts get-caller-identity --profile eksctl
-   ```
-   The result should be similar to the following (actual secret values are obfuscated with asterisks):
-   ```
-   {
-       "UserId": "AI*******************",
-       "Account": "74**********",
-       "Arn": "arn:aws:iam::74**********:user/eksctl"
-   }
-   ```
-
-### Task 7: Create a hosted zone in Route 53
-
-You need to have a fully-qualified domain name (FQDN) for your MOSTLY AI application. If you need to register a new FQDN, you can do so from any domain name registrar (such as GoDaddy, Namecheap, or any other) or use AWS Route 53. You can also use a subdomain.
-
-If you register an FQDN with Route 53, you already have your hosted zone available in AWS under **Route 53** > **Hosted zones**.
-
-If you register an FQDN from another domain registrar, you need to create a hosted zone in Route 53 with your registered domain. In this case, follow the steps below.
-
-**Steps**
-
-1.  From AWS Services, search and open **Route 53**.
-    <Image src="/docimages/install/aws-eks/08-hosted-zone-01-open-route.webp" alt="AWS Services - Open EC2" width={700} height={700} />
-2.  Select **Hosted zones** from the sidebar.
-3.  Click **Create hosted zone**.
-    <Image src="/docimages/install/aws-eks/08-hosted-zone-02-route-53-click-create-hosted-zone.webp" alt="AWS S3 - upload deployment files" width={700} height={300} />
-4.  For **Domain name**, type your FQDN.
-5.  Click **Create hosted zone**.
-    <Image src="/docimages/install/aws-eks/08-hosted-zone-03-name-click-create.webp" alt="AWS S3 - upload deployment files" width={550} height={300} />
-    **Step result**: Your FQDN appears in the **Records** tabe.
-6.  From the **Records** table, copy the name servers for the hosted zone you created.
-    <Image src="/docimages/install/aws-eks/08-hosted-zone-04-copy-name-servers.webp" alt="AWS S3 - upload deployment files" width={800} height={300} />
-7.  Go to your domain registrar and add the copied name servers as custom nameservers for your domain.
-
-          <Callout type="info">
-
-    The propagation of the updated name servers across the DNS network might take several hours.
-
-    For more information, contact your domain registrar.
-
-          </Callout>
-
-**Result**
-
-You now have a configured hosted zone in Route 53 for your FQDN.
-
-Depending on your domain name provider, it might take some time (sometimes up to a few days) before the new nameservers are updated and propagated across the global DNS network.
-
-### Task 8: Create a SSL certificate for your FQDN
-
-To enable encrypted access with your FQDN, you need an SSL certificate. You can create a SSL certificate through AWS Certificate Manager.
-
-An SSL certificate for your FQDN is required to deploy MOSTLY AI in an EKS cluster.
-
-**Steps**
-
-1.  From AWS Services, search and open **Certificate Manager**.
-    <Image src="/docimages/install/aws-eks/09-ssl-cert-01-open-cert-manager.webp" alt="AWS Services - Open EC2" width={700} height={700} />
-2.  Click **List certificates** from the sidebar.
-3.  Click **Request**.
-    <Image src="/docimages/install/aws-eks/09-ssl-cert-02-cert-mgr-click-request.webp" alt="AWS Certificate Manager - Click Request" width={800} height={300} />
-4.  Select **Request a public certificate** and click **Next**.
-    <Image src="/docimages/install/aws-eks/09-ssl-cert-03-public-cert-click-next.webp" alt="AWS Certificate Manager - Request a public certificate" width={800} height={300} />
-5.  Configure and submit a certificate request.
-    1. For **Fully qualified domain name**, type your FQDN.
-    2. Select **DNS validation** under **Validation method**.
-    3. Click **Requst**.
-       <Image src="/docimages/install/aws-eks/09-ssl-cert-04-name-dns-valid-request.webp" alt="AWS Certificate Manager - type FQDN select DNS validation and request" width={800} height={300} />
-       **Step result**: A notification indicates that the certificate requires further validation.
-       <Image src="/docimages/install/aws-eks/09-ssl-cert-05-request-success-notification.webp" alt="AWS Certificate Manager - type FQDN select DNS validation and request" width={800} height={300} />
-6.  Validate you are the owner of your domain.
+### Task 2: Create the EKS cluster with eksctl
 
           <Callout>
 
-    AWS provides two validation methods: **DNS validation** and **Email validation**.
+    The `mostlyai-cluster.yaml` below will create an Elastic Kubernetes Service (EKS) cluster with the minimum requirements to get you up and running. However, it should be treated as a starting point for your own infrastructure setup.
 
-    For more information, see [Validating domain ownership](https://docs.aws.amazon.com/acm/latest/userguide/domain-ownership-validation.html) in the _AWS Certificate Manager (ACM) documentation_.
-
-    The steps below demonstrate the **DNS validation** method when your domain name provider is not AWS Route 53.
-
-    If your domain name provider is AWS Route 53, see [DNS validation](https://docs.aws.amazon.com/acm/latest/userguide/dns-validation.html) in the _AWS Certificate Manager (ACM) documentation_.
+    Always refer to your own company infrastructure team for reference on how to create your cluster, according to your internal guidelines and best practices while considering the minimum requirements for deploying MOSTLY AI.
 
           </Callout>
 
-7.  Select **List certificates**.
-8.  Select the **Certificate ID** in a **Pending validation** status.
-    <Image src="/docimages/install/aws-eks/09-ssl-cert-06-open-pending-valildation-request.webp" alt="AWS Certificate Manager - open the certificate request with pending validation" width={800} height={300} />
-9.  Copy the CNAME name and value and add them as a new CNAME record in your DNS provider.
-    <Image src="/docimages/install/aws-eks/09-ssl-cert-07-copy-cname-name-value.webp" alt="AWS Certificate Manager - copy CNAME name and value" width={800} height={300} />
-10. Create a new CNAME record for your domain name in your domain name provider web interface.
-    <Callout type="warning">See your domain name provider documentation on how to add a new CNAME record for the DNS validation.</Callout>
-
-**Result**
-
-As explained the [DNS validation](https://docs.aws.amazon.com/acm/latest/userguide/dns-validation.html) page in the _AWS ACM Documentation_, the **DNS validation can take up to 30 minutes** after you add the CNAME record in your domain name provider web interface.
-
-After the DNS validation completes, the **Status** of your certificate changes to **Issued** in the certificates list.
-
-<Image src="/docimages/install/aws-eks/09-ssl-cert-08-cert-issued.webp" alt="AWS Certificate Manager - copy CNAME name and value" width={800} height={300} />
-
-### Task 9: Create an AWS EKS cluster
-
-To simplify the creation of an EKS cluster, you can use the `eksctl` command-line tool. The tool creates the cluster and the required resources in CloudFormation.
-
-**Prerequisites**
-
-Install [`eksctl`](https://eksctl.io/installation/).
-
 **Steps**
 
-1. Create a CloudFormation YAML file named `mostly-ai-cluster.yaml` with the contents below.
+1. In your IDE, create a new file: `mostlyai-cluster.yaml` with the contents below. **Make sure to at least edit the region (`metadata.region`) to be the same region you specified in the Task 1**:
 
-   ```yaml copy filename="mostly-ai-cluster.yaml"
+   ```shell copy filename="mostlyai-cluster.yaml"
    apiVersion: eksctl.io/v1alpha5
-   kind: ClusterConfig
+    kind: ClusterConfig
+    
+    metadata:
+      name: mostly-ai
+      region: eu-central-1
+      version: "1.32"
+    
+    iam:
+      withOIDC: true
+    
+    addons:
+      # REQUIRED for podIdentityAssociations below
+      - name: eks-pod-identity-agent
+        version: latest
+    
+      - name: vpc-cni
+        version: latest
+        configurationValues: |
+          enableNetworkPolicy: "true"
+        podIdentityAssociations:
+          - namespace: kube-system
+            serviceAccountName: aws-node
+            permissionPolicyARNs:
+              - arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy
+    
+      - name: coredns
+        version: latest
+    
+      - name: kube-proxy
+        version: latest
+    
+      - name: aws-ebs-csi-driver
+        version: latest
+        podIdentityAssociations:
+          - namespace: kube-system
+            serviceAccountName: ebs-csi-controller-sa
+            permissionPolicyARNs:
+              - arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy
+    
+    cloudWatch:
+      clusterLogging:
+        enableTypes: ['audit', 'authenticator', 'controllerManager']
+    
+    managedNodeGroups:
+      - name: system-nodes
+        amiFamily: Bottlerocket
+        instanceTypes: [ m5.large ]
+        minSize: 1
+        maxSize: 1
+        desiredCapacity: 1
+        labels: { nodepool: system, role: system }
+        volumeType: gp3
+        volumeSize: 24
+    
+      - name: frontend-nodes
+        amiFamily: Bottlerocket
+        bottlerocket: { enableAdminContainer: true }
+        instanceTypes: [ m5a.xlarge ]
+        minSize: 1
+        maxSize: 1
+        desiredCapacity: 1
+        labels: { nodepool: frontend, role: frontend }
+        volumeType: gp3
+        volumeSize: 24
+    
+      - name: cpu-compute-nodes
+        amiFamily: Bottlerocket
+        bottlerocket: { enableAdminContainer: true }
+        instanceTypes: [ c5.4xlarge ]
+        minSize: 1
+        maxSize: 4
+        desiredCapacity: 1
+        labels: { nodepool: cpu-compute, role: workers }
+        taints:
+          - key: scheduling.mostly.ai/node
+            value: engine-jobs
+            effect: NoSchedule
+        volumeType: gp3
+        volumeSize: 24
+    
+    vpc:
+      cidr: 192.168.0.0/16
+      clusterEndpoints: { publicAccess: true, privateAccess: false }
+      nat: { gateway: Single }
 
-   metadata:
-     name: mostly-ai
-     region: eu-central-1
-
-   nodeGroups:
-     - name: mostly-ai-nodegroup
-       instanceType: m5.8xlarge
-       desiredCapacity: 1
-
-   cloudWatch:
-     clusterLogging:
-       enableTypes: ['audit', 'authenticator', 'controllerManager']
-
-   addons:
-     - name: aws-ebs-csi-driver
-       version: latest
-       attachPolicyARNs:
-         - arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy
    ```
 
-2. Run the CloudFormation definition with your AWS CLI.
+2. Save the file and launch a dry-run to validate that the `mostlyai-cluster.yaml` file can be executed without errors by `eksctl`:
 
    ```shell copy filename="shell"
-   eksctl create cluster -f mostly-ai-cluster.yaml
+   eksctl create cluster -f mostlyai-cluster.yaml --dry-run
+   ```
+
+This should output the contents of the `mostlyai-cluster.yaml` file as read by eksctl. If if returns any errors, please validate your credentials (and their level of permissions), region and changes you may have made to the `mostlyai-cluster.yaml` file itself.
+
+3. If there are no errors in the dry-run, proceed to execute the creation of the cluster by removing the flag `--dry-run` from the same command (this takes 15+ minutes to complete):
+
+   ```shell copy filename="shell"
+   eksctl create cluster -f mostlyai-cluster.yaml --dry-run
    ```
 
 **Result**
+The cluster will be created by eksctl by leveraging of CloudFormation in your account and you will see the progress of its creation in your terminal. When completed, you should receive a message like:
 
-The cluster creation is started in CloudFormation.
+>`EKS cluster "mostly-ai" in "eu-central-1" region is ready`
 
-**What's next**
 
-You can track the cluster creation in CloudFormation. When the cluster is created, you can proceed to grant access to your AWS user to view resources in the cluster.
-
-### Task 10: Grant permissions to view cluster resources
-
-With your cluster ready, you can view it in the **AWS Management Console** under **Elastic Kubernetes Service** > **Clusters**. However, when you open the Resources tabs or browse To do so, you need to grant permissions to the user that created the cluster.
-
-Add the the **AmazonEKSAdminPolicy** and **AmazonEKSClusterAdminPolicy** policies to the user creating the cluster. The policies are required so that the user that you create the cluster with can view and manage nodes and resources in the EKS cluster.
+### Task 3: Connect to the cluster and prepare for deployment of the MOSTLY AI Platform
 
 **Steps**
 
-1. In AWS, open **Elastic Kubernetes Service (EKS)**.
-2. From the sidebar, select **Clusters**.
-3. Select the **mostly-ai-cluster**.
-4. From the cluster tabs, select **Access**.
-5. View the entries under **IAM access entries**.
-6. Select the user to which you need to grant permissions.
-   <Image src="/docimages/install/aws-eks/_new/xx-eks-cluster-01-iam-access-entries.webp" alt="AWS EKS Cluster - View IAM Access Entries" width={800} height={300} />
-7. Click **Add access policy.**
-   <Image src="/docimages/install/aws-eks/_new/xx-eks-cluster-02-add-access-policy.webp" alt="AWS EKS Cluster - Click Add access policy" width={800} height={300} />
-8. Add the **AmazonEKSAdminPolicy** and **AmazonEKSClusterAdminPolicy** policies. Repeat the steps below for each.
-   1. For **Policy name**, select one of the policies.
-   2. For **Access scope**, select **Cluster**.
-   3. Click **Add access policy** in the bottom right.
-      <Image src="/docimages/install/aws-eks/_new/xx-eks-cluster-03-add-access-policy-steps.webp" alt="AWS EKS Cluster - Step to add an Access policy" width={800} height={300} />
+1. When the cluster creation is completed, retrieve the credentials to connect to the cluster (make sure to update the region to be the same where your `mostly-ai` cluster is up and running):
 
-**Result**
-
-The access policies now appear for the user.
-
-The user can now view the available nodes on the **Compute** tab and view the pods on **Resources** tab, under **Workloads** > **Pods**.
-
-### Task 11: Grant permissions to provision storage volumes
-
-The shared storage service `minio` that is provisioned during the deployment requires permissions to create storage volumes. To grant the required permissions, you need to attach the `AmazonEC2FullAccess` policy to the `eksctl-mostly-ai-cluster-nodegroup-NodeInstanceRole-******` role.
-
-**Steps**
-
-1. In AWS, open **Identity and Access Management (IAM)**.
-2. From the sidebar, select **Roles**.
-3. Search for `nodeinstance` and open the `eksctl-mostly-ai-cluster-nodegroup-NodeInstanceRole-******` role.
-   <Image src="/docimages/install/aws-eks/_new/xx-storage-permissions-01-select-nodeinstance-role.webp" alt="AWS IAM - Search for nodeinstance role" width={800} height={300} />
-4. Click **Add permissions** and select **Attach policies**.
-   <Image src="/docimages/install/aws-eks/_new/xx-storage-permissions-02-nodeinstance-role-attach-policy.webp" alt="AWS IAM - Search for nodeinstance role" width={800} height={300} />
-5. Search for `ec2fullaccess`, select **AmazonEC2FullAccess** and click **Add permissions**.
-   <Image src="/docimages/install/aws-eks/_new/xx-storage-permissions-03-select-ec2fullaccess-and-attach.webp" alt="AWS IAM - Search for nodeinstance role" width={800} height={300} />
-
-**Result**
-
-The `eksctl-mostly-ai-cluster-nodegroup-NodeInstanceRole-******` role now has the `AmazonEC2FullAccess` policy attached. With the policy, the role can provision storage volumes as required by the `minio` shared storage service.
-
-### Task 12: Configure an ingress controller
-
-MOSTLY AI supports HAProxy by default as the ingress controller. NGINX and Istio virtual services are also supported.
-
-For details on how to configure each, see [_Ingress controllers_](../config/ingress-controllers).
-
-## Deployment
-
-### Task 13: Edit the `values.yaml` file
-
-**Prerequisites**
-
-Obtain the MOSTLY AI Helm chart from your Customer Experience Engineer. The Helm chart includes the `values.yaml` file.
-
-**Steps**
-
-1. In a terminal or command prompt, make the Helm chart directory the current directory .
    ```shell copy filename="shell"
-   cd <helm-chart-directory>
-   ```
-2. Edit the `values.yaml` file.
-3. At the start, set the application domain name to an FQDN. Do the same as listed below for `minio`.
-   ```yaml filename="values.yaml" copy {3-4}
-   _customerInstallation:
-     domainNames:
-       mostly-ai: &fqdn yourfqdn.com
-   ```
-4. Apply one of the configurations below depending on whether you intend to use TLS-encrypted access to the MOSTLY AI application.<br /><br />
-   **➡️ You use a TLS certificate**. Replace `your-tls-secret` with the TLS secret name as defined in your cluster configuration.
-   <Callout>Your IT department or Kubernetes administrator creates the FQDN and its TLS certificate and adds it to the configuration of your cluster. When added, it comes with a TLS secret name that you can define in the `values.yaml` file. For details, see [_Configure your domain TLS certificate_](/install/config/domain-tls-cert).</Callout>
-   ```yaml filename="values.yaml" copy {(4, 9)}
-   _customerInstallation: ... deploymentSettings: tlsSecretName: &tlsSecretName your-tls-secret ... global: ... tls: enabled: true ... ``` **➡️ You do not use a TLS certificate**. Replace the `your-tls-secret` with an empty string and, for `global.tls`, set `enabled` to `false`. ```yaml filename="values.yaml" copy {(4, 9)}
-   _customerInstallation: ... deploymentSettings: tlsSecretName: &tlsSecretName [] # your-tls-secret ... global: ... tls: enabled: false ... ```
-5. (Optional) If you host third-party container images in an internal repository, replace `docker.io` in `registryFor3rdPartyComponents`.
-   ```yaml filename="values.yaml" copy {5}
-   _customerInstallation:
-   ...
-     deploymentSettings:
-     ...
-       registryFor3rdPartyComponents: &registryFor3rdPartyComponents REPLACE_WITH_INTERNAL_IMAGE_REPOSITORY
-   ...
-   ```
-6. (Optional) If you need to host MOSTLY AI container images in an internal repository, replace `quay.io/mostlyai` in `mostlyRegistry`.
-   ```yaml filename="values.yaml" copy {5}
-   _customerInstallation:
-   ...
-     deploymentSettings:
-     ...
-       mostlyRegistry: &mostlyRegistry quay.io/mostlyai
-   ...
-   ```
-7. (Optional) If you intend to use the MOSTLY AI image repository at `quay.io/mostlyai`, set its secret in `mostlyRegistryDockerConfigJson`.
-   <Callout>To obtain the secret, contact your MOSTLY AI Customer Experience Engineer.</Callout>
-   ```yaml filename="values.yaml" copy {5}
-   _customerInstallation: ... deploymentSettings: ... mostlyRegistryDockerConfigJson: &mostlyRegistryDockerConfigJson INSERT_QUAY.IO_SECRET ... ```
-8. Set an AWS storage class in `_customerInstallation.deploymentSettings.persistenceStorageClass`. For example, set `gp2` for the default AWS storage class.
-   ```yaml copy filename="values.yaml" {5} /gp2/
-   _customerInstallation:
-     ...
-     deploymentSettings:
-       ...
-       persistenceStorageClass: &persistenceStorageClass gp2
-     ...
+   aws eks update-kubeconfig --region eu-central-1 --name mostly-ai
    ```
 
-**Result**
+2. Create the default storage class to be used by the deployment:
 
-The `values.yaml` file is now configured for your deployment.
+In your IDE, create a new file: `gp3-storageclass.yaml` with the contents below:
 
-### Task 14: Deploy MOSTLY AI
+   ```yaml copy filename="gp3-storageclass.yaml"
+    apiVersion: storage.k8s.io/v1
+    kind: StorageClass
+    metadata:
+      name: gp3
+      annotations:
+        storageclass.kubernetes.io/is-default-class: "true"
+    provisioner: ebs.csi.aws.com
+    volumeBindingMode: WaitForFirstConsumer
+    parameters:
+      type: gp3
+   ```
 
-1. Deploy the MOSTLY AI Helm chart.
+2. Save the file and have `kubectl` create it for you in the cluster:
+
    ```shell copy filename="shell"
+   kubectl apply -f gp3-storageclass.yaml
+   ```
+
+### Task 4: Update the `values.yaml` in the root of the MOSTLY AI helm charts.
+
+Map the `fqdn` that you will use, secret to pull the images (mostlyRegistryDockerConfigJson), `gp3` as storage class, and `haproxy` as the ingress class.
+**Remember to save the file after you finish your changes**
+
+You can find an excerpt of the values.yaml as reference below:
+
+   ```
+   ...
+   _customerInstallation:
+      domainNames:
+        mostly-ai: &fqdn your.mostly.ai.installation.fqdn.com # Replace for your valid fqdn
+      deploymentSettings:
+      ...
+        mostlyRegistryDockerConfigJson: &mostlyRegistryDockerConfigJson eyJhdXRocyI6eyJodHRwczovL3NvbWUuZG9ja2VyLnJlcG9zaXRvcnkvdjEvIjp7InVzZXJuYW1lIjoic29tZS11c2VybmFtZSIsInBhc3N3b3JkIjoic29tZS1wYXNzd29yZCIsImF1dGgiOiJjMjl0WlMxMWMyVnlibUZ0WlRwemIyMWxMWEJoYzNOM2IzSmsifX19
+        persistenceStorageClass: &persistenceStorageClass "gp3"
+        ingressClassName: &ingressClassName "haproxy"
+   ...
+   combinedChart:
+    ...
+     haproxy: {enabled: true}
+   ...
+   haproxy:
+     controller:
+       ingressClassResource:
+         default: true
+   ```
+
+### Task 5: Deploy the platform in your cluster
+   ```yaml copy"
    helm upgrade --install mostly-ai ./mostly-combined --values values.yaml --namespace mostly-ai --create-namespace
    ```
+
+**Result**
    The result from the command should be similar to the following. If you see errors, see the [_Troubleshoot AWS EKS deployment issues_](/install/troubleshoot/aws-eks) section.
    ```
    Release "mostly-ai" does not exist. Installing it now.
    NAME: mostly-ai
-   LAST DEPLOYED: Fri Nov 10 18:45:58 2023
+   LAST DEPLOYED: Fri Aug 15 15:54:53 2025
    NAMESPACE: mostly-ai
    STATUS: deployed
    REVISION: 1
    TEST SUITE: None
    ```
 
-## Post-deployment
+### Task 6: Connect yout deployment with your `fqdn`.
 
-### Task 15: Set your FQDN to point at your ALB
+In Route53, map the external IP created by the `haproxy` service in its hosted zone as an **A record**, routing traffic to an **Alias to Application and Classic Load Balancer**.
 
-If the deployment script finishes successfully in [Task 11](#task-11-run-deployment-script), you now need to configure your FQDN to point to the ALB that is created by the CloudFormation script at the address that is output by the script.
+Make sure to use the same **External IP** that `haproxy` is exposing. You can confirm it with this command:
+  ```shell copy filename="shell"
+  kubectl get svc -n mostly-ai
+  ```
 
-**Steps**
+If you are using an external domain provider (e.g. GoDaddy, Namecheap, etc,) map the External IP of the load balancer as an A record there. It may take a bit longer to propagate.
 
-1. Go to **Route 53** > **Hosted zones** and select the hosted zone for your FQDN.
-2. Click **Create record**.
-   <Image src="/docimages/install/aws-eks/12-alb-domain-01-click-create-record.webp" alt="AWS Route 53 - click Create record" width={800} height={300} />
-3. Configure the record.
-   1. For **Record type**, select **A - Route traffic to an IPv4 address and some AWS resources**.
-   2. For **Alias**, enable the checkbox.
-   3. Under **Route traffic to**, select the following options:
-      - **Alias to an Application and Classic Load Balancer**
-      - Select your region. In this case, **Europe (Frankfurt)**.
-      - From the search box, select the name of your ALB.
-        <Image src="/docimages/install/aws-eks/12-alb-domain-02-configure-a-record.webp" alt="AWS Route 53 - configure A record" width={800} height={300} />
-4. Click **Create records**.
 
-**Result**
+### Task 7: Log into your MOSTLY AI deployment.
 
-Your FQDN now points to the ALB for the MOSTLY AI app.
+In a new tab in your web browser, go to your fqdn and log in with the superadmin credentials.
 
-**What's next**
-
-You can now direct your browser to your FQDN and open your deployed MOSTLY AI app for the first time.
-
-### Task 16: Log in to your MOSTLY AI deployment
-
-Log in for the first time to your MOSTLY AI deployment to set a new password for the `superadmin` user.
-
-**Prerequisites**
-
-Obtain the superadmin credentials from your Customer Experience Engineer.
-
-**Steps**
-
-1. Open your FQDN in your browser.<br />
-   **Step result**: You **Sign in** page for your MOSTLY AI deployment opens.
    <Image src="/docimages/install/minikube/02-minikube-dashboard-01-post-deployment-red.webp" alt="MOSTLY AI Deployment - Log in page" width={800} height={300} />
-2. Enter the superadmin credentials and click **Sign in**.
-3. Provide a new password and click **Change password**.
 
 **Result**
 
-Your `superadmin` password is now changed and you can use it to log in again to your MOSTLY AI deployment.
+You can use your MOSTLY AI deployment.
