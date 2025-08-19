@@ -21,7 +21,20 @@ Before you start, make sure you complete the prerequisites in the next section.
 
 - An AWS account where you have admin rights (no need to create IAM Users, you will use your Admin credentials for the account).
 - A `fqdn` OR A valid hosted zone where you can create a new record.
-  - You can validate if your hosted zone is exposed by running `dig <your hostedzonedomain>` in a terminal with Internet access. This should return `NOERROR` and its authority.
+  - You can validate if your hosted zone is exposed by running `dig +stats +short <YOURHOSTEDZONE> NS` in a terminal with Internet access. This should return something or nothing depending on the status:
+
+```
+#For a valid hosted zone:  
+❯ dig +stats +short mostly.ai NS
+  ns-1939.awsdns-50.co.uk.
+  ns-1041.awsdns-02.org.
+  ns-437.awsdns-54.com.
+  ns-1014.awsdns-62.net.
+
+# For an invalid hosted zone:
+❯ dig +stats +short mostlyASD.ai NS
+```
+
 - Install the tools listed below.
   - Install [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
   - Install [Helm](https://helm.sh/docs/intro/install/).
@@ -31,7 +44,7 @@ Before you start, make sure you complete the prerequisites in the next section.
 - Obtain deployment details from your Customer Experience Engineer.
   - **MOSTLY AI Helm chart**. Required for [Task 13](#task-13-edit-the-valuesyaml-file).
   - **First-time log in credentials** for the MOSTLY AI application. Required for [Task 16](#task-16-log-in-to-your-mostly-ai-deployment).
-  - (Optional) **MOSTLY AI image repository pull secret**. Required only if you don't already have the images from MOSTLY AI in your company internal image repository and instead intend to use the MOSTLY AI image repository to pull the container images. Optional for [Task 13](#task-13-edit-the-valuesyaml-file) and [Task 14](#task-14-deploy-mostly-ai).
+  - (Optional) **MOSTLY AI image repository pull secret**. Required only if you don't already have the images from MOSTLY AI in your company internal image repository and instead intend to use the MOSTLY AI image repository to pull the container images.
 
 - Recommended:
   - An IDE like `vscode`
@@ -40,24 +53,31 @@ Before you start, make sure you complete the prerequisites in the next section.
 
 ### Task 1: Export your Admin Credentials for AWS
 
+          <Callout>
+
+    This will vary depending on how your AWS access is set up. Please refer to your Infrastructure team and to the [Official AWS Documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) for exact guidance.
+    The example below is based on the assumption of SSO being set up.
+
+          </Callout>
+
 Go to your AWS Access Portal.
 From the Account where you have **AdministratorAccess** and you will use to create the cluster and deploy the platform, click on **Access keys**.
 From the **Option 1: Set AWS environment variables**, click the button to copy your key, secret and token. Open a terminal in your IDE where you already have the MOSTLY AI helm charts available and paste them there.
 
-`#export <your aws key>`
+`#export AWS_ACCESS_KEY_ID="<YOURAWSKEY>"`
 
-`#export <your aws secret>`
+`#export AWS_SECRET_ACCESS_KEY="<YOURAWSSECRET>"`
 
-`#export <your aws token>`
+`#export AWS_SESSION_TOKEN="<YOURAWSTOKEN>"`
 
 
-Make sure to **also save your credentials in the aws cli** via `aws configure` (hit <Enter> after updating the values in every line to save the parameters):
+Make sure to **also save your credentials in the aws cli** via `aws configure` (hit <Enter> after updating the values in every line to save the parameters). EKSCTL requires to know your zone and token:
 
-`AWS Access Key ID [none]: <your aws key>`
+`AWS Access Key ID [none]: <YOURAWSKEY>`
 
-`AWS Secret Access Key [none]: <your aws secret>`
+`AWS Secret Access Key [none]: <YOURAWSSECRET>`
 
-`Default region name [none]: <your aws region>`
+`Default region name [none]: <YOURAWSREGION>`
 
 `Default output format [none]: json`
 
@@ -98,13 +118,11 @@ Validate that your credentials are enabled and that you have access to AWS:
     metadata:
       name: mostly-ai
       region: eu-central-1
-      version: "1.32"
     
     iam:
       withOIDC: true
     
     addons:
-      # REQUIRED for podIdentityAssociations below
       - name: eks-pod-identity-agent
         version: latest
     
@@ -132,31 +150,17 @@ Validate that your credentials are enabled and that you have access to AWS:
             permissionPolicyARNs:
               - arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy
     
-    cloudWatch:
-      clusterLogging:
-        enableTypes: ['audit', 'authenticator', 'controllerManager']
-    
     managedNodeGroups:
       - name: system-nodes
         amiFamily: Bottlerocket
-        instanceTypes: [ m5.large ]
+        instanceTypes: [ m5a.xlarge ]
         minSize: 1
         maxSize: 1
         desiredCapacity: 1
         labels: { nodepool: system, role: system }
         volumeType: gp3
         volumeSize: 24
-    
-      - name: frontend-nodes
-        amiFamily: Bottlerocket
-        bottlerocket: { enableAdminContainer: true }
-        instanceTypes: [ m5a.xlarge ]
-        minSize: 1
-        maxSize: 1
-        desiredCapacity: 1
-        labels: { nodepool: frontend, role: frontend }
-        volumeType: gp3
-        volumeSize: 24
+
     
       - name: cpu-compute-nodes
         amiFamily: Bottlerocket
