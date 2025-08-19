@@ -118,6 +118,7 @@ Validate that your credentials are enabled and that you have access to AWS:
     metadata:
       name: mostly-ai
       region: eu-central-1
+      version: "1.33"
     
     iam:
       withOIDC: true
@@ -153,12 +154,12 @@ Validate that your credentials are enabled and that you have access to AWS:
     managedNodeGroups:
       - name: system-nodes
         amiFamily: Bottlerocket
-        instanceTypes: [ m5a.xlarge ]
+        instanceTypes: [ m5a.2xlarge ]
         minSize: 1
         maxSize: 1
         desiredCapacity: 1
         labels: { nodepool: system, role: system }
-        volumeType: gp3
+        volumeType: gp2
         volumeSize: 24
 
     
@@ -174,7 +175,7 @@ Validate that your credentials are enabled and that you have access to AWS:
           - key: scheduling.mostly.ai/node
             value: engine-jobs
             effect: NoSchedule
-        volumeType: gp3
+        volumeType: gp2
         volumeSize: 24
     
     vpc:
@@ -214,32 +215,10 @@ The cluster will be created by eksctl by leveraging of CloudFormation in your ac
    aws eks update-kubeconfig --region eu-central-1 --name mostly-ai
    ```
 
-2. Create the default storage class to be used by the deployment:
-
-In your IDE, create a new file: `gp3-storageclass.yaml` with the contents below:
-
-   ```yaml copy filename="gp3-storageclass.yaml"
-    apiVersion: storage.k8s.io/v1
-    kind: StorageClass
-    metadata:
-      name: gp3
-      annotations:
-        storageclass.kubernetes.io/is-default-class: "true"
-    provisioner: ebs.csi.aws.com
-    volumeBindingMode: WaitForFirstConsumer
-    parameters:
-      type: gp3
-   ```
-
-2. Save the file and have `kubectl` create it for you in the cluster:
-
-   ```shell copy filename="shell"
-   kubectl apply -f gp3-storageclass.yaml
-   ```
 
 ### Task 4: Update the `values.yaml` in the root of the MOSTLY AI helm charts.
 
-Map the `fqdn` that you will use, secret to pull the images (mostlyRegistryDockerConfigJson), `gp3` as storage class, and `haproxy` as the ingress class.
+Map the `fqdn` that you will use, secret to pull the images (mostlyRegistryDockerConfigJson), `gp2` as storage class, and `haproxy` as the ingress class.
 **Remember to save the file after you finish your changes**
 
 You can find an excerpt of the values.yaml as reference below:
@@ -252,7 +231,7 @@ You can find an excerpt of the values.yaml as reference below:
       deploymentSettings:
       ...
         mostlyRegistryDockerConfigJson: &mostlyRegistryDockerConfigJson eyJhdXRocyI6eyJodHRwczovL3NvbWUuZG9ja2VyLnJlcG9zaXRvcnkvdjEvIjp7InVzZXJuYW1lIjoic29tZS11c2VybmFtZSIsInBhc3N3b3JkIjoic29tZS1wYXNzd29yZCIsImF1dGgiOiJjMjl0WlMxMWMyVnlibUZ0WlRwemIyMWxMWEJoYzNOM2IzSmsifX19
-        persistenceStorageClass: &persistenceStorageClass "gp3"
+        persistenceStorageClass: &persistenceStorageClass "gp2"
         ingressClassName: &ingressClassName "haproxy"
    ...
    combinedChart:
