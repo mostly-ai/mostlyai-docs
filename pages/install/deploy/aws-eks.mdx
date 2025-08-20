@@ -8,71 +8,71 @@ import { Callout } from 'nextra/components';
 
 # Deploy MOSTLY AI to an AWS EKS cluster
 
-To run MOSTLY AI in AWS, you need an Elastic Kubernetes Service (EKS) cluster. Please refer to the [infrastructure requirements](https://docs.mostly.ai/install/requirements) and to your own company infrastructure team for reference on how to create your cluster, according to your internal guidelines and best practices.
+To run MOSTLY AI in AWS, you need an Elastic Kubernetes Service (EKS) cluster. Please refer to the [infrastructure requirements](https://docs.mostly.ai/install/requirements) and your own company infrastructure team for reference on how to create your cluster, according to your internal guidelines and best practices.
 
-> We believe that infrastructure should always be tailored to the specific needs of the company deploying it. As such, please note that while this guide will get you up and running, none of the modules/examples are direct requirements for the installation. Instead, treat them as a starting point for your own infrastructure setup.
-
-Use the tasks on this page as a reference for what you might need to complete to reach the point in which MOSTLY AI runs in an EKS cluster.
-
-Before you start, make sure you complete the prerequisites in the next section.
+> Infrastructure is tailored to the specific needs of each company. As such, it is important to note that while this guide will get you up and running, none of the modules or examples are direct requirements for the installation. Treat them as a starting point for your own infrastructure setup.
 
 ## Prerequisites
 
-- An AWS account where you have admin rights (no need to create IAM Users, you will use your Admin credentials for the account).
-- A `fqdn` OR A valid hosted zone where you can create a new record.
-  - You can validate if your hosted zone is exposed by running `dig +stats +short <YOURHOSTEDZONE> NS` in a terminal with Internet access. This should return something or nothing depending on the status:
+- An AWS account where you have root user privileges.
+- A fully-qualified domain name (FQDN) or a valid hosted zone where you can create a new record.
+  - You can validate if your hosted zone is exposed by running `dig +stats +short <YOURHOSTEDZONE> NS` in a terminal with Internet access.
 
-```
-#For a valid hosted zone:
+```shell copy filename="shell"
+#For a valid hosted zone, a response should be returned:
 ❯ dig +stats +short mostly.ai NS
   ns-1939.awsdns-50.co.uk.
   ns-1041.awsdns-02.org.
   ns-437.awsdns-54.com.
   ns-1014.awsdns-62.net.
 
-# For an invalid hosted zone:
+# For an invalid hosted zone, no response should be returned:
 ❯ dig +stats +short mostlyASD.ai NS
 ```
 
-- Install the tools listed below.
-  - Install [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
-  - Install [Helm](https://helm.sh/docs/intro/install/).
-  - Install [`kubectl`](https://kubernetes.io/docs/tasks/tools/).
-  - Install [`eksctl`](https://eksctl.io/installation/).
-- Decide in which AWS region you want to deploy MOSTLY AI. The page documents the steps in detail to deploy to **`eu-central-1`**. If you need to deploy to another region, adjust your deployment accordingly.
+- Install the following tools:
+  - [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+  - [Helm](https://helm.sh/docs/intro/install/)
+  - [`kubectl`](https://kubernetes.io/docs/tasks/tools/)
+  - [`eksctl`](https://eksctl.io/installation/)
+- Decide in which AWS region you want to deploy MOSTLY AI. These instructions are based on deploying to **`eu-central-1`**. If you need to deploy to another region, adjust your deployment region accordingly.
 - Obtain deployment details from your Customer Experience Engineer.
 
-  - **MOSTLY AI Helm chart**.
-  - **First-time log in credentials** for the MOSTLY AI Platform.
-  - (Optional) **MOSTLY AI image repository pull secret**. Required only if you don't already have the images from MOSTLY AI in your company internal image repository and instead intend to use the MOSTLY AI image repository to pull the container images.
+  - MOSTLY AI Helm chart
+  - First-time log in credentials for the MOSTLY AI Platform
+  - (Optional) MOSTLY AI image repository pull secret. This is required only if you do not have the images from MOSTLY AI in your internal image repository and instead intend to use the MOSTLY AI image repository to pull the container images.
 
 - Recommended:
-  - An IDE like `vscode`
+  - An IDE like Visual Studio Code or Cursor
 
 ## Pre-deployment
 
-### Task 1: Export your Admin Credentials for AWS
+### Export your root user credentials for AWS
 
-          <Callout>
+<Callout>
 
-    This will vary depending on how your AWS access is set up. Please refer to your Infrastructure team and to the [Official AWS Documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) for exact guidance.
-    The example below is based on the assumption of SSO being set up.
+This will vary depending on how your AWS access is set up. Refer to your infrastructure team and to the [Official AWS Documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) for exact guidance.
 
-          </Callout>
+This tutorial assumes that SSO is set up. If you are not using SSO, create an IAM user with the `AdministratorAccess` policy and use its credentials instead.
 
-Go to your AWS Access Portal.
-From the Account where you have **AdministratorAccess** and you will use to create the cluster and deploy the platform, click on **Access keys**.
-From the **Option 1: Set AWS environment variables**, click the button to copy your key, secret and token. Open a terminal in your IDE where you already have the MOSTLY AI helm charts available and paste them there.
+</Callout>
 
-`#export AWS_ACCESS_KEY_ID="<YOURAWSKEY>"`
+1. Navigate to your AWS Access Portal.
+2. From the IAM account where you have the `AdministratorAccess` policy, click on **Access keys**.
+3. From the **Option 1: Set AWS environment variables** modal, copy your key, secret and token.
+4. Open a terminal in your IDE where you already have the MOSTLY AI helm charts available and paste them there.
 
-`#export AWS_SECRET_ACCESS_KEY="<YOURAWSSECRET>"`
+```shell copy filename="shell"
+#export AWS_ACCESS_KEY_ID="<YOURAWSKEY>"
 
-`#export AWS_SESSION_TOKEN="<YOURAWSTOKEN>"`
+#export AWS_SECRET_ACCESS_KEY="<YOURAWSSECRET>"
 
-`#export AWS_REGION="<YOURAWSREGION>"`
+#export AWS_SESSION_TOKEN="<YOURAWSTOKEN>"
 
-Validate that your credentials are enabled and that you have access to AWS:
+#export AWS_REGION="<YOURAWSREGION>"
+```
+
+Validate that your credentials are enabled and that you have access to AWS with the following command:
 
 ```shell copy filename="shell"
 aws sts get-caller-identity
@@ -80,29 +80,27 @@ aws sts get-caller-identity
 
 **Result**
 
-- You should see your own credentials and the account you just saved, e.g:
+The expected output is similar to the following:
 
-> `{
+```json
+{
+  "UserId": "AROAMOSTLYAIQ:my.user@mycompany.com",
+  "Account": "1234567890",
+  "Arn": "arn:aws:sts::1234567890:assumed-role/AWSReservedSSO_AdministratorAccess_0987654321/my.user@mycompany.com"
+}
+```
 
-    "UserId": "AROAMOSTLYAIQ:julio.zambrano@mostly.ai",
-    "Account": "1234567890",
-    "Arn": "arn:aws:sts::1234567890:assumed-role/AWSReservedSSO_AdministratorAccess_0987654321/julio.zambrano@mostly.ai"
+### Create the EKS cluster with `eksctl`
 
-} `
+<Callout>
 
-### Task 2: Create the EKS cluster with eksctl
+The `mostlyai-cluster.yaml` file creates an Elastic Kubernetes Service (EKS) cluster with the minimum requirements to get you up and running. However, it should be treated as a starting point for your own infrastructure setup.
 
-          <Callout>
+Always refer to your own company infrastructure team for reference on how to create your cluster, according to your internal guidelines and best practices while considering the minimum requirements for deploying MOSTLY AI.
 
-    The `mostlyai-cluster.yaml` below will create an Elastic Kubernetes Service (EKS) cluster with the minimum requirements to get you up and running. However, it should be treated as a starting point for your own infrastructure setup.
+</Callout>
 
-    Always refer to your own company infrastructure team for reference on how to create your cluster, according to your internal guidelines and best practices while considering the minimum requirements for deploying MOSTLY AI.
-
-          </Callout>
-
-**Steps**
-
-1. In your IDE, create a new file: `mostlyai-cluster.yaml` with the contents below. **Make sure to at least edit the region (`metadata.region`) to be the same region you specified in the Task 1**:
+1. In your IDE, create a new file: `mostlyai-cluster.yaml` with the contents below. Make sure to at least edit the region `metadata.region` to be the same region you specified in the [Export your root user credentials for AWS](#export-your-root-user-credentials-for-aws) process:
 
    ```shell copy filename="mostlyai-cluster.yaml"
    apiVersion: eksctl.io/v1alpha5
@@ -175,7 +173,6 @@ aws sts get-caller-identity
       cidr: 192.168.0.0/16
       clusterEndpoints: { publicAccess: true, privateAccess: false }
       nat: { gateway: Single }
-
    ```
 
 2. Save the file and launch a dry-run to validate that the `mostlyai-cluster.yaml` file can be executed without errors by `eksctl`:
@@ -186,35 +183,33 @@ aws sts get-caller-identity
 
 This should output the contents of the `mostlyai-cluster.yaml` file as read by eksctl. If if returns any errors, please validate your credentials (and their level of permissions), region and changes you may have made to the `mostlyai-cluster.yaml` file itself.
 
-3. If there are no errors in the dry-run, proceed to execute the creation of the cluster by removing the flag `--dry-run` from the same command (this takes 15+ minutes to complete):
+3. If there are no errors in the dry run, proceed to execute the creation of the cluster by removing the flag `--dry-run` from the same command (this takes 15+ minutes to complete):
 
    ```shell copy filename="shell"
    eksctl create cluster -f mostlyai-cluster.yaml --dry-run
    ```
 
 **Result**
-The cluster will be created by eksctl by leveraging of CloudFormation in your account and you will see the progress of its creation in your terminal. When completed, you should receive a message like:
+
+The cluster is created by `eksctl` by leveraging of CloudFormation in your account and you will see the progress of its creation in your terminal. When completed, you should receive a message like:
 
 > `EKS cluster "mostly-ai" in "eu-central-1" region is ready`
 
-### Task 3: Connect to the cluster and prepare for deployment of the MOSTLY AI Platform
+### Connect to the cluster and prepare for deployment of the MOSTLY AI Platform
 
-**Steps**
-
-1. When the cluster creation is completed, retrieve the credentials to connect to the cluster (make sure to update the region to be the same where your `mostly-ai` cluster is up and running):
+1. When cluster creation is completed, retrieve the credentials to connect to the cluster (make sure to update the region to be the same where your `mostly-ai` cluster is up and running):
 
    ```shell copy filename="shell"
    aws eks update-kubeconfig --region eu-central-1 --name mostly-ai
    ```
 
-### Task 4: Update the `values.yaml` in the root of the MOSTLY AI helm charts.
+### Update the `values.yaml` in the root of the MOSTLY AI Helm charts.
 
-Map the `fqdn` that you will use, secret to pull the images (mostlyRegistryDockerConfigJson), `gp2` as storage class, and `haproxy` as the ingress class.
-**Remember to save the file after you finish your changes**
+Map the FQDN that you wish to use, secret to pull the images (`mostlyRegistryDockerConfigJson`), `gp2` as storage class, and `haproxy` as the ingress class. Save the file after you finish your changes.
 
-You can find an excerpt of the values.yaml as reference below:
+Refer to the sample excerpt below as reference for the `values.yaml` file:
 
-```
+```yaml copy filename="values.yaml"
 ...
 _customerInstallation:
    domainNames:
@@ -235,16 +230,17 @@ haproxy:
       default: true
 ```
 
-### Task 5: Deploy the platform in your cluster
+### Deploy the platform in your cluster
 
-```yaml copy"
+```shell copy filename="shell"
 helm upgrade --install mostly-ai ./mostly-combined --values values.yaml --namespace mostly-ai --create-namespace
 ```
 
 **Result**
-The result from the command should be similar to the following. If you see errors, see the [_Troubleshoot AWS EKS deployment issues_](/install/troubleshoot/aws-eks) section.
 
-```
+The expected output is similar to the following. If you see errors, see the [Troubleshoot AWS EKS deployment issues](/install/troubleshoot/aws-eks) section.
+
+```shell copy filename="shell"
 Release "mostly-ai" does not exist. Installing it now.
 NAME: mostly-ai
 LAST DEPLOYED: Fri Aug 15 15:54:53 2025
@@ -254,25 +250,22 @@ REVISION: 1
 TEST SUITE: None
 ```
 
-### Task 6: Connect yout deployment with your `fqdn`.
+### Connect yout deployment with your FQDN
 
 In Route53, map the external IP created by the `haproxy` service in its hosted zone as an **A record**, routing traffic to an **Alias to Application and Classic Load Balancer**.
 
-Make sure to use the same **External IP** that `haproxy` is exposing. You can confirm it with this command:
+Make sure to use the same **External IP** that is exposed by `haproxy`. You can confirm it with this command:
 
 ```shell copy filename="shell"
 kubectl get svc -n mostly-ai
 ```
 
-If you are using an external domain provider (e.g. GoDaddy, Namecheap, etc,) map the External IP of the load balancer as an A record there. It may take a bit longer to propagate.
+If you are using an external domain provider such as GoDaddy, Namecheap, etc., map the external IP address of the load balancer as an `A` record there.
 
-### Task 7: Log into your MOSTLY AI deployment.
+### Log in to your MOSTLY AI deployment.
 
-In a new tab in your web browser, go to your fqdn and log in with the superadmin credentials.
+In a new tab in your web browser, go to your FQDN and log in with the superadmin credentials.
 
-{' '}
 <Image src="/docimages/install/minikube/02-minikube-dashboard-01-post-deployment-red.webp" alt="MOSTLY AI Deployment - Log in page" width={800} height={300} />
-
-**Result**
 
 You can use your MOSTLY AI deployment.
