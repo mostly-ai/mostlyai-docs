@@ -17,11 +17,11 @@ If you wish to modify the default configuration, you can do so by selecting a pr
 
 MOSTLY AI offers the following pre-configured presets:
 
-| Preset   | Description                                                                                                      | Behavior                                                                                 |
-|----------|------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------|
-| Accuracy | Runs training until the model reaches the highest possible accuracy (lowest validation loss). Takes the longest. | Full training with maximum epochs and sample size for best accuracy.                      |
-| Speed    | Shortcut to reduce maximum training epochs and sample size.                                                      | Faster training while still achieving high accuracy.                                      |
-| Turbo    | Minimal training with reduced epochs and sample size.                                                            | Fastest option; best for quick sense checks where lower accuracy is tolerable.                      |
+| Preset   | Description                                                                                                      | Behavior                                                                       |
+| -------- | ---------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| Accuracy | Runs training until the model reaches the highest possible accuracy (lowest validation loss). Takes the longest. | Full training with maximum epochs and sample size for best accuracy.           |
+| Speed    | Shortcut to reduce maximum training epochs and sample size.                                                      | Faster training while still achieving high accuracy.                           |
+| Turbo    | Minimal training with reduced epochs and sample size.                                                            | Fastest option; best for quick sense checks where lower accuracy is tolerable. |
 
 ## Use a custom configuration
 
@@ -29,15 +29,15 @@ Each table in the subject dataset has a dedicated AI model trained to generate d
 
 Customizable model parameters are:
 
-| Parameter                                  | Description                                                                                     | Default            |
-|--------------------------------------------|-------------------------------------------------------------------------------------------------|--------------------|
+| Parameter                                  | Description                                                                                                          | Default            |
+| ------------------------------------------ | -------------------------------------------------------------------------------------------------------------------- | ------------------ |
 | Max sample size                            | Maximum percentage of the dataset to be used, see [Training sample size](#training-sample-size) for more information | All available rows |
-| Max training time                          | Maximum duration allowed for training in minutes                                                | `10`               |
-| Max training epochs                        | Maximum number of training iterations                                                           | `100`              |
-| Model                                      | MOSTLY AI model to train, see [Model size](#model-size) for more information                    | `MOSTLY_AI/Medium` |
-| Physical batch size                        | Number of samples processed per training step                                                   | `Auto`             |
-| Gradient accumulation steps                | Number of forward and backward passes performed before a single optimizer step is taken         | `Auto`             |
-| Max sequence window (linked tables & Text) | Maximum rows considered for linked/text sequences                                               | `100`              |
+| Max training time                          | Maximum duration allowed for training in minutes                                                                     | `10`               |
+| Max training epochs                        | Maximum number of training iterations                                                                                | `100`              |
+| Model                                      | MOSTLY AI model to train, see [Model size](#model-size) for more information                                         | `MOSTLY_AI/Medium` |
+| Physical batch size                        | Number of samples processed per training step                                                                        | `Auto`             |
+| Gradient accumulation steps                | Number of forward and backward passes performed before a single optimizer step is taken                              | `Auto`             |
+| Max sequence window (linked tables & Text) | Maximum rows considered for linked/text sequences                                                                    | `100`              |
 
 ## Training sample size
 
@@ -52,10 +52,10 @@ You can configure the training sample size for each table from the **Model confi
 
 1.  With an untrained generator open, go to the **Model configuration** page by clicking **Configure models**.
 2.  Click a model to expand its settings.
-3.  Set the **Max sample size** as number of rows. 
+3.  Set the **Max sample size** as number of rows.
     - For subject tables, you set the number of rows to be used for training from the original subject table.
     - For linked tables, you set the number of sequences (the sequences equal the number of subjects) to be used for training.
-    <Callout> The training size of linked tables is defined by the number of sequences. A sequence is the defined as 1 subject (sample) from the subject table and all of its related samples from the linked table. Think of the training size for linked tables as defined by the number of subjects or sequences used to pull the related sequences for a subject.</Callout>
+      <Callout> The training size of linked tables is defined by the number of sequences. A sequence is the defined as 1 subject (sample) from the subject table and all of its related samples from the linked table. Think of the training size for linked tables as defined by the number of subjects or sequences used to pull the related sequences for a subject.</Callout>
 
 </Tabs.Tab>
 <Tabs.Tab>
@@ -87,10 +87,10 @@ config = {
 
 Model size defines the amount of internal parameters that the AI model uses to learn from your data. A larger model uses more parameters to analyze and train on your data. You can use three different model sizes.
 
-| Model              | Description                                                                                          |
-|--------------------|------------------------------------------------------------------------------------------------------|
-| **MOSTLY_AI/Small**  | Uses fewer parameters, takes less memory and time, at the cost of accuracy.                          |
-| **MOSTLY_AI/Medium** | Uses optimal parameters and is best for most use cases.                                             |
+| Model                | Description                                                                                               |
+| -------------------- | --------------------------------------------------------------------------------------------------------- |
+| **MOSTLY_AI/Small**  | Uses fewer parameters, takes less memory and time, at the cost of accuracy.                               |
+| **MOSTLY_AI/Medium** | Uses optimal parameters and is best for most use cases.                                                   |
 | **MOSTLY_AI/Large**  | Can further improve accuracy for large datasets, but requires significantly more memory and compute time. |
 
 <Tabs items={['Platform', 'Synthetic Data SDK']}>
