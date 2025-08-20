@@ -7,6 +7,9 @@
 		respond 200
 	}
 
+	@doubleDocs path_regexp doublerewrite ^/docs/docs(.*)$
+	rewrite @doubleDocs /docs{http.regexp.doublerewrite.1}
+
 	redir / /docs
 	handle_path /docs* {
 		root * /app/html

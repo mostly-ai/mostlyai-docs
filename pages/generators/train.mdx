@@ -84,7 +84,7 @@ Configure a generator that will produce data which follows the statistical patte
 
 ```python copy filename="python" {7} # 1. Load original data into a pd.DataFrame
 import pandas as pd
-df = pd.read_csv("https://docs.mostly.ai/datasets/us-census-income.csv.gz")
+df = pd.read_csv("https://docs.mostly.ai/public-datasets/us-census-income.csv.gz")
 
 # 2. Instantiate in Local use
 from mostlyai.sdk import MostlyAI
@@ -100,7 +100,7 @@ g = mostly.train(data=df, start=True, wait=True)
 ```python copy filename="python" {7}
 # 1. Load original data into a pd.DataFrame
 import pandas as pd
-df = pd.read_csv("https://docs.mostly.ai/datasets/us-census-income.csv.gz")
+df = pd.read_csv("https://docs.mostly.ai/public-datasets/us-census-income.csv.gz")
 
 # 2. Instantiate in Client mode by connecting to a remote Platform instance
 from mostlyai.sdk import MostlyAI

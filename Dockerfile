@@ -12,6 +12,11 @@ RUN set -eux; \
   for dir in $(find /build/public -mindepth 1 -maxdepth 1 -type d -exec basename {} \;); do \
   find /build/out -type f -name "*.html" -exec sed -i "s|/${dir}/|/docs/${dir}/|g" {} +; \
   find /build/out -type f -name "*.js" -exec sed -i "s|/${dir}/|/docs/${dir}/|g" {} +; \
+  done \
+  && \
+  for dir in $(find /build/public -mindepth 1 -maxdepth 1 -type d -exec basename {} \;); do \
+  find /build/out -type f -name "*.html" -exec sed -i "s|docs/docs|docs|g" {} +; \
+  find /build/out -type f -name "*.js" -exec sed -i "s|docs/docs|docs|g" {} +; \
   done
 
 FROM cgr.dev/chainguard/wolfi-base:latest AS final
