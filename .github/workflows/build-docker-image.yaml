@@ -43,6 +43,7 @@ jobs:
         uses: docker/build-push-action@v6
         env:
           DOCKER_BUILD_RECORD_UPLOAD: 'false'
+          BUILDX_NO_DEFAULT_ATTESTATIONS: '1'
         with:
           platforms: ${{ env.PLATFORMS }}
           build-args: GIT_COMMIT_SHA=${{ steps.buildconfig.outputs.commitsha }}
@@ -51,4 +52,3 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           push: true
           sbom: true
-          provenance: mode=max
