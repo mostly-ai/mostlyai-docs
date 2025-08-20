@@ -12,7 +12,6 @@ To run MOSTLY AI in AWS, you need an Elastic Kubernetes Service (EKS) cluster. P
 
 > We believe that infrastructure should always be tailored to the specific needs of the company deploying it. As such, please note that while this guide will get you up and running, none of the modules/examples are direct requirements for the installation. Instead, treat them as a starting point for your own infrastructure setup.
 
-
 Use the tasks on this page as a reference for what you might need to complete to reach the point in which MOSTLY AI runs in an EKS cluster.
 
 Before you start, make sure you complete the prerequisites in the next section.
@@ -24,7 +23,7 @@ Before you start, make sure you complete the prerequisites in the next section.
   - You can validate if your hosted zone is exposed by running `dig +stats +short <YOURHOSTEDZONE> NS` in a terminal with Internet access. This should return something or nothing depending on the status:
 
 ```
-#For a valid hosted zone:  
+#For a valid hosted zone:
 ❯ dig +stats +short mostly.ai NS
   ns-1939.awsdns-50.co.uk.
   ns-1041.awsdns-02.org.
@@ -42,6 +41,7 @@ Before you start, make sure you complete the prerequisites in the next section.
   - Install [`eksctl`](https://eksctl.io/installation/).
 - Decide in which AWS region you want to deploy MOSTLY AI. The page documents the steps in detail to deploy to **`eu-central-1`**. If you need to deploy to another region, adjust your deployment accordingly.
 - Obtain deployment details from your Customer Experience Engineer.
+
   - **MOSTLY AI Helm chart**.
   - **First-time log in credentials** for the MOSTLY AI Platform.
   - (Optional) **MOSTLY AI image repository pull secret**. Required only if you don't already have the images from MOSTLY AI in your company internal image repository and instead intend to use the MOSTLY AI image repository to pull the container images.
@@ -72,23 +72,23 @@ From the **Option 1: Set AWS environment variables**, click the button to copy y
 
 `#export AWS_REGION="<YOURAWSREGION>"`
 
-
-
 Validate that your credentials are enabled and that you have access to AWS:
 
-   ```shell copy filename="shell"
-   aws sts get-caller-identity
-   ```
+```shell copy filename="shell"
+aws sts get-caller-identity
+```
 
 **Result**
+
 - You should see your own credentials and the account you just saved, e.g:
 
->`{
+> `{
+
     "UserId": "AROAMOSTLYAIQ:julio.zambrano@mostly.ai",
     "Account": "1234567890",
     "Arn": "arn:aws:sts::1234567890:assumed-role/AWSReservedSSO_AdministratorAccess_0987654321/julio.zambrano@mostly.ai"
-} `
 
+} `
 
 ### Task 2: Create the EKS cluster with eksctl
 
@@ -107,19 +107,19 @@ Validate that your credentials are enabled and that you have access to AWS:
    ```shell copy filename="mostlyai-cluster.yaml"
    apiVersion: eksctl.io/v1alpha5
     kind: ClusterConfig
-    
+
     metadata:
       name: mostly-ai
       region: eu-central-1
       version: "1.33"
-    
+
     iam:
       withOIDC: true
-    
+
     addons:
       - name: eks-pod-identity-agent
         version: latest
-    
+
       - name: vpc-cni
         version: latest
         configurationValues: |
@@ -129,13 +129,13 @@ Validate that your credentials are enabled and that you have access to AWS:
             serviceAccountName: aws-node
             permissionPolicyARNs:
               - arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy
-    
+
       - name: coredns
         version: latest
-    
+
       - name: kube-proxy
         version: latest
-    
+
       - name: aws-ebs-csi-driver
         version: latest
         podIdentityAssociations:
@@ -143,7 +143,7 @@ Validate that your credentials are enabled and that you have access to AWS:
             serviceAccountName: ebs-csi-controller-sa
             permissionPolicyARNs:
               - arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy
-    
+
     managedNodeGroups:
       - name: system-nodes
         amiFamily: Bottlerocket
@@ -155,7 +155,7 @@ Validate that your credentials are enabled and that you have access to AWS:
         volumeType: gp2
         volumeSize: 24
 
-    
+
       - name: cpu-compute-nodes
         amiFamily: Bottlerocket
         bottlerocket: { enableAdminContainer: true }
@@ -170,7 +170,7 @@ Validate that your credentials are enabled and that you have access to AWS:
             effect: NoSchedule
         volumeType: gp2
         volumeSize: 24
-    
+
     vpc:
       cidr: 192.168.0.0/16
       clusterEndpoints: { publicAccess: true, privateAccess: false }
@@ -195,8 +195,7 @@ This should output the contents of the `mostlyai-cluster.yaml` file as read by e
 **Result**
 The cluster will be created by eksctl by leveraging of CloudFormation in your account and you will see the progress of its creation in your terminal. When completed, you should receive a message like:
 
->`EKS cluster "mostly-ai" in "eu-central-1" region is ready`
-
+> `EKS cluster "mostly-ai" in "eu-central-1" region is ready`
 
 ### Task 3: Connect to the cluster and prepare for deployment of the MOSTLY AI Platform
 
@@ -208,7 +207,6 @@ The cluster will be created by eksctl by leveraging of CloudFormation in your ac
    aws eks update-kubeconfig --region eu-central-1 --name mostly-ai
    ```
 
-
 ### Task 4: Update the `values.yaml` in the root of the MOSTLY AI helm charts.
 
 Map the `fqdn` that you will use, secret to pull the images (mostlyRegistryDockerConfigJson), `gp2` as storage class, and `haproxy` as the ingress class.
@@ -216,61 +214,64 @@ Map the `fqdn` that you will use, secret to pull the images (mostlyRegistryDocke
 
 You can find an excerpt of the values.yaml as reference below:
 
-   ```
+```
+...
+_customerInstallation:
+   domainNames:
+     mostly-ai: &fqdn your.mostly.ai.installation.fqdn.com # Replace for your valid fqdn
+   deploymentSettings:
    ...
-   _customerInstallation:
-      domainNames:
-        mostly-ai: &fqdn your.mostly.ai.installation.fqdn.com # Replace for your valid fqdn
-      deploymentSettings:
-      ...
-        mostlyRegistryDockerConfigJson: &mostlyRegistryDockerConfigJson eyJhdXRocyI6eyJodHRwczovL3NvbWUuZG9ja2VyLnJlcG9zaXRvcnkvdjEvIjp7InVzZXJuYW1lIjoic29tZS11c2VybmFtZSIsInBhc3N3b3JkIjoic29tZS1wYXNzd29yZCIsImF1dGgiOiJjMjl0WlMxMWMyVnlibUZ0WlRwemIyMWxMWEJoYzNOM2IzSmsifX19
-        persistenceStorageClass: &persistenceStorageClass "gp2"
-        ingressClassName: &ingressClassName "haproxy"
-   ...
-   combinedChart:
-    ...
-     haproxy: {enabled: true}
-   ...
-   haproxy:
-     controller:
-       ingressClassResource:
-         default: true
-   ```
+     mostlyRegistryDockerConfigJson: &mostlyRegistryDockerConfigJson eyJhdXRocyI6eyJodHRwczovL3NvbWUuZG9ja2VyLnJlcG9zaXRvcnkvdjEvIjp7InVzZXJuYW1lIjoic29tZS11c2VybmFtZSIsInBhc3N3b3JkIjoic29tZS1wYXNzd29yZCIsImF1dGgiOiJjMjl0WlMxMWMyVnlibUZ0WlRwemIyMWxMWEJoYzNOM2IzSmsifX19
+     persistenceStorageClass: &persistenceStorageClass "gp2"
+     ingressClassName: &ingressClassName "haproxy"
+...
+combinedChart:
+ ...
+  haproxy: {enabled: true}
+...
+haproxy:
+  controller:
+    ingressClassResource:
+      default: true
+```
 
 ### Task 5: Deploy the platform in your cluster
-   ```yaml copy"
-   helm upgrade --install mostly-ai ./mostly-combined --values values.yaml --namespace mostly-ai --create-namespace
-   ```
+
+```yaml copy"
+helm upgrade --install mostly-ai ./mostly-combined --values values.yaml --namespace mostly-ai --create-namespace
+```
 
 **Result**
-   The result from the command should be similar to the following. If you see errors, see the [_Troubleshoot AWS EKS deployment issues_](/install/troubleshoot/aws-eks) section.
-   ```
-   Release "mostly-ai" does not exist. Installing it now.
-   NAME: mostly-ai
-   LAST DEPLOYED: Fri Aug 15 15:54:53 2025
-   NAMESPACE: mostly-ai
-   STATUS: deployed
-   REVISION: 1
-   TEST SUITE: None
-   ```
+The result from the command should be similar to the following. If you see errors, see the [_Troubleshoot AWS EKS deployment issues_](/install/troubleshoot/aws-eks) section.
+
+```
+Release "mostly-ai" does not exist. Installing it now.
+NAME: mostly-ai
+LAST DEPLOYED: Fri Aug 15 15:54:53 2025
+NAMESPACE: mostly-ai
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+```
 
 ### Task 6: Connect yout deployment with your `fqdn`.
 
 In Route53, map the external IP created by the `haproxy` service in its hosted zone as an **A record**, routing traffic to an **Alias to Application and Classic Load Balancer**.
 
 Make sure to use the same **External IP** that `haproxy` is exposing. You can confirm it with this command:
-  ```shell copy filename="shell"
-  kubectl get svc -n mostly-ai
-  ```
+
+```shell copy filename="shell"
+kubectl get svc -n mostly-ai
+```
 
 If you are using an external domain provider (e.g. GoDaddy, Namecheap, etc,) map the External IP of the load balancer as an A record there. It may take a bit longer to propagate.
-
 
 ### Task 7: Log into your MOSTLY AI deployment.
 
 In a new tab in your web browser, go to your fqdn and log in with the superadmin credentials.
 
-   <Image src="/docimages/install/minikube/02-minikube-dashboard-01-post-deployment-red.webp" alt="MOSTLY AI Deployment - Log in page" width={800} height={300} />
+{' '}
+<Image src="/docimages/install/minikube/02-minikube-dashboard-01-post-deployment-red.webp" alt="MOSTLY AI Deployment - Log in page" width={800} height={300} />
 
 **Result**
 
