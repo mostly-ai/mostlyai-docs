@@ -52,3 +52,9 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           push: true
           sbom: true
+
+      - name: Build | Generate SBOM
+        uses: anchore/sbom-action@v0
+        with:
+          image: ${{ steps.meta.outputs.tags }}
+          format: cyclonedx-json
