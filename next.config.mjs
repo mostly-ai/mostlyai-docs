@@ -340,21 +340,6 @@ export default withNextra({
       permanent: true,
     },
     {
-      source: '/datasets/us-census-na.csv.gz',
-      destination: '/datasets/us-census-na.csv.gz',
-      permanent: true,
-    },
-    {
-      source: '/datasets/baseball.zip',
-      destination: '/datasets/baseball.zip',
-      permanent: true,
-    },
-    {
-      source: '/datasets/insurance_claims.csv.gz',
-      destination: '/datasets/insurance_claims.csv.gz',
-      permanent: true,
-    },
-    {
       source: '/concepts/best-practices',
       destination: '/best-practices',
       permanent: true,

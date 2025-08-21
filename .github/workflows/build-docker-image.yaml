@@ -42,10 +42,8 @@ jobs:
       - name: Build | Build Docker Image
         uses: docker/build-push-action@v6
         env:
-          BUILDX_NO_DEFAULT_ATTESTATIONS: '1'
-          DOCKER_BUILD_SUMMARY: 'false'
-          DOCKER_BUILD_CHECKS_ANNOTATIONS: 'false'
           DOCKER_BUILD_RECORD_UPLOAD: 'false'
+          BUILDX_NO_DEFAULT_ATTESTATIONS: '1'
         with:
           platforms: ${{ env.PLATFORMS }}
           build-args: GIT_COMMIT_SHA=${{ steps.buildconfig.outputs.commitsha }}
@@ -53,3 +51,4 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           push: true
+          sbom: true
