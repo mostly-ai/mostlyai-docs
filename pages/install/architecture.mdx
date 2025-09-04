@@ -31,7 +31,7 @@ MOSTLY AI runs as a set of containerized applications and services that you can 
 | **mostly-backup**<br /><br />`mostly-backup`                     | Backup service for MOSTLY AI.                                                                                                                                | Service       |
 | **docs**<br /><br />`mostly-docs`                                | Documentation service that provides guides and API documentation.                                                                                            | Service       |
 | `mostly-ai-haproxy`                                              | Automatic load balancer and ingress management service.                                                                                                      | Service       |
-| `mostly-ai-minio`                                                | Shared storage service.                                                                                                                                      | Service       |
+| `mostly-ai-minio`                                                | (OPTIONAL) Legacy shared storage service.                                                                                                                                      | Service       |
 | `mostly-core-probe-api`                                          | Service for live-probing generators.                                                                                                                         | Service       |
 
 ## AI Worker nodes
@@ -67,6 +67,4 @@ The Assistant Broker can connect to any Large Language Model (LLM) service that 
 MOSTLY AI uses two types of storage.
 
 - **Block Storage**. Used by single pods, such as PostgreSQL. Typically, this is automatically provisioned by the Kubernetes cluster.
-- **Shared Storage**. Shared by various pods to store models, synthetic data, and others. Two options exist for using shared storage:
-  - **MinIO**. MOSTLY AI provides shared storage via [MinIO](https://min.io/). This uses the block storage provisioned by the Kubernetes cluster.
-  - **External S3 storage**. You can use an external S3 storage solution instead of MinIO.
+- **Shared Storage**. Shared by various pods to store models, synthetic data, and others. You can use an external S3 compatible storage solution

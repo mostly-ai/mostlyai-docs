@@ -181,7 +181,7 @@ As mentioned in the [Prerequisites](#prerequisites), you need to obtain the [MOS
 
 1. Open the `values.yaml` file in a text editor.
 2. At the start, set the application domain name to an FQDN.
-   <Callout>`minio` is the shared storage service.</Callout>
+   <Callout>An external S3 compatible storage solution is the shared storage service.</Callout>
    ```yaml filename="values.yaml" copy {3 - 4}
    _customerInstallation: domainNames: mostly-ai: &fqdn yourfqdn.com ```
 3. (Optional) Apply one of the configurations below depending on whether you intend to use TLS-encrypted access to the MOSTLY AI application.<br /><br />

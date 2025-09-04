@@ -353,7 +353,7 @@ scp -i KEYPAIR_FILENAME.pem MOSTLY_AI_Helm_chart.zip ubuntu@IP_ADDRESS:~
 1. On the machine, unzip the Helm chart.
 2. Edit the `values.yaml` file as highlighted below.
    1. At the start, set the application domain name to `mostly.local`.
-      <Callout>`minio` is the shared storage service.</Callout>
+      <Callout>An s3 compatible storage solution is the shared storage service.</Callout>
       ```yaml filename="values.yaml" copy {3 - 4}
       _customerInstallation: domainNames: mostly-ai: &fqdn mostly.local ```
    2. (Optional) Apply one of the configurations below depending on whether you intend to use SSL-encrypted access to the MOSTLY AI application.<br /><br />
