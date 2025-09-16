@@ -8,6 +8,35 @@ import Image from 'next/image';
 
 # What's new in MOSTLY AI
 
+## 5.2.1
+
+_September 15th, 2025_
+
+### Descriptive code block labels
+
+- {/* MSD-2063 */} When executing Python code in the Assistant, code block labels describe the purpose of the code block.
+
+### Animated toasts for error notifications
+
+- {/* MSD-2047 */} Error notifications now feature animated toasts to make them easier to recognize.
+
+### Improvements
+
+- {/* MSD-2066 */} Update modal pop-ups (Datasets & Synthetic Datasets)
+- {/* MSD-2107 */} Show small Mostly AI icon on header for mobile devices to improve responsiveness
+- {/* MSD-1808 */} Improve mobile responsiveness for Assistant modals
+- {/* MSD-2132 */} Improve artifact sharing experience by adding filename and download URL as new properties
+
+### Resolved issues
+
+- {/* MSD-2120 */} Resolve issue with disordered messages when multiple streaming chats were active
+- {/* MSD-2130 */} Redirect user to homepage when reaching parallel chat limit to make it easier to find the chat you want to continue
+- {/* MSD-2085 */} Real-time credit update after generator/synthetic dataset job finishes to improve usage tracking
+
+### Upstream dependencies
+
+- Upgraded to [`mostlyai`](https://github.com/mostly-ai/mostlyai) 5.2.1
+
 ## 5.2.0
 
 _September 5th, 2025_
@@ -20,7 +49,7 @@ _September 5th, 2025_
 
 - {/* MSD-XXX */} Implement always-ready kernel pool for instant startup time for [Python sessions](https://docs.mostly.ai/assistant/python-session-status).
 
-### Enhancements
+### Improvements
 
 - {/* MSD-XXX */} Switch to [GPT-5 Nano](https://platform.openai.com/docs/models/gpt-5-nano) as default for [Mock Data generation](https://github.com/mostly-ai/mostlyai-mock).
 
