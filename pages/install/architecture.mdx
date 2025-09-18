@@ -11,7 +11,7 @@ import { ChipIcon, WebFrontendIcon, UserPersonaIcon, DatabaseLockIcon, TerminalI
 
 MOSTLY AI runs as a set of containerized applications and services that you can deploy in a Kubernetes cluster and maintain a fault-tolerant and highly available application.
 
-<Image src="/docimages/install/mostly-ai-architecture.svg" alt="MOSTLY AI architecture diagram" width={800} height={30} />
+<Image src="/docimages/install/mostly-ai-architecture.png" alt="MOSTLY AI architecture diagram" width={800} height={30} />
 
 ## Application Nodes
 
@@ -19,6 +19,7 @@ MOSTLY AI runs as a set of containerized applications and services that you can 
 | ---------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------- |
 | **mostly-core**<br /><br />`mostly-core-api`                     | Component that reads metadata and analyzes data sources and destinations.                                                                                    | Service       |
 | **mostly-app-v2**<br /><br />`mostly-app`                        | Contains the backend and public APIs of MOSTLY AI.                                                                                                           | Service       |
+| **mostly-gateway**<br /><br />`mostly-gateway`                   | Entry point for web application frontend of all MOSTLY AI services as well as Keycloak.                                                                      | Service       |
 | **mostly-keycloak**<br /><br />`mostly-keycloak`                 | Keycloak is an open-source identity management, authentication, and authorization tool. This container has a pre-configured Keycloak instance for MOSTLY AI. | Service       |
 | **mostly-coordinator**<br /><br />`mostly-coordinator`           | Component that takes all requests from the web application and coordinates execution of tasks on the main AI engine.                                         | Service       |
 | **mostly-core-gpu**<br /><br />`mostly-core-gpu`                 | Service for running AI tasks on GPU nodes.                                                                                                                   | Service       |
