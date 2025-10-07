@@ -85,7 +85,8 @@ There may be cases where you need to improve the quality of a Generator by resum
 You can continue Generator training from the Platform or with the Synthetic Data SDK.
 
 <Tabs items={['Platform', 'Synthetic Data SDK']}>
-<Tabs.Tab>To continue Generator training, follow these steps.
+<Tabs.Tab>
+To continue Generator training, follow these steps.
 
 **Steps**
 
@@ -102,7 +103,6 @@ MOSTLY AI fetches the original data from the data source and continues the train
 
 </Tabs.Tab>
 <Tabs.Tab>
-
 To continue the training of a generator with the Synthetic Data SDK, use the [`clone()` method](https://mostly-ai.github.io/mostlyai/api_client/#mostlyai.sdk.domain.Generator.clone) on a generator that has completed its training and set the `training_status` parameter to `CONTINUE`.
 
 ```python filename="python" copy
