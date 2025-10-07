@@ -1,6 +1,6 @@
 ---
-title: 'Manage generators'
-description: 'Train generators with MOSTLY AI and you can share them with peers and colleagues, generate synthetic datasets, transfer ownership, manage access, and more.'
+title: 'Manage Generators'
+description: 'Train Generators with MOSTLY AI to share them with the world, generate synthetic datasets, and more.'
 ---
 
 import { Callout } from 'nextra/components';
@@ -8,27 +8,27 @@ import { Tabs } from 'nextra/components';
 import Image from 'next/image';
 import { Canceled, Generating, InProgress, OnHold, Ready, Failed, New, Queued, Continue } from '@components/status-pills';
 
-# Manage generators
+# Manage Generators
 
-You need to be the owner or have Editor access to a generator to modify it.
+You need to be the owner or have Editor access to a Generator to modify it.
 
-## Status of generators
+## Generator Statuses
 
-The status of a generator indicates its current state.
+The status of a Generator indicates its current state.
 
 | Status         | Description                                                                                        | Next actions                                                                                                         |
 | :------------- | :------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------- |
-| <New />        | A generator object exists with a default or modified configuration. Training not started.          | • Start training<br />• Clone configuration<br />• Delete                                                            |
+| <New />        | A Generator is created with a default or modified configuration. Training is not started.          | • Start training<br />• Clone configuration<br />• Delete                                                            |
 | <Queued />     | Generator training is queued until cluster resources become available.                             | • Share<br />• Clone configuration<br />• Cancel training<br />• Delete                                              |
 | <InProgress /> | Generator training is ongoing.                                                                     | • Share<br/ >•&nbsp;Clone&nbsp;configuration<br />•&nbsp;Cancel&nbsp;training<br />• Delete                          |
-| <Continue />   | A trained generator was cloned to improve its quality with further training. Training not started. | • Start&nbsp;training<br />• Share<br />• Clone configuration<br />• Delete                                          |
-| <Ready />      | The generator has completed training successfully and can now generate synthetic datasets.         | • Generate data<br />• Share<br />• Export to file<br />• Clone configuration<br />• Continue training<br />• Delete |
-| <Failed />     | The generator training started and then failed.                                                    | • Share<br />• Clone configuration<br />• Delete                                                                     |
-| <Canceled />   | The generator training was canceled while still in progress.                                       | • Share<br />• Clone configuration<br />• Delete                                                                     |
+| <Continue />   | A trained Generator was cloned to improve its quality with further training. Training not started. | • Start&nbsp;training<br />• Share<br />• Clone configuration<br />• Delete                                          |
+| <Ready />      | Generator has completed training successfully and can now generate synthetic datasets.             | • Generate data<br />• Share<br />• Export to file<br />• Clone configuration<br />• Continue training<br />• Delete |
+| <Failed />     | Generator training started and then failed.                                                        | • Share<br />• Clone configuration<br />• Delete                                                                     |
+| <Canceled />   | Generator training was canceled while in progress.                                                 | • Share<br />• Clone configuration<br />• Delete                                                                     |
 
-## Clone a generator
+## Clone a Generator
 
-If you need to reuse the data and model configuration from an existing generator, you can clone it. All previously added data as well as the model and training configuration are copied to the new generator.
+If you want to reuse the data and model configuration from an existing Generator, you can clone it. All previously added data as well as the model and training configuration are copied to the new Generator.
 
 <Callout>
 Before you start, keep in mind:
@@ -40,24 +40,24 @@ Before you start, keep in mind:
 
 <Tabs items={['Platform', 'Synthetic Data SDK']}>
 <Tabs.Tab>
-Clone a generator from the Web UI, by following the steps below.
+Clone a Generator on the MOSTLY AI Platform, by following the steps below.
 
 **Steps**
 
-- Clone a generator directly from the **Generators** page.
-  1. From the **Generators** page, click the kebab menu of a generator, and select **Clone configuration**.
-- Clone a generator after you open it.
-  1. From the **Generators** page, click a generator to open it.
-  2. Open the actions menu by clicking the generator name.
+- Clone a Generator directly from the **Generators** page.
+  1. From the **Generators** page, click the kebab menu of a Generator, and select **Clone configuration**.
+- Clone a Generator after you open it.
+  1. From the **Generators** page, click a Generator to open it.
+  2. Open the actions menu by clicking the Generator name.
   3. Click **Clone configuration**.
 
 **Result**
 
-A new generator with the name of the original generator with the prefix **Clone -** prepended to it is created.
+A new Generator with the name of the original Generator with the prefix **Clone -** prepended to it is created.
 
 </Tabs.Tab>
 <Tabs.Tab>
-To clone a generator with the Synthetic Data SDK, use the [`clone()` method](https://mostly-ai.github.io/mostlyai/api_client/#mostlyai.sdk.domain.Generator.clone) on a generator that has completed its training and set the `training_status` parameter to `NEW`. This reuses the existing generator configuration and prepares the cloned generator to train from scratch.
+To clone a Generator with the Synthetic Data SDK, use the [`clone()` method](https://mostly-ai.github.io/mostlyai/api_client/#mostlyai.sdk.domain.Generator.clone) on a Generator that has completed its training and set the `training_status` parameter to `NEW`. This reuses the existing Generator configuration and prepares the cloned Generator to train from scratch.
 
 ```python filename="python" copy
 g = mostly.generators.get("INSERT_GENERATOR_ID_TO_CLONE")
@@ -73,33 +73,32 @@ You can now use the data and model configuration from the previous generator and
 
 ## Continue training
 
-There may be cases where you need to improve the quality of a generator by resuming its training from the current weights of the model. An example is improving the overall accuracy of the generator. In such cases, you can use the **Continue training** option.
+There may be cases where you need to improve the quality of a Generator by resuming its training from the current weights of the model. In such cases, you can use the **Continue training** option.
 
 **Prerequisites**
 
-- The generator you want to improve must have already completed training successfully. You cannot improve generators with **Failed** or **Canceled** status.
-- You can only improve generators that use a [database](/connectors/create#database-connectors) or a [cloud storage bucket](/connectors/create#cloud-storage-connectors) as a data source. Uploaded files used for generator training are deleted immediately after training and therefore cannot be used to continue generator training.
-- The source data must be available in the data source.
-- You must have the Editor role.
+- The Generator you want to improve must have already completed training successfully. You cannot improve Generators with **Failed** or **Canceled** status.
+- You can only continue training Generators that use a [database](/connectors/create#database-connectors) or a [cloud storage bucket](/connectors/create#cloud-storage-connectors) as a data source. Uploaded files used for generator training are deleted immediately after training and therefore cannot be used to continue generator training.
+- The source data must be available in the associated Connector entity.
+- You must have the Editor role of the selected Generator.
 
-You can continue generator training from the Platform or with the Synthetic Data SDK.
+You can continue Generator training from the Platform or with the Synthetic Data SDK.
 
 <Tabs items={['Platform', 'Synthetic Data SDK']}>
-<Tabs.Tab>
-To continue generator training, follow these steps.
+<Tabs.Tab>To continue Generator training, follow these steps.
 
 **Steps**
 
-1. Continue the training of a generator in one of two ways.
-   - From the **Generators** page, click the kebab menu of a generator, and select **Continue training**.
-   - From the generator page, open the action menu by clicking the generator name, and select **Continue training**.
-     The generator is cloned with the status `CONTINUE`. You can now configure the model and training options. The generator name is prefixed with **Continue training -** followed by the name of the original generator.
+1. Continue the training of a Generator in one of two ways.
+   - From the **Generators** page, click the kebab menu of a Generator, and select **Continue training**.
+   - From the Generator page, open the action menu by clicking the Generator name, and select **Continue training**.
+     The Generator is cloned with the status `CONTINUE`. You can now configure the model and training options. The Generator name is prefixed with **Continue training -** followed by the name of the original Generator.
 2. (Optional) Click a table to expand its model and training configuration to adjust as needed.
-3. Click **Continue training** to start the generator training.
+3. Click **Continue training** to start the Generator training.
 
 **Result**
 
-MOSTLY AI fetches the original data from the data source and continues the training from the already saved model weights. The generator status is updated to `CONTINUE`.
+MOSTLY AI fetches the original data from the data source and continues the training from the already saved model weights. The Generator status is updated to `CONTINUE`.
 
 </Tabs.Tab>
 <Tabs.Tab>
@@ -119,20 +118,24 @@ cloned_g.training.start() # start the training of the new cloned_g generator
 
 You can use the newly trained generator to [generate a new synthetic dataset](/synthetic-datasets/generate) or [probe it](/generators/live-probing) for immediately generated samples.
 
-## Share a generator
+## Share a Generator
 
 You can share a generator with members of your organization, see [Manage Resources](../organizations/manage-resources.mdx#share-a-resource-with-an-organization).
 
-## Delete a generator
+Consider the following when sharing a Generator:
 
-A generator consists of a dedicated generative AI model for each table of the source dataset. Depending on the size of your original data, it can take a long time to train a new one.
+- A Generator is a standalone entity. When sharing a Generator, it is not necessary to share the Connector associated with it in order to generate synthetic data.
+- **Unlisted** Generators cannot be cloned for [continued training](#continue-training). If your downstream users expect to continue Generator training, they must be granted **Editor** access to the Generator.
+- If you pass the ownership of a Generator to an organization, people in the organization can generate data with it. If members of this organization wish to continue training with the Generator, you must also grant access to the underlying Connector entity as well.
 
-If you need to delete a generator, you can do so after you open a generator.
+## Delete a Generator
 
-1. Delete a generator in one of two ways.
+A Generator consists of a dedicated generative AI model for each table of the source dataset. Depending on the size of your original data, it can take a long time to train a new one.
+
+1. Delete a Generator in one of two ways.
    - From the **Generators** page, click the kebab menu of a generator, and select **Delete**.
-   - From the generator page, open the action menu by clicking the generator name, and select **Delete**.
+   - On the page of the selected Generator, open the action menu by clicking the Generator name, and select **Delete**.
 
 **Result**
 
-The generator is now deleted.
+The Generator has been deleted.
