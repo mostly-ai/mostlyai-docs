@@ -14,12 +14,12 @@ You can grow your organization's portfolio by adding synthetic data resources.
 
 You can add the following types of resources to an organization:
 
-- [generators](/generators)
-- [synthetic datasets](/synthetic-datasets)
-- [connectors](/connectors)
-- [datasets](/datasets)
+- [Generators](/generators)
+- [Synthetic Datasets](/synthetic-datasets)
+- [Connectors](/connectors)
+- [Datasets](/datasets)
 
-To add resources, you [share the resource from your personal account to the organization](#share-a-resource-with-an-organization). A resource's initial owner is always the creator's account. Resources cannot start with an organization as the owner, but they can always be shared back to your account.
+To add resources, you can [share the resource from your personal account to the organization](#share-a-resource-with-an-organization). A resource's initial owner is always the creator's account. Resources cannot start with an organization as the owner, but they can always be shared back to your account.
 
 ## Share a resource with an organization
 
@@ -27,16 +27,13 @@ In MOSTLY AI, you can share any generator, synthetic datasets, or connector you 
 
 After sharing, even if the creator of a resource deletes their account, the resource will not be deleted and its owner will remain the organization shared to.
 
-Sharing is not available in the cases listed below.
-
-- To another user
-- From/to an organization where you do not have sufficient permissions
+> You cannot share resources with a single specific user or to an organization where you do not have sufficient permissions.
 
 **Prerequisites**
 
 - You are the creator of the resource you want to share.
 - You have the Admin or Contributor role in the organization you want to share the resource to.
-- You can share generators and synthetic datasets only when their status is **Ready**. For details, see [_Status of generators_](/generators/manage#status-of-generators) and [_Status of synthetic datasets_](/synthetic-datasets/manage#status-of-synthetic-datasets).
+- You can share generators and synthetic datasets only when their status is **Ready**. For details, see [Status of generators](/generators/manage#status-of-generators) and [Status of synthetic datasets](/synthetic-datasets/manage#status-of-synthetic-datasets).
 
 **Steps**
 
@@ -56,8 +53,10 @@ The resource is now shared with the selected organization.
 To remove a resource from an organization, you can do one of the following:
 
 <div className="empty_header_table"></div>
-| | | | --- | --- | | Delete the resource | • [Delete a generator](/generators/manage#delete-a-generator)
-<br />• [Delete a synthetic dataset](/synthetic-datasets/manage#delete-a-synthetic-dataset)
-<br />* [Delete a connector](/connectors/manage#delete-a-connector) | | Share the resource back to your account | Follow [Share a resource to an organization](#share-a-resource-with-an-organization). Instead of an organization, select your account. |
 
-As a result, the resource will be no longer available to the organization members.
+| Action                                      | Description                                                                                                                                                                                                                 |
+| ------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Delete the resource**                     | • [Delete a generator](/generators/manage#delete-a-generator)<br />• [Delete a synthetic dataset](/synthetic-datasets/manage#delete-a-synthetic-dataset)<br />• [Delete a connector](/connectors/manage#delete-a-connector) |
+| **Share the resource back to your account** | Follow [Share a resource to an organization](#share-a-resource-with-an-organization). Instead of an organization, select your account.                                                                                      |
+
+As a result, the resource is no longer available to the organization members.
