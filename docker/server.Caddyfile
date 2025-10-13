@@ -2,7 +2,9 @@
 	log default
 	encode
 
-	metrics /metrics
+	handle_path /metrics {
+	  metrics
+  }
 	handle_path /healthz {
 		respond 200
 	}
