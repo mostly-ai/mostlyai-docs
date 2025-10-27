@@ -8,6 +8,23 @@ import Image from 'next/image';
 
 # What's new in MOSTLY AI
 
+## 5.4.2
+
+_October 24th, 2025_
+
+### Non-Context Foreign Key Models
+
+- {/* MSD-2149 */} Non-context foreign keys are now supported by their own generative AI models. That means that every single foreign key in your dataset contains plausible values with respect to their parent primary key. Consider a case when you have a parent and a child. There are certain obvious things that must be true about their relationship: the parent must be a certain number of years older than the child. The parent should be assigned a certain gender based on their relationship to the child (mother, father). Now extrapolate that concept to less directly apparent relationships between data tables. With the deployment of non-context foreign key models, your synthetic data just got even smarter.
+
+### Enhancements
+
+- {/* MSD-2279 */} Show user first and last name instead of username throughout platform UI.
+- {/* MSD-XXXX */} Enhanced login email design and content.
+
+### Upstream dependencies
+
+- Update [Synthetic Data SDK](https://github.com/mostly-ai/mostlyai) to`5.4.1`, and [Synthetic Data Engine](https://github.com/mostly-ai/mostlyai-engine) to `1.6.1`.
+
 ## 5.4.1
 
 _October 21st, 2025_
