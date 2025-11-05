@@ -8,6 +8,30 @@ import Image from 'next/image';
 
 # What's new in MOSTLY AI
 
+## 5.5.0
+
+_November 4th, 2025_
+
+### User-Scoped Secrets in the Assistant
+
+- {/* MSD-2256 */} Now you can define Secrets for use by the [MOSTLY AI Assistant](/assistant) to make use of during Chats. Use Secrets to authetnicate API calls or store sensitive information that you don't want to be visible in the UI. With MOSTLY AI, you're in control.
+
+### Enhancements
+
+- {/* MSD-2208 */} Provide real-time [Credit](/usage#usage) calculations for your usage, ensuring you always know how much you've used and how much you have left.
+- {/* MSD-XXX */} Increase process visubility during [Genrator](/generators) training with enhanced progress messages.
+- {/* MSD-XXX */} Improved foreign key matching ability for models with further fine-tuning.
+
+### Resolved issues
+
+- {/* MSD-2239 */} Enable social sharing previews in the [Aritifact Library](/assistant/artifacts).
+- {/* MSD-XXX */} Resolve issue with progress accuracy during [Genrator](/generators) training showing Model Report generation as complete whilst still ongoing.
+- {/* MSD-1943 */} Fix issues caused by table names in Generator configuration differing from the actual database table names.
+
+### Upstream dependencies
+
+- Upgraded [Synthetic Data SDK](https://github.com/mostly-ai/mostlyai) to `5.5.0`, [Synthetic Data Engine](https://github.com/mostly-ai/mostlyai-engine) to `1.7.0`, and mostly-mock to `0.2.2`.
+
 ## 5.4.2
 
 _October 24th, 2025_
