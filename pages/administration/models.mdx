@@ -13,6 +13,22 @@ Unstructured text generation in MOSTLY AI is available via the configuration of 
 
 You can use any text generation model available on Hugging Face. To do so, you can first acquire a Hugging Face token.
 
+## Use cases
+
+Adding a Hugging Face model to MOSTLY AI allows you to use it to generate synthetic text data using publicly accessible model repositories or your own fine-tuned adapters.
+
+MOSTLY AI recommends the following powerful open-source or open-weight models to generate synthetic text data on the platform:
+
+- [`gpt-oss-120B`](https://huggingface.co/openai/gpt-oss-120b) from OpenAI (USA)
+- [`Mistral-7B-Instruct-v0.2`](https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.2) from Mistral AI (France)
+- [`Llama-3.1-8B-Instruct`](https://huggingface.co/meta-llama/Llama-3.1-8B-Instruct) from Meta AI (USA)
+- [`Qwen-2.5-512B-Instruct`](https://huggingface.co/Qwen/Qwen2.5-512B-Instruct) from Alibaba Cloud (China)
+- [`gemma-3-1b-it`](https://huggingface.co/google/gemma-3-1b-it) from Google (USA)
+
+Each of these models is available for inspection on the [Hugging Face model hub](https://huggingface.co/models).
+
+> You can also use your own fine-tuned adapters to generate synthetic text data. To do so, you can first [fine-tune the model on your own data](/generators/fine-tuning-llms) and then add the fine-tuned adapter to MOSTLY AI from the Hugging Face model hub.
+
 ## Create a Hugging Face token
 
 You need to sign up or use an existing account to obtain a Hugging Face token. The token must have at least Read permissions. This document demonstrates the creation of a **Read** token. You can also use a **Fine-grained** token with the required read permissions.
