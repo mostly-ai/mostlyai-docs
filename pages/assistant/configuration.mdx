@@ -9,7 +9,12 @@ import { CustomCallout } from '@components/custom-callout';
 
 # Assistant configuration
 
-When you deploy MOSTLY AI, the Assistant is included as part of the deployment of Kubernetes services and containers. For the Assistant to work, you need to configure access to the Large Language Model (LLM). The Assistant can use any LLM provided by your organization.
+When you deploy MOSTLY AI, the Assistant is included as part of the deployment of Kubernetes services and containers. For the Assistant to work, you need to configure access to the Large Language Model (LLM).
+
+The Assistant can use any LLM provided by your organization but MOSTLY AI recommends the following models:
+
+- [Claude Sonnet 4.5](https://docs.litellm.ai/docs/providers/anthropic#supported-models-1) from Anthropic
+- [GPT-4.1](https://docs.litellm.ai/docs/providers/openai#supported-models-1) from OpenAI
 
 <CustomCallout>**Note**: You can only configure the Assistant as a **Super Admin**.</CustomCallout>
 
