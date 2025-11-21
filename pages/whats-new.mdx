@@ -8,6 +8,27 @@ import Image from 'next/image';
 
 # What's new in MOSTLY AI
 
+## 5.7.0
+
+_November 21st, 2025_
+
+### Migrate mostly-app to non-blocking reactive Spring
+
+- {/* MSD-2274 */} MOSTLY AI just became even more more efficient, using fewer resources to do the same work as previously. The platform is scaling fast and can now serve far more simultaneous users without needing to scale up hardware, is more resilient under spikes in traffic, and supports requests moving through the system more smoothly.
+
+### Navbar redesign
+
+- {/* MSD-2286 */} Introducing the new and improved navigation bar for the MOSTLY AI Platform. Now you can get around faster, aesier, and with fewer clciks than before.
+
+### Fixes
+
+- {/* MSD-2297 */} Cap image size with base64 encoding consideration to prevent out-of-memory issues
+- {/* MSD-2298 */} Improved scheduling logic of pool manager for better resource utilization
+
+### Upstream dependencies
+
+- Upgraded [Synthetic Data SDK](https://github.com/mostly-ai/mostlyai) to `5.7.0`, [Synthetic Data Engine](https://github.com/mostly-ai/mostlyai-engine) to `2.0.1`, DuckDB to `1.4.2`.
+
 ## 5.6.0
 
 _November 14th, 2025_
