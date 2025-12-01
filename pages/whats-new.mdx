@@ -8,6 +8,26 @@ import Image from 'next/image';
 
 # What's new in MOSTLY AI
 
+## 5.8.0
+
+_December 1st, 2025_
+
+### Improvements
+
+- {/* MSD-1921 */} Stop stripping extra columns from seed data; retain all columns through generation and finalization.
+- {/* MSD-2148 */} Update SDK auto-detection logic for DATETIME and short-string (TABULAR_CHARACTER) columns.
+- {/* MSD-2323 */} Add openpyxl to the kernel image to ensure Excel files can be downloaded reliably in all environments.
+- {/* MSD-2284 */} Show a warning when navigating away with messages still queued for execution.
+
+### Resolved issues
+
+- {/* MSD-2309 */} Set Owner:Me as default filter on the resource list pages
+- {/* MSD-XXXX */} Ensure successful file sync when stopping the thread
+
+### Upstream dependencies
+
+- Upgraded [Synthetic Data SDK](https://github.com/mostly-ai/mostlyai) to `5.8.2`, [Synthetic Data Engine](https://github.com/mostly-ai/mostlyai-engine) to `2.3.1`.
+
 ## 5.7.1
 
 _November 26th, 2025_
