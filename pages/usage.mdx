@@ -1,6 +1,6 @@
 ---
 title: 'Usage and credits'
-description: 'Daily, MOSTLY AI provides 5 credits for the free generation of synthetic data points. 1 credits equals 1 million synthetic data points. 5 credits equals 1 million chat tokens.'
+description: 'Daily, MOSTLY AI provides 2 credits for the free generation of synthetic data points. 1 credit equals 1 million synthetic data points. 5 credits equals 1 million chat tokens.'
 ---
 
 import { Tabs } from 'nextra/components';
@@ -9,7 +9,7 @@ import { CustomCallout } from '@components/custom-callout';
 
 # Usage and credits
 
-The [MOSTLY AI Platform](https://app.mostly.ai) provides a daily limit of 5 credits to train generators, generate synthetic datasets, and use the [Assistant](./assistant.mdx). Enterprise deployments have a usage-based configuration which can be adjusted according to the organization's needs.
+The [MOSTLY AI Platform](https://app.mostly.ai) provides a daily limit of 2 credits to train generators, generate synthetic datasets, and use the [Assistant](./assistant.mdx). Enterprise deployments have a usage-based configuration which can be adjusted according to the organization's needs.
 
 <CustomCallout>
 **Note**
@@ -44,7 +44,7 @@ GPU time is only available when a GPU was selected to generate the synthetic dat
 
 ## Credits
 
-Credits are consumed based on the total virtual CPU and GPU time used to train generators and generate synthetic datasets. Credits are also be consumed during conversation with the Assistant at a rate of 5 credits per 1M tokens.
+Credits are consumed based on the total virtual CPU and GPU time used to train generators and generate synthetic datasets. Credits are also consumed during conversation with the Assistant at a rate of 5 credits per 1M tokens.
 
 `Credits` = `𝐴` × `Total Virtual CPU Time` + `𝐵` × `Total Virtual GPU Time`, where `𝐴` and `𝐵`are the unit prices for CPU and GPU time respectively.
 
@@ -81,7 +81,7 @@ The result is a Python dictionary and you can find details about your current cr
     'usage': {
         'credits': {
             'current': 1.662,
-            'limit': 5.0,
+            'limit': 2.0,
             'period_start': datetime.datetime(2024, 4, 18, 0, 0, tzinfo=TzInfo(UTC)),
             'period_end': datetime.datetime(2024, 4, 18, 23, 59, 59, 999999, tzinfo=TzInfo(UTC))
         },
