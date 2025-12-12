@@ -56,5 +56,5 @@ jobs:
       - name: Build | Generate SBOM
         uses: anchore/sbom-action@fbfd9c6c189226748411491745178e0c2017392d # v0.20.10
         with:
-          image: ${{ steps.meta.outputs.tags }}
+          image: ghcr.io/mostly-ai/docs:${{ github.ref_name }}
           format: cyclonedx-json
